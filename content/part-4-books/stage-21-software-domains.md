@@ -101,7 +101,7 @@ with `<userinput>` and `<systemoutput>`.
          Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>
          <msgblock>Export2: Filename=episode.mp3 NumChannels=1
    BatchCommand finished: Failed!</msgblock>
-         <p>The <apiname>do_command</apiname> helper in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) raises <apiname>RuntimeError</apiname> on <msgnum>Failed!</msgnum>.</p>
+         <p>The <apiname>send</apiname> function in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
        </section>
        <properties>
          <prophead>
@@ -346,7 +346,7 @@ with `<userinput>` and `<systemoutput>`.
    --- a/audacity-book.ditamap
    +++ b/audacity-book.ditamap
    @@ -68,6 +68,9 @@
-      <appendix href="topics/recording-is-silent.dita"/>
+      <appendix href="topics/recording-is-silent.dita" keys="silent"/>
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
       <appendix href="topics/effects-reference.dita" keys="effects"/>
    +  <appendix href="topics/scripting-reference.dita">

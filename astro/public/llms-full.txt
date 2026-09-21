@@ -20,7 +20,7 @@ Every stage is a git branch in the [tutorial repository](https://github.com/dogs
 
 ## The ladder {#the-ladder}
 
-Twenty-six stages in five parts. Stages marked *coming* are planned but their branch and page are not written yet.
+Twenty-six stages in five parts. The ladder is complete: every stage has its branch and its page, and the last branch is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 | --- | --- | --- | --- |
@@ -47,9 +47,9 @@ Twenty-six stages in five parts. Stages marked *coming* are planned but their br
 | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-hazards-and-safety) | `tutorial/20-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |
 | [21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-software-domains) | `tutorial/21-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
 | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning) | `tutorial/22-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the gate and the L&T DTDs |
-| 23 *coming* | `tutorial/23-drafts-and-localization` | Ready for review and translation | `<draft-comment>`, `<required-cleanup>`, `@status`, `@xml:lang`, `@translate`, `<sort-as>` |
-| 24 *coming* | `tutorial/24-house-rules` | Rules as code | Schematron `house-style.sch`, `AGENTS.md`, the house-style skill |
-| 25 *coming* | `tutorial/25-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
+| [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) | `tutorial/23-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
+| [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) | `tutorial/24-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; the gate's house-rules step |
+| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final) | `tutorial/25-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it {#how-to-use-it}
 
@@ -7110,8 +7110,25 @@ This stage adds two. A hearing hazard about loud playback goes into the `shared/
       </body>
    ```
 
-   The `silent` key, defined in the full guide in stage 19, was unused until now; `dogsbay-xml health` listed it. The topic is print-only, so the sentence appears in the PDF, and there it shows a gap on the branch: the book's `<appendix>` for the troubleshooting topic carries no `keys="silent"`, so in `out/book-pdf/audacity-book.pdf` the notices page reads *Recording nothing but silence? See .* with nothing after *See*. The gate does not catch it: `project-health` resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, and the PDF build does not fail on an unresolved key. Add `keys="silent"` to that appendix in `audacity-book.ditamap` and the link resolves; a key that a topic uses must be defined in every map that publishes the topic.
-5. **Read the output** The gate's html5 build of the full guide, `topics/recording-your-first-track.html`, has the hazard in place:
+   The `silent` key, defined in the full guide in stage 19, was unused until now; `dogsbay-xml health` listed it. The topic is print-only, so the sentence appears in the PDF, and the PDF is built from a different map.
+5. **Edit `audacity-book.ditamap`**
+
+   ```diff {title="audacity-book.ditamap"}
+   --- a/audacity-book.ditamap
+   +++ b/audacity-book.ditamap
+   @@ -65,7 +65,7 @@
+        <chapter href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
+      </part>
+
+   -  <appendix href="topics/recording-is-silent.dita"/>
+   +  <appendix href="topics/recording-is-silent.dita" keys="silent"/>
+      <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
+      <appendix href="topics/effects-reference.dita" keys="effects"/>
+
+   ```
+
+   Stage 19 defined `silent` in `audacity-guide.ditamap` only; the book's `<appendix>` for the same topic had no `keys`. Without this line the notices page of `out/book-pdf/audacity-book.pdf` reads *Recording nothing but silence? See .* with nothing after *See*, and the gate does not catch it: `project-health` resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, and the PDF build does not fail on an unresolved key. A key that a topic uses must be defined in every map that publishes the topic; with it, the sentence in the PDF reads *Recording nothing but silence? See The recording is silent on page 37.*
+6. **Read the output** The gate's html5 build of the full guide, `topics/recording-your-first-track.html`, has the hazard in place:
 
    ```
    <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
@@ -7186,7 +7203,7 @@ The DTD requires a `<messagepanel>` in every `<hazardstatement>`, whether or not
 - When a hazard is not a note: harm to a person, laid out as a panel with a signal word.
 - A conref'd hazard statement needs a placeholder panel, like the `<cmd/>` of a conref'd step.
 - The html5 class `hazardstatement--<type>`.
-- Every key defined gets used: `silent`.
+- Every key defined gets used: `silent`, and a key a topic uses is defined in every map that publishes the topic.
 
 ## Where to go next {#where-to-go-next}
 
@@ -7296,7 +7313,7 @@ Two new topics and one new folder. `topics/scripting-reference.dita` has a `<syn
          Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>
          <msgblock>Export2: Filename=episode.mp3 NumChannels=1
    BatchCommand finished: Failed!</msgblock>
-         <p>The <apiname>do_command</apiname> helper in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) raises <apiname>RuntimeError</apiname> on <msgnum>Failed!</msgnum>.</p>
+         <p>The <apiname>send</apiname> function in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
        </section>
        <properties>
          <prophead>
@@ -7491,7 +7508,7 @@ Two new topics and one new folder. `topics/scripting-reference.dita` has a `<syn
    --- a/audacity-book.ditamap
    +++ b/audacity-book.ditamap
    @@ -68,6 +68,9 @@
-      <appendix href="topics/recording-is-silent.dita"/>
+      <appendix href="topics/recording-is-silent.dita" keys="silent"/>
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
       <appendix href="topics/effects-reference.dita" keys="effects"/>
    +  <appendix href="topics/scripting-reference.dita">
@@ -7978,10 +7995,1209 @@ The error comes from the DITA-OT catalog pass, since the editor's catalog never 
 ## Where to go next {#where-to-go-next}
 
 :::cards
-- **[The element index](/dogsbay-xml-dita-tutorial-docs/reference/element-index){icon="book-open"}**
-  Every element so far, with the stage that introduced it. Part 5 covers drafts and localization, house rules and the finished guide, and its pages arrive as the branches do.
+- **[Stage 23: Drafts and localization](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization){icon="arrow-right"}**
+  Language and translate flags on every file, sort keys, review markup and a change history.
 
 - **[Compare 21 to 22 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/21-software-domains...tutorial/22-learning){icon="github"}**
+  Exactly what this stage added.
+:::
+
+---
+
+# Stage 23: Drafts and localization
+
+URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization.md
+
+---
+title: "Stage 23: Drafts and localization"
+description: Mark the guide for review and translation with a language on every root, translate flags, a right-to-left phrase, sort keys, review markup and a change history.
+type: tutorial
+---
+
+# Stage 23: Drafts and localization {#stage-23-drafts-and-localization}
+
+A guide that is finished for its authors is not finished for a reviewer or a translator. Both need things the text does not say: which language a topic is in, which words must not be translated, which way a phrase runs, how a term sorts when its letters would put it in the wrong place, what a reviewer still has to check, and what changed since the last edition. DITA carries all of that in the XML, as attributes and a few small elements, so that it survives every build and every hand-off.
+
+This stage touches every file once, for `xml:lang`, and a handful of them for the rest: `translate="no"` on the product keys and the code, a Hebrew phrase with `dir="rtl"`, a `<sort-as>` on a glossary term and an `<index-see>` for its abbreviation, a `<draft-comment>` and a `<required-cleanup>` for the reviewer, `status` and `rev` on new content, and a `<change-historylist>` in a prolog. The gate reports the review markup as warnings; stage 24 turns them into failures.
+
+**Time:** about 30 minutes. **You need:** stage 22 complete.
+
+## Step 1: Language and translation {#step-1-language-and-translation}
+
+:::steps
+1. **Add `xml:lang="en-GB"` to every root element**
+
+   ```diff {title="topics/what-is-audacity.dita"}
+   --- a/topics/what-is-audacity.dita
+   +++ b/topics/what-is-audacity.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+
+   -<concept id="what-is-audacity">
+   +<concept id="what-is-audacity" xml:lang="en-GB">
+      <title>What is <keyword keyref="product-name"/>?</title>
+      <shortdesc><keyword keyref="product-name"/> is a free, open-source audio editor and recorder for Windows, macOS and Linux.</shortdesc>
+      <prolog>
+   ```
+
+   The same one-line change goes on the root element of all 35 `.dita` and `.ditamap` files on the branch: every topic, every glossary entry, the warehouses in `shared/`, the assessment in `learning/`, and all nine maps. The `compare` link at the end shows them all.
+2. **Read it**
+
+   - `xml:lang` is XML's own language attribute, in the `xml` namespace, so it needs no declaration. Its value is a BCP 47 language tag: `en-GB` for British English, `de` for German, `pt-BR` for Brazilian Portuguese. An element without one inherits its parent's, so one attribute on the root covers the file.
+   - DITA-OT reads it. The map's language chooses the generated text in the output, the *CAUTION* of a hazard statement, the *Table 1* of a table title, the headings of the index, and the sort order of the index and glossary in the PDF. Each html5 page carries the topic's language as `<html lang="en-gb">`, which is what a screen reader uses to choose a voice.
+   - A translation tool reads it too: the source language of every file it is given, and the target language once it writes the translated copy.
+3. **Mark what must not be translated**
+
+   ```diff {title="keydefs-product.ditamap"}
+   --- a/keydefs-product.ditamap
+   +++ b/keydefs-product.ditamap
+   @@ -1,13 +1,13 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   -<map>
+   +<map xml:lang="en-GB">
+      <title>Product key definitions</title>
+
+      <keydef keys="product-name">
+        <topicmeta>
+          <keywords>
+   -        <keyword>Audacity</keyword>
+   +        <keyword translate="no">Audacity</keyword>
+          </keywords>
+        </topicmeta>
+      </keydef>
+   @@ -26,7 +26,7 @@
+      <keydef keys="project-extension">
+        <topicmeta>
+          <keywords>
+   -        <keyword>.aup3</keyword>
+   +        <keyword translate="no">.aup3</keyword>
+          </keywords>
+        </topicmeta>
+      </keydef>
+   ```
+
+   `translate="no"` on a `<keyword>` says its text is not to be translated. The product name and the project extension are marked once, where their values live; every `<keyword keyref="product-name"/>` in the topics pulls the marked text in. `translate` takes `yes` or `no` and inherits, so it can go on a block to cover everything inside.
+4. **Mark the code and the commands**
+
+   ```diff {title="topics/scripting-reference.dita"}
+   --- a/topics/scripting-reference.dita
+   +++ b/topics/scripting-reference.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+
+   -<reference id="scripting-reference">
+   +<reference id="scripting-reference" xml:lang="en-GB">
+      <title>Scripting commands</title>
+      <shortdesc>The scripting commands most useful for batch work, their parameters and the responses they return.</shortdesc>
+      <prolog>
+   @@ -42,7 +42,7 @@
+        </section>
+        <refsyn>
+          <title>Commands</title>
+   -      <parml>
+   +      <parml translate="no">
+            <plentry>
+              <pt>
+                <cmdname>SelectAll:</cmdname>
+   @@ -68,7 +68,7 @@
+          <title>Responses</title>
+          <p>Every reply ends with a status line.
+          Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>
+   -      <msgblock>Export2: Filename=episode.mp3 NumChannels=1
+   +      <msgblock translate="no">Export2: Filename=episode.mp3 NumChannels=1
+    BatchCommand finished: Failed!</msgblock>
+          <p>The <apiname>send</apiname> function in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
+        </section>
+   ```
+
+   ```diff {title="topics/exporting-from-a-script.dita"}
+   --- a/topics/exporting-from-a-script.dita
+   +++ b/topics/exporting-from-a-script.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+
+   -<task id="exporting-from-a-script">
+   +<task id="exporting-from-a-script" xml:lang="en-GB">
+      <title>Exporting from a script</title>
+      <shortdesc>Enable mod-script-pipe, then normalize and export the open project from a Python script.</shortdesc>
+      <prolog>
+   @@ -31,13 +31,13 @@
+          <step>
+            <cmd>Save the sample script as <filepath>export-mp3.py</filepath>.</cmd>
+            <info>
+   -          <codeblock outputclass="language-python"><coderef href="../samples/export-mp3.py"/></codeblock>
+   +          <codeblock outputclass="language-python" translate="no"><coderef href="../samples/export-mp3.py"/></codeblock>
+            </info>
+          </step>
+          <step>
+            <cmd>Run it, naming the output file.</cmd>
+            <info>
+   -          <screen><userinput>python3 export-mp3.py episode.mp3</userinput>
+   +          <screen translate="no"><userinput>python3 export-mp3.py episode.mp3</userinput>
+    <systemoutput>BatchCommand finished: OK
+    BatchCommand finished: OK
+    BatchCommand finished: OK</systemoutput></screen>
+   ```
+
+   The parameter list, the message block, the code block and the screen from stage 21 are all things a translator must leave alone. The DITA specification says that many of the code elements, `<codeblock>`, `<screen>`, `<cmdname>`, `<parmname>`, `<varname>` among them, are `translate="no"` by default, but a translation tool sees only what is in the file, so the branch says it on the blocks. Marking the whole `<parml>` keeps the `<pd>` descriptions in English as well as the `<pt>` terms; mark each `<pt>` instead if the descriptions are to be translated.
+:::
+
+## Step 2: Direction and sort order {#step-2-direction-and-sort-order}
+
+:::steps
+1. **Edit `topics/what-is-digital-audio.dita`**
+
+   ```diff {title="topics/what-is-digital-audio.dita"}
+   --- a/topics/what-is-digital-audio.dita
+   +++ b/topics/what-is-digital-audio.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+
+   -<concept id="what-is-digital-audio">
+   +<concept id="what-is-digital-audio" xml:lang="en-GB">
+      <title>What is digital audio?</title>
+      <shortdesc>Digital audio is sound stored as numbers: samples taken thousands of times a second at a chosen precision.</shortdesc>
+      <prolog>
+   @@ -26,6 +26,7 @@
+            <indexterm>decibel<index-see-also>amplitude</index-see-also></indexterm>
+            <indexterm>amplitude</indexterm>
+            <indexterm><index-sort-as>clipping</index-sort-as>Clipping (distortion)</indexterm>
+   +        <indexterm>dB<index-see>decibel</index-see></indexterm>
+          </keywords>
+        </metadata>
+      </prolog>
+   @@ -133,6 +134,7 @@
+            </dlentry>
+          </dl>
+          <lq reftitle="The Audacity Manual">Audio is measured in decibels because the ear hears ratios, not differences.</lq>
+   +      <p>The same idea in Hebrew, for a right-to-left example: <ph xml:lang="he" dir="rtl">האוזן שומעת יחסים</ph> (the ear hears ratios).</p>
+        </section>
+      </conbody>
+      <related-links>
+   ```
+2. **Read it**
+
+   - `xml:lang="he"` on a `<ph>` overrides the root's `en-GB` for that phrase alone. `dir="rtl"` says the phrase runs right to left; the values are `ltr`, `rtl`, `lro` and `rlo`, the last two overriding the characters' own direction. Hebrew and Arabic letters carry their direction, so the attribute matters most where a phrase mixes them with digits and punctuation, and it is what a stylesheet keys on.
+   - `<index-see>`, from stage 12, adds an index entry that redirects: *dB, see decibel*. The abbreviation gets its own line in the index and the reader is sent to the entry that has the page numbers.
+3. **Edit `topics/glossary/audio-units.dita`**
+
+   ```diff {title="topics/glossary/audio-units.dita"}
+   --- a/topics/glossary/audio-units.dita
+   +++ b/topics/glossary/audio-units.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
+
+   -<glossgroup id="audio-units">
+   +<glossgroup id="audio-units" xml:lang="en-GB">
+      <title>Units</title>
+      <prolog>
+        <author type="creator">The Audacity tutorial team</author>
+   @@ -13,7 +13,7 @@
+        </metadata>
+      </prolog>
+      <glossentry id="gl-decibel">
+   -    <glossterm>decibel</glossterm>
+   +    <glossterm><sort-as value="decibel"/>dB (decibel)</glossterm>
+        <glossdef>A logarithmic unit for the ratio between two levels. In audio editing, 0 dB is the loudest level a file can hold, and quieter sounds are negative.</glossdef>
+        <prolog>
+          <author type="creator">The Audacity tutorial team</author>
+   ```
+
+   The displayed term is now *dB (decibel)*, and `<sort-as value="decibel"/>` tells a sorted glossary to place it as if it read *decibel*. `<sort-as>` is a DITA 1.3 element allowed in titles and glossary terms. It is for the cases a plain sort gets wrong: a term that starts with a symbol, a digit or an abbreviation, or a language where the sort key is not the displayed characters, as with Japanese kanji sorted by their reading. `<index-sort-as>` on the *Clipping (distortion)* entry, three lines up in the same prolog, is the index term's equivalent.
+:::
+
+## Step 3: Review markup and a change history {#step-3-review-markup-and-a-change-history}
+
+:::steps
+1. **Edit `topics/exporting-audio.dita`**
+
+   ```diff {title="topics/exporting-audio.dita"}
+   --- a/topics/exporting-audio.dita
+   +++ b/topics/exporting-audio.dita
+   @@ -1,13 +1,14 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+
+   -<task id="exporting-audio">
+   +<task id="exporting-audio" xml:lang="en-GB" status="changed">
+      <title>Exporting audio</title>
+      <shortdesc>Export a finished project as a WAV, MP3, OGG or FLAC file that other programs and devices can play.</shortdesc>
+      <prolog>
+        <author type="creator">The Audacity tutorial team</author>
+        <critdates>
+          <created date="2026-01-22"/>
+   +      <revised modified="2026-03-05"/>
+        </critdates>
+        <metadata>
+          <audience type="user" experiencelevel="novice"/>
+   @@ -22,6 +23,13 @@
+            <indexterm>audio formats<indexterm>MP3</indexterm><indexterm>WAV</indexterm></indexterm>
+          </keywords>
+        </metadata>
+   +    <change-historylist>
+   +      <change-item>
+   +        <change-person>The Audacity tutorial team</change-person>
+   +        <change-completed>2026-03-05</change-completed>
+   +        <change-summary>Marked the metadata-tags step as new in 3.4.</change-summary>
+   +      </change-item>
+   +    </change-historylist>
+      </prolog>
+      <taskbody>
+        <prereq>
+   @@ -67,6 +75,7 @@
+          </step>
+        </steps>
+        <result>
+   +      <draft-comment author="reviewer" time="2026-03-05" disposition="open">Check the 3.4 export dialog: is the metadata tags step still a separate dialog?</draft-comment>
+          <p>The exported file is in the folder you chose.
+          The project itself is unchanged.</p>
+        </result>
+   ```
+2. **Read it**
+
+   - `status="changed"` on the root says the topic changed since the last release. The values are `new`, `changed`, `deleted` and `unchanged`, and the attribute is allowed on most elements, so a single row or paragraph can carry it. Nothing renders it by default; a DITAVAL or a report can select on it.
+   - `<revised modified="2026-03-05"/>` joins the `<created>` from stage 12 in `<critdates>`. The content model is `created?` then `revised*`, in that order, one `<revised>` per revision.
+   - `<change-historylist>` is DITA 1.3's structured change log, in the `<prolog>` after `<metadata>`. Each `<change-item>` holds who, `<change-person>`, when, `<change-completed>`, and what, `<change-summary>`. The other children are `<change-organization>`, `<change-revisionid>`, `<change-request-reference>` and `<change-started>`.
+   - `<draft-comment>` is a note to the reviewer, in the flow where it applies. `author` and `time` say who and when; `disposition` tracks it, `open`, `accepted`, `rejected`, `deferred`, `duplicate`, `reopened`, `unassigned` or `completed`. DITA-OT drops draft comments from the output unless you ask for them, which step 4 shows.
+3. **Edit `topics/podcast-production-workflow.dita`**
+
+   ```diff {title="topics/podcast-production-workflow.dita"}
+   --- a/topics/podcast-production-workflow.dita
+   +++ b/topics/podcast-production-workflow.dita
+   @@ -1,7 +1,7 @@
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+
+   -<concept id="podcast-production-workflow">
+   +<concept id="podcast-production-workflow" xml:lang="en-GB">
+      <title>Podcast production workflow</title>
+      <shortdesc>A typical order of work for a spoken-word podcast: prepare, record, clean up, level and export.</shortdesc>
+      <prolog>
+   @@ -51,6 +51,7 @@
+            <li><b><term keyref="gl-compression">Compression</term></b>: even out volume differences (threshold -18 dB, ratio 3:1).</li>
+            <li><b>Export</b>: MP3 at 128 kbps mono for distribution, by hand or from a script (<xref keyref="scripting"/>).</li>
+          </ol>
+   +      <required-cleanup remap="table">Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table once the list is confirmed.</required-cleanup>
+        </section>
+        <section audience="beginner">
+          <title>Getting started with podcasting</title>
+   ```
+
+   `<required-cleanup>` marks content that is not in its final form. It is allowed almost anywhere and holds almost anything, which is the point: it is where content goes that does not yet fit the grammar of its place. `remap="table"` records what it should become. Like a draft comment, it is dropped from the output by default.
+4. **Edit `topics/effects-reference.dita`**
+
+   ```diff {title="topics/effects-reference.dita"}
+   --- a/topics/effects-reference.dita
+   +++ b/topics/effects-reference.dita
+   @@ -3,7 +3,7 @@
+
+    <!-- Nested topics: two topics in one file. The map decides whether they publish
+         as one page (the default) or one page each (chunk="by-topic"). -->
+   -<reference id="effects-reference">
+   +<reference id="effects-reference" xml:lang="en-GB">
+      <title>Effects reference</title>
+      <shortdesc>The built-in effects, what each one does, and the parameters that matter.</shortdesc>
+      <prolog>
+   @@ -19,6 +19,7 @@
+            <keyword>Amplify</keyword>
+            <keyword>Compressor</keyword>
+            <keyword>Normalize</keyword>
+   +        <keyword>Loudness Normalization</keyword>
+            <indexterm>effects<indexterm>reference</indexterm></indexterm>
+          </keywords>
+        </metadata>
+   @@ -70,6 +71,11 @@
+                <entry>Sets the peak amplitude to a target level and optionally removes DC offset.</entry>
+                <entry>Peak amplitude (dB), typically -1.0; <uicontrol>Remove DC offset</uicontrol>.</entry>
+              </row>
+   +          <row rev="3.4" status="new">
+   +            <entry>Loudness Normalization</entry>
+   +            <entry>Sets the perceived loudness of the selection to a target, for podcast platforms that specify one.</entry>
+   +            <entry>Target (LUFS), typically -16 for podcasts; <uicontrol>Normalize</uicontrol> to perceived loudness or RMS.</entry>
+   +          </row>
+              <row>
+                <entry>Fade In, Fade Out</entry>
+                <entry>Ramps the volume of the selection up from silence, or down to it.</entry>
+   ```
+
+   A new effect for the next release, as a table row. `rev="3.4"` is the revision mark from stage 13, which `filters/review.ditaval` flags; `status="new"` says the same thing to a tool that reads status rather than revisions. The new effect's name also joins the `<keywords>` in the prolog, which the metadata policy from stage 12 asks for.
+:::
+
+## Step 4: README and the gate {#step-4-readme-and-the-gate}
+
+:::steps
+1. **Change the "You are on" line**
+
+   ```diff {title="README.md"}
+   --- a/README.md
+   +++ b/README.md
+   @@ -5,7 +5,7 @@ branch is the previous branch plus one lesson, from a single concept topic to a
+    complete, publish-ready **Audacity User Guide**. The diff between two branches
+    is the lesson.
+
+   -You are on **stage 22 — learning**: a learning assessment with true/false, single, multiple and sequencing questions.
+   +You are on **stage 23 — drafts and localization**: review markup, change history, language and direction, translate flags and sort keys.
+
+    ## Stages
+
+   ```
+2. **Format and check**
+
+   ```bash
+   dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita *.ditamap
+   scripts/check-stage.sh
+   ```
+
+   ```
+   == validate-project  /home/you/audacity-guide ==
+   /home/you/audacity-guide/learning/check-your-understanding.dita:
+     -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
+   42 file(s): 41 valid, 1 invalid.
+
+   == validate learning/ against the DITA-OT catalog ==
+   VALID
+
+   == project-health  /home/you/audacity-guide ==
+   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+   Authoring leftovers (2; warnings):
+     /home/you/audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
+   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+
+   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
+   42 file(s): 42 pass, 0 with violations.
+
+   == build  project.json -> /tmp/check-stage-<pid> ==
+   all deliverables built
+
+   STAGE OK
+   ```
+
+   `project-health` now has something to say. *Authoring leftovers* is its name for review markup, and it counts the draft comment and the required cleanup, two, with the file and line of each. They are warnings: the project is still healthy, the gate still prints `STAGE OK`, and the markup goes into the repository as the record of what is unfinished. Stage 24 adds a house rule that makes the same two findings failures, so that they cannot reach a release.
+3. **Read the review build** The `review` deliverable from stage 13 flags revision `3.4`, so in `out/review/topics/effects-reference.html` the new row carries the flag's colour:
+
+   ```
+   <tr style="color:#b00020;" class="row">
+   <td class="entry" headers="effects-reference__entry__1">Loudness Normalization</td>
+   <td class="entry" headers="effects-reference__entry__2">Sets the perceived loudness of the selection to a target, for podcast platforms that specify one.</td>
+   <td class="entry" headers="effects-reference__entry__3">Target (LUFS), typically -16 for podcasts; <span class="ph uicontrol">Normalize</span> to perceived loudness or RMS.</td>
+   </tr>
+   ```
+
+   The `[new in 3.4]` start-flag text is not on the row: DITA-OT puts flag text only where text can go, and a table row has no place for it outside its cells. On the step that stage 13 marked, in `out/review/topics/exporting-audio.html`, both the colour and the text appear:
+
+   ```
+   <span style="color:#b00020;" class="ph cmd">[new in 3.4]Fill in the <span class="keyword wintitle">Edit Metadata Tags</span> dialog and click <span class="ph uicontrol">OK</span>.</span>
+   ```
+
+   The draft comment is in neither build, nor is the required cleanup: DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the build asks for them with `args.draft=yes`. A search for the comment's text across every html5 deliverable the gate built, `grep -rl 'metadata tags step' /tmp/check-stage-<pid>`, prints nothing. To see them, build the review map once with the parameter:
+
+   ```bash
+   dita -i audacity-guide.ditamap -f html5 --filter=filters/review.ditaval -o /tmp/review-draft --args.draft=yes
+   ```
+
+   ```
+   <div class="draft-comment" style="background-color: #99FF99; border: 1pt black solid;"><strong>Draft comment: </strong>reviewer open 2026-03-05<br>Check the 3.4 export dialog: is the metadata tags step still a separate dialog?</div>
+   <div class="required-cleanup" style="background-color: #FFFF99; color:#CC3333; border: 1pt black solid;"><strong>Required cleanup: </strong>[table] Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table once the list is confirmed.</div>
+   ```
+
+   The comment and the cleanup are rendered in place, boxed and coloured, with the author, disposition and date. So the review markup has two audiences: a reviewer who builds with `args.draft=yes` and sees it where it applies, and a release that never does.
+:::
+
+Now make the mistake. Change the new row in `topics/effects-reference.dita` to `status="draft"`, a value that reads well and does not exist, and run the gate with `SKIP_BUILD=1`:
+
+```
+== validate-project  /home/you/audacity-guide ==
+/home/you/audacity-guide/learning/check-your-understanding.dita:
+  -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
+/home/you/audacity-guide/topics/effects-reference.dita:
+  74:41  error: Attribute "status" with value "draft" must have a value from the list "changed deleted new unchanged -dita-use-conref-target ".
+42 file(s): 40 valid, 2 invalid.
+FAIL: validation errors
+```
+
+`status` is an enumerated attribute in the DTD, unlike `rev`, which takes any string. The four values, plus `-dita-use-conref-target`, which every enumerated attribute accepts for conref, are the whole vocabulary; a workflow state such as *draft* or *in review* belongs in a `<draft-comment disposition>` or in `<change-historylist>`, not in `status`.
+
+One caution about the formatter. `dogsbay-xml format -i` escapes `&` in text on every pass, so an `&amp;` that is in a file becomes `&amp;amp;` the next time the file is formatted, and worse the time after. Until that is fixed in the editor, do not put character entities in text: write *and*, and let an element whose only content would be a space, such as the `<repsep>` of stage 21, stay empty.
+
+## What you learned {#what-you-learned}
+
+- `xml:lang` on every root; `translate="no"` on the product keys and the code; `xml:lang` and `dir="rtl"` on a phrase.
+- `<sort-as>` in a glossary term, `<index-see>` for an abbreviation.
+- `<draft-comment author time disposition>` and `<required-cleanup remap>`: review markup that DITA-OT drops unless `args.draft=yes`.
+- `status` on a topic or a row, `<revised>` beside `<created>`, and `<change-historylist>` with `<change-item>`.
+- `project-health` reports review markup as *Authoring leftovers*, warnings until a house rule says otherwise.
+
+## Where to go next {#where-to-go-next}
+
+:::cards
+- **[Stage 24: House rules](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules){icon="arrow-right"}**
+  The house style as Schematron, enforced by the gate and explained to agents.
+
+- **[Compare 22 to 23 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/22-learning...tutorial/23-drafts-and-localization){icon="github"}**
+  Exactly what this stage added, all 36 files.
+:::
+
+---
+
+# Stage 24: House rules
+
+URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules.md
+
+---
+title: "Stage 24: House rules"
+description: Write the house style as Schematron, name it in the project config so the gate enforces it, explain it to agents, and fix the ten violations it finds.
+type: tutorial
+---
+
+# Stage 24: House rules {#stage-24-house-rules}
+
+Everything the gate has checked so far is DITA's own grammar and the project's own wiring: links, keys, element ids, controlled values, the metadata policy. A house style is different. It is what this guide has decided for itself: every topic has a short description, a UI label is `<uicontrol>` and never `<b>`, the product name is a key and not a word, review markup does not ship. Until now those were sentences in a README that a reader could miss. Schematron turns them into rules, each with a message, that a validator runs the way it runs a DTD.
+
+This stage writes `house-style.sch`, names it in `.dogsbay/config.xml` so that `project-health` runs it and the gate gains a *house rules* step, states the same rules in prose for people and agents in `AGENTS.md` and a skill, and resolves the ten violations the rules find in the files from stage 23. Resolving them is content work, not deletion: the `<required-cleanup>` becomes the table it asked for, and the answered `<draft-comment>` becomes a line in the change history.
+
+**Time:** about 40 minutes. **You need:** stage 23 complete.
+
+## Step 1: The rules {#step-1-the-rules}
+
+:::steps
+1. **Create `house-style.sch`**
+
+   ```xml {title="house-style.sch"}
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!--
+     Audacity guide house style as machine-checkable rules.
+     Run across the project with:  dogsbay-xml project-health . (house rules from .dogsbay/config.xml)
+     (or ask the agent: "run our house-style rules and fix the violations").
+
+     Design notes:
+      - The product-name / extension tests match direct text() only, so a literal
+        inside a descendant <filepath>/<codeblock> (e.g.
+        <filepath>C:\Program Files\Audacity</filepath>) does NOT trip the enclosing
+        <p> — the house rule deliberately leaves such literals alone.
+      - Coverage spans the places hardcoded names actually hide: prose <p>, list
+        items <li>, table cells <entry>, definitions <dd>, shortdescs, and step
+        commands <cmd>. One pattern per element keeps each rule readable and its
+        report message specific.
+   -->
+   <schema xmlns="http://purl.oclc.org/dsdl/schematron">
+     <title>Audacity User Guide house style</title>
+
+     <!-- every topic needs a shortdesc (one pattern per topic type) -->
+     <pattern id="shortdesc-topic"><rule context="topic"><assert test="shortdesc">Every topic needs a shortdesc (a one- or two-sentence description).</assert></rule></pattern>
+     <pattern id="shortdesc-concept"><rule context="concept"><assert test="shortdesc">Every topic needs a shortdesc (a one- or two-sentence description).</assert></rule></pattern>
+     <pattern id="shortdesc-task"><rule context="task"><assert test="shortdesc">Every topic needs a shortdesc (a one- or two-sentence description).</assert></rule></pattern>
+     <pattern id="shortdesc-reference"><rule context="reference"><assert test="shortdesc">Every topic needs a shortdesc (a one- or two-sentence description).</assert></rule></pattern>
+
+     <pattern id="ui-labels-use-uicontrol">
+       <rule context="b">
+         <report test="true()">Use uicontrol for UI labels (and drop decorative bold); do not use b.</report>
+       </rule>
+     </pattern>
+
+     <!-- no hardcoded product name; direct text() only (filepath/codeblock literals exempt) -->
+     <pattern id="pn-p"><rule context="p"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".</report></rule></pattern>
+     <pattern id="pn-li"><rule context="li"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in a list item; use keyref="product-name".</report></rule></pattern>
+     <pattern id="pn-entry"><rule context="entry"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in a table cell; use keyref="product-name".</report></rule></pattern>
+     <pattern id="pn-dd"><rule context="dd"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in a definition; use keyref="product-name".</report></rule></pattern>
+     <pattern id="pn-shortdesc"><rule context="shortdesc"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".</report></rule></pattern>
+     <pattern id="pn-cmd"><rule context="cmd"><report test="text()[contains(., 'Audacity')]">Do not hardcode the product name "Audacity" in a step command; use keyref="product-name".</report></rule></pattern>
+
+     <!-- no hardcoded project extension; use keyref="project-extension" -->
+     <pattern id="ext-p"><rule context="p"><report test="text()[contains(., '.aup3')]">Do not hardcode ".aup3"; use keyref="project-extension".</report></rule></pattern>
+     <pattern id="ext-li"><rule context="li"><report test="text()[contains(., '.aup3')]">Do not hardcode ".aup3"; use keyref="project-extension".</report></rule></pattern>
+     <pattern id="ext-entry"><rule context="entry"><report test="text()[contains(., '.aup3')]">Do not hardcode ".aup3"; use keyref="project-extension".</report></rule></pattern>
+     <pattern id="ext-dd"><rule context="dd"><report test="text()[contains(., '.aup3')]">Do not hardcode ".aup3"; use keyref="project-extension".</report></rule></pattern>
+
+     <!-- leftover authoring markers must not ship -->
+     <pattern id="todo-p"><rule context="p"><report test="contains(., 'TODO') or contains(., 'FIXME') or contains(., 'TBD')">Remove authoring markers (TODO/FIXME/TBD) before publishing.</report></rule></pattern>
+     <pattern id="todo-li"><rule context="li"><report test="contains(., 'TODO') or contains(., 'FIXME') or contains(., 'TBD')">Remove authoring markers (TODO/FIXME/TBD) before publishing.</report></rule></pattern>
+     <pattern id="todo-cmd"><rule context="cmd"><report test="contains(., 'TODO') or contains(., 'FIXME') or contains(., 'TBD')">Remove authoring markers (TODO/FIXME/TBD) before publishing.</report></rule></pattern>
+     <pattern id="todo-draftcomment"><rule context="draft-comment"><report test="true()">Remove draft-comment before publishing.</report></rule></pattern>
+     <pattern id="todo-reqcleanup"><rule context="required-cleanup"><report test="true()">Remove required-cleanup before publishing.</report></rule></pattern>
+
+     <!-- a step command must say something (conref'd steps exempt) -->
+     <pattern id="cmd-not-empty"><rule context="cmd"><assert test="normalize-space(.) != '' or @conref or @conkeyref or parent::step/@conref or parent::step/@conkeyref">A cmd must have text, or pull content via conref.</assert></rule></pattern>
+
+     <pattern id="note-type-allowed">
+       <rule context="note[@type]">
+         <assert test="@type = 'note' or @type = 'tip' or @type = 'important' or @type = 'caution' or @type = 'warning' or @type = 'attention' or @type = 'danger' or @type = 'fastpath' or @type = 'remember' or @type = 'restriction' or @type = 'trouble' or @type = 'other'">note type is not an allowed DITA value.</assert>
+       </rule>
+     </pattern>
+
+     <pattern id="step-has-cmd">
+       <rule context="step">
+         <assert test="cmd">Every step must contain a cmd.</assert>
+       </rule>
+     </pattern>
+   </schema>
+   ```
+2. **Read it**
+
+   - A Schematron `<schema>` is a list of `<pattern>`s. Each `<pattern>` holds `<rule>`s; a `<rule context="…">` names, in XPath, the elements it applies to; inside it `<assert test="…">` fires when the test is false and `<report test="…">` fires when it is true. The element content is the message. That is the whole language.
+   - The four `shortdesc-*` patterns are one rule each because a rule's context is one XPath: `topic`, `concept`, `task`, `reference`. The `<troubleshooting>` and `<glossentry>` topics are not listed, so a glossary entry, which has no `<shortdesc>` by design, passes.
+   - `ui-labels-use-uicontrol` fires on every `<b>`: `test="true()"` with a `<report>` is how to forbid an element outright.
+   - The product-name and extension rules test `text()` only, the direct text of a `<p>`, `<li>`, `<entry>`, `<dd>`, `<shortdesc>` or `<cmd>`. A literal inside a child element does not count, so `<filepath>C:\Program Files\Audacity</filepath>` in a step is left alone, and so is *The Audacity Manual* once it is inside `<cite>`. One pattern per element keeps each message specific.
+   - The `todo-*` patterns catch authoring markers in text and, with `test="true()"`, any `<draft-comment>` or `<required-cleanup>`: the two warnings from stage 23 are now violations.
+   - `cmd-not-empty` allows an empty `<cmd/>` only when the `<cmd>` or its `<step>` carries `conref` or `conkeyref`, which is the placeholder pattern from stage 10. `note-type-allowed` lists the `type` values the DTD accepts, and `step-has-cmd` is a DTD rule restated so that its message is the house's.
+   - The comment at the top says how to run the rules and why they are shaped as they are. A rules file is read by the next writer more often than it is edited; say what it is for.
+:::
+
+## Step 2: Run them on stage 23 {#step-2-run-them-on-stage-23}
+
+:::steps
+1. **Edit `.dogsbay/config.xml`**
+
+   ```diff {title=".dogsbay/config.xml"}
+   --- a/.dogsbay/config.xml
+   +++ b/.dogsbay/config.xml
+   @@ -6,6 +6,7 @@
+      <framework>DITA-OT 4.3.5</framework>
+      <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
+      <default-deliverable file="project.json" name="full"/>
+   +  <default-schematron>house-style.sch</default-schematron>
+      <metadata-policy>
+        <rule topic-type="task" field="created" presence="required" pattern="\d{4}-\d\d-\d\d"/>
+        <rule field="author" presence="recommended"/>
+   ```
+
+   `<default-schematron>` names the rules file relative to the project root. From now on `project-health` runs it with everything else, the editor uses the same setting, and the `house rules:` part of the health report's first line names it instead of saying *none*.
+2. **Run the rules before you change anything else** With the rules file and the config line in place, and the files still as they were at the end of stage 23:
+
+   ```bash
+   dogsbay-xml project-health --include=schematron .
+   ```
+
+   ```
+   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+   House rules (4 of 42 files):
+     /home/you/audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
+     /home/you/audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/audacity-guide/topics/exporting-audio.dita:78 — Remove draft-comment before publishing.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:49 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:50 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:51 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:52 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
+
+   Summary
+     House rules                  10  in 4 of 42 files
+       Use uicontrol for UI labels (and drop decorative bold); do no…    5
+       Do not hardcode the product name "Audacity" in prose; use a k…    2
+       Do not hardcode the product name "Audacity" in a shortdesc; u…    1
+       Remove draft-comment before publishing.                           1
+       Remove required-cleanup before publishing.                        1
+   ```
+
+   Ten violations in four files, every one a house-style decision the README had stated and nobody had checked. The main map's `<shortdesc>` spells out the product name. *About this guide* names it twice in prose, once as part of a title and once as part of an organisation. The podcast workflow has five decorative `<b>`s and the `<required-cleanup>` from stage 23; *Exporting audio* has the `<draft-comment>`. `--include=schematron` runs only the rules, which is the fast loop while you fix them.
+:::
+
+## Step 3: Resolve the violations {#step-3-resolve-the-violations}
+
+:::steps
+1. **Edit `audacity-guide.ditamap`**
+
+   ```diff {title="audacity-guide.ditamap"}
+   --- a/audacity-guide.ditamap
+   +++ b/audacity-guide.ditamap
+   @@ -4,7 +4,7 @@
+    <map xml:lang="en-GB">
+      <title>Audacity User Guide</title>
+      <topicmeta>
+   -    <shortdesc>Record, edit and export audio with Audacity, from your first track to a finished file.</shortdesc>
+   +    <shortdesc>Record, edit and export audio with <keyword keyref="product-name"/>, from your first track to a finished file.</shortdesc>
+        <author type="creator">The Audacity tutorial team</author>
+        <publisher>DogsBay Ltd.</publisher>
+        <copyright>
+   ```
+
+   A `<shortdesc>` in `<topicmeta>` takes the same inline content as one in a topic, so the key from stage 09 works here too.
+2. **Edit `topics/about-this-guide.dita`**
+
+   ```diff {title="topics/about-this-guide.dita"}
+   --- a/topics/about-this-guide.dita
+   +++ b/topics/about-this-guide.dita
+   @@ -17,12 +17,12 @@
+      </prolog>
+      <body>
+        <p>This guide is published under the Creative Commons Attribution 4.0 licence.
+   -    Its topics are adapted from the Audacity Manual, copyright the Audacity Team and the Manual's authors, under the Creative Commons Attribution 3.0 licence.</p>
+   +    Its topics are adapted from <cite>The Audacity Manual</cite>, copyright the <keyword keyref="product-name"/> Team and the Manual's authors, under the Creative Commons Attribution 3.0 licence.</p>
+        <p>New to <keyword keyref="product-name"/>? Start with <xref keyref="start-here"/>.
+        New to audio? Read <xref keyref="digital-audio"/> first.
+        Here for podcasting? Go straight to <xref keyref="podcast-workflow"/>.
+        Recording nothing but silence? See <xref keyref="silent"/>.</p>
+        <p><keyword keyref="product-name"/> is a registered trademark of Dominic Mazzoni.
+   -    The Audacity Team does not endorse this guide and is not affiliated with it.</p>
+   +    The <keyword keyref="product-name"/> Team does not endorse this guide and is not affiliated with it.</p>
+      </body>
+    </topic>
+   ```
+
+   Two different fixes for two different uses of the word. *The Audacity Manual* is the title of a work, so it goes in `<cite>`, where the rule does not look, and it should not be keyed: if the product were renamed the manual's title would not change. *The Audacity Team* is the product's name used as a name, so it takes the key.
+3. **Edit `topics/podcast-production-workflow.dita`**
+
+   ```diff {title="topics/podcast-production-workflow.dita"}
+   --- a/topics/podcast-production-workflow.dita
+   +++ b/topics/podcast-production-workflow.dita
+   @@ -45,13 +45,30 @@
+          <title>Post-production</title>
+          <p>Process the audio in this order (see <xref keyref="effects"/> for each effect's parameters):</p>
+          <ol>
+   -        <li><b>Noise reduction</b>: remove background noise using the noise profile from the silence.</li>
+   -        <li><b>Editing</b>: trim mistakes, long pauses and false starts.</li>
+   -        <li><b><term keyref="gl-normalization">Normalization</term></b>: bring the peak level to -1.0 dB.</li>
+   -        <li><b><term keyref="gl-compression">Compression</term></b>: even out volume differences (threshold -18 dB, ratio 3:1).</li>
+   -        <li><b>Export</b>: MP3 at 128 kbps mono for distribution, by hand or from a script (<xref keyref="scripting"/>).</li>
+   +        <li>Noise reduction: remove background noise using the noise profile from the silence.</li>
+   +        <li>Editing: trim mistakes, long pauses and false starts.</li>
+   +        <li><term keyref="gl-normalization">Normalization</term>: bring the peak level to -1.0 dB.</li>
+   +        <li><term keyref="gl-compression">Compression</term>: even out volume differences (threshold -18 dB, ratio 3:1).</li>
+   +        <li>Export: MP3 at 128 kbps mono for distribution, by hand or from a script (<xref keyref="scripting"/>).</li>
+          </ol>
+   -      <required-cleanup remap="table">Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table once the list is confirmed.</required-cleanup>
+   +      <simpletable>
+   +        <sthead>
+   +          <stentry>Platform</stentry>
+   +          <stentry>Target loudness</stentry>
+   +        </sthead>
+   +        <strow>
+   +          <stentry>Spotify</stentry>
+   +          <stentry>-14 LUFS</stentry>
+   +        </strow>
+   +        <strow>
+   +          <stentry>Apple Podcasts</stentry>
+   +          <stentry>-16 LUFS</stentry>
+   +        </strow>
+   +        <strow>
+   +          <stentry>YouTube</stentry>
+   +          <stentry>-14 LUFS</stentry>
+   +        </strow>
+   +      </simpletable>
+        </section>
+        <section audience="beginner">
+          <title>Getting started with podcasting</title>
+   ```
+
+   The five `<b>`s were emphasis, not UI labels, so the fix is plain text, not `<uicontrol>`; the `<term>`s stay. The `<required-cleanup>` asked to become a table, so it becomes the `<simpletable>` from stage 03, with a header row and one row per platform. That is what resolving review markup means: the content it carried lands in its proper element, and the wrapper goes.
+4. **Edit `topics/exporting-audio.dita`**
+
+   ```diff {title="topics/exporting-audio.dita"}
+   --- a/topics/exporting-audio.dita
+   +++ b/topics/exporting-audio.dita
+   @@ -27,7 +27,7 @@
+          <change-item>
+            <change-person>The Audacity tutorial team</change-person>
+            <change-completed>2026-03-05</change-completed>
+   -        <change-summary>Marked the metadata-tags step as new in 3.4.</change-summary>
+   +        <change-summary>Marked the metadata-tags step as new in 3.4; confirmed it is still a separate dialog.</change-summary>
+          </change-item>
+        </change-historylist>
+      </prolog>
+   @@ -75,7 +75,6 @@
+          </step>
+        </steps>
+        <result>
+   -      <draft-comment author="reviewer" time="2026-03-05" disposition="open">Check the 3.4 export dialog: is the metadata tags step still a separate dialog?</draft-comment>
+          <p>The exported file is in the folder you chose.
+          The project itself is unchanged.</p>
+        </result>
+   ```
+
+   The reviewer's question has been answered, so the comment goes and the answer is recorded where the next reviewer will look for it, in the `<change-summary>` of the `<change-historylist>` from stage 23.
+:::
+
+## Step 4: Tell the agents {#step-4-tell-the-agents}
+
+:::steps
+1. **Create `AGENTS.md`**
+
+   ```md {title="AGENTS.md"}
+   # Project context — Audacity User Guide (DITA)
+
+   This is the documentation set for **Audacity**, authored in DITA 1.3 and built
+   with DogsBay XML. It is also the finished state of a step-by-step DITA tutorial:
+   every `tutorial/NN-*` branch adds one feature, and this file describes the
+   conventions the finished project keeps.
+
+   ## Layout
+
+   - `audacity-guide.ditamap` — the main guide (start here). `beginner-guide`,
+     `podcaster-guide`, `audacity-book` (PDF), `audacity-collection` (all three
+     guides, key-scoped) and `installation-variants` (branch filtering) reuse the
+     same topics.
+   - `topics/` — concepts, tasks, references, a troubleshooting topic;
+     `topics/glossary/` — glossary entries; `learning/` — a learning assessment;
+     `shared/` — warehouses pulled in by conref; `samples/` — code pulled in by
+     coderef; `images/` — illustrations.
+   - `keydefs-product.ditamap`, `keydefs-glossary.ditamap` — key definitions.
+   - `subject-scheme.ditamap` — the controlled values for `@platform`
+     (`windows`, `mac`, `linux`) and `@audience` (`beginner`, `podcaster`).
+   - `filters/` — DITAVAL files, one per deliverable plus `review.ditaval` (flags).
+   - `project.json` — the DITA-OT project file: every deliverable this guide ships.
+   - `.dogsbay/config.xml` — default root map and deliverable, the metadata
+     policy, the house rules (`house-style.sch`) and the format style.
+   - `scripts/check-stage.sh` — the gate: validation, project health,
+     controlled values, house rules and a build of every deliverable.
+
+   ## House style
+
+   - **Never hardcode the product name, version, download URL or project
+     extension.** Use the keys `product-name`, `product-version`, `download-url`,
+     `project-extension`: `<keyword keyref="product-name"/>`. Literals inside
+     `<filepath>`, `<codeph>`, `<codeblock>` and `<cite>` are fine.
+   - **UI labels** use `<uicontrol>`, never `<b>`; menu paths use
+     `<menucascade>`; a mnemonic is `<shortcut>` inside `<uicontrol>`.
+   - **Reuse, don't repeat.** Shared steps, notes and hazards live in `shared/`
+     and are pulled in with `conref` or `conkeyref`.
+   - **Conditions** use only the values in `subject-scheme.ditamap`;
+     `validate-conditions` fails on anything else.
+   - **Every topic needs a `<shortdesc>`** right after the title, under about 155
+     characters, leading with what the topic is about.
+   - **Every topic needs keywords** in its prolog; tasks need a `<created>` date;
+     an `<author>` is recommended. The metadata policy in `.dogsbay/config.xml`
+     enforces this.
+   - **Review markup does not ship.** Resolve `<draft-comment>` and
+     `<required-cleanup>` before a release; the house rules report them.
+   - **Titles** are sentence case. **Language** is `xml:lang="en-GB"` on every
+     root element; product names and code carry `translate="no"`.
+   - **Format** every file with `dogsbay-xml format -i` before committing. Do not
+     put character entities such as `&amp;` in text; write "and".
+
+   ## Checks
+
+   Run `scripts/check-stage.sh` before every commit; it must print `STAGE OK`.
+   For one dimension: `dogsbay-xml validate-project .`, `project-health .`,
+   `validate-conditions -S subject-scheme.ditamap .`,
+   `project-health --include=schematron .`, or `dita --project=project.json`.
+   ```
+2. **Create `.xagent/skills/audacity-house-style/SKILL.md`**
+
+   ```md {title=".xagent/skills/audacity-house-style/SKILL.md"}
+   ---
+   name: audacity-house-style
+   description: Apply the Audacity guide's house style to DITA topics — use product keys instead of hardcoded names, semantic UI elements instead of bold, conref shared content, and sentence-case titles. Use when asked to apply house style, clean up a topic, or make content consistent.
+   ---
+
+   # Audacity guide house style
+
+   When asked to apply house style (or to "clean up" / "make consistent") to one or
+   more DITA topics, apply these rules and re-validate afterwards:
+
+   1. **Product references → keys.** Replace any literal "Audacity", the version
+      number, the download URL, or the project extension (`.aup3`) with the matching
+      key:
+      - `Audacity` → `<keyword keyref="product-name"/>`
+      - version (e.g. `3.4`) → `<keyword keyref="product-version"/>`
+      - download URL → `<keyword keyref="download-url"/>`
+      - `.aup3` → `<keyword keyref="project-extension"/>`
+      Keys are defined in `keydefs-product.ditamap`. Use `list_keys` to confirm.
+      Do **not** replace literals inside `<codeblock>` or `<filepath>` examples
+      (e.g. a shell command or `C:\Program Files\Audacity`).
+
+   2. **UI labels → `<uicontrol>`.** Replace `<b>Record</b>`-style highlighting of
+      buttons, menu items, and field names with `<uicontrol>Record</uicontrol>`.
+      Multi-level menu paths use
+      `<menucascade><uicontrol>…</uicontrol>…</menucascade>`.
+
+   3. **Deduplicate via conref.** If a step or note is copied verbatim from
+      `shared/common-steps.dita` or `shared/common-notes.dita`, replace the copy with
+      a `conref` to the shared element instead of repeating it.
+
+   4. **Titles** are sentence case.
+
+   5. After editing, **validate** each changed topic and fix any errors before
+      reporting done.
+
+   Make the minimal edits needed; preserve meaning and surrounding markup.
+   ```
+3. **Read them**
+
+   - `AGENTS.md` is the file an AI coding agent reads before it touches a project; most agent tools look for it by that name. It is also the shortest description of the project for a person. The layout section says where things are; the house style section says the same rules as `house-style.sch`, plus the ones a rule cannot check, such as titles in sentence case and the formatter's `&amp;` limitation; the checks section says how to run the gate and each of its parts.
+   - The skill is a recipe for one task. Its frontmatter `name` and `description` are what an agent matches a request against, so the description names the task in the words a person would use, *apply house style*, *clean up a topic*, *make consistent*. The body is the steps, in order, ending with *validate before reporting done*.
+   - The same rules now exist three times, for three readers: the machine in `house-style.sch`, which fails the gate; the person or agent reading the project in `AGENTS.md`; the agent given a task in the skill. Keep them in step: a rule added to the Schematron is added to the prose the same day.
+:::
+
+## Step 5: README and the gate {#step-5-readme-and-the-gate}
+
+:::steps
+1. **Change the "You are on" line and the layout**
+
+   ```diff {title="README.md"}
+   --- a/README.md
+   +++ b/README.md
+   @@ -5,7 +5,7 @@ branch is the previous branch plus one lesson, from a single concept topic to a
+    complete, publish-ready **Audacity User Guide**. The diff between two branches
+    is the lesson.
+
+   -You are on **stage 23 — drafts and localization**: review markup, change history, language and direction, translate flags and sort keys.
+   +You are on **stage 24 — house rules**: Schematron rules, an agent guide and a skill, and the gate that enforces them.
+
+    ## Stages
+
+   @@ -46,6 +46,9 @@ keydefs-product.ditamap key definitions: product name, version, download URL, pr
+    keydefs-glossary.ditamap key definitions for the glossary entries
+    topics/glossary/      glossary entries and a glossary group
+    project.json          DITA-OT project file: the deliverables this guide ships
+   +house-style.sch       house rules as Schematron; run by project-health
+   +AGENTS.md             project context and house style for AI agents (and people)
+   +.xagent/skills/       a project-specific agent skill
+    subject-scheme.ditamap  the controlled values for platform and audience
+    .dogsbay/config.xml   shared editor project settings (project type, framework, default map and deliverable, format style)
+    scripts/              the gate
+   ```
+2. **Format and check**
+
+   ```bash
+   dogsbay-xml format -i topics/*.dita *.ditamap
+   scripts/check-stage.sh
+   ```
+
+   ```
+   == validate-project  /home/you/audacity-guide ==
+   /home/you/audacity-guide/learning/check-your-understanding.dita:
+     -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
+   42 file(s): 41 valid, 1 invalid.
+
+   == validate learning/ against the DITA-OT catalog ==
+   VALID
+
+   == project-health  /home/you/audacity-guide ==
+   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+
+   == house rules  /home/you/audacity-guide ==
+   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+
+   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
+   42 file(s): 42 pass, 0 with violations.
+
+   == build  project.json -> /tmp/check-stage-<pid> ==
+   all deliverables built
+
+   STAGE OK
+   ```
+
+   Two things have changed since stage 23. The health report's first line names the rules file, and a new step, *house rules*, runs `project-health --include=schematron` on its own and prints the same summary when the rules pass. The gate's health step has run with an explicit `--include` list since stage 22, to keep the `learning/` folder out of the editor's grammar pass, and `schematron` is not in that list because `--include` needs a rules file to exist; so the script looks for `<default-schematron>` in the config and, when it finds one, runs the rules as their own step. The step fails the gate on any violation, so the two stage 23 warnings are now something a branch cannot carry.
+:::
+
+Now make the mistake. Put one `<b>` back in `topics/podcast-production-workflow.dita`, around *Noise reduction* in the post-production list, and run the gate with `SKIP_BUILD=1`:
+
+```
+== house rules  /home/you/audacity-guide ==
+Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+House rules (1 of 42 files):
+  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+
+Summary
+  House rules                   1  in 1 of 42 files
+    Use uicontrol for UI labels (and drop decorative bold); do no…    1
+FAIL: house-rule violations
+```
+
+The message is the one from the `ui-labels-use-uicontrol` pattern, with the file and line, and the gate fails. Nothing else changed: the file is valid DITA, the links resolve, the metadata is complete. The house rule is the only thing that knows this project does not use `<b>`, which is what the rule is for.
+
+## What you learned {#what-you-learned}
+
+- Schematron: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>` and `<report test>`, with the message as content.
+- Testing `text()` so that literals inside `<filepath>` and `<cite>` are exempt; `test="true()"` to forbid an element.
+- `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the gate's *house rules* step.
+- Resolving review markup is content work: a `<required-cleanup>` becomes its table, an answered `<draft-comment>` becomes a `<change-summary>`.
+- The same rules for three readers: the Schematron, `AGENTS.md` and a skill.
+
+## Where to go next {#where-to-go-next}
+
+:::cards
+- **[Stage 25: Final](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final){icon="arrow-right"}**
+  The complete guide, every deliverable, and the tutorial/final tag.
+
+- **[Compare 23 to 24 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/23-drafts-and-localization...tutorial/24-house-rules){icon="github"}**
+  Exactly what this stage added.
+:::
+
+---
+
+# Stage 25: Final
+
+URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final.md
+
+---
+title: "Stage 25: Final"
+description: No new DITA. The README lists every stage and every deliverable, the branch is tagged tutorial/final, and the full gate builds all eight deliverables clean.
+type: tutorial
+---
+
+# Stage 25: Final {#stage-25-final}
+
+The last stage adds no DITA. Twenty-five branches have built, from one concept topic, a guide of 26 topic files and nine maps that publishes as three html5 guides in five variants, a collection, a set of install variants and a PDF book, checked by a gate that validates every file, resolves every link and key, enforces a metadata policy, a subject scheme and the house rules, and builds every deliverable. This stage writes that down: the README on the branch gets the full stage table and the list of deliverables, and the commit is tagged `tutorial/final`, a name that will keep pointing at the finished tree however the chain is rebased.
+
+Read it as a checklist. If your own project has come this far, it has everything on this page; if it has not, the table says which stage to go back to.
+
+**Time:** about 15 minutes. **You need:** stage 24 complete.
+
+## Step 1: The README {#step-1-the-readme}
+
+:::steps
+1. **Write the stage table and the deliverables**
+
+   ```diff {title="README.md"}
+   --- a/README.md
+   +++ b/README.md
+   @@ -5,7 +5,7 @@ branch is the previous branch plus one lesson, from a single concept topic to a
+    complete, publish-ready **Audacity User Guide**. The diff between two branches
+    is the lesson.
+
+   -You are on **stage 24 — house rules**: Schematron rules, an agent guide and a skill, and the gate that enforces them.
+   +You are on **stage 25 — final**: the complete guide, also tagged `tutorial/final`. Every deliverable builds and the gate is clean.
+
+    ## Stages
+
+   @@ -18,10 +18,29 @@ You are on **stage 24 — house rules**: Schematron rules, an agent guide and a
+    | `tutorial/04-rich-tasks` | prereqs, substeps, choices, examples |
+    | `tutorial/05-links` | cross-references and related links |
+    | `tutorial/06-figures` | images, SVG and an equation |
+   -| … | maps, keys, reuse, glossary, metadata, conditions, subject schemes, branch filtering, key scopes, chunking, bookmap, troubleshooting, hazards, software domains, learning, drafts and localization, house rules |
+   +| `tutorial/07-first-map` | the first map and build |
+   +| `tutorial/08-map-structure` | hierarchy, sequences, a relationship table |
+   +| `tutorial/09-keys` | product variables and indirect links |
+   +| `tutorial/10-reuse` | conref, conkeyref, ranges and push |
+   +| `tutorial/11-glossary` | glossary entries and abbreviations |
+   +| `tutorial/12-metadata-and-index` | prolog metadata, index terms, a metadata policy |
+   +| `tutorial/13-conditional-text` | conditions, DITAVAL filters and flags, audience maps |
+   +| `tutorial/14-subject-scheme` | controlled values |
+   +| `tutorial/15-branch-filtering` | one topic, three platform variants |
+   +| `tutorial/16-key-scopes` | three guides in one collection |
+   +| `tutorial/17-chunking-and-output` | pages, file names, print and search control |
+   +| `tutorial/18-bookmap` | a book and a PDF |
+   +| `tutorial/19-troubleshooting` | a troubleshooting topic |
+   +| `tutorial/20-hazards-and-safety` | hazard statements |
+   +| `tutorial/21-software-domains` | commands, syntax, messages, code samples |
+   +| `tutorial/22-learning` | a learning assessment |
+   +| `tutorial/23-drafts-and-localization` | review markup, language, translation |
+   +| `tutorial/24-house-rules` | Schematron rules, an agent guide and skill |
+    | `tutorial/25-final` | the complete guide (also tagged `tutorial/final`) |
+
+   -The walkthrough for readers is the docs site (see the `main` branch README).
+   +Deliverables in `project.json`: `full`, `beginner-mac`, `beginner-windows`,
+   +`podcaster-linux`, `review`, `install-variants`, `collection` (html5) and
+   +`book-pdf` (PDF).
+
+    ## The gate
+
+   ```
+
+   The whole file, as it is on the branch:
+
+   ````md {title="README.md"}
+   # DogsBay DITA tutorial — step by step
+
+   A DITA 1.3 project built up one feature at a time. Each `tutorial/NN-slug`
+   branch is the previous branch plus one lesson, from a single concept topic to a
+   complete, publish-ready **Audacity User Guide**. The diff between two branches
+   is the lesson.
+
+   You are on **stage 25 — final**: the complete guide, also tagged `tutorial/final`. Every deliverable builds and the gate is clean.
+
+   ## Stages
+
+   | Branch | Adds |
+   |--------|------|
+   | `tutorial/00-setup` | project settings, the gate script |
+   | `tutorial/01-concept` | one concept topic |
+   | `tutorial/02-task-and-reference` | a task and a reference topic |
+   | `tutorial/03-inline-and-block` | inline semantics, notes, lists, code |
+   | `tutorial/04-rich-tasks` | prereqs, substeps, choices, examples |
+   | `tutorial/05-links` | cross-references and related links |
+   | `tutorial/06-figures` | images, SVG and an equation |
+   | `tutorial/07-first-map` | the first map and build |
+   | `tutorial/08-map-structure` | hierarchy, sequences, a relationship table |
+   | `tutorial/09-keys` | product variables and indirect links |
+   | `tutorial/10-reuse` | conref, conkeyref, ranges and push |
+   | `tutorial/11-glossary` | glossary entries and abbreviations |
+   | `tutorial/12-metadata-and-index` | prolog metadata, index terms, a metadata policy |
+   | `tutorial/13-conditional-text` | conditions, DITAVAL filters and flags, audience maps |
+   | `tutorial/14-subject-scheme` | controlled values |
+   | `tutorial/15-branch-filtering` | one topic, three platform variants |
+   | `tutorial/16-key-scopes` | three guides in one collection |
+   | `tutorial/17-chunking-and-output` | pages, file names, print and search control |
+   | `tutorial/18-bookmap` | a book and a PDF |
+   | `tutorial/19-troubleshooting` | a troubleshooting topic |
+   | `tutorial/20-hazards-and-safety` | hazard statements |
+   | `tutorial/21-software-domains` | commands, syntax, messages, code samples |
+   | `tutorial/22-learning` | a learning assessment |
+   | `tutorial/23-drafts-and-localization` | review markup, language, translation |
+   | `tutorial/24-house-rules` | Schematron rules, an agent guide and skill |
+   | `tutorial/25-final` | the complete guide (also tagged `tutorial/final`) |
+
+   Deliverables in `project.json`: `full`, `beginner-mac`, `beginner-windows`,
+   `podcaster-linux`, `review`, `install-variants`, `collection` (html5) and
+   `book-pdf` (PDF).
+
+   ## The gate
+
+   ```bash
+   scripts/check-stage.sh            # validate every file, check project health, build every deliverable
+   SKIP_BUILD=1 scripts/check-stage.sh
+   ```
+
+   It needs the `dogsbay-xml` CLI and DITA-OT 4.3.5 (`DOGSBAY_XML`, `DITA_HOME`
+   override the defaults). A stage is done when it prints `STAGE OK`.
+
+   ## Layout
+
+   ```
+   audacity-guide.ditamap  the main guide (start here)
+   installation-variants.ditamap  branch filtering: one install topic, three platform variants
+   beginner-guide.ditamap, podcaster-guide.ditamap  audience-specific guides that reuse the same topics
+   audacity-book.ditamap  the same guide as a book (PDF): parts, chapters, appendices, glossary, index
+   audacity-collection.ditamap  all three guides in one publication, each in its own key scope
+   filters/              DITAVAL files: what each deliverable includes, excludes or flags
+   keydefs-product.ditamap key definitions: product name, version, download URL, project extension
+   keydefs-glossary.ditamap key definitions for the glossary entries
+   topics/glossary/      glossary entries and a glossary group
+   project.json          DITA-OT project file: the deliverables this guide ships
+   house-style.sch       house rules as Schematron; run by project-health
+   AGENTS.md             project context and house style for AI agents (and people)
+   .xagent/skills/       a project-specific agent skill
+   subject-scheme.ditamap  the controlled values for platform and audience
+   .dogsbay/config.xml   shared editor project settings (project type, framework, default map and deliverable, format style)
+   scripts/              the gate
+   topics/               topics
+   learning/             learning and training: an assessment
+   samples/              code samples pulled into topics by coderef
+   shared/               warehouses: content pulled in by conref (common-steps, common-notes)
+   images/               illustrations referenced by <image>
+   ```
+
+   ## Licence and attribution
+
+   CC BY 4.0, see [LICENSE](LICENSE). Topic text is adapted from the
+   [Audacity Manual](https://manual.audacityteam.org/) (CC BY 3.0); see
+   [NOTICE](NOTICE) for the credit the licence requires.
+   ````
+2. **Read it** The "You are on" line names the stage, as on every branch since stage 00. The table that Part 1 started with six rows and an ellipsis now has all 26, one per branch, with what each adds in the words the branch's page uses. The deliverables line is the contents of `project.json` in one sentence. The rest of the file, the gate, the layout and the licence, has grown one line at a time since stage 00 and is unchanged here.
+:::
+
+## Step 2: The tag {#step-2-the-tag}
+
+:::steps
+1. **Tag the branch** On the branch, once the gate is clean:
+
+   ```bash
+   git tag tutorial/final
+   git tag --points-at tutorial/25-final
+   ```
+
+   ```
+   tutorial/final
+   ```
+2. **Read it** A branch moves: stage 25 is rebased every time a middle stage is edited, as [Branches](/dogsbay-xml-dita-tutorial-docs/reference/branches) describes, and its commit gets a new hash. A tag is a name for one commit. `tutorial/final` is moved by hand, to the new tip of the chain, after the ladder has been re-checked, so a script or a reader who wants the finished project can fetch that name and get a tree that passed the gate:
+
+   ```bash
+   git fetch --tags
+   git show tutorial/final:README.md | head -9
+   ```
+:::
+
+## Step 3: Everything it ships {#step-3-everything-it-ships}
+
+:::steps
+1. **Read `project.json`** Eight deliverables, each with a map, an optional DITAVAL and a transtype:
+
+   | Deliverable | Map | Filter | Output | Since |
+   | --- | --- | --- | --- | --- |
+   | `full` | `audacity-guide.ditamap` | none | html5, full navigation | [07](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-07-first-map) |
+   | `beginner-mac` | `beginner-guide.ditamap` | `filters/mac-beginner.ditaval` | html5, partial navigation | [13](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text) |
+   | `beginner-windows` | `beginner-guide.ditamap` | `filters/windows-beginner.ditaval` | html5, partial navigation | [13](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text) |
+   | `podcaster-linux` | `podcaster-guide.ditamap` | `filters/linux-podcaster.ditaval` | html5 | [13](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text) |
+   | `review` | `audacity-guide.ditamap` | `filters/review.ditaval` | html5, everything flagged | [13](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text) |
+   | `install-variants` | `installation-variants.ditamap` | in the map, by `<ditavalref>` | html5 | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-branch-filtering) |
+   | `collection` | `audacity-collection.ditamap` | none | html5, full navigation | [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-key-scopes) |
+   | `book-pdf` | `audacity-book.ditamap` | none | PDF | [18](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-18-bookmap) |
+2. **Run the full gate**
+
+   ```bash
+   scripts/check-stage.sh
+   ```
+
+   ```
+   == validate-project  /home/you/audacity-guide ==
+   /home/you/audacity-guide/learning/check-your-understanding.dita:
+     -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
+   42 file(s): 41 valid, 1 invalid.
+
+   == validate learning/ against the DITA-OT catalog ==
+   VALID
+
+   == project-health  /home/you/audacity-guide ==
+   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+
+   == house rules  /home/you/audacity-guide ==
+   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
+   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+
+   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
+   42 file(s): 42 pass, 0 with violations.
+
+   == build  project.json -> /tmp/check-stage-<pid> ==
+   all deliverables built
+
+   STAGE OK
+   ```
+
+   Every step, every deliverable. The build's output folder has one directory per deliverable:
+
+   ```
+   beginner-mac
+   beginner-windows
+   book-pdf
+   collection
+   full
+   install-variants
+   podcaster-linux
+   review
+   ```
+
+   The run takes under a minute on the full guide, most of it the PDF. That is the cost of knowing that the branch you tag is the branch that builds.
+:::
+
+## What to build next {#what-to-build-next}
+
+The guide is complete for what it set out to teach, and it is a starting point. Each of these is one more branch, in the same shape as the 26 before it:
+
+- **A second language.** Copy the topics to `topics/de/`, translate them, set `xml:lang="de"` on each root, and publish a `full-de` deliverable from a map that references them. The `translate="no"` marks from stage 23 say what stays in English.
+- **A constraint module.** The house rule against `<b>` runs after the fact; a DTD constraint removes `<b>` from the grammar, so that the editor never offers it. Constraints and specialisation are the next layer of DITA above what this tutorial covers.
+- **A DITA-OT plugin.** The PDF from stage 18 uses the default stylesheets. A small plugin puts the hazard symbol on the cover, the product name in the running header and the house's fonts on the page.
+- **A learning plan.** Stage 22 wrote one assessment; a `<learningPlan>`, a `<learningContent>` and a `<learningMap>` turn the guide into a course.
+- **Continuous checking.** `scripts/check-stage.sh` runs anywhere `dogsbay-xml` and DITA-OT are installed. A workflow that runs it on every pull request is twenty lines, and it makes the gate a rule of the repository rather than a habit of its authors.
+
+## What you learned {#what-you-learned}
+
+- Nothing new in DITA. The README as the map of the project, the tag as the fixed name for a moving branch, `project.json` as the list of what ships.
+- The full gate on the full guide: validation, health, house rules, controlled values, and every deliverable built.
+- Where to go from here: languages, constraints, a plugin, a course, continuous checking.
+
+## Where to go next {#where-to-go-next}
+
+:::cards
+- **[The element index](/dogsbay-xml-dita-tutorial-docs/reference/element-index){icon="book-open"}**
+  Every element and attribute in the tutorial, with the stage that introduced it.
+
+- **[Branches](/dogsbay-xml-dita-tutorial-docs/reference/branches){icon="git-branch"}**
+  Every stage branch, the tutorial/final tag, and how to compare any two stages.
+
+- **[Compare 24 to 25 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/24-house-rules...tutorial/25-final){icon="github"}**
   Exactly what this stage added.
 :::
 
@@ -7993,13 +9209,13 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/element-index.m
 
 ---
 title: Element index
-description: Every DITA element and attribute in the tutorial, with the stage that introduces it. Stages 00 to 22 are written; later stages are listed from the plan.
+description: Every DITA element and attribute in the tutorial, with the stage that introduces it, from stage 00 to stage 25.
 type: reference
 ---
 
 # Element index {#element-index}
 
-The stage that introduces each element or attribute. Look an element up here, then read the stage page for what it is for and where it may appear. Elements in stages marked *coming* are listed from the plan and will be linked as the stage pages are written.
+The stage that introduces each element or attribute. Look an element up here, then read the stage page for what it is for and where it may appear. All 26 stages are written, so every row links to its page.
 
 ## Part 1: Topics {#part-1-topics}
 
@@ -8149,10 +9365,17 @@ The stage that introduces each element or attribute. Look an element up here, th
 
 | Element or attribute | Stage |
 | --- | --- |
-| `<draft-comment>`, `<required-cleanup>`, `@status` | 23 *coming* |
-| `@xml:lang`, `@translate="no"`, `@dir`, `<sort-as>`, `<change-historylist>` | 23 *coming* |
-| Schematron `house-style.sch`, `AGENTS.md`, the house-style skill, `project-health --schematron` | 24 *coming* |
-| Nothing new: every deliverable builds, `tutorial/final` | 25 *coming* |
+| `@xml:lang` on every root and on a `<ph>`; `@dir="rtl"` | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `@translate="no"` on a `<keyword>`, `<parml>`, `<msgblock>`, `<codeblock>`, `<screen>` | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `<sort-as value>` in a `<glossterm>`; `<index-see>` for an abbreviation | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `<draft-comment author time disposition>`, `<required-cleanup remap>`; DITA-OT `args.draft` | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `project-health`'s *Authoring leftovers* warnings | [23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) |
+| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the gate's *house rules* step | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) |
+| `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` frontmatter | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) |
+| `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) |
+| Nothing new: the README's stage table and deliverables, `project.json` in full, the `tutorial/final` tag | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final) |
 
 ---
 
@@ -8175,7 +9398,7 @@ type: reference
 | Step | Command | Proves |
 | --- | --- | --- |
 | 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` validates against its DOCTYPE. From [stage 22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning), files under `learning/` that fail here are validated again with `dogsbay-xml validate --catalog $DITA_HOME/catalog-dita.xml`, because the editor's built-in catalog has no Learning and Training DTDs |
-| 2 | `dogsbay-xml project-health <root>` | No broken links, undefined or unused keys, broken element ids, orphan conref pushes or dangling index redirects; no metadata-policy or house-rule violations. House-style formatting and authoring leftovers are warnings. When a `learning/` folder exists the check runs with an explicit `--include` list that leaves out its own grammar pass, and house rules run as a separate step once `.dogsbay/config.xml` names a `<default-schematron>` |
+| 2 | `dogsbay-xml project-health <root>` | No broken links, undefined or unused keys, broken element ids, orphan conref pushes or dangling index redirects; no metadata-policy or house-rule violations. House-style formatting and authoring leftovers are warnings. When a `learning/` folder exists the check runs with an explicit `--include` list that leaves out its own grammar pass, and house rules run as a separate step, `project-health --include=schematron`, once `.dogsbay/config.xml` names a `<default-schematron>` (from [stage 24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules)) |
 | 2b | `dogsbay-xml validate-conditions -S <scheme> <root>` | Every `platform` and `audience` value is one the subject scheme allows. Runs only when a subject scheme map exists (from [stage 14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-subject-scheme)); without `-S` or `-m` the command has no scheme and passes vacuously |
 | 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` codes, because the build does not always exit non-zero |
 
@@ -8254,7 +9477,7 @@ The full ladder is checked with `scripts/check-all-stages.sh` on `main`, which c
 
 ## The script {#the-script}
 
-The gate as it is on `tutorial/22-learning`, the newest branch. Stages 00 to 13 carry it without step 2b, stages 14 to 21 without the `learning/` special case: the editor's built-in catalog has no Learning and Training DTDs, so from stage 22 the gate validates `learning/*.dita` against the DITA-OT catalog and runs the health check without its own grammar pass.
+The gate as it is on `tutorial/25-final`, the last branch; it has not changed since stage 22. Stages 00 to 13 carry it without step 2b, stages 14 to 21 without the `learning/` special case: the editor's built-in catalog has no Learning and Training DTDs, so from stage 22 the gate validates `learning/*.dita` against the DITA-OT catalog and runs the health check without its own grammar pass. The *house rules* step is in the script from stage 22 but runs only once `.dogsbay/config.xml` names a `<default-schematron>`, which [stage 24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) does; from then on the output has a `== house rules ==` block after the health check, and a violation fails the gate.
 
 ```bash {title="scripts/check-stage.sh"}
 #!/usr/bin/env bash
@@ -8400,9 +9623,11 @@ The tutorial repository is [dogsbay/dogsbay-xml-dita-tutorial](https://github.co
 | `tutorial/20-hazards-and-safety` | Hazard statements with a message panel and a symbol, one reused by conkeyref | [Stage 20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-hazards-and-safety) |
 | `tutorial/21-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-software-domains) |
 | `tutorial/22-learning` | A learning assessment, and the gate taught about the Learning and Training DTDs | [Stage 22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning) |
-| `tutorial/23-drafts-and-localization` … `tutorial/25-final` | Part 5: governance and the finish | *coming* |
+| `tutorial/23-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 23](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization) |
+| `tutorial/24-house-rules` | The house style as Schematron, named in the project config and run by the gate; `AGENTS.md` and a skill; the ten violations resolved | [Stage 24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules) |
+| `tutorial/25-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final) |
 
-`tutorial/25-final` will also be tagged `tutorial/final`, a stable name for the finished tree.
+`tutorial/25-final` is also tagged `tutorial/final`, a stable name for the finished tree. The branch moves when a middle stage is edited and the chain is rebased; the tag is moved to the new tip by hand once the ladder has been re-checked, so `git show tutorial/final:README.md` always reads a tree that passed the gate.
 
 `main` is not part of the chain. It is the finished, deliberately broken demo project that the DogsBay XML tutorial uses, and it shares no history with the stage branches.
 
@@ -8422,7 +9647,7 @@ On GitHub, the compare URL is the two branch names joined by three dots:
 https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/<from>...<to>
 ```
 
-For example, [compare 03 to 04](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/03-inline-and-block...tutorial/04-rich-tasks). Non-adjacent branches work too: compare `tutorial/00-setup` to `tutorial/06-figures` to see all of Part 1 at once, or `tutorial/06-figures` to `tutorial/12-metadata-and-index` for all of Part 2, or `tutorial/12-metadata-and-index` to `tutorial/17-chunking-and-output` for all of Part 3, or `tutorial/17-chunking-and-output` to `tutorial/22-learning` for all of Part 4.
+For example, [compare 03 to 04](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/03-inline-and-block...tutorial/04-rich-tasks). Non-adjacent branches work too: compare `tutorial/00-setup` to `tutorial/06-figures` to see all of Part 1 at once, or `tutorial/06-figures` to `tutorial/12-metadata-and-index` for all of Part 2, or `tutorial/12-metadata-and-index` to `tutorial/17-chunking-and-output` for all of Part 3, `tutorial/17-chunking-and-output` to `tutorial/22-learning` for all of Part 4, or `tutorial/22-learning` to `tutorial/25-final` for all of Part 5. The whole ladder is [compare `tutorial/00-setup` to `tutorial/25-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/25-final).
 
 To read one file as it is on a branch without checking the branch out:
 

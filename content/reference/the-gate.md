@@ -16,7 +16,7 @@ it; this page is the reference.
 | Step | Command | Proves |
 |---|---|---|
 | 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` validates against its DOCTYPE. From [stage 22](/part-4-books/stage-22-learning), files under `learning/` that fail here are validated again with `dogsbay-xml validate --catalog $DITA_HOME/catalog-dita.xml`, because the editor's built-in catalog has no Learning and Training DTDs |
-| 2 | `dogsbay-xml project-health <root>` | No broken links, undefined or unused keys, broken element ids, orphan conref pushes or dangling index redirects; no metadata-policy or house-rule violations. House-style formatting and authoring leftovers are warnings. When a `learning/` folder exists the check runs with an explicit `--include` list that leaves out its own grammar pass, and house rules run as a separate step once `.dogsbay/config.xml` names a `<default-schematron>` |
+| 2 | `dogsbay-xml project-health <root>` | No broken links, undefined or unused keys, broken element ids, orphan conref pushes or dangling index redirects; no metadata-policy or house-rule violations. House-style formatting and authoring leftovers are warnings. When a `learning/` folder exists the check runs with an explicit `--include` list that leaves out its own grammar pass, and house rules run as a separate step, `project-health --include=schematron`, once `.dogsbay/config.xml` names a `<default-schematron>` (from [stage 24](/part-5-governance/stage-24-house-rules)) |
 | 2b | `dogsbay-xml validate-conditions -S <scheme> <root>` | Every `platform` and `audience` value is one the subject scheme allows. Runs only when a subject scheme map exists (from [stage 14](/part-3-conditions/stage-14-subject-scheme)); without `-S` or `-m` the command has no scheme and passes vacuously |
 | 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` codes, because the build does not always exit non-zero |
 
@@ -117,11 +117,16 @@ book from [stage 18](/part-4-books/stage-18-bookmap) adds about 26 seconds to th
 
 ## The script
 
-The gate as it is on `tutorial/22-learning`, the newest branch. Stages 00
-to 13 carry it without step 2b, stages 14 to 21 without the `learning/`
-special case: the editor's built-in catalog has no Learning and Training
-DTDs, so from stage 22 the gate validates `learning/*.dita` against the
-DITA-OT catalog and runs the health check without its own grammar pass.
+The gate as it is on `tutorial/25-final`, the last branch; it has not
+changed since stage 22. Stages 00 to 13 carry it without step 2b, stages 14
+to 21 without the `learning/` special case: the editor's built-in catalog
+has no Learning and Training DTDs, so from stage 22 the gate validates
+`learning/*.dita` against the DITA-OT catalog and runs the health check
+without its own grammar pass. The *house rules* step is in the script from
+stage 22 but runs only once `.dogsbay/config.xml` names a
+`<default-schematron>`, which [stage 24](/part-5-governance/stage-24-house-rules)
+does; from then on the output has a `== house rules ==` block after the
+health check, and a violation fails the gate.
 
 ```bash title="scripts/check-stage.sh"
 #!/usr/bin/env bash

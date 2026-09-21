@@ -19,8 +19,8 @@ same check, so you always know when a stage is done.
 
 ## The ladder
 
-Twenty-six stages in five parts. Stages marked *coming* are planned but their
-branch and page are not written yet.
+Twenty-six stages in five parts. The ladder is complete: every stage has
+its branch and its page, and the last branch is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 |---|---|---|---|
@@ -47,9 +47,9 @@ branch and page are not written yet.
 | [20](/part-4-books/stage-20-hazards-and-safety) | `tutorial/20-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |
 | [21](/part-4-books/stage-21-software-domains) | `tutorial/21-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
 | [22](/part-4-books/stage-22-learning) | `tutorial/22-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the gate and the L&T DTDs |
-| 23 *coming* | `tutorial/23-drafts-and-localization` | Ready for review and translation | `<draft-comment>`, `<required-cleanup>`, `@status`, `@xml:lang`, `@translate`, `<sort-as>` |
-| 24 *coming* | `tutorial/24-house-rules` | Rules as code | Schematron `house-style.sch`, `AGENTS.md`, the house-style skill |
-| 25 *coming* | `tutorial/25-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
+| [23](/part-5-governance/stage-23-drafts-and-localization) | `tutorial/23-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
+| [24](/part-5-governance/stage-24-house-rules) | `tutorial/24-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; the gate's house-rules step |
+| [25](/part-5-governance/stage-25-final) | `tutorial/25-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it
 

@@ -150,18 +150,37 @@ its use.
 
    The `silent` key, defined in the full guide in stage 19, was unused
    until now; `dogsbay-xml health` listed it. The topic is print-only, so
-   the sentence appears in the PDF, and there it shows a gap on the
-   branch: the book's `<appendix>` for the troubleshooting topic carries
-   no `keys="silent"`, so in `out/book-pdf/audacity-book.pdf` the notices
-   page reads *Recording nothing but silence? See .* with nothing after
-   *See*. The gate does not catch it: `project-health` resolves keys
-   against the root map, `audacity-guide.ditamap`, where the key exists,
-   and the PDF build does not fail on an unresolved key. Add
-   `keys="silent"` to that appendix in `audacity-book.ditamap` and the
-   link resolves; a key that a topic uses must be defined in every map
-   that publishes the topic.
+   the sentence appears in the PDF, and the PDF is built from a different
+   map.
 
-5. **Read the output**
+5. **Edit `audacity-book.ditamap`**
+
+   ```diff title="audacity-book.ditamap"
+   --- a/audacity-book.ditamap
+   +++ b/audacity-book.ditamap
+   @@ -65,7 +65,7 @@
+        <chapter href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
+      </part>
+    
+   -  <appendix href="topics/recording-is-silent.dita"/>
+   +  <appendix href="topics/recording-is-silent.dita" keys="silent"/>
+      <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
+      <appendix href="topics/effects-reference.dita" keys="effects"/>
+    
+   ```
+
+   Stage 19 defined `silent` in `audacity-guide.ditamap` only; the book's
+   `<appendix>` for the same topic had no `keys`. Without this line the
+   notices page of `out/book-pdf/audacity-book.pdf` reads *Recording
+   nothing but silence? See .* with nothing after *See*, and the gate
+   does not catch it: `project-health` resolves keys against the root
+   map, `audacity-guide.ditamap`, where the key exists, and the PDF build
+   does not fail on an unresolved key. A key that a topic uses must be
+   defined in every map that publishes the topic; with it, the sentence
+   in the PDF reads *Recording nothing but silence? See The recording is
+   silent on page 37.*
+
+6. **Read the output**
    The gate's html5 build of the full guide,
    `topics/recording-your-first-track.html`, has the hazard in place:
 
@@ -248,7 +267,8 @@ the same way you give a conref'd step its empty `<cmd/>`.
 - A conref'd hazard statement needs a placeholder panel, like the `<cmd/>`
   of a conref'd step.
 - The html5 class `hazardstatement--<type>`.
-- Every key defined gets used: `silent`.
+- Every key defined gets used: `silent`, and a key a topic uses is
+  defined in every map that publishes the topic.
 
 ## Where to go next
 

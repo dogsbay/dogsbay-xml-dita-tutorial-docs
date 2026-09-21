@@ -38,10 +38,15 @@ root; see [How the tutorial works](/start-here/how-the-tutorial-works).
 | `tutorial/20-hazards-and-safety` | Hazard statements with a message panel and a symbol, one reused by conkeyref | [Stage 20](/part-4-books/stage-20-hazards-and-safety) |
 | `tutorial/21-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 21](/part-4-books/stage-21-software-domains) |
 | `tutorial/22-learning` | A learning assessment, and the gate taught about the Learning and Training DTDs | [Stage 22](/part-4-books/stage-22-learning) |
-| `tutorial/23-drafts-and-localization` … `tutorial/25-final` | Part 5: governance and the finish | *coming* |
+| `tutorial/23-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 23](/part-5-governance/stage-23-drafts-and-localization) |
+| `tutorial/24-house-rules` | The house style as Schematron, named in the project config and run by the gate; `AGENTS.md` and a skill; the ten violations resolved | [Stage 24](/part-5-governance/stage-24-house-rules) |
+| `tutorial/25-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 25](/part-5-governance/stage-25-final) |
 
-`tutorial/25-final` will also be tagged `tutorial/final`, a stable name for
-the finished tree.
+`tutorial/25-final` is also tagged `tutorial/final`, a stable name for the
+finished tree. The branch moves when a middle stage is edited and the chain
+is rebased; the tag is moved to the new tip by hand once the ladder has been
+re-checked, so `git show tutorial/final:README.md` always reads a tree that
+passed the gate.
 
 `main` is not part of the chain. It is the finished, deliberately broken demo
 project that the DogsBay XML tutorial uses, and it shares no history with the
@@ -69,8 +74,10 @@ Non-adjacent branches work too: compare `tutorial/00-setup` to
 `tutorial/06-figures` to see all of Part 1 at once, or `tutorial/06-figures`
 to `tutorial/12-metadata-and-index` for all of Part 2, or
 `tutorial/12-metadata-and-index` to `tutorial/17-chunking-and-output` for
-all of Part 3, or `tutorial/17-chunking-and-output` to `tutorial/22-learning`
-for all of Part 4.
+all of Part 3, `tutorial/17-chunking-and-output` to `tutorial/22-learning`
+for all of Part 4, or `tutorial/22-learning` to `tutorial/25-final` for all
+of Part 5. The whole ladder is
+[compare `tutorial/00-setup` to `tutorial/25-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/25-final).
 
 To read one file as it is on a branch without checking the branch out:
 

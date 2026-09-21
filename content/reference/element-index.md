@@ -1,15 +1,14 @@
 ---
 title: Element index
-description: Every DITA element and attribute in the tutorial, with the stage that introduces it. Stages 00 to 22 are written; later stages are listed from the plan.
+description: Every DITA element and attribute in the tutorial, with the stage that introduces it, from stage 00 to stage 25.
 type: reference
 ---
 
 # Element index
 
 The stage that introduces each element or attribute. Look an element up here,
-then read the stage page for what it is for and where it may appear. Elements
-in stages marked *coming* are listed from the plan and will be linked as the
-stage pages are written.
+then read the stage page for what it is for and where it may appear. All 26
+stages are written, so every row links to its page.
 
 ## Part 1: Topics
 
@@ -159,7 +158,14 @@ stage pages are written.
 
 | Element or attribute | Stage |
 |---|---|
-| `<draft-comment>`, `<required-cleanup>`, `@status` | 23 *coming* |
-| `@xml:lang`, `@translate="no"`, `@dir`, `<sort-as>`, `<change-historylist>` | 23 *coming* |
-| Schematron `house-style.sch`, `AGENTS.md`, the house-style skill, `project-health --schematron` | 24 *coming* |
-| Nothing new: every deliverable builds, `tutorial/final` | 25 *coming* |
+| `@xml:lang` on every root and on a `<ph>`; `@dir="rtl"` | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| `@translate="no"` on a `<keyword>`, `<parml>`, `<msgblock>`, `<codeblock>`, `<screen>` | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| `<sort-as value>` in a `<glossterm>`; `<index-see>` for an abbreviation | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| `<draft-comment author time disposition>`, `<required-cleanup remap>`; DITA-OT `args.draft` | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| `project-health`'s *Authoring leftovers* warnings | [23](/part-5-governance/stage-23-drafts-and-localization) |
+| Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [24](/part-5-governance/stage-24-house-rules) |
+| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the gate's *house rules* step | [24](/part-5-governance/stage-24-house-rules) |
+| `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` frontmatter | [24](/part-5-governance/stage-24-house-rules) |
+| `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [24](/part-5-governance/stage-24-house-rules) |
+| Nothing new: the README's stage table and deliverables, `project.json` in full, the `tutorial/final` tag | [25](/part-5-governance/stage-25-final) |

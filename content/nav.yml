@@ -37,11 +37,10 @@
     - "Stage 20: Hazards and safety": part-4-books/stage-20-hazards-and-safety.md
     - "Stage 21: Software domains": part-4-books/stage-21-software-domains.md
     - "Stage 22: Learning": part-4-books/stage-22-learning.md
-# Uncomment each group as its branches and pages land.
-# - "Part 5: Governance and the finish":
-#     - "Stage 23: Drafts and localization": part-5-governance/stage-23-drafts-and-localization.md
-#     - "Stage 24: House rules": part-5-governance/stage-24-house-rules.md
-#     - "Stage 25: Final": part-5-governance/stage-25-final.md
+- "Part 5: Governance and the finish":
+    - "Stage 23: Drafts and localization": part-5-governance/stage-23-drafts-and-localization.md
+    - "Stage 24: House rules": part-5-governance/stage-24-house-rules.md
+    - "Stage 25: Final": part-5-governance/stage-25-final.md
 - Reference:
     - Element index: reference/element-index.md
     - The gate: reference/the-gate.md

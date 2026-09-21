@@ -12,11 +12,12 @@ reader needs before stage 00 (how the branches work, installing the tools,
 running the gate), and a reference section (element-to-stage index, the gate,
 branch cheatsheet).
 
-Now: the start-here pages, Part 1 (stages 00 to 06), Part 2 (stages 07 to
-12), Part 3 (stages 13 to 17) and Part 4 (stages 18 to 22), which are the
-branches that exist. The nav carries a commented placeholder for Part 5, and
-the home page and element index list every stage from the plan, marked
-"coming" until its branch and page exist.
+Now: complete. The start-here pages, Part 1 (stages 00 to 06), Part 2
+(stages 07 to 12), Part 3 (stages 13 to 17), Part 4 (stages 18 to 22) and
+Part 5 (stages 23 to 25) are written, one page per branch, and the home
+page, element index and branches reference link every stage. Remaining work
+is maintenance: when a stage branch is rewritten, refresh its page's blocks
+and re-run its gate output.
 
 Out: documenting the `main` branch's deliberately broken demo (that is the
 `dogsbay-xml-docs` tutorial), and anything about the DogsBay XML editor that
@@ -42,7 +43,7 @@ is not needed to follow a stage.
 1. Start here: what you will build (the home page), how the tutorial works,
    set up your tools, run the gate.
 2. Parts 1 to 4: stages 00 to 22, one page each.
-3. Part 5, as a comment until its branches exist.
+3. Part 5: stages 23 to 25, one page each.
 4. Reference: element index, the gate, branches.
 
 Each stage page has the same skeleton as
@@ -72,8 +73,8 @@ Every file shown on a stage page is the file on that stage branch, pasted from
 `git show tutorial/NN-slug:path`, not written by hand. New files are shown
 whole; edited files are shown as the exact changed region or whole. The gate
 output on each page is from a real run of `scripts/check-stage.sh` on an
-extracted copy of the branch. The plan's ladder is the source for stages that
-have no branch yet, and those are marked "coming".
+extracted copy of the branch. Every stage has a branch now, so nothing is
+listed from the plan alone.
 
 When a stage branch changes, its page changes with it. The planned
 `scripts/check-excerpts.sh` in the tutorial repo will verify that every fenced

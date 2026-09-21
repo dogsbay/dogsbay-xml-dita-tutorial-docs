@@ -451,10 +451,9 @@ platform first and text for a reader second.
 ## Where to go next
 
 :::cards
-- **[The element index](/reference/element-index)** {icon="book-open"}
-  Every element so far, with the stage that introduced it. Part 5 covers
-  drafts and localization, house rules and the finished guide, and its
-  pages arrive as the branches do.
+- **[Stage 23: Drafts and localization](/part-5-governance/stage-23-drafts-and-localization)** {icon="arrow-right"}
+  Language and translate flags on every file, sort keys, review markup
+  and a change history.
 
 - **[Compare 21 to 22 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/21-software-domains...tutorial/22-learning)** {icon="github"}
   Exactly what this stage added.

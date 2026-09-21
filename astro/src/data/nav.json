@@ -133,6 +133,23 @@
     ]
   },
   {
+    "label": "Part 5: Governance and the finish",
+    "children": [
+      {
+        "label": "Stage 23: Drafts and localization",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization"
+      },
+      {
+        "label": "Stage 24: House rules",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules"
+      },
+      {
+        "label": "Stage 25: Final",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final"
+      }
+    ]
+  },
+  {
     "label": "Reference",
     "children": [
       {
