@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dogsbay-xml-dita-tutorial-docs",
+  "compatibility_date": "2026-04-01",
+
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  },
+
+  "routes": [
+    // Both patterns, as the blog has: "/dogsbay-xml-dita-tutorial-docs/*" does
+    // not match the bare "/dogsbay-xml-dita-tutorial-docs", which would fall
+    // through to the apex worker and 404 — and that path is the tutorial's
+    // home page.
+    { "pattern": "dogsbay.ai/dogsbay-xml-dita-tutorial-docs", "zone_name": "dogsbay.ai" },
+    { "pattern": "dogsbay.ai/dogsbay-xml-dita-tutorial-docs/*", "zone_name": "dogsbay.ai" }
+  ]
+}

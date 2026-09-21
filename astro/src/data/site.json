@@ -1,0 +1,7 @@
+{
+  "siteName": "DogsBay DITA tutorial",
+  "repoUrl": "https://github.com/dogsbay/dogsbay-xml-dita-tutorial-docs",
+  "siteUrl": "https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs",
+  "description": "Learn DITA 1.3 one feature at a time by building an Audacity user guide, stage by stage, with a check at every step.",
+  "poweredBy": true
+}

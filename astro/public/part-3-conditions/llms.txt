@@ -1,0 +1,9 @@
+# DogsBay DITA tutorial — Part 3: Conditions and variants
+
+## Part 3: Conditions and variants
+
+- [Stage 13: Conditional text](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text.md): Mark text for a platform or an audience, write DITAVAL filters that include, exclude or flag it, and ship one deliverable per audience from the same topics.
+- [Stage 14: Subject scheme](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-subject-scheme.md): Define the allowed values of platform and audience in a subject scheme map, reference it from every root map, and make the gate reject a value outside it.
+- [Stage 15: Branch filtering](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-branch-filtering.md): Publish the install task three times from one map, once per platform, with a ditavalref on the branch and a prefix or suffix on the copies.
+- [Stage 16: Key scopes](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-key-scopes.md): Give each guide its own start-here key, publish all three guides in one collection without key collisions, and link across deliverables with a peer map.
+- [Stage 17: Chunking and output](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-chunking-and-output.md): Decide which topics become which pages with chunk and copy-to, keep a licence topic out of the web output, and reuse a map branch by topicsetref.

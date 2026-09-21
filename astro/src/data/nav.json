@@ -1,0 +1,152 @@
+[
+  {
+    "label": "Start here",
+    "children": [
+      {
+        "label": "What you will build",
+        "href": "/dogsbay-xml-dita-tutorial-docs"
+      },
+      {
+        "label": "How the tutorial works",
+        "href": "/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works"
+      },
+      {
+        "label": "Set up your tools",
+        "href": "/dogsbay-xml-dita-tutorial-docs/start-here/set-up"
+      },
+      {
+        "label": "Run the gate",
+        "href": "/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate"
+      }
+    ]
+  },
+  {
+    "label": "Part 1: Topics",
+    "children": [
+      {
+        "label": "Stage 00: Set up the project",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup"
+      },
+      {
+        "label": "Stage 01: A concept topic",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept"
+      },
+      {
+        "label": "Stage 02: A task and a reference",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-task-and-reference"
+      },
+      {
+        "label": "Stage 03: Inline and block elements",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-inline-and-block"
+      },
+      {
+        "label": "Stage 04: Rich tasks",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-rich-tasks"
+      },
+      {
+        "label": "Stage 05: Links",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-links"
+      },
+      {
+        "label": "Stage 06: Figures",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-figures"
+      }
+    ]
+  },
+  {
+    "label": "Part 2: Maps and publishing",
+    "children": [
+      {
+        "label": "Stage 07: Your first map",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-07-first-map"
+      },
+      {
+        "label": "Stage 08: Map structure",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-08-map-structure"
+      },
+      {
+        "label": "Stage 09: Keys",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-keys"
+      },
+      {
+        "label": "Stage 10: Reuse",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-reuse"
+      },
+      {
+        "label": "Stage 11: Glossary",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-glossary"
+      },
+      {
+        "label": "Stage 12: Metadata and index",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-metadata-and-index"
+      }
+    ]
+  },
+  {
+    "label": "Part 3: Conditions and variants",
+    "children": [
+      {
+        "label": "Stage 13: Conditional text",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-13-conditional-text"
+      },
+      {
+        "label": "Stage 14: Subject scheme",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-subject-scheme"
+      },
+      {
+        "label": "Stage 15: Branch filtering",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-branch-filtering"
+      },
+      {
+        "label": "Stage 16: Key scopes",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-key-scopes"
+      },
+      {
+        "label": "Stage 17: Chunking and output",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-chunking-and-output"
+      }
+    ]
+  },
+  {
+    "label": "Part 4: Books and specialised topics",
+    "children": [
+      {
+        "label": "Stage 18: Bookmap",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-18-bookmap"
+      },
+      {
+        "label": "Stage 19: Troubleshooting",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-troubleshooting"
+      },
+      {
+        "label": "Stage 20: Hazards and safety",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-hazards-and-safety"
+      },
+      {
+        "label": "Stage 21: Software domains",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-software-domains"
+      },
+      {
+        "label": "Stage 22: Learning",
+        "href": "/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning"
+      }
+    ]
+  },
+  {
+    "label": "Reference",
+    "children": [
+      {
+        "label": "Element index",
+        "href": "/dogsbay-xml-dita-tutorial-docs/reference/element-index"
+      },
+      {
+        "label": "The gate",
+        "href": "/dogsbay-xml-dita-tutorial-docs/reference/the-gate"
+      },
+      {
+        "label": "Branches",
+        "href": "/dogsbay-xml-dita-tutorial-docs/reference/branches"
+      }
+    ]
+  }
+]

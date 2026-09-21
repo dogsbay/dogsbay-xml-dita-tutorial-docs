@@ -1,0 +1,8 @@
+# DogsBay DITA tutorial — Start here
+
+## Start here
+
+- [What you will build](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs.md): Learn DITA 1.3 one feature at a time by building an Audacity user guide, stage by stage, with a check at every step.
+- [How the tutorial works](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works.md): The tutorial is a chain of git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
+- [Set up your tools](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/set-up.md): Install DITA-OT 4.3.5 and the DogsBay XML command line, point the gate at them, and clone the tutorial repository at its first stage.
+- [Run the gate](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate.md): What scripts/check-stage.sh checks, what it prints when a stage passes or fails, and the SKIP_BUILD and STRICT switches.

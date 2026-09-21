@@ -1,0 +1,48 @@
+# Sidebar navigation. One group per part of the ladder, in reading order.
+# Each page declares its Diataxis type in frontmatter; that governs the shape
+# of the page, not where it sits here.
+#
+# Labels containing a colon must be quoted, or the YAML parser reads the colon
+# as a mapping separator and the build fails.
+
+- Start here:
+    - What you will build: index.md
+    - How the tutorial works: start-here/how-the-tutorial-works.md
+    - Set up your tools: start-here/set-up.md
+    - Run the gate: start-here/run-the-gate.md
+- "Part 1: Topics":
+    - "Stage 00: Set up the project": part-1-topics/stage-00-setup.md
+    - "Stage 01: A concept topic": part-1-topics/stage-01-concept.md
+    - "Stage 02: A task and a reference": part-1-topics/stage-02-task-and-reference.md
+    - "Stage 03: Inline and block elements": part-1-topics/stage-03-inline-and-block.md
+    - "Stage 04: Rich tasks": part-1-topics/stage-04-rich-tasks.md
+    - "Stage 05: Links": part-1-topics/stage-05-links.md
+    - "Stage 06: Figures": part-1-topics/stage-06-figures.md
+- "Part 2: Maps and publishing":
+    - "Stage 07: Your first map": part-2-maps/stage-07-first-map.md
+    - "Stage 08: Map structure": part-2-maps/stage-08-map-structure.md
+    - "Stage 09: Keys": part-2-maps/stage-09-keys.md
+    - "Stage 10: Reuse": part-2-maps/stage-10-reuse.md
+    - "Stage 11: Glossary": part-2-maps/stage-11-glossary.md
+    - "Stage 12: Metadata and index": part-2-maps/stage-12-metadata-and-index.md
+- "Part 3: Conditions and variants":
+    - "Stage 13: Conditional text": part-3-conditions/stage-13-conditional-text.md
+    - "Stage 14: Subject scheme": part-3-conditions/stage-14-subject-scheme.md
+    - "Stage 15: Branch filtering": part-3-conditions/stage-15-branch-filtering.md
+    - "Stage 16: Key scopes": part-3-conditions/stage-16-key-scopes.md
+    - "Stage 17: Chunking and output": part-3-conditions/stage-17-chunking-and-output.md
+- "Part 4: Books and specialised topics":
+    - "Stage 18: Bookmap": part-4-books/stage-18-bookmap.md
+    - "Stage 19: Troubleshooting": part-4-books/stage-19-troubleshooting.md
+    - "Stage 20: Hazards and safety": part-4-books/stage-20-hazards-and-safety.md
+    - "Stage 21: Software domains": part-4-books/stage-21-software-domains.md
+    - "Stage 22: Learning": part-4-books/stage-22-learning.md
+# Uncomment each group as its branches and pages land.
+# - "Part 5: Governance and the finish":
+#     - "Stage 23: Drafts and localization": part-5-governance/stage-23-drafts-and-localization.md
+#     - "Stage 24: House rules": part-5-governance/stage-24-house-rules.md
+#     - "Stage 25: Final": part-5-governance/stage-25-final.md
+- Reference:
+    - Element index: reference/element-index.md
+    - The gate: reference/the-gate.md
+    - Branches: reference/branches.md

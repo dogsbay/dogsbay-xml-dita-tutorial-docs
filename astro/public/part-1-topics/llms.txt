@@ -1,0 +1,11 @@
+# DogsBay DITA tutorial — Part 1: Topics
+
+## Part 1: Topics
+
+- [Stage 00: Set up the project](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup.md): An empty DITA project that the tools recognise, with the shared editor settings and the gate script that every later stage must pass.
+- [Stage 01: A concept topic](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept.md): Write What is Audacity? as a DITA concept, learn the parts every topic has, and validate one file with the gate.
+- [Stage 02: A task and a reference](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-task-and-reference.md): Write Recording your first track as a task and Supported audio formats as a reference, and learn why DITA has three information types.
+- [Stage 03: Inline and block elements](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-inline-and-block.md): Mark up UI controls, menu paths, terms and file paths inline; add notes, definition lists, ordered and simple lists, footnotes, simple tables and code blocks.
+- [Stage 04: Rich tasks](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-rich-tasks.md): Write four more tasks that use prerequisites, substeps, choices, a choice table, step examples and results, troubleshooting, and unordered steps.
+- [Stage 05: Links](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-links.md): Add cross-references inside the text and related links at the end of each topic, link to a section by id, and link out to the web.
+- [Stage 06: Figures](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-figures.md): Add a figure with an image and alt text, an inline SVG, an image map with clickable areas, and the decibel formula as MathML with a text fallback.
