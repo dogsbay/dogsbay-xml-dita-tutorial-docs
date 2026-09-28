@@ -43,7 +43,10 @@ cd ../audacity-conditions
 dogsbay-xml check .
 ```
 
-Use a new branch and directory name if either already exists. The checkpoint
+Use a new branch and directory name if either already exists. To only
+inspect a checkpoint, switch the clone to it instead: in the editor, click
+the branch name in the status bar and choose the `origin/tutorial/NN-slug`
+branch. The checkpoint
 includes the skipped examples so later diffs apply cleanly.
 
 ## Optional modules

@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 16 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: A key per guide
 
@@ -31,9 +31,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```diff title="beginner-guide.ditamap"
    --- a/beginner-guide.ditamap
    +++ b/beginner-guide.ditamap
-   @@ -7,6 +7,8 @@
-      <mapref href="keydefs-product.ditamap"/>
-      <mapref href="keydefs-glossary.ditamap"/>
+   @@ -9,6 +9,8 @@
+      <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
+      <topicref href="topics/glossary/audio-units.dita" toc="no"/>
       <keydef keys="common-notes" href="shared/common-notes.dita"/>
    +  <!-- This guide's own landing page, under the same bare key every guide uses. -->
    +  <keydef keys="start-here" href="topics/recording-your-first-track.dita"/>
@@ -193,7 +193,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 ::::
 
-## Step 3: The deliverable, the README and the gate
+## Step 3: The deliverable, the README and the check
 
 ::::steps
 1. **Edit `project.json`**
@@ -243,31 +243,34 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-3. **Check**
+3. **Check your work**
+   In the editor, choose **Project** > **Check Project** and read the
+   result in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   scripts/check-stage.sh
+   dogsbay-xml check .
    ```
 
+   Example output:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   34 file(s): 34 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide ==
-   34 file(s): 34 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-425102 ==
-   all deliverables built
-
-   STAGE OK
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
 4. **Read the output**
-   Under your gate's build directory, `out/collection/index.html` has the three
+   `out/collection/index.html` has the three
    guides one after another, and `topics/` has a page per use of each
    topic: `what-is-audacity.html` for the full guide, then
    `what-is-audacity-1.html` for the beginner guide and
@@ -278,16 +281,17 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 ::::
 
 Test an unqualified key at the root. Add `<topicref keyref="start-here"/>`
-to `audacity-collection.ditamap`, above the first `<topichead>`, and run the
-gate. It passes. DITA-OT drops the topicref, and only a verbose build
-(`dita … -v`) says so:
+to `audacity-collection.ditamap`, above the first `<topichead>`, and check
+your work. The check reports `Ready`. DITA-OT drops the topicref, and only
+a verbose DITA-OT log records it, as an informational message:
 
 ```
-file:/home/you/audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
+[keyref] file:/home/you/audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
 ```
 
 There is no `@href`, so the entry is missing from the table of contents and
-nothing else. `project-health` does not see it either: it checks the
+nothing else. The build succeeds and no link breaks, so the output check
+has nothing to report. Health does not see it either: it checks the
 default root map, the full guide. The tool that does object is the key
 resolver, pointed at the collection:
 
@@ -303,8 +307,8 @@ A key reference from the root has to name the scope,
 `keyref="userguide.start-here"`, or the map has to define the bare key in
 the root. When you add a root map, check its key space by hand.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+After each error exercise, undo the deliberate change and check again.
+Confirm that the check reports `Ready` before you continue.
 
 ## What you learned
 

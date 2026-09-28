@@ -167,7 +167,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   dogsbay-xml check --no-build .
+   dogsbay-xml check .
    ```
 
    The output looks like this example:
@@ -175,17 +175,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean, with warnings
      orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
-   Project health is clean. The build was not run, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
+   Project health is clean — no deliverables yet, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
    ```
 
    The orphan warning is expected. No map refers to the topic yet, so it
    would not appear in any output. Stage 02 adds the map. A warning does not
    make the check fail.
 
-   The project declares no deliverables until stage 03. In the editor, and
-   from the command line without `--no-build`, the check reports
-   `Not ready: stopped at build` because there is nothing to build. That
-   result is expected before stage 03. Look for `health   clean`.
+   The project declares no deliverables until stage 03, so the check
+   reports on the source only. Look for `health   clean`.
 ::::
 
 To see a validation error, put a `<section>` inside another `<section>` and
@@ -199,20 +197,22 @@ its `<p>`:
 </section>
 ```
 
-The check names the file and stops at the health stage. The output looks like
-this example:
+The check names the file, with the line, column, and message of the first
+errors, and stops at the health stage. The output looks like this example:
 
 ```
 health   NOT CLEAN
   invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+    27:15  The content of element type "section" does not match its content model.
   (run project-health for the full report)
   orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-For the line, column, and message, open the **Project Validation** panel in
-the editor, or run `dogsbay-xml project-health .`. It reports the element
-whose content model was broken. For example:
+The error is reported on the closing tag of the outer `<section>`, where the
+parser finds that its content does not fit. For the full report, open the
+**Project Validation** panel in the editor, or run
+`dogsbay-xml project-health .`. For example:
 
 ```
 Root map: none (none configured); house rules: none (none configured)

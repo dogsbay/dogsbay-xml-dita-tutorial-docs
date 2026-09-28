@@ -53,11 +53,11 @@ inspection. Record the commands, output directories, and any limitations
 you found. If the check reports `Ready` but output is wrong, investigate the affected
 map and transform before accepting the result.
 
-Compare your checker output with the
-[known reference-build findings](/reference/known-output-issues). Report
-those baseline failures and any new failures separately. Your new topic and
-its links must pass the acceptance checks; baseline defects still need to
-be resolved before a release of the whole guide.
+The reference guide checks clean (see
+[Known output issues](/reference/known-output-issues)), so any failure
+that the check reports in your project comes from your changes. Your new
+topic and its links must pass the acceptance checks, and the check must
+report `Ready` before you hand off your work.
 
 ## Explain your design
 

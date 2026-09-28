@@ -22,7 +22,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 20 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The hazard in the shared topic
 
@@ -41,7 +41,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +++ b/shared/common-notes.dita
    @@ -23,6 +23,17 @@
         <note id="backup-warning" type="warning">This effect changes the audio data.
-        Save the project first; you can undo with <ph platform="windows linux"><uicontrol>Ctrl+Z</uicontrol></ph><ph platform="mac"><uicontrol>Cmd+Z</uicontrol></ph>.</note>
+        Save the project first; you can undo with <ph platform="windows linux"><uicontrol>Ctrl+Z</uicontrol></ph><ph platform="mac"> <ph platform="windows linux">or, on macOS,</ph> <uicontrol>Cmd+Z</uicontrol></ph>.</note>
         <note id="quiet-room-tip" type="tip">For best results, record in a quiet room and position the microphone 15 to 30 cm from your mouth.</note>
    +    <hazardstatement id="hearing-hazard" type="caution">
    +      <messagepanel>
@@ -150,10 +150,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
       </body>
    ```
 
-   The `silent` key, defined in the full guide in stage 20, was unused
-   until now; `dogsbay-xml health` listed it. The topic is print-only, so
-   the sentence appears in the PDF, and the PDF is built from a different
-   map.
+   The `silent` key comes from stage 20. The topic is print-only, so the
+   sentence appears only in the PDF, and the PDF is built from a
+   different map.
 
 5. **Edit `audacity-book.ditamap`**
 
@@ -171,20 +170,25 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
       <appendix href="topics/effect-presets.dita"/>
    ```
 
-   Stage 20 defined `silent` in `audacity-guide.ditamap` only; the book's
-   `<appendix>` for the same topic had no `keys`. Without this line the
+   Stage 20 defined `silent` in the full guide, the beginner guide and
+   the installation variants, but not in the book: the book's
+   `<appendix>` for the same topic had no `keys`. The trouble note from
+   stage 20 did not need it, because its `href` fallback resolves without
+   the key. The new sentence has only a `keyref`. Without this line the
    notices page of `out/book-pdf/audacity-book.pdf` reads *Recording
-   nothing but silence? See .* with nothing after *See*, and the gate
-   does not catch it: `project-health` resolves keys against the root
-   map, `audacity-guide.ditamap`, where the key exists, and the PDF build
-   does not fail on an unresolved key. A key that a topic uses must be
+   nothing but silence? See .* with nothing after *See*, and the check
+   still reports `Ready`. Health resolves keys against the root map,
+   `audacity-guide.ditamap`, where the key exists, the PDF build does not
+   fail on an unresolved key, and the output check reads links in HTML
+   pages only. A key that a topic uses must be
    defined in every map that publishes the topic; with it, the sentence
    in the PDF reads *Recording nothing but silence? See The recording is
    silent on page 37.*
 
 6. **Read the output**
-   The gate's HTML5 build of the full guide,
-   `topics/recording-your-first-track.html`, has the hazard in place:
+   The check's HTML5 build of the full guide,
+   `out/full/topics/recording-your-first-track.html`, has the hazard in
+   place (the inline SVG is shortened here):
 
    ```
    <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
@@ -199,7 +203,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    panel's parts each a `div` of their own, for a stylesheet to lay out.
 ::::
 
-## Step 3: README and the gate
+## Step 3: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -218,49 +222,59 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   39 file(s): 39 valid, 0 invalid.
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+   Example output:
 
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   39 file(s): 39 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 8 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 ::::
 
 Test the hazard statement without its placeholder. Make the reference in the recording task a single
 empty element, `<hazardstatement conkeyref="common-notes/hearing-hazard"/>`,
-and run the gate with `SKIP_BUILD=1`:
+and check your work. The check stops at health. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/recording-your-first-track.dita:
-  31:65  error: The content of element type "hazardstatement" is incomplete, it must match "(messagepanel+,hazardsymbol*)".
-39 file(s): 38 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/recording-your-first-track.dita
+    31:65  The content of element type "hazardstatement" is incomplete, it must match "(messagepanel+,hazardsymbol*)".
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The DTD requires a `<messagepanel>` in every `<hazardstatement>`, whether
 or not it is going to be replaced. Give a conref'd hazard the empty panel
 the same way you give a conref'd step its empty `<cmd/>`.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

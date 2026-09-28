@@ -192,8 +192,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `keydefs-glossary.ditamap`**
    Create the file in the project root from the **Key Definition Map**
-   template, as in stage 10 (choose the template explicitly, because the
-   dialog selects **Bookmap** first). Replace the title with
+   template, as in stage 10. Replace the title with
    `Glossary key definitions`, and replace the two sample key definitions
    with the eight glossary keys. If you use another editor, create the file
    and type the finished listing.
@@ -451,7 +450,7 @@ health   NOT CLEAN
   unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
   unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives

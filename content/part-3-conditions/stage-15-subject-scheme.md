@@ -1,6 +1,6 @@
 ---
 title: "Stage 15: Subject scheme"
-description: Define the allowed values of platform and audience in a subject scheme map, reference it from every root map, and make the gate reject a value outside it.
+description: Define the allowed values of platform and audience in a subject scheme map, reference it from every root map, and check the project for a value outside it.
 type: tutorial
 ---
 
@@ -11,15 +11,16 @@ Without a controlled vocabulary, `platform="macos"` passes DTD validation
 even though the filters expect `mac`. The unrecognized value leaves the
 macOS content in Windows and Linux output.
 
-Create `subject-scheme.ditamap`, reference it from each root map, and add
-`validate-conditions` to the gate. DITA-OT warns about values outside
-the scheme; the new gate check treats them as failures.
+Create `subject-scheme.ditamap`, reference it from each root map, and
+check the values against it. DITA-OT only warns about a value outside the
+scheme, and **Check Project** does not report it, so this lesson adds a
+separate check for controlled values.
 
 **Time:** about 20 minutes.
 **You need:** stage 14 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The vocabulary
 
@@ -140,7 +141,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <mapref href="subject-scheme.ditamap" type="subjectScheme"/>
       <mapref href="keydefs-product.ditamap"/>
       <mapref href="keydefs-glossary.ditamap"/>
-      <keydef keys="common-notes" href="shared/common-notes.dita"/>
+      <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
    ```
 
    ```diff title="podcaster-guide.ditamap"
@@ -170,54 +171,22 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    dogsbay-xml list-subjects subject-scheme.ditamap
    ```
 
+   Example output:
+
    ```
-   @audience: beginner, podcaster, readers
-   @platform: linux, mac, os, windows
+   @platform: linux, mac, windows
+   @audience: beginner, podcaster
    ```
 
-   This recorded tool output includes the containers `os` and `readers`.
-   That behavior conflicts with the DITA enumeration rules. The allowed
-   platform values are `windows`, `mac`, and `linux`; the audience values
-   are `beginner` and `podcaster`. Do not use the container names as values.
-   See [Binding controlled values to an attribute](https://docs.oasis-open.org/dita/dita/v1.3/errata01/os/complete/part2-tech-content/archSpec/base/binding-controlled-values-to-attribute.html).
+   The containers `os` and `readers` are not values: the enumeration
+   binds each attribute to the subjects below them. See
+   [Binding controlled values to an attribute](https://docs.oasis-open.org/dita/dita/v1.3/errata01/os/complete/part2-tech-content/archSpec/base/binding-controlled-values-to-attribute.html).
 ::::
 
-## Step 3: The gate checks the values
+## Step 3: Check the values and your work
 
 ::::steps
-1. **Edit `scripts/check-stage.sh`**
-   A step between health and build that runs when the project root contains
-   a map with a `<subjectScheme>` element.
-
-   ```diff title="scripts/check-stage.sh"
-   --- a/scripts/check-stage.sh
-   +++ b/scripts/check-stage.sh
-   @@ -5,6 +5,8 @@
-    #   1. dogsbay-xml validate-project   every topic and map validates against its DOCTYPE
-    #   2. dogsbay-xml project-health     links, keys, element ids, conref pushes, index,
-    #                                     metadata policy and house rules are clean
-   +#   2b. dogsbay-xml validate-conditions (once a subject scheme is referenced) every
-   +#                                     platform/audience value is a controlled value
-    #   3. dita --project=project.json    every deliverable actually publishes
-    #
-    # Exit code is non-zero when any gate fails. Usage:
-   @@ -40,6 +42,13 @@
-      "$DOGSBAY_XML" project-health --severity=error "$ROOT" || fail "project-health found errors"
-    fi
-    
-   +scheme=$(grep -l '<subjectScheme' "$ROOT"/*.ditamap 2>/dev/null | head -1 || true)
-   +if [ -n "$scheme" ]; then
-   +  # Without -S (or -m) the command discovers no scheme and passes vacuously.
-   +  say "validate-conditions  $ROOT  (scheme: ${scheme#$ROOT/})"
-   +  "$DOGSBAY_XML" validate-conditions -S "$scheme" "$ROOT" || fail "profiling values outside the subject scheme"
-   +fi
-   +
-    if [ "$SKIP_BUILD" = "1" ]; then
-      say "build  skipped (SKIP_BUILD=1)"
-    elif [ -f "$ROOT/project.json" ]; then
-   ```
-
-2. **Change the "You are on" line and the layout**
+1. **Change the "You are on" line and the layout**
 
    ```diff title="README.md"
    --- a/README.md
@@ -233,67 +202,90 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-3. **Check**
+2. **Check the controlled values**
+   In the editor, choose **Project** > **Validate** >
+   **Controlled Values (Subject Scheme)** and read the result in the
+   **Project Validation** panel. From the command line, name the map whose
+   scheme applies:
 
    ```bash
-   scripts/check-stage.sh
+   dogsbay-xml validate-conditions -m audacity-guide.ditamap .
    ```
 
+   Example output:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   29 file(s): 29 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   29 file(s): 29 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-418211 ==
-   all deliverables built
-
-   STAGE OK
+   27 file(s): 27 pass, 0 with violations.
    ```
 
-   The 29th file is the scheme itself, which validates against its own
-   DTD.
+   The command scans the files in the full guide's map, and finds the
+   scheme through the map's `<mapref type="subjectScheme">`.
+
+3. **Check your work**
+   In the editor, choose **Project** > **Check Project** and read the
+   result in the **Project Validation** panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
+   ```
+
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The scheme is a map with its own DOCTYPE, and health validates it like
+   any other file.
 ::::
 
 Test a value outside the controlled vocabulary. In
 `topics/installing-audacity.dita`, change the macOS row to
-`<chrow platform="macos">` and check the values against the scheme of the
-full guide:
+`<chrow platform="macos">` and check the controlled values:
 
 ```bash
 dogsbay-xml validate-conditions -m audacity-guide.ditamap .
 ```
 
+The output looks like this example:
+
 ```
 /home/you/audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
-29 file(s): 28 pass, 1 with violations.
+27 file(s): 26 pass, 1 with violations.
 ```
 
 The `-m` names the map whose scheme applies; the command discovers the
 scheme from the map's closure, and with `-S subject-scheme.ditamap` you can
 name a scheme directly. Run without either, the scan has no scheme to check
-against and every file passes. The gate therefore locates the scheme map
-and passes it explicitly with `-S`.
+against and every file passes.
 
-DITA-OT sees the same thing. Build the full guide and the log carries a
-warning:
+Now choose **Check Project**, or run `dogsbay-xml check .`. It reports
+`Ready`: the value is valid against the DTD, every deliverable builds, and
+every link in the output leads somewhere. DITA-OT sees the value, but only
+as a warning in its build log:
 
 ```
-Warning: file:/home/you/audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
+[topic-reader] file:/home/you/audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W][WARN] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
 ```
 
-It is a warning, so the build goes on, and because no DITAVAL has a rule
-for `macos`, the row is included in every filtered build.
-The gate greps the log for errors only; the `validate-conditions` step is
-what turns this into a failure.
+Because no DITAVAL has a rule for `macos`, the row is included in every
+filtered build: `beginner-windows`, `beginner-mac` and `podcaster-linux`
+all show the `.dmg` row. Check the controlled values whenever you add or
+change a profiling attribute.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+After each error exercise, undo the deliberate change, then check the
+controlled values and your work again. Confirm that the values pass and
+that the check reports `Ready` before you continue.
 
 ## What you learned
 
@@ -303,10 +295,11 @@ Confirm that it prints `STAGE OK` before continuing.
 - `<mapref type="subjectScheme">` in every root map; a scheme applies only
   where it is referenced.
 - `dogsbay-xml list-subjects` shows the vocabulary;
-  `dogsbay-xml validate-conditions -m <rootmap> .` fails on a value outside
-  it; DITA-OT warns with `DOTJ049W` and builds anyway.
-- The gate gains a step that names the scheme with `-S`, guarded so that
-  earlier stages without a scheme still pass.
+  **Project** > **Validate** > **Controlled Values (Subject Scheme)**, or
+  `dogsbay-xml validate-conditions -m <rootmap> .`, fails on a value
+  outside it; DITA-OT warns with `DOTJ049W` and builds anyway.
+- **Check Project** does not check controlled values, so check them
+  separately after you change a profiling attribute.
 
 ## Next lesson
 

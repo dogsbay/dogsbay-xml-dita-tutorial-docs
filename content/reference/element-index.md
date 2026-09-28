@@ -153,7 +153,7 @@ stages are written, so every row links to its page.
 | `<lcObjectives>`, `<lcObjectivesStem>`, `<lcObjectivesGroup>`, `<lcObjective>`; `<lcDuration>`, `<lcTime value>` | [23](/part-4-books/stage-23-learning) |
 | `<lcInteraction>`; `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcQuestion2>`, `<lcAnswerOptionGroup2>`, `<lcAnswerOption2>`, `<lcAnswerContent2>`, `<lcCorrectResponse2>`, `<lcFeedback2>` | [23](/part-4-books/stage-23-learning) |
 | `<lcSequencing2>`, `<lcSequenceOptionGroup2>`, `<lcSequenceOption2>`, `<lcSequence2 value>` | [23](/part-4-books/stage-23-learning) |
-| `dogsbay-xml validate --catalog <catalog>`; `project-health --include=…` | [23](/part-4-books/stage-23-learning) |
+| `dogsbay-xml validate` on a learning topic, with no catalog option | [23](/part-4-books/stage-23-learning) |
 
 ## Part 5: Governance and the finish
 
@@ -166,7 +166,7 @@ stages are written, so every row links to its page.
 | `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [24](/part-5-governance/stage-24-drafts-and-localization) |
 | `project-health`'s *Authoring leftovers* warnings | [24](/part-5-governance/stage-24-drafts-and-localization) |
 | Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/part-5-governance/stage-25-house-rules) |
-| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the gate's *house rules* step | [25](/part-5-governance/stage-25-house-rules) |
+| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the house rules in **Check Project** | [25](/part-5-governance/stage-25-house-rules) |
 | `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/part-5-governance/stage-25-house-rules) |
 | `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [25](/part-5-governance/stage-25-house-rules) |
 | Nothing new: the README's stage table and deliverables, `project.json` in full, the `tutorial/final` tag | [26](/part-5-governance/stage-26-final) |

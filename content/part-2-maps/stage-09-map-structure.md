@@ -315,7 +315,7 @@ health and names the broken reference. Example output:
 health   NOT CLEAN
   /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
   (run project-health for the full report)
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel lists the same problem. From the command

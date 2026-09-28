@@ -40,15 +40,16 @@ Run this check after changing a stage branch or its quoted documentation.
 
 ## Check all generated HTML deliverables
 
-First run the stage gate with builds enabled. Note the directory printed by
-its build step. Replace the example below with that directory's `out/` path:
+First build the deliverables. `dogsbay-xml check .` builds each one into the
+project's `out/` folder; pass that folder:
 
 ```bash
-python3 scripts/check-output-links.py /tmp/check-stage-12345/out
+python3 scripts/check-output-links.py /path/to/stage/out
 ```
 
-If you built directly with `dita --project=project.json`, pass the project's
-`out/` directory. Pass the common parent of all deliverables so that links
+If you ran the stage gate with builds enabled, pass the `out/` path under the
+directory printed by its build step. If you built directly with
+`dita --project=project.json`, pass the project's `out/` directory. Pass the common parent of all deliverables so that links
 between them can resolve.
 
 The script checks local `href` and `src` targets, HTML fragment IDs, named
@@ -77,9 +78,9 @@ output-link checks. A reference stage can pass its historical gate and fail
 the new output check; investigate the reported output rather than suppressing
 the finding.
 
-The final reference build currently has 21 reported failures across 178 HTML
-pages. See [Known output issues](/reference/known-output-issues) for the
-affected deliverables and investigation points.
+The final reference stage, `tutorial/26-final`, built with
+`dogsbay-xml check .`, has no reported failures across 180 HTML pages. [Known output issues](/reference/known-output-issues)
+records the earlier findings.
 
 For checker regression tests, run `python3 -B scripts/test_checks.py`.
 

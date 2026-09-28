@@ -1,5 +1,27 @@
 # Tutorial documentation review
 
+## Source fixes and Check Project for every stage, September 28, 2026
+
+The tutorial branches were rebuilt from stage 11 with the phase 3 source
+fixes (see `plans/editor-consistency.md`, "Status"). Every stage now checks
+clean with the current editor: stages 00 to 02 report healthy with no
+deliverables yet, and stages 03 to 26 report Ready, including the PDF.
+
+- Stages 14 to 26 now use **Project** > **Check Project** instead of the
+  gate. Every recorded check output and deliberate-error exercise was
+  re-recorded with `dogsbay-xml check` on the rebuilt branches.
+- Set-up and the start-here pages move between stages with the status-bar
+  branch switcher; `git switch` stays as the command-line option.
+- Stage 23 validates learning topics without a catalog option; stage 24
+  builds the draft with a deliverable parameter instead of the `dita` CLI.
+- Known output issues: the final build has 0 broken links across 180
+  pages. Two limitations remain and are documented: the split chunking
+  example in stage 18 has two broken generated links, and the PDF built in
+  the editor has no index.
+
+The docs source audit and the excerpt check (190 listings, 0 failures)
+passed.
+
 ## New file templates, stages 01 to 13, September 28, 2026
 
 Every step that creates a DITA file now starts from the editor's **New

@@ -13,6 +13,8 @@ with `copy-to`.
 **Optional module.** See [Choose a learning path](/start-here/learning-path).
 **You need:** stage 17 complete. **Time:** about 35 minutes.
 
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
+
 ## Add the production topics
 
 Create the following files. The effects reference and presets use separate
@@ -231,7 +233,7 @@ audio-formats topic a different output filename.
 ```diff title="beginner-guide.ditamap"
 --- a/beginner-guide.ditamap
 +++ b/beginner-guide.ditamap
-@@ -21,6 +21,7 @@
+@@ -23,6 +23,7 @@
      <topicref href="topics/exporting-audio.dita"/>
    </topichead>
    <topichead navtitle="Quick reference">
@@ -287,16 +289,39 @@ and is excluded from the deliverables in `project.json`.
 ```xml title="examples/chunking/topics/nested.dita"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+
 <reference id="chunk-parent">
   <title>Chunking demonstration</title>
   <shortdesc>Compare a combined page with separate pages for nested topics.</shortdesc>
-  <prolog><author>The tutorial team</author><metadata><keywords><keyword>chunking</keyword></keywords></metadata></prolog>
-  <refbody><section><p>The parent and child share one source file.</p></section></refbody>
+  <prolog>
+    <author>The tutorial team</author>
+    <metadata>
+      <keywords>
+        <keyword>chunking</keyword>
+      </keywords>
+    </metadata>
+  </prolog>
+  <refbody>
+    <section>
+      <p>The parent and child share one source file.</p>
+    </section>
+  </refbody>
   <reference id="chunk-child">
     <title>Nested topic</title>
     <shortdesc>The child can be published on its own page.</shortdesc>
-    <prolog><author>The tutorial team</author><metadata><keywords><keyword>chunking</keyword></keywords></metadata></prolog>
-    <refbody><section><p>Check the generated parent and child links.</p></section></refbody>
+    <prolog>
+      <author>The tutorial team</author>
+      <metadata>
+        <keywords>
+          <keyword>chunking</keyword>
+        </keywords>
+      </metadata>
+    </prolog>
+    <refbody>
+      <section>
+        <p>Check the generated parent and child links.</p>
+      </section>
+    </refbody>
   </reference>
 </reference>
 ```
@@ -304,6 +329,7 @@ and is excluded from the deliverables in `project.json`.
 ```xml title="examples/chunking/combined.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
 <map>
   <title>Chunking demonstration</title>
   <topicref href="topics/nested.dita"/>
@@ -313,40 +339,105 @@ and is excluded from the deliverables in `project.json`.
 ```xml title="examples/chunking/split.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
 <map>
   <title>Chunking demonstration</title>
   <topicref href="topics/nested.dita" chunk="by-topic"/>
 </map>
 ```
 
-Run both builds from the project root:
+The example is not a deliverable, so **Check Project** does not build it.
+To build both maps with the DITA-OT that the editor includes, give the
+example folder a `project.json` of its own. Create
+`examples/chunking/project.json`:
 
-```bash
-dita --input=examples/chunking/combined.ditamap --format=html5 --output=out/chunk-combined --nav-toc=full
-dita --input=examples/chunking/split.ditamap --format=html5 --output=out/chunk-split --nav-toc=full
-python3 scripts/check-output-links.py out/chunk-combined
-python3 scripts/check-output-links.py out/chunk-split
+```json
+{
+  "deliverables": [
+    {
+      "name": "chunk-combined",
+      "context": { "id": "chunk-combined", "input": "combined.ditamap" },
+      "output": "out/chunk-combined",
+      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
+    },
+    {
+      "name": "chunk-split",
+      "context": { "id": "chunk-split", "input": "split.ditamap" },
+      "output": "out/chunk-split",
+      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
+    }
+  ]
+}
 ```
 
-Open each output's `index.html`. The combined version keeps the parent and
-child on one page. The split version should create a page for each topic.
-Follow the parent, child, and navigation links. Generated filenames can vary.
+The stage branch does not contain this file. Then check the example folder
+as a project of its own:
 
-**Warning:** The previous effects example produced broken generated links
-with DITA-OT 4.3.5. Nested topics with `chunk="by-topic"` are valid DITA.
-The separate example preserves that lesson but does not guarantee that a
-processor will handle every chunking case correctly. Record the results for
-your version and transformation, and check generated links before publishing.
+```bash
+dogsbay-xml check examples/chunking
+```
+
+The output looks like this example:
+
+```
+health   clean
+build    chunk-combined       ok  /home/you/audacity-guide/examples/chunking/out/chunk-combined
+build    chunk-split          ok  /home/you/audacity-guide/examples/chunking/out/chunk-split
+output   2 broken link(s)
+  /home/you/audacity-guide/examples/chunking/out/chunk-split/97fc308b7a258ea5c2fbc53def61887c5203182b.html:12  @href="602efa29ceccc1cbad72daac54430cff43f917d2.html#chunk-parent" — there is no 602efa29ceccc1cbad72daac54430cff43f917d2.html
+  /home/you/audacity-guide/examples/chunking/out/chunk-split/topics/chunk-parent.html:13  @href="97fc308b7a258ea5c2fbc53def61887c5203182b.html" — there is no topics/97fc308b7a258ea5c2fbc53def61887c5203182b.html
+Not ready: 2 links in the built output lead nowhere.
+```
+
+Open each output's `index.html`. The combined version,
+`out/chunk-combined/topics/nested.html`, keeps the parent and child on one
+page. The split version writes two pages: `topics/chunk-parent.html` for
+the parent, and a page with a generated name at the top of the output
+folder for the child. The table of contents links to both pages correctly.
+The links that DITA-OT 4.3.5 generates between parent and child do not:
+the child link on the parent page looks for the child page in `topics/`,
+and the parent link on the child page names another generated file that
+was never written. Generated file names can differ between runs.
+
+Nested topics with `chunk="by-topic"` are valid DITA. The broken links
+come from how this processor version writes the split pages. Record the
+results for your version and transformation, and check generated links
+before you publish split pages. When you finish, delete
+`examples/chunking/project.json` and `examples/chunking/out/`.
 
 ## Check the guide
 
-Run `scripts/check-stage.sh`, build the production deliverables, and run the
-output-link checker. Record remaining [known output issues](/reference/known-output-issues)
-separately from the chunking experiment.
+In the editor, choose **Project** > **Check Project** and read the result
+in the **Project Validation** panel. From the command line, run:
 
-Check that the effects and presets pages have stable filenames, the merged
-introduction links resolve, and the beginner formats page uses its alternate
-name. `outputclass="compact"` on the effects table supplies a CSS class; a
+```bash
+dogsbay-xml check .
+```
+
+Example output:
+
+```
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/audacity-guide/out/review
+build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+build    collection           ok  /home/you/audacity-guide/out/collection
+output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+```
+
+The unused-key warnings are gone: *About this guide* refers to
+`start-here`, `digital-audio` and `podcast-workflow`.
+
+Check that the effects and presets pages have stable filenames
+(`out/full/topics/effects-reference.html` and `effect-presets.html`), that
+`out/full/topics/` has no `what-is-digital-audio.html` because
+`to-content` merged it into `what-is-audacity.html`, and that the beginner
+guides have `topics/formats-quick-reference.html`.
+`outputclass="compact"` on the effects table supplies a CSS class; a
 stylesheet must define its visual effect.
 
 ## What you learned

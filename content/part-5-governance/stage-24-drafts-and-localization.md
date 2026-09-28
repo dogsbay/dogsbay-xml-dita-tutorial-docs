@@ -11,7 +11,7 @@ topic and map, identify text that stays untranslated, set the direction of
 a Hebrew phrase, and supply a glossary sort key.
 
 Add review comments, content that requires cleanup, revision metadata, and
-a change history. The gate reports the review markup as warnings. Stage 25
+a change history. Project health reports the review markup as warnings. Stage 25
 adds rules that require you to resolve it before release.
 
 **Optional module.** See [Choose a learning path](/start-here/learning-path)
@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 23 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Language and translation
 
@@ -42,10 +42,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
       <prolog>
    ```
 
-   The same one-line change goes on the root element of all 35 `.dita`
-   and `.ditamap` files on the branch: every topic, every glossary entry,
-   the shared topics in `shared/`, the assessment in `learning/`, and all
-   nine maps. The `compare` link at the end shows them all.
+   The same one-line change goes on the root element of 36 `.dita` and
+   `.ditamap` files on the branch: every topic, every glossary entry, the
+   shared topics in `shared/`, the assessment in `learning/`, and all
+   nine maps. The three files in `examples/chunking/` from stage 18 are
+   examples that no deliverable publishes, and they are left unchanged.
+   The `compare` link at the end shows every change.
 
 2. **Read it**
 
@@ -132,7 +134,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    -      <msgblock>Export2: Filename=episode.mp3 NumChannels=1
    +      <msgblock translate="no">Export2: Filename=episode.mp3 NumChannels=1
     BatchCommand finished: Failed!</msgblock>
-          <p>The <apiname>send</apiname> function in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
+          <p>The <apiname>send</apiname> function in the sample script (<filepath>export-mp3.py</filepath>, listed in <xref href="exporting-from-a-script.dita"/>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
         </section>
    ```
 
@@ -403,7 +405,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    the prolog, which the metadata policy from stage 13 asks for.
 ::::
 
-## Step 4: README and the gate
+## Step 4: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -422,49 +424,68 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   /home/you/audacity-guide/learning/check-your-understanding.dita:
-     -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
-   42 file(s): 41 valid, 1 invalid.
 
-   == validate learning/ against the DITA-OT catalog ==
-   VALID
+   Example output:
 
-   == project-health  /home/you/audacity-guide ==
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   ```
+
+   The check reports `health   clean`, because review markup is a
+   warning, not a fault. To see the warnings, open the
+   **Project Validation** panel, or run:
+
+   ```bash
+   dogsbay-xml project-health .
+   ```
+
+   Example output:
+
+   ```
    Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
    Authoring leftovers (2; warnings):
      /home/you/audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
      /home/you/audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
    Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   42 file(s): 42 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
    ```
 
-   `project-health` now has something to say. *Authoring leftovers* is
-   its name for review markup, and it counts the draft comment and the
-   required cleanup, two, with the file and line of each. They are
-   warnings: the project is still healthy, the gate still prints
-   `STAGE OK`, and the markup goes into the repository as the record of
-   what is unfinished. Stage 25 adds a house rule that makes the same two
-   findings failures, so that they cannot reach a release.
+   *Authoring leftovers* is the health report's name for review markup.
+   It counts the draft comment and the required cleanup, two, with the
+   file and line of each. They are warnings: the project is still
+   healthy, the check still reports `Ready`, and the markup goes into the
+   repository as the record of what is unfinished. Stage 25 adds a house
+   rule that makes the same two findings failures, so that they cannot
+   reach a release.
 
 3. **Read the review build**
-   Run `dita --project=project.json` to create the following paths under
-   your project directory, or use `out/` under the gate's build directory.
+   The check built every deliverable into `out/` in your project.
 
    The `review` deliverable from stage 14 flags revision `3.4`, so in
    `out/review/topics/effects-reference.html` the new row carries the
@@ -491,13 +512,34 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    The draft comment is in neither build, nor is the required cleanup:
    DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the
    build asks for them with `args.draft=yes`. A search for the comment's
-   text across every HTML5 deliverable the gate built,
-   `grep -rl 'metadata tags step' /tmp/check-stage-<pid>`, prints nothing.
-   To see them, build the review map once with the parameter:
+   text across every deliverable that the check built,
+   `grep -rl 'metadata tags step' out/`, prints nothing.
+
+   To see them, give the `review` deliverable the parameter for one
+   build. In `project.json`, add a `params` list to the `publication` of
+   the `review` deliverable:
+
+   ```json
+   "publication": {
+     "transtype": "html5",
+     "params": [
+       {
+         "name": "args.draft",
+         "value": "yes"
+       }
+     ]
+   }
+   ```
+
+   Then build and check that deliverable only:
 
    ```bash
-   dita -i audacity-guide.ditamap -f html5 --filter=filters/review.ditaval -o /tmp/review-draft --args.draft=yes
+   dogsbay-xml check --deliverable=review .
    ```
+
+   `out/review/topics/exporting-audio.html` and
+   `out/review/topics/podcast-production-workflow.html` now contain the
+   review markup:
 
    ```
    <div class="draft-comment" style="background-color: #99FF99; border: 1pt black solid;"><strong>Draft comment: </strong>reviewer open 2026-03-05<br>Check the 3.4 export dialog: is the metadata tags step still a separate dialog?</div>
@@ -505,22 +547,22 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 
    The comment and the cleanup are rendered in place, boxed and colored,
-   with the author, disposition and date. Use `args.draft=yes` to include this markup during review. Resolve it
-   before release.
+   with the author, disposition and date. Use `args.draft=yes` to include
+   this markup during review, and resolve it before release. Remove the
+   `params` list from `project.json` again before you continue, so that
+   the `review` deliverable matches the stage branch.
 ::::
 
 Test an invalid value. Change the new row in `topics/effects-reference.dita`
-to `status="draft"`, a value that reads well and does not exist, and run the
-gate with `SKIP_BUILD=1`:
+to `status="draft"`, a value that reads well and does not exist, and check
+your work. The check stops at health. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/learning/check-your-understanding.dita:
-  -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
-/home/you/audacity-guide/topics/effects-reference.dita:
-  74:41  error: Attribute "status" with value "draft" must have a value from the list "changed deleted new unchanged -dita-use-conref-target ".
-42 file(s): 40 valid, 2 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/effects-reference.dita
+    72:41  Attribute "status" with value "draft" must have a value from the list "changed deleted new unchanged -dita-use-conref-target ".
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 `status` is an enumerated attribute in the DTD, unlike `rev`, which takes
@@ -534,8 +576,8 @@ changing `&amp;` to `&amp;amp;` on a subsequent pass. Check the diff after
 formatting with your installed version. Preserve valid XML escaping when an
 ampersand is required; use *and* where it expresses the intended wording.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

@@ -30,7 +30,7 @@ root; see [How the tutorial works](/start-here/how-the-tutorial-works).
 | `tutorial/12-glossary` | Glossary entries, a group, abbreviations and terms by key | [Stage 12](/part-2-maps/stage-12-glossary) |
 | `tutorial/13-metadata-and-index` | Prolog metadata, index terms and the metadata policy | [Stage 13](/part-2-maps/stage-13-metadata-and-index) |
 | `tutorial/14-conditional-text` | Platform, audience and revision conditions, DITAVAL filters and flags, a map and a deliverable per audience | [Stage 14](/part-3-conditions/stage-14-conditional-text) |
-| `tutorial/15-subject-scheme` | A subject scheme for the conditional values, checked by the gate | [Stage 15](/part-3-conditions/stage-15-subject-scheme) |
+| `tutorial/15-subject-scheme` | A subject scheme for the conditional values | [Stage 15](/part-3-conditions/stage-15-subject-scheme) |
 | `tutorial/16-branch-filtering` | Three platform variants of one branch from a single map | [Stage 16](/part-3-conditions/stage-16-branch-filtering) |
 | `tutorial/17-key-scopes` | Three guides in one collection under key scopes, and a peer map | [Stage 17](/part-3-conditions/stage-17-key-scopes) |
 | `tutorial/18-chunking-and-output` | Chunking, copy-to, print-only topics, topicsets and outputclass | [Stage 18](/part-3-conditions/stage-18-chunking-and-output) |
@@ -38,16 +38,16 @@ root; see [How the tutorial works](/start-here/how-the-tutorial-works).
 | `tutorial/20-troubleshooting` | A troubleshooting topic with causes and remedies, and a trouble note | [Stage 20](/part-4-books/stage-20-troubleshooting) |
 | `tutorial/21-hazards-and-safety` | Hazard statements with a message panel and a symbol, one reused by conkeyref | [Stage 21](/part-4-books/stage-21-hazards-and-safety) |
 | `tutorial/22-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 22](/part-4-books/stage-22-software-domains) |
-| `tutorial/23-learning` | A learning assessment and catalog-based validation of the Learning and Training DTDs | [Stage 23](/part-4-books/stage-23-learning) |
+| `tutorial/23-learning` | A learning assessment, validated against the Learning and Training DTDs | [Stage 23](/part-4-books/stage-23-learning) |
 | `tutorial/24-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 24](/part-5-governance/stage-24-drafts-and-localization) |
-| `tutorial/25-house-rules` | The house style as Schematron, named in the project config and run by the gate; `AGENTS.md` and a skill; the ten violations resolved | [Stage 25](/part-5-governance/stage-25-house-rules) |
+| `tutorial/25-house-rules` | The house style as Schematron, named in the project config and run by the check; `AGENTS.md` and a skill; the ten violations resolved | [Stage 25](/part-5-governance/stage-25-house-rules) |
 | `tutorial/26-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 26](/part-5-governance/stage-26-final) |
 
 `tutorial/26-final` is also tagged `tutorial/final`, a stable name for the
 finished tree. The branch moves when a middle stage is edited and the chain
 is rebased; the tag is moved to the new tip by hand once the ladder has been
 re-checked, so `git show tutorial/final:README.md` always reads a tree that
-passed the gate.
+passed the checks.
 
 `main` is not part of the chain. It is the finished, deliberately broken demo
 project that the DogsBay XML tutorial uses, and it shares no history with the
@@ -90,13 +90,20 @@ git log --oneline origin/tutorial/08-figures
 
 ## Inspect a stage and keep your work
 
-Run these commands in the tutorial clone to open a completed stage in a
-separate directory. Choose a directory that does not already exist:
+To switch the tutorial clone to a completed stage in the editor, click the
+branch name in the status bar and choose the stage's
+`origin/tutorial/NN-slug` branch. The editor creates a local tracking branch
+and switches to it. See
+[Move between stages](/start-here/set-up#move-between-stages).
+
+From the command line, you can instead open a completed stage in a separate
+directory. Run these commands in the tutorial clone, and choose a directory
+that does not already exist:
 
 ```bash
 git worktree add --detach ../audacity-stage-04 origin/tutorial/06-rich-tasks
 cd ../audacity-stage-04
-scripts/check-stage.sh
+dogsbay-xml check .
 ```
 
 The worktree contains the reference stage. Your original working directory
@@ -113,7 +120,7 @@ git switch -c my-stage-04 origin/tutorial/05-inline-and-block
 git diff origin/tutorial/06-rich-tasks
 ```
 
-After any checkout, the "You are on" line near the top of `README.md` names
+After you switch branches, the "You are on" line near the top of `README.md` names
 the stage:
 
 ```bash

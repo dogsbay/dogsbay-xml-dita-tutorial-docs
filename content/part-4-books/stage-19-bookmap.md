@@ -17,11 +17,12 @@ Create `audacity-book.ditamap` from the existing topics and add a
 for the starting checkpoint and the next core lesson.
 
 **Time:** about 30 minutes.
-**You need:** stage 18 complete. The PDF build needs a Java runtime, which
-DITA-OT already needed.
+**You need:** stage 18 complete. The editor builds the PDF with the DITA-OT
+and Apache FOP that it includes, so you do not need to install anything
+else.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The bookmap
 
@@ -160,8 +161,11 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      *Appendix A*, *Appendix B* and *Appendix C*.
    - `<backmatter>` holds a second `<booklists>`: a `<glossarylist>`
      with the seven glossary topics inside it, so they print as one
-     glossary, and an empty `<indexlist/>` that the transform fills from
-     every `<indexterm>` in the prolog metadata of stage 13.
+     glossary, and an empty `<indexlist/>`, which asks the transform for
+     an index built from the `<indexterm>` elements in the prolog
+     metadata of stage 13. The PDF that the editor built for the recorded
+     examples has no index pages, so the contents list in step 3 ends at
+     *Glossary*.
 ::::
 
 ## Step 2: The deliverable
@@ -195,12 +199,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Read it**
    The eighth deliverable, `book-pdf`, is the bookmap with
    `"transtype": "pdf"`. DITA-OT's built-in PDF transform, `org.dita.pdf2`,
-   uses Apache FOP and needs nothing installed beyond DITA-OT itself. The
-   gate builds it with the other seven; on its own, the PDF takes about
-   26 seconds on this project.
+   renders the book with Apache FOP. The editor includes both, and
+   **Check Project** builds the PDF with the other seven deliverables into
+   `out/book-pdf/`.
 ::::
 
-## Step 3: README and the gate
+## Step 3: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -219,43 +223,60 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   38 file(s): 38 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   38 file(s): 38 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
-   ```
-
-3. **Read the book**
-   The PDF is at `out/book-pdf/audacity-book.pdf` under the build folder
-   the gate names (`/tmp/check-stage-<pid>/`). `pdftotext` shows the
-   contents page without a viewer:
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
    ```bash
-   pdftotext /tmp/check-stage-<pid>/out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
+   dogsbay-xml check .
+   ```
+
+   Example output:
+
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   ```
+
+   The check builds eight deliverables. The `book-pdf` line reports the
+   PDF, and the indented line under it summarizes the layout warnings from
+   Apache FOP, such as content that is wider than its column. The warnings
+   do not fail the check. The output check reads links in HTML pages only,
+   so for the PDF it confirms that the build wrote a file.
+
+3. **Read the book**
+   The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your
+   project. Open it in any PDF viewer. `pdftotext` shows the contents page
+   without a viewer:
+
+   ```bash
+   pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Glossary/p'
    ```
 
    ```
    Contents
    List of Figures..................................................................................................................................v
    List of Tables................................................................................................................................. vii
+
    About this guide.......................................................................................................ix
    Preface: What is Audacity?.................................................................................... xi
    Part I: Getting started............................................................................................ 13
@@ -264,55 +285,48 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    Part II: Recording and editing.............................................................................. 21
    Chapter 3: Preparing to record.................................................................... 23
    Recording your first track...................................................................................................................... 24
-   Chapter 4: Trimming audio.......................................................................... 25
+
+   Chapter 4: Trimming audio...........................................................................25
    Chapter 5: Removing background noise......................................................27
    Why the order of effects matters........................................................................................................... 28
-   Chapter 6: Exporting audio.......................................................................... 29
+
+   Chapter 6: Exporting audio...........................................................................29
    Part III: Podcasting.................................................................................................31
-   Chapter 7: Podcast production workflow....................................................33
+   Chapter 7: Podcast production workflow.................................................... 33
    Appendix A: Supported audio formats.................................................................35
    Appendix B: Effects reference............................................................................... 37
-   Presets..................................................................................................................................................................38
 
-   Glossary.......................................................................................................................................... 39
-   Index................................................................................................................................................41
+   Appendix C: Presets................................................................................................39
+   Glossary.......................................................................................................................................... 41
    ```
 
-   The example contents list shows *Presets* without its label. The PDF
-   that this stage builds lists it as *Appendix C: Presets*.
-
-   The PDF transform generates the numbered parts, chapters, appendixes,
-   glossary, and index from the bookmap. The license topic appears as the
-   notices page.
+   The PDF transform generates the numbered parts, chapters, and
+   appendixes, the lists of figures and tables, and the glossary from the
+   bookmap. The license topic appears as the notices page.
 ::::
 
 Test the placement of key definitions. Move the two
 `<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`, and
-run the gate:
+check your work. The check stops at health. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/audacity-book.ditamap:
-  85:11  error: The content of element type "bookmap" does not match its content model.
-38 file(s): 37 valid, 1 invalid.
-FAIL: validation errors
-
-== build  project.json -> /tmp/check-stage-<pid> ==
-Error: file:/home/you/audacity-guide/audacity-book.ditamap:85:11: [DOTJ088E] XML parsing error: The content of element type "bookmap" must match "((title|booktitle)?,bookmeta?,frontmatter?,chapter*,part*,(appendices?|appendix*),backmatter?,reltable*)".
-FAIL: DITA-OT build reported errors (full log: /tmp/check-stage-<pid>.log)
-
-STAGE FAILED
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/audacity-book.ditamap
+    86:11  The content of element type "bookmap" does not match its content model.
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-`<bookmap>` does not allow a `<keydef>` at its top level, and neither
-validation nor DITA-OT accepts it. The editor reports the content model at
-the closing tag, line 85, because that is where the parser gives up on
-matching; DITA-OT's `DOTJ088E` spells the model out, and the build stops
-before it can write a page. Keys, scheme maprefs and resource-only
+`<bookmap>` does not allow a `<keydef>` at its top level. The error is
+reported at the closing `</bookmap>` tag, line 86, because that is where
+the parser stops matching the content model. The model is a title, then
+`<bookmeta>`, `<frontmatter>`, chapters or parts, appendixes,
+`<backmatter>`, and relationship tables, in that order. Because health
+failed, nothing was built. Keys, scheme maprefs and resource-only
 references live inside `<frontmatter>` in a bookmap.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

@@ -405,18 +405,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then
 `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order,
 move the `<postreq>` in *Installing Audacity* above `<result>` and check
-your work. The check names the file and stops. The output looks like this
-example:
+your work. The check names the file with the line, column, and message of the error,
+and stops. The output looks like this example:
 
 ```
 health   NOT CLEAN
   invalid: /home/you/audacity-guide/topics/installing-audacity.dita
+    68:14  The content of element type "taskbody" does not match its content model.
   (run project-health for the full report)
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
-the line, column, and message. For example:
+the full report. For example:
 
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)

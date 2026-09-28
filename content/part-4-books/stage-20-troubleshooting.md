@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 19 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The troubleshooting topic
 
@@ -153,7 +153,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    -          <note type="warning">A flat line instead of a waveform means the microphone is not selected correctly.
    -          Click <uicontrol>Stop</uicontrol> and check the recording device.</note>
    +          <note type="trouble">A flat line instead of a waveform means nothing is being captured.
-   +          See <xref href="recording-is-silent.dita"/>.</note>
+   +          See <xref keyref="silent" href="recording-is-silent.dita"/>.</note>
             </info>
           </step>
           <step>
@@ -162,9 +162,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    `<note type="trouble">` is the note type for "if this goes wrong, look
    here". The HTML5 transform labels it *Trouble:*. It replaces a
    `warning`, which is for harm to people or data, and the fix moves out
-   of the note into the topic it links to. The `<xref>` is a plain local
-   reference; the book, the beginner guide and the podcaster guide all
-   contain the target, so it resolves in every deliverable.
+   of the note into the topic it links to.
+
+   The `<xref>` carries both a `keyref` and an `href`:
+   `<xref keyref="silent" href="recording-is-silent.dita"/>`. When the
+   map that publishes the topic defines the key `silent`, the key wins and
+   the link goes where the key points. When no map defines the key, the
+   processor uses the `href` instead. The next step explains why this
+   project needs both.
 ::::
 
 ## Step 2: The topic in every map
@@ -175,17 +180,17 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```diff title="audacity-guide.ditamap"
    --- a/audacity-guide.ditamap
    +++ b/audacity-guide.ditamap
-   @@ -51,6 +51,10 @@
-          <topicref href="topics/removing-background-noise.dita" linking="targetonly"/>
-          <topicref href="topics/effect-order.dita"/>
+   @@ -53,6 +53,10 @@
         </topicset>
-   +  </topichead>
-   +
-   +  <topichead navtitle="Troubleshooting" id="troubleshooting">
-   +    <topicref href="topics/recording-is-silent.dita" keys="silent"/>
       </topichead>
     
+   +  <topichead navtitle="Troubleshooting" id="troubleshooting">
+   +    <topicref href="topics/recording-is-silent.dita" keys="silent"/>
+   +  </topichead>
+   +
       <topichead navtitle="Podcast production" audience="podcaster">
+        <topicref href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
+      </topichead>
    ```
 
 2. **Edit `audacity-book.ditamap`**
@@ -208,12 +213,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```diff title="beginner-guide.ditamap"
    --- a/beginner-guide.ditamap
    +++ b/beginner-guide.ditamap
-   @@ -20,6 +20,9 @@
+   @@ -22,6 +22,9 @@
         <topicref href="topics/trimming-audio.dita"/>
         <topicref href="topics/exporting-audio.dita"/>
       </topichead>
    +  <topichead navtitle="Troubleshooting">
-   +    <topicref href="topics/recording-is-silent.dita"/>
+   +    <topicref href="topics/recording-is-silent.dita" keys="silent"/>
    +  </topichead>
       <topichead navtitle="Quick reference">
         <!-- The same source topic, published under a different file name in this guide. -->
@@ -242,13 +247,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```diff title="installation-variants.ditamap"
    --- a/installation-variants.ditamap
    +++ b/installation-variants.ditamap
-   @@ -31,6 +31,8 @@
+   @@ -33,6 +33,8 @@
             <dvrKeyscopePrefix>linux.</dvrKeyscopePrefix>
           </ditavalmeta>
         </ditavalref>
    -    <topicref href="topics/recording-your-first-track.dita" keys="first-track"/>
    +    <topicref href="topics/recording-your-first-track.dita" keys="first-track">
-   +      <topicref href="topics/recording-is-silent.dita"/>
+   +      <topicref href="topics/recording-is-silent.dita" keys="silent"/>
    +    </topicref>
       </topicref>
     </map>
@@ -258,10 +263,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    - The full guide gives the topic a `<topichead>` of its own, with an
      `id` so a later stage can reference the branch, and the key `silent`.
-     The key is defined here and used in stage 21.
    - In the book it is an appendix, before the three reference appendixes.
    - The beginner and podcaster guides put it in a *Troubleshooting*
-     head of their own.
+     head of their own. The beginner guide also defines the key `silent`.
    - The installation variants map nests it under the recording task, so
      each of the three platform branches from stage 16 carries its own
      filtered copy: the Mac branch keeps the macOS solution, the other
@@ -269,16 +273,23 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      `topics/win-recording-is-silent.html`,
      `topics/mac-recording-is-silent.html` and
      `topics/recording-is-silent-linux.html`.
-   - The links that the map generates from each copy of the recording task
-     go to the copy in the same branch. The `<xref>` in the trouble note
-     does not. DITA-OT 4.3.5 resolves it to one copy of the troubleshooting
-     topic for every branch. In the stage 20 build, every copy of the
-     recording task links to `recording-is-silent-linux.html`, so the
-     Windows and Mac copies link to the Linux copy. Which copy is chosen
-     can change as the project changes.
+   - The nested reference defines the key `silent` inside the branch.
+     Each branch has its own key scope (`win.`, `mac.` and `linux.`, from
+     the `<dvrKeyscopePrefix>` in stage 16), so each branch has its own
+     `silent` key, which points at that branch's copy. The `keyref` in the
+     trouble note resolves within the scope of the copy that contains it:
+     `win-recording-your-first-track.html` links to
+     `win-recording-is-silent.html`, the macOS copy to
+     `mac-recording-is-silent.html`, and the Linux copy to
+     `recording-is-silent-linux.html`. A plain `href` cannot do this. It
+     resolves to one copy of the troubleshooting topic for every branch,
+     so the Windows and Linux readers would land on the macOS page.
+   - The book and the podcaster guide do not define `silent`, so the
+     `href` fallback applies there. Both contain the topic, so the link
+     resolves in every deliverable.
 ::::
 
-## Step 3: README and the gate
+## Step 3: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -297,41 +308,55 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   39 file(s): 39 valid, 0 invalid.
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+   Example output:
 
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   39 file(s): 39 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
    ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   ```
+
+   The `install-variants` output is clean: each platform copy of the
+   recording task links to the troubleshooting copy in its own branch.
 ::::
 
 Test the content model for a remedy. In the macOS solution, replace the
 `<steps-informal>` element with its `<p>` alone, so that `<remedy>` holds a
-title and a paragraph, and run the gate with `SKIP_BUILD=1`:
+title and a paragraph, and check your work. The check stops at health.
+Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/recording-is-silent.dita:
-  76:16  error: The content of element type "remedy" does not match its content model.
-39 file(s): 38 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/recording-is-silent.dita
+    76:16  The content of element type "remedy" does not match its content model.
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 `<remedy>` allows an optional `<title>`, then one of `<steps>`,
@@ -339,8 +364,8 @@ FAIL: validation errors
 always a steps element, even when it is one sentence: that is what
 `<steps-informal>` is for.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 
@@ -350,6 +375,8 @@ Confirm that it prints `STAGE OK` before continuing.
 - A profiling attribute on a `<troubleSolution>`.
 - `<note type="trouble">` with an `<xref>` to the troubleshooting topic,
   in place of a warning that carried the fix itself.
+- An `<xref>` with a `keyref` and an `href` fallback, so that each
+  branch-filtered copy links within its own key scope.
 - One topic referenced by five maps, including a nested reference in a
   branch-filtered map.
 

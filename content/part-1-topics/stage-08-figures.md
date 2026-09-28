@@ -253,7 +253,7 @@ example:
 health   NOT CLEAN
   /home/you/audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
   (run project-health for the full report)
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 Undo the change and check again. Confirm that the check reports `Ready`

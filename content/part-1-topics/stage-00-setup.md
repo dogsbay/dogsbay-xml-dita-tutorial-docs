@@ -202,28 +202,19 @@ result appears in the **Project Validation** panel. From the command line,
 run this command from the project root:
 
 ```bash
-dogsbay-xml check --no-build .
+dogsbay-xml check .
 ```
 
-With no topics and no map, the source is clean. The output looks like this
-example:
-
-```
-health   clean
-Project health is clean. The build was not run, so nothing here speaks for the output.
-```
-
-The project declares no deliverables until stage 03, so there is nothing to
-build yet. In the editor, and from the command line without `--no-build`,
-the check reports that it stopped at the build stage:
+With no topics and no map, the source is clean. The project declares no
+deliverables until stage 03, so there is nothing to build yet, and the
+check reports on the source only. The output looks like this example:
 
 ```
 health   clean
-build    nothing to build
-Not ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.
+Project health is clean — no deliverables yet, so nothing here speaks for the output.
 ```
 
-That result is expected before stage 03. Look for `health   clean`. If the
+Before stage 03, `health   clean` means the stage is done. If the
 command is not found, go back to [Set up your tools](/start-here/set-up) and
 add the command line to your `PATH`. For more about the result, see
 [Check your work](/start-here/run-the-gate).
@@ -232,7 +223,7 @@ add the command line to your `PATH`. For more about the result, see
 
 - A DITA project is a folder of topics and maps; nothing declares it except
   the files themselves and, for the editor, `.dogsbay/config.xml`.
-- DOCTYPEs are resolved through the DITA-OT catalog, so a project states which
+- DOCTYPEs are resolved through the catalog of the bundled DITA-OT, so a project states which
   DITA-OT it targets and the DTDs come from there.
 - **Project** > **Check Project**, or `dogsbay-xml check`, checks your
   work. Before stage 03, `health   clean` means a stage is done.
