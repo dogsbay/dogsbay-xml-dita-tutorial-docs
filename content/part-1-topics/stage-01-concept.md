@@ -26,22 +26,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `topics/what-is-audacity.dita` from a template**
    In the **Explorer**, right-click the `topics` folder and choose
    **New File**. Enter `what-is-audacity.dita` and press Enter. The
-   **New XML Document** dialog lists the templates for XML files. Choose
-   **dita-concept-minimal** and click **OK**.
+   **New XML Document** dialog lists the templates for `.dita` files.
+   Choose **Concept** and click **OK**.
 
    Use the topic `@id` as the file name to keep links readable. This is a
-   project convention.
+   project convention. The editor sets the root `@id` from the file name,
+   so the id needs no editing.
 
    The editor opens the new file with the template's content:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-   <concept id="concept_id">
-       <title>Concept Title</title>
-       <conbody>
 
-       </conbody>
+   <concept id="what-is-audacity">
+     <title>Concept Title</title>
+     <shortdesc></shortdesc>
+     <conbody>
+       <p></p>
+     </conbody>
    </concept>
    ```
 
@@ -52,17 +55,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    If you use another editor, create the file and type the finished topic
    shown in step 3.
 
-2. **Replace the placeholders**
-   Double-click `concept_id` and type `what-is-audacity`. Click inside the
-   title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and
-   type `What is Audacity?`.
+2. **Replace the title and add the short description**
+   Click inside the title, choose **XML** > **Select Element Content**
+   (Ctrl+Shift+E), and type `What is Audacity?`. Then click between
+   `<shortdesc>` and `</shortdesc>` and type the short description.
 
 3. **Complete the topic**
-   Add the short description after the title, then the paragraphs, list,
-   and section inside `<conbody>`. When you type the `>` of a start tag,
-   the editor inserts the matching end tag after the cursor. Type the
-   content, then move the cursor past the end tag to continue. Leave the
-   indentation to the formatter in "Step 3: Format and check your work".
+   Type the first paragraph in the empty `<p></p>`, then add the other
+   paragraph, the list, and the section inside `<conbody>`. When you type
+   the `>` of a start tag, the editor inserts the matching end tag after
+   the cursor. Type the content, then move the cursor past the end tag to
+   continue. Leave the indentation to the formatter in "Step 3: Format and
+   check your work".
 
    The finished topic:
 

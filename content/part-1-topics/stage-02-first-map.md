@@ -13,7 +13,34 @@ one now so that later lessons can add topics to a working guide.
 
 ## Create the guide map
 
-Save this file as `audacity-guide.ditamap` in the project root:
+Create the map from a template:
+
+1. In the **Explorer**, right-click the project root and choose
+   **New File**.
+2. Enter `audacity-guide.ditamap` and press Enter. The
+   **New XML Document** dialog lists the templates for `.ditamap` files.
+3. Select **Map** and click **OK**. The dialog selects **Bookmap** first
+   because it sorts first, so select **Map** explicitly.
+
+The editor opens the new file with the template's content:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+<map>
+  <title>Map Title</title>
+  <topicref href="topic.dita"/>
+</map>
+```
+
+Click inside the title, choose **XML** > **Select Element Content**
+(Ctrl+Shift+E), and type `Audio user guide`. Then replace the placeholder
+`topic.dita` in the `@href` with `topics/what-is-audacity.dita`. If you use
+another editor, create the file in the project root and type the finished
+listing.
+
+The finished map:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>

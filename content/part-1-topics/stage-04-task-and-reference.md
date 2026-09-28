@@ -25,6 +25,34 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `topics/recording-your-first-track.dita`**
+   In the **Explorer**, right-click the `topics` folder, choose
+   **New File**, and enter `recording-your-first-track.dita`. In the
+   **New XML Document** dialog, choose **Task** and click **OK**. As in
+   stage 01, the editor sets the `@id` from the file name. The template
+   gives you the task skeleton:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+
+   <task id="recording-your-first-track">
+     <title>Task Title</title>
+     <shortdesc></shortdesc>
+     <taskbody>
+       <steps>
+         <step>
+           <cmd></cmd>
+         </step>
+       </steps>
+     </taskbody>
+   </task>
+   ```
+
+   Replace the title placeholder (**XML** > **Select Element Content**)
+   and type the short description. Add the `<context>` before `<steps>`,
+   type the first action in the empty `<cmd></cmd>`, then add the
+   `<info>` elements, the other steps, and the `<result>`. If you use another editor, create the file and
+   type the finished listing. The finished task:
 
    ```xml title="topics/recording-your-first-track.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -98,6 +126,31 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `topics/supported-audio-formats.dita`**
+   Create the file in the `topics` folder in the same way, and choose the
+   **Reference** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+
+   <reference id="supported-audio-formats">
+     <title>Reference Title</title>
+     <shortdesc></shortdesc>
+     <refbody>
+       <section>
+         <title>Section Title</title>
+         <p></p>
+       </section>
+     </refbody>
+   </reference>
+   ```
+
+   Replace the title and type the short description. This reference's
+   introductory section has no title, so delete
+   `<title>Section Title</title>`, and type the introduction in the empty
+   `<p></p>`. Then add the `<table>` after the `</section>`. If you use
+   another editor, create the file and type the finished listing. The
+   finished reference:
 
    ```xml title="topics/supported-audio-formats.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -182,7 +235,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      `<entry>` per column.
 ::::
 
-## Step 3: Update the README and check your work
+## Step 3: Update the map and the README, and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -201,7 +254,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     
    ```
 
-2. **Format and check your work**
+2. **Add the topics to the map**
+   Add a `<topicref>` for each new topic to `audacity-guide.ditamap`.
+   Do this before you check your work: the check reports a topic that
+   no map refers to as an orphan topic. The complete map at this
+   checkpoint is:
+
+   ```xml title="audacity-guide.ditamap"
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+   
+   <map>
+     <title>Audio user guide</title>
+     <topicref href="topics/recording-your-first-track.dita"/>
+     <topicref href="topics/supported-audio-formats.dita"/>
+     <topicref href="topics/what-is-audacity.dita"/>
+   </map>
+   ```
+
+3. **Format and check your work**
    Format the topics:
 
    ```bash
@@ -209,9 +280,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. With the lesson's topics
-   in the map (see "Publish your changes"), the output looks like this
-   example:
+   `dogsbay-xml check .` from the project root. The check rebuilds the
+   guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
@@ -248,26 +318,6 @@ Summary
 
 Undo the change and check again. Confirm that the check reports `Ready`
 before you continue.
-
-## Publish your changes
-
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
-
-```xml title="audacity-guide.ditamap"
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-
-<map>
-  <title>Audio user guide</title>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/what-is-audacity.dita"/>
-</map>
-```
-
-```bash
-dogsbay-xml check .
-```
 
 ## What you learned
 
