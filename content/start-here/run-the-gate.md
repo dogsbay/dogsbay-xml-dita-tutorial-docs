@@ -107,7 +107,8 @@ dogsbay-xml project-health .
 ```
 
 When a build fails, the check names the deliverable and reports the
-DITA-OT errors. When the output check fails, it lists each link that leads
+DITA-OT errors, with their message codes, such as `DOTJ046E`, when
+DITA-OT gives one. When the output check fails, it lists each link that leads
 nowhere, with the page and line that contains it, and the verdict counts
 them, for example `Not ready: 1 link in the built output leads nowhere.`
 

@@ -15,9 +15,10 @@ deliverables yet, and stages 03 to 26 report Ready, including the PDF.
 - Stage 23 validates learning topics without a catalog option; stage 24
   builds the draft with a deliverable parameter instead of the `dita` CLI.
 - Known output issues: the final build has 0 broken links across 180
-  pages. Two limitations remain and are documented: the split chunking
-  example in stage 18 has two broken generated links, and the PDF built in
-  the editor has no index.
+  pages. One limitation remains and is documented: the split chunking
+  example in stage 18 has two broken generated links.
+- Stage 19 shows the PDF index (dogsbay-xml `14ca9c3` bundles the index
+  plugin), and the check page names DITA-OT message codes again.
 
 The docs source audit and the excerpt check (190 listings, 0 failures)
 passed.

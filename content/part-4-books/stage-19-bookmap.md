@@ -163,9 +163,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      with the seven glossary topics inside it, so they print as one
      glossary, and an empty `<indexlist/>`, which asks the transform for
      an index built from the `<indexterm>` elements in the prolog
-     metadata of stage 13. The PDF that the editor built for the recorded
-     examples has no index pages, so the contents list in step 3 ends at
-     *Glossary*.
+     metadata of stage 13. The index is the last entry in the contents
+     list in step 3.
 ::::
 
 ## Step 2: The deliverable
@@ -269,7 +268,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    without a viewer:
 
    ```bash
-   pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Glossary/p'
+   pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
    ```
 
    ```
@@ -298,11 +297,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    Appendix C: Presets................................................................................................39
    Glossary.......................................................................................................................................... 41
+   Index................................................................................................................................................43
    ```
 
    The PDF transform generates the numbered parts, chapters, and
-   appendixes, the lists of figures and tables, and the glossary from the
-   bookmap. The license topic appears as the notices page.
+   appendixes, the lists of figures and tables, the glossary, and the index
+   from the bookmap. The license topic appears as the notices page.
 ::::
 
 Test the placement of key definitions. Move the two
