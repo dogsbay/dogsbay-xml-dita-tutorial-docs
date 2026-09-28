@@ -22,11 +22,14 @@ Choose one workflow:
   stage 00. Fetch the reference branches there to compare your files and
   retrieve supplied images.
 - Inspect completed stages in the tutorial clone. Compare adjacent branches
-  and check your work on the stage that you check out.
+  and check your work on the stage that you switch to.
 
 The command examples use `origin/tutorial/NN-slug` for fetched reference
 branches. These refs are available after cloning or fetching; local stage
-branches exist only after you create them.
+branches exist only after you create them. In the editor, click the branch
+name in the status bar and choose `origin/tutorial/NN-slug`: the editor
+creates the local tracking branch and switches to it. See
+[Move between stages](/start-here/set-up#move-between-stages).
 
 ## The branch chain
 
@@ -77,8 +80,9 @@ demo project used by the
 and the step-by-step tutorial has to start empty. So `git log tutorial/00-setup`
 shows one commit, and nothing on `main` is an ancestor of any stage branch.
 
-The consequence for you: `git checkout tutorial/00-setup` from `main` replaces
-the whole working tree. That is expected.
+The consequence for you: switching from `main` to `tutorial/00-setup`, in
+the status bar or with `git switch`, replaces the whole working tree. That
+is expected.
 
 ## The "You are on" line
 
@@ -89,7 +93,7 @@ each stage:
 You are on stage 05: inline and block.
 ```
 
-Read it after any checkout to confirm where you are. The README's stage table
+Read it after you switch branches to confirm where you are. The README's stage table
 is the whole ladder, so you can also see what is ahead.
 
 ## What every branch carries

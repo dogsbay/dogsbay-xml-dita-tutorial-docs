@@ -294,17 +294,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 To see the type split enforced, move the `<p>` in the reference out of its
 `<section>` so it is a direct child of `<refbody>`, and check your work. The
 reference body does not allow it. A concept body would. The check names the
-file and stops. The output looks like this example:
+file with the line, column, and message of the error, and stops. The output
+looks like this example:
 
 ```
 health   NOT CLEAN
   invalid: /home/you/audacity-guide/topics/supported-audio-formats.dita
+    57:13  The content of element type "refbody" does not match its content model.
   (run project-health for the full report)
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
-the line, column, and message. For example:
+the full report. For example:
 
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)

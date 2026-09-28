@@ -1,6 +1,6 @@
 ---
 title: "Stage 25: House rules"
-description: Write the house style as Schematron, name it in the project config so the gate enforces it, explain it to agents, and fix the ten violations it finds.
+description: Write the house style as Schematron, name it in the project config so that the check enforces it, explain it to agents, and fix the ten violations it finds.
 type: tutorial
 ---
 
@@ -19,7 +19,7 @@ recording the review decision in the change history.
 **You need:** stage 24 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The rules
 
@@ -84,7 +84,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    
      <pattern id="note-type-allowed">
        <rule context="note[@type]">
-         <assert test="@type = 'note' or @type = 'tip' or @type = 'important' or @type = 'caution' or @type = 'warning' or @type = 'attention' or @type = 'danger' or @type = 'fastpath' or @type = 'remember' or @type = 'restriction' or @type = 'trouble' or @type = 'other'">note type is not an allowed DITA value.</assert>
+         <assert test="@type = 'note' or @type = 'tip' or @type = 'important' or @type = 'notice' or @type = 'caution' or @type = 'warning' or @type = 'attention' or @type = 'danger' or @type = 'fastpath' or @type = 'remember' or @type = 'restriction' or @type = 'trouble' or @type = 'other'">note type is not an allowed DITA value.</assert>
        </rule>
      </pattern>
    
@@ -121,10 +121,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      the two warnings from stage 24 are now violations.
    - `cmd-not-empty` allows an empty `<cmd/>` only when the `<cmd>` or
      its `<step>` carries `conref` or `conkeyref`, which is the
-     placeholder pattern from stage 11. `note-type-allowed` lists the
-     `type` values the DTD accepts, except `notice`. DITA 1.3 allows
-     `notice`, but this rule reports it as a violation. `step-has-cmd` is
-     a DTD rule restated so that its message is the house's.
+     placeholder pattern from stage 11. `note-type-allowed` lists every
+     `type` value that the DITA 1.3 DTD accepts, `notice` included.
+     `note-type-allowed` and `step-has-cmd` restate DTD rules so that
+     their messages are the house's.
    - The comment at the top says how to run the rules and why they are
      shaped as they are. A rules file is read by the next writer more
      often than it is edited; say what it is for.
@@ -163,7 +163,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    ```
    Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
-   House rules (4 of 42 files):
+   House rules (4 of 46 files):
      /home/you/audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
      /home/you/audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
      /home/you/audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
@@ -176,7 +176,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      /home/you/audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
 
    Summary
-     House rules                  10  in 4 of 42 files
+     House rules                  10  in 4 of 46 files
        Use uicontrol for UI labels (and drop decorative bold); do no…    5
        Do not hardcode the product name "Audacity" in prose; use a k…    2
        Do not hardcode the product name "Audacity" in a shortdesc; u…    1
@@ -436,20 +436,23 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      says where things are; the house style section says the same rules
      as `house-style.sch`, plus the ones a rule cannot check, such as
      titles in sentence case and the formatter's `&amp;` limitation; the
-     checks section says how to run the gate and each of its parts.
+     checks section names the commands for each part of the check.
+     `scripts/check-stage.sh` is the script that maintainers use to
+     verify the stage branches; in your own project, use
+     **Check Project** or `dogsbay-xml check .`.
    - The skill is a recipe for one task. Its front matter `name` and
      `description` are what an agent matches a request against, so the
      description names the task in the words a person would use, *apply
      house style*, *clean up a topic*, *make consistent*. The body is the
      steps, in order, ending with *validate before reporting done*.
    - The same rules now exist three times, for three readers: the
-     machine in `house-style.sch`, which fails the gate; the person or
+     machine in `house-style.sch`, which fails the check; the person or
      agent reading the project in `AGENTS.md`; the agent given a task in
      the skill. Keep them in step: a rule added to the Schematron is added
      to the prose the same day.
 ::::
 
-## Step 5: README and the gate
+## Step 5: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -468,76 +471,81 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   /home/you/audacity-guide/learning/check-your-understanding.dita:
-     -1:-1  error: Validation failed: /home/you/audacity-guide/learning/learningAssessment.dtd (No such file or directory)
-   42 file(s): 41 valid, 1 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == validate learning/ against the DITA-OT catalog ==
-   VALID
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == house rules  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   42 file(s): 42 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Two things have changed since stage 24. The health report's first
-   line names the rules file, and a new step, *house rules*, runs
-   `project-health --include=schematron` on its own and prints the same
-   summary when the rules pass. The gate's health
-   step has run with an explicit `--include` list since stage 23, to keep
-   the `learning/` folder out of the editor's grammar pass, and
-   `schematron` is not in that list because `--include` needs a rules
-   file to exist; so the script looks for `<default-schematron>` in the
-   config and, when it finds one, runs the rules as their own step. The
-   step fails the gate on any violation, so the two stage 24 warnings are
-   now something a branch cannot carry.
+   Example output:
+
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   ```
+
+   Health now runs the house rules with everything else, because
+   `.dogsbay/config.xml` names them. Step 3 resolved the ten violations,
+   including the two stage 24 warnings, so health is clean. From now on a
+   house-rule violation stops the check at health, so a branch cannot
+   carry unresolved review markup.
 ::::
 
 Test an invalid value. Put one `<b>` back in
 `topics/podcast-production-workflow.dita`, around *Noise reduction* in the
-post-production list, and run the gate with `SKIP_BUILD=1`:
+post-production list, and check your work. The check stops at health.
+Example output:
 
 ```
-== house rules  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
+```
+
+The **Project Validation** panel, or
+`dogsbay-xml project-health --include=schematron .`, gives the report for
+the rules:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
-House rules (1 of 42 files):
+House rules (1 of 46 files):
   /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
 
 Summary
-  House rules                   1  in 1 of 42 files
+  House rules                   1  in 1 of 46 files
     Use uicontrol for UI labels (and drop decorative bold); do no…    1
-FAIL: house-rule violations
 ```
 
 The message is the one from the `ui-labels-use-uicontrol` pattern, with
-the file and line, and the gate fails. Nothing else changed: the file is
+the file and line, and the check stops at health. Nothing else changed: the file is
 valid DITA, the links resolve, the metadata is complete. The house rule is
 the only thing that knows this project does not use `<b>`, which is what
 the rule is for.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 
@@ -546,7 +554,8 @@ Confirm that it prints `STAGE OK` before continuing.
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are
   exempt; `test="true()"` to forbid an element.
 - `<default-schematron>` in `.dogsbay/config.xml`;
-  `project-health --include=schematron`; the gate's *house rules* step.
+  `project-health --include=schematron`; a house-rule violation stops
+  the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes
   its table, an answered `<draft-comment>` becomes a `<change-summary>`.
 - The same rules for three readers: the Schematron, `AGENTS.md` and a

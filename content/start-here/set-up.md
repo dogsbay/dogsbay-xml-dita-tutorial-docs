@@ -58,44 +58,61 @@ editor nor a separate JDK. The recorded examples use the included DITA-OT
 
    ```bash
    git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
-   cd dogsbay-xml-dita-tutorial
    ```
 
    The clone opens on `main`, which contains the separate repair exercise.
    Use the stage branches for this tutorial.
 
-2. **Check out the first stage**
+2. **Open the clone in the editor**
+   In the DogsBay XML editor, open the `dogsbay-xml-dita-tutorial` folder
+   as a project. The status bar shows the current branch, `main`.
 
-   ```bash
-   git checkout tutorial/00-setup
-   ```
+3. **Switch to the first stage**
+   Click the branch name in the status bar. The list shows the stage
+   branches as `origin/tutorial/NN-slug`. Choose
+   `origin/tutorial/00-setup`. The editor creates a local branch,
+   `tutorial/00-setup`, that tracks it, and switches to it.
 
    The working tree is replaced: `tutorial/00-setup` shares no history with
    `main`. See [How the tutorial works](/start-here/how-the-tutorial-works).
 
-3. **Confirm where you are**
+   From the command line, run this command in the clone instead:
 
    ```bash
-   grep 'You are on' README.md
+   git switch tutorial/00-setup
    ```
 
-   The command prints the "You are on" line for stage 00:
+   Git creates the same tracking branch from `origin/tutorial/00-setup`.
+
+4. **Confirm where you are**
+   Open `README.md`. Its "You are on" line names the stage:
 
    ```
    You are on stage 00: setup.
    ```
+
+   From the command line, run `grep 'You are on' README.md`.
 :::
 
-## Open the project in the editor
+## Move between stages
+
+To look at another completed stage in the clone, click the branch name in
+the status bar and choose its `origin/tutorial/NN-slug` branch. The editor
+creates a local tracking branch and switches to it. From the command line,
+run `git switch tutorial/NN-slug`.
+
+The stage branches are references. Keep your own work in the separate
+`audacity-guide` repository that stage 00 creates.
+
+## Open your own project in the editor
 
 For the authoring workflow, stage 00 creates a separate `audacity-guide`
-repository. Open that folder after creating it. Keep the clone as a
-reference. For the inspection workflow, open the clone directly.
+repository. Open that folder as a project after you create it, and keep the
+clone as a reference. For the inspection workflow, work in the clone.
 
-If you use the DogsBay XML editor, open the selected folder as a project. The
-`.dogsbay/config.xml` on every stage branch sets the project type to DITA, the
-framework to DITA-OT 4.3.5 and the format style, so the editor and the
-command line agree on what a valid, well-formatted file is.
+The `.dogsbay/config.xml` on every stage branch sets the project type to
+DITA, the framework to DITA-OT 4.3.5 and the format style, so the editor and
+the command line agree on what a valid, well-formatted file is.
 
 ## Check the tools
 
@@ -104,10 +121,17 @@ finish at once. In the editor, choose **Project** > **Check Project**. From
 the command line, run this command from the project root:
 
 ```bash
-dogsbay-xml check --no-build .
+dogsbay-xml check .
 ```
 
-The next page explains what it printed.
+The output looks like this example:
+
+```
+health   clean
+Project health is clean — no deliverables yet, so nothing here speaks for the output.
+```
+
+The next page explains the result.
 
 ## Where to go next
 

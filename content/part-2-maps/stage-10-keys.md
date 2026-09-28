@@ -27,9 +27,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `keydefs-product.ditamap`** in the project root.
    In the **Explorer**, right-click the project root, choose **New File**,
    and enter `keydefs-product.ditamap`. In the **New XML Document** dialog,
-   choose **Key Definition Map** and click **OK**. The dialog selects
-   **Bookmap** first, so choose the template explicitly. The template
-   contains two sample key definitions:
+   choose **Key Definition Map** and click **OK**. The template contains
+   two sample key definitions:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
@@ -505,7 +504,7 @@ health   NOT CLEAN
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
   unused key: product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14] — nothing references it
   unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel lists the same problems. From the command

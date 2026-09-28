@@ -8,14 +8,21 @@ type: reference
 
 `scripts/check-stage.sh` is the check every tutorial stage branch passes
 before it is committed. This page is for maintainers of the tutorial.
-Readers check their work with **Project** > **Check Project** in the
-editor, or `dogsbay-xml check`; see [Check your work](/start-here/run-the-gate).
+Readers do not need the script, a separate DITA-OT installation, or
+`DITA_HOME`. They check their work with **Project** > **Check Project** in
+the editor, or `dogsbay-xml check`, which build with the included DITA-OT;
+see [Check your work](/start-here/run-the-gate).
+
+The script predates `dogsbay-xml check` and runs the maintainers' own
+DITA-OT from `DITA_HOME`. Some of its special cases, such as the
+`learning/` validation against the DITA-OT catalog, are no longer needed
+with the current editor, which includes the Learning and Training DTDs.
 
 ## Steps
 
 | Step | Command | Checks |
 |---|---|---|
-| 1 | `dogsbay-xml validate-project <root>` | Validates `.dita` and `.ditamap` files against their DOCTYPEs. From [stage 23](/part-4-books/stage-23-learning), learning topics can be validated again with `dogsbay-xml validate --catalog "$DITA_HOME/catalog-dita.xml"`. |
+| 1 | `dogsbay-xml validate-project <root>` | Validates `.dita` and `.ditamap` files against their DOCTYPEs. From [stage 23](/part-4-books/stage-23-learning), the script also validates learning topics with `dogsbay-xml validate --catalog "$DITA_HOME/catalog-dita.xml"`. Readers do not need the catalog option. |
 | 2 | `dogsbay-xml project-health <root>` | Checks references, keys, reuse targets, index redirects, metadata, and configured house rules for the default root map. Warnings alone can pass. From stage 23, an explicit check list avoids repeating grammar validation; stage 25 enables a separate Schematron check. |
 | 2b | `dogsbay-xml validate-conditions -S <scheme> <root>` | Checks profiling values against the subject scheme from [stage 15](/part-3-conditions/stage-15-subject-scheme). Without `-S` or `-m`, the command has no scheme to check against. |
 | 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` codes, because the build does not always exit non-zero |
@@ -48,7 +55,7 @@ output link works or that the content is ready for readers. In particular:
 - Inspect filtered content, figures, equations, and PDF layout.
 - Rerun with `SKIP_BUILD=0` before completing a stage if you skipped the build.
 
-See [Run the gate](/start-here/run-the-gate#find-the-output) for output
+See [Check your work](/start-here/run-the-gate#find-the-output) for output
 locations. The recorded diagnostics use the tutorial's original tool versions.
 
 ## Usage
@@ -72,7 +79,7 @@ a branch.
 | Variable | Default | Purpose |
 |---|---|---|
 | `DOGSBAY_XML` | `dogsbay-xml` on `PATH`, else `~/github/dogsbay-xml/bin/dogsbay-xml` | The DogsBay XML command line |
-| `DITA_HOME` | `~/Downloads/dita-ot-4.3.5` | The DITA-OT installation |
+| `DITA_HOME` | `~/Downloads/dita-ot-4.3.5` | The maintainers' DITA-OT installation, used by step 3 and the `learning/` special case |
 | `DITA` | `dita` on `PATH`, else `$DITA_HOME/bin/dita` | The `dita` executable directly |
 | `OUT` | `${TMPDIR:-/tmp}/check-stage-<pid>` | Where step 3 writes the build; the log is `$OUT.log` |
 | `STRICT` | `1` | `0` runs `project-health --severity=error` |
@@ -140,10 +147,12 @@ book from [stage 19](/part-4-books/stage-19-bookmap) adds about 26 seconds to th
 
 The gate as it is on `tutorial/26-final`, the last branch; it has not
 changed since stage 23. stages 00 to 14 carry it without step 2b, stages 14
-to 21 without the `learning/` special case: the editor's built-in catalog
-has no Learning and Training DTDs, so from stage 23 the gate validates
-`learning/*.dita` against the DITA-OT catalog and runs the health check
-without its own grammar pass. The *house rules* step is in the script from
+to 21 without the `learning/` special case: when the script was written,
+the editor's built-in catalog had no Learning and Training DTDs, so from
+stage 23 the gate validates `learning/*.dita` against the DITA-OT catalog
+and runs the health check without its own grammar pass. The current editor
+includes those DTDs, and `dogsbay-xml check` validates `learning/*.dita`
+with no catalog option. The *house rules* step is in the script from
 stage 23 but runs only once `.dogsbay/config.xml` names a
 `<default-schematron>`, which [stage 25](/part-5-governance/stage-25-house-rules)
 does; from then on the output has a `== house rules ==` block after the

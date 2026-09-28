@@ -780,20 +780,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::
 
 Test the metadata policy. Delete the `<critdates>` block from *Trimming audio*
-and check your work. The check stops at health. Example output:
+and check your work. The check stops at health and names the file. Example
+output:
 
 ```
 health   NOT CLEAN
+  /home/you/audacity-guide/topics/trimming-audio.dita:7  created — missing required <created @date>
   (run project-health for the full report)
   unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
   unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-The check summary does not name the file for a metadata policy error. Open
-the **Project Validation** panel, or run `dogsbay-xml project-health .`, to
-see it:
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the full report:
 
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
@@ -815,20 +816,22 @@ makes it required, for tasks, in this project.
 
 Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is
 Audacity?* to before `<metadata>`, and check your work. The file is no
-longer valid, and the check names it. Example output:
+longer valid, and the check names it with the line, column, and message.
+Example output:
 
 ```
 health   NOT CLEAN
   invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+    29:12  The content of element type "prolog" does not match its content model.
   (run project-health for the full report)
   unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
   unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
-the line, column, and message:
+the full report. It begins:
 
 ```
 Invalid files (1 of 21):

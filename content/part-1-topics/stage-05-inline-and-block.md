@@ -225,15 +225,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 > accelerator letter of a control, not a key combination. Key combinations
 > such as `Ctrl+A` are plain `<uicontrol>` text. If you write
 > `<cmd>Press <shortcut>Delete</shortcut></cmd>`, the check names the file
-> and stops at the health stage. The **Project Validation** panel, or
-> `dogsbay-xml project-health .`, gives the line, column, and message. The
-> following output is an example:
+> with the line, column, and message, and stops at the health stage. The
+> **Project Validation** panel, or `dogsbay-xml project-health .`, gives the
+> full report. The following output is an example:
 >
 > ```
 > health   NOT CLEAN
 >   invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+>     22:170  The content of element type "cmd" does not match its content model.
 >   (run project-health for the full report)
-> Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+> Not ready: the project itself has faults. The build and the built output were not checked.
 > ```
 >
 > ```

@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 21 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The scripting reference
 
@@ -101,7 +101,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
          Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>
          <msgblock>Export2: Filename=episode.mp3 NumChannels=1
    BatchCommand finished: Failed!</msgblock>
-         <p>The <apiname>send</apiname> function in the sample script (<xref href="../samples/export-mp3.py" scope="external" format="py">export-mp3.py</xref>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
+         <p>The <apiname>send</apiname> function in the sample script (<filepath>export-mp3.py</filepath>, listed in <xref href="exporting-from-a-script.dita"/>) returns the whole reply; check it for <msgnum>Failed!</msgnum> before sending the next command.</p>
        </section>
        <properties>
          <prophead>
@@ -128,9 +128,11 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    </reference>
    ```
 
-   The `<xref>` to `../samples/export-mp3.py` in the *Responses* section
-   is a known broken link. The HTML output does not include the sample
-   file. See [Known output issues](/reference/known-output-issues).
+   The *Responses* section names the sample script with `<filepath>` and
+   links to the task that lists it, `exporting-from-a-script.dita`. The
+   link goes to the task and not to the `.py` file, because the build
+   does not copy `samples/` into the output: the script reaches the
+   reader as the listing that `<coderef>` pulls into the task.
 
 2. **Read the syntax diagram**
 
@@ -189,22 +191,37 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```text title="samples/export-mp3.py"
    #!/usr/bin/env python3
    """Export the open Audacity project as MP3 through mod-script-pipe."""
+   import os
    import sys
    
-   TO_PIPE = "/tmp/audacity_script_pipe.to." + str(1000)
-   FROM_PIPE = "/tmp/audacity_script_pipe.from." + str(1000)
+   if sys.platform == "win32":
+       TO_PIPE = "\\\\.\\pipe\\ToSrvPipe"
+       FROM_PIPE = "\\\\.\\pipe\\FromSrvPipe"
+       EOL = "\r\n\0"
+   else:
+       TO_PIPE = f"/tmp/audacity_script_pipe.to.{os.getuid()}"
+       FROM_PIPE = f"/tmp/audacity_script_pipe.from.{os.getuid()}"
+       EOL = "\n"
    
-   def send(command: str) -> str:
-       with open(TO_PIPE, "w") as to_pipe:
-           to_pipe.write(command + "\n")
-       with open(FROM_PIPE) as from_pipe:
-           return from_pipe.read()
+   
+   def send(to_pipe, from_pipe, command: str) -> str:
+       """Send one command and return the reply, which ends with an empty line."""
+       to_pipe.write(command + EOL)
+       to_pipe.flush()
+       reply = ""
+       while True:
+           line = from_pipe.readline()
+           if line == "" or (line == "\n" and reply):
+               return reply
+           reply += line
+   
    
    if __name__ == "__main__":
        target = sys.argv[1] if len(sys.argv) > 1 else "episode.mp3"
-       print(send("SelectAll:"))
-       print(send("Normalize: PeakLevel=-1"))
-       print(send(f"Export2: Filename={target} NumChannels=1"))
+       with open(TO_PIPE, "w") as to_pipe, open(FROM_PIPE) as from_pipe:
+           for command in ("SelectAll:", "Normalize: PeakLevel=-1",
+                           f"Export2: Filename={target} NumChannels=1"):
+               print(send(to_pipe, from_pipe, command).strip())
    ```
 
 2. **Create `topics/exporting-from-a-script.dita`**
@@ -255,7 +272,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    BatchCommand finished: OK</systemoutput></screen>
            </info>
            <steptroubleshooting>
-             <p>If the script hangs on the first command, the pipe does not exist: <keyword keyref="product-name"/> is not running or the module is not enabled.
+             <p>If the script stops with <msgph>FileNotFoundError</msgph>, the pipe does not exist: <keyword keyref="product-name"/> is not running or the module is not enabled.
              On Linux, <cmdname>ls</cmdname> <filepath>/tmp/audacity_script_pipe.*</filepath> shows whether the pipes are there.</p>
            </steptroubleshooting>
          </step>
@@ -279,38 +296,77 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    and tested; the topic never goes stale against it. `outputclass` on
    the `<codeblock>` becomes a class on the `<pre>` in the HTML5 output,
    `language-python`, the convention that syntax highlighters such as
-   highlight.js and Prism read. In the gate's build of the full guide the
-   listing is in place:
+   highlight.js and Prism read. In the check's build of the full guide,
+   `out/full/topics/exporting-from-a-script.html`, the listing is in
+   place:
 
    ```
    <pre class="pre codeblock language-python"><code>#!/usr/bin/env python3
    """Export the open Audacity project as MP3 through mod-script-pipe."""
+   import os
    import sys
 
-   TO_PIPE = "/tmp/audacity_script_pipe.to." + str(1000)
-   FROM_PIPE = "/tmp/audacity_script_pipe.from." + str(1000)
+   if sys.platform == "win32":
+       TO_PIPE = "\\\\.\\pipe\\ToSrvPipe"
+       FROM_PIPE = "\\\\.\\pipe\\FromSrvPipe"
+       EOL = "\r\n\0"
+   else:
+       TO_PIPE = f"/tmp/audacity_script_pipe.to.{os.getuid()}"
+       FROM_PIPE = f"/tmp/audacity_script_pipe.from.{os.getuid()}"
+       EOL = "\n"
 
-   def send(command: str) -&gt; str:
-       with open(TO_PIPE, "w") as to_pipe:
-           to_pipe.write(command + "\n")
-       with open(FROM_PIPE) as from_pipe:
-           return from_pipe.read()
+
+   def send(to_pipe, from_pipe, command: str) -&gt; str:
+       """Send one command and return the reply, which ends with an empty line."""
+       to_pipe.write(command + EOL)
+       to_pipe.flush()
+       reply = ""
+       while True:
+           line = from_pipe.readline()
+           if line == "" or (line == "\n" and reply):
+               return reply
+           reply += line
+
 
    if __name__ == "__main__":
        target = sys.argv[1] if len(sys.argv) &gt; 1 else "episode.mp3"
-       print(send("SelectAll:"))
-       print(send("Normalize: PeakLevel=-1"))
-       print(send(f"Export2: Filename={target} NumChannels=1"))</code></pre>
+       with open(TO_PIPE, "w") as to_pipe, open(FROM_PIPE) as from_pipe:
+           for command in ("SelectAll:", "Normalize: PeakLevel=-1",
+                           f"Export2: Filename={target} NumChannels=1"):
+               print(send(to_pipe, from_pipe, command).strip())</code></pre>
    ```
 
-4. **Read the screen**
-   `<screen>` is a block for what a terminal shows, whitespace preserved.
-   Inside it, `<userinput>` is what the reader typed and `<systemoutput>`
-   what came back, so a stylesheet can tell them apart. The
-   `<steptroubleshooting>` from stage 06 covers the one way the step
-   fails, with `<cmdname>` and `<filepath>` for the check.
+4. **Read the script**
+   The script follows the pipe example that Audacity publishes for
+   `mod-script-pipe`:
 
-5. **Edit the maps**
+   - Audacity creates two pipes, one for commands and one for replies.
+     On Linux and macOS they are
+     `/tmp/audacity_script_pipe.to.<uid>` and
+     `/tmp/audacity_script_pipe.from.<uid>`, where `<uid>` is your user
+     id, which `os.getuid()` returns. On Windows they are the named pipes
+     `\\.\pipe\ToSrvPipe` and `\\.\pipe\FromSrvPipe`, written with
+     doubled backslashes in a Python string. Each command on Windows ends
+     with `\r\n\0`, and on the other platforms with `\n`.
+   - The script opens both pipes once, in one `with` statement, and
+     sends the three commands through them.
+   - Each reply is the command's output, the status line, and then an
+     empty line. `send()` reads the reply line by line and returns when
+     it reaches that empty line. A single `read()` would wait for the end
+     of the file, and that never comes while Audacity holds the pipe
+     open, so the script would hang after the first command.
+
+5. **Read the screen**
+   `<screen>`, from the user interface domain, is a block for what a
+   terminal shows, whitespace preserved. Inside it, `<userinput>` and
+   `<systemoutput>`, from the software domain, mark what the reader typed
+   and what came back, so a stylesheet can tell them apart. The
+   `<steptroubleshooting>` from stage 06 covers the common way the step
+   fails: if the pipe does not exist, opening it raises
+   `FileNotFoundError`, marked with `<msgph>`. `<cmdname>` and
+   `<filepath>` mark the command that checks for the pipes.
+
+6. **Edit the maps**
 
    ```diff title="audacity-guide.ditamap"
    --- a/audacity-guide.ditamap
@@ -371,7 +427,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    fourth appendix with the task as its section. The beginner guide does
    not get them.
 
-6. **Edit `topics/podcast-production-workflow.dita`**
+7. **Edit `topics/podcast-production-workflow.dita`**
 
    ```diff title="topics/podcast-production-workflow.dita"
    --- a/topics/podcast-production-workflow.dita
@@ -390,7 +446,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    The `scripting` key is used the stage it is defined.
 ::::
 
-## Step 3: README and the gate
+## Step 3: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -409,49 +465,60 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   41 file(s): 41 valid, 0 invalid.
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+   Example output:
 
-   == validate-conditions  /home/you/audacity-guide  (scheme: subject-scheme.ditamap) ==
-   41 file(s): 41 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-<pid> ==
-   all deliverables built
-
-   STAGE OK
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   build    collection           ok  /home/you/audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   output   wrote a file, no pages to check links in book-pdf
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 ::::
 
 Test the position of the repetition separator. Move the
 `<repsep>` line out of the inner `<groupseq>` to directly after
-`<delim>:</delim>` in the outer one, and run the gate with `SKIP_BUILD=1`:
+`<delim>:</delim>` in the outer one, and check your work. The check stops
+at health. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/scripting-reference.dita:
-  39:20  error: The content of element type "groupseq" does not match its content model.
-41 file(s): 40 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/scripting-reference.dita
+    39:20  The content of element type "groupseq" does not match its content model.
+  (run project-health for the full report)
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 A `<repsep>` follows the optional title and precedes the items in its
 group. The message names the element it found instead of what the model
 allows.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

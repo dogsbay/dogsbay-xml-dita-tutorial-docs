@@ -14,30 +14,30 @@ The style guide keeps file listings identical to the stage branches, and several
 |---|---|---|
 | 1 | Wrong claims, start-here fixes, stage 01 from the minimal template, editor steps that already work, and lesson gaps that need no source change | Nothing. This branch. |
 | 2 | Replace the gate script with a **Check Project** command; re-record every check output; templates for maps and other file kinds; set up with the Project Manager and branch switcher; stage 18 rewrite | The editor changes below |
-| 3 | Source fixes: "Ctrl+ACmd+A", the shared select-region step, `notice` in the house rule, `xml:lang` on `effect-presets.dita`, formatting of `examples/chunking` | The tutorial branches first (`scripts/rebase-stages.sh`), then this repo's listings |
+| 3 | Source fixes: "Ctrl+ACmd+A", the shared select-region step, the glossary and sample links, the stage 20 trouble link, the sample script, `notice` in the house rule, `xml:lang` on `effect-presets.dita`, formatting of `examples/chunking` | The tutorial branches first, then this repo's listings |
 
-## Phase 2 status, 2026-09-28
+## Status, 2026-09-28 (end of day)
 
-The editor team delivered **Check Project** (`dogsbay-xml check`), the output link check, template filtering, ids from file names, the bundle refresh, and the root-map field fix. `dogsbay-xml check` was run on all 27 stage branches (dogsbay-xml `0569145`):
+All three phases are done. Every stage checks clean with dogsbay-xml `a0431d9` or later: stages 00 to 02 report `Project health is clean — no deliverables yet` (exit 0), and stages 03 to 26 report Ready, including `book-pdf` from stage 19.
 
-| Stages | Result | Blocked by |
-|---|---|---|
-| 00 to 02 | "Not ready: stopped at build": no deliverables yet. `--no-build` gives `health clean`. | Nothing. The lessons explain it. Ideally the editor treats "nothing to build yet" as not a failure. |
-| 03 to 13 | Ready. From stage 10, a note lists unused keys. | Nothing: updated on `feature/check-project` |
-| 14 to 18 | Stops at output: broken links from the beginner builds to `glossary/audio-units.html#gl-decibel`, which those maps do not publish | **Tutorial branches:** publish the glossary topic in the beginner maps (and fix the sample link from stage 22) |
-| 19 to 22 | Stops at build: `book-pdf` fails with the DITA-OT bundled in the editor ("FAILED, 1 error(s)", no message). The external DITA-OT 4.3.5 builds it. | **Editor:** PDF with the bundled engine, and show the build error |
-| 23 to 26 | Stops at health: `learning/check-your-understanding.dita` is invalid, because the learning DTDs are not bundled | **Editor:** bundle the DITA learning DTDs |
+**Editor, delivered:** Check Project and the output link check; orphan topics as warnings; the first three errors of an invalid file inline; metadata, Schematron, conref push and index findings printed; DITA-OT message codes in build errors; `check --map=` scoped to the map; "no deliverables yet" as clean; PDF with the bundled DITA-OT (FOP 2.11, Liberation fonts embedded, FOP warnings summed up in one line); the learning DTDs bundled; templates for every file kind the lessons create, filtered by extension, with the plainest template pre-selected; ids from file names; the bundle refreshed for headless runs; the branch switcher confirmed on `origin/tutorial/NN-slug`.
 
-Also for the editor team:
+**Tutorial branches, rebuilt from stage 11** (originals kept under `refs/backup/2026-09-28/tutorial/*`):
 
-- `check` does not show orphan topics. `project-health` names them, but a topic missing from the map still gets "Ready". Show them as warnings in the check's report and in the **Project Validation** panel.
-- When health fails, `check` names only the file. Show the first few errors (line, column, message) inline.
-- For a metadata-policy error (such as a missing `<critdates>`), `check` does not name the file.
-- `dogsbay-xml build` prints the DITA-OT message but not its code (for example `DOTJ046E`), and there is no log file with it.
-- `check --map=<another map>` flags `images/*.png` as invalid and reports keys from topics outside that map.
-- Stage 23 still runs `dogsbay-xml validate --catalog "$DITA_HOME/catalog-dita.xml"`, and set-up no longer sets `DITA_HOME`. It is fixed when the learning DTDs are bundled.
-- No templates were added for map, keydef map, bookmap, DITAVAL, subject scheme, glossentry, glossgroup, troubleshooting, generic topic or Schematron. A new `.ditamap` offers only **Blank XML Document** and **DTD Document**, under an empty separator.
-- For a `.ditamap`, the New XML Document dialog pre-selects **Bookmap** because it sorts first. Pre-select **Map**.
+| From stage | Fix |
+|---|---|
+| 11 | The shared select-region step no longer carries whole-track advice, so it fits the noise task |
+| 14 | Platform alternatives read "Ctrl+A or, on macOS, Cmd+A" in unfiltered builds, through a joiner conditioned on the other platform |
+| 14, 16 | The beginner and installation-variants maps publish the glossary group with `toc="no"`, so abbreviation links land |
+| 18 | `examples/chunking` formatted |
+| 20 | The trouble note uses `keyref="silent"`, so each platform copy links to its own troubleshooting copy |
+| 22 | `export-mp3.py` reads each reply to its blank line instead of hanging, uses the real uid, and supports Windows; the scripting reference links to the task, not to a file the output lacks |
+| 24 | `effect-presets.dita` has `xml:lang` |
+| 25 | The house rule allows `notice` |
+
+Still for the editor team:
+
+- `dogsbay-xml format` trims spaces at the edges of inline elements: `<ph> or, on macOS, </ph>` becomes `<ph>or, on macOS,</ph>`. In mixed content those spaces are text. The stage 14 joiner keeps its spaces outside the inner `<ph>` to work around it.
 
 ## Editor changes needed
 

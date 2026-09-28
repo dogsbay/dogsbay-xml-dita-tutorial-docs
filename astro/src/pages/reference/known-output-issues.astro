@@ -22,7 +22,7 @@ import TableHead from "@ui/table/TableHead.astro";
 import TableHeader from "@ui/table/TableHeader.astro";
 import TableRow from "@ui/table/TableRow.astro";
 
-const headings = [{"depth":1,"slug":"known-output-issues","text":"Known output issues"},{"depth":2,"slug":"completing-a-lesson","text":"Completing a lesson"},{"depth":2,"slug":"preparing-a-release","text":"Preparing a release"}];
+const headings = [{"depth":1,"slug":"known-output-issues","text":"Known output issues"},{"depth":2,"slug":"fixed-defects","text":"Fixed defects"},{"depth":2,"slug":"what-the-output-check-does-not-cover","text":"What the output check does not cover"},{"depth":2,"slug":"completing-a-lesson","text":"Completing a lesson"}];
 const nav = navData;
 const currentPath = "/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues";
 const _navForPagination = filterNavByAxis(nav as any[], {
@@ -33,7 +33,7 @@ const _navForPagination = filterNavByAxis(nav as any[], {
 });
 const { prev, next } = getPagination(currentPath, _navForPagination);
 const title = "Known output issues";
-const description = "Review the broken links and assets found in the final reference guide by the additional HTML output checker." || undefined;
+const description = "The final reference guide checks clean. Review the output defects of earlier builds, how the stages fixed them, and what the check does not cover." || undefined;
 const ogImage = "" || undefined;
 const noindex = false;
 const nofollow = false;
@@ -46,7 +46,7 @@ const pageCategory = ["reference"];
 const pageTaxonomies = null;
 const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Known output issues {#known-output-issues}\n\nThe final reference branch passes its historical gate, but the additional output-link check finds defects. A DITA-OT 4.3.5 build of `tutorial/26-final` produced 177 HTML pages with 12 failing local references. All eight deliverables built. These are baseline findings in the supplied guide.\n\n| Finding | Affected output | Investigation |\n| --- | --- | --- |\n| Links to `topics/glossary/audio-units.html` have no target file | Beginner Mac, beginner Windows, and installation variants | Review glossary topic inclusion in each root map; a key definition alone does not guarantee a published page. |\n| The scripting reference links to `samples/export-mp3.py`, which is absent from the output | Full guide, review guide, podcaster guide, and collection | Configure the sample as a published resource and check both the download link and code listing. |\n\nGenerated filenames and process-specific paths can differ between builds. Use the [output-link checker](/dogsbay-xml-dita-tutorial-docs/reference/verification) to obtain the paths for your run. These findings cover local HTML references; they do not assess external URLs or PDF accessibility.\n\nSeparating the effects and presets topics removed the eight broken chunk links and the missing stylesheet reference from the production builds. The remaining failures comprise seven glossary links and five sample links.\n\nThe original chunking finding is why the tutorial keeps its `chunk=\"by-topic\"` example in an isolated demonstration map. Production topics should use separate source files and explicit topicrefs until the exact DITA-OT version used for a release has been tested. The demonstration is still useful for learning the feature, but a valid DITA structure is not proof that every processor generates valid links.\n\n## Completing a lesson {#completing-a-lesson}\n\nUse the historical gate to compare your source with the reference stage. Use the output check to identify publishing defects as a separate result. Record existing findings and any new findings introduced by your changes. A failed output check remains a failure even when the historical gate passes.\n\n## Preparing a release {#preparing-a-release}\n\nResolve the output defects before describing the generated guide as ready for publication. Source corrections belong on the affected stage branches, with subsequent branches and quoted examples updated together. The tutorial's deliberately broken `main` project is a separate exercise and should retain its planted errors.\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Known output issues {#known-output-issues}\n\nThe final reference branch, `tutorial/26-final`, checks clean. A `dogsbay-xml check .` of the branch builds all eight deliverables with the DITA-OT that the editor includes, and the output check finds no broken links, images, or fragments in the seven HTML deliverables. The maintainers' output checker, `scripts/check-output-links.py`, reports the same result: 180 HTML pages checked, 0 failures.\n\n## Fixed defects {#fixed-defects}\n\nEarlier builds of the final branch had 12 failing local references in the HTML output: seven glossary links and five sample links. The stage branches were corrected, and every later branch carries the fixes. The table also lists two related defects that the link check did not count as failures.\n\n| Defect | Fix |\n| --- | --- |\n| Seven links to `topics/glossary/audio-units.html` had no target page in the beginner guides and the installation variants. | Stages 14 and 16 add `<topicref href=\"topics/glossary/audio-units.dita\" toc=\"no\"/>` to `beginner-guide.ditamap` and `installation-variants.ditamap`, because a key definition that points at a fragment does not make DITA-OT publish the topic. |\n| Five links from the scripting reference to `samples/export-mp3.py` had no target, because the build does not copy `samples/` into the output. | Stage 22 names the script with `<filepath>` and links to the task that lists it, *Exporting from a script*. |\n| The Windows and Linux copies of the recording task in the installation variants linked to the macOS copy of *The recording is silent*. | Stage 20 gives the trouble note `keyref=\"silent\"` with an `href` fallback and defines the key in each branch, so each copy links to its own platform's copy. |\n| Eight chunk links and a stylesheet reference were broken when the effects and presets topics were chunked into one page. | The effects and presets topics are separate files. The `chunk=\"by-topic\"` example stays in `examples/chunking/`, which no deliverable publishes. |\n\n## What the output check does not cover {#what-the-output-check-does-not-cover}\n\n- **The PDF.** The output check reads links in HTML pages. For the `book-pdf` deliverable it confirms that the build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF to inspect its navigation, layout, and accessibility. The check summarizes Apache FOP layout warnings, such as content that is wider than its column, in one line. The warnings do not fail the check.\n- **The PDF index.** The bookmap has an `<indexlist/>`, but the PDF that the editor builds for the final branch has no index pages.\n- **Keys that only the root map defines.** Project health resolves keys against the root map, `audacity-guide.ditamap`. If a topic uses a key that another publishing map does not define, the cross-reference in that map's PDF is empty, and the check still reports `Ready`. Stage 21 shows the case and its fix.\n- **External URLs.** The check does not follow links to other sites.\n\n## Completing a lesson {#completing-a-lesson}\n\n[Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) at the end of every lesson. If the check reports a broken link in the output, fix its source before you continue. A defect that you introduce in one stage stays in every later stage until you fix it.\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -101,35 +101,44 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
   <MarkdownContentStack>
     <article class="docs-prose">
       <h1 id="known-output-issues" class="group scroll-mt-20">Known output issues<a href="#known-output-issues" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h1>
-      <p>The final reference branch passes its historical gate, but the additional output-link check finds defects. A DITA-OT 4.3.5 build of <code>tutorial/26-final</code> produced 177 HTML pages with 12 failing local references. All eight deliverables built. These are baseline findings in the supplied guide.</p>
+      <p>The final reference branch, <code>tutorial/26-final</code>, checks clean. A <code>dogsbay-xml check .</code> of the branch builds all eight deliverables with the DITA-OT that the editor includes, and the output check finds no broken links, images, or fragments in the seven HTML deliverables. The maintainers' output checker, <code>scripts/check-output-links.py</code>, reports the same result: 180 HTML pages checked, 0 failures.</p>
+      <h2 id="fixed-defects" class="group scroll-mt-20">Fixed defects<a href="#fixed-defects" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <p>Earlier builds of the final branch had 12 failing local references in the HTML output: seven glossary links and five sample links. The stage branches were corrected, and every later branch carries the fixes. The table also lists two related defects that the link check did not count as failures.</p>
       <Table class="my-4">
       <TableHeader>
       <TableRow>
-      <TableHead>Finding</TableHead>
-      <TableHead>Affected output</TableHead>
-      <TableHead>Investigation</TableHead>
+      <TableHead>Defect</TableHead>
+      <TableHead>Fix</TableHead>
       </TableRow>
       </TableHeader>
       <TableBody>
       <TableRow>
-      <TableCell>Links to <code>topics/glossary/audio-units.html</code> have no target file</TableCell>
-      <TableCell>Beginner Mac, beginner Windows, and installation variants</TableCell>
-      <TableCell>Review glossary topic inclusion in each root map; a key definition alone does not guarantee a published page.</TableCell>
+      <TableCell>Seven links to <code>topics/glossary/audio-units.html</code> had no target page in the beginner guides and the installation variants.</TableCell>
+      <TableCell>Stages 14 and 16 add <code>&lt;topicref href="topics/glossary/audio-units.dita" toc="no"/&gt;</code> to <code>beginner-guide.ditamap</code> and <code>installation-variants.ditamap</code>, because a key definition that points at a fragment does not make DITA-OT publish the topic.</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell>The scripting reference links to <code>samples/export-mp3.py</code>, which is absent from the output</TableCell>
-      <TableCell>Full guide, review guide, podcaster guide, and collection</TableCell>
-      <TableCell>Configure the sample as a published resource and check both the download link and code listing.</TableCell>
+      <TableCell>Five links from the scripting reference to <code>samples/export-mp3.py</code> had no target, because the build does not copy <code>samples/</code> into the output.</TableCell>
+      <TableCell>Stage 22 names the script with <code>&lt;filepath&gt;</code> and links to the task that lists it, <em>Exporting from a script</em>.</TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell>The Windows and Linux copies of the recording task in the installation variants linked to the macOS copy of <em>The recording is silent</em>.</TableCell>
+      <TableCell>Stage 20 gives the trouble note <code>keyref="silent"</code> with an <code>href</code> fallback and defines the key in each branch, so each copy links to its own platform's copy.</TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell>Eight chunk links and a stylesheet reference were broken when the effects and presets topics were chunked into one page.</TableCell>
+      <TableCell>The effects and presets topics are separate files. The <code>chunk="by-topic"</code> example stays in <code>examples/chunking/</code>, which no deliverable publishes.</TableCell>
       </TableRow>
       </TableBody>
       </Table>
-      <p>Generated filenames and process-specific paths can differ between builds. Use the <a href="/dogsbay-xml-dita-tutorial-docs/reference/verification">output-link checker</a> to obtain the paths for your run. These findings cover local HTML references; they do not assess external URLs or PDF accessibility.</p>
-      <p>Separating the effects and presets topics removed the eight broken chunk links and the missing stylesheet reference from the production builds. The remaining failures comprise seven glossary links and five sample links.</p>
-      <p>The original chunking finding is why the tutorial keeps its <code>chunk="by-topic"</code> example in an isolated demonstration map. Production topics should use separate source files and explicit topicrefs until the exact DITA-OT version used for a release has been tested. The demonstration is still useful for learning the feature, but a valid DITA structure is not proof that every processor generates valid links.</p>
+      <h2 id="what-the-output-check-does-not-cover" class="group scroll-mt-20">What the output check does not cover<a href="#what-the-output-check-does-not-cover" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <ul>
+      <li><strong>The PDF.</strong> The output check reads links in HTML pages. For the <code>book-pdf</code> deliverable it confirms that the build wrote <code>out/book-pdf/audacity-book.pdf</code>. Open the PDF to inspect its navigation, layout, and accessibility. The check summarizes Apache FOP layout warnings, such as content that is wider than its column, in one line. The warnings do not fail the check.</li>
+      <li><strong>The PDF index.</strong> The bookmap has an <code>&lt;indexlist/&gt;</code>, but the PDF that the editor builds for the final branch has no index pages.</li>
+      <li><strong>Keys that only the root map defines.</strong> Project health resolves keys against the root map, <code>audacity-guide.ditamap</code>. If a topic uses a key that another publishing map does not define, the cross-reference in that map's PDF is empty, and the check still reports <code>Ready</code>. Stage 21 shows the case and its fix.</li>
+      <li><strong>External URLs.</strong> The check does not follow links to other sites.</li>
+      </ul>
       <h2 id="completing-a-lesson" class="group scroll-mt-20">Completing a lesson<a href="#completing-a-lesson" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <p>Use the historical gate to compare your source with the reference stage. Use the output check to identify publishing defects as a separate result. Record existing findings and any new findings introduced by your changes. A failed output check remains a failure even when the historical gate passes.</p>
-      <h2 id="preparing-a-release" class="group scroll-mt-20">Preparing a release<a href="#preparing-a-release" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <p>Resolve the output defects before describing the generated guide as ready for publication. Source corrections belong on the affected stage branches, with subsequent branches and quoted examples updated together. The tutorial's deliberately broken <code>main</code> project is a separate exercise and should retain its planted errors.</p>
+      <p><a href="/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate">Check your work</a> at the end of every lesson. If the check reports a broken link in the output, fix its source before you continue. A defect that you introduce in one stage stays in every later stage until you fix it.</p>
     </article>
   </MarkdownContentStack>
 </DocsLayout>

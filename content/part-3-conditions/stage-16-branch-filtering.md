@@ -20,7 +20,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 15 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: A DITAVAL per platform
 
@@ -74,6 +74,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      <mapref href="subject-scheme.ditamap" type="subjectScheme"/>
      <mapref href="keydefs-product.ditamap"/>
      <mapref href="keydefs-glossary.ditamap"/>
+     <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
+     <topicref href="topics/glossary/audio-units.dita" toc="no"/>
      <keydef keys="common-notes" href="shared/common-notes.dita"/>
      <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
      <!-- Branch filtering (DITA 1.3): each ditavalref makes DITA-OT copy this branch
@@ -124,6 +126,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      key scopes.
    - The rest of the map is what any root map needs: the scheme, the
      product and glossary keys, the shared topics.
+   - The `<topicref toc="no">` to `audio-units.dita` is the same one the
+     beginner map got in stage 14. *Recording your first track* links to
+     pages that use `<abbreviated-form>`, and a `<keydef>` to a fragment
+     such as `audio-units.dita#gl-decibel` does not make DITA-OT publish
+     the glossary group. The topicref publishes the group so that those
+     links have a page to land on, and keeps it out of the table of
+     contents.
 
 3. **List the branches**
 
@@ -143,7 +152,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    DITAVAL file.
 ::::
 
-## Step 3: The deliverable, the README and the gate
+## Step 3: The deliverable, the README and the check
 
 ::::steps
 1. **Edit `project.json`**
@@ -188,31 +197,36 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-3. **Check**
+3. **Check your work**
+   In the editor, choose **Project** > **Check Project** and read the
+   result in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   scripts/check-stage.sh
+   dogsbay-xml check .
    ```
 
+   Example output:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   33 file(s): 33 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == validate-conditions  /home/you/audacity-guide ==
-   33 file(s): 33 pass, 0 with violations.
-
-   == build  project.json -> /tmp/check-stage-421655 ==
-   all deliverables built
-
-   STAGE OK
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
+
+   The new filters use only controlled values. To confirm, check the
+   controlled values as in stage 15.
 
 4. **Read the output**
-   Under your gate's build directory, `out/install-variants/topics/` has three copies
+   `out/install-variants/topics/` has three copies
    of each of the two topics:
 
    ```
@@ -251,17 +265,34 @@ mac-                 filters topics/installing-audacity.dita ditaval=filters/pla
 3 branch variant(s).
 ```
 
-Two variants now want the same file names. The gate still says `STAGE OK`:
-DITA-OT logs no error and no warning. But the output has no Linux pages at
-all. `mac-installing-audacity.html` is the Linux copy (its choice table has
-the `apt install` row), the Mac copy is gone, and the table of contents
-links the second variant to `350611f215aad75b9ab4b6d1c51e836229c8b605-1.html`
-and `1260618b1518ef4be91b7a2f9576e1da3ce3bd89-1.html`, generated names for
-pages that were never written. A branch collision is silent; check the
-`list-branches` output, and the output folder, whenever you add a variant.
+Two variants now want the same file names. DITA-OT logs no error and no
+warning, and the output has no Linux pages at all.
+`mac-installing-audacity.html` is the Linux copy (its choice table has the
+`apt install` row), the Mac copy is gone, and the table of contents links
+the Mac variant to generated names for pages that were never written. Check
+your work, or build this deliverable only with
+`dogsbay-xml check --deliverable=install-variants .`. The build succeeds,
+and the output check finds the two table of contents links. The output
+looks like this example:
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+```
+health   clean, with warnings
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+output   2 broken link(s)
+  /home/you/audacity-guide/out/install-variants/index.html:19  @href="bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html" — there is no bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html
+  /home/you/audacity-guide/out/install-variants/index.html:20  @href="3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html" — there is no 3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html
+Not ready: 2 links in the built output lead nowhere.
+```
+
+The generated names can differ between runs. The check reports the symptom,
+two links that lead nowhere, and not the cause. Check the `list-branches`
+output, and the output folder, whenever you add a variant.
+
+After each error exercise, undo the deliberate change and check again.
+Confirm that the check reports `Ready` before you continue.
 
 ## What you learned
 
@@ -271,7 +302,8 @@ Confirm that it prints `STAGE OK` before continuing.
   `<dvrKeyscopePrefix>` names the copies and their key scopes; the
   prefixes must differ.
 - A branch-filtered map needs no `profiles` in `project.json`; a
-  collision between variants breaks the output without an error.
+  collision between variants builds without an error, and only the
+  output check sees the links it breaks.
 - `dogsbay-xml list-branches <map>` enumerates the variants.
 
 ## Next lesson

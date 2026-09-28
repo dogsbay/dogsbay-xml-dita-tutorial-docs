@@ -19,7 +19,7 @@ two beginner guides, a Linux podcaster guide, and a review build.
 **You need:** stage 13 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Mark what varies
 
@@ -61,24 +61,11 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
               </chrow>
    ```
 
-2. **Edit `shared/common-steps.dita` and `shared/common-notes.dita`**
+2. **Edit `shared/common-notes.dita`**
    The shortcut that differs by platform becomes two `<ph>` alternatives.
    The first carries two values, `platform="windows linux"`, because the
-   shortcut is the same on both.
-
-   ```diff title="shared/common-steps.dita"
-   --- a/shared/common-steps.dita
-   +++ b/shared/common-steps.dita
-   @@ -25,7 +25,7 @@
-            <cmd>Select the region of audio you want to work on.</cmd>
-            <info>
-              <p>Click and drag in the waveform to select a region; the selection is highlighted.
-   -          To select the whole track, press <uicontrol>Ctrl+A</uicontrol> (Windows and Linux) or <uicontrol>Cmd+A</uicontrol> (macOS).</p>
-   +          To select the whole track, press <ph platform="windows linux"><uicontrol>Ctrl+A</uicontrol></ph><ph platform="mac"><uicontrol>Cmd+A</uicontrol></ph>.</p>
-            </info>
-          </step>
-          <step id="save-project">
-   ```
+   shortcut is the same on both. The second holds the macOS shortcut and,
+   inside it, a joiner that item 5, *Read the attributes*, explains.
 
    ```diff title="shared/common-notes.dita"
    --- a/shared/common-notes.dita
@@ -88,7 +75,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
       <body>
         <note id="backup-warning" type="warning">This effect changes the audio data.
    -    Save the project first; you can undo with <uicontrol>Ctrl+Z</uicontrol> (Windows and Linux) or <uicontrol>Cmd+Z</uicontrol> (macOS).</note>
-   +    Save the project first; you can undo with <ph platform="windows linux"><uicontrol>Ctrl+Z</uicontrol></ph><ph platform="mac"><uicontrol>Cmd+Z</uicontrol></ph>.</note>
+   +    Save the project first; you can undo with <ph platform="windows linux"><uicontrol>Ctrl+Z</uicontrol></ph><ph platform="mac"> <ph platform="windows linux">or, on macOS,</ph> <uicontrol>Cmd+Z</uicontrol></ph>.</note>
         <note id="quiet-room-tip" type="tip">For best results, record in a quiet room and position the microphone 15 to 30 cm from your mouth.</note>
         <p>Recommended starting settings for Noise Reduction:</p>
         <ul id="noise-reduction-settings">
@@ -114,7 +101,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
           </step>
           <step>
    -        <cmd>Select the whole track with <uicontrol>Ctrl+A</uicontrol> or <uicontrol>Cmd+A</uicontrol>.</cmd>
-   +        <cmd>Select the whole track with <ph platform="windows linux"><uicontrol>Ctrl+A</uicontrol></ph><ph platform="mac"><uicontrol>Cmd+A</uicontrol></ph>.</cmd>
+   +        <cmd>Select the whole track with <ph platform="windows linux"><uicontrol>Ctrl+A</uicontrol></ph><ph platform="mac"> <ph platform="windows linux">or, on macOS,</ph> <uicontrol>Cmd+A</uicontrol></ph>.</cmd>
           </step>
           <step>
             <cmd>Open <uicontrol>Noise Reduction</uicontrol> again, adjust the settings and click <uicontrol>OK</uicontrol>.</cmd>
@@ -193,8 +180,18 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      Linux build.
    - Two alternatives side by side, `<ph platform="windows linux">` then
      `<ph platform="mac">`, are the idiom for text that differs: exactly
-     one survives each filtered build. There is no space between them,
-     because the survivor is followed by the full stop.
+     one survives each filtered build. There is no space between them or
+     before the full stop, so the survivor reads "Ctrl+A." or "Cmd+A."
+   - An unfiltered build keeps both alternatives, so the macOS `<ph>`
+     starts with a joiner, `<ph platform="windows linux">or, on
+     macOS,</ph>`. The joiner is conditioned on the other platforms. A
+     macOS build excludes it with the Windows and Linux shortcut, and a
+     Windows or Linux build excludes it with the whole macOS `<ph>`. It
+     survives only when nothing filters on `@platform`, and then the
+     sentence reads "Select the whole track with Ctrl+A or, on macOS,
+     Cmd+A." The spaces around the joiner sit outside the inner `<ph>`,
+     inside the macOS one, because the formatter trims spaces at the start
+     and end of an inline element's content.
    - `@rev` is not a filter. It names the revision that changed the
      element, and a DITAVAL can flag it; nothing is ever excluded by
      `@rev`.
@@ -396,7 +393,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 ::::steps
 1. **Create `beginner-guide.ditamap`**
-   Seven topics in three chapters, no glossary, no reltable.
+   Six topics in three chapters, no glossary chapter, no reltable. One
+   glossary topic is published without a table of contents entry.
 
    ```xml title="beginner-guide.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -406,6 +404,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      <title>Audacity Beginner's Guide</title>
      <mapref href="keydefs-product.ditamap"/>
      <mapref href="keydefs-glossary.ditamap"/>
+     <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
+     <topicref href="topics/glossary/audio-units.dita" toc="no"/>
      <keydef keys="common-notes" href="shared/common-notes.dita"/>
      <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
    
@@ -474,9 +474,20 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      The product and glossary keys come in by `<mapref>`, and the steps
      shared topic is `resource-only`, as in the full guide. A map that
      misses one of these fails the build, as the demo below shows.
+   - The beginner map has no glossary chapter, but *Recording your first
+     track* cross-references *What is digital audio?* and *Preparing to
+     record*, so DITA-OT publishes those two pages too. They use
+     `<abbreviated-form keyref="gl-decibel"/>` and `gl-hertz`, which render
+     as links to the entries in the `audio-units.dita` group. Those keys
+     point to fragments, `audio-units.dita#gl-decibel`, and a `<keydef>` to
+     a fragment does not make DITA-OT publish the topic, so the links
+     would have nowhere to land. The `<topicref toc="no">` publishes the
+     group as a page and leaves it out of the table of contents. The
+     podcaster map lists the group in its *Reference* chapter, so it needs
+     no extra entry.
 ::::
 
-## Step 5: Deliverables, README and the gate
+## Step 5: Deliverables, README and the check
 
 ::::steps
 1. **Edit `project.json`**
@@ -594,36 +605,52 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-3. **Format and check**
+3. **Format and check your work**
+
+   Format the changed files:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap filters/*.ditaval
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   28 file(s): 28 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-412907 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   The build step takes longer now: five deliverables instead of one.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/audacity-guide/out/review
+   output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
+   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The check takes longer now: it builds five deliverables instead of one,
+   and checks the links in each. `podcast-workflow` is unused until stage
+   18 refers to it.
 
 4. **Read the output**
-   Under the gate's build directory, `out/` contains one folder per
-   deliverable. Use the directory printed by your run. Compare these files:
-   - `beginner-windows/topics/removing-background-noise.html` says
-     `Ctrl+A` and contains no `Cmd+A`; the same page under `beginner-mac`
-     says `Cmd+A` and contains no `Ctrl+A`. In `full`, the unfiltered
-     build, both survive side by side.
+   `out/` contains one folder per deliverable. Compare these files:
+
+   - In `topics/removing-background-noise.html`, the step reads "Select
+     the whole track with Ctrl+A." under `beginner-windows` and
+     `podcaster-linux`, and "Select the whole track with Cmd+A." under
+     `beginner-mac`. Under `full` and `review`, which filter nothing on
+     `@platform`, it reads "Select the whole track with Ctrl+A or, on
+     macOS, Cmd+A." The backup warning at the top of the page reads the
+     same way with `Ctrl+Z` and `Cmd+Z`.
    - `beginner-windows/topics/installing-audacity.html` has one row in
      the choice table, the `.exe` one; `beginner-mac` has the `.dmg` row,
      `podcaster-linux` the `apt install` row.
@@ -638,38 +665,50 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      Nothing is missing from the review build.
 ::::
 
-Test a missing key definition. In `beginner-guide.ditamap`, remove `keys="install"`
-from the install topicref and run the gate. Validation and health pass, and
-the build fails:
+Test a missing key definition. In `beginner-guide.ditamap`, remove
+`keys="install"` from the install topicref and check your work. Health
+passes, and the two beginner builds fail. The output looks like this
+example:
 
 ```
-== build  project.json -> /tmp/check-stage-413350 ==
-Error: file:/home/you/audacity-guide/topics/what-is-audacity.dita:49:29: [DOTX028E]: Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
-FAIL: DITA-OT build reported errors (full log: /tmp/check-stage-413350.log)
-
-STAGE FAILED
+health   clean, with warnings
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
+build    full                 ok  /home/you/audacity-guide/out/full
+build    beginner-mac         FAILED  /home/you/audacity-guide/out/beginner-mac
+  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    beginner-windows     FAILED  /home/you/audacity-guide/out/beginner-windows
+  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/audacity-guide/out/review
+Not ready: beginner-mac, beginner-windows failed to build. The built output was not read.
 ```
 
-`project-health` analyzes the project's default root map, the full guide,
-where `install` is defined. Every root map needs every key its topics use;
-the build of the beginner guide is where a missing one shows.
+Health analyzes the project's default root map, the full guide, where
+`install` is defined. Every root map needs every key its topics use; the
+build of the beginner guide is where a missing one shows.
 
-Undo the key change, then test the topic structure. Add a `<p>` after the last `<section>` of the podcast
-workflow and validation fails:
+Undo the key change, then test the topic structure. Add a `<p>` after the
+last `<section>` of the podcast workflow and check your work. The check
+stops at health. The output looks like this example:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/podcast-production-workflow.dita:
-  61:13  error: The content of element type "conbody" does not match its content model.
-28 file(s): 27 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+    61:13  The content of element type "conbody" does not match its content model.
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 In a `<conbody>`, block elements come first and sections last; a paragraph
 that belongs after a section goes inside it.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+After each error exercise, undo the deliberate change and check again.
+Confirm that the check reports `Ready` before you continue.
 
 ## What you learned
 
@@ -683,8 +722,8 @@ Confirm that it prints `STAGE OK` before continuing.
   of the map.
 - One topic set, several maps, one DITAVAL per deliverable in
   `project.json`, under `profiles.ditavals`.
-- Every root map defines every key its topics use; `project-health` checks
-  the default root map, the build checks each map.
+- Every root map defines every key its topics use; the health check reads
+  the default root map, and the build checks each map.
 
 ## Next lesson
 

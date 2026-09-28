@@ -50,8 +50,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
          <step id="select-region">
            <cmd>Select the region of audio you want to work on.</cmd>
            <info>
-             <p>Click and drag in the waveform to select a region; the selection is highlighted.
-             To select the whole track, press <uicontrol>Ctrl+A</uicontrol> (Windows and Linux) or <uicontrol>Cmd+A</uicontrol> (macOS).</p>
+             <p>Click and drag in the waveform to select a region; the selection is highlighted.</p>
            </info>
          </step>
          <step id="save-project">
@@ -128,6 +127,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - Both `<shortdesc>`s say what the file is for: a reader who opens it
      in the editor, or an agent that finds it in a search, learns at once
      that it is a shared topic and is not published.
+   - The step `select-region` is generic: it says how to select a region
+     and nothing about which region. That is why it fits the noise task,
+     which uses it to select a noise-only section. The noise task selects
+     the whole track in a later step of its own.
    - The step `save-project` uses `<keyword keyref="project-extension"/>`
      for `.aup3`, the key defined in stage 10; a shared topic step should not
      hard-code product facts either.
@@ -350,26 +353,30 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    that exists and checks that each `conaction="mark"` finds its target.
    Rename the play-back step's id, for example to `playback`, and check
    your work. The check stops at health and names the reference that no
-   longer resolves. Example output:
+   longer resolves and the push that no longer finds its target. Example
+   output:
 
    ```
    health   NOT CLEAN
-     /home/you/audacity-guide/shared/common-steps.dita:29  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/audacity-guide/shared/common-steps.dita:28  <step> — push target id 'play-back' not found in recording-your-first-track.dita
      (run project-health for the full report)
      unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
      unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
-   Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+   Not ready: the project itself has faults. The build and the built output were not checked.
    ```
 
    The **Project Validation** panel, or `dogsbay-xml project-health .`,
-   reports a broken element id and, under `Conref pushes`, this line:
+   lists the two problems under `Conref pushes` and `Broken element ids`:
 
    ```
    Conref pushes (1):
-     /home/you/audacity-guide/shared/common-steps.dita:29  <step> push target id 'play-back' not found in recording-your-first-track.dita
+     /home/you/audacity-guide/shared/common-steps.dita:28  <step> push target id 'play-back' not found in recording-your-first-track.dita
+   Broken element ids (1):
+     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
    ```
 
-   The diagnostic names the id that the push looks for, `play-back`, not the
+   The diagnostics name the id that the push looks for, `play-back`, not the
    new id. Restore the id and check again.
 
 3. **Check the output**
@@ -409,7 +416,7 @@ health   NOT CLEAN
   (run project-health for the full report)
   unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
@@ -450,19 +457,20 @@ anything is built.
 Undo the key change. Next, remove the placeholder. Replace the trimming task's
 `<step conref="…"><cmd/></step>` with a self-closing
 `<step conref="…"/>`, and check your work. The file is no longer valid,
-and the check names it. Example output:
+and the check names it with the line, column, and message. Example output:
 
 ```
 health   NOT CLEAN
   invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+    37:77  The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
   (run project-health for the full report)
   unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
   unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
-the line, column, and message:
+the full report. It begins:
 
 ```
 Invalid files (1 of 13):

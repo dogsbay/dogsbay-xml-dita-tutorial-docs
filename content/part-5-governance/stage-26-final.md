@@ -11,6 +11,8 @@ every deliverable before tagging your work.
 
 **You need:** stage 25 complete. **Time:** about 15 minutes, plus corrections.
 
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
+
 ## Review the project
 
 `project.json` defines eight deliverables: full, beginner-mac,
@@ -68,23 +70,49 @@ The chunking experiment under `examples/chunking/` is available from stage 18. B
 Topic text is adapted from the Audacity Manual. See LICENSE and NOTICE for licensing and attribution.
 ```
 
-## Validate and publish
+## Check and publish
 
-Run these commands from the project root:
+Check the finished project. In the editor, choose **Project** >
+**Check Project** and read the result in the **Project Validation** panel.
+From the command line, run from the project root:
 
 ```bash
-scripts/check-stage.sh
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
-The gate checks source validation, project health, controlled values, house
-rules, and publication. The output checker tests local HTML links and assets.
-Inspect PDF navigation, accessibility, and layout separately.
+The check validates the source, runs project health with the metadata
+policy and the house rules, builds all eight deliverables into `out/`,
+and checks every link, image, and fragment in the HTML output. Example
+output for the finished guide:
 
-Review [known output issues](/reference/known-output-issues). A successful
-source gate does not override a failed output check. Resolve release defects
-before describing your own guide as ready for publication.
+```
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/audacity-guide/out/review
+build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+build    collection           ok  /home/you/audacity-guide/out/collection
+build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
+  PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+output   wrote a file, no pages to check links in book-pdf
+output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
+Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+```
+
+The README's *Verification* section names `scripts/check-stage.sh` and
+`scripts/check-output-links.py`, the scripts that maintainers use to
+verify the stage branches. You do not need them. See
+[Check your work](/start-here/run-the-gate).
+
+The output check reads HTML pages only. For the PDF, it confirms that the
+build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF and inspect its
+navigation, layout, and accessibility yourself.
+
+The final reference build checks clean. See
+[Known output issues](/reference/known-output-issues) for the defects that
+earlier builds had and how the stage branches fixed them.
 
 ## Tag your result
 
@@ -97,7 +125,6 @@ git show --stat my-tutorial-final
 ```
 
 The supplied reference is `tutorial/26-final`, also tagged `tutorial/final`.
-It includes every optional lesson. The tag identifies a checkpoint, not a
-claim that every known publishing issue has been resolved.
+It includes every optional lesson, and it checks as `Ready`.
 
 [Compare this stage with its predecessor](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/25-house-rules...tutorial/26-final).

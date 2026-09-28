@@ -282,7 +282,7 @@ the check stops. The following output is an example:
 health   NOT CLEAN
   /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
   (run project-health for the full report)
-Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 Undo the change and check again.
@@ -300,7 +300,7 @@ health   clean
 build    full                 ok  /home/you/audacity-guide/out/full
 output   1 broken link(s)
   /home/you/audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
-Not ready: stopped at output.
+Not ready: 1 link in the built output leads nowhere.
 ```
 
 Undo the change and check again.
