@@ -36,8 +36,6 @@ as failures.
   navigation, layout, and accessibility. The check summarizes Apache FOP
   layout warnings, such as content that is wider than its column, in one
   line. The warnings do not fail the check.
-- **The PDF index.** The bookmap has an `<indexlist/>`, but the PDF that
-  the editor builds for the final branch has no index pages.
 - **Keys that only the root map defines.** Project health resolves keys
   against the root map, `audacity-guide.ditamap`. If a topic uses a key
   that another publishing map does not define, the cross-reference in
