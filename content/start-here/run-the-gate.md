@@ -6,25 +6,30 @@ type: how-to
 
 # Run the gate
 
-Every stage branch carries `scripts/check-stage.sh`, the gate. It is the one
-command that decides whether a stage is done, and every stage page ends by
-running it. Run it from the project root at any time; it never changes your
-files.
+Each stage includes `scripts/check-stage.sh`, the gate. Run it from the
+project root to check the source and, from stage 03, build the deliverables.
+The script writes build output and logs to a temporary directory by default.
 
 The gate runs three checks in order and prints `STAGE OK` when all of them
-pass, or `STAGE FAILED` with the first failure marked `FAIL:`.
+pass, or `STAGE FAILED` with failed checks marked `FAIL:`. A missing tool
+causes an immediate exit with code `2`.
 
 ## What it checks
 
-| Step | Command | Proves |
+| Step | Command | Checks |
 |---|---|---|
 | 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` file validates against its DOCTYPE |
-| 2 | `dogsbay-xml project-health <root>` | No broken links, undefined or unused keys, broken element ids, orphan conref pushes or dangling index redirects; no metadata-policy or house-rule violations; formatting and authoring leftovers are reported as warnings |
+| 2 | `dogsbay-xml project-health <root>` | References, keys, reuse targets, metadata, and configured house rules for the default root map. Warnings alone can pass. |
 | 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` message codes, because the build does not always exit non-zero on a content error |
 
 Step 2 uses the root map and Schematron configured in `.dogsbay/config.xml`
 once later stages add them. Step 3 is skipped until the project has a
-`project.json`, which arrives in Part 2.
+`project.json`, which arrives in stage 03.
+
+Stage 15 adds controlled-value validation. Stage 23 adds a catalog fallback
+for learning topics, and stage 25 enables a separate house-rules check.
+See [The gate](/reference/the-gate) for those details and the limits of the
+checks.
 
 ## Run it
 
@@ -32,12 +37,12 @@ once later stages add them. Step 3 is skipped until the project has a
 scripts/check-stage.sh
 ```
 
-On a passing stage in Part 1, where there is no map and no `project.json` yet,
+On stage 01, before the map and `project.json` are created,
 it prints:
 
 ```
 == validate-project  /home/you/dogsbay-xml-dita-tutorial ==
-9 file(s): 9 valid, 0 invalid.
+1 file(s): 1 valid, 0 invalid.
 
 == project-health  /home/you/dogsbay-xml-dita-tutorial ==
 Root map: none (none configured); house rules: none (none configured)
@@ -49,7 +54,7 @@ STAGE OK
 ```
 
 The file count grows with each stage. `Root map: none` is expected until
-stage 07.
+stage 02.
 
 ## When it fails
 
@@ -75,10 +80,29 @@ STRICT=0 scripts/check-stage.sh        # project-health at --severity=error only
 scripts/check-stage.sh /path/to/root   # check another project folder
 ```
 
-`SKIP_BUILD=1` matters from Part 2 on, when the build takes about ten seconds.
-`STRICT=0` lets warnings such as house-style formatting through; the branches
-themselves are checked with `STRICT=1`, the default, so keep it on before you
-compare your work with a branch.
+`SKIP_BUILD=1` skips publishing from stage 03 onward. Build time depends on
+the size of the publication and your system.
+`STRICT=0` restricts the health report to errors. The default, `STRICT=1`,
+also reports warnings; it does not make every warning a failure. Use the
+default when checking a completed lesson and review the reported findings.
+
+## Find the output
+
+The build header identifies the temporary directory for that run. Paths
+such as `/tmp/check-stage-357688` in recorded output are examples. Use the
+directory printed by your own run.
+
+When a lesson asks you to inspect `out/full/` in your project, first build
+there with:
+
+```bash
+dita --project=project.json
+```
+
+Alternatively, inspect `out/full/` under the gate's temporary directory.
+The same rule applies to the other deliverable directories. Command output
+can vary with tool versions; compare the checks and results, not process IDs
+or line numbers.
 
 ## Environment
 

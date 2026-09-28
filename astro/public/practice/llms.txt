@@ -1,0 +1,6 @@
+# DogsBay DITA tutorial — Practice
+
+## Practice
+
+- [Practice exercises](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/practice/exercises.md): Apply topic design, maps, reuse, conditions, output review, and house rules without copying a complete solution.
+- [Suggested exercise solutions](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/practice/solutions.md): Compare your decisions and observed output with the expected results for the five DITA practice exercises.

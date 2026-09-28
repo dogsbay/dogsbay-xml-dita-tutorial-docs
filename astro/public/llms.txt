@@ -1,8 +1,16 @@
-# DogsBay DITA tutorial — Start here
+# DogsBay DITA tutorial — Optional modules
 
-## Start here
+## Optional modules
 
-- [What you will build](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs.md): Learn DITA 1.3 one feature at a time by building an Audacity user guide, stage by stage, with a check at every step.
-- [How the tutorial works](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works.md): The tutorial is a chain of git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
-- [Set up your tools](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/set-up.md): Install DITA-OT 4.3.5 and the DogsBay XML command line, point the gate at them, and clone the tutorial repository at its first stage.
-- [Run the gate](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate.md): What scripts/check-stage.sh checks, what it prints when a stage passes or fails, and the SKIP_BUILD and STRICT switches.
+- [Stage 08: Figures](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures.md): Add a figure with an image and alt text, an inline SVG, an image map with clickable areas, and the decibel formula as MathML with a text fallback.
+- [Stage 12: Glossary](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary.md): Add glossary entries and a glossary group with abbreviations, key them in a keydef map, and bind terms in the text to their definitions.
+- [Stage 13: Metadata and index](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index.md): Give every topic a prolog with author, dates, audience, keywords and index terms, add publication metadata to the map, and enforce a metadata policy.
+- [Stage 16: Branch filtering](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering.md): Publish the install task three times from one map, once per platform, with a ditavalref on the branch and a prefix or suffix on the copies.
+- [Stage 17: Key scopes](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes.md): Give each guide its own start-here key, publish all three guides in one collection without key collisions, and link across deliverables with a peer map.
+- [Stage 18: Chunking and output](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output.md): Combine output pages, test splitting in a separate example, and control publication names and visibility.
+- [Stage 19: Bookmap](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap.md): Publish the guide as a PDF book with a bookmap, book metadata, front matter, parts, chapters, appendixes, a glossary list and an index.
+- [Stage 20: Troubleshooting](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting.md): Write a troubleshooting topic with a condition, causes and remedies, and turn a warning in the recording task into a trouble note that points at it.
+- [Stage 21: Hazards and safety](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety.md): Create a hazard statement with a message panel and symbol, then reuse it in the recording task with conkeyref.
+- [Stage 22: Software domains](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains.md): Document a command-line interface with the software and programming domains, a syntax diagram, a parameter list, messages, and code pulled from a file.
+- [Stage 23: Learning](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning.md): Create a learning assessment with four question types and configure the gate to validate it with the DITA-OT catalog.
+- [Stage 24: Drafts and localization](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization.md): Mark the guide for review and translation with a language on every root, translate flags, a right-to-left phrase, sort keys, review markup and a change history.

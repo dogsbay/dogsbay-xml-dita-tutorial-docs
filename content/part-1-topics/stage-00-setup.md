@@ -1,41 +1,48 @@
 ---
 title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognise, with the shared editor settings and the gate script that every later stage must pass.
+description: An empty DITA project that the tools recognize, with the shared editor settings and the gate script that every later stage must pass.
 type: tutorial
 ---
 
 # Stage 00: Set up the project
 
-In this stage you build an empty DITA project: no topics yet, only the files
-that make a folder a project. The DogsBay XML editor reads `.dogsbay/config.xml`
-to know that this is a DITA project on DITA-OT 4.3.5 and how to format files,
-and the gate script `scripts/check-stage.sh` is the check every later stage
-must pass.
+Create the project settings, validation script, and README for the guide.
+The DogsBay XML editor uses `.dogsbay/config.xml` to select the DITA
+framework and formatting settings. The script `scripts/check-stage.sh`
+runs the checks used throughout the tutorial.
 
-There is no DITA to learn here, but there is one thing to understand: how a
-DITA file finds its grammar. Every topic in this tutorial starts with a
-DOCTYPE that names a public identifier such as
-`-//OASIS//DTD DITA Concept//EN`. Neither the editor nor DITA-OT fetches
-anything for it; they map the identifier to a DTD on disk through the DITA-OT
-catalog, which is why the project only has to say which DITA-OT it targets.
+A topic's DOCTYPE identifies its grammar. For example,
+`-//OASIS//DTD DITA Concept//EN` identifies the concept DTD. An XML catalog
+maps that identifier to a local DTD. The tools can then validate the topic
+without downloading the grammar.
 
 **Time:** about 10 minutes.
 **You need:** the tools from [Set up your tools](/start-here/set-up), and a
 clone of the repository on `tutorial/00-setup` if you want to compare.
 
+
+Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+
 ## Step 1: Create the project folder
 
 ::::steps
-1. **Start an empty repository**
-   The stage branch is an orphan, so start from nothing rather than from
-   `main`.
+1. **Create your authoring repository**
+   Run these commands from the directory where you want to keep your work.
+   If you are inspecting completed stages in the clone, read the examples
+   and skip the file-creation steps.
 
    ```bash
    mkdir audacity-guide && cd audacity-guide
    git init
+   git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
+   git fetch origin
    mkdir -p .dogsbay scripts topics
    touch topics/.gitkeep
    ```
+
+   Fetching adds the reference branches as `origin/tutorial/NN-slug`
+   without adding their files to your working directory. Later lessons
+   use these refs to retrieve images and compare your work.
 
 2. **Write the editor settings**
    `.dogsbay/config.xml` is shared by everyone who opens the project. It sets
@@ -45,7 +52,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
 
    ```xml title=".dogsbay/config.xml"
    <?xml version="1.0" encoding="UTF-8"?>
-
+   
    <dogsbay-project>
      <project-type>DITA</project-type>
      <framework>DITA-OT 4.3.5</framework>
@@ -53,7 +60,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    </dogsbay-project>
    ```
 
-3. **Keep personal settings out of git**
+3. **Keep personal settings out of Git**
    The editor writes a `local.xml` beside `config.xml` for the active
    deliverable and window state. Ignore it inside the folder.
 
@@ -100,7 +107,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    # Tooling is found from, in order: $DOGSBAY_XML / $DITA_HOME, the PATH, then the
    # developer defaults below.
    set -u
-
+   
    ROOT="$(cd "${1:-$(dirname "$0")/..}" && pwd)"
    DOGSBAY_XML="${DOGSBAY_XML:-$(command -v dogsbay-xml || echo "$HOME/github/dogsbay-xml/bin/dogsbay-xml")}"
    DITA_HOME="${DITA_HOME:-$HOME/Downloads/dita-ot-4.3.5}"
@@ -108,23 +115,23 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    STRICT="${STRICT:-1}"
    SKIP_BUILD="${SKIP_BUILD:-0}"
    OUT="${OUT:-${TMPDIR:-/tmp}/check-stage-$$}"
-
+   
    status=0
    say() { printf '\n== %s ==\n' "$*"; }
    fail() { status=1; printf 'FAIL: %s\n' "$*"; }
-
+   
    [ -x "$DOGSBAY_XML" ] || { echo "dogsbay-xml CLI not found (set DOGSBAY_XML)"; exit 2; }
-
+   
    say "validate-project  $ROOT"
    "$DOGSBAY_XML" validate-project "$ROOT" || fail "validation errors"
-
+   
    say "project-health  $ROOT"
    if [ "$STRICT" = "1" ]; then
      "$DOGSBAY_XML" project-health "$ROOT" || fail "project-health found issues"
    else
      "$DOGSBAY_XML" project-health --severity=error "$ROOT" || fail "project-health found errors"
    fi
-
+   
    if [ "$SKIP_BUILD" = "1" ]; then
      say "build  skipped (SKIP_BUILD=1)"
    elif [ -f "$ROOT/project.json" ]; then
@@ -142,7 +149,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    else
      say "build  skipped (no project.json yet)"
    fi
-
+   
    echo
    [ "$status" = 0 ] && echo "STAGE OK" || echo "STAGE FAILED"
    exit "$status"
@@ -159,7 +166,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    details are on [Run the gate](/start-here/run-the-gate).
 ::::
 
-## Step 3: Write the README and licence
+## Step 3: Write the README and license
 
 ::::steps
 1. **Write the README**
@@ -167,58 +174,55 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    stage table lists the whole ladder.
 
    ````md title="README.md"
-   # DogsBay DITA tutorial — step by step
-
-   A DITA 1.3 project built up one feature at a time. Each `tutorial/NN-slug`
-   branch is the previous branch plus one lesson, from a single concept topic to a
-   complete, publish-ready **Audacity User Guide**. The diff between two branches
-   is the lesson.
-
-   You are on **stage 00 — setup**: an empty project the tools recognise, and the
-   gate every later stage must pass.
-
+   # DITA tutorial
+   
+   Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
+   
+   You are on stage 00: setup.
+   
    ## Stages
-
-   | Branch | Adds |
-   |--------|------|
-   | `tutorial/00-setup` | project settings, the gate script |
-   | `tutorial/01-concept` | one concept topic |
-   | `tutorial/02-task-and-reference` | a task and a reference topic |
-   | `tutorial/03-inline-and-block` | inline semantics, notes, lists, code |
-   | `tutorial/04-rich-tasks` | prereqs, substeps, choices, examples |
-   | `tutorial/05-links` | cross-references and related links |
-   | `tutorial/06-figures` | images, SVG and an equation |
-   | … | maps, keys, reuse, glossary, metadata, conditions, subject schemes, branch filtering, key scopes, chunking, bookmap, troubleshooting, hazards, software domains, learning, drafts and localization, house rules |
-   | `tutorial/25-final` | the complete guide (also tagged `tutorial/final`) |
-
-   The walkthrough for readers is the docs site (see the `main` branch README).
-
-   ## The gate
-
-   ```bash
-   scripts/check-stage.sh            # validate every file, check project health, build every deliverable
-   SKIP_BUILD=1 scripts/check-stage.sh
-   ```
-
-   It needs the `dogsbay-xml` CLI and DITA-OT 4.3.5 (`DOGSBAY_XML`, `DITA_HOME`
-   override the defaults). A stage is done when it prints `STAGE OK`.
-
-   ## Layout
-
-   ```
-   .dogsbay/config.xml   shared editor project settings (project type, framework, format style)
-   scripts/              the gate
-   topics/               topics (empty at this stage)
-   ```
-
-   ## Licence and attribution
-
-   CC BY 4.0, see [LICENSE](LICENSE). Topic text is adapted from the
-   [Audacity Manual](https://manual.audacityteam.org/) (CC BY 3.0); see
-   [NOTICE](NOTICE) for the credit the licence requires.
+   
+   | Branch | Lesson |
+   |---|---|
+   | `tutorial/00-setup` | setup |
+   | `tutorial/01-concept` | concept |
+   | `tutorial/02-first-map` | first map |
+   | `tutorial/03-first-build` | first build |
+   | `tutorial/04-task-and-reference` | task and reference |
+   | `tutorial/05-inline-and-block` | inline and block |
+   | `tutorial/06-rich-tasks` | rich tasks |
+   | `tutorial/07-links` | links |
+   | `tutorial/08-figures` | figures |
+   | `tutorial/09-map-structure` | map structure |
+   | `tutorial/10-keys` | keys |
+   | `tutorial/11-reuse` | reuse |
+   | `tutorial/12-glossary` | glossary |
+   | `tutorial/13-metadata-and-index` | metadata and index |
+   | `tutorial/14-conditional-text` | conditional text |
+   | `tutorial/15-subject-scheme` | subject scheme |
+   | `tutorial/16-branch-filtering` | branch filtering |
+   | `tutorial/17-key-scopes` | key scopes |
+   | `tutorial/18-chunking-and-output` | chunking and output |
+   | `tutorial/19-bookmap` | bookmap |
+   | `tutorial/20-troubleshooting` | troubleshooting |
+   | `tutorial/21-hazards-and-safety` | hazards and safety |
+   | `tutorial/22-software-domains` | software domains |
+   | `tutorial/23-learning` | learning |
+   | `tutorial/24-drafts-and-localization` | drafts and localization |
+   | `tutorial/25-house-rules` | house rules |
+   | `tutorial/26-final` | final |
+   
+   ## Verification
+   
+   Run `scripts/check-stage.sh` from the project root. From stage 03, the gate builds the deliverables in `project.json`.
+   Run `python3 scripts/check-output-links.py <output-directory>` after publishing HTML. Source health and generated output checks report separate results.
+   
+   The chunking experiment under `examples/chunking/` is available from stage 18. Build its maps separately; they are not release deliverables.
+   
+   Topic text is adapted from the Audacity Manual. See LICENSE and NOTICE for licensing and attribution.
    ````
 
-2. **Add the licence and the credit**
+2. **Add the license and the credit**
    The project is CC BY 4.0. The topic text in later stages is adapted from
    the Audacity Manual, which is CC BY 3.0 and requires a credit, so `NOTICE`
    carries it from the first stage.
@@ -226,10 +230,10 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    ```text title="NOTICE"
    DogsBay DITA tutorial — step by step
    Copyright (C) 2026 DogsBay Ltd.
-
+   
    This work is licensed under the Creative Commons Attribution 4.0
    International licence. See LICENSE for the full text.
-
+   
    -------------------------------------------------------------------------------
    Adapted material: the Audacity Manual
    -------------------------------------------------------------------------------
@@ -238,7 +242,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    Credit:   Copyright the Audacity Team and the Manual's authors.
    Licence:  Creative Commons Attribution 3.0
              https://creativecommons.org/licenses/by/3.0/
-
+   
    The Manual states: "Pages in this Manual are available under the terms of the
    Creative Commons Attribution 3.0 license. In essence, you are free to (1) copy,
    distribute and transmit the work (2) to adapt the work, under condition you
@@ -246,17 +250,17 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    they endorse you or your use of the work). For any reuse or distribution, you
    may not remove our copyright notice and must make clear to others the license
    terms of this work."
-
+   
    That notice is retained here, and the licence terms of the source work are
    stated above, as the licence requires.
-
+   
    Changes made: the material was rewritten as DITA 1.3 topics, shortened, and
    restructured into maps to teach DITA. It is a teaching sample, not Audacity's
    documentation, and may be out of date or simplified. The Audacity Team does not
    endorse this work and is not affiliated with it.
-
+   
    Audacity(R) is a registered trademark of Dominic Mazzoni.
-
+   
    -------------------------------------------------------------------------------
    Original material
    -------------------------------------------------------------------------------
@@ -266,7 +270,7 @@ clone of the repository on `tutorial/00-setup` if you want to compare.
    ```
 
    `LICENSE` is the full text of the Creative Commons Attribution 4.0
-   International licence; copy it from
+   International license; copy it from
    [creativecommons.org](https://creativecommons.org/licenses/by/4.0/legalcode.txt)
    or from the branch.
 ::::
@@ -307,12 +311,8 @@ to [Set up your tools](/start-here/set-up) and set `DOGSBAY_XML` or
 - Format style lives in the project so every stage's diff is about the
   feature.
 
-## Where to go next
+## Next lesson
 
-:::cards
-- **[Stage 01: A concept topic](/part-1-topics/stage-01-concept)** {icon="arrow-right"}
-  Write *What is Audacity?* as a `<concept>` and validate one file.
+Continue with [Stage 01: concept](/part-1-topics/stage-01-concept).
 
-- **[The branch on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/tree/tutorial/00-setup)** {icon="github"}
-  `tutorial/00-setup`, the orphan root of the chain.
-:::
+For the core course, use the [learning path](/start-here/learning-path) to skip optional modules.

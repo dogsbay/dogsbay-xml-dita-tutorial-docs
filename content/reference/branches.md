@@ -1,6 +1,6 @@
 ---
 title: Branches
-description: The stage branches, how to compare any two of them, and how to reset your clone to a stage.
+description: Compare tutorial branches and inspect completed stages in a separate worktree while keeping your own work.
 type: reference
 ---
 
@@ -15,34 +15,35 @@ root; see [How the tutorial works](/start-here/how-the-tutorial-works).
 
 | Branch | Stage | Page |
 |---|---|---|
-| `tutorial/00-setup` | An empty project the tools recognise | [Stage 00](/part-1-topics/stage-00-setup) |
+| `tutorial/00-setup` | An empty project the tools recognize | [Stage 00](/part-1-topics/stage-00-setup) |
 | `tutorial/01-concept` | One concept topic | [Stage 01](/part-1-topics/stage-01-concept) |
-| `tutorial/02-task-and-reference` | A task and a reference topic | [Stage 02](/part-1-topics/stage-02-task-and-reference) |
-| `tutorial/03-inline-and-block` | Inline semantics and block elements | [Stage 03](/part-1-topics/stage-03-inline-and-block) |
-| `tutorial/04-rich-tasks` | The richer task elements | [Stage 04](/part-1-topics/stage-04-rich-tasks) |
-| `tutorial/05-links` | Links between topics | [Stage 05](/part-1-topics/stage-05-links) |
-| `tutorial/06-figures` | Figures, images, SVG and an equation | [Stage 06](/part-1-topics/stage-06-figures) |
-| `tutorial/07-first-map` | The first map, `project.json` and the first build | [Stage 07](/part-2-maps/stage-07-first-map) |
-| `tutorial/08-map-structure` | Hierarchy, sequences, link control and a reltable | [Stage 08](/part-2-maps/stage-08-map-structure) |
-| `tutorial/09-keys` | Product keys and indirect links | [Stage 09](/part-2-maps/stage-09-keys) |
-| `tutorial/10-reuse` | Conref, conkeyref, ranges and conref push from `shared/` | [Stage 10](/part-2-maps/stage-10-reuse) |
-| `tutorial/11-glossary` | Glossary entries, a group, abbreviations and terms by key | [Stage 11](/part-2-maps/stage-11-glossary) |
-| `tutorial/12-metadata-and-index` | Prolog metadata, index terms and the metadata policy | [Stage 12](/part-2-maps/stage-12-metadata-and-index) |
-| `tutorial/13-conditional-text` | Platform, audience and revision conditions, DITAVAL filters and flags, a map and a deliverable per audience | [Stage 13](/part-3-conditions/stage-13-conditional-text) |
-| `tutorial/14-subject-scheme` | A subject scheme for the conditional values, checked by the gate | [Stage 14](/part-3-conditions/stage-14-subject-scheme) |
-| `tutorial/15-branch-filtering` | Three platform variants of one branch from a single map | [Stage 15](/part-3-conditions/stage-15-branch-filtering) |
-| `tutorial/16-key-scopes` | Three guides in one collection under key scopes, and a peer map | [Stage 16](/part-3-conditions/stage-16-key-scopes) |
-| `tutorial/17-chunking-and-output` | Chunking, copy-to, print-only topics, topicsets and outputclass | [Stage 17](/part-3-conditions/stage-17-chunking-and-output) |
-| `tutorial/18-bookmap` | A bookmap and the PDF book: front matter, parts, chapters, appendices, glossary and index | [Stage 18](/part-4-books/stage-18-bookmap) |
-| `tutorial/19-troubleshooting` | A troubleshooting topic with causes and remedies, and a trouble note | [Stage 19](/part-4-books/stage-19-troubleshooting) |
-| `tutorial/20-hazards-and-safety` | Hazard statements with a message panel and a symbol, one reused by conkeyref | [Stage 20](/part-4-books/stage-20-hazards-and-safety) |
-| `tutorial/21-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 21](/part-4-books/stage-21-software-domains) |
-| `tutorial/22-learning` | A learning assessment, and the gate taught about the Learning and Training DTDs | [Stage 22](/part-4-books/stage-22-learning) |
-| `tutorial/23-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 23](/part-5-governance/stage-23-drafts-and-localization) |
-| `tutorial/24-house-rules` | The house style as Schematron, named in the project config and run by the gate; `AGENTS.md` and a skill; the ten violations resolved | [Stage 24](/part-5-governance/stage-24-house-rules) |
-| `tutorial/25-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 25](/part-5-governance/stage-25-final) |
+| `tutorial/02-first-map` | The first map | [Stage 02](/part-1-topics/stage-02-first-map) |
+| `tutorial/03-first-build` | The first HTML deliverable | [Stage 03](/part-1-topics/stage-03-first-build) |
+| `tutorial/04-task-and-reference` | A task and a reference topic | [Stage 04](/part-1-topics/stage-04-task-and-reference) |
+| `tutorial/05-inline-and-block` | Inline semantics and block elements | [Stage 05](/part-1-topics/stage-05-inline-and-block) |
+| `tutorial/06-rich-tasks` | The richer task elements | [Stage 06](/part-1-topics/stage-06-rich-tasks) |
+| `tutorial/07-links` | Links between topics | [Stage 07](/part-1-topics/stage-07-links) |
+| `tutorial/08-figures` | Figures, images, SVG and an equation | [Stage 08](/part-1-topics/stage-08-figures) |
+| `tutorial/09-map-structure` | Hierarchy, sequences, link control and a reltable | [Stage 09](/part-2-maps/stage-09-map-structure) |
+| `tutorial/10-keys` | Product keys and indirect links | [Stage 10](/part-2-maps/stage-10-keys) |
+| `tutorial/11-reuse` | Conref, conkeyref, ranges and conref push from `shared/` | [Stage 11](/part-2-maps/stage-11-reuse) |
+| `tutorial/12-glossary` | Glossary entries, a group, abbreviations and terms by key | [Stage 12](/part-2-maps/stage-12-glossary) |
+| `tutorial/13-metadata-and-index` | Prolog metadata, index terms and the metadata policy | [Stage 13](/part-2-maps/stage-13-metadata-and-index) |
+| `tutorial/14-conditional-text` | Platform, audience and revision conditions, DITAVAL filters and flags, a map and a deliverable per audience | [Stage 14](/part-3-conditions/stage-14-conditional-text) |
+| `tutorial/15-subject-scheme` | A subject scheme for the conditional values, checked by the gate | [Stage 15](/part-3-conditions/stage-15-subject-scheme) |
+| `tutorial/16-branch-filtering` | Three platform variants of one branch from a single map | [Stage 16](/part-3-conditions/stage-16-branch-filtering) |
+| `tutorial/17-key-scopes` | Three guides in one collection under key scopes, and a peer map | [Stage 17](/part-3-conditions/stage-17-key-scopes) |
+| `tutorial/18-chunking-and-output` | Chunking, copy-to, print-only topics, topicsets and outputclass | [Stage 18](/part-3-conditions/stage-18-chunking-and-output) |
+| `tutorial/19-bookmap` | A bookmap and the PDF book: front matter, parts, chapters, appendixes, glossary and index | [Stage 19](/part-4-books/stage-19-bookmap) |
+| `tutorial/20-troubleshooting` | A troubleshooting topic with causes and remedies, and a trouble note | [Stage 20](/part-4-books/stage-20-troubleshooting) |
+| `tutorial/21-hazards-and-safety` | Hazard statements with a message panel and a symbol, one reused by conkeyref | [Stage 21](/part-4-books/stage-21-hazards-and-safety) |
+| `tutorial/22-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 22](/part-4-books/stage-22-software-domains) |
+| `tutorial/23-learning` | A learning assessment and catalog-based validation of the Learning and Training DTDs | [Stage 23](/part-4-books/stage-23-learning) |
+| `tutorial/24-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 24](/part-5-governance/stage-24-drafts-and-localization) |
+| `tutorial/25-house-rules` | The house style as Schematron, named in the project config and run by the gate; `AGENTS.md` and a skill; the ten violations resolved | [Stage 25](/part-5-governance/stage-25-house-rules) |
+| `tutorial/26-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 26](/part-5-governance/stage-26-final) |
 
-`tutorial/25-final` is also tagged `tutorial/final`, a stable name for the
+`tutorial/26-final` is also tagged `tutorial/final`, a stable name for the
 finished tree. The branch moves when a middle stage is edited and the chain
 is rebased; the tag is moved to the new tip by hand once the ladder has been
 re-checked, so `git show tutorial/final:README.md` always reads a tree that
@@ -57,9 +58,9 @@ stage branches.
 The diff between adjacent branches is the lesson. Locally:
 
 ```bash
-git diff tutorial/03-inline-and-block tutorial/04-rich-tasks
-git diff --stat tutorial/03-inline-and-block tutorial/04-rich-tasks     # files only
-git diff tutorial/03-inline-and-block tutorial/04-rich-tasks -- topics/installing-audacity.dita
+git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
+git diff --stat origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
+git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks -- topics/installing-audacity.dita
 ```
 
 On GitHub, the compare URL is the two branch names joined by three dots:
@@ -69,43 +70,47 @@ https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/<from>...<to>
 ```
 
 For example,
-[compare 03 to 04](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/03-inline-and-block...tutorial/04-rich-tasks).
+[compare these stages](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/05-inline-and-block...tutorial/06-rich-tasks).
 Non-adjacent branches work too: compare `tutorial/00-setup` to
-`tutorial/06-figures` to see all of Part 1 at once, or `tutorial/06-figures`
-to `tutorial/12-metadata-and-index` for all of Part 2, or
-`tutorial/12-metadata-and-index` to `tutorial/17-chunking-and-output` for
-all of Part 3, `tutorial/17-chunking-and-output` to `tutorial/22-learning`
-for all of Part 4, or `tutorial/22-learning` to `tutorial/25-final` for all
+`tutorial/08-figures` to see all of Part 1 at once, or `tutorial/08-figures`
+to `tutorial/13-metadata-and-index` for all of Part 2, or
+`tutorial/13-metadata-and-index` to `tutorial/18-chunking-and-output` for
+all of Part 3, `tutorial/18-chunking-and-output` to `tutorial/23-learning`
+for all of Part 4, or `tutorial/23-learning` to `tutorial/26-final` for all
 of Part 5. The whole ladder is
-[compare `tutorial/00-setup` to `tutorial/25-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/25-final).
+[compare `tutorial/00-setup` to `tutorial/26-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/26-final).
 
 To read one file as it is on a branch without checking the branch out:
 
 ```bash
-git show tutorial/06-figures:topics/what-is-digital-audio.dita
-git ls-tree -r --name-only tutorial/06-figures                          # every file on the branch
-git log --oneline tutorial/06-figures                                    # the lessons so far
+git show origin/tutorial/08-figures:topics/what-is-digital-audio.dita
+git ls-tree -r --name-only origin/tutorial/08-figures
+git log --oneline origin/tutorial/08-figures
 ```
 
-## Reset to a stage
+## Inspect a stage and keep your work
 
-To put your clone at a stage, discarding your own work on it:
+Run these commands in the tutorial clone to open a completed stage in a
+separate directory. Choose a directory that does not already exist:
 
 ```bash
-git checkout tutorial/04-rich-tasks
-git status
+git worktree add --detach ../audacity-stage-04 origin/tutorial/06-rich-tasks
+cd ../audacity-stage-04
+scripts/check-stage.sh
 ```
 
-`git status` should report nothing to commit. If it lists modified files, you
-have uncommitted changes from your own work; `git stash` keeps them,
-`git checkout -- .` discards them.
+The worktree contains the reference stage. Your original working directory
+retains its files and uncommitted changes. Switching branches with
+`git checkout` can carry compatible uncommitted changes across branches;
+it does not reset your work.
 
-To keep your own work and still look at a stage, branch first:
+To start a lesson from the preceding reference stage, create a branch in a
+clean clone or worktree:
 
 ```bash
-git checkout -b my-stage-04 tutorial/03-inline-and-block   # start your work from stage 03
+git switch -c my-stage-04 origin/tutorial/05-inline-and-block
 # ... write the stage ...
-git diff tutorial/04-rich-tasks                             # compare with the answer
+git diff origin/tutorial/06-rich-tasks
 ```
 
 After any checkout, the "You are on" line near the top of `README.md` names
@@ -114,6 +119,10 @@ the stage:
 ```bash
 head -9 README.md
 ```
+
+`git diff` compares tracked files. Use `git status --short` as well to find
+new files that Git has not yet tracked. Review and commit your lesson files
+when you reach a passing checkpoint.
 
 ## Editing a middle stage
 

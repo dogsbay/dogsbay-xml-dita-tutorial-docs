@@ -1,35 +1,47 @@
 ---
 title: How the tutorial works
-description: The tutorial is a chain of git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
+description: The tutorial is a chain of Git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
 type: explanation
 ---
 
 # How the tutorial works
 
-The tutorial is not a finished project that you read; it is a project that you
-build. The finished states live in the
-[tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial) as
-a chain of branches, and this site tells you how to get from each one to the
-next.
+The [learning path](/start-here/learning-path) separates the core course from
+optional modules. The numbered branches still form one complete reference
+sequence. Skipping a module means starting the next lesson from its supplied
+checkpoint, which already contains the prerequisite files.
 
-You can follow it two ways. Write every file yourself on your own clone and
-use the branches to check your work, which is how the pages are written. Or
-check out each branch in turn and read the diff, which is faster and still
-teaches the elements. Either way, the gate tells you when a stage is done.
+Build a DITA guide in 27 stages. The
+[tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial)
+contains a branch for each completed stage. Each lesson explains how to
+produce that stage from the previous one.
+
+Choose one workflow:
+
+- Build the guide in a separate `audacity-guide` repository, starting at
+  stage 00. Fetch the reference branches there to compare your files and
+  retrieve supplied images.
+- Inspect completed stages in the tutorial clone. Compare adjacent branches
+  and run the gate on the stage that you check out.
+
+The command examples use `origin/tutorial/NN-slug` for fetched reference
+branches. These refs are available after cloning or fetching; local stage
+branches exist only after you create them.
 
 ## The branch chain
 
 Stage branches are named `tutorial/NN-slug`, from `tutorial/00-setup` to
-`tutorial/25-final`. Each stage branch is the previous stage branch plus the
+`tutorial/26-final`. Each stage branch is the previous stage branch plus the
 commits for that stage, so the chain is linear:
 
 ```
 tutorial/00-setup
   └─ tutorial/01-concept
-       └─ tutorial/02-task-and-reference
-            └─ tutorial/03-inline-and-block
-                 └─ …
-                      └─ tutorial/25-final   (also tagged tutorial/final)
+       └─ tutorial/02-first-map
+            └─ tutorial/03-first-build
+                 └─ tutorial/04-task-and-reference
+                      └─ …
+                           └─ tutorial/26-final   (also tagged tutorial/final)
 ```
 
 Commit messages start with `Stage NN:`, so `git log --oneline` on any branch
@@ -41,19 +53,20 @@ Because each branch builds on the one before, the difference between two
 adjacent branches is exactly one lesson:
 
 ```bash
-git diff tutorial/03-inline-and-block tutorial/04-rich-tasks
+git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
 ```
 
 GitHub shows the same thing as a compare view, and every stage page links to
 its own:
 
 ```
-https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/03-inline-and-block...tutorial/04-rich-tasks
+https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/05-inline-and-block...tutorial/06-rich-tasks
 ```
 
-Text is written once, correctly. Stages add structure; they do not plant
-mistakes. When a page wants to show you a mistake, it shows what the gate
-reports when you make it, and the branch itself stays clean.
+Each completed stage passes its configured gate. Error exercises show the
+diagnostics for a deliberate change. Undo that change and rerun the gate
+before continuing. Later stages add checks, so an earlier passing stage can
+still contain issues that those later checks detect.
 
 ## The orphan root
 
@@ -73,7 +86,7 @@ Every stage branch carries the same `README.md`, with one line that changes at
 each stage:
 
 ```
-You are on **stage 03 — inline and block**: UI controls, shortcuts, terms, notes, lists, tables and code.
+You are on **stage 05 — inline and block**: UI controls, shortcuts, terms, notes, lists, tables and code.
 ```
 
 Read it after any checkout to confirm where you are. The README's stage table
@@ -89,7 +102,7 @@ Besides the topics, every stage branch has:
 | `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
 | `.dogsbay/config.xml` | Shared editor project settings: project type, framework, format style |
 | `scripts/check-stage.sh` | The gate. See [Run the gate](/start-here/run-the-gate) |
-| `.gitignore` | Keeps DITA-OT output out of git |
+| `.gitignore` | Keeps DITA-OT output out of Git |
 
 ## The gate
 

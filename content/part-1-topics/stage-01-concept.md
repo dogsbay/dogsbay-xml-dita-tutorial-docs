@@ -6,29 +6,31 @@ type: tutorial
 
 # Stage 01: A concept topic
 
-In this stage you write the first topic of the guide, *What is Audacity?*, as a
-DITA `<concept>`. A concept explains what something is or how it works; it is
-the information type for background, and it is the right home for a product
-introduction.
+Write the guide's first topic, *What is Audacity?*, as a DITA `<concept>`.
+A concept provides background information about a subject or explains how
+something works.
 
-You also meet the parts that every DITA topic has, whatever its type: an `@id`,
-a `<title>`, a `<shortdesc>` and a body. Everything you learn here carries
-over to tasks and references in the next stage.
+Add a topic identifier, title, short description, and body. The tutorial
+requires a short description for each concept, task, and reference topic;
+the DTD makes some of these elements optional.
 
 **Time:** about 15 minutes.
 **You need:** stage 00 complete, with the gate passing.
+
+
+Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
 
 ## Step 1: Write the topic
 
 ::::steps
 1. **Create `topics/what-is-audacity.dita`**
-   The file name matches the topic `@id`. That is a convention, not a rule,
-   but it keeps links readable when the map arrives.
+   Use the topic `@id` as the file name to keep links readable. This is a
+   project convention.
 
    ```xml title="topics/what-is-audacity.dita"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-
+   
    <concept id="what-is-audacity">
      <title>What is Audacity?</title>
      <shortdesc>Audacity is a free, open-source audio editor and recorder for Windows, macOS and Linux.</shortdesc>
@@ -54,12 +56,13 @@ over to tasks and references in the next stage.
    ```
 
 2. **Read it element by element**
+
    - The XML declaration and the DOCTYPE come first. `-//OASIS//DTD DITA
      Concept//EN` is the public identifier the catalog resolves; `concept.dtd`
      is the system identifier, kept relative so the file does not depend on
      where DITA-OT is installed.
    - `<concept id="…">` is the topic. Every topic has an `@id`, and a link to
-     a topic points at that id. Use lower-case words joined by hyphens.
+     a topic points at that id. Use lowercase words joined by hyphens.
    - `<title>` is required and is the first child. It becomes the page
      heading, the entry in the table of contents and, by default, the link
      text of any link to this topic.
@@ -84,25 +87,15 @@ over to tasks and references in the next stage.
    ````diff title="README.md"
    --- a/README.md
    +++ b/README.md
-   @@ -5,8 +5,7 @@ branch is the previous branch plus one lesson, from a single concept topic to a
-    complete, publish-ready **Audacity User Guide**. The diff between two branches
-    is the lesson.
+   @@ -2,7 +2,7 @@
     
-   -You are on **stage 00 — setup**: an empty project the tools recognise, and the
-   -gate every later stage must pass.
-   +You are on **stage 01 — concept**: one concept topic, and the gate proves it validates.
+    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
+    
+   -You are on stage 00: setup.
+   +You are on stage 01: concept.
     
     ## Stages
     
-   @@ -39,7 +38,7 @@ override the defaults). A stage is done when it prints `STAGE OK`.
-    ```
-    .dogsbay/config.xml   shared editor project settings (project type, framework, format style)
-    scripts/              the gate
-   -topics/               topics (empty at this stage)
-   +topics/               topics
-    ```
-    
-    ## Licence and attribution
    ````
 
 2. **Remove `topics/.gitkeep`**
@@ -144,22 +137,23 @@ To see a validation error, put a `<section>` inside another `<section>` and
 run the gate again. `validate-project` names the file, the line and the
 element whose content model was broken. Undo the change before you go on.
 
+After each error exercise, undo the deliberate change and rerun the gate.
+Confirm that it prints `STAGE OK` before continuing.
+
 ## What you learned
 
 - A concept is the information type for "what is it": `<concept>`,
   `<conbody>`, sections.
-- Every topic has an `@id`, a `<title>` and a `<shortdesc>`; the short
-  description is not optional in practice.
+- Concepts, tasks, and references in this tutorial have an `@id`, a
+  `<title>`, and a `<shortdesc>`. The short description is a house rule.
 - The DOCTYPE names a public identifier, and the catalog finds the DTD.
 - `<section>` is one level deep; deeper structure means another topic.
 - Format, then gate, every time.
 
-## Where to go next
+## Next lesson
 
-:::cards
-- **[Stage 02: A task and a reference](/part-1-topics/stage-02-task-and-reference)** {icon="arrow-right"}
-  The other two information types, side by side with the concept.
+Continue with [Stage 02: first map](/part-1-topics/stage-02-first-map).
 
-- **[Compare 00 to 01 on GitHub](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/01-concept)** {icon="github"}
-  Exactly what this stage added.
-:::
+For the core course, use the [learning path](/start-here/learning-path) to skip optional modules.
+
+[Compare this stage with its predecessor](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/01-concept).

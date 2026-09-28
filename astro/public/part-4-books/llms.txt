@@ -1,9 +1,9 @@
-# DogsBay DITA tutorial — Part 4: Books and specialised topics
+# DogsBay DITA tutorial — Part 4: Books and specialized topics
 
-## Part 4: Books and specialised topics
+## Part 4: Books and specialized topics
 
-- [Stage 18: Bookmap](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-18-bookmap.md): Publish the guide as a PDF book with a bookmap, book metadata, front matter, parts, chapters, appendices, a glossary list and an index.
+- [Stage 18: Bookmap](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-18-bookmap.md): Publish the guide as a PDF book with a bookmap, book metadata, front matter, parts, chapters, appendixes, a glossary list and an index.
 - [Stage 19: Troubleshooting](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-troubleshooting.md): Write a troubleshooting topic with a condition, causes and remedies, and turn a warning in the recording task into a trouble note that points at it.
-- [Stage 20: Hazards and safety](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-hazards-and-safety.md): Write a hazard statement with a message panel and a symbol, warehouse it, pull it into the recording task by conkeyref, and add an inline warning.
+- [Stage 20: Hazards and safety](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-hazards-and-safety.md): Create a hazard statement with a message panel and symbol, then reuse it in the recording task with conkeyref.
 - [Stage 21: Software domains](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-software-domains.md): Document a command-line interface with the software and programming domains, a syntax diagram, a parameter list, messages, and code pulled from a file.
-- [Stage 22: Learning](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning.md): Write a learning assessment with true/false, single, multiple and sequencing questions, and teach the gate about DTDs the editor's catalog lacks.
+- [Stage 22: Learning](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-learning.md): Create a learning assessment with four question types and configure the gate to validate it with the DITA-OT catalog.
