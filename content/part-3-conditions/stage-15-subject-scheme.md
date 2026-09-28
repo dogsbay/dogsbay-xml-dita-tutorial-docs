@@ -13,8 +13,8 @@ macOS content in Windows and Linux output.
 
 Create `subject-scheme.ditamap`, reference it from each root map, and
 check the values against it. DITA-OT only warns about a value outside the
-scheme, and **Check Project** does not report it, so this lesson adds a
-separate check for controlled values.
+scheme and builds anyway. **Check Project** treats it as an error, so a
+typo cannot quietly change which content a build includes.
 
 **Time:** about 20 minutes.
 **You need:** stage 14 complete.
@@ -205,21 +205,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Check the controlled values**
    In the editor, choose **Project** > **Validate** >
    **Controlled Values (Subject Scheme)** and read the result in the
-   **Project Validation** panel. From the command line, name the map whose
-   scheme applies:
+   **Project Validation** panel. From the command line, run:
 
    ```bash
-   dogsbay-xml validate-conditions -m audacity-guide.ditamap .
+   dogsbay-xml validate-conditions .
    ```
 
    Example output:
 
    ```
-   27 file(s): 27 pass, 0 with violations.
+   29 file(s): 29 pass, 0 with violations.
    ```
 
-   The command scans the files in the full guide's map, and finds the
-   scheme through the map's `<mapref type="subjectScheme">`.
+   The command finds the scheme through the project's root map and its
+   `<mapref type="subjectScheme">`. **Check Project** runs the same check
+   as part of health; this command runs it on its own, which is quicker
+   after you change a profiling attribute.
 
 3. **Check your work**
    In the editor, choose **Project** > **Check Project** and read the
@@ -251,41 +252,40 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 Test a value outside the controlled vocabulary. In
 `topics/installing-audacity.dita`, change the macOS row to
-`<chrow platform="macos">` and check the controlled values:
-
-```bash
-dogsbay-xml validate-conditions -m audacity-guide.ditamap .
-```
-
+`<chrow platform="macos">` and check your work. The check stops at health.
 The output looks like this example:
 
 ```
-/home/you/audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
-27 file(s): 26 pass, 1 with violations.
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/installing-audacity.dita:54  @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-The `-m` names the map whose scheme applies; the command discovers the
-scheme from the map's closure, and with `-S subject-scheme.ditamap` you can
-name a scheme directly. Run without either, the scan has no scheme to check
-against and every file passes.
+`dogsbay-xml validate-conditions .` reports the same line:
 
-Now choose **Check Project**, or run `dogsbay-xml check .`. It reports
-`Ready`: the value is valid against the DTD, every deliverable builds, and
-every link in the output leads somewhere. DITA-OT sees the value, but only
-as a warning in its build log:
+```
+/home/you/audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+29 file(s): 28 pass, 1 with violations.
+```
+
+The value is valid against the DTD, and DITA-OT on its own would build
+the project anyway. It sees the value only as a warning in its build log:
 
 ```
 [topic-reader] file:/home/you/audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W][WARN] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
 ```
 
-Because no DITAVAL has a rule for `macos`, the row is included in every
-filtered build: `beginner-windows`, `beginner-mac` and `podcaster-linux`
-all show the `.dmg` row. Check the controlled values whenever you add or
-change a profiling attribute.
+Because no DITAVAL has a rule for `macos`, the row would be included in
+every filtered build: `beginner-windows`, `beginner-mac` and
+`podcaster-linux` would all show the `.dmg` row. That is why the check
+treats a value outside the scheme as an error.
 
-After each error exercise, undo the deliberate change, then check the
-controlled values and your work again. Confirm that the values pass and
-that the check reports `Ready` before you continue.
+After each error exercise, undo the deliberate change and check your work
+again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned
 
@@ -296,10 +296,10 @@ that the check reports `Ready` before you continue.
   where it is referenced.
 - `dogsbay-xml list-subjects` shows the vocabulary;
   **Project** > **Validate** > **Controlled Values (Subject Scheme)**, or
-  `dogsbay-xml validate-conditions -m <rootmap> .`, fails on a value
-  outside it; DITA-OT warns with `DOTJ049W` and builds anyway.
-- **Check Project** does not check controlled values, so check them
-  separately after you change a profiling attribute.
+  `dogsbay-xml validate-conditions .`, fails on a value outside it;
+  DITA-OT warns with `DOTJ049W` and builds anyway.
+- **Check Project** fails on a value outside the scheme, before anything
+  is built.
 
 ## Next lesson
 

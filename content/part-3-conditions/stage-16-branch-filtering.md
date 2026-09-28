@@ -222,8 +222,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The new filters use only controlled values. To confirm, check the
-   controlled values as in stage 15.
+   The new filters use only controlled values: the check includes the
+   controlled values from stage 15, and it reads the DITAVAL files too.
 
 4. **Read the output**
    `out/install-variants/topics/` has three copies

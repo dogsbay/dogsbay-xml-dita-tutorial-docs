@@ -17,6 +17,10 @@ deliverables yet, and stages 03 to 26 report Ready, including the PDF.
 - Known output issues: the final build has 0 broken links across 180
   pages. One limitation remains and is documented: the split chunking
   example in stage 18 has two broken generated links.
+- Stage 15: **Check Project** now fails on a profiling value outside the
+  subject scheme, in topics and DITAVAL files (dogsbay-xml `183fb65`); the
+  exercise is re-recorded and the separate check is optional. Stages 14
+  to 26 still check Ready.
 - Stage 19 shows the PDF index (dogsbay-xml `14ca9c3` bundles the index
   plugin), and the check page names DITA-OT message codes again.
 
