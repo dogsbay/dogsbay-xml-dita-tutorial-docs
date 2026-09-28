@@ -30,6 +30,30 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Each is a `<glossentry>` with the glossary entry DOCTYPE: a
    `<glossterm>` and a `<glossdef>`, nothing else.
 
+   In the **Explorer**, right-click the `topics` folder, choose
+   **New Folder**, and enter `glossary`. Right-click the `glossary` folder,
+   choose **New File**, enter `g-sample-rate.dita`, and choose the
+   **Glossary Entry** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary Entry//EN" "glossentry.dtd">
+
+   <glossentry id="g-sample-rate">
+     <glossterm>Term</glossterm>
+     <glossdef></glossdef>
+   </glossentry>
+   ```
+
+   The editor sets the `@id` from the file name, `g-sample-rate`. This
+   lesson uses the `gl-` prefix for glossary ids and keys, so change the
+   id to `gl-sample-rate`. Replace `Term` with
+   **XML** > **Select Element Content**, and type the definition between
+   `<glossdef>` and `</glossdef>`. Create the other five files in the same
+   way, and change each id from `g-` to `gl-`, for example `g-clipping` to
+   `gl-clipping`. If you use another editor, create the folder and the
+   files, and type the finished listings. The finished entries:
+
    ```xml title="topics/glossary/g-sample-rate.dita"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary Entry//EN" "glossentry.dtd">
@@ -93,6 +117,29 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Create `topics/glossary/audio-units.dita`**
    A `<glossgroup>` with two entries whose terms have abbreviations.
 
+   Create `audio-units.dita` in the `glossary` folder, and choose the
+   **Glossary Group** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
+
+   <glossgroup id="audio-units">
+     <title>Glossary</title>
+     <glossentry id="term">
+       <glossterm>Term</glossterm>
+       <glossdef></glossdef>
+     </glossentry>
+   </glossgroup>
+   ```
+
+   The group's `@id` comes from the file name and needs no editing.
+   Replace the title with `Units`. The sample entry keeps the id `term`,
+   so change it to `gl-decibel`, fill in the entry, and add its
+   `<glossBody>`. Then add the `gl-hertz` entry after it. If you use
+   another editor, create the file and type the finished listing. The
+   finished group:
+
    ```xml title="topics/glossary/audio-units.dita"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
@@ -144,6 +191,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `keydefs-glossary.ditamap`**
+   Create the file in the project root from the **Key Definition Map**
+   template, as in stage 10 (choose the template explicitly, because the
+   dialog selects **Bookmap** first). Replace the title with
+   `Glossary key definitions`, and replace the two sample key definitions
+   with the eight glossary keys. If you use another editor, create the file
+   and type the finished listing.
 
    ```xml title="keydefs-glossary.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>

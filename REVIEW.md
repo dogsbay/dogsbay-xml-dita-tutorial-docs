@@ -1,5 +1,20 @@
 # Tutorial documentation review
 
+## New file templates, stages 01 to 13, September 28, 2026
+
+Every step that creates a DITA file now starts from the editor's **New
+File** dialog and names the template to choose: Concept, Task, Reference,
+Topic, Map, Key Definition Map, Glossary Entry, or Glossary Group. Each
+kind's template content is shown once, where it is first used, with the
+placeholders to replace. The editor sets the root `@id` from the file name;
+stage 12 tells readers to change the glossary ids from `g-` to `gl-`.
+
+In stages 04 to 06, the map update now comes before the check, because
+the check reports a topic missing from the map as an orphan.
+
+The docs source audit and the excerpt check (193 listings, 0 failures)
+passed. Titled listings are unchanged.
+
 ## Check Project, stages 00 to 13, September 28, 2026
 
 Readers of stages 00 to 13 now check their work with **Project** >

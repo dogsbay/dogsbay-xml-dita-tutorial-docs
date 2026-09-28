@@ -37,6 +37,7 @@ Also for the editor team:
 - `check --map=<another map>` flags `images/*.png` as invalid and reports keys from topics outside that map.
 - Stage 23 still runs `dogsbay-xml validate --catalog "$DITA_HOME/catalog-dita.xml"`, and set-up no longer sets `DITA_HOME`. It is fixed when the learning DTDs are bundled.
 - No templates were added for map, keydef map, bookmap, DITAVAL, subject scheme, glossentry, glossgroup, troubleshooting, generic topic or Schematron. A new `.ditamap` offers only **Blank XML Document** and **DTD Document**, under an empty separator.
+- For a `.ditamap`, the New XML Document dialog pre-selects **Bookmap** because it sorts first. Pre-select **Map**.
 
 ## Editor changes needed
 

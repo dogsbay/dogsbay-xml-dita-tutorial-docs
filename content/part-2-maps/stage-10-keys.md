@@ -25,6 +25,36 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `keydefs-product.ditamap`** in the project root.
+   In the **Explorer**, right-click the project root, choose **New File**,
+   and enter `keydefs-product.ditamap`. In the **New XML Document** dialog,
+   choose **Key Definition Map** and click **OK**. The dialog selects
+   **Bookmap** first, so choose the template explicitly. The template
+   contains two sample key definitions:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   <map>
+     <title>Key Definitions</title>
+     <keydef keys="installing" href="topic.dita"/>
+     <keydef keys="product-name">
+       <topicmeta>
+         <keywords>
+           <keyword>Product Name</keyword>
+         </keywords>
+       </topicmeta>
+     </keydef>
+   </map>
+   ```
+
+   Replace the title with `Product key definitions`. Delete the sample
+   `installing` key definition, because this map defines text and URL
+   keys only; step 2 keys the topics in the guide map. Keep the
+   `product-name` key definition and replace `Product Name` with
+   `Audacity`, then add the other key definitions. If you use another
+   editor, create the file and type the finished listing. The finished
+   map:
 
    ```xml title="keydefs-product.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>

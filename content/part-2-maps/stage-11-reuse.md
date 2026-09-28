@@ -30,6 +30,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    A task whose steps exist to be referenced. Every reusable element has an
    `@id`.
 
+   In the **Explorer**, right-click the project root, choose
+   **New Folder**, and enter `shared`. Then right-click the `shared`
+   folder, choose **New File**, enter `common-steps.dita`, and choose the
+   **Task** template. Replace the title placeholder, type the short
+   description, and build the steps from the template's first `<step>`.
+   If you use another editor, create the folder and the file, and type the
+   finished listing.
+
    ```xml title="shared/common-steps.dita"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
@@ -71,6 +79,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    A generic `<topic>` for notes and a list. `<topic>` is the base type,
    with `<body>` instead of `<conbody>` or `<taskbody>`; a shared topic of
    notes has no reason to be a concept or a task.
+
+   Create `common-notes.dita` in the `shared` folder, and choose the
+   **Topic** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+
+   <topic id="common-notes">
+     <title>Topic Title</title>
+     <shortdesc></shortdesc>
+     <body>
+       <p></p>
+     </body>
+   </topic>
+   ```
+
+   Replace the title placeholder and type the short description. The body
+   starts with the two notes, so add them before the empty `<p></p>`, type
+   the paragraph in it, and add the list after it. If you use another
+   editor, create the file and type the finished listing. The finished
+   topic:
 
    ```xml title="shared/common-notes.dita"
    <?xml version="1.0" encoding="UTF-8"?>
