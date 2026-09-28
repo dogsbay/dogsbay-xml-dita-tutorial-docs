@@ -1,5 +1,29 @@
 # Tutorial documentation review
 
+## Editor-consistency pass, September 28, 2026
+
+A dry run of all 27 stages found wrong claims, stale recorded output, and
+steps the editor now does differently. This pass (phase 1 of
+`plans/editor-consistency.md`) changed prose only:
+
+- Stage 01 starts from the `dita-concept-minimal` template, as the
+  watch-along video does, and shows the editor's **Format** and
+  **Validate** beside the command line.
+- Stage 02 explains the map and names the editor path for the default
+  root map. Its exercise uses the gate, since `validate` does not check
+  hrefs.
+- Stages 05, 06, 07, 09, 11, 12, 13, 17, 19, 20, 22, 23, 24, and 25 no
+  longer make claims that the dry run disproved by building or
+  validating.
+- The start-here pages show the real "You are on" line and a command that
+  prints it.
+
+All 27 stage gates passed with the current `dogsbay-xml` and DITA-OT
+4.3.5. All 194 quoted listings still match their branches. The docs source
+audit, the strict site build, the Astro production build, and the
+generated-site audit passed. Recorded check output is re-recorded in
+phase 2, once the editor has a single project check.
+
 ## Redesign verification, September 22, 2026
 
 The implemented course now has 27 stages. Stage 02 creates the permanent

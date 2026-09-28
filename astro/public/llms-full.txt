@@ -272,7 +272,7 @@ The consequence for you: `git checkout tutorial/00-setup` from `main` replaces t
 Every stage branch carries the same `README.md`, with one line that changes at each stage:
 
 ```
-You are on **stage 05 — inline and block**: UI controls, shortcuts, terms, notes, lists, tables and code.
+You are on stage 05: inline and block.
 ```
 
 Read it after any checkout to confirm where you are. The README's stage table is the whole ladder, so you can also see what is ahead.
@@ -386,10 +386,14 @@ The tutorial's recorded examples use DITA-OT 4.3.5. Use that version to compare 
 3. **Confirm where you are**
 
    ```bash
-   head -9 README.md
+   grep 'You are on' README.md
    ```
 
-   The last line printed is the "You are on" line for stage 00.
+   The command prints the "You are on" line for stage 00:
+
+   ```
+   You are on stage 00: setup.
+   ```
 :::
 
 ## Open the project in the editor {#open-the-project-in-the-editor}
@@ -830,7 +834,30 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 ## Step 1: Write the topic {#step-1-write-the-topic}
 
 :::steps
-1. **Create `topics/what-is-audacity.dita`** Use the topic `@id` as the file name to keep links readable. This is a project convention.
+1. **Create `topics/what-is-audacity.dita` from a template** In the **Explorer**, right-click the `topics` folder and choose **New File**. Enter `what-is-audacity.dita` and press Enter. The **New XML Document** dialog lists the templates for XML files. Choose **dita-concept-minimal** and click **OK**.
+
+   Use the topic `@id` as the file name to keep links readable. This is a project convention.
+
+   The editor opens the new file with the template's content:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+   <concept id="concept_id">
+       <title>Concept Title</title>
+       <conbody>
+
+       </conbody>
+   </concept>
+   ```
+
+   The template supplies the XML declaration, the DOCTYPE, and the parts every concept needs. The editor recognizes the file as a DITA concept from its name, so validation and formatting work from the start.
+
+   If you use another editor, create the file and type the finished topic shown in step 3.
+2. **Replace the placeholders** Double-click `concept_id` and type `what-is-audacity`. Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `What is Audacity?`.
+3. **Complete the topic** Add the short description after the title, then the paragraphs, list, and section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and run the gate".
+
+   The finished topic:
 
    ```xml {title="topics/what-is-audacity.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -859,7 +886,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      </conbody>
    </concept>
    ```
-2. **Read it element by element**
+4. **Read it element by element**
 
    - The XML declaration and the DOCTYPE come first. `-//OASIS//DTD DITA Concept//EN` is the public identifier the catalog resolves; `concept.dtd` is the system identifier, kept relative so the file does not depend on where DITA-OT is installed.
    - `<concept id="…">` is the topic. Every topic has an `@id`, and a link to a topic points at that id. Use lowercase words joined by hyphens.
@@ -879,14 +906,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 00: setup.
    +You are on stage 01: concept.
-    
+
     ## Stages
-    
+
    ```
 2. **Remove `topics/.gitkeep`** The folder is no longer empty.
 :::
@@ -895,6 +922,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 :::steps
 1. **Format the topic** Apply the project's format style before every check, so your diff stays about the feature. This is how every stage branch was written.
+
+   In the editor, choose **XML** > **Format**, then save the file. To check the topic against its DTD, choose **XML** > **Validate**. The **Errors** panel reports `Valid Document`.
+
+   From the command line, format every topic:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -919,14 +950,20 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 :::
 
-To see a validation error, put a `<section>` inside another `<section>` and run the gate again. `validate-project` names the file, the line and the element whose content model was broken. Undo the change before you go on.
+To see a validation error, put a `<section>` inside another `<section>` and run the gate again. `validate-project` names the file, the line and the element whose content model was broken. For example:
+
+```
+24:15  error: The content of element type "section" does not match its content model.
+```
+
+In the editor, **XML** > **Validate** reports the same error in the **Errors** panel. Undo the change before you go on.
 
 After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
 
 ## What you learned {#what-you-learned}
 
 - A concept is the information type for "what is it": `<concept>`, `<conbody>`, sections.
-- Concepts, tasks, and references in this tutorial have an `@id`, a `<title>`, and a `<shortdesc>`. The short description is a house rule.
+- Concepts, tasks, and references in this tutorial have an `@id`, a `<title>`, and a `<shortdesc>`. Stage 25 makes the short description a house rule.
 - The DOCTYPE names a public identifier, and the catalog finds the DTD.
 - `<section>` is one level deep; deeper structure means another topic.
 - Format, then gate, every time.
@@ -971,18 +1008,50 @@ Save this file as `audacity-guide.ditamap` in the project root:
 </map>
 ```
 
-The `href` is relative to the map. The map title names the publication; the topic title supplies its navigation label. Add a topicref when you add a topic to the guide. Later lessons introduce hierarchy and generated links.
+The map has three elements:
+
+- `<map>` is the root element. The `map` DOCTYPE declares it. Unlike a topic, a map does not need an `@id`.
+- `<title>` is the title of the publication.
+- `<topicref>` adds one topic to the publication. Its `@href` is relative to the map file. The navigation label comes from the title of the topic, so the map does not repeat it.
+
+Add a `<topicref>` each time you add a topic to the guide. Later lessons introduce hierarchy and generated links.
 
 ## Select and validate the map {#select-and-validate-the-map}
 
-Set the default root map to `audacity-guide.ditamap` in the project settings. Validate the document in the editor, or run from the project root:
+Set the default root map for the project:
+
+1. Click **Project** > **Manage Projects**.
+2. Select the project.
+3. In the **Default Root Map** field, enter `audacity-guide.ditamap`.
+
+The project stores the setting in `.dogsbay/config.xml` as `<default-root-map>audacity-guide.ditamap</default-root-map>`. The health check uses this map to decide which topics belong to the publication.
+
+Validate the document in the editor, or run these commands from the project root:
 
 ```bash
 dogsbay-xml validate audacity-guide.ditamap
 scripts/check-stage.sh
 ```
 
-The gate checks the source. Stage 03 adds a deliverable so the gate can also publish HTML. Try an incorrect topic filename, check the diagnostic, then restore the filename and validate again.
+The gate checks the source. Stage 03 adds a deliverable so the gate can also publish HTML.
+
+Validation checks the map against its grammar only. It does not check that each `@href` points to a file. To see the difference, change the `@href` to `topics/what-is-audacty.dita` and run `dogsbay-xml validate audacity-guide.ditamap` again. It still prints `VALID`. Now run the gate. The project health check reports the broken reference, and the topic that the map no longer includes. The following output is an example:
+
+```
+== project-health  /home/you/audacity-guide ==
+Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+Broken references (1):
+  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
+Orphan topics (1):
+  /home/you/audacity-guide/topics/what-is-audacity.dita
+
+Summary
+  Broken references             1
+  Orphan topics                 1
+FAIL: project-health found issues
+```
+
+Restore the file name and rerun the gate.
 
 ## Next lesson {#next-lesson}
 
@@ -1223,14 +1292,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 03: first build.
    +You are on stage 04: task and reference.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -1468,7 +1537,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<filepath>` is a file name, path or extension: `.aup3`.
 3. **Read the notes**
 
-   - `<note>` is a block that stands out from the text. `@type` says why: `tip` for a shortcut or a better way, `important` for something the reader must not skip, `warning` when something can go wrong, `caution` for a milder version, `note` (the default) for anything else. Stage 20 adds `trouble`. A note may sit in `<context>` or, inside a step, in `<info>`; it may not be a direct child of `<step>`.
+   - `<note>` is a block that stands out from the text. `@type` says why: `tip` for a shortcut or a better way, `important` for something the reader must not skip, `warning` when something can go wrong, `caution` for a milder version, `note` (the default) for anything else. Stage 20 adds `trouble`. A note may sit in `<context>`. Inside a step, a note is allowed before the `<cmd>`. After the command, put the note inside `<info>`.
 :::
 
 > [!NOTE]
@@ -1586,14 +1655,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 04: task and reference.
    +You are on stage 05: inline and block.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -1635,12 +1704,12 @@ python3 scripts/check-output-links.py out
 
 ## What you learned {#what-you-learned}
 
-- Inline elements name what text is: `<uicontrol>`, `<menucascade>`, `<shortcut>`, `<wintitle>`, `<filepath>`, `<term>`, `<cmdname>`, `<ph>`.
+- Inline elements name what text is: `<uicontrol>`, `<menucascade>`, `<shortcut>`, `<wintitle>`, `<filepath>`, `<term>`, `<cmdname>`.
 - `<b>` and `<i>` are for typographic convention only; prefer a semantic element.
-- `<note>` has types, and lives in `<context>` or `<info>`, not directly in a step.
+- `<note>` has types. In a step, a note goes before the `<cmd>` or inside `<info>` after it.
 - Lists: `<ul>`, `<ol>`, `<sl>`, `<dl>`; each is a different kind of list.
 - `<simpletable>` for short values, CALS `<table>` for everything else.
-- `<fn>`, `<lq>`, `<codeblock>` and `<pre>` for footnotes, quotations and verbatim text.
+- `<fn>`, `<lq>` and `<codeblock>` for footnotes, quotations and code.
 - `<shortcut>` only inside `<uicontrol>`.
 
 ## Next lesson {#next-lesson}
@@ -1751,8 +1820,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 2. **Read the new elements**
 
-   - `<prereq>` states what must be true before the reader starts. It goes before `<context>`, and output labels it "Before you begin".
-   - `<postreq>` states what to do after the task is done. It goes after `<result>`, and output labels it "What to do next".
+   - `<prereq>` states what must be true before the reader starts. It goes before `<context>`.
+   - `<postreq>` states what to do after the task is done. It goes after `<result>`.
+   - The default HTML5 build shows both sections without a heading. To add the labels "Before you begin" and "What to do next", set the DITA-OT parameter `args.gen.task.lbl` to `YES`.
    - `<choicetable>` is a step whose action depends on a condition, laid out as a two-column table: `<chhead>` with `<choptionhd>` and `<chdeschd>` for the headings, then one `<chrow>` per option with `<choption>` and `<chdesc>`. It sits inside a `<step>` after the `<cmd>`.
    - `<substeps>` breaks a step into `<substep>` elements, each with its own `<cmd>` and optional `<info>`. Substeps do not nest further; if they would, the step is a separate task.
    - `@importance="optional"` on a `<step>` or `<substep>` marks it as one the reader may skip. Output prefixes it with "Optional:".
@@ -1955,14 +2025,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 05: inline and block.
    +You are on stage 06: rich tasks.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -2123,7 +2193,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<xref href="…"/>` with no content: output supplies the target's `<title>` as the link text. This is the usual form for a link to a DITA topic, and it updates the link text when the target title changes.
    - `href="file.dita"` links to the topic. `href="file.dita#topic/element"` links to an element inside it that has an `@id`; the topic id is required in the fragment because one file can hold several topics.
    - `@scope="external"` says the target is outside the project and is not to be resolved or copied. `@format="html"` says what kind of thing it is, so the processor does not try to parse it as DITA.
-   - `<link>` is the same reference as `<xref>` but as a list entry in `<related-links>`. It takes `<linktext>` for the text when the target has no title, and `<desc>` for a short description shown under the link.
+   - `<link>` is the same reference as `<xref>` but as a list entry in `<related-links>`. It takes `<linktext>` for the text when the target has no title, and `<desc>` for a short description. The HTML5 output shows the description as a tooltip (the `title` attribute of the link), not as text under the link.
 :::
 
 ## Step 2: Related links on the remaining topics {#step-2-related-links-on-the-remaining-topics}
@@ -2238,14 +2308,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 06: rich tasks.
    +You are on stage 07: links.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -2268,7 +2338,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 :::
 
-This is the first stage where `project-health` has something to check besides validity: every `@href` now has to resolve. Misspell the target of the `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and run the gate. The file still validates, because a broken link is not a grammar error, but the health check reports it and the stage fails:
+This is the first stage with links inside topics. The health check has resolved the `@href` of each `<topicref>` in the map since stage 02; now it also resolves each `@href` in a topic. Misspell the target of the `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and run the gate. The file still validates, because a broken link is not a grammar error, but the health check reports it and the stage fails:
 
 ```
 == project-health  /home/you/audacity-guide ==
@@ -2279,11 +2349,17 @@ Broken references (1):
 FAIL: project-health found issues
 ```
 
-The validation and health checks cover different problems. A wrong fragment such as `#supported-audio-formats/choose` passes the health check and, once there is a map, the DITA-OT build as well. The link renders and points at the top of the topic instead of the section. Check fragments by clicking them in the built output. `dogsbay-xml conref-audit` checks conref target IDs; it does not replace testing these cross-reference links.
+The validation and health checks cover different problems. A wrong fragment such as `#supported-audio-formats/choose` passes the health check and the DITA-OT build. The link renders and points at the top of the topic instead of the section. The output link check catches it. Today that check is the tutorial's `scripts/check-output-links.py`; a product command is planned. After you build, the check reports the wrong fragment. The following output is an example:
+
+```
+out/full/topics/exporting-audio.html:17: missing fragment: supported-audio-formats.html#supported-audio-formats__choose
+```
+
+`dogsbay-xml conref-audit` checks conref target IDs. It does not check cross-reference links.
 
 ## Why links belong in the map {#why-links-belong-in-the-map}
 
-Every `<related-links>` block you wrote here is a statement about how topics relate, stored inside one of the two topics. When you organize the map in stage 09 and relationship tables in stage 09, those statements move to the map, where one `<reltable>` row says "these topics are related" once and the processor generates the links on both sides. Topics then carry only the `<xref>`s that the text needs, and the same topic can be related to different neighbors in different guides.
+Every `<related-links>` block you wrote here is a statement about how topics relate, stored inside one of the two topics. In stage 09 you organize the map and add a relationship table. Those statements then move to the map, where one `<reltable>` row says "these topics are related" once and the processor generates the links on both sides. Topics then carry only the `<xref>`s that the text needs, and the same topic can be related to different neighbors in different guides.
 
 Writing these links first shows the relationships that the map later generates. Topic-level links are also useful when publishing a topic on its own.
 
@@ -2365,7 +2441,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +++ b/audacity-guide.ditamap
    @@ -2,14 +2,63 @@
     <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-    
+
     <map>
    -  <title>Audio user guide</title>
    -  <topicref href="topics/exporting-audio.dita"/>
@@ -2449,14 +2525,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 3. **Read the relationship table**
 
    - `<reltable>` is a table of relationships. Each `<relcolspec>` in the `<relheader>` names a column, here typed `concept`, `task` and `reference`, so the generated links are grouped as "Related concepts", "Related tasks" and "Related reference".
-   - Each `<relrow>` says that everything in its cells is related. In the first row the concept links to both tasks and the reference, and each of them links back. An empty `<relcell/>` in the second row means no concept is involved.
+   - Each `<relrow>` relates the topics in one cell to the topics in the other cells of the row. Links go across columns: in the first row the concept links to both tasks and the reference, and each of them links back. Topics in the same `<relcell>` do not link to each other unless the cell has `@collection-type="family"`. An empty `<relcell/>` in the second row means no concept is involved.
    - Links are generated in both directions from one statement, and a topic can be related to different neighbors in a different map, which is what a hand-written `<link>` cannot do.
 :::
 
 ## Step 2: Remove the links the map now generates {#step-2-remove-the-links-the-map-now-generates}
 
 :::steps
-1. **Edit the six topics** Each deletion is a link that a parent-child relationship, the sequence or the reltable now produces. Only the links with no map equivalent stay: the external ones, the `<linklist>` with its own title in *What is digital audio?*, and two links with a `<desc>` or to a topic outside the reltable.
+1. **Edit the six topics** Almost every deletion is a link that a parent-child relationship, the sequence or the reltable now produces. The exception is the link from *What is Audacity?* to *Installing Audacity*. The two topics are siblings under a `<topichead>`, so the map generates no link between them. This link is dropped here, and stage 10 adds it back with a key reference. Only the links with no map equivalent stay: the external ones, the `<linklist>` with its own title in *What is digital audio?*, and two links with a `<desc>` or to a topic outside the reltable.
 
    ```diff {title="topics/what-is-audacity.dita"}
    --- a/topics/what-is-audacity.dita
@@ -2549,14 +2625,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 08: figures.
    +You are on stage 09: map structure.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -2701,7 +2777,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -7,11 +7,14 @@
         <shortdesc>Record, edit and export audio with Audacity, from your first track to a finished file.</shortdesc>
       </topicmeta>
-    
+
    +  <mapref href="keydefs-product.ditamap"/>
    +  <keydef keys="start-here" href="topics/what-is-audacity.dita"/>
    +
@@ -2713,11 +2789,11 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    -    <topicref href="topics/installing-audacity.dita"/>
    +    <topicref href="topics/installing-audacity.dita" keys="install"/>
       </topichead>
-    
+
       <topichead navtitle="Recording and editing">
    @@ -25,7 +28,7 @@
       </topichead>
-    
+
       <topichead navtitle="Reference" id="reference">
    -    <topicref href="topics/supported-audio-formats.dita" locktitle="yes">
    +    <topicref href="topics/supported-audio-formats.dita" keys="formats" locktitle="yes">
@@ -2742,7 +2818,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +++ b/topics/installing-audacity.dita
    @@ -2,19 +2,19 @@
     <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
-    
+
     <task id="installing-audacity">
    -  <title>Installing Audacity</title>
    -  <shortdesc>Download Audacity from the official website, or install it with your package manager, and launch it once to finish setup.</shortdesc>
@@ -2825,7 +2901,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +++ b/topics/what-is-audacity.dita
    @@ -2,12 +2,12 @@
     <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-    
+
     <concept id="what-is-audacity">
    -  <title>What is Audacity?</title>
    -  <shortdesc>Audacity is a free, open-source audio editor and recorder for Windows, macOS and Linux.</shortdesc>
@@ -2862,7 +2938,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/topics/recording-your-first-track.dita
    +++ b/topics/recording-your-first-track.dita
    @@ -3,7 +3,7 @@
-    
+
     <task id="recording-your-first-track">
       <title>Recording your first track</title>
    -  <shortdesc>Make your first recording in Audacity: pick a microphone, record, stop and play it back.</shortdesc>
@@ -2897,7 +2973,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/topics/supported-audio-formats.dita
    +++ b/topics/supported-audio-formats.dita
    @@ -3,10 +3,10 @@
-    
+
     <reference id="supported-audio-formats">
       <title>Supported audio formats</title>
    -  <shortdesc>The audio formats Audacity imports and exports, and when to use each one.</shortdesc>
@@ -3003,14 +3079,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 09: map structure.
    +You are on stage 10: keys.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -3120,7 +3196,7 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reus
 
 ---
 title: "Stage 11: Reuse"
-description: Write steps, notes and a list once in a shared shared topic, then pull them into tasks by conref, conkeyref and a conref range, and push a step in.
+description: Write steps, notes and a list once in a shared topic, then pull them into tasks by conref, conkeyref and a conref range, and push a step in.
 type: tutorial
 ---
 
@@ -3216,13 +3292,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/audacity-guide.ditamap
    +++ b/audacity-guide.ditamap
    @@ -9,6 +9,9 @@
-    
+
       <mapref href="keydefs-product.ditamap"/>
       <keydef keys="start-here" href="topics/what-is-audacity.dita"/>
    +  <!-- Warehouses: pulled in by conref and conkeyref, never pages of their own. -->
    +  <keydef keys="common-notes" href="shared/common-notes.dita"/>
    +  <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
-    
+
       <topichead navtitle="Getting started">
         <topicref href="topics/what-is-audacity.dita" collection-type="family">
    ```
@@ -3340,14 +3416,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 10: keys.
    +You are on stage 11: reuse.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check** The format command covers `shared/` too.
 
@@ -3370,7 +3446,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    STAGE OK
    ```
 
-   `project-health` resolves every `@conref` and `@conkeyref` to an element that exists and checks that each `conaction="mark"` finds its target. Rename the play-back step's id and it reports both a broken element id and, under *Conref pushes*, `push target id 'playback' not found`.
+   `project-health` resolves every `@conref` and `@conkeyref` to an element that exists and checks that each `conaction="mark"` finds its target. Rename the play-back step's id, for example to `playback`. The health check then reports a broken element id and, under `Conref pushes`, a line like this example:
+
+   ```
+   <step> push target id 'play-back' not found in recording-your-first-track.dita
+   ```
+
+   The diagnostic names the id that the push looks for, `play-back`, not the new id. Restore the id and rerun the gate.
 3. **Check the output** The build folder has one page per topic in the table of contents and nothing for the shared topics:
 
    ```bash
@@ -3709,7 +3791,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <topichead navtitle="Podcast production" audience="podcaster">
    +    <topicref href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
       </topichead>
-    
+
       <topichead navtitle="Reference" id="reference">
    ```
 3. **Read the map** Profiling attributes on a `<topicref>` or `<topichead>` filter the branch: when the value is excluded, the topic is not in the table of contents and its page is not written. A `<p audience="beginner">` inside a topic removes one paragraph; a `<topichead audience="…">` removes a chapter.
@@ -3962,14 +4044,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 13: metadata and index.
    +You are on stage 14: conditional text.
-    
+
     ## Stages
-    
+
    ```
 3. **Format and check**
 
@@ -4153,7 +4235,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -21,6 +21,7 @@
         </keywords>
       </topicmeta>
-    
+
    +  <mapref href="subject-scheme.ditamap" type="subjectScheme"/>
       <mapref href="keydefs-product.ditamap"/>
       <mapref href="keydefs-glossary.ditamap"/>
@@ -4164,7 +4246,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/beginner-guide.ditamap
    +++ b/beginner-guide.ditamap
    @@ -3,6 +3,7 @@
-    
+
     <map>
       <title>Audacity Beginner's Guide</title>
    +  <mapref href="subject-scheme.ditamap" type="subjectScheme"/>
@@ -4177,7 +4259,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/podcaster-guide.ditamap
    +++ b/podcaster-guide.ditamap
    @@ -3,6 +3,7 @@
-    
+
     <map>
       <title>Audacity for Podcasters</title>
    +  <mapref href="subject-scheme.ditamap" type="subjectScheme"/>
@@ -4220,7 +4302,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -40,6 +42,13 @@
       "$DOGSBAY_XML" project-health --severity=error "$ROOT" || fail "project-health found errors"
     fi
-    
+
    +scheme=$(grep -l '<subjectScheme' "$ROOT"/*.ditamap 2>/dev/null | head -1 || true)
    +if [ -n "$scheme" ]; then
    +  # Without -S (or -m) the command discovers no scheme and passes vacuously.
@@ -4238,14 +4320,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 14: conditional text.
    +You are on stage 15: subject scheme.
-    
+
     ## Stages
-    
+
    ```
 3. **Check**
 
@@ -4414,7 +4496,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `ui-labels-use-uicontrol` fires on every `<b>`: `test="true()"` with a `<report>` is how to forbid an element outright.
    - The product-name and extension rules test `text()` only, the direct text of a `<p>`, `<li>`, `<entry>`, `<dd>`, `<shortdesc>` or `<cmd>`. A literal inside a child element does not count, so `<filepath>C:\Program Files\Audacity</filepath>` in a step is left alone, and so is *The Audacity Manual* once it is inside `<cite>`. One pattern per element keeps each message specific.
    - The `todo-*` patterns catch authoring markers in text and, with `test="true()"`, any `<draft-comment>` or `<required-cleanup>`: the two warnings from stage 24 are now violations.
-   - `cmd-not-empty` allows an empty `<cmd/>` only when the `<cmd>` or its `<step>` carries `conref` or `conkeyref`, which is the placeholder pattern from stage 11. `note-type-allowed` lists the `type` values the DTD accepts, and `step-has-cmd` is a DTD rule restated so that its message is the house's.
+   - `cmd-not-empty` allows an empty `<cmd/>` only when the `<cmd>` or its `<step>` carries `conref` or `conkeyref`, which is the placeholder pattern from stage 11. `note-type-allowed` lists the `type` values the DTD accepts, except `notice`. DITA 1.3 allows `notice`, but this rule reports it as a violation. `step-has-cmd` is a DTD rule restated so that its message is the house's.
    - The comment at the top says how to run the rules and why they are shaped as they are. A rules file is read by the next writer more often than it is edited; say what it is for.
 :::
 
@@ -4556,7 +4638,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
           <title>Getting started with podcasting</title>
    ```
 
-   Remove the five `<b>` wrappers used for decorative emphasis. Keep the `<term>` markup that identifies defined terms. The `<required-cleanup>` asked to become a table, so it becomes the `<simpletable>` from stage 03, with a header row and one row per platform. Move the content into that table and remove the cleanup wrapper.
+   Remove the five `<b>` wrappers used for decorative emphasis. Keep the `<term>` markup that identifies defined terms. The `<required-cleanup>` asked to become a table, so it becomes the `<simpletable>` from stage 05, with a header row and one row per platform. Move the content into that table and remove the cleanup wrapper.
 4. **Edit `topics/exporting-audio.dita`**
 
    ```diff {title="topics/exporting-audio.dita"}
@@ -4704,14 +4786,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 24: drafts and localization.
    +You are on stage 25: house rules.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -5112,14 +5194,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 07: links.
    +You are on stage 08: figures.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -5347,7 +5429,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +++ b/audacity-guide.ditamap
    @@ -8,6 +8,7 @@
       </topicmeta>
-    
+
       <mapref href="keydefs-product.ditamap"/>
    +  <mapref href="keydefs-glossary.ditamap"/>
       <keydef keys="start-here" href="topics/what-is-audacity.dita"/>
@@ -5478,6 +5560,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    - `<term keyref="gl-clipping">clipping</term>` keeps the word as written and binds it to the entry. The output makes it a link to the definition, with the `<glossdef>` as the link's hover text. The content stays, so "Compressed" in a table cell and "clipping" in a sentence keep their own capitalization and grammar.
    - `<abbreviated-form keyref="gl-decibel"/>` is empty. The processor writes the term for you: the `<glossSurfaceForm>` where the reader first meets it, and the `<glossAbbreviation>` after that. In the HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
+   - `<abbreviated-form>` inserts the surface form exactly as the glossary entry writes it, in the singular. The output reads "-12 decibel (dB)" and "Measured in decibel (dB)". For a measurement after a number, where the reader expects "-12 dB", keep the plain unit instead.
    - The `<term>` elements without a `@keyref`, such as *Lossless* and *lossy*, are unchanged: they mark a term but have no entry to link to.
    - The *Clipping* `<dt>` is laid out on three lines because that is how the formatter writes a `<dt>` whose only content is an element; the meaning is unchanged.
 :::
@@ -5491,14 +5574,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 11: reuse.
    +You are on stage 12: glossary.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -5622,7 +5705,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
         <p><keyword keyref="product-name"/> records live audio, imports and exports the common audio formats, and edits sound with cut, copy, paste and a library of effects.
         It is free to download and use, and it runs on Windows, macOS and Linux.</p>
    ```
-2. **Read the order** The children of `<prolog>` come in a fixed order: `<author>`, `<source>`, `<publisher>`, `<copyright>`, `<critdates>`, `<permissions>`, `<metadata>`, `<resourceid>`, `<data>`. Skip any, but do not reorder them. `<resourceid>` and `<data>` come after `<metadata>`, not inside it; put them inside and the file does not validate.
+2. **Read the order** The children of `<prolog>` come in a fixed order: `<author>`, `<source>`, `<publisher>`, `<copyright>`, `<critdates>`, `<permissions>`, `<metadata>`, `<resourceid>`, `<data>`. Skip any, but do not reorder them. `<resourceid>` comes after `<metadata>`. If you put it inside `<metadata>`, the file does not validate. `<data>` is allowed in both places: at the end of `<metadata>`, or after `<resourceid>` as here.
 3. **Read the elements**
 
    - `<author type="creator">` names who wrote the topic; `type` may also be `contributor`.
@@ -5931,7 +6014,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/topics/glossary/audio-units.dita
    +++ b/topics/glossary/audio-units.dita
    @@ -3,9 +3,28 @@
-    
+
     <glossgroup id="audio-units">
       <title>Units</title>
    +  <prolog>
@@ -6187,7 +6270,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +      <keyword>audio editing</keyword>
    +    </keywords>
       </topicmeta>
-    
+
       <mapref href="keydefs-product.ditamap"/>
    ```
 2. **Read the map metadata** The map's `<topicmeta>` takes the same elements as a prolog, in the same order, without the `<metadata>` wrapper: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and `<keywords>` sit directly inside it. Map metadata applies to the publication and, for the HTML5 transform, cascades into every page: the `<meta name="rights">` tag on each page comes from this copyright.
@@ -6224,14 +6307,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 12: glossary.
    +You are on stage 13: metadata and index.
-    
+
     ## Stages
-    
+
    ```
 4. **Format and check**
 
@@ -6465,14 +6548,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 15: subject scheme.
    +You are on stage 16: branch filtering.
-    
+
     ## Stages
-    
+
    ```
 3. **Check**
 
@@ -6579,7 +6662,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <!-- This guide's own landing page, under the same bare key every guide uses. -->
    +  <keydef keys="start-here" href="topics/recording-your-first-track.dita"/>
       <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
-    
+
       <topichead navtitle="Introduction">
    ```
 2. **Edit `podcaster-guide.ditamap`** A `start-here` of its own, the workflow topic keyed as in the full guide, and a peer reference to the beginner guide.
@@ -6597,7 +6680,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +       beginner.<key>, but resolve to that separately published deliverable. -->
    +  <mapref href="beginner-guide.ditamap" scope="peer" keyscope="beginner"/>
       <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
-    
+
       <topichead navtitle="Getting started">
    @@ -22,7 +27,7 @@
         <topicref href="topics/exporting-audio.dita"/>
@@ -6612,7 +6695,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 3. **Read the peer mapref**
 
    - `scope="peer"` on a `<mapref>` says the referenced map is published separately; its topics are not added to this publication.
-   - `keyscope="beginner"` gives that map's keys a scope name. Inside the podcaster guide they are `beginner.start-here`, `beginner.install`, `beginner.formats`. A link by such a key is a link to the other deliverable, and making it resolve to a published URL is up to the publishing setup; no topic in this stage uses one yet.
+   - `keyscope="beginner"` gives that map's keys a scope name. Inside the podcaster guide they are `beginner.start-here`, `beginner.install`, `beginner.formats`. A link by such a key is a link to the other deliverable. No topic in this stage uses one.
+   - DITA-OT 4.3.5 does not resolve peer-map keys such as `beginner.install`. A link by such a key renders as an empty link, and the build prints no warning. The editor's key list and `dogsbay-xml keys` still show these keys. Do not use them in a topic unless you set up cross-deliverable publishing that maps them to published URLs.
    - A peer mapref without a `@keyscope` would pour the beginner guide's bare keys into this guide, and its `start-here` would collide with the one defined here.
 4. **List the keys of the podcaster guide**
 
@@ -6673,7 +6757,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    - `keyscope="userguide"` on a `<mapref>` puts the whole full guide in a scope: every key it defines is `userguide.<key>` from the collection's point of view, and inside the guide the bare names go on working. The three `start-here`s no longer collide because they are `userguide.start-here`, `beginner.start-here` and `podcaster.start-here`.
    - A bare key is not visible in the parent scope. `start-here` is undefined at the root of the collection; only the three scoped names exist. The last comment in the map says what happens if you forget.
-   - Keys defined in the root scope are visible in every child scope. The collection defines the product keys and `common-notes` at its root as well as inside each guide, for a reason the first comment gives: the conref push in `shared/common-steps.dita` reaches the recording task directly, outside any guide's scope, and that copy of the topic resolves its keys in the root scope. Content that a push or a resource-only reference reaches from the root needs its keys in the root.
+   - Keys defined in the root scope are visible in every child scope. If an ancestor scope and a child scope define the same key, the definition in the ancestor scope takes precedence (DITA 1.3). The collection defines the product keys and `common-notes` at its root as well as inside each guide, for a reason the first comment gives: the conref push in `shared/common-steps.dita` reaches the recording task directly, outside any guide's scope, and that copy of the topic resolves its keys in the root scope. Content that a push or a resource-only reference reaches from the root needs its keys in the root.
    - A `<topichead>` around each mapref gives the collection three chapters, one per guide.
 3. **Resolve the same key in three scopes**
 
@@ -6735,14 +6819,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 16: branch filtering.
    +You are on stage 17: key scopes.
-    
+
     ## Stages
-    
+
    ```
 3. **Check**
 
@@ -6999,7 +7083,7 @@ The `cleanup` topicset names a reusable branch. The podcaster map includes that 
    <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
 +  <!-- Print only: the licence page belongs in the PDF, not in the web TOC or search. -->
 +  <topicref href="topics/about-this-guide.dita" print="printonly" toc="no" search="no"/>
- 
+
    <topichead navtitle="Getting started">
 -    <topicref href="topics/what-is-audacity.dita" collection-type="family">
 +    <!-- Two small topics, one page: to-content merges the child into the parent. -->
@@ -7018,7 +7102,7 @@ The `cleanup` topicset names a reusable branch. The podcaster map includes that 
 +      <topicref href="topics/effect-order.dita"/>
 +    </topicset>
    </topichead>
- 
+
    <topichead navtitle="Podcast production" audience="podcaster">
 @@ -56,6 +63,8 @@
          <navtitle>Audio formats</navtitle>
@@ -7285,7 +7369,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 4. **Read the body and the back matter**
 
    - `<part navtitle="…">` groups chapters and prints as *Part I*, *Part II*; each `<chapter href>` is a topic and its nested `<topicref>`s are its sections. The keys the topicrefs carried in the full guide, `digital-audio`, `install`, `podcast-workflow`, `formats` and `effects`, are carried here too, so the `<xref keyref>`s and the license topic's `<xref keyref="start-here"/>` resolve in the book.
-   - `<appendix href>` after the parts: the two reference topics become *Appendix A* and *Appendix B*.
+   - `<appendix href>` after the parts: the three reference topics become *Appendix A*, *Appendix B* and *Appendix C*.
    - `<backmatter>` holds a second `<booklists>`: a `<glossarylist>` with the seven glossary topics inside it, so they print as one glossary, and an empty `<indexlist/>` that the transform fills from every `<indexterm>` in the prolog metadata of stage 13.
 :::
 
@@ -7328,14 +7412,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 18: chunking and output.
    +You are on stage 19: bookmap.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -7391,6 +7475,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    Glossary.......................................................................................................................................... 39
    Index................................................................................................................................................41
    ```
+
+   The example contents list shows *Presets* without its label. The PDF that this stage builds lists it as *Appendix C: Presets*.
 
    The PDF transform generates the numbered parts, chapters, appendixes, glossary, and index from the bookmap. The license topic appears as the notices page.
 :::
@@ -7594,7 +7680,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <topichead navtitle="Troubleshooting" id="troubleshooting">
    +    <topicref href="topics/recording-is-silent.dita" keys="silent"/>
       </topichead>
-    
+
       <topichead navtitle="Podcast production" audience="podcaster">
    ```
 2. **Edit `audacity-book.ditamap`**
@@ -7605,7 +7691,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -65,6 +65,7 @@
         <chapter href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
       </part>
-    
+
    +  <appendix href="topics/recording-is-silent.dita"/>
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
       <appendix href="topics/effects-reference.dita" keys="effects"/>
@@ -7662,9 +7748,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 6. **Read the five references**
 
    - The full guide gives the topic a `<topichead>` of its own, with an `id` so a later stage can reference the branch, and the key `silent`. The key is defined here and used in stage 21.
-   - In the book it is an appendix, before the two reference appendixes.
+   - In the book it is an appendix, before the three reference appendixes.
    - The beginner and podcaster guides put it in a *Troubleshooting* head of their own.
-   - The installation variants map nests it under the recording task, so each of the three platform branches from stage 16 carries its own filtered copy: the Mac branch keeps the macOS solution, the other two drop it. `dogsbay-xml list-branches installation-variants.ditamap` shows the topic under each prefix.
+   - The installation variants map nests it under the recording task, so each of the three platform branches from stage 16 carries its own filtered copy: the Mac branch keeps the macOS solution, the other two drop it. The `install-variants` build writes the copies as `topics/win-recording-is-silent.html`, `topics/mac-recording-is-silent.html` and `topics/recording-is-silent-linux.html`.
+   - The links that the map generates from each copy of the recording task go to the copy in the same branch. The `<xref>` in the trouble note does not. DITA-OT 4.3.5 resolves it to one copy of the troubleshooting topic for every branch. In the stage 20 build, every copy of the recording task links to `recording-is-silent-linux.html`, so the Windows and Mac copies link to the Linux copy. Which copy is chosen can change as the project changes.
 :::
 
 ## Step 3: README and the gate {#step-3-readme-and-the-gate}
@@ -7676,14 +7763,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 19: bookmap.
    +You are on stage 20: troubleshooting.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -7874,7 +7961,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -65,7 +65,7 @@
         <chapter href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
       </part>
-    
+
    -  <appendix href="topics/recording-is-silent.dita"/>
    +  <appendix href="topics/recording-is-silent.dita" keys="silent"/>
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
@@ -7906,14 +7993,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 20: troubleshooting.
    +You are on stage 21: hazards and safety.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -8098,6 +8185,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      </refbody>
    </reference>
    ```
+
+   The `<xref>` to `../samples/export-mp3.py` in the *Responses* section is a known broken link. The HTML output does not include the sample file. See [Known output issues](/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues).
 2. **Read the syntax diagram**
 
    - `<syntaxdiagram>` is a block that describes syntax as a tree of groups. `<groupseq>` is a sequence; its children are `<kwd>` for a literal keyword, `<delim>` for a delimiter, `<var>` for something the reader supplies. The outer sequence is *CommandName* `:` then an optional inner sequence, `importance="optional"`, of *Name* `=` *Value*.
@@ -8109,7 +8198,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<parml>` is a definition list for parameters: each `<plentry>` has a `<pt>` (the term) and a `<pd>` (its description). Inside them, `<cmdname>` is the command, `<parmname>` a named parameter, `<varname>` a value the reader supplies, `<option>` a switch that selects a behavior, `<codeph>` a literal value.
    - Everything a reader types or reads on a screen gets the element that says what it is, and a stylesheet can render `<cmdname>` in bold and `<varname>` in italic without you deciding it here.
 4. **Read the messages** `<msgph>` is a message quoted inline; `<msgblock>` is a message as a block, whitespace preserved like `<codeblock>`; `<msgnum>` is the message's identifier, here the status word `Failed!`. `<apiname>` is the name of a function, class or method in an API.
-5. **Read the properties table** `<properties>` is a reference table with three fixed columns: `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional `<prophead>` naming them. Each `<property>` row carries a `platform` attribute, so the Windows builds from stage 14 show the Windows pipe and the Mac and Linux builds the other. `<filepath>` with a `<varname>` inside it names the pipe with the user id as a variable.
+5. **Read the properties table** `<properties>` is a reference table with three fixed columns: `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional `<prophead>` naming them. Each `<property>` row carries a `platform` attribute, so a filtered build keeps only the rows for its platform. No Windows-filtered deliverable includes the scripting reference: the `podcaster-linux` build drops the Windows row, and the unfiltered builds show both rows. `<filepath>` with a `<varname>` inside it names the pipe with the user id as a variable.
 :::
 
 ## Step 2: The task and the sample {#step-2-the-task-and-the-sample}
@@ -8231,7 +8320,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -61,6 +61,10 @@
         <topicref href="topics/podcast-production-workflow.dita" keys="podcast-workflow"/>
       </topichead>
-    
+
    +  <topichead navtitle="Automation">
    +    <topicref href="topics/exporting-from-a-script.dita"/>
    +  </topichead>
@@ -8273,7 +8362,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <appendix href="topics/scripting-reference.dita">
    +    <topicref href="topics/exporting-from-a-script.dita"/>
    +  </appendix>
-    
+
       <backmatter>
         <booklists>
    ```
@@ -8307,14 +8396,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 21: hazards and safety.
    +You are on stage 22: software domains.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -8358,7 +8447,8 @@ After each error exercise, undo the deliberate change and rerun the gate. Confir
 ## What you learned {#what-you-learned}
 
 - The programming domain: `<syntaxdiagram>`, `<groupseq>`, `<kwd>`, `<delim>`, `<var>`, `<repsep>`, `<synph>`; `<parml>`, `<plentry>`, `<pt>`, `<pd>`; `<parmname>`, `<option>`, `<apiname>`, `<codeph>`; `<codeblock outputclass="language-…">` with `<coderef>`.
-- The software domain: `<cmdname>`, `<varname>`, `<msgph>`, `<msgblock>`, `<msgnum>`, `<screen>`, `<userinput>`, `<systemoutput>`.
+- The software domain: `<cmdname>`, `<varname>`, `<msgph>`, `<msgblock>`, `<msgnum>`, `<userinput>`, `<systemoutput>`.
+- The user interface domain: `<screen>`.
 - `<refsyn>` and `<properties>` with `<prophead>`, `<property>`, `<proptype>`, `<propvalue>`, `<propdesc>`, and a profiling attribute on a row.
 - A `<repsep>` precedes the items in its group, after any title.
 - Code lives in a file and the topic references it.
@@ -8526,7 +8616,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    - `<lcTrueFalse2>`, `<lcSingleSelect2>` and `<lcMultipleSelect2>` share a shape: an `<lcQuestion2>`, then an `<lcAnswerOptionGroup2>` of `<lcAnswerOption2>`s, each with `<lcAnswerContent2>`, an empty `<lcCorrectResponse2/>` on the right ones, and `<lcFeedback2>`. A single-select has one correct option, a multiple-select as many as apply, a true/false exactly two options.
    - `<lcSequencing2>` asks for an order: an `<lcSequenceOptionGroup2>` of `<lcSequenceOption2>`s, each with its `<lcAnswerContent2>` and an `<lcSequence2 value="n"/>` giving its place in the right order.
-   - Every interaction has an `id`, so a learning map or an LMS export can address it. The HTML5 transform renders each question as a list of its options with their feedback and drops `<lcCorrectResponse2/>` from the page: which answer is right is data for a learning platform, not something a reader page gives away.
+   - Every interaction has an `id`, so a learning map or an LMS export can address it. The HTML5 transform renders each question as a list of its options with their feedback. It drops `<lcCorrectResponse2/>` and `<lcSequence2>` from the page, but the page still shows the answers to a careful reader. The feedback on each correct option starts with "Correct.", only the wrong options in the multiple-select question have feedback, and the sequencing options are listed in the answer order. For a real quiz, publish the interactions to a learning platform, or write the feedback and the option order so that they do not reveal the answer.
+   - The HTML5 output renders `<lcDuration>` as an empty section. The `<lcTime>` value is not shown.
 :::
 
 ## Step 2: The maps {#step-2-the-maps}
@@ -8546,7 +8637,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  <topichead navtitle="Check your understanding">
    +    <topicref href="learning/check-your-understanding.dita"/>
       </topichead>
-    
+
       <topichead navtitle="Troubleshooting" id="troubleshooting">
    ```
 2. **Edit `beginner-guide.ditamap`**
@@ -8616,12 +8707,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     # developer defaults below.
    -set -u
    +set -u -o pipefail
-    
+
     ROOT="$(cd "${1:-$(dirname "$0")/..}" && pwd)"
     DOGSBAY_XML="${DOGSBAY_XML:-$(command -v dogsbay-xml || echo "$HOME/github/dogsbay-xml/bin/dogsbay-xml")}"
    @@ -33,13 +34,38 @@
     [ -x "$DOGSBAY_XML" ] || { echo "dogsbay-xml CLI not found (set DOGSBAY_XML)"; exit 2; }
-    
+
     say "validate-project  $ROOT"
    -"$DOGSBAY_XML" validate-project "$ROOT" || fail "validation errors"
    +vp="$(mktemp)"
@@ -8640,7 +8731,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  fi
    +fi
    +rm -f "$vp"
-    
+
     say "project-health  $ROOT"
    +health=("$DOGSBAY_XML" project-health)
    +# validate-project above already covered grammar validation; project-health's own
@@ -8659,7 +8750,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    +  say "house rules  $ROOT"
    +  "$DOGSBAY_XML" project-health --include=schematron "$ROOT" || fail "house-rule violations"
     fi
-    
+
     scheme=$(grep -l '<subjectScheme' "$ROOT"/*.ditamap 2>/dev/null | head -1 || true)
    ```
 2. **Read the changes**
@@ -8674,14 +8765,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 22: software domains.
    +You are on stage 23: learning.
-    
+
     ## Stages
-    
+
    ```
 4. **Format and check**
 
@@ -8784,7 +8875,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-    
+
    -<concept id="what-is-audacity">
    +<concept id="what-is-audacity" xml:lang="en-GB">
       <title>What is <keyword keyref="product-name"/>?</title>
@@ -8806,11 +8897,11 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,13 +1,13 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-    
+
    -<map>
    +<map xml:lang="en-GB">
       <title>Product key definitions</title>
-    
+
       <keydef keys="product-name">
         <topicmeta>
           <keywords>
@@ -8839,7 +8930,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
-    
+
    -<reference id="scripting-reference">
    +<reference id="scripting-reference" xml:lang="en-GB">
       <title>Scripting commands</title>
@@ -8871,7 +8962,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
-    
+
    -<task id="exporting-from-a-script">
    +<task id="exporting-from-a-script" xml:lang="en-GB">
       <title>Exporting from a script</title>
@@ -8909,7 +9000,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-    
+
    -<concept id="what-is-digital-audio">
    +<concept id="what-is-digital-audio" xml:lang="en-GB">
       <title>What is digital audio?</title>
@@ -8944,7 +9035,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
-    
+
    -<glossgroup id="audio-units">
    +<glossgroup id="audio-units" xml:lang="en-GB">
       <title>Units</title>
@@ -8975,7 +9066,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,13 +1,14 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
-    
+
    -<task id="exporting-audio">
    +<task id="exporting-audio" xml:lang="en-GB" status="changed">
       <title>Exporting audio</title>
@@ -9014,7 +9105,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Read it**
 
    - `status="changed"` on the root says the topic changed since the last release. The values are `new`, `changed`, `deleted` and `unchanged`, and the attribute is allowed on most elements, so a single row or paragraph can carry it. Nothing renders it by default; a DITAVAL or a report can select on it.
-   - `<revised modified="2026-03-05"/>` joins the `<created>` from stage 12 in `<critdates>`. The content model is `created?` then `revised*`, in that order, one `<revised>` per revision.
+   - `<revised modified="2026-03-05"/>` joins the `<created>` from stage 13 in `<critdates>`. The content model is `created?` then `revised*`, in that order, one `<revised>` per revision.
    - `<change-historylist>` is DITA 1.3's structured change log, in the `<prolog>` after `<metadata>`. Each `<change-item>` holds who, `<change-person>`, when, `<change-completed>`, and what, `<change-summary>`. The other children are `<change-organization>`, `<change-revisionid>`, `<change-request-reference>` and `<change-started>`.
    - `<draft-comment>` is a note to the reviewer, in the flow where it applies. `author` and `time` say who and when; `disposition` tracks it, `open`, `accepted`, `rejected`, `deferred`, `duplicate`, `reopened`, `unassigned` or `completed`. DITA-OT drops draft comments from the output unless you ask for them, which step 4 shows.
 3. **Edit `topics/podcast-production-workflow.dita`**
@@ -9025,7 +9116,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-    
+
    -<concept id="podcast-production-workflow">
    +<concept id="podcast-production-workflow" xml:lang="en-GB">
       <title>Podcast production workflow</title>
@@ -9050,7 +9141,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    @@ -1,7 +1,7 @@
     <?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
-    
+
    -<reference id="effects-reference">
    +<reference id="effects-reference" xml:lang="en-GB">
       <title>Effects reference</title>
@@ -9090,14 +9181,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    --- a/README.md
    +++ b/README.md
    @@ -2,7 +2,7 @@
-    
+
     Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
+
    -You are on stage 23: learning.
    +You are on stage 24: drafts and localization.
-    
+
     ## Stages
-    
+
    ```
 2. **Format and check**
 
@@ -9295,7 +9386,7 @@ The expected output contains resolved product names, working links, and a comple
 
 ## Conditions {#conditions}
 
-Use `<note audience="podcaster">` around the note. The beginner filters exclude `podcaster`; the Linux podcaster filter includes it. The subject scheme identifies allowed values, while the DITAVAL selects or flags content for a particular publication. A spelling error can pass the DTD because the DTD does not contain this project's controlled vocabulary.
+Add the `audience="podcaster"` attribute to the note itself, as in `<note audience="podcaster">`. Do not add a wrapper element around the note. The beginner filters exclude `podcaster`; the Linux podcaster filter includes it. The subject scheme identifies allowed values, while the DITAVAL selects or flags content for a particular publication. A spelling error can pass the DTD because the DTD does not contain this project's controlled vocabulary.
 
 The scheme's `readers` and `os` keys identify containers. They are not allowed audience or platform values in this enumeration. A tool that lists them as selectable values needs correction.
 
@@ -9944,7 +10035,7 @@ git diff origin/tutorial/06-rich-tasks
 After any checkout, the "You are on" line near the top of `README.md` names the stage:
 
 ```bash
-head -9 README.md
+grep 'You are on' README.md
 ```
 
 `git diff` compares tracked files. Use `git status --short` as well to find new files that Git has not yet tracked. Review and commit your lesson files when you reach a passing checkpoint.

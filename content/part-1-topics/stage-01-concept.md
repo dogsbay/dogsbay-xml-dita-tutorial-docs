@@ -23,9 +23,48 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 ## Step 1: Write the topic
 
 ::::steps
-1. **Create `topics/what-is-audacity.dita`**
+1. **Create `topics/what-is-audacity.dita` from a template**
+   In the **Explorer**, right-click the `topics` folder and choose
+   **New File**. Enter `what-is-audacity.dita` and press Enter. The
+   **New XML Document** dialog lists the templates for XML files. Choose
+   **dita-concept-minimal** and click **OK**.
+
    Use the topic `@id` as the file name to keep links readable. This is a
    project convention.
+
+   The editor opens the new file with the template's content:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
+   <concept id="concept_id">
+       <title>Concept Title</title>
+       <conbody>
+
+       </conbody>
+   </concept>
+   ```
+
+   The template supplies the XML declaration, the DOCTYPE, and the parts
+   every concept needs. The editor recognizes the file as a DITA concept
+   from its name, so validation and formatting work from the start.
+
+   If you use another editor, create the file and type the finished topic
+   shown in step 3.
+
+2. **Replace the placeholders**
+   Double-click `concept_id` and type `what-is-audacity`. Click inside the
+   title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and
+   type `What is Audacity?`.
+
+3. **Complete the topic**
+   Add the short description after the title, then the paragraphs, list,
+   and section inside `<conbody>`. When you type the `>` of a start tag,
+   the editor inserts the matching end tag after the cursor. Type the
+   content, then move the cursor past the end tag to continue. Leave the
+   indentation to the formatter in "Step 3: Format and run the gate".
+
+   The finished topic:
 
    ```xml title="topics/what-is-audacity.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -55,7 +94,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    </concept>
    ```
 
-2. **Read it element by element**
+4. **Read it element by element**
 
    - The XML declaration and the DOCTYPE come first. `-//OASIS//DTD DITA
      Concept//EN` is the public identifier the catalog resolves; `concept.dtd`
@@ -109,6 +148,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    Apply the project's format style before every check, so your diff stays
    about the feature. This is how every stage branch was written.
 
+   In the editor, choose **XML** > **Format**, then save the file. To check
+   the topic against its DTD, choose **XML** > **Validate**. The **Errors**
+   panel reports `Valid Document`.
+
+   From the command line, format every topic:
+
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
@@ -135,7 +180,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 To see a validation error, put a `<section>` inside another `<section>` and
 run the gate again. `validate-project` names the file, the line and the
-element whose content model was broken. Undo the change before you go on.
+element whose content model was broken. For example:
+
+```
+24:15  error: The content of element type "section" does not match its content model.
+```
+
+In the editor, **XML** > **Validate** reports the same error in the
+**Errors** panel. Undo the change before you go on.
 
 After each error exercise, undo the deliberate change and rerun the gate.
 Confirm that it prints `STAGE OK` before continuing.
@@ -145,7 +197,8 @@ Confirm that it prints `STAGE OK` before continuing.
 - A concept is the information type for "what is it": `<concept>`,
   `<conbody>`, sections.
 - Concepts, tasks, and references in this tutorial have an `@id`, a
-  `<title>`, and a `<shortdesc>`. The short description is a house rule.
+  `<title>`, and a `<shortdesc>`. Stage 25 makes the short description a
+  house rule.
 - The DOCTYPE names a public identifier, and the catalog finds the DTD.
 - `<section>` is one level deep; deeper structure means another topic.
 - Format, then gate, every time.

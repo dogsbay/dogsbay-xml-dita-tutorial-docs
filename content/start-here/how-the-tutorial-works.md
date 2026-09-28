@@ -86,7 +86,7 @@ Every stage branch carries the same `README.md`, with one line that changes at
 each stage:
 
 ```
-You are on **stage 05 — inline and block**: UI controls, shortcuts, terms, notes, lists, tables and code.
+You are on stage 05: inline and block.
 ```
 
 Read it after any checkout to confirm where you are. The README's stage table

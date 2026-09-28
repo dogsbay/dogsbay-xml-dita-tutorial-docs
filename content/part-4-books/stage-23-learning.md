@@ -176,9 +176,16 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      `<lcSequence2 value="n"/>` giving its place in the right order.
    - Every interaction has an `id`, so a learning map or an LMS export
      can address it. The HTML5 transform renders each question as a list
-     of its options with their feedback and drops `<lcCorrectResponse2/>`
-     from the page: which answer is right is data for a learning
-     platform, not something a reader page gives away.
+     of its options with their feedback. It drops `<lcCorrectResponse2/>`
+     and `<lcSequence2>` from the page, but the page still shows the
+     answers to a careful reader. The feedback on each correct option
+     starts with "Correct.", only the wrong options in the multiple-select
+     question have feedback, and the sequencing options are listed in the
+     answer order. For a real quiz, publish the interactions to a learning
+     platform, or write the feedback and the option order so that they do
+     not reveal the answer.
+   - The HTML5 output renders `<lcDuration>` as an empty section. The
+     `<lcTime>` value is not shown.
 ::::
 
 ## Step 2: The maps

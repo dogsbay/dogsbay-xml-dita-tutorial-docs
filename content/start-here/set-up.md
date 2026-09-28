@@ -114,10 +114,14 @@ editor nor a separate JDK.
 3. **Confirm where you are**
 
    ```bash
-   head -9 README.md
+   grep 'You are on' README.md
    ```
 
-   The last line printed is the "You are on" line for stage 00.
+   The command prints the "You are on" line for stage 00:
+
+   ```
+   You are on stage 00: setup.
+   ```
 :::
 
 ## Open the project in the editor

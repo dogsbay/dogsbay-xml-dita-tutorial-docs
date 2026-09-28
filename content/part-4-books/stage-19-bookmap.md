@@ -156,8 +156,8 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      `digital-audio`, `install`, `podcast-workflow`, `formats` and
      `effects`, are carried here too, so the `<xref keyref>`s and the
      license topic's `<xref keyref="start-here"/>` resolve in the book.
-   - `<appendix href>` after the parts: the two reference topics become
-     *Appendix A* and *Appendix B*.
+   - `<appendix href>` after the parts: the three reference topics become
+     *Appendix A*, *Appendix B* and *Appendix C*.
    - `<backmatter>` holds a second `<booklists>`: a `<glossarylist>`
      with the seven glossary topics inside it, so they print as one
      glossary, and an empty `<indexlist/>` that the transform fills from
@@ -277,6 +277,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    Glossary.......................................................................................................................................... 39
    Index................................................................................................................................................41
    ```
+
+   The example contents list shows *Presets* without its label. The PDF
+   that this stage builds lists it as *Appendix C: Presets*.
 
    The PDF transform generates the numbered parts, chapters, appendixes,
    glossary, and index from the bookmap. The license topic appears as the

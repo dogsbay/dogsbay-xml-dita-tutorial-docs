@@ -259,14 +259,23 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - The full guide gives the topic a `<topichead>` of its own, with an
      `id` so a later stage can reference the branch, and the key `silent`.
      The key is defined here and used in stage 21.
-   - In the book it is an appendix, before the two reference appendixes.
+   - In the book it is an appendix, before the three reference appendixes.
    - The beginner and podcaster guides put it in a *Troubleshooting*
      head of their own.
    - The installation variants map nests it under the recording task, so
      each of the three platform branches from stage 16 carries its own
      filtered copy: the Mac branch keeps the macOS solution, the other
-     two drop it. `dogsbay-xml list-branches installation-variants.ditamap`
-     shows the topic under each prefix.
+     two drop it. The `install-variants` build writes the copies as
+     `topics/win-recording-is-silent.html`,
+     `topics/mac-recording-is-silent.html` and
+     `topics/recording-is-silent-linux.html`.
+   - The links that the map generates from each copy of the recording task
+     go to the copy in the same branch. The `<xref>` in the trouble note
+     does not. DITA-OT 4.3.5 resolves it to one copy of the troubleshooting
+     topic for every branch. In the stage 20 build, every copy of the
+     recording task links to `recording-is-silent-linux.html`, so the
+     Windows and Mac copies link to the Linux copy. Which copy is chosen
+     can change as the project changes.
 ::::
 
 ## Step 3: README and the gate

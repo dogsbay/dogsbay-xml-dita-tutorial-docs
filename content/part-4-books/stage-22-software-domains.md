@@ -128,6 +128,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    </reference>
    ```
 
+   The `<xref>` to `../samples/export-mp3.py` in the *Responses* section
+   is a known broken link. The HTML output does not include the sample
+   file. See [Known output issues](/reference/known-output-issues).
+
 2. **Read the syntax diagram**
 
    - `<syntaxdiagram>` is a block that describes syntax as a tree of
@@ -170,8 +174,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    `<properties>` is a reference table with three fixed columns:
    `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional
    `<prophead>` naming them. Each `<property>` row carries a `platform`
-   attribute, so the Windows builds from stage 14 show the Windows pipe
-   and the Mac and Linux builds the other. `<filepath>` with a `<varname>`
+   attribute, so a filtered build keeps only the rows for its platform.
+   No Windows-filtered deliverable includes the scripting reference: the
+   `podcaster-linux` build drops the Windows row, and the unfiltered builds
+   show both rows. `<filepath>` with a `<varname>`
    inside it names the pipe with the user id as a variable.
 ::::
 
@@ -454,7 +460,8 @@ Confirm that it prints `STAGE OK` before continuing.
   `<pt>`, `<pd>`; `<parmname>`, `<option>`, `<apiname>`, `<codeph>`;
   `<codeblock outputclass="language-…">` with `<coderef>`.
 - The software domain: `<cmdname>`, `<varname>`, `<msgph>`, `<msgblock>`,
-  `<msgnum>`, `<screen>`, `<userinput>`, `<systemoutput>`.
+  `<msgnum>`, `<userinput>`, `<systemoutput>`.
+- The user interface domain: `<screen>`.
 - `<refsyn>` and `<properties>` with `<prophead>`, `<property>`,
   `<proptype>`, `<propvalue>`, `<propdesc>`, and a profiling attribute
   on a row.
