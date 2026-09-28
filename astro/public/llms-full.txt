@@ -501,7 +501,7 @@ Broken references, undefined keys, metadata policy errors, conref pushes, and ho
 dogsbay-xml project-health .
 ```
 
-When a build fails, the check names the deliverable and reports the DITA-OT errors. When the output check fails, it lists each link that leads nowhere, with the page and line that contains it, and the verdict counts them, for example `Not ready: 1 link in the built output leads nowhere.`
+When a build fails, the check names the deliverable and reports the DITA-OT errors, with their message codes, such as `DOTJ046E`, when DITA-OT gives one. When the output check fails, it lists each link that leads nowhere, with the page and line that contains it, and the verdict counts them, for example `Not ready: 1 link in the built output leads nowhere.`
 
 Fix the problem and check again. After a lesson's deliberate-error exercise, undo the change and check again before you continue.
 
@@ -7748,7 +7748,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    - `<part navtitle="…">` groups chapters and prints as *Part I*, *Part II*; each `<chapter href>` is a topic and its nested `<topicref>`s are its sections. The keys the topicrefs carried in the full guide, `digital-audio`, `install`, `podcast-workflow`, `formats` and `effects`, are carried here too, so the `<xref keyref>`s and the license topic's `<xref keyref="start-here"/>` resolve in the book.
    - `<appendix href>` after the parts: the three reference topics become *Appendix A*, *Appendix B* and *Appendix C*.
-   - `<backmatter>` holds a second `<booklists>`: a `<glossarylist>` with the seven glossary topics inside it, so they print as one glossary, and an empty `<indexlist/>`, which asks the transform for an index built from the `<indexterm>` elements in the prolog metadata of stage 13. The PDF that the editor built for the recorded examples has no index pages, so the contents list in step 3 ends at *Glossary*.
+   - `<backmatter>` holds a second `<booklists>`: a `<glossarylist>` with the seven glossary topics inside it, so they print as one glossary, and an empty `<indexlist/>`, which asks the transform for an index built from the `<indexterm>` elements in the prolog metadata of stage 13. The index is the last entry in the contents list in step 3.
 :::
 
 ## Step 2: The deliverable {#step-2-the-deliverable}
@@ -7835,7 +7835,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 3. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. Open it in any PDF viewer. `pdftotext` shows the contents page without a viewer:
 
    ```bash
-   pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Glossary/p'
+   pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
    ```
 
    ```
@@ -7864,9 +7864,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    Appendix C: Presets................................................................................................39
    Glossary.......................................................................................................................................... 41
+   Index................................................................................................................................................43
    ```
 
-   The PDF transform generates the numbered parts, chapters, and appendixes, the lists of figures and tables, and the glossary from the bookmap. The license topic appears as the notices page.
+   The PDF transform generates the numbered parts, chapters, and appendixes, the lists of figures and tables, the glossary, and the index from the bookmap. The license topic appears as the notices page.
 :::
 
 Test the placement of key definitions. Move the two `<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`, and check your work. The check stops at health. Example output:
@@ -9941,7 +9942,6 @@ Earlier builds of the final branch had 12 failing local references in the HTML o
 ## What the output check does not cover {#what-the-output-check-does-not-cover}
 
 - **The PDF.** The output check reads links in HTML pages. For the `book-pdf` deliverable it confirms that the build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF to inspect its navigation, layout, and accessibility. The check summarizes Apache FOP layout warnings, such as content that is wider than its column, in one line. The warnings do not fail the check.
-- **The PDF index.** The bookmap has an `<indexlist/>`, but the PDF that the editor builds for the final branch has no index pages.
 - **Keys that only the root map defines.** Project health resolves keys against the root map, `audacity-guide.ditamap`. If a topic uses a key that another publishing map does not define, the cross-reference in that map's PDF is empty, and the check still reports `Ready`. Stage 21 shows the case and its fix.
 - **External URLs.** The check does not follow links to other sites.
 
