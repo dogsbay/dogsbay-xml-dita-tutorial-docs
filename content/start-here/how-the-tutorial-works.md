@@ -22,7 +22,7 @@ Choose one workflow:
   stage 00. Fetch the reference branches there to compare your files and
   retrieve supplied images.
 - Inspect completed stages in the tutorial clone. Compare adjacent branches
-  and run the gate on the stage that you check out.
+  and check your work on the stage that you check out.
 
 The command examples use `origin/tutorial/NN-slug` for fetched reference
 branches. These refs are available after cloning or fetching; local stage
@@ -63,8 +63,8 @@ its own:
 https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/05-inline-and-block...tutorial/06-rich-tasks
 ```
 
-Each completed stage passes its configured gate. Error exercises show the
-diagnostics for a deliberate change. Undo that change and rerun the gate
+Each completed stage passes the check. Error exercises show the
+diagnostics for a deliberate change. Undo that change and check again
 before continuing. Later stages add checks, so an earlier passing stage can
 still contain issues that those later checks detect.
 
@@ -98,25 +98,27 @@ Besides the topics, every stage branch has:
 
 | File | Purpose |
 |---|---|
-| `README.md` | The "You are on" line, the stage table, the gate command |
+| `README.md` | The "You are on" line, the stage table, the maintainer check commands |
 | `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
 | `.dogsbay/config.xml` | Shared editor project settings: project type, framework, format style |
-| `scripts/check-stage.sh` | The gate. See [Run the gate](/start-here/run-the-gate) |
+| `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/reference/the-gate) |
 | `.gitignore` | Keeps DITA-OT output out of Git |
 
-## The gate
+## Check your work
 
-`scripts/check-stage.sh` validates every file, runs a project health check
-and, once the project has a `project.json`, builds every deliverable with
-DITA-OT. A stage is done when it prints `STAGE OK`. Every branch in the chain
-passes it, and every stage page ends by running it.
+**Project** > **Check Project** in the editor, or `dogsbay-xml check .` on
+the command line, checks the project health and, once the project declares
+deliverables in stage 03, builds every deliverable with DITA-OT and checks
+the built output. From stage 03, a stage is done when the check reports
+`Ready`. Before stage 03, look for `health   clean`. Every stage page ends by
+checking your work.
 
 ## Where to go next
 
 :::cards
 - **[Set up your tools](/start-here/set-up)** {icon="wrench"}
-  DITA-OT 4.3.5, the DogsBay XML command line, and the clone.
+  The DogsBay XML editor and command line, and the clone.
 
-- **[Run the gate](/start-here/run-the-gate)** {icon="check"}
+- **[Check your work](/start-here/run-the-gate)** {icon="check"}
   What the check does and what its output means.
 :::

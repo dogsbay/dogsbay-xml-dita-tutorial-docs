@@ -40,7 +40,7 @@ From the tutorial clone, create a practice branch and worktree, for example:
 ```bash
 git worktree add -b practice-conditions ../audacity-conditions origin/tutorial/13-metadata-and-index
 cd ../audacity-conditions
-scripts/check-stage.sh
+dogsbay-xml check .
 ```
 
 Use a new branch and directory name if either already exists. The checkpoint

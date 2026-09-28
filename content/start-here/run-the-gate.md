@@ -1,118 +1,118 @@
 ---
-title: Run the gate
-description: What scripts/check-stage.sh checks, what it prints when a stage passes or fails, and the SKIP_BUILD and STRICT switches.
+title: Check your work
+description: Check a stage with Project > Check Project in the editor or dogsbay-xml check on the command line, read the result, and find the details when it fails.
 type: how-to
 ---
 
-# Run the gate
+# Check your work
 
-Each stage includes `scripts/check-stage.sh`, the gate. Run it from the
-project root to check the source and, from stage 03, build the deliverables.
-The script writes build output and logs to a temporary directory by default.
+Check your project at the end of every lesson. The check tells you whether
+the project is ready to publish: whether its source is sound, whether every
+deliverable builds, and whether the built output holds together.
 
-The gate runs three checks in order and prints `STAGE OK` when all of them
-pass, or `STAGE FAILED` with failed checks marked `FAIL:`. A missing tool
-causes an immediate exit with code `2`.
+- In the editor, choose **Project** > **Check Project**. The result appears
+  in the **Project Validation** panel.
+- From the command line, run `dogsbay-xml check .` from the project root.
+
+Both run the same check. You do not need to install DITA-OT: the editor and
+the command line include DITA-OT 4.3.5 and build with it.
 
 ## What it checks
 
-| Step | Command | Checks |
-|---|---|---|
-| 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` file validates against its DOCTYPE |
-| 2 | `dogsbay-xml project-health <root>` | References, keys, reuse targets, metadata, and configured house rules for the default root map. Warnings alone can pass. |
-| 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` message codes, because the build does not always exit non-zero on a content error |
+The check runs three stages in order, and each runs only when the one before
+it passed:
 
-Step 2 uses the root map and Schematron configured in `.dogsbay/config.xml`
-once later stages add them. Step 3 is skipped until the project has a
-`project.json`, which arrives in stage 03.
+| Stage | Checks |
+|---|---|
+| Health | Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound |
+| Build | Every deliverable in `project.json` builds with DITA-OT |
+| Output | Every link, image, and fragment in the built output leads somewhere |
 
-Stage 15 adds controlled-value validation. Stage 23 adds a catalog fallback
-for learning topics, and stage 25 enables a separate house-rules check.
-See [The gate](/reference/the-gate) for those details and the limits of the
-checks.
+It stops at the first stage that fails, because later stages would only
+report consequences of the same fault. A broken reference in the source, for
+example, produces a broken link in the output.
 
-## Run it
+Health uses the root map and house rules set in the project settings once
+later stages add them.
+
+## Before stage 03: no deliverables yet
+
+Deliverables arrive in stage 03. Until then there is nothing to build, and
+the check reports that it stopped at the build stage:
+
+```
+health   clean
+build    nothing to build
+Not ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.
+```
+
+In stages 00 to 02, `health   clean` is the result to look for. From the
+command line, add `--no-build` to check the source only:
 
 ```bash
-scripts/check-stage.sh
+dogsbay-xml check --no-build .
 ```
 
-On stage 01, before the map and `project.json` are created,
-it prints:
-
 ```
-== validate-project  /home/you/dogsbay-xml-dita-tutorial ==
-1 file(s): 1 valid, 0 invalid.
-
-== project-health  /home/you/dogsbay-xml-dita-tutorial ==
-Root map: none (none configured); house rules: none (none configured)
-Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-== build  skipped (no project.json yet) ==
-
-STAGE OK
+health   clean
+Project health is clean. The build was not run, so nothing here speaks for the output.
 ```
 
-The file count grows with each stage. `Root map: none` is expected until
-stage 02.
+## A ready project
+
+From stage 03, a finished lesson checks as ready. For example, on stage 03:
+
+```
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+output   clean (full)
+Ready: the project is healthy, every deliverable built, and the output of full holds together.
+```
+
+Later stages list one `build` line for each deliverable. Paths in recorded
+output are examples.
 
 ## When it fails
 
-A validation error names the file, the line and column, and the element whose
-content model was broken:
+When health fails, the check names the files with problems:
 
 ```
-== validate-project  /home/you/dogsbay-xml-dita-tutorial ==
-/home/you/dogsbay-xml-dita-tutorial/topics/trimming-audio.dita:
-  22:170  error: The content of element type "cmd" does not match its content model.
-5 file(s): 4 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-The gate carries on to the health check so you see everything at once, then
-ends with `STAGE FAILED`. Fix the file, run it again.
-
-## The switches
+For the line, column, and message of each problem, open the
+**Project Validation** panel in the editor, or run:
 
 ```bash
-SKIP_BUILD=1 scripts/check-stage.sh    # skip DITA-OT; a fast loop while authoring
-STRICT=0 scripts/check-stage.sh        # project-health at --severity=error only
-scripts/check-stage.sh /path/to/root   # check another project folder
+dogsbay-xml project-health .
 ```
 
-`SKIP_BUILD=1` skips publishing from stage 03 onward. Build time depends on
-the size of the publication and your system.
-`STRICT=0` restricts the health report to errors. The default, `STRICT=1`,
-also reports warnings; it does not make every warning a failure. Use the
-default when checking a completed lesson and review the reported findings.
+When the output check fails, it lists each link that leads nowhere, with the
+page and line that contains it.
+
+Fix the problem and check again. After a lesson's deliberate-error
+exercise, undo the change and check again before you continue.
 
 ## Find the output
 
-The build header identifies the temporary directory for that run. Paths
-such as `/tmp/check-stage-357688` in recorded output are examples. Use the
-directory printed by your own run.
+Each deliverable builds into its own folder, as `project.json` declares it:
+`out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner
+guide, and so on. The `out/` folder is ignored by Git.
 
-When a lesson asks you to inspect `out/full/` in your project, first build
-there with:
+To build and check one deliverable only:
 
 ```bash
-dita --project=project.json
+dogsbay-xml check --deliverable=full .
 ```
 
-Alternatively, inspect `out/full/` under the gate's temporary directory.
-The same rule applies to the other deliverable directories. Command output
-can vary with tool versions; compare the checks and results, not process IDs
-or line numbers.
+## For maintainers
 
-## Environment
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `DOGSBAY_XML` | `dogsbay-xml` on `PATH`, else `~/github/dogsbay-xml/bin/dogsbay-xml` | The DogsBay XML command line |
-| `DITA_HOME` | `~/Downloads/dita-ot-4.3.5` | The DITA-OT installation; `DITA` overrides the `dita` executable directly |
-| `OUT` | a temporary directory | Where step 3 writes the build |
-
-Exit codes: `0` stage OK, `1` a gate failed, `2` a tool was not found.
+Each stage branch also carries `scripts/check-stage.sh`, the script used to
+verify the branches. Readers do not need it. See
+[The stage gate](/reference/the-gate).
 
 ## Where to go next
 
@@ -120,6 +120,6 @@ Exit codes: `0` stage OK, `1` a gate failed, `2` a tool was not found.
 - **[Stage 00: Set up the project](/part-1-topics/stage-00-setup)** {icon="play"}
   The empty project, file by file.
 
-- **[The gate](/reference/the-gate)** {icon="book-open"}
-  The full reference, including why `xmllint` is not used.
+- **[The stage gate](/reference/the-gate)** {icon="book-open"}
+  The maintainers' script, and why `xmllint` is not used.
 :::

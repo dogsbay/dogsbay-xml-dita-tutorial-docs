@@ -21,7 +21,7 @@ For the core course, focus on pulling steps with `conref` and notes with
 [Choose a reuse method](/reference/choosing-reuse) before adding shared content.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the shared topics
 
@@ -268,7 +268,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      into a `<ul>`.
 ::::
 
-## Step 4: Update the README, run the gate and check what was published
+## Step 4: Update the README, check your work and check what was published
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -287,76 +287,105 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-2. **Format and check**
+2. **Format and check your work**
    The format command covers `shared/` too.
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   13 file(s): 13 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   `project-health` resolves every `@conref` and `@conkeyref` to an element
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   `start-here` and `digital-audio` are defined for a later stage: stage 18
+   uses them in a new topic.
+
+   The health stage resolves every `@conref` and `@conkeyref` to an element
    that exists and checks that each `conaction="mark"` finds its target.
-   Rename the play-back step's id, for example to `playback`. The health
-   check then reports a broken element id and, under `Conref pushes`, a
-   line like this example:
+   Rename the play-back step's id, for example to `playback`, and check
+   your work. The check stops at health and names the reference that no
+   longer resolves. Example output:
 
    ```
-   <step> push target id 'play-back' not found in recording-your-first-track.dita
+   health   NOT CLEAN
+     /home/you/audacity-guide/shared/common-steps.dita:29  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     (run project-health for the full report)
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+   ```
+
+   The **Project Validation** panel, or `dogsbay-xml project-health .`,
+   reports a broken element id and, under `Conref pushes`, this line:
+
+   ```
+   Conref pushes (1):
+     /home/you/audacity-guide/shared/common-steps.dita:29  <step> push target id 'play-back' not found in recording-your-first-track.dita
    ```
 
    The diagnostic names the id that the push looks for, `play-back`, not the
-   new id. Restore the id and rerun the gate.
+   new id. Restore the id and check again.
 
 3. **Check the output**
-   The build folder has one page per topic in the table of contents and
-   nothing for the shared topics:
+   The check builds the guide into `out/full/`. The folder has one page
+   per topic in the table of contents and nothing for the shared topics:
 
    ```bash
-   dita --project=project.json
    find out/full -name '*.html' | sort
    ```
 
    ```
-   /tmp/check-stage-357688/out/full/index.html
-   /tmp/check-stage-357688/out/full/topics/exporting-audio.html
-   /tmp/check-stage-357688/out/full/topics/installing-audacity.html
-   /tmp/check-stage-357688/out/full/topics/preparing-to-record.html
-   /tmp/check-stage-357688/out/full/topics/recording-your-first-track.html
-   /tmp/check-stage-357688/out/full/topics/removing-background-noise.html
-   /tmp/check-stage-357688/out/full/topics/supported-audio-formats.html
-   /tmp/check-stage-357688/out/full/topics/trimming-audio.html
-   /tmp/check-stage-357688/out/full/topics/what-is-audacity.html
-   /tmp/check-stage-357688/out/full/topics/what-is-digital-audio.html
+   out/full/index.html
+   out/full/topics/exporting-audio.html
+   out/full/topics/installing-audacity.html
+   out/full/topics/preparing-to-record.html
+   out/full/topics/recording-your-first-track.html
+   out/full/topics/removing-background-noise.html
+   out/full/topics/supported-audio-formats.html
+   out/full/topics/trimming-audio.html
+   out/full/topics/what-is-audacity.html
+   out/full/topics/what-is-digital-audio.html
    ```
 
-   The recorded output above uses the gate's temporary directory. Your
-   `find` command lists paths under `out/full`. Neither directory contains
-   `common-steps.html` or `common-notes.html`. Open
+   The folder does not contain `common-steps.html` or `common-notes.html`. Open
    `recording-your-first-track.html`: the step "Turn the playback volume
    down before you listen" sits before "Click Play", pushed there from the
    shared topic, and the task's own file never mentions it.
 ::::
 
 Test two errors. First, use a `@conkeyref` with an undefined key. Change `common-notes/backup-warning` in the noise task to
-`common-note/backup-warning` and run the gate:
+`common-note/backup-warning` and check your work. The check stops at
+health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
   /home/you/audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
@@ -367,34 +396,54 @@ Unused keys (2):
 Summary
   Undefined keys                1
   Unused keys                   2
-FAIL: project-health found issues
+```
 
-== build  project.json -> /tmp/check-stage-357688 ==
-Error: file:/home/you/audacity-guide/topics/removing-background-noise.dita:11:53: [DOTJ046E] The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
-FAIL: DITA-OT build reported errors (full log: /tmp/check-stage-357688.log)
+Because health fails, the check does not build. To see what DITA-OT makes
+of the same fault, build the deliverable directly:
 
-STAGE FAILED
+```bash
+dogsbay-xml build . full
+```
+
+The first lines of the example output:
+
+```
+full (html5) → /home/you/audacity-guide/out/full: FAILED — 1 error(s)
+    file:/home/you/audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
 ```
 
 DITA-OT resolves `@conkeyref` only through the root map's key space, and an
 undefined key produces build error `DOTJ046E`: the note would
-be missing from the page. The health check reports the same key a step
-earlier.
+be missing from the page. The health check reports the same key before
+anything is built.
 
 Undo the key change. Next, remove the placeholder. Replace the trimming task's
 `<step conref="…"><cmd/></step>` with a self-closing
-`<step conref="…"/>`, and validation fails before anything is resolved:
+`<step conref="…"/>`, and check your work. The file is no longer valid,
+and the check names it. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/trimming-audio.dita:
-  37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
-13 file(s): 12 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the line, column, and message:
+
+```
+Invalid files (1 of 13):
+  /home/you/audacity-guide/topics/trimming-audio.dita:
+    37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
+```
+
+Validation fails before anything is resolved.
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

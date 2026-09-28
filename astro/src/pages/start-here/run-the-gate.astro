@@ -28,7 +28,7 @@ import TableHead from "@ui/table/TableHead.astro";
 import TableHeader from "@ui/table/TableHeader.astro";
 import TableRow from "@ui/table/TableRow.astro";
 
-const headings = [{"depth":1,"slug":"run-the-gate","text":"Run the gate"},{"depth":2,"slug":"what-it-checks","text":"What it checks"},{"depth":2,"slug":"run-it","text":"Run it"},{"depth":2,"slug":"when-it-fails","text":"When it fails"},{"depth":2,"slug":"the-switches","text":"The switches"},{"depth":2,"slug":"find-the-output","text":"Find the output"},{"depth":2,"slug":"environment","text":"Environment"},{"depth":2,"slug":"where-to-go-next","text":"Where to go next"}];
+const headings = [{"depth":1,"slug":"check-your-work","text":"Check your work"},{"depth":2,"slug":"what-it-checks","text":"What it checks"},{"depth":2,"slug":"before-stage-03-no-deliverables-yet","text":"Before stage 03: no deliverables yet"},{"depth":2,"slug":"a-ready-project","text":"A ready project"},{"depth":2,"slug":"when-it-fails","text":"When it fails"},{"depth":2,"slug":"find-the-output","text":"Find the output"},{"depth":2,"slug":"for-maintainers","text":"For maintainers"},{"depth":2,"slug":"where-to-go-next","text":"Where to go next"}];
 const nav = navData;
 const currentPath = "/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate";
 const _navForPagination = filterNavByAxis(nav as any[], {
@@ -38,8 +38,8 @@ const _navForPagination = filterNavByAxis(nav as any[], {
   locale: null ?? undefined,
 });
 const { prev, next } = getPagination(currentPath, _navForPagination);
-const title = "Run the gate";
-const description = "What scripts/check-stage.sh checks, what it prints when a stage passes or fails, and the SKIP_BUILD and STRICT switches." || undefined;
+const title = "Check your work";
+const description = "Check a stage with Project > Check Project in the editor or dogsbay-xml check on the command line, read the result, and find the details when it fails." || undefined;
 const ogImage = "" || undefined;
 const noindex = false;
 const nofollow = false;
@@ -52,7 +52,7 @@ const pageCategory = ["start-here"];
 const pageTaxonomies = null;
 const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Run the gate {#run-the-gate}\n\nEach stage includes `scripts/check-stage.sh`, the gate. Run it from the project root to check the source and, from stage 03, build the deliverables. The script writes build output and logs to a temporary directory by default.\n\nThe gate runs three checks in order and prints `STAGE OK` when all of them pass, or `STAGE FAILED` with failed checks marked `FAIL:`. A missing tool causes an immediate exit with code `2`.\n\n## What it checks {#what-it-checks}\n\n| Step | Command | Checks |\n| --- | --- | --- |\n| 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` file validates against its DOCTYPE |\n| 2 | `dogsbay-xml project-health <root>` | References, keys, reuse targets, metadata, and configured house rules for the default root map. Warnings alone can pass. |\n| 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` message codes, because the build does not always exit non-zero on a content error |\n\nStep 2 uses the root map and Schematron configured in `.dogsbay/config.xml` once later stages add them. Step 3 is skipped until the project has a `project.json`, which arrives in stage 03.\n\nStage 15 adds controlled-value validation. Stage 23 adds a catalog fallback for learning topics, and stage 25 enables a separate house-rules check. See [The gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate) for those details and the limits of the checks.\n\n## Run it {#run-it}\n\n```bash\nscripts/check-stage.sh\n```\n\nOn stage 01, before the map and `project.json` are created, it prints:\n\n```\n== validate-project  /home/you/dogsbay-xml-dita-tutorial ==\n1 file(s): 1 valid, 0 invalid.\n\n== project-health  /home/you/dogsbay-xml-dita-tutorial ==\nRoot map: none (none configured); house rules: none (none configured)\nProject is healthy: valid, no broken references, keys, orphans, or broken element ids.\n\n== build  skipped (no project.json yet) ==\n\nSTAGE OK\n```\n\nThe file count grows with each stage. `Root map: none` is expected until stage 02.\n\n## When it fails {#when-it-fails}\n\nA validation error names the file, the line and column, and the element whose content model was broken:\n\n```\n== validate-project  /home/you/dogsbay-xml-dita-tutorial ==\n/home/you/dogsbay-xml-dita-tutorial/topics/trimming-audio.dita:\n  22:170  error: The content of element type \"cmd\" does not match its content model.\n5 file(s): 4 valid, 1 invalid.\nFAIL: validation errors\n```\n\nThe gate carries on to the health check so you see everything at once, then ends with `STAGE FAILED`. Fix the file, run it again.\n\n## The switches {#the-switches}\n\n```bash\nSKIP_BUILD=1 scripts/check-stage.sh    # skip DITA-OT; a fast loop while authoring\nSTRICT=0 scripts/check-stage.sh        # project-health at --severity=error only\nscripts/check-stage.sh /path/to/root   # check another project folder\n```\n\n`SKIP_BUILD=1` skips publishing from stage 03 onward. Build time depends on the size of the publication and your system. `STRICT=0` restricts the health report to errors. The default, `STRICT=1`, also reports warnings; it does not make every warning a failure. Use the default when checking a completed lesson and review the reported findings.\n\n## Find the output {#find-the-output}\n\nThe build header identifies the temporary directory for that run. Paths such as `/tmp/check-stage-357688` in recorded output are examples. Use the directory printed by your own run.\n\nWhen a lesson asks you to inspect `out/full/` in your project, first build there with:\n\n```bash\ndita --project=project.json\n```\n\nAlternatively, inspect `out/full/` under the gate's temporary directory. The same rule applies to the other deliverable directories. Command output can vary with tool versions; compare the checks and results, not process IDs or line numbers.\n\n## Environment {#environment}\n\n| Variable | Default | Purpose |\n| --- | --- | --- |\n| `DOGSBAY_XML` | `dogsbay-xml` on `PATH`, else `~/github/dogsbay-xml/bin/dogsbay-xml` | The DogsBay XML command line |\n| `DITA_HOME` | `~/Downloads/dita-ot-4.3.5` | The DITA-OT installation; `DITA` overrides the `dita` executable directly |\n| `OUT` | a temporary directory | Where step 3 writes the build |\n\nExit codes: `0` stage OK, `1` a gate failed, `2` a tool was not found.\n\n## Where to go next {#where-to-go-next}\n\n:::cards\n- **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon=\"play\"}**\n  The empty project, file by file.\n\n- **[The gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate){icon=\"book-open\"}**\n  The full reference, including why xmllint is not used.\n:::\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Check your work {#check-your-work}\n\nCheck your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the built output holds together.\n\n- In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel.\n- From the command line, run `dogsbay-xml check .` from the project root.\n\nBoth run the same check. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5 and build with it.\n\n## What it checks {#what-it-checks}\n\nThe check runs three stages in order, and each runs only when the one before it passed:\n\n| Stage | Checks |\n| --- | --- |\n| Health | Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound |\n| Build | Every deliverable in `project.json` builds with DITA-OT |\n| Output | Every link, image, and fragment in the built output leads somewhere |\n\nIt stops at the first stage that fails, because later stages would only report consequences of the same fault. A broken reference in the source, for example, produces a broken link in the output.\n\nHealth uses the root map and house rules set in the project settings once later stages add them.\n\n## Before stage 03: no deliverables yet {#before-stage-03-no-deliverables-yet}\n\nDeliverables arrive in stage 03. Until then there is nothing to build, and the check reports that it stopped at the build stage:\n\n```\nhealth   clean\nbuild    nothing to build\nNot ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.\n```\n\nIn stages 00 to 02, `health   clean` is the result to look for. From the command line, add `--no-build` to check the source only:\n\n```bash\ndogsbay-xml check --no-build .\n```\n\n```\nhealth   clean\nProject health is clean. The build was not run, so nothing here speaks for the output.\n```\n\n## A ready project {#a-ready-project}\n\nFrom stage 03, a finished lesson checks as ready. For example, on stage 03:\n\n```\nhealth   clean\nbuild    full                 ok  /home/you/audacity-guide/out/full\noutput   clean (full)\nReady: the project is healthy, every deliverable built, and the output of full holds together.\n```\n\nLater stages list one `build` line for each deliverable. Paths in recorded output are examples.\n\n## When it fails {#when-it-fails}\n\nWhen health fails, the check names the files with problems:\n\n```\nhealth   NOT CLEAN\n  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita\n  (run project-health for the full report)\nNot ready: stopped at health — the project itself has faults, so nothing was built and no output was read.\n```\n\nFor the line, column, and message of each problem, open the **Project Validation** panel in the editor, or run:\n\n```bash\ndogsbay-xml project-health .\n```\n\nWhen the output check fails, it lists each link that leads nowhere, with the page and line that contains it.\n\nFix the problem and check again. After a lesson's deliberate-error exercise, undo the change and check again before you continue.\n\n## Find the output {#find-the-output}\n\nEach deliverable builds into its own folder, as `project.json` declares it: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on. The `out/` folder is ignored by Git.\n\nTo build and check one deliverable only:\n\n```bash\ndogsbay-xml check --deliverable=full .\n```\n\n## For maintainers {#for-maintainers}\n\nEach stage branch also carries `scripts/check-stage.sh`, the script used to verify the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate).\n\n## Where to go next {#where-to-go-next}\n\n:::cards\n- **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon=\"play\"}**\n  The empty project, file by file.\n\n- **[The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate){icon=\"book-open\"}**\n  The maintainers' script, and why xmllint is not used.\n:::\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -106,83 +106,62 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
   <RightRailStack slot="right-rail" />
   <MarkdownContentStack>
     <article class="docs-prose">
-      <h1 id="run-the-gate" class="group scroll-mt-20">Run the gate<a href="#run-the-gate" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h1>
-      <p>Each stage includes <code>scripts/check-stage.sh</code>, the gate. Run it from the project root to check the source and, from stage 03, build the deliverables. The script writes build output and logs to a temporary directory by default.</p>
-      <p>The gate runs three checks in order and prints <code>STAGE OK</code> when all of them pass, or <code>STAGE FAILED</code> with failed checks marked <code>FAIL:</code>. A missing tool causes an immediate exit with code <code>2</code>.</p>
+      <h1 id="check-your-work" class="group scroll-mt-20">Check your work<a href="#check-your-work" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h1>
+      <p>Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the built output holds together.</p>
+      <ul>
+      <li>In the editor, choose <strong>Project</strong> &gt; <strong>Check Project</strong>. The result appears in the <strong>Project Validation</strong> panel.</li>
+      <li>From the command line, run <code>dogsbay-xml check .</code> from the project root.</li>
+      </ul>
+      <p>Both run the same check. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5 and build with it.</p>
       <h2 id="what-it-checks" class="group scroll-mt-20">What it checks<a href="#what-it-checks" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <p>The check runs three stages in order, and each runs only when the one before it passed:</p>
       <Table class="my-4">
       <TableHeader>
       <TableRow>
-      <TableHead>Step</TableHead>
-      <TableHead>Command</TableHead>
+      <TableHead>Stage</TableHead>
       <TableHead>Checks</TableHead>
       </TableRow>
       </TableHeader>
       <TableBody>
       <TableRow>
-      <TableCell>1</TableCell>
-      <TableCell><code>dogsbay-xml validate-project &lt;root&gt;</code></TableCell>
-      <TableCell>Every <code>.dita</code> and <code>.ditamap</code> file validates against its DOCTYPE</TableCell>
+      <TableCell>Health</TableCell>
+      <TableCell>Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell>2</TableCell>
-      <TableCell><code>dogsbay-xml project-health &lt;root&gt;</code></TableCell>
-      <TableCell>References, keys, reuse targets, metadata, and configured house rules for the default root map. Warnings alone can pass.</TableCell>
+      <TableCell>Build</TableCell>
+      <TableCell>Every deliverable in <code>project.json</code> builds with DITA-OT</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell>3</TableCell>
-      <TableCell><code>dita --project=project.json --output=&lt;tmp&gt;</code></TableCell>
-      <TableCell>Every deliverable in <code>project.json</code> builds. The log is scanned for <code>Error:</code> lines and DITA-OT <code>E</code> and <code>F</code> message codes, because the build does not always exit non-zero on a content error</TableCell>
+      <TableCell>Output</TableCell>
+      <TableCell>Every link, image, and fragment in the built output leads somewhere</TableCell>
       </TableRow>
       </TableBody>
       </Table>
-      <p>Step 2 uses the root map and Schematron configured in <code>.dogsbay/config.xml</code> once later stages add them. Step 3 is skipped until the project has a <code>project.json</code>, which arrives in stage 03.</p>
-      <p>Stage 15 adds controlled-value validation. Stage 23 adds a catalog fallback for learning topics, and stage 25 enables a separate house-rules check. See <a href="/dogsbay-xml-dita-tutorial-docs/reference/the-gate">The gate</a> for those details and the limits of the checks.</p>
-      <h2 id="run-it" class="group scroll-mt-20">Run it<a href="#run-it" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <CodeBlock code={"scripts/check-stage.sh"} lang="bash" />
-      <p>On stage 01, before the map and <code>project.json</code> are created, it prints:</p>
-      <CodeBlock code={"== validate-project  /home/you/dogsbay-xml-dita-tutorial ==\n1 file(s): 1 valid, 0 invalid.\n\n== project-health  /home/you/dogsbay-xml-dita-tutorial ==\nRoot map: none (none configured); house rules: none (none configured)\nProject is healthy: valid, no broken references, keys, orphans, or broken element ids.\n\n== build  skipped (no project.json yet) ==\n\nSTAGE OK"} lang="plaintext" />
-      <p>The file count grows with each stage. <code>Root map: none</code> is expected until stage 02.</p>
+      <p>It stops at the first stage that fails, because later stages would only report consequences of the same fault. A broken reference in the source, for example, produces a broken link in the output.</p>
+      <p>Health uses the root map and house rules set in the project settings once later stages add them.</p>
+      <h2 id="before-stage-03-no-deliverables-yet" class="group scroll-mt-20">Before stage 03: no deliverables yet<a href="#before-stage-03-no-deliverables-yet" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <p>Deliverables arrive in stage 03. Until then there is nothing to build, and the check reports that it stopped at the build stage:</p>
+      <CodeBlock code={"health   clean\nbuild    nothing to build\nNot ready: stopped at build — this project declares no deliverables, so there is nothing to build or check."} lang="plaintext" />
+      <p>In stages 00 to 02, <code>health   clean</code> is the result to look for. From the command line, add <code>--no-build</code> to check the source only:</p>
+      <CodeBlock code={"dogsbay-xml check --no-build ."} lang="bash" />
+      <CodeBlock code={"health   clean\nProject health is clean. The build was not run, so nothing here speaks for the output."} lang="plaintext" />
+      <h2 id="a-ready-project" class="group scroll-mt-20">A ready project<a href="#a-ready-project" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <p>From stage 03, a finished lesson checks as ready. For example, on stage 03:</p>
+      <CodeBlock code={"health   clean\nbuild    full                 ok  /home/you/audacity-guide/out/full\noutput   clean (full)\nReady: the project is healthy, every deliverable built, and the output of full holds together."} lang="plaintext" />
+      <p>Later stages list one <code>build</code> line for each deliverable. Paths in recorded output are examples.</p>
       <h2 id="when-it-fails" class="group scroll-mt-20">When it fails<a href="#when-it-fails" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <p>A validation error names the file, the line and column, and the element whose content model was broken:</p>
-      <CodeBlock code={"== validate-project  /home/you/dogsbay-xml-dita-tutorial ==\n/home/you/dogsbay-xml-dita-tutorial/topics/trimming-audio.dita:\n  22:170  error: The content of element type \"cmd\" does not match its content model.\n5 file(s): 4 valid, 1 invalid.\nFAIL: validation errors"} lang="plaintext" />
-      <p>The gate carries on to the health check so you see everything at once, then ends with <code>STAGE FAILED</code>. Fix the file, run it again.</p>
-      <h2 id="the-switches" class="group scroll-mt-20">The switches<a href="#the-switches" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <CodeBlock code={"SKIP_BUILD=1 scripts/check-stage.sh    # skip DITA-OT; a fast loop while authoring\nSTRICT=0 scripts/check-stage.sh        # project-health at --severity=error only\nscripts/check-stage.sh /path/to/root   # check another project folder"} lang="bash" />
-      <p><code>SKIP_BUILD=1</code> skips publishing from stage 03 onward. Build time depends on the size of the publication and your system. <code>STRICT=0</code> restricts the health report to errors. The default, <code>STRICT=1</code>, also reports warnings; it does not make every warning a failure. Use the default when checking a completed lesson and review the reported findings.</p>
+      <p>When health fails, the check names the files with problems:</p>
+      <CodeBlock code={"health   NOT CLEAN\n  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita\n  (run project-health for the full report)\nNot ready: stopped at health — the project itself has faults, so nothing was built and no output was read."} lang="plaintext" />
+      <p>For the line, column, and message of each problem, open the <strong>Project Validation</strong> panel in the editor, or run:</p>
+      <CodeBlock code={"dogsbay-xml project-health ."} lang="bash" />
+      <p>When the output check fails, it lists each link that leads nowhere, with the page and line that contains it.</p>
+      <p>Fix the problem and check again. After a lesson's deliberate-error exercise, undo the change and check again before you continue.</p>
       <h2 id="find-the-output" class="group scroll-mt-20">Find the output<a href="#find-the-output" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <p>The build header identifies the temporary directory for that run. Paths such as <code>/tmp/check-stage-357688</code> in recorded output are examples. Use the directory printed by your own run.</p>
-      <p>When a lesson asks you to inspect <code>out/full/</code> in your project, first build there with:</p>
-      <CodeBlock code={"dita --project=project.json"} lang="bash" />
-      <p>Alternatively, inspect <code>out/full/</code> under the gate's temporary directory. The same rule applies to the other deliverable directories. Command output can vary with tool versions; compare the checks and results, not process IDs or line numbers.</p>
-      <h2 id="environment" class="group scroll-mt-20">Environment<a href="#environment" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <Table class="my-4">
-      <TableHeader>
-      <TableRow>
-      <TableHead>Variable</TableHead>
-      <TableHead>Default</TableHead>
-      <TableHead>Purpose</TableHead>
-      </TableRow>
-      </TableHeader>
-      <TableBody>
-      <TableRow>
-      <TableCell><code>DOGSBAY_XML</code></TableCell>
-      <TableCell><code>dogsbay-xml</code> on <code>PATH</code>, else <code>~/github/dogsbay-xml/bin/dogsbay-xml</code></TableCell>
-      <TableCell>The DogsBay XML command line</TableCell>
-      </TableRow>
-      <TableRow>
-      <TableCell><code>DITA_HOME</code></TableCell>
-      <TableCell><code>~/Downloads/dita-ot-4.3.5</code></TableCell>
-      <TableCell>The DITA-OT installation; <code>DITA</code> overrides the <code>dita</code> executable directly</TableCell>
-      </TableRow>
-      <TableRow>
-      <TableCell><code>OUT</code></TableCell>
-      <TableCell>a temporary directory</TableCell>
-      <TableCell>Where step 3 writes the build</TableCell>
-      </TableRow>
-      </TableBody>
-      </Table>
-      <p>Exit codes: <code>0</code> stage OK, <code>1</code> a gate failed, <code>2</code> a tool was not found.</p>
+      <p>Each deliverable builds into its own folder, as <code>project.json</code> declares it: <code>out/full/</code> for the full guide, <code>out/beginner-mac/</code> for the macOS beginner guide, and so on. The <code>out/</code> folder is ignored by Git.</p>
+      <p>To build and check one deliverable only:</p>
+      <CodeBlock code={"dogsbay-xml check --deliverable=full ."} lang="bash" />
+      <h2 id="for-maintainers" class="group scroll-mt-20">For maintainers<a href="#for-maintainers" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
+      <p>Each stage branch also carries <code>scripts/check-stage.sh</code>, the script used to verify the branches. Readers do not need it. See <a href="/dogsbay-xml-dita-tutorial-docs/reference/the-gate">The stage gate</a>.</p>
       <h2 id="where-to-go-next" class="group scroll-mt-20">Where to go next<a href="#where-to-go-next" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
       <Grid cols={[1, 2]} gap={4}>
       <Card class="p-4 hover:border-foreground/20 transition-colors">
@@ -198,8 +177,8 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <CardContent class="p-0">
       <a href="/dogsbay-xml-dita-tutorial-docs/reference/the-gate" class="[text-decoration:none] text-foreground">
       <Icon name="book-open" class="size-5 mb-2 text-muted-foreground" />
-      <h3 class="text-base font-semibold">The gate</h3>
-      <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">The full reference, including why xmllint is not used.</p>
+      <h3 class="text-base font-semibold">The stage gate</h3>
+      <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">The maintainers' script, and why xmllint is not used.</p>
       </a>
       </CardContent>
       </Card>

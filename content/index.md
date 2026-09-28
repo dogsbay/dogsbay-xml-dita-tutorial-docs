@@ -19,8 +19,9 @@ one-topic HTML guide in stages 02 and 03. Each module includes
 
 Every stage is a Git branch in the
 [tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial).
-Compare adjacent branches to see each lesson's changes. Run the stage's
-validation script, called the gate, and inspect the output to check your work.
+Compare adjacent branches to see each lesson's changes. Check your work with
+**Project** > **Check Project** in the DogsBay XML editor, or
+`dogsbay-xml check` on the command line, and inspect the output.
 
 The sample guide is teaching material adapted from the Audacity Manual.
 Use the current Audacity documentation for product instructions.
@@ -32,7 +33,7 @@ The maintainer's completed version is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 |---|---|---|---|
-| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, the gate script |
+| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, checking your work |
 | [01](/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
 | [03](/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | `project.json`, DITA-OT, output inspection |
@@ -55,9 +56,9 @@ The maintainer's completed version is tagged `tutorial/final`.
 | [20](/part-4-books/stage-20-troubleshooting) | `tutorial/20-troubleshooting` | *The recording is silent* | `<troubleshooting>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>`, `<steps-informal>`, `<note type="trouble">` |
 | [21](/part-4-books/stage-21-hazards-and-safety) | `tutorial/21-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |
 | [22](/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
-| [23](/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the gate and the L&T DTDs |
+| [23](/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |
 | [24](/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
-| [25](/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; the gate's house-rules step |
+| [25](/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; house rules in the check |
 | [26](/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it
@@ -99,7 +100,7 @@ additional time for setup, troubleshooting, and the capstone.
   Branches, diffs, the orphan root and the "You are on" line.
 
 - **[Set up your tools](/start-here/set-up)** {icon="wrench"}
-  Install DITA-OT and the DogsBay XML command line.
+  Install the DogsBay XML editor and its command line.
 
 - **[Stage 00: Set up the project](/part-1-topics/stage-00-setup)** {icon="play"}
   Start building.

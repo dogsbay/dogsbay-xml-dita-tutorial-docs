@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 12 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The prolog of a concept
 
@@ -692,7 +692,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    `<meta name="rights">` tag on each page comes from this copyright.
 ::::
 
-## Step 5: The metadata policy, the README and the gate
+## Step 5: The metadata policy, the README and the check
 
 ::::steps
 1. **Edit `.dogsbay/config.xml`**
@@ -716,14 +716,15 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    - Each `<rule>` names a `field`, a `presence` and, optionally, a
      `topic-type` and a `pattern`. A missing `required` field is an error
-     and fails the gate; a missing `recommended` field is a warning, shown
+     and fails the check; a missing `recommended` field is a warning, shown
      beside a file's errors.
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`.
      Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere,
      which is the rule that reaches the glossary group.
-   - `project-health` applies the policy as one of its checks, so the gate
-     enforces it. The editor reads the same file.
+   - `project-health` applies the policy as one of its checks, so the
+     health stage of **Check Project** and `dogsbay-xml check` enforces it.
+     The editor reads the same file.
 
 3. **Change the "You are on" line**
 
@@ -741,38 +742,60 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-4. **Format and check**
+4. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   21 file(s): 21 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Run `dita --project=project.json` to build in the project directory.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The unused keys are defined for later stages: stage 14 refers to
+   `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
+
+   The check builds the guide into `out/full/`.
    In `out/full/topics/what-is-audacity.html` the `<head>` now carries
    `<meta name="keywords" content="Audacity, audio editor, open source">`
    and `<meta name="rights" content="© 2026 DogsBay Ltd.">`. The PDF transform uses the index terms to generate an index.
 ::::
 
 Test the metadata policy. Delete the `<critdates>` block from *Trimming audio*
-and run the gate:
+and check your work. The check stops at health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The check summary does not name the file for a metadata policy error. Open
+the **Project Validation** panel, or run `dogsbay-xml project-health .`, to
+see it:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Metadata policy (1 of 21 files):
   /home/you/audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
@@ -785,25 +808,36 @@ Summary
   Metadata policy               1  in 1 of 21 files (1 error(s), 0 warning(s))
     missing required <created @date>                                  1
   Unused keys                   3
-FAIL: project-health found issues
 ```
 
 The file is valid; `<critdates>` is optional to the DTD. The policy is what
 makes it required, for tasks, in this project.
 
 Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is
-Audacity?* to before `<metadata>`, and validation fails:
+Audacity?* to before `<metadata>`, and check your work. The file is no
+longer valid, and the check names it. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/what-is-audacity.dita:
-  29:12  error: The content of element type "prolog" does not match its content model.
-21 file(s): 20 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the line, column, and message:
+
+```
+Invalid files (1 of 21):
+  /home/you/audacity-guide/topics/what-is-audacity.dita:
+    29:12  error: The content of element type "prolog" does not match its content model.
+```
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 
@@ -817,7 +851,7 @@ Confirm that it prints `STAGE OK` before continuing.
   other.
 - Map `<topicmeta>` takes the same elements for the publication.
 - A metadata policy in `.dogsbay/config.xml`: `<rule field presence
-  topic-type pattern>`, enforced by `project-health` and so by the gate.
+  topic-type pattern>`, enforced by `project-health` and so by the check.
 - End of Part 2: a map with structure and a reltable, a key space, a
   shared topic, a glossary and metadata, published as one HTML5 deliverable.
 

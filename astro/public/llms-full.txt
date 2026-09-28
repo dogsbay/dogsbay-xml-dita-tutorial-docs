@@ -18,7 +18,7 @@ Build a DITA 1.3 documentation set using an Audacity user guide as the example. 
 
 Choose the [core course or optional modules](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path). Start with [Plan your topics](/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics), then publish a one-topic HTML guide in stages 02 and 03. Each module includes [practice exercises](/dogsbay-xml-dita-tutorial-docs/practice/exercises), and the core course ends with an [interview-workflow capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).
 
-Every stage is a Git branch in the [tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Compare adjacent branches to see each lesson's changes. Run the stage's validation script, called the gate, and inspect the output to check your work.
+Every stage is a Git branch in the [tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Compare adjacent branches to see each lesson's changes. Check your work with **Project** > **Check Project** in the DogsBay XML editor, or `dogsbay-xml check` on the command line, and inspect the output.
 
 The sample guide is teaching material adapted from the Audacity Manual. Use the current Audacity documentation for product instructions.
 
@@ -28,7 +28,7 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 
 | Stage | Branch | Builds | Introduces |
 | --- | --- | --- | --- |
-| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, the gate script |
+| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, checking your work |
 | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
 | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | `project.json`, DITA-OT, output inspection |
@@ -51,9 +51,9 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) | `tutorial/20-troubleshooting` | *The recording is silent* | `<troubleshooting>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>`, `<steps-informal>`, `<note type="trouble">` |
 | [21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety) | `tutorial/21-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |
 | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
-| [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the gate and the L&T DTDs |
+| [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |
 | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
-| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; the gate's house-rules step |
+| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; house rules in the check |
 | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it {#how-to-use-it}
@@ -79,7 +79,7 @@ Follow the core course for topic authoring, maps, reuse, variants, and validatio
   Branches, diffs, the orphan root and the "You are on" line.
 
 - **[Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up){icon="wrench"}**
-  Install DITA-OT and the DogsBay XML command line.
+  Install the DogsBay XML editor and its command line.
 
 - **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
   Start building.
@@ -128,7 +128,7 @@ From the tutorial clone, create a practice branch and worktree, for example:
 ```bash
 git worktree add -b practice-conditions ../audacity-conditions origin/tutorial/13-metadata-and-index
 cd ../audacity-conditions
-scripts/check-stage.sh
+dogsbay-xml check .
 ```
 
 Use a new branch and directory name if either already exists. The checkpoint includes the skipped examples so later diffs apply cleanly.
@@ -225,7 +225,7 @@ Build a DITA guide in 27 stages. The [tutorial repository](https://github.com/do
 Choose one workflow:
 
 - Build the guide in a separate `audacity-guide` repository, starting at stage 00. Fetch the reference branches there to compare your files and retrieve supplied images.
-- Inspect completed stages in the tutorial clone. Compare adjacent branches and run the gate on the stage that you check out.
+- Inspect completed stages in the tutorial clone. Compare adjacent branches and check your work on the stage that you check out.
 
 The command examples use `origin/tutorial/NN-slug` for fetched reference branches. These refs are available after cloning or fetching; local stage branches exist only after you create them.
 
@@ -259,7 +259,7 @@ GitHub shows the same thing as a compare view, and every stage page links to its
 https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/05-inline-and-block...tutorial/06-rich-tasks
 ```
 
-Each completed stage passes its configured gate. Error exercises show the diagnostics for a deliberate change. Undo that change and rerun the gate before continuing. Later stages add checks, so an earlier passing stage can still contain issues that those later checks detect.
+Each completed stage passes the check. Error exercises show the diagnostics for a deliberate change. Undo that change and check again before continuing. Later stages add checks, so an earlier passing stage can still contain issues that those later checks detect.
 
 ## The orphan root {#the-orphan-root}
 
@@ -283,23 +283,23 @@ Besides the topics, every stage branch has:
 
 | File | Purpose |
 | --- | --- |
-| `README.md` | The "You are on" line, the stage table, the gate command |
+| `README.md` | The "You are on" line, the stage table, the maintainer check commands |
 | `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
 | `.dogsbay/config.xml` | Shared editor project settings: project type, framework, format style |
-| `scripts/check-stage.sh` | The gate. See [Run the gate](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) |
+| `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate) |
 | `.gitignore` | Keeps DITA-OT output out of Git |
 
-## The gate {#the-gate}
+## Check your work {#check-your-work}
 
-`scripts/check-stage.sh` validates every file, runs a project health check and, once the project has a `project.json`, builds every deliverable with DITA-OT. A stage is done when it prints `STAGE OK`. Every branch in the chain passes it, and every stage page ends by running it.
+**Project** > **Check Project** in the editor, or `dogsbay-xml check .` on the command line, checks the project health and, once the project declares deliverables in stage 03, builds every deliverable with DITA-OT and checks the built output. From stage 03, a stage is done when the check reports `Ready`. Before stage 03, look for `health   clean`. Every stage page ends by checking your work.
 
 ## Where to go next {#where-to-go-next}
 
 :::cards
 - **[Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up){icon="wrench"}**
-  DITA-OT 4.3.5, the DogsBay XML command line, and the clone.
+  The DogsBay XML editor and command line, and the clone.
 
-- **[Run the gate](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
+- **[Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
   What the check does and what its output means.
 :::
 
@@ -311,59 +311,34 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/set-up.md
 
 ---
 title: Set up your tools
-description: Install DITA-OT 4.3.5 and the DogsBay XML command line, point the gate at them, and clone the tutorial repository at its first stage.
+description: Install the DogsBay XML editor, which includes the dogsbay-xml command line and DITA-OT 4.3.5, and clone the tutorial repository at its first stage.
 type: how-to
 ---
 
 # Set up your tools {#set-up-your-tools}
 
-The tutorial needs two tools: DITA-OT, which publishes the guide, and the DogsBay XML command line `dogsbay-xml`, which validates the files and checks the project. The gate script finds both on your `PATH` or through two environment variables.
+The tutorial needs two tools: the DogsBay XML editor and Git. The editor includes the `dogsbay-xml` command line and DITA-OT 4.3.5. You check your work with either one: **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line. Both validate the files, check the project, and build the guide with the included DITA-OT. You do not need to install DITA-OT or set any environment variables.
 
-You also need Git, Bash, and a text editor. The shell examples use Bash and Unix utilities. On Windows, use a Bash environment and verify that it can run both tools before continuing. The DogsBay XML editor is the recommended editor: it validates as you type against the same DTDs the gate uses, and it ships the command line. Any editor that can save UTF-8 text works.
+The shell examples use Bash and Unix utilities. On Windows, use a Bash environment. The editor validates as you type against the same DTDs that the check uses. Any editor that can save UTF-8 text works for writing the files, but you need the DogsBay XML editor or its command line to check your work.
 
-## Install DITA-OT 4.3.5 {#install-dita-ot-435}
+## Install the DogsBay XML editor {#install-the-dogsbay-xml-editor}
 
-The tutorial's recorded examples use DITA-OT 4.3.5. Use that version to compare your results with the examples. Other versions can produce different output or diagnostics.
-
-:::steps
-1. **Download the release** Get `dita-ot-4.3.5.zip` from the [DITA-OT releases](https://github.com/dita-ot/dita-ot/releases/tag/4.3.5) and unpack it somewhere you keep tools, such as `~/Downloads/dita-ot-4.3.5` or `/opt/dita-ot-4.3.5`.
-2. **Check it runs** DITA-OT needs a Java runtime, 17 or later.
-
-   ```bash
-   ~/Downloads/dita-ot-4.3.5/bin/dita --version
-   ```
-3. **Set the installation directory** Set `DITA_HOME` to your installation directory, even if `dita` is on `PATH`. Stage 23 uses this directory to locate the XML catalog. Replace the example path with your installation path:
-
-   ```bash
-   export DITA_HOME="/opt/dita-ot-4.3.5"
-   export PATH="$DITA_HOME/bin:$PATH"
-   dita --version
-   ```
-
-   Add the exports to your Bash profile if you want to use them in future sessions. `DITA` overrides the executable used by the gate; keep it consistent with `DITA_HOME` if you set it.
-:::
-
-## Install the DogsBay XML command line {#install-the-dogsbay-xml-command-line}
-
-`dogsbay-xml` is installed with the DogsBay XML editor. The installer puts the executable beside the editor, and the command line needs neither a running editor nor a separate JDK.
+The command line is installed with the editor. It needs neither a running editor nor a separate JDK. The recorded examples use the included DITA-OT 4.3.5.
 
 :::steps
 1. **Install the editor** Follow [Installing](https://dogsbay.ai/dogsbay-xml-docs/getting-started/install) in the DogsBay XML documentation: download the package for your platform from the [releases page](https://github.com/dogsbay/dogsbay-xml/releases) and install it the usual way.
-2. **Put the command line on your PATH** The same page shows the directory for each platform. On Linux:
+2. **Put the command line on your PATH** If you work from the command line, `dogsbay-xml` must be on your `PATH`. The installation page shows the directory for each platform. On Linux:
 
    ```bash
    export PATH="/opt/dogsbay-xml-editor/bin:$PATH"
    dogsbay-xml --version
    ```
-3. **Or point the gate at it** If you would rather not change your `PATH`, set `DOGSBAY_XML` to the executable. The gate checks the variable first, then the `PATH`.
 
-   ```bash
-   export DOGSBAY_XML=/opt/dogsbay-xml-editor/bin/dogsbay-xml
-   ```
+   Add the export to your Bash profile to use it in future sessions. If you check your work only in the editor, you can skip this step.
 :::
 
 > [!NOTE]
-> Use `dogsbay-xml` for the tutorial checks. In the environment used for the recorded runs, `xmllint` rejected the DITA 1.3 DTDs with "Maximum entity amplification factor exceeded", including with `--huge`. `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
+> Use `dogsbay-xml` to check your work. In the environment used for the recorded runs, `xmllint` rejected the DITA 1.3 DTDs with "Maximum entity amplification factor exceeded", including with `--huge`. `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
 
 ## Clone the repository {#clone-the-repository}
 
@@ -400,14 +375,14 @@ The tutorial's recorded examples use DITA-OT 4.3.5. Use that version to compare 
 
 For the authoring workflow, stage 00 creates a separate `audacity-guide` repository. Open that folder after creating it. Keep the clone as a reference. For the inspection workflow, open the clone directly.
 
-If you use the DogsBay XML editor, open the selected folder as a project. The `.dogsbay/config.xml` on every stage branch sets the project type to DITA, the framework to DITA-OT 4.3.5 and the format style, so the editor and the gate agree on what a valid, well-formatted file is.
+If you use the DogsBay XML editor, open the selected folder as a project. The `.dogsbay/config.xml` on every stage branch sets the project type to DITA, the framework to DITA-OT 4.3.5 and the format style, so the editor and the command line agree on what a valid, well-formatted file is.
 
 ## Check the tools {#check-the-tools}
 
-Run the gate once on stage 00. There is nothing to validate yet, so it should finish at once:
+Check stage 00 once. There is nothing to validate yet, so the check should finish at once. In the editor, choose **Project** > **Check Project**. From the command line, run this command from the project root:
 
 ```bash
-scripts/check-stage.sh
+dogsbay-xml check --no-build .
 ```
 
 The next page explains what it printed.
@@ -415,8 +390,8 @@ The next page explains what it printed.
 ## Where to go next {#where-to-go-next}
 
 :::cards
-- **[Run the gate](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
-  What the check does, what it prints and the two switches.
+- **[Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
+  What the check does, what it prints, and where to find the details.
 
 - **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
   The empty project, file by file.
@@ -424,102 +399,107 @@ The next page explains what it printed.
 
 ---
 
-# Run the gate
+# Check your work
 
 URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate.md
 
 ---
-title: Run the gate
-description: What scripts/check-stage.sh checks, what it prints when a stage passes or fails, and the SKIP_BUILD and STRICT switches.
+title: Check your work
+description: Check a stage with Project > Check Project in the editor or dogsbay-xml check on the command line, read the result, and find the details when it fails.
 type: how-to
 ---
 
-# Run the gate {#run-the-gate}
+# Check your work {#check-your-work}
 
-Each stage includes `scripts/check-stage.sh`, the gate. Run it from the project root to check the source and, from stage 03, build the deliverables. The script writes build output and logs to a temporary directory by default.
+Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the built output holds together.
 
-The gate runs three checks in order and prints `STAGE OK` when all of them pass, or `STAGE FAILED` with failed checks marked `FAIL:`. A missing tool causes an immediate exit with code `2`.
+- In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel.
+- From the command line, run `dogsbay-xml check .` from the project root.
+
+Both run the same check. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5 and build with it.
 
 ## What it checks {#what-it-checks}
 
-| Step | Command | Checks |
-| --- | --- | --- |
-| 1 | `dogsbay-xml validate-project <root>` | Every `.dita` and `.ditamap` file validates against its DOCTYPE |
-| 2 | `dogsbay-xml project-health <root>` | References, keys, reuse targets, metadata, and configured house rules for the default root map. Warnings alone can pass. |
-| 3 | `dita --project=project.json --output=<tmp>` | Every deliverable in `project.json` builds. The log is scanned for `Error:` lines and DITA-OT `E` and `F` message codes, because the build does not always exit non-zero on a content error |
+The check runs three stages in order, and each runs only when the one before it passed:
 
-Step 2 uses the root map and Schematron configured in `.dogsbay/config.xml` once later stages add them. Step 3 is skipped until the project has a `project.json`, which arrives in stage 03.
+| Stage | Checks |
+| --- | --- |
+| Health | Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound |
+| Build | Every deliverable in `project.json` builds with DITA-OT |
+| Output | Every link, image, and fragment in the built output leads somewhere |
 
-Stage 15 adds controlled-value validation. Stage 23 adds a catalog fallback for learning topics, and stage 25 enables a separate house-rules check. See [The gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate) for those details and the limits of the checks.
+It stops at the first stage that fails, because later stages would only report consequences of the same fault. A broken reference in the source, for example, produces a broken link in the output.
 
-## Run it {#run-it}
+Health uses the root map and house rules set in the project settings once later stages add them.
+
+## Before stage 03: no deliverables yet {#before-stage-03-no-deliverables-yet}
+
+Deliverables arrive in stage 03. Until then there is nothing to build, and the check reports that it stopped at the build stage:
+
+```
+health   clean
+build    nothing to build
+Not ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.
+```
+
+In stages 00 to 02, `health   clean` is the result to look for. From the command line, add `--no-build` to check the source only:
 
 ```bash
-scripts/check-stage.sh
+dogsbay-xml check --no-build .
 ```
 
-On stage 01, before the map and `project.json` are created, it prints:
-
 ```
-== validate-project  /home/you/dogsbay-xml-dita-tutorial ==
-1 file(s): 1 valid, 0 invalid.
-
-== project-health  /home/you/dogsbay-xml-dita-tutorial ==
-Root map: none (none configured); house rules: none (none configured)
-Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-== build  skipped (no project.json yet) ==
-
-STAGE OK
+health   clean
+Project health is clean. The build was not run, so nothing here speaks for the output.
 ```
 
-The file count grows with each stage. `Root map: none` is expected until stage 02.
+## A ready project {#a-ready-project}
+
+From stage 03, a finished lesson checks as ready. For example, on stage 03:
+
+```
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+output   clean (full)
+Ready: the project is healthy, every deliverable built, and the output of full holds together.
+```
+
+Later stages list one `build` line for each deliverable. Paths in recorded output are examples.
 
 ## When it fails {#when-it-fails}
 
-A validation error names the file, the line and column, and the element whose content model was broken:
+When health fails, the check names the files with problems:
 
 ```
-== validate-project  /home/you/dogsbay-xml-dita-tutorial ==
-/home/you/dogsbay-xml-dita-tutorial/topics/trimming-audio.dita:
-  22:170  error: The content of element type "cmd" does not match its content model.
-5 file(s): 4 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-The gate carries on to the health check so you see everything at once, then ends with `STAGE FAILED`. Fix the file, run it again.
-
-## The switches {#the-switches}
+For the line, column, and message of each problem, open the **Project Validation** panel in the editor, or run:
 
 ```bash
-SKIP_BUILD=1 scripts/check-stage.sh    # skip DITA-OT; a fast loop while authoring
-STRICT=0 scripts/check-stage.sh        # project-health at --severity=error only
-scripts/check-stage.sh /path/to/root   # check another project folder
+dogsbay-xml project-health .
 ```
 
-`SKIP_BUILD=1` skips publishing from stage 03 onward. Build time depends on the size of the publication and your system. `STRICT=0` restricts the health report to errors. The default, `STRICT=1`, also reports warnings; it does not make every warning a failure. Use the default when checking a completed lesson and review the reported findings.
+When the output check fails, it lists each link that leads nowhere, with the page and line that contains it.
+
+Fix the problem and check again. After a lesson's deliberate-error exercise, undo the change and check again before you continue.
 
 ## Find the output {#find-the-output}
 
-The build header identifies the temporary directory for that run. Paths such as `/tmp/check-stage-357688` in recorded output are examples. Use the directory printed by your own run.
+Each deliverable builds into its own folder, as `project.json` declares it: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on. The `out/` folder is ignored by Git.
 
-When a lesson asks you to inspect `out/full/` in your project, first build there with:
+To build and check one deliverable only:
 
 ```bash
-dita --project=project.json
+dogsbay-xml check --deliverable=full .
 ```
 
-Alternatively, inspect `out/full/` under the gate's temporary directory. The same rule applies to the other deliverable directories. Command output can vary with tool versions; compare the checks and results, not process IDs or line numbers.
+## For maintainers {#for-maintainers}
 
-## Environment {#environment}
-
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `DOGSBAY_XML` | `dogsbay-xml` on `PATH`, else `~/github/dogsbay-xml/bin/dogsbay-xml` | The DogsBay XML command line |
-| `DITA_HOME` | `~/Downloads/dita-ot-4.3.5` | The DITA-OT installation; `DITA` overrides the `dita` executable directly |
-| `OUT` | a temporary directory | Where step 3 writes the build |
-
-Exit codes: `0` stage OK, `1` a gate failed, `2` a tool was not found.
+Each stage branch also carries `scripts/check-stage.sh`, the script used to verify the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate).
 
 ## Where to go next {#where-to-go-next}
 
@@ -527,8 +507,8 @@ Exit codes: `0` stage OK, `1` a gate failed, `2` a tool was not found.
 - **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
   The empty project, file by file.
 
-- **[The gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate){icon="book-open"}**
-  The full reference, including why xmllint is not used.
+- **[The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate){icon="book-open"}**
+  The maintainers' script, and why xmllint is not used.
 :::
 
 ---
@@ -539,19 +519,19 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-se
 
 ---
 title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognize, with the shared editor settings and the gate script that every later stage must pass.
+description: An empty DITA project that the tools recognize, with the shared editor settings, a README, and a first check of your work.
 type: tutorial
 ---
 
 # Stage 00: Set up the project {#stage-00-set-up-the-project}
 
-Create the project settings, validation script, and README for the guide. The DogsBay XML editor uses `.dogsbay/config.xml` to select the DITA framework and formatting settings. The script `scripts/check-stage.sh` runs the checks used throughout the tutorial.
+Create the project settings and README for the guide, then check the project. The DogsBay XML editor uses `.dogsbay/config.xml` to select the DITA framework and formatting settings. At the end of every lesson, you check your work with **Project** > **Check Project** in the editor or `dogsbay-xml check` on the command line.
 
 A topic's DOCTYPE identifies its grammar. For example, `-//OASIS//DTD DITA Concept//EN` identifies the concept DTD. An XML catalog maps that identifier to a local DTD. The tools can then validate the topic without downloading the grammar.
 
 **Time:** about 10 minutes. **You need:** the tools from [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up), and a clone of the repository on `tutorial/00-setup` if you want to compare.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Create the project folder {#step-1-create-the-project-folder}
 
@@ -563,11 +543,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    git init
    git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
    git fetch origin
-   mkdir -p .dogsbay scripts topics
+   mkdir -p .dogsbay topics
    touch topics/.gitkeep
    ```
 
    Fetching adds the reference branches as `origin/tutorial/NN-slug` without adding their files to your working directory. Later lessons use these refs to retrieve images and compare your work.
+
+   Each stage branch also has a `scripts/` folder. Its scripts are checks for the tutorial maintainers. You do not need them in your repository.
 2. **Write the editor settings** `.dogsbay/config.xml` is shared by everyone who opens the project. It sets the project type, the framework the DOCTYPEs resolve against, and the format style that `dogsbay-xml format` and the editor apply, so diffs between stages stay about the feature and not about whitespace.
 
    ```xml {title=".dogsbay/config.xml"}
@@ -596,87 +578,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 :::
 
-## Step 2: Add the gate {#step-2-add-the-gate}
+## Step 2: Write the README and license {#step-2-write-the-readme-and-license}
 
 :::steps
-1. **Write the script** Save it as `scripts/check-stage.sh` and make it executable. It runs `validate-project`, then `project-health`, then, once the project has a `project.json`, a DITA-OT build of every deliverable.
-
-   ```bash {title="scripts/check-stage.sh"}
-   #!/usr/bin/env bash
-   # check-stage.sh — the gate every tutorial stage branch must pass.
-   #
-   # Runs, from the project root:
-   #   1. dogsbay-xml validate-project   every topic and map validates against its DOCTYPE
-   #   2. dogsbay-xml project-health     links, keys, element ids, conref pushes, index,
-   #                                     metadata policy and house rules are clean
-   #   3. dita --project=project.json    every deliverable actually publishes
-   #
-   # Exit code is non-zero when any gate fails. Usage:
-   #   scripts/check-stage.sh [project-root]           (default: the repo root)
-   #   STRICT=0 scripts/check-stage.sh                 (project-health at severity=error only)
-   #   SKIP_BUILD=1 scripts/check-stage.sh             (skip the DITA-OT build)
-   #
-   # Tooling is found from, in order: $DOGSBAY_XML / $DITA_HOME, the PATH, then the
-   # developer defaults below.
-   set -u
-
-   ROOT="$(cd "${1:-$(dirname "$0")/..}" && pwd)"
-   DOGSBAY_XML="${DOGSBAY_XML:-$(command -v dogsbay-xml || echo "$HOME/github/dogsbay-xml/bin/dogsbay-xml")}"
-   DITA_HOME="${DITA_HOME:-$HOME/Downloads/dita-ot-4.3.5}"
-   DITA="${DITA:-$(command -v dita || echo "$DITA_HOME/bin/dita")}"
-   STRICT="${STRICT:-1}"
-   SKIP_BUILD="${SKIP_BUILD:-0}"
-   OUT="${OUT:-${TMPDIR:-/tmp}/check-stage-$$}"
-
-   status=0
-   say() { printf '\n== %s ==\n' "$*"; }
-   fail() { status=1; printf 'FAIL: %s\n' "$*"; }
-
-   [ -x "$DOGSBAY_XML" ] || { echo "dogsbay-xml CLI not found (set DOGSBAY_XML)"; exit 2; }
-
-   say "validate-project  $ROOT"
-   "$DOGSBAY_XML" validate-project "$ROOT" || fail "validation errors"
-
-   say "project-health  $ROOT"
-   if [ "$STRICT" = "1" ]; then
-     "$DOGSBAY_XML" project-health "$ROOT" || fail "project-health found issues"
-   else
-     "$DOGSBAY_XML" project-health --severity=error "$ROOT" || fail "project-health found errors"
-   fi
-
-   if [ "$SKIP_BUILD" = "1" ]; then
-     say "build  skipped (SKIP_BUILD=1)"
-   elif [ -f "$ROOT/project.json" ]; then
-     [ -x "$DITA" ] || { echo "dita command not found (set DITA_HOME or DITA)"; exit 2; }
-     say "build  project.json -> $OUT"
-     log="$OUT.log"; mkdir -p "$OUT"
-     # DITA-OT does not always exit non-zero on content errors, so also grep the log.
-     if ! (cd "$ROOT" && "$DITA" --project=project.json --output="$OUT" >"$log" 2>&1) \
-        || grep -qE '^Error:|\[(DOT[A-Z]+[0-9]+[EF])\]' "$log"; then
-       grep -E '^Error:|\[(DOT[A-Z]+[0-9]+[EF])\]' "$log" | sort -u | head -40
-       fail "DITA-OT build reported errors (full log: $log)"
-     else
-       echo "all deliverables built"
-     fi
-   else
-     say "build  skipped (no project.json yet)"
-   fi
-
-   echo
-   [ "$status" = 0 ] && echo "STAGE OK" || echo "STAGE FAILED"
-   exit "$status"
-   ```
-
-   ```bash
-   chmod +x scripts/check-stage.sh
-   ```
-2. **Read the three steps** Each is a `say` header, a command and a `fail` on error. The build step greps the DITA-OT log for `Error:` and for `E` and `F` message codes because DITA-OT does not always exit non-zero when content is wrong. The details are on [Run the gate](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
-:::
-
-## Step 3: Write the README and license {#step-3-write-the-readme-and-license}
-
-:::steps
-1. **Write the README** The "You are on" line is the one line that changes at every stage. The stage table lists the whole ladder.
+1. **Write the README** The "You are on" line is the one line that changes at every stage. The stage table lists the whole ladder. The "Verification" section names `scripts/`, which holds maintainer checks that readers do not need.
 
    ```md {title="README.md"}
    # DITA tutorial
@@ -773,34 +678,36 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    `LICENSE` is the full text of the Creative Commons Attribution 4.0 International license; copy it from [creativecommons.org](https://creativecommons.org/licenses/by/4.0/legalcode.txt) or from the branch.
 :::
 
-## Step 4: Run the gate {#step-4-run-the-gate}
+## Step 3: Check your work {#step-3-check-your-work}
+
+Check the project. In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the command line, run this command from the project root:
 
 ```bash
-scripts/check-stage.sh
+dogsbay-xml check --no-build .
 ```
 
-With no topics there is nothing to validate, no map to check and no `project.json` to build, so the gate passes at once:
+With no topics and no map, the source is clean. The output looks like this example:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-0 file(s): 0 valid, 0 invalid.
-
-== project-health  /home/you/audacity-guide ==
-Root map: none (none configured); house rules: none (none configured)
-Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-== build  skipped (no project.json yet) ==
-
-STAGE OK
+health   clean
+Project health is clean. The build was not run, so nothing here speaks for the output.
 ```
 
-If it prints `dogsbay-xml CLI not found` or `dita command not found`, go back to [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) and set `DOGSBAY_XML` or `DITA_HOME`.
+The project declares no deliverables until stage 03, so there is nothing to build yet. In the editor, and from the command line without `--no-build`, the check reports that it stopped at the build stage:
+
+```
+health   clean
+build    nothing to build
+Not ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.
+```
+
+That result is expected before stage 03. Look for `health   clean`. If the command is not found, go back to [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) and add the command line to your `PATH`. For more about the result, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
 ## What you learned {#what-you-learned}
 
 - A DITA project is a folder of topics and maps; nothing declares it except the files themselves and, for the editor, `.dogsbay/config.xml`.
 - DOCTYPEs are resolved through the DITA-OT catalog, so a project states which DITA-OT it targets and the DTDs come from there.
-- The gate is three commands. `STAGE OK` means a stage is done.
+- **Project** > **Check Project**, or `dogsbay-xml check`, checks your work. Before stage 03, `health   clean` means a stage is done.
 - Format style lives in the project so every stage's diff is about the feature.
 
 ## Next lesson {#next-lesson}
@@ -817,7 +724,7 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-co
 
 ---
 title: "Stage 01: A concept topic"
-description: Write What is Audacity? as a DITA concept, learn the parts every topic has, and validate one file with the gate.
+description: Write What is Audacity? as a DITA concept, learn the parts every topic has, and check your work.
 type: tutorial
 ---
 
@@ -827,9 +734,9 @@ Write the guide's first topic, *What is Audacity?*, as a DITA `<concept>`. A con
 
 Add a topic identifier, title, short description, and body. The tutorial requires a short description for each concept, task, and reference topic; the DTD makes some of these elements optional.
 
-**Time:** about 15 minutes. **You need:** stage 00 complete, with the gate passing.
+**Time:** about 15 minutes. **You need:** stage 00 complete, with the check reporting `health   clean`.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the topic {#step-1-write-the-topic}
 
@@ -855,7 +762,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    If you use another editor, create the file and type the finished topic shown in step 3.
 2. **Replace the placeholders** Double-click `concept_id` and type `what-is-audacity`. Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `What is Audacity?`.
-3. **Complete the topic** Add the short description after the title, then the paragraphs, list, and section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and run the gate".
+3. **Complete the topic** Add the short description after the title, then the paragraphs, list, and section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and check your work".
 
    The finished topic:
 
@@ -918,7 +825,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Remove `topics/.gitkeep`** The folder is no longer empty.
 :::
 
-## Step 3: Format and run the gate {#step-3-format-and-run-the-gate}
+## Step 3: Format and check your work {#step-3-format-and-check-your-work}
 
 :::steps
 1. **Format the topic** Apply the project's format style before every check, so your diff stays about the feature. This is how every stage branch was written.
@@ -930,35 +837,62 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
-2. **Run the gate**
+2. **Check your work** In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   scripts/check-stage.sh
+   dogsbay-xml check --no-build .
    ```
 
+   The output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   1 file(s): 1 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean, with warnings
+     orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+   Project health is clean. The build was not run, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
    ```
+
+   The orphan warning is expected. No map refers to the topic yet, so it would not appear in any output. Stage 02 adds the map. A warning does not make the check fail.
+
+   The project declares no deliverables until stage 03. In the editor, and from the command line without `--no-build`, the check reports `Not ready: stopped at build` because there is nothing to build. That result is expected before stage 03. Look for `health   clean`.
 :::
 
-To see a validation error, put a `<section>` inside another `<section>` and run the gate again. `validate-project` names the file, the line and the element whose content model was broken. For example:
+To see a validation error, put a `<section>` inside another `<section>` and check again. For example, add this inside the *Who uses it* section, after its `<p>`:
+
+```xml
+<section>
+  <title>Nested</title>
+  <p>Inner.</p>
+</section>
+```
+
+The check names the file and stops at the health stage. The output looks like this example:
 
 ```
-24:15  error: The content of element type "section" does not match its content model.
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-In the editor, **XML** > **Validate** reports the same error in the **Errors** panel. Undo the change before you go on.
+For the line, column, and message, open the **Project Validation** panel in the editor, or run `dogsbay-xml project-health .`. It reports the element whose content model was broken. For example:
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+```
+Root map: none (none configured); house rules: none (none configured)
+Invalid files (1 of 1):
+  /home/you/audacity-guide/topics/what-is-audacity.dita:
+    27:15  error: The content of element type "section" does not match its content model.
+Orphan topics (1):
+  /home/you/audacity-guide/topics/what-is-audacity.dita
+
+Summary
+  Invalid files                 1  of 1
+  Orphan topics                 1
+```
+
+In the editor, **XML** > **Validate** also reports the error in the **Errors** panel.
+
+Undo the change and check again. Confirm that the check reports `health   clean` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -966,7 +900,7 @@ After each error exercise, undo the deliberate change and rerun the gate. Confir
 - Concepts, tasks, and references in this tutorial have an `@id`, a `<title>`, and a `<shortdesc>`. Stage 25 makes the short description a house rule.
 - The DOCTYPE names a public identifier, and the catalog finds the DTD.
 - `<section>` is one level deep; deeper structure means another topic.
-- Format, then gate, every time.
+- Format, then check your work, every time.
 
 ## Next lesson {#next-lesson}
 
@@ -1026,19 +960,40 @@ Set the default root map for the project:
 
 The project stores the setting in `.dogsbay/config.xml` as `<default-root-map>audacity-guide.ditamap</default-root-map>`. The health check uses this map to decide which topics belong to the publication.
 
-Validate the document in the editor, or run these commands from the project root:
+Validate the map in the editor with **XML** > **Validate**, or run this command from the project root:
 
 ```bash
 dogsbay-xml validate audacity-guide.ditamap
-scripts/check-stage.sh
 ```
 
-The gate checks the source. Stage 03 adds a deliverable so the gate can also publish HTML.
+Then check your work. In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the command line, run:
 
-Validation checks the map against its grammar only. It does not check that each `@href` points to a file. To see the difference, change the `@href` to `topics/what-is-audacty.dita` and run `dogsbay-xml validate audacity-guide.ditamap` again. It still prints `VALID`. Now run the gate. The project health check reports the broken reference, and the topic that the map no longer includes. The following output is an example:
+```bash
+dogsbay-xml check --no-build .
+```
+
+The output looks like this example:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   clean
+Project health is clean. The build was not run, so nothing here speaks for the output.
+```
+
+The orphan warning from stage 01 is gone, because the map now refers to the topic. The check reads the source only. Stage 03 adds a deliverable, so the check can also build HTML. Until then, the editor, and the command line without `--no-build`, report `Not ready: stopped at build` because the project declares no deliverables. That result is expected. Look for `health   clean`.
+
+Validation checks the map against its grammar only. It does not check that each `@href` points to a file. To see the difference, change the `@href` to `topics/what-is-audacty.dita` and run `dogsbay-xml validate audacity-guide.ditamap` again. It still prints `VALID`. Now check your work. The check reports the broken reference, and the topic that the map no longer includes. The following output is an example:
+
+```
+health   NOT CLEAN
+  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita" — target not found
+  (run project-health for the full report)
+  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the full report. For example:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
   /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
@@ -1048,10 +1003,9 @@ Orphan topics (1):
 Summary
   Broken references             1
   Orphan topics                 1
-FAIL: project-health found issues
 ```
 
-Restore the file name and rerun the gate.
+Restore the file name and check again. Confirm that the check reports `health   clean` before you continue.
 
 ## Next lesson {#next-lesson}
 
@@ -1077,7 +1031,7 @@ type: tutorial
 
 Publish the map from stage 02. Keep this build throughout the course so you can inspect every topic, link, and navigation change as you make it.
 
-**You need:** stage 02 complete and DITA-OT installed. **Time:** about 10 minutes.
+**You need:** stage 02 complete. **Time:** about 10 minutes.
 
 ## Define the deliverable {#define-the-deliverable}
 
@@ -1094,23 +1048,32 @@ Create `project.json` in the project root:
 }
 ```
 
-The context identifies the root map. The publication selects the HTML5 transformation and requests navigation on each page. The output is relative to the build's output base directory. Select `full` as the default deliverable in the editor's project settings.
+The context identifies the root map. The publication selects the HTML5 transformation and requests navigation on each page. The output folder is relative to the project root, so this deliverable builds into `out/full/`. Select `full` as the default deliverable in the editor's project settings.
 
 ## Build and inspect {#build-and-inspect}
 
-From the project root, run:
+Check your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.
+
+In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the project root on the command line, run:
 
 ```bash
-scripts/check-stage.sh
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
-The gate builds into a temporary directory. The second command keeps a local copy under `out/out/full/`. Open its `index.html`, follow the topic link, and check the heading, short description, list, and section.
+The output looks like this example:
 
-Change the topic title, rebuild, and refresh the browser. Check both the page heading and navigation label. Restore the title when you finish the exercise.
+```
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+output   clean (full)
+Ready: the project is healthy, every deliverable built, and the output of full holds together.
+```
 
-If a command fails, check the working directory, the map-relative paths, and the configured DITA-OT installation. A successful source check does not ensure that generated links work; inspect the output-link check separately.
+The `build` line shows where the deliverable was built. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.
+
+Change the topic title, check again, and refresh the browser. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.
+
+If the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
 ## Next lesson {#next-lesson}
 
@@ -1140,7 +1103,7 @@ Concepts explain a subject, tasks describe actions, and references provide infor
 
 **Time:** about 20 minutes. **You need:** stage 03 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the task {#step-1-write-the-task}
 
@@ -1283,7 +1246,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<thead>` and `<tbody>` hold header and body rows; each `<row>` holds one `<entry>` per column.
 :::
 
-## Step 3: Update the README and run the gate {#step-3-update-the-readme-and-run-the-gate}
+## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -1301,28 +1264,48 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   3 file(s): 3 valid, 0 invalid.
-   …
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
 
-To see the type split enforced, move the `<p>` in the reference out of its `<section>` so it is a direct child of `<refbody>`, and run the gate. The reference body does not allow it. A concept body would.
+To see the type split enforced, move the `<p>` in the reference out of its `<section>` so it is a direct child of `<refbody>`, and check your work. The reference body does not allow it. A concept body would. The check names the file and stops. The output looks like this example:
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+```
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/supported-audio-formats.dita
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the line, column, and message. For example:
+
+```
+Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+Invalid files (1 of 4):
+  /home/you/audacity-guide/topics/supported-audio-formats.dita:
+    57:13  error: The content of element type "refbody" does not match its content model.
+
+Summary
+  Invalid files                 1  of 4
+```
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## Publish your changes {#publish-your-changes}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1337,8 +1320,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned {#what-you-learned}
@@ -1376,7 +1358,7 @@ Add notes, lists, footnotes, simple tables, and code blocks to structure the top
 
 **Time:** about 30 minutes. **You need:** stage 04 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the concept {#step-1-write-the-concept}
 
@@ -1541,14 +1523,26 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 :::
 
 > [!NOTE]
-> `<shortcut>` is only valid inside `<uicontrol>` in DITA 1.3. It marks the accelerator letter of a control, not a key combination. Key combinations such as `Ctrl+A` are plain `<uicontrol>` text. If you write `<cmd>Press <shortcut>Delete</shortcut></cmd>`, the gate reports:
+> `<shortcut>` is only valid inside `<uicontrol>` in DITA 1.3. It marks the accelerator letter of a control, not a key combination. Key combinations such as `Ctrl+A` are plain `<uicontrol>` text. If you write `<cmd>Press <shortcut>Delete</shortcut></cmd>`, the check names the file and stops at the health stage. The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the line, column, and message. The following output is an example:
 >
 > ```
-> topics/trimming-audio.dita:
->   22:170  error: The content of element type "cmd" does not match its content model.
-> 5 file(s): 4 valid, 1 invalid.
-> FAIL: validation errors
+> health   NOT CLEAN
+>   invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+>   (run project-health for the full report)
+> Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 > ```
+>
+> ```
+> Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+> Invalid files (1 of 6):
+>   /home/you/audacity-guide/topics/trimming-audio.dita:
+>     22:170  error: The content of element type "cmd" does not match its content model.
+>
+> Summary
+>   Invalid files                 1  of 6
+> ```
+>
+> If you try this, undo the change and check again.
 
 ## Step 3: Mark up the stage 04 topics {#step-3-mark-up-the-stage-04-topics}
 
@@ -1646,7 +1640,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<ph>` is a phrase with no more specific meaning. It carries attributes (conditions in stage 14, ids for reuse in stage 11) when you need a handle on a run of text and none of the other inline elements fits.
 :::
 
-## Step 4: Update the README and run the gate {#step-4-update-the-readme-and-run-the-gate}
+## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -1664,24 +1658,25 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   5 file(s): 5 valid, 0 invalid.
-   …
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
 
 ## Publish your changes {#publish-your-changes}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1698,8 +1693,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned {#what-you-learned}
@@ -1740,7 +1734,7 @@ Choose elements according to their purpose. Use `<prereq>` for a requirement tha
 
 **Time:** about 30 minutes. **You need:** stage 05 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Installing Audacity {#step-1-installing-audacity}
 
@@ -2016,7 +2010,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `<tutorialinfo>` is additional information for a reader who is learning, as opposed to `<info>`, which is for anyone doing the step. A stylesheet for expert readers can drop it.
 :::
 
-## Step 5: Update the README and run the gate {#step-5-update-the-readme-and-run-the-gate}
+## Step 5: Update the README and check your work {#step-5-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -2034,28 +2028,48 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-   …
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
 
-The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order, move the `<postreq>` in *Installing Audacity* above `<result>` and run the gate.
+The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order, move the `<postreq>` in *Installing Audacity* above `<result>` and check your work. The check names the file and stops. The output looks like this example:
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+```
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/installing-audacity.dita
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the line, column, and message. For example:
+
+```
+Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+Invalid files (1 of 10):
+  /home/you/audacity-guide/topics/installing-audacity.dita:
+    68:14  error: The content of element type "taskbody" does not match its content model.
+
+Summary
+  Invalid files                 1  of 10
+```
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## Publish your changes {#publish-your-changes}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2076,8 +2090,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned {#what-you-learned}
@@ -2116,7 +2129,7 @@ In stage 09, you move relationships shared by several topics into the map.
 
 **Time:** about 20 minutes. **You need:** stage 06 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Cross-references in the text {#step-1-cross-references-in-the-text}
 
@@ -2299,7 +2312,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 5. **Read the placement** `<related-links>` is a child of the topic, after the body, not inside it. In a task it follows `</taskbody>`; in a concept, `</conbody>`. The validator rejects it anywhere else.
 :::
 
-## Step 3: Update the README and run the gate {#step-3-update-the-readme-and-run-the-gate}
+## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -2317,43 +2330,44 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
 
-This is the first stage with links inside topics. The health check has resolved the `@href` of each `<topicref>` in the map since stage 02; now it also resolves each `@href` in a topic. Misspell the target of the `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and run the gate. The file still validates, because a broken link is not a grammar error, but the health check reports it and the stage fails:
+This is the first stage with links inside topics. The health check has resolved the `@href` of each `<topicref>` in the map since stage 02; now it also resolves each `@href` in a topic. Misspell the target of the `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and check your work. The file still validates, because a broken link is not a grammar error, but the health stage reports it with the file and line, and the check stops. The following output is an example:
 
 ```
-== project-health  /home/you/audacity-guide ==
-Root map: none (none configured); house rules: none (none configured)
-Broken references (1):
-  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita"
-…
-FAIL: project-health found issues
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-The validation and health checks cover different problems. A wrong fragment such as `#supported-audio-formats/choose` passes the health check and the DITA-OT build. The link renders and points at the top of the topic instead of the section. The output link check catches it. Today that check is the tutorial's `scripts/check-output-links.py`; a product command is planned. After you build, the check reports the wrong fragment. The following output is an example:
+Undo the change and check again.
+
+The health and output stages cover different problems. In *Exporting audio*, find the `<xref>` to the *Choosing a format* section. Change the fragment `#supported-audio-formats/choosing` to `#supported-audio-formats/choose` and check your work. The source passes the health stage and the DITA-OT build. The link renders and points at an anchor that the page does not have. The output stage reads the built HTML and reports each link that leads nowhere, with the page, the line, and the target. The following output is an example:
 
 ```
-out/full/topics/exporting-audio.html:17: missing fragment: supported-audio-formats.html#supported-audio-formats__choose
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+output   1 broken link(s)
+  /home/you/audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
+Not ready: stopped at output.
 ```
+
+Undo the change and check again.
 
 `dogsbay-xml conref-audit` checks conref target IDs. It does not check cross-reference links.
 
@@ -2363,11 +2377,11 @@ Every `<related-links>` block you wrote here is a statement about how topics rel
 
 Writing these links first shows the relationships that the map later generates. Topic-level links are also useful when publishing a topic on its own.
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+After each error exercise, undo the deliberate change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## Publish your changes {#publish-your-changes}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2388,8 +2402,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned {#what-you-learned}
@@ -2399,7 +2412,7 @@ python3 scripts/check-output-links.py out
 - `file#topic/element` reaches a section or any element with an `@id`.
 - `@scope="external"` and `@format` for links out of the project; `<linktext>` when there is no title to borrow; `<desc>` for a blurb.
 - `<linklist>` keeps order and has a title; `<linkpool>` lets the processor sort and merge.
-- `project-health` catches broken references that validation cannot.
+- The check's health stage catches broken references that validation cannot. Its output stage catches links in the built HTML that lead nowhere, such as a wrong fragment.
 
 ## Next lesson {#next-lesson}
 
@@ -2429,7 +2442,7 @@ DITA-OT generates links from the map. Remove the corresponding links from six to
 
 **Time:** about 25 minutes. **You need:** stage 08 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Structure the map {#step-1-structure-the-map}
 
@@ -2616,7 +2629,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Read why** A hand-written `<link>` states a relationship inside one of the two topics, once, in one direction. The map states it once for both directions, keeps the topic free of assumptions about its neighbors, and lets the same topic sit in another guide with other neighbors. Retain topic-level links where they provide useful context, such as the titled `<linklist>` and its descriptions. Maps can also define external links and link descriptions.
 :::
 
-## Step 3: Update the README, run the gate and look at the output {#step-3-update-the-readme-run-the-gate-and-look-at-the-output}
+## Step 3: Update the README, check your work and look at the output {#step-3-update-the-readme-check-your-work-and-look-at-the-output}
 
 :::steps
 1. **Change the "You are on" line**
@@ -2634,27 +2647,29 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   10 file(s): 10 valid, 0 invalid.
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+   Example output:
 
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
    ```
-3. **Read the generated links** Build with `dita --project=project.json` and open the pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   ```
+3. **Read the generated links** The check builds the guide into `out/full/`. Open the pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
 
    | Page | Generated links |
    | --- | --- |
@@ -2665,20 +2680,27 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    The sequence gives the previous and next links, the reltable gives the typed groups, the hand-written external link survives as "Related information", and `@linking="targetonly"` leaves the noise task with no links at all while the recording task still links to it.
 :::
 
-`project-health` checks the reltable like any other reference. Misspell `topics/exporting-audio.dita` in the second `<relrow>` as `topics/export-audio.dita` and run the gate:
+`project-health` checks the reltable like any other reference. Misspell `topics/exporting-audio.dita` in the second `<relrow>` as `topics/export-audio.dita` and check your work. The check stops at health and names the broken reference. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel lists the same problem. From the command line, `dogsbay-xml project-health .` prints the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
   /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
 
 Summary
   Broken references             1
-FAIL: project-health found issues
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -2716,7 +2738,7 @@ Store product values in `keydefs-product.ditamap` and include that map with `<ma
 
 **Time:** about 30 minutes. **You need:** stage 09 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Define the product keys {#step-1-define-the-product-keys}
 
@@ -3070,7 +3092,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    A topic key shows the file it resolves to; a text key shows its text; each shows the map and line that defines it. Keys from the `<mapref>` are listed as part of the guide's key space.
 :::
 
-## Step 5: Update the README and run the gate {#step-5-update-the-readme-and-run-the-gate}
+## Step 5: Update the README and check your work {#step-5-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line and the layout**
@@ -3088,34 +3110,54 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   11 file(s): 11 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Run `dita --project=project.json` to build in the project directory. Open `out/full/topics/installing-audacity.html`: the title reads *Installing Audacity*, the download step reads "Download Audacity 3.4 from the Audacity download page" with the link on the last five words, after DITA-OT resolves the key references.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
+     unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The three unused keys are defined for later stages: stage 11 uses `project-extension` in a reused step, and stage 18 uses `start-here` and `digital-audio` in a new topic.
+
+   The check builds the guide into `out/full/`. Open `out/full/topics/installing-audacity.html`: the title reads *Installing Audacity*, the download step reads "Download Audacity 3.4 from the Audacity download page" with the link on the last five words, after DITA-OT resolves the key references.
 :::
 
-Test an undefined key reference. Change both occurrences of `keyref="product-version"` in the install task to `product-verson` and run the gate:
+Test an undefined key reference. Change both occurrences of `keyref="product-version"` in the install task to `product-verson` and check your work. The check stops at health and names both references. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
+  unused key: product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14] — nothing references it
+  unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel lists the same problems. From the command line, `dogsbay-xml project-health .` prints the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (2):
   /home/you/audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
@@ -3129,10 +3171,11 @@ Unused keys (4):
 Summary
   Undefined keys                2
   Unused keys                   4
-FAIL: project-health found issues
 ```
 
-The file validates, since `@keyref` is only a name to the DTD, and DITA-OT would build the page with the version missing. The *Unused keys* list provides diagnostic information: `start-here`, `digital-audio` and `project-extension` are defined for later stages, and the report shows them only when something else is wrong.
+The file validates, since `@keyref` is only a name to the DTD, and DITA-OT would build the page with the version missing. The unused keys are warnings. `product-version` appears in the list now because the misspelled references no longer use it.
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -3210,7 +3253,7 @@ Include the shared topics in the map as resources. DITA-OT processes their conte
 
 For the core course, focus on pulling steps with `conref` and notes with `conkeyref`. The range and push examples are optional. See [Choose a reuse method](/dogsbay-xml-dita-tutorial-docs/reference/choosing-reuse) before adding shared content.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the shared topics {#step-1-write-the-shared-topics}
 
@@ -3407,7 +3450,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - The referencing element and the target must be the same element type, and the target may not need anything the referencing context does not allow. A `<step>` into `<steps>`, a `<note>` into `<context>`, `<li>`s into a `<ul>`.
 :::
 
-## Step 4: Update the README, run the gate and check what was published {#step-4-update-the-readme-run-the-gate-and-check-what-was-published}
+## Step 4: Update the README, check your work and check what was published {#step-4-update-the-readme-check-your-work-and-check-what-was-published}
 
 :::steps
 1. **Change the "You are on" line and the layout**
@@ -3425,61 +3468,86 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check** The format command covers `shared/` too.
+2. **Format and check your work** The format command covers `shared/` too.
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   13 file(s): 13 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
-   ```
-
-   `project-health` resolves every `@conref` and `@conkeyref` to an element that exists and checks that each `conaction="mark"` finds its target. Rename the play-back step's id, for example to `playback`. The health check then reports a broken element id and, under `Conref pushes`, a line like this example:
-
-   ```
-   <step> push target id 'play-back' not found in recording-your-first-track.dita
-   ```
-
-   The diagnostic names the id that the push looks for, `play-back`, not the new id. Restore the id and rerun the gate.
-3. **Check the output** The build folder has one page per topic in the table of contents and nothing for the shared topics:
+   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   dita --project=project.json
+   dogsbay-xml check .
+   ```
+
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   `start-here` and `digital-audio` are defined for a later stage: stage 18 uses them in a new topic.
+
+   The health stage resolves every `@conref` and `@conkeyref` to an element that exists and checks that each `conaction="mark"` finds its target. Rename the play-back step's id, for example to `playback`, and check your work. The check stops at health and names the reference that no longer resolves. Example output:
+
+   ```
+   health   NOT CLEAN
+     /home/you/audacity-guide/shared/common-steps.dita:29  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     (run project-health for the full report)
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+   ```
+
+   The **Project Validation** panel, or `dogsbay-xml project-health .`, reports a broken element id and, under `Conref pushes`, this line:
+
+   ```
+   Conref pushes (1):
+     /home/you/audacity-guide/shared/common-steps.dita:29  <step> push target id 'play-back' not found in recording-your-first-track.dita
+   ```
+
+   The diagnostic names the id that the push looks for, `play-back`, not the new id. Restore the id and check again.
+3. **Check the output** The check builds the guide into `out/full/`. The folder has one page per topic in the table of contents and nothing for the shared topics:
+
+   ```bash
    find out/full -name '*.html' | sort
    ```
 
    ```
-   /tmp/check-stage-357688/out/full/index.html
-   /tmp/check-stage-357688/out/full/topics/exporting-audio.html
-   /tmp/check-stage-357688/out/full/topics/installing-audacity.html
-   /tmp/check-stage-357688/out/full/topics/preparing-to-record.html
-   /tmp/check-stage-357688/out/full/topics/recording-your-first-track.html
-   /tmp/check-stage-357688/out/full/topics/removing-background-noise.html
-   /tmp/check-stage-357688/out/full/topics/supported-audio-formats.html
-   /tmp/check-stage-357688/out/full/topics/trimming-audio.html
-   /tmp/check-stage-357688/out/full/topics/what-is-audacity.html
-   /tmp/check-stage-357688/out/full/topics/what-is-digital-audio.html
+   out/full/index.html
+   out/full/topics/exporting-audio.html
+   out/full/topics/installing-audacity.html
+   out/full/topics/preparing-to-record.html
+   out/full/topics/recording-your-first-track.html
+   out/full/topics/removing-background-noise.html
+   out/full/topics/supported-audio-formats.html
+   out/full/topics/trimming-audio.html
+   out/full/topics/what-is-audacity.html
+   out/full/topics/what-is-digital-audio.html
    ```
 
-   The recorded output above uses the gate's temporary directory. Your `find` command lists paths under `out/full`. Neither directory contains `common-steps.html` or `common-notes.html`. Open `recording-your-first-track.html`: the step "Turn the playback volume down before you listen" sits before "Click Play", pushed there from the shared topic, and the task's own file never mentions it.
+   The folder does not contain `common-steps.html` or `common-notes.html`. Open `recording-your-first-track.html`: the step "Turn the playback volume down before you listen" sits before "Click Play", pushed there from the shared topic, and the task's own file never mentions it.
 :::
 
-Test two errors. First, use a `@conkeyref` with an undefined key. Change `common-notes/backup-warning` in the noise task to `common-note/backup-warning` and run the gate:
+Test two errors. First, use a `@conkeyref` with an undefined key. Change `common-notes/backup-warning` in the noise task to `common-note/backup-warning` and check your work. The check stops at health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
   /home/you/audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
@@ -3490,28 +3558,45 @@ Unused keys (2):
 Summary
   Undefined keys                1
   Unused keys                   2
-FAIL: project-health found issues
-
-== build  project.json -> /tmp/check-stage-357688 ==
-Error: file:/home/you/audacity-guide/topics/removing-background-noise.dita:11:53: [DOTJ046E] The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
-FAIL: DITA-OT build reported errors (full log: /tmp/check-stage-357688.log)
-
-STAGE FAILED
 ```
 
-DITA-OT resolves `@conkeyref` only through the root map's key space, and an undefined key produces build error `DOTJ046E`: the note would be missing from the page. The health check reports the same key a step earlier.
+Because health fails, the check does not build. To see what DITA-OT makes of the same fault, build the deliverable directly:
 
-Undo the key change. Next, remove the placeholder. Replace the trimming task's `<step conref="…"><cmd/></step>` with a self-closing `<step conref="…"/>`, and validation fails before anything is resolved:
-
-```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/trimming-audio.dita:
-  37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
-13 file(s): 12 valid, 1 invalid.
-FAIL: validation errors
+```bash
+dogsbay-xml build . full
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+The first lines of the example output:
+
+```
+full (html5) → /home/you/audacity-guide/out/full: FAILED — 1 error(s)
+    file:/home/you/audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
+```
+
+DITA-OT resolves `@conkeyref` only through the root map's key space, and an undefined key produces build error `DOTJ046E`: the note would be missing from the page. The health check reports the same key before anything is built.
+
+Undo the key change. Next, remove the placeholder. Replace the trimming task's `<step conref="…"><cmd/></step>` with a self-closing `<step conref="…"/>`, and check your work. The file is no longer valid, and the check names it. Example output:
+
+```
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the line, column, and message:
+
+```
+Invalid files (1 of 13):
+  /home/you/audacity-guide/topics/trimming-audio.dita:
+    37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
+```
+
+Validation fails before anything is resolved.
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -4900,7 +4985,7 @@ Use placeholder interview details that do not include personal information. The 
 | Check | Passing result |
 | --- | --- |
 | Content plan | Each topic has a distinct reader purpose |
-| DTD and house rules | The new content validates and the full gate passes |
+| DTD and house rules | The new content validates and the check reports `Ready` |
 | Map integration | Both intended guides expose the new task in navigation |
 | Key and reuse resolution | No empty product values, missing steps, or unresolved links |
 | Filtering | Each audience sees its intended explanation or note |
@@ -4908,7 +4993,7 @@ Use placeholder interview details that do not include personal information. The 
 | Accessibility | Link text, reading order, and any image or table alternatives are reviewed |
 | Change review | The diff contains only the intended additions and required map changes |
 
-Use the [automated checks](/dogsbay-xml-dita-tutorial-docs/reference/verification) alongside manual output inspection. Record the commands, output directories, and any limitations you found. If the gate passes but output is wrong, investigate the affected map and transform before accepting the result.
+Use the [automated checks](/dogsbay-xml-dita-tutorial-docs/reference/verification) alongside manual output inspection. Record the commands, output directories, and any limitations you found. If the check reports `Ready` but output is wrong, investigate the affected map and transform before accepting the result.
 
 Compare your checker output with the [known reference-build findings](/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues). Report those baseline failures and any new failures separately. Your new topic and its links must pass the acceptance checks; baseline defects still need to be resolved before a release of the whole guide.
 
@@ -5038,7 +5123,7 @@ The supplied images are generated illustrations of audio concepts and controls. 
 
 **Time:** about 25 minutes. **You need:** stage 07 complete, and the two PNG files from the branch (see step 1).
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Add the images {#step-1-add-the-images}
 
@@ -5185,7 +5270,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - The cross-reference `what-is-digital-audio.dita#what-is-digital-audio/fig-waveform` reaches the figure by its `@id`, the same `file#topic/element` form as a section link in stage 07.
 :::
 
-## Step 4: Update the README and run the gate {#step-4-update-the-readme-and-run-the-gate}
+## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line and the layout** The layout section gains the `images/` folder.
@@ -5203,34 +5288,36 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
 
-`project-health` checks image references too. Misspell `waveform.png` in the `<fig>` and run the gate to see the broken reference.
+The health stage checks image references too. Misspell `waveform.png` in the `<fig>` as `wavefrom.png` and check your work. The check reports the broken reference with the file and line, and stops. The following output is an example:
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+```
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## Publish your changes {#publish-your-changes}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -5251,8 +5338,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned {#what-you-learned}
@@ -5294,7 +5380,7 @@ Define a key for each entry. Use `<term keyref>` to link a term to its entry and
 
 **Time:** about 30 minutes. **You need:** stage 11 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the entries {#step-1-write-the-entries}
 
@@ -5565,7 +5651,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - The *Clipping* `<dt>` is laid out on three lines because that is how the formatter writes a `<dt>` whose only content is an element; the meaning is unchanged.
 :::
 
-## Step 4: Update the README and run the gate {#step-4-update-the-readme-and-run-the-gate}
+## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line and the layout**
@@ -5583,34 +5669,52 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   21 file(s): 21 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Twenty-one files: nine topics, two shared topics, seven glossary files and three maps. Run `dita --project=project.json`, then open `out/full/topics/glossary/audio-units.html` after the build: the group is one page with both entries, each showing the term, the definition, the surface form and the alternative forms.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
+     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The project now has twenty-one files: nine topics, two shared topics, seven glossary files and three maps. The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
+
+   The check builds the guide into `out/full/`. Open `out/full/topics/glossary/audio-units.html`: the group is one page with both entries, each showing the term, the definition, the surface form and the alternative forms.
 :::
 
-A glossary key is a key like any other. Change the `<term keyref>` in *Preparing to record* to `gl-clippng` and run the gate:
+A glossary key is a key like any other. Change the `<term keyref>` in *Preparing to record* to `gl-clippng` and check your work. The check stops at health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
   /home/you/audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
@@ -5622,10 +5726,11 @@ Unused keys (3):
 Summary
   Undefined keys                1
   Unused keys                   3
-FAIL: project-health found issues
 ```
 
-`gl-normalization` appears as unused because no topic mentions normalization yet; the entry is still published from the map. That line is information and does not fail the stage on its own.
+`gl-normalization` appears as unused because no topic mentions normalization yet; the entry is still published from the map. An unused key is a warning and does not fail the check on its own.
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -5664,7 +5769,7 @@ Configure a metadata policy in `.dogsbay/config.xml` to require keywords on topi
 
 **Time:** about 40 minutes. **You need:** stage 12 complete.
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: The prolog of a concept {#step-1-the-prolog-of-a-concept}
 
@@ -6276,7 +6381,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Read the map metadata** The map's `<topicmeta>` takes the same elements as a prolog, in the same order, without the `<metadata>` wrapper: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and `<keywords>` sit directly inside it. Map metadata applies to the publication and, for the HTML5 transform, cascades into every page: the `<meta name="rights">` tag on each page comes from this copyright.
 :::
 
-## Step 5: The metadata policy, the README and the gate {#step-5-the-metadata-policy-the-readme-and-the-gate}
+## Step 5: The metadata policy, the README and the check {#step-5-the-metadata-policy-the-readme-and-the-check}
 
 :::steps
 1. **Edit `.dogsbay/config.xml`**
@@ -6297,10 +6402,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 2. **Read the rules**
 
-   - Each `<rule>` names a `field`, a `presence` and, optionally, a `topic-type` and a `pattern`. A missing `required` field is an error and fails the gate; a missing `recommended` field is a warning, shown beside a file's errors.
+   - Each `<rule>` names a `field`, a `presence` and, optionally, a `topic-type` and a `pattern`. A missing `required` field is an error and fails the check; a missing `recommended` field is a warning, shown beside a file's errors.
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`. Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere, which is the rule that reaches the glossary group.
-   - `project-health` applies the policy as one of its checks, so the gate enforces it. The editor reads the same file.
+   - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor reads the same file.
 3. **Change the "You are on" line**
 
    ```diff {title="README.md"}
@@ -6316,34 +6421,51 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     ## Stages
 
    ```
-4. **Format and check**
+4. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   21 file(s): 21 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Run `dita --project=project.json` to build in the project directory. In `out/full/topics/what-is-audacity.html` the `<head>` now carries `<meta name="keywords" content="Audacity, audio editor, open source">` and `<meta name="rights" content="© 2026 DogsBay Ltd.">`. The PDF transform uses the index terms to generate an index.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
+
+   The check builds the guide into `out/full/`. In `out/full/topics/what-is-audacity.html` the `<head>` now carries `<meta name="keywords" content="Audacity, audio editor, open source">` and `<meta name="rights" content="© 2026 DogsBay Ltd.">`. The PDF transform uses the index terms to generate an index.
 :::
 
-Test the metadata policy. Delete the `<critdates>` block from *Trimming audio* and run the gate:
+Test the metadata policy. Delete the `<critdates>` block from *Trimming audio* and check your work. The check stops at health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The check summary does not name the file for a metadata policy error. Open the **Project Validation** panel, or run `dogsbay-xml project-health .`, to see it:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Metadata policy (1 of 21 files):
   /home/you/audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
@@ -6356,22 +6478,31 @@ Summary
   Metadata policy               1  in 1 of 21 files (1 error(s), 0 warning(s))
     missing required <created @date>                                  1
   Unused keys                   3
-FAIL: project-health found issues
 ```
 
 The file is valid; `<critdates>` is optional to the DTD. The policy is what makes it required, for tasks, in this project.
 
-Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is Audacity?* to before `<metadata>`, and validation fails:
+Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is Audacity?* to before `<metadata>`, and check your work. The file is no longer valid, and the check names it. Example output:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-/home/you/audacity-guide/topics/what-is-audacity.dita:
-  29:12  error: The content of element type "prolog" does not match its content model.
-21 file(s): 20 valid, 1 invalid.
-FAIL: validation errors
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate. Confirm that it prints `STAGE OK` before continuing.
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the line, column, and message:
+
+```
+Invalid files (1 of 21):
+  /home/you/audacity-guide/topics/what-is-audacity.dita:
+    29:12  error: The content of element type "prolog" does not match its content model.
+```
+
+Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -6379,7 +6510,7 @@ After each error exercise, undo the deliberate change and rerun the gate. Confir
 - `<indexterm>`, nested for sub-entries; `<index-see>`, `<index-see-also>` and `<index-sort-as>` inside an entry.
 - A `<glossgroup>` and a shared topic are topics and carry prologs like any other.
 - Map `<topicmeta>` takes the same elements for the publication.
-- A metadata policy in `.dogsbay/config.xml`: `<rule field presence topic-type pattern>`, enforced by `project-health` and so by the gate.
+- A metadata policy in `.dogsbay/config.xml`: `<rule field presence topic-type pattern>`, enforced by `project-health` and so by the check.
 - End of Part 2: a map with structure and a reltable, a key space, a shared topic, a glossary and metadata, published as one HTML5 deliverable.
 
 ## Next lesson {#next-lesson}
@@ -9313,7 +9444,7 @@ Try the exercise before reading the [suggested solutions](/dogsbay-xml-dita-tuto
 
 Add a task called *Checking a recording before export*. Include a short description, prerequisites, three or four actions, and an observable result. Use UI markup only for actual control labels. Link to the existing export task. Decide whether background about export formats belongs in this task or in the existing reference topic.
 
-**Check:** Validate the new topic with `dogsbay-xml validate`. Read only its `cmd` elements and confirm that the actions form a usable procedure. At this checkpoint the guide already has a map and HTML deliverable. Add the topic to the map and rebuild to inspect your changes.
+**Check:** Validate the new topic with `dogsbay-xml validate`. Read only its `cmd` elements and confirm that the actions form a usable procedure. At this checkpoint the guide already has a map and HTML deliverable. Add the topic to the map, [check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate), and inspect the new page in `out/full/`.
 
 ## Maps and reuse {#maps-and-reuse}
 
@@ -9323,7 +9454,13 @@ Add a practice map that publishes the recording and export tasks. Include the ke
 
 Before adding another reusable step, compare its purpose with the shared save step. Explain whether you can use the existing element unchanged.
 
-**Check:** Build the practice map with `dita --input=practice.ditamap --format=html5 --output=out/practice`. Inspect titles, links, resolved product names, and the reused save instruction. The default project health check does not automatically select your new map.
+**Check:** Add a deliverable named `practice` to `project.json`, with `practice.ditamap` as its input and `out/practice` as its output. Then check that deliverable. In the editor, **Project** > **Check Project** checks every deliverable. From the command line, run:
+
+```bash
+dogsbay-xml check --deliverable=practice .
+```
+
+The check builds the practice map into `out/practice/` and checks the links in the built pages. Inspect titles, links, resolved product names, and the reused save instruction. The health stage uses the guide's root map, so it does not check the key space of your new map.
 
 ## Conditions {#conditions}
 
@@ -9352,7 +9489,7 @@ dogsbay-xml validate topics/what-is-audacity.dita
 dogsbay-xml project-health --include=schematron .
 ```
 
-**Check:** Explain why the DTD can accept the file while the project rule rejects it. Restore the short description and run the full gate. Confirm that the deliberate error is absent before continuing to the [capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).
+**Check:** Explain why the DTD can accept the file while the project rule rejects it. Restore the short description and check your work. Confirm that the deliberate error is absent before continuing to the [capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).
 
 ---
 
@@ -9719,19 +9856,19 @@ The stage that introduces each element or attribute. Look an element up here, th
 
 ---
 
-# The gate
+# The stage gate
 
 URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/the-gate.md
 
 ---
-title: The gate
-description: Reference for scripts/check-stage.sh, the check every stage passes; its steps, switches, environment variables, exit codes, and why not xmllint.
+title: The stage gate
+description: "For maintainers. scripts/check-stage.sh, the script that verifies every stage branch: its steps, switches, variables, exit codes, and why not xmllint."
 type: reference
 ---
 
-# The gate {#the-gate}
+# The stage gate {#the-stage-gate}
 
-`scripts/check-stage.sh` is the check every tutorial stage branch passes before it is committed. It is also a one-shot health check for any DITA project folder. [Run the gate](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) walks through using it; this page is the reference.
+`scripts/check-stage.sh` is the check every tutorial stage branch passes before it is committed. This page is for maintainers of the tutorial. Readers check their work with **Project** > **Check Project** in the editor, or `dogsbay-xml check`; see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
 ## Steps {#steps}
 

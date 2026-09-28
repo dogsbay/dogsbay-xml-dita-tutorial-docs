@@ -19,7 +19,7 @@ with `<mapref>`. Define topic keys with `@keys` on the guide's existing
 **You need:** stage 09 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Define the product keys
 
@@ -403,7 +403,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    are listed as part of the guide's key space.
 ::::
 
-## Step 5: Update the README and run the gate
+## Step 5: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -422,28 +422,39 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   11 file(s): 11 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Run `dita --project=project.json` to build in the project directory.
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
+     unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The three unused keys are defined for later stages: stage 11 uses
+   `project-extension` in a reused step, and stage 18 uses `start-here`
+   and `digital-audio` in a new topic.
+
+   The check builds the guide into `out/full/`.
    Open `out/full/topics/installing-audacity.html`: the
    title reads *Installing Audacity*, the download step reads "Download
    Audacity 3.4 from the Audacity download page" with the link on the last
@@ -452,10 +463,25 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 Test an undefined key reference.
 Change both occurrences of `keyref="product-version"` in the install task to
-`product-verson` and run the gate:
+`product-verson` and check your work. The check stops at health and
+names both references. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
+  unused key: product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14] — nothing references it
+  unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel lists the same problems. From the command
+line, `dogsbay-xml project-health .` prints the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (2):
   /home/you/audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
@@ -469,14 +495,15 @@ Unused keys (4):
 Summary
   Undefined keys                2
   Unused keys                   4
-FAIL: project-health found issues
 ```
 
 The file validates, since `@keyref` is only a
 name to the DTD, and DITA-OT would build the page with the version missing.
-The *Unused keys* list provides diagnostic information: `start-here`,
-`digital-audio` and `project-extension` are defined for later stages, and
-the report shows them only when something else is wrong.
+The unused keys are warnings. `product-version` appears in the list now
+because the misspelled references no longer use it.
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

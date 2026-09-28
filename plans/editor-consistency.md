@@ -16,6 +16,28 @@ The style guide keeps file listings identical to the stage branches, and several
 | 2 | Replace the gate script with a **Check Project** command; re-record every check output; templates for maps and other file kinds; set up with the Project Manager and branch switcher; stage 18 rewrite | The editor changes below |
 | 3 | Source fixes: "Ctrl+ACmd+A", the shared select-region step, `notice` in the house rule, `xml:lang` on `effect-presets.dita`, formatting of `examples/chunking` | The tutorial branches first (`scripts/rebase-stages.sh`), then this repo's listings |
 
+## Phase 2 status, 2026-09-28
+
+The editor team delivered **Check Project** (`dogsbay-xml check`), the output link check, template filtering, ids from file names, the bundle refresh, and the root-map field fix. `dogsbay-xml check` was run on all 27 stage branches (dogsbay-xml `0569145`):
+
+| Stages | Result | Blocked by |
+|---|---|---|
+| 00 to 02 | "Not ready: stopped at build": no deliverables yet. `--no-build` gives `health clean`. | Nothing. The lessons explain it. Ideally the editor treats "nothing to build yet" as not a failure. |
+| 03 to 13 | Ready. From stage 10, a note lists unused keys. | Nothing: updated on `feature/check-project` |
+| 14 to 18 | Stops at output: broken links from the beginner builds to `glossary/audio-units.html#gl-decibel`, which those maps do not publish | **Tutorial branches:** publish the glossary topic in the beginner maps (and fix the sample link from stage 22) |
+| 19 to 22 | Stops at build: `book-pdf` fails with the DITA-OT bundled in the editor ("FAILED, 1 error(s)", no message). The external DITA-OT 4.3.5 builds it. | **Editor:** PDF with the bundled engine, and show the build error |
+| 23 to 26 | Stops at health: `learning/check-your-understanding.dita` is invalid, because the learning DTDs are not bundled | **Editor:** bundle the DITA learning DTDs |
+
+Also for the editor team:
+
+- `check` does not show orphan topics. `project-health` names them, but a topic missing from the map still gets "Ready". Show them as warnings in the check's report and in the **Project Validation** panel.
+- When health fails, `check` names only the file. Show the first few errors (line, column, message) inline.
+- For a metadata-policy error (such as a missing `<critdates>`), `check` does not name the file.
+- `dogsbay-xml build` prints the DITA-OT message but not its code (for example `DOTJ046E`), and there is no log file with it.
+- `check --map=<another map>` flags `images/*.png` as invalid and reports keys from topics outside that map.
+- Stage 23 still runs `dogsbay-xml validate --catalog "$DITA_HOME/catalog-dita.xml"`, and set-up no longer sets `DITA_HOME`. It is fixed when the learning DTDs are bundled.
+- No templates were added for map, keydef map, bookmap, DITAVAL, subject scheme, glossentry, glossgroup, troubleshooting, generic topic or Schematron. A new `.ditamap` offers only **Blank XML Document** and **DTD Document**, under an empty separator.
+
 ## Editor changes needed
 
 "Blocks" means the lessons cannot describe the editor way until the change exists.

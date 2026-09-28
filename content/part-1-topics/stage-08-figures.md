@@ -22,7 +22,7 @@ for the starting checkpoint and the next core lesson.
 step 1).
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Add the images
 
@@ -205,7 +205,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      section link in stage 07.
 ::::
 
-## Step 4: Update the README and run the gate
+## Step 4: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -225,36 +225,43 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-2. **Format and check**
+2. **Format and check your work**
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run
+   `dogsbay-xml check .` from the project root. The output looks like this
+   example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 ::::
 
-`project-health` checks image references too. Misspell `waveform.png` in the
-`<fig>` and run the gate to see the broken reference.
+The health stage checks image references too. Misspell `waveform.png` in the
+`<fig>` as `wavefrom.png` and check your work. The check reports the broken
+reference with the file and line, and stops. The following output is an
+example:
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+```
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## Publish your changes
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -275,8 +282,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned

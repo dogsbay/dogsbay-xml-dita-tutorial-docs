@@ -1,6 +1,6 @@
 ---
 title: "Stage 01: A concept topic"
-description: Write What is Audacity? as a DITA concept, learn the parts every topic has, and validate one file with the gate.
+description: Write What is Audacity? as a DITA concept, learn the parts every topic has, and check your work.
 type: tutorial
 ---
 
@@ -15,10 +15,10 @@ requires a short description for each concept, task, and reference topic;
 the DTD makes some of these elements optional.
 
 **Time:** about 15 minutes.
-**You need:** stage 00 complete, with the gate passing.
+**You need:** stage 00 complete, with the check reporting `health   clean`.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the topic
 
@@ -62,7 +62,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    and section inside `<conbody>`. When you type the `>` of a start tag,
    the editor inserts the matching end tag after the cursor. Type the
    content, then move the cursor past the end tag to continue. Leave the
-   indentation to the formatter in "Step 3: Format and run the gate".
+   indentation to the formatter in "Step 3: Format and check your work".
 
    The finished topic:
 
@@ -141,7 +141,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    The folder is no longer empty.
 ::::
 
-## Step 3: Format and run the gate
+## Step 3: Format and check your work
 
 ::::steps
 1. **Format the topic**
@@ -158,39 +158,76 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    dogsbay-xml format -i topics/*.dita
    ```
 
-2. **Run the gate**
+2. **Check your work**
+   In the editor, choose **Project** > **Check Project**. The result appears
+   in the **Project Validation** panel. From the command line, run:
 
    ```bash
-   scripts/check-stage.sh
+   dogsbay-xml check --no-build .
    ```
 
+   The output looks like this example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   1 file(s): 1 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean, with warnings
+     orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+   Project health is clean. The build was not run, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
    ```
+
+   The orphan warning is expected. No map refers to the topic yet, so it
+   would not appear in any output. Stage 02 adds the map. A warning does not
+   make the check fail.
+
+   The project declares no deliverables until stage 03. In the editor, and
+   from the command line without `--no-build`, the check reports
+   `Not ready: stopped at build` because there is nothing to build. That
+   result is expected before stage 03. Look for `health   clean`.
 ::::
 
 To see a validation error, put a `<section>` inside another `<section>` and
-run the gate again. `validate-project` names the file, the line and the
-element whose content model was broken. For example:
+check again. For example, add this inside the *Who uses it* section, after
+its `<p>`:
+
+```xml
+<section>
+  <title>Nested</title>
+  <p>Inner.</p>
+</section>
+```
+
+The check names the file and stops at the health stage. The output looks like
+this example:
 
 ```
-24:15  error: The content of element type "section" does not match its content model.
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  (run project-health for the full report)
+  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-In the editor, **XML** > **Validate** reports the same error in the
-**Errors** panel. Undo the change before you go on.
+For the line, column, and message, open the **Project Validation** panel in
+the editor, or run `dogsbay-xml project-health .`. It reports the element
+whose content model was broken. For example:
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+```
+Root map: none (none configured); house rules: none (none configured)
+Invalid files (1 of 1):
+  /home/you/audacity-guide/topics/what-is-audacity.dita:
+    27:15  error: The content of element type "section" does not match its content model.
+Orphan topics (1):
+  /home/you/audacity-guide/topics/what-is-audacity.dita
+
+Summary
+  Invalid files                 1  of 1
+  Orphan topics                 1
+```
+
+In the editor, **XML** > **Validate** also reports the error in the
+**Errors** panel.
+
+Undo the change and check again. Confirm that the check reports
+`health   clean` before you continue.
 
 ## What you learned
 
@@ -201,7 +238,7 @@ Confirm that it prints `STAGE OK` before continuing.
   house rule.
 - The DOCTYPE names a public identifier, and the catalog finds the DTD.
 - `<section>` is one level deep; deeper structure means another topic.
-- Format, then gate, every time.
+- Format, then check your work, every time.
 
 ## Next lesson
 

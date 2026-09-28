@@ -17,7 +17,7 @@ In stage 09, you move relationships shared by several topics into the map.
 **You need:** stage 06 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Cross-references in the text
 
@@ -232,7 +232,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    validator rejects it anywhere else.
 ::::
 
-## Step 3: Update the README and run the gate
+## Step 3: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -251,24 +251,22 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run
+   `dogsbay-xml check .` from the project root. The output looks like this
+   example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-
-   == project-health  /home/you/audacity-guide ==
-   Root map: none (none configured); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  skipped (no project.json yet) ==
-
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 ::::
 
@@ -276,29 +274,36 @@ This is the first stage with links inside topics. The health check has
 resolved the `@href` of each `<topicref>` in the map since stage 02; now it
 also resolves each `@href` in a topic. Misspell the target of the
 `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and
-run the gate. The file still validates, because a broken link is not a
-grammar error, but the health check reports it and the stage fails:
+check your work. The file still validates, because a broken link is not a
+grammar error, but the health stage reports it with the file and line, and
+the check stops. The following output is an example:
 
 ```
-== project-health  /home/you/audacity-guide ==
-Root map: none (none configured); house rules: none (none configured)
-Broken references (1):
-  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita"
-…
-FAIL: project-health found issues
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
 ```
 
-The validation and health checks cover different problems. A wrong
-fragment such as `#supported-audio-formats/choose` passes the health check
-and the DITA-OT build. The link renders and points at the top of the topic
-instead of the section. The output link check catches it. Today that check
-is the tutorial's `scripts/check-output-links.py`; a product command is
-planned. After you build, the check reports the wrong fragment. The
-following output is an example:
+Undo the change and check again.
+
+The health and output stages cover different problems. In *Exporting
+audio*, find the `<xref>` to the *Choosing a format* section. Change the fragment
+`#supported-audio-formats/choosing` to `#supported-audio-formats/choose` and
+check your work. The source passes the health stage and the DITA-OT build.
+The link renders and points at an anchor that the page does not have. The
+output stage reads the built HTML and reports each link that leads nowhere,
+with the page, the line, and the target. The following output is an example:
 
 ```
-out/full/topics/exporting-audio.html:17: missing fragment: supported-audio-formats.html#supported-audio-formats__choose
+health   clean
+build    full                 ok  /home/you/audacity-guide/out/full
+output   1 broken link(s)
+  /home/you/audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
+Not ready: stopped at output.
 ```
+
+Undo the change and check again.
 
 `dogsbay-xml conref-audit` checks conref target IDs. It does not check
 cross-reference links.
@@ -317,12 +322,12 @@ Writing these links first shows the relationships that the map later
 generates. Topic-level links are also useful when publishing a topic on
 its own.
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+After each error exercise, undo the deliberate change and check again.
+Confirm that the check reports `Ready` before you continue.
 
 ## Publish your changes
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -343,8 +348,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned
@@ -356,7 +360,9 @@ python3 scripts/check-output-links.py out
   `<linktext>` when there is no title to borrow; `<desc>` for a blurb.
 - `<linklist>` keeps order and has a title; `<linkpool>` lets the processor
   sort and merge.
-- `project-health` catches broken references that validation cannot.
+- The check's health stage catches broken references that validation
+  cannot. Its output stage catches links in the built HTML that lead
+  nowhere, such as a wrong fragment.
 
 ## Next lesson
 
