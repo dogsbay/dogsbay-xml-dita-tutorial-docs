@@ -112,8 +112,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      is, so the processor does not try to parse it as DITA.
    - `<link>` is the same reference as `<xref>` but as a list entry in
      `<related-links>`. It takes `<linktext>` for the text when the target
-     has no title, and `<desc>` for a short description shown under the
-     link.
+     has no title, and `<desc>` for a short description. The HTML5 output
+     shows the description as a tooltip (the `title` attribute of the link),
+     not as text under the link.
 ::::
 
 ## Step 2: Related links on the remaining topics
@@ -271,8 +272,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 ::::
 
-This is the first stage where `project-health` has something to check besides
-validity: every `@href` now has to resolve. Misspell the target of the
+This is the first stage with links inside topics. The health check has
+resolved the `@href` of each `<topicref>` in the map since stage 02; now it
+also resolves each `@href` in a topic. Misspell the target of the
 `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and
 run the gate. The file still validates, because a broken link is not a
 grammar error, but the health check reports it and the stage fails:
@@ -288,16 +290,24 @@ FAIL: project-health found issues
 
 The validation and health checks cover different problems. A wrong
 fragment such as `#supported-audio-formats/choose` passes the health check
-and, once there is a map, the DITA-OT build as well. The link renders and
-points at the top of the topic instead of the section. Check fragments by
-clicking them in the built output. `dogsbay-xml conref-audit` checks
-conref target IDs; it does not replace testing these cross-reference links.
+and the DITA-OT build. The link renders and points at the top of the topic
+instead of the section. The output link check catches it. Today that check
+is the tutorial's `scripts/check-output-links.py`; a product command is
+planned. After you build, the check reports the wrong fragment. The
+following output is an example:
+
+```
+out/full/topics/exporting-audio.html:17: missing fragment: supported-audio-formats.html#supported-audio-formats__choose
+```
+
+`dogsbay-xml conref-audit` checks conref target IDs. It does not check
+cross-reference links.
 
 ## Why links belong in the map
 
 Every `<related-links>` block you wrote here is a statement about how topics
-relate, stored inside one of the two topics. When you organize the map in stage 09
-and relationship tables in stage 09, those statements move to the map, where
+relate, stored inside one of the two topics. In stage 09 you organize the
+map and add a relationship table. Those statements then move to the map, where
 one `<reltable>` row says "these topics are related" once and the processor
 generates the links on both sides. Topics then carry only the `<xref>`s that
 the text needs, and the same topic can be related to different neighbors in

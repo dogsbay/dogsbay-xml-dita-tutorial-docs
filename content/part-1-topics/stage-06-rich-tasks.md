@@ -101,9 +101,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 2. **Read the new elements**
 
    - `<prereq>` states what must be true before the reader starts. It goes
-     before `<context>`, and output labels it "Before you begin".
+     before `<context>`.
    - `<postreq>` states what to do after the task is done. It goes after
-     `<result>`, and output labels it "What to do next".
+     `<result>`.
+   - The default HTML5 build shows both sections without a heading. To add
+     the labels "Before you begin" and "What to do next", set the DITA-OT
+     parameter `args.gen.task.lbl` to `YES`.
    - `<choicetable>` is a step whose action depends on a condition, laid out
      as a two-column table: `<chhead>` with `<choptionhd>` and `<chdeschd>`
      for the headings, then one `<chrow>` per option with `<choption>` and

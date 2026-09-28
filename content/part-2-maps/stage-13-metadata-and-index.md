@@ -68,9 +68,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    The children of `<prolog>` come in a fixed order: `<author>`,
    `<source>`, `<publisher>`, `<copyright>`, `<critdates>`,
    `<permissions>`, `<metadata>`, `<resourceid>`, `<data>`. Skip any, but
-   do not reorder them. `<resourceid>` and `<data>` come after
-   `<metadata>`, not inside it; put them inside and the file does not
-   validate.
+   do not reorder them. `<resourceid>` comes after `<metadata>`. If you
+   put it inside `<metadata>`, the file does not validate. `<data>` is
+   allowed in both places: at the end of `<metadata>`, or after
+   `<resourceid>` as here.
 
 3. **Read the elements**
 

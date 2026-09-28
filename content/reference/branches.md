@@ -117,7 +117,7 @@ After any checkout, the "You are on" line near the top of `README.md` names
 the stage:
 
 ```bash
-head -9 README.md
+grep 'You are on' README.md
 ```
 
 `git diff` compares tracked files. Use `git status --short` as well to find

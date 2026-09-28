@@ -131,10 +131,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      `<relheader>` names a column, here typed `concept`, `task` and
      `reference`, so the generated links are grouped as "Related concepts",
      "Related tasks" and "Related reference".
-   - Each `<relrow>` says that everything in its cells is related. In the
-     first row the concept links to both tasks and the reference, and each
-     of them links back. An empty `<relcell/>` in the second row means no
-     concept is involved.
+   - Each `<relrow>` relates the topics in one cell to the topics in the
+     other cells of the row. Links go across columns: in the first row the
+     concept links to both tasks and the reference, and each of them links
+     back. Topics in the same `<relcell>` do not link to each other unless
+     the cell has `@collection-type="family"`. An empty `<relcell/>` in the
+     second row means no concept is involved.
    - Links are generated in both directions from one statement, and a
      topic can be related to different neighbors in a different map,
      which is what a hand-written `<link>` cannot do.
@@ -144,11 +146,14 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 ::::steps
 1. **Edit the six topics**
-   Each deletion is a link that a parent-child relationship, the sequence
-   or the reltable now produces. Only the links with no map equivalent stay:
-   the external ones, the `<linklist>` with its own title in *What is
-   digital audio?*, and two links with a `<desc>` or to a topic outside the
-   reltable.
+   Almost every deletion is a link that a parent-child relationship, the
+   sequence or the reltable now produces. The exception is the link from
+   *What is Audacity?* to *Installing Audacity*. The two topics are siblings
+   under a `<topichead>`, so the map generates no link between them. This
+   link is dropped here, and stage 10 adds it back with a key reference.
+   Only the links with no map equivalent stay: the external ones, the
+   `<linklist>` with its own title in *What is digital audio?*, and two
+   links with a `<desc>` or to a topic outside the reltable.
 
    ```diff title="topics/what-is-audacity.dita"
    --- a/topics/what-is-audacity.dita

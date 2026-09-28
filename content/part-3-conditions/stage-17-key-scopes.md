@@ -79,8 +79,12 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `keyscope="beginner"` gives that map's keys a scope name. Inside the
      podcaster guide they are `beginner.start-here`, `beginner.install`,
      `beginner.formats`. A link by such a key is a link to the other
-     deliverable, and making it resolve to a published URL is up to the
-     publishing setup; no topic in this stage uses one yet.
+     deliverable. No topic in this stage uses one.
+   - DITA-OT 4.3.5 does not resolve peer-map keys such as
+     `beginner.install`. A link by such a key renders as an empty link, and
+     the build prints no warning. The editor's key list and `dogsbay-xml
+     keys` still show these keys. Do not use them in a topic unless you set
+     up cross-deliverable publishing that maps them to published URLs.
    - A peer mapref without a `@keyscope` would pour the beginner guide's
      bare keys into this guide, and its `start-here` would collide with
      the one defined here.
@@ -154,7 +158,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - A bare key is not visible in the parent scope. `start-here` is
      undefined at the root of the collection; only the three scoped names
      exist. The last comment in the map says what happens if you forget.
-   - Keys defined in the root scope are visible in every child scope. The
+   - Keys defined in the root scope are visible in every child scope. If
+     an ancestor scope and a child scope define the same key, the
+     definition in the ancestor scope takes precedence (DITA 1.3). The
      collection defines the product keys and `common-notes` at its root
      as well as inside each guide, for a reason the first comment gives:
      the conref push in `shared/common-steps.dita` reaches the recording

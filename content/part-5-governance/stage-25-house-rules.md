@@ -122,8 +122,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    - `cmd-not-empty` allows an empty `<cmd/>` only when the `<cmd>` or
      its `<step>` carries `conref` or `conkeyref`, which is the
      placeholder pattern from stage 11. `note-type-allowed` lists the
-     `type` values the DTD accepts, and `step-has-cmd` is a DTD rule
-     restated so that its message is the house's.
+     `type` values the DTD accepts, except `notice`. DITA 1.3 allows
+     `notice`, but this rule reports it as a violation. `step-has-cmd` is
+     a DTD rule restated so that its message is the house's.
    - The comment at the top says how to run the rules and why they are
      shaped as they are. A rules file is read by the next writer more
      often than it is edited; say what it is for.
@@ -290,7 +291,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    Remove the five `<b>` wrappers used for decorative emphasis. Keep the
    `<term>` markup that identifies defined terms. The `<required-cleanup>`
    asked to become a table, so it becomes the `<simpletable>` from stage
-   03, with a header row and one row per platform. Move the content into that table and remove the cleanup wrapper.
+   05, with a header row and one row per platform. Move the content into that table and remove the cleanup wrapper.
 
 4. **Edit `topics/exporting-audio.dita`**
 

@@ -319,6 +319,10 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      first meets it, and the `<glossAbbreviation>` after that. In the
      HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it
      shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
+   - `<abbreviated-form>` inserts the surface form exactly as the glossary
+     entry writes it, in the singular. The output reads "-12 decibel (dB)"
+     and "Measured in decibel (dB)". For a measurement after a number,
+     where the reader expects "-12 dB", keep the plain unit instead.
    - The `<term>` elements without a `@keyref`, such as *Lossless* and
      *lossy*, are unchanged: they mark a term but have no entry to link to.
    - The *Clipping* `<dt>` is laid out on three lines because that is how

@@ -1,6 +1,6 @@
 ---
 title: "Stage 11: Reuse"
-description: Write steps, notes and a list once in a shared shared topic, then pull them into tasks by conref, conkeyref and a conref range, and push a step in.
+description: Write steps, notes and a list once in a shared topic, then pull them into tasks by conref, conkeyref and a conref range, and push a step in.
 type: tutorial
 ---
 
@@ -311,8 +311,16 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
    `project-health` resolves every `@conref` and `@conkeyref` to an element
    that exists and checks that each `conaction="mark"` finds its target.
-   Rename the play-back step's id and it reports both a broken element id
-   and, under *Conref pushes*, `push target id 'playback' not found`.
+   Rename the play-back step's id, for example to `playback`. The health
+   check then reports a broken element id and, under `Conref pushes`, a
+   line like this example:
+
+   ```
+   <step> push target id 'play-back' not found in recording-your-first-track.dita
+   ```
+
+   The diagnostic names the id that the push looks for, `play-back`, not the
+   new id. Restore the id and rerun the gate.
 
 3. **Check the output**
    The build folder has one page per topic in the table of contents and

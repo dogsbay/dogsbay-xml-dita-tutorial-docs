@@ -315,7 +315,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      single row or paragraph can carry it. Nothing renders it by default;
      a DITAVAL or a report can select on it.
    - `<revised modified="2026-03-05"/>` joins the `<created>` from stage
-     12 in `<critdates>`. The content model is `created?` then `revised*`,
+     13 in `<critdates>`. The content model is `created?` then `revised*`,
      in that order, one `<revised>` per revision.
    - `<change-historylist>` is DITA 1.3's structured change log, in the
      `<prolog>` after `<metadata>`. Each `<change-item>` holds who,

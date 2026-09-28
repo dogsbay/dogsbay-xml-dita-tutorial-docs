@@ -205,8 +205,9 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      `tip` for a shortcut or a better way, `important` for something the
      reader must not skip, `warning` when something can go wrong, `caution`
      for a milder version, `note` (the default) for anything else. Stage 20
-     adds `trouble`. A note may sit in `<context>` or, inside a step, in
-     `<info>`; it may not be a direct child of `<step>`.
+     adds `trouble`. A note may sit in `<context>`. Inside a step, a note is
+     allowed before the `<cmd>`. After the command, put the note inside
+     `<info>`.
 ::::
 
 > [!NOTE]
@@ -396,15 +397,14 @@ python3 scripts/check-output-links.py out
 ## What you learned
 
 - Inline elements name what text is: `<uicontrol>`, `<menucascade>`,
-  `<shortcut>`, `<wintitle>`, `<filepath>`, `<term>`, `<cmdname>`, `<ph>`.
+  `<shortcut>`, `<wintitle>`, `<filepath>`, `<term>`, `<cmdname>`.
 - `<b>` and `<i>` are for typographic convention only; prefer a semantic
   element.
-- `<note>` has types, and lives in `<context>` or `<info>`, not directly in a
-  step.
+- `<note>` has types. In a step, a note goes before the `<cmd>` or inside
+  `<info>` after it.
 - Lists: `<ul>`, `<ol>`, `<sl>`, `<dl>`; each is a different kind of list.
 - `<simpletable>` for short values, CALS `<table>` for everything else.
-- `<fn>`, `<lq>`, `<codeblock>` and `<pre>` for footnotes, quotations and
-  verbatim text.
+- `<fn>`, `<lq>` and `<codeblock>` for footnotes, quotations and code.
 - `<shortcut>` only inside `<uicontrol>`.
 
 ## Next lesson

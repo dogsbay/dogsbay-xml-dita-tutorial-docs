@@ -40,7 +40,8 @@ meet the exercise requirements.
 
 ## Conditions
 
-Use `<note audience="podcaster">` around the note. The beginner filters
+Add the `audience="podcaster"` attribute to the note itself, as in
+`<note audience="podcaster">`. Do not add a wrapper element around the note. The beginner filters
 exclude `podcaster`; the Linux podcaster filter includes it. The subject
 scheme identifies allowed values, while the DITAVAL selects or flags content
 for a particular publication. A spelling error can pass the DTD because the
