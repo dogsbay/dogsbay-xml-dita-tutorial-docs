@@ -23,7 +23,7 @@
         "href": "/dogsbay-xml-dita-tutorial-docs/start-here/set-up"
       },
       {
-        "label": "Run the gate",
+        "label": "Check your work",
         "href": "/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate"
       }
     ]
@@ -197,7 +197,7 @@
         "href": "/dogsbay-xml-dita-tutorial-docs/reference/element-index"
       },
       {
-        "label": "The gate",
+        "label": "The stage gate (maintainers)",
         "href": "/dogsbay-xml-dita-tutorial-docs/reference/the-gate"
       },
       {
