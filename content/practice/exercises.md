@@ -28,7 +28,8 @@ or in the existing reference topic.
 **Check:** Validate the new topic with `dogsbay-xml validate`. Read only its
 `cmd` elements and confirm that the actions form a usable procedure. At this
 checkpoint the guide already has a map and HTML deliverable. Add the topic
-to the map and rebuild to inspect your changes.
+to the map, [check your work](/start-here/run-the-gate), and inspect the
+new page in `out/full/`.
 
 ## Maps and reuse
 
@@ -42,10 +43,19 @@ your new checking task.
 Before adding another reusable step, compare its purpose with the shared
 save step. Explain whether you can use the existing element unchanged.
 
-**Check:** Build the practice map with `dita --input=practice.ditamap
---format=html5 --output=out/practice`. Inspect titles, links, resolved product
-names, and the reused save instruction. The default project health check
-does not automatically select your new map.
+**Check:** Add a deliverable named `practice` to `project.json`, with
+`practice.ditamap` as its input and `out/practice` as its output. Then
+check that deliverable. In the editor, **Project** > **Check Project**
+checks every deliverable. From the command line, run:
+
+```bash
+dogsbay-xml check --deliverable=practice .
+```
+
+The check builds the practice map into `out/practice/` and checks the links
+in the built pages. Inspect titles, links, resolved product names, and the
+reused save instruction. The health stage uses the guide's root map, so it
+does not check the key space of your new map.
 
 ## Conditions
 
@@ -87,6 +97,6 @@ dogsbay-xml project-health --include=schematron .
 ```
 
 **Check:** Explain why the DTD can accept the file while the project rule
-rejects it. Restore the short description and run the full gate. Confirm
+rejects it. Restore the short description and check your work. Confirm
 that the deliberate error is absent before continuing to the
 [capstone](/practice/capstone).

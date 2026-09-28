@@ -11,7 +11,7 @@
     - Plan your topics: start-here/plan-your-topics.md
     - How the tutorial works: start-here/how-the-tutorial-works.md
     - Set up your tools: start-here/set-up.md
-    - Run the gate: start-here/run-the-gate.md
+    - Check your work: start-here/run-the-gate.md
 - "Core: Topics and first publication":
     - "Stage 00: Set up the project": part-1-topics/stage-00-setup.md
     - "Stage 01: A concept topic": part-1-topics/stage-01-concept.md
@@ -53,5 +53,5 @@
     - Verify excerpts and output links: reference/verification.md
     - Known output issues: reference/known-output-issues.md
     - Element index: reference/element-index.md
-    - The gate: reference/the-gate.md
+    - The stage gate (maintainers): reference/the-gate.md
     - Branches: reference/branches.md

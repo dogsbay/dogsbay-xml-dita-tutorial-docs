@@ -1,15 +1,16 @@
 ---
 title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognize, with the shared editor settings and the gate script that every later stage must pass.
+description: An empty DITA project that the tools recognize, with the shared editor settings, a README, and a first check of your work.
 type: tutorial
 ---
 
 # Stage 00: Set up the project
 
-Create the project settings, validation script, and README for the guide.
-The DogsBay XML editor uses `.dogsbay/config.xml` to select the DITA
-framework and formatting settings. The script `scripts/check-stage.sh`
-runs the checks used throughout the tutorial.
+Create the project settings and README for the guide, then check the
+project. The DogsBay XML editor uses `.dogsbay/config.xml` to select the
+DITA framework and formatting settings. At the end of every lesson, you check
+your work with **Project** > **Check Project** in the editor or
+`dogsbay-xml check` on the command line.
 
 A topic's DOCTYPE identifies its grammar. For example,
 `-//OASIS//DTD DITA Concept//EN` identifies the concept DTD. An XML catalog
@@ -21,7 +22,7 @@ without downloading the grammar.
 clone of the repository on `tutorial/00-setup` if you want to compare.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Create the project folder
 
@@ -36,13 +37,16 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    git init
    git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
    git fetch origin
-   mkdir -p .dogsbay scripts topics
+   mkdir -p .dogsbay topics
    touch topics/.gitkeep
    ```
 
    Fetching adds the reference branches as `origin/tutorial/NN-slug`
    without adding their files to your working directory. Later lessons
    use these refs to retrieve images and compare your work.
+
+   Each stage branch also has a `scripts/` folder. Its scripts are checks
+   for the tutorial maintainers. You do not need them in your repository.
 
 2. **Write the editor settings**
    `.dogsbay/config.xml` is shared by everyone who opens the project. It sets
@@ -81,97 +85,13 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    ```
 ::::
 
-## Step 2: Add the gate
-
-::::steps
-1. **Write the script**
-   Save it as `scripts/check-stage.sh` and make it executable. It runs
-   `validate-project`, then `project-health`, then, once the project has a
-   `project.json`, a DITA-OT build of every deliverable.
-
-   ```bash title="scripts/check-stage.sh"
-   #!/usr/bin/env bash
-   # check-stage.sh — the gate every tutorial stage branch must pass.
-   #
-   # Runs, from the project root:
-   #   1. dogsbay-xml validate-project   every topic and map validates against its DOCTYPE
-   #   2. dogsbay-xml project-health     links, keys, element ids, conref pushes, index,
-   #                                     metadata policy and house rules are clean
-   #   3. dita --project=project.json    every deliverable actually publishes
-   #
-   # Exit code is non-zero when any gate fails. Usage:
-   #   scripts/check-stage.sh [project-root]           (default: the repo root)
-   #   STRICT=0 scripts/check-stage.sh                 (project-health at severity=error only)
-   #   SKIP_BUILD=1 scripts/check-stage.sh             (skip the DITA-OT build)
-   #
-   # Tooling is found from, in order: $DOGSBAY_XML / $DITA_HOME, the PATH, then the
-   # developer defaults below.
-   set -u
-   
-   ROOT="$(cd "${1:-$(dirname "$0")/..}" && pwd)"
-   DOGSBAY_XML="${DOGSBAY_XML:-$(command -v dogsbay-xml || echo "$HOME/github/dogsbay-xml/bin/dogsbay-xml")}"
-   DITA_HOME="${DITA_HOME:-$HOME/Downloads/dita-ot-4.3.5}"
-   DITA="${DITA:-$(command -v dita || echo "$DITA_HOME/bin/dita")}"
-   STRICT="${STRICT:-1}"
-   SKIP_BUILD="${SKIP_BUILD:-0}"
-   OUT="${OUT:-${TMPDIR:-/tmp}/check-stage-$$}"
-   
-   status=0
-   say() { printf '\n== %s ==\n' "$*"; }
-   fail() { status=1; printf 'FAIL: %s\n' "$*"; }
-   
-   [ -x "$DOGSBAY_XML" ] || { echo "dogsbay-xml CLI not found (set DOGSBAY_XML)"; exit 2; }
-   
-   say "validate-project  $ROOT"
-   "$DOGSBAY_XML" validate-project "$ROOT" || fail "validation errors"
-   
-   say "project-health  $ROOT"
-   if [ "$STRICT" = "1" ]; then
-     "$DOGSBAY_XML" project-health "$ROOT" || fail "project-health found issues"
-   else
-     "$DOGSBAY_XML" project-health --severity=error "$ROOT" || fail "project-health found errors"
-   fi
-   
-   if [ "$SKIP_BUILD" = "1" ]; then
-     say "build  skipped (SKIP_BUILD=1)"
-   elif [ -f "$ROOT/project.json" ]; then
-     [ -x "$DITA" ] || { echo "dita command not found (set DITA_HOME or DITA)"; exit 2; }
-     say "build  project.json -> $OUT"
-     log="$OUT.log"; mkdir -p "$OUT"
-     # DITA-OT does not always exit non-zero on content errors, so also grep the log.
-     if ! (cd "$ROOT" && "$DITA" --project=project.json --output="$OUT" >"$log" 2>&1) \
-        || grep -qE '^Error:|\[(DOT[A-Z]+[0-9]+[EF])\]' "$log"; then
-       grep -E '^Error:|\[(DOT[A-Z]+[0-9]+[EF])\]' "$log" | sort -u | head -40
-       fail "DITA-OT build reported errors (full log: $log)"
-     else
-       echo "all deliverables built"
-     fi
-   else
-     say "build  skipped (no project.json yet)"
-   fi
-   
-   echo
-   [ "$status" = 0 ] && echo "STAGE OK" || echo "STAGE FAILED"
-   exit "$status"
-   ```
-
-   ```bash
-   chmod +x scripts/check-stage.sh
-   ```
-
-2. **Read the three steps**
-   Each is a `say` header, a command and a `fail` on error. The build step
-   greps the DITA-OT log for `Error:` and for `E` and `F` message codes
-   because DITA-OT does not always exit non-zero when content is wrong. The
-   details are on [Run the gate](/start-here/run-the-gate).
-::::
-
-## Step 3: Write the README and license
+## Step 2: Write the README and license
 
 ::::steps
 1. **Write the README**
    The "You are on" line is the one line that changes at every stage. The
-   stage table lists the whole ladder.
+   stage table lists the whole ladder. The "Verification" section names
+   `scripts/`, which holds maintainer checks that readers do not need.
 
    ````md title="README.md"
    # DITA tutorial
@@ -275,31 +195,38 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    or from the branch.
 ::::
 
-## Step 4: Run the gate
+## Step 3: Check your work
+
+Check the project. In the editor, choose **Project** > **Check Project**. The
+result appears in the **Project Validation** panel. From the command line,
+run this command from the project root:
 
 ```bash
-scripts/check-stage.sh
+dogsbay-xml check --no-build .
 ```
 
-With no topics there is nothing to validate, no map to check and no
-`project.json` to build, so the gate passes at once:
+With no topics and no map, the source is clean. The output looks like this
+example:
 
 ```
-== validate-project  /home/you/audacity-guide ==
-0 file(s): 0 valid, 0 invalid.
-
-== project-health  /home/you/audacity-guide ==
-Root map: none (none configured); house rules: none (none configured)
-Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-== build  skipped (no project.json yet) ==
-
-STAGE OK
+health   clean
+Project health is clean. The build was not run, so nothing here speaks for the output.
 ```
 
-If it prints `dogsbay-xml CLI not found` or `dita command not found`, go back
-to [Set up your tools](/start-here/set-up) and set `DOGSBAY_XML` or
-`DITA_HOME`.
+The project declares no deliverables until stage 03, so there is nothing to
+build yet. In the editor, and from the command line without `--no-build`,
+the check reports that it stopped at the build stage:
+
+```
+health   clean
+build    nothing to build
+Not ready: stopped at build — this project declares no deliverables, so there is nothing to build or check.
+```
+
+That result is expected before stage 03. Look for `health   clean`. If the
+command is not found, go back to [Set up your tools](/start-here/set-up) and
+add the command line to your `PATH`. For more about the result, see
+[Check your work](/start-here/run-the-gate).
 
 ## What you learned
 
@@ -307,7 +234,8 @@ to [Set up your tools](/start-here/set-up) and set `DOGSBAY_XML` or
   the files themselves and, for the editor, `.dogsbay/config.xml`.
 - DOCTYPEs are resolved through the DITA-OT catalog, so a project states which
   DITA-OT it targets and the DTDs come from there.
-- The gate is three commands. `STAGE OK` means a stage is done.
+- **Project** > **Check Project**, or `dogsbay-xml check`, checks your
+  work. Before stage 03, `health   clean` means a stage is done.
 - Format style lives in the project so every stage's diff is about the
   feature.
 

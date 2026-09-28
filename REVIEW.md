@@ -1,5 +1,28 @@
 # Tutorial documentation review
 
+## Check Project, stages 00 to 13, September 28, 2026
+
+Readers of stages 00 to 13 now check their work with **Project** >
+**Check Project** in the editor, or `dogsbay-xml check`, instead of
+`scripts/check-stage.sh`. The script stays on the branches for maintainers
+and is documented as the stage gate.
+
+- Every recorded check output comes from running `dogsbay-xml check` on
+  that stage's branch (dogsbay-xml `58cf9a2`). Every deliberate-error
+  exercise was re-run to record what the check and `project-health` now
+  print.
+- Set-up no longer asks for a separate DITA-OT install or `DITA_HOME`;
+  the editor and its command line include DITA-OT 4.3.5.
+- Stage 00 no longer has readers write the gate script.
+
+Stages 14 to 26 still describe the gate: on the current branches and
+editor, a correct project does not yet check as ready there (see
+`plans/editor-consistency.md`, "Phase 2 status").
+
+The docs source audit, the excerpt check (193 listings, 0 failures; one
+listing fewer because the gate script is no longer quoted), the strict site
+build, the Astro production build, and the generated-site audit passed.
+
 ## Editor-consistency pass, September 28, 2026
 
 A dry run of all 27 stages found wrong claims, stale recorded output, and

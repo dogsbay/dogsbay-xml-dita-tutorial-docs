@@ -19,7 +19,7 @@ requirement that readers must meet before starting, for example, and
 **You need:** stage 05 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Installing Audacity
 
@@ -323,7 +323,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      for expert readers can drop it.
 ::::
 
-## Step 5: Update the README and run the gate
+## Step 5: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line**
@@ -342,32 +342,58 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then choose **Project** > **Check Project** in the editor, or run
+   `dogsbay-xml check .` from the project root. With the lesson's topics
+   in the map (see "Publish your changes"), the output looks like this
+   example:
+
    ```
-   == validate-project  /home/you/audacity-guide ==
-   9 file(s): 9 valid, 0 invalid.
-   …
-   STAGE OK
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 ::::
 
 The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then
 `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order,
-move the `<postreq>` in *Installing Audacity* above `<result>` and run the
-gate.
+move the `<postreq>` in *Installing Audacity* above `<result>` and check
+your work. The check names the file and stops. The output looks like this
+example:
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+```
+health   NOT CLEAN
+  invalid: /home/you/audacity-guide/topics/installing-audacity.dita
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the line, column, and message. For example:
+
+```
+Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
+Invalid files (1 of 10):
+  /home/you/audacity-guide/topics/installing-audacity.dita:
+    68:14  error: The content of element type "taskbody" does not match its content model.
+
+Summary
+  Invalid files                 1  of 10
+```
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## Publish your changes
 
-Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The complete map at this checkpoint is:
+Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -388,8 +414,7 @@ Add the lesson's topics to `audacity-guide.ditamap`, then rebuild the guide. The
 ```
 
 ```bash
-dita --project=project.json --output=out
-python3 scripts/check-output-links.py out
+dogsbay-xml check .
 ```
 
 ## What you learned

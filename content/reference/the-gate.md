@@ -1,15 +1,15 @@
 ---
-title: The gate
-description: Reference for scripts/check-stage.sh, the check every stage passes; its steps, switches, environment variables, exit codes, and why not xmllint.
+title: The stage gate
+description: "For maintainers. scripts/check-stage.sh, the script that verifies every stage branch: its steps, switches, variables, exit codes, and why not xmllint."
 type: reference
 ---
 
-# The gate
+# The stage gate
 
 `scripts/check-stage.sh` is the check every tutorial stage branch passes
-before it is committed. It is also a one-shot health check for any DITA
-project folder. [Run the gate](/start-here/run-the-gate) walks through using
-it; this page is the reference.
+before it is committed. This page is for maintainers of the tutorial.
+Readers check their work with **Project** > **Check Project** in the
+editor, or `dogsbay-xml check`; see [Check your work](/start-here/run-the-gate).
 
 ## Steps
 

@@ -21,7 +21,7 @@ for the starting checkpoint and the next core lesson.
 **You need:** stage 11 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Write the entries
 
@@ -330,7 +330,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
      meaning is unchanged.
 ::::
 
-## Step 4: Update the README and run the gate
+## Step 4: Update the README and check your work
 
 ::::steps
 1. **Change the "You are on" line and the layout**
@@ -349,39 +349,62 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ````
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
-   scripts/check-stage.sh
    ```
 
-   ```
-   == validate-project  /home/you/audacity-guide ==
-   21 file(s): 21 valid, 0 invalid.
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
-
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```bash
+   dogsbay-xml check .
    ```
 
-   Twenty-one files: nine topics, two shared topics, seven glossary files and
-   three maps. Run `dita --project=project.json`, then open
-   `out/full/topics/glossary/audio-units.html` after the
-   build: the group is one page with both entries, each showing the term,
+   Example output:
+
+   ```
+   health   clean, with warnings
+     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
+     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
+     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   ```
+
+   The project now has twenty-one files: nine topics, two shared topics,
+   seven glossary files and three maps. The unused keys are defined for
+   later stages: stage 14 refers to `gl-normalization`, and stage 18 uses
+   `start-here` and `digital-audio`.
+
+   The check builds the guide into `out/full/`. Open
+   `out/full/topics/glossary/audio-units.html`: the group is one page with both entries, each showing the term,
    the definition, the surface form and the alternative forms.
 ::::
 
 A glossary key is a key like any other. Change the `<term keyref>` in
-*Preparing to record* to `gl-clippng` and run the gate:
+*Preparing to record* to `gl-clippng` and check your work. The check
+stops at health. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
+  (run project-health for the full report)
+  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
+  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
+  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel, or `dogsbay-xml project-health .`, gives
+the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
   /home/you/audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
@@ -393,12 +416,14 @@ Unused keys (3):
 Summary
   Undefined keys                1
   Unused keys                   3
-FAIL: project-health found issues
 ```
 
 `gl-normalization` appears as unused because no topic mentions
-normalization yet; the entry is still published from the map. That line is
-information and does not fail the stage on its own.
+normalization yet; the entry is still published from the map. An unused
+key is a warning and does not fail the check on its own.
+
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 

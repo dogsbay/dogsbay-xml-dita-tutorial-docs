@@ -40,7 +40,7 @@ make a real recording.
 | Check | Passing result |
 |---|---|
 | Content plan | Each topic has a distinct reader purpose |
-| DTD and house rules | The new content validates and the full gate passes |
+| DTD and house rules | The new content validates and the check reports `Ready` |
 | Map integration | Both intended guides expose the new task in navigation |
 | Key and reuse resolution | No empty product values, missing steps, or unresolved links |
 | Filtering | Each audience sees its intended explanation or note |
@@ -50,7 +50,7 @@ make a real recording.
 
 Use the [automated checks](/reference/verification) alongside manual output
 inspection. Record the commands, output directories, and any limitations
-you found. If the gate passes but output is wrong, investigate the affected
+you found. If the check reports `Ready` but output is wrong, investigate the affected
 map and transform before accepting the result.
 
 Compare your checker output with the

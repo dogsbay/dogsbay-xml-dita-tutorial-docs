@@ -17,7 +17,7 @@ six topics so that each relationship is maintained in one place.
 **You need:** stage 08 complete.
 
 
-Recorded diagnostic examples below come from earlier runs. File counts, paths, and stage numbers can differ. Run the gate for your current checkout.
+Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Structure the map
 
@@ -245,7 +245,7 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
    links and link descriptions.
 ::::
 
-## Step 3: Update the README, run the gate and look at the output
+## Step 3: Update the README, check your work and look at the output
 
 ::::steps
 1. **Change the "You are on" line**
@@ -264,29 +264,33 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
     
    ```
 
-2. **Format and check**
+2. **Format and check your work**
+
+   Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
-   scripts/check-stage.sh
    ```
 
+   Then check the project. In the editor, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
+
+   ```bash
+   dogsbay-xml check .
    ```
-   == validate-project  /home/you/audacity-guide ==
-   10 file(s): 10 valid, 0 invalid.
 
-   == project-health  /home/you/audacity-guide ==
-   Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
-   Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
+   Example output:
 
-   == build  project.json -> /tmp/check-stage-357688 ==
-   all deliverables built
-
-   STAGE OK
+   ```
+   health   clean
+   build    full                 ok  /home/you/audacity-guide/out/full
+   output   clean (full)
+   Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 
 3. **Read the generated links**
-   Build with `dita --project=project.json` and open the pages under
+   The check builds the guide into `out/full/`. Open the pages under
    `out/full/topics/`. The link blocks at the foot of each page are now
    generated. The text of three of them, as DITA-OT 4.3.5 writes it:
 
@@ -304,21 +308,30 @@ Recorded diagnostic examples below come from earlier runs. File counts, paths, a
 
 `project-health` checks the reltable like any other reference. Misspell
 `topics/exporting-audio.dita` in the second `<relrow>` as
-`topics/export-audio.dita` and run the gate:
+`topics/export-audio.dita` and check your work. The check stops at
+health and names the broken reference. Example output:
 
 ```
-== project-health  /home/you/audacity-guide ==
+health   NOT CLEAN
+  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
+  (run project-health for the full report)
+Not ready: stopped at health — the project itself has faults, so nothing was built and no output was read.
+```
+
+The **Project Validation** panel lists the same problem. From the command
+line, `dogsbay-xml project-health .` prints the full report:
+
+```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
   /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
 
 Summary
   Broken references             1
-FAIL: project-health found issues
 ```
 
-After each error exercise, undo the deliberate change and rerun the gate.
-Confirm that it prints `STAGE OK` before continuing.
+Undo the change and check again. Confirm that the check reports `Ready`
+before you continue.
 
 ## What you learned
 
