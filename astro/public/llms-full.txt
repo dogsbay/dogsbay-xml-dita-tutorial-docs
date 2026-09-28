@@ -741,28 +741,30 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Write the topic {#step-1-write-the-topic}
 
 :::steps
-1. **Create `topics/what-is-audacity.dita` from a template** In the **Explorer**, right-click the `topics` folder and choose **New File**. Enter `what-is-audacity.dita` and press Enter. The **New XML Document** dialog lists the templates for XML files. Choose **dita-concept-minimal** and click **OK**.
+1. **Create `topics/what-is-audacity.dita` from a template** In the **Explorer**, right-click the `topics` folder and choose **New File**. Enter `what-is-audacity.dita` and press Enter. The **New XML Document** dialog lists the templates for `.dita` files. Choose **Concept** and click **OK**.
 
-   Use the topic `@id` as the file name to keep links readable. This is a project convention.
+   Use the topic `@id` as the file name to keep links readable. This is a project convention. The editor sets the root `@id` from the file name, so the id needs no editing.
 
    The editor opens the new file with the template's content:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
-   <concept id="concept_id">
-       <title>Concept Title</title>
-       <conbody>
 
-       </conbody>
+   <concept id="what-is-audacity">
+     <title>Concept Title</title>
+     <shortdesc></shortdesc>
+     <conbody>
+       <p></p>
+     </conbody>
    </concept>
    ```
 
    The template supplies the XML declaration, the DOCTYPE, and the parts every concept needs. The editor recognizes the file as a DITA concept from its name, so validation and formatting work from the start.
 
    If you use another editor, create the file and type the finished topic shown in step 3.
-2. **Replace the placeholders** Double-click `concept_id` and type `what-is-audacity`. Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `What is Audacity?`.
-3. **Complete the topic** Add the short description after the title, then the paragraphs, list, and section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and check your work".
+2. **Replace the title and add the short description** Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `What is Audacity?`. Then click between `<shortdesc>` and `</shortdesc>` and type the short description.
+3. **Complete the topic** Type the first paragraph in the empty `<p></p>`, then add the other paragraph, the list, and the section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and check your work".
 
    The finished topic:
 
@@ -930,7 +932,27 @@ A map selects the topics in a publication and their navigation order. Create one
 
 ## Create the guide map {#create-the-guide-map}
 
-Save this file as `audacity-guide.ditamap` in the project root:
+Create the map from a template:
+
+1. In the **Explorer**, right-click the project root and choose **New File**.
+2. Enter `audacity-guide.ditamap` and press Enter. The **New XML Document** dialog lists the templates for `.ditamap` files.
+3. Select **Map** and click **OK**. The dialog selects **Bookmap** first because it sorts first, so select **Map** explicitly.
+
+The editor opens the new file with the template's content:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+<map>
+  <title>Map Title</title>
+  <topicref href="topic.dita"/>
+</map>
+```
+
+Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `Audio user guide`. Then replace the placeholder `topic.dita` in the `@href` with `topics/what-is-audacity.dita`. If you use another editor, create the file in the project root and type the finished listing.
+
+The finished map:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1108,7 +1130,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Write the task {#step-1-write-the-task}
 
 :::steps
-1. **Create `topics/recording-your-first-track.dita`**
+1. **Create `topics/recording-your-first-track.dita`** In the **Explorer**, right-click the `topics` folder, choose **New File**, and enter `recording-your-first-track.dita`. In the **New XML Document** dialog, choose **Task** and click **OK**. As in stage 01, the editor sets the `@id` from the file name. The template gives you the task skeleton:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
+
+   <task id="recording-your-first-track">
+     <title>Task Title</title>
+     <shortdesc></shortdesc>
+     <taskbody>
+       <steps>
+         <step>
+           <cmd></cmd>
+         </step>
+       </steps>
+     </taskbody>
+   </task>
+   ```
+
+   Replace the title placeholder (**XML** > **Select Element Content**) and type the short description. Add the `<context>` before `<steps>`, type the first action in the empty `<cmd></cmd>`, then add the `<info>` elements, the other steps, and the `<result>`. If you use another editor, create the file and type the finished listing. The finished task:
 
    ```xml {title="topics/recording-your-first-track.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1173,7 +1214,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Write the reference {#step-2-write-the-reference}
 
 :::steps
-1. **Create `topics/supported-audio-formats.dita`**
+1. **Create `topics/supported-audio-formats.dita`** Create the file in the `topics` folder in the same way, and choose the **Reference** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE reference PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd">
+
+   <reference id="supported-audio-formats">
+     <title>Reference Title</title>
+     <shortdesc></shortdesc>
+     <refbody>
+       <section>
+         <title>Section Title</title>
+         <p></p>
+       </section>
+     </refbody>
+   </reference>
+   ```
+
+   Replace the title and type the short description. This reference's introductory section has no title, so delete `<title>Section Title</title>`, and type the introduction in the empty `<p></p>`. Then add the `<table>` after the `</section>`. If you use another editor, create the file and type the finished listing. The finished reference:
 
    ```xml {title="topics/supported-audio-formats.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1246,7 +1305,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<thead>` and `<tbody>` hold header and body rows; each `<row>` holds one `<entry>` per column.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Update the map and the README, and check your work {#step-3-update-the-map-and-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -1264,13 +1323,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     ## Stages
 
    ```
-2. **Format and check your work** Format the topics:
+2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+
+   ```xml {title="audacity-guide.ditamap"}
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   <map>
+     <title>Audio user guide</title>
+     <topicref href="topics/recording-your-first-track.dita"/>
+     <topicref href="topics/supported-audio-formats.dita"/>
+     <topicref href="topics/what-is-audacity.dita"/>
+   </map>
+   ```
+3. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
@@ -1302,26 +1374,6 @@ Summary
 ```
 
 Undo the change and check again. Confirm that the check reports `Ready` before you continue.
-
-## Publish your changes {#publish-your-changes}
-
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
-
-```xml {title="audacity-guide.ditamap"}
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-
-<map>
-  <title>Audio user guide</title>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/what-is-audacity.dita"/>
-</map>
-```
-
-```bash
-dogsbay-xml check .
-```
 
 ## What you learned {#what-you-learned}
 
@@ -1363,7 +1415,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Write the concept {#step-1-write-the-concept}
 
 :::steps
-1. **Create `topics/what-is-digital-audio.dita`**
+1. **Create `topics/what-is-digital-audio.dita`** In the **Explorer**, right-click the `topics` folder, choose **New File**, and enter `what-is-digital-audio.dita`. Choose the **Concept** template and click **OK**. Replace the title placeholder, type the short description, and start the body in the empty `<p></p>`. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/what-is-digital-audio.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1458,7 +1510,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Write the task {#step-2-write-the-task}
 
 :::steps
-1. **Create `topics/trimming-audio.dita`**
+1. **Create `topics/trimming-audio.dita`** Create `trimming-audio.dita` in the `topics` folder in the same way, from the **Task** template. Replace the title placeholder, type the short description, and fill in the steps starting from the empty `<cmd></cmd>`. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/trimming-audio.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1640,7 +1692,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<ph>` is a phrase with no more specific meaning. It carries attributes (conditions in stage 14, ids for reuse in stage 11) when you need a handle on a run of text and none of the other inline elements fits.
 :::
 
-## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
+## Step 4: Update the map and the README, and check your work {#step-4-update-the-map-and-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -1658,13 +1710,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     ## Stages
 
    ```
-2. **Format and check your work** Format the topics:
+2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+
+   ```xml {title="audacity-guide.ditamap"}
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   <map>
+     <title>Audio user guide</title>
+     <topicref href="topics/recording-your-first-track.dita"/>
+     <topicref href="topics/supported-audio-formats.dita"/>
+     <topicref href="topics/trimming-audio.dita"/>
+     <topicref href="topics/what-is-audacity.dita"/>
+     <topicref href="topics/what-is-digital-audio.dita"/>
+   </map>
+   ```
+3. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
@@ -1673,28 +1740,6 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 :::
-
-## Publish your changes {#publish-your-changes}
-
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
-
-```xml {title="audacity-guide.ditamap"}
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-
-<map>
-  <title>Audio user guide</title>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/trimming-audio.dita"/>
-  <topicref href="topics/what-is-audacity.dita"/>
-  <topicref href="topics/what-is-digital-audio.dita"/>
-</map>
-```
-
-```bash
-dogsbay-xml check .
-```
 
 ## What you learned {#what-you-learned}
 
@@ -1739,7 +1784,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Installing Audacity {#step-1-installing-audacity}
 
 :::steps
-1. **Create `topics/installing-audacity.dita`**
+1. **Create `topics/installing-audacity.dita`** Each topic in this lesson is a task. In the **Explorer**, right-click the `topics` folder, choose **New File**, and enter `installing-audacity.dita`. Choose the **Task** template and click **OK**. Replace the title placeholder, type the short description, and build the task body around the template's `<steps>`. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/installing-audacity.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1827,7 +1872,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Exporting audio {#step-2-exporting-audio}
 
 :::steps
-1. **Create `topics/exporting-audio.dita`**
+1. **Create `topics/exporting-audio.dita`** Create `exporting-audio.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/exporting-audio.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1901,7 +1946,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Removing background noise {#step-3-removing-background-noise}
 
 :::steps
-1. **Create `topics/removing-background-noise.dita`**
+1. **Create `topics/removing-background-noise.dita`** Create `removing-background-noise.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/removing-background-noise.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1971,7 +2016,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 4: Preparing to record {#step-4-preparing-to-record}
 
 :::steps
-1. **Create `topics/preparing-to-record.dita`**
+1. **Create `topics/preparing-to-record.dita`** Create `preparing-to-record.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. This task uses `<steps-unordered>`, so change the template's `<steps>` and `</steps>` tags to `<steps-unordered>` and `</steps-unordered>`. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/preparing-to-record.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -2010,7 +2055,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<tutorialinfo>` is additional information for a reader who is learning, as opposed to `<info>`, which is for anyone doing the step. A stylesheet for expert readers can drop it.
 :::
 
-## Step 5: Update the README and check your work {#step-5-update-the-readme-and-check-your-work}
+## Step 5: Update the map and the README, and check your work {#step-5-update-the-map-and-the-readme-and-check-your-work}
 
 :::steps
 1. **Change the "You are on" line**
@@ -2028,13 +2073,32 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     ## Stages
 
    ```
-2. **Format and check your work** Format the topics:
+2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+
+   ```xml {title="audacity-guide.ditamap"}
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   <map>
+     <title>Audio user guide</title>
+     <topicref href="topics/exporting-audio.dita"/>
+     <topicref href="topics/installing-audacity.dita"/>
+     <topicref href="topics/preparing-to-record.dita"/>
+     <topicref href="topics/recording-your-first-track.dita"/>
+     <topicref href="topics/removing-background-noise.dita"/>
+     <topicref href="topics/supported-audio-formats.dita"/>
+     <topicref href="topics/trimming-audio.dita"/>
+     <topicref href="topics/what-is-audacity.dita"/>
+     <topicref href="topics/what-is-digital-audio.dita"/>
+   </map>
+   ```
+3. **Format and check your work** Format the topics:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. With the lesson's topics in the map (see "Publish your changes"), the output looks like this example:
+   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
@@ -2066,32 +2130,6 @@ Summary
 ```
 
 Undo the change and check again. Confirm that the check reports `Ready` before you continue.
-
-## Publish your changes {#publish-your-changes}
-
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
-
-```xml {title="audacity-guide.ditamap"}
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
-
-<map>
-  <title>Audio user guide</title>
-  <topicref href="topics/exporting-audio.dita"/>
-  <topicref href="topics/installing-audacity.dita"/>
-  <topicref href="topics/preparing-to-record.dita"/>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/removing-background-noise.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/trimming-audio.dita"/>
-  <topicref href="topics/what-is-audacity.dita"/>
-  <topicref href="topics/what-is-digital-audio.dita"/>
-</map>
-```
-
-```bash
-dogsbay-xml check .
-```
 
 ## What you learned {#what-you-learned}
 
@@ -2743,7 +2781,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Define the product keys {#step-1-define-the-product-keys}
 
 :::steps
-1. **Create `keydefs-product.ditamap`** in the project root.
+1. **Create `keydefs-product.ditamap`** in the project root. In the **Explorer**, right-click the project root, choose **New File**, and enter `keydefs-product.ditamap`. In the **New XML Document** dialog, choose **Key Definition Map** and click **OK**. The dialog selects **Bookmap** first, so choose the template explicitly. The template contains two sample key definitions:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+
+   <map>
+     <title>Key Definitions</title>
+     <keydef keys="installing" href="topic.dita"/>
+     <keydef keys="product-name">
+       <topicmeta>
+         <keywords>
+           <keyword>Product Name</keyword>
+         </keywords>
+       </topicmeta>
+     </keydef>
+   </map>
+   ```
+
+   Replace the title with `Product key definitions`. Delete the sample `installing` key definition, because this map defines text and URL keys only; step 2 keys the topics in the guide map. Keep the `product-name` key definition and replace `Product Name` with `Audacity`, then add the other key definitions. If you use another editor, create the file and type the finished listing. The finished map:
 
    ```xml {title="keydefs-product.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -3260,6 +3317,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `shared/common-steps.dita`** A task whose steps exist to be referenced. Every reusable element has an `@id`.
 
+   In the **Explorer**, right-click the project root, choose **New Folder**, and enter `shared`. Then right-click the `shared` folder, choose **New File**, enter `common-steps.dita`, and choose the **Task** template. Replace the title placeholder, type the short description, and build the steps from the template's first `<step>`. If you use another editor, create the folder and the file, and type the finished listing.
+
    ```xml {title="shared/common-steps.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd">
@@ -3297,6 +3356,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    </task>
    ```
 2. **Create `shared/common-notes.dita`** A generic `<topic>` for notes and a list. `<topic>` is the base type, with `<body>` instead of `<conbody>` or `<taskbody>`; a shared topic of notes has no reason to be a concept or a task.
+
+   Create `common-notes.dita` in the `shared` folder, and choose the **Topic** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+
+   <topic id="common-notes">
+     <title>Topic Title</title>
+     <shortdesc></shortdesc>
+     <body>
+       <p></p>
+     </body>
+   </topic>
+   ```
+
+   Replace the title placeholder and type the short description. The body starts with the two notes, so add them before the empty `<p></p>`, type the paragraph in it, and add the list after it. If you use another editor, create the file and type the finished listing. The finished topic:
 
    ```xml {title="shared/common-notes.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -5387,6 +5463,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `topics/glossary/` and the six entry files** Each is a `<glossentry>` with the glossary entry DOCTYPE: a `<glossterm>` and a `<glossdef>`, nothing else.
 
+   In the **Explorer**, right-click the `topics` folder, choose **New Folder**, and enter `glossary`. Right-click the `glossary` folder, choose **New File**, enter `g-sample-rate.dita`, and choose the **Glossary Entry** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary Entry//EN" "glossentry.dtd">
+
+   <glossentry id="g-sample-rate">
+     <glossterm>Term</glossterm>
+     <glossdef></glossdef>
+   </glossentry>
+   ```
+
+   The editor sets the `@id` from the file name, `g-sample-rate`. This lesson uses the `gl-` prefix for glossary ids and keys, so change the id to `gl-sample-rate`. Replace `Term` with **XML** > **Select Element Content**, and type the definition between `<glossdef>` and `</glossdef>`. Create the other five files in the same way, and change each id from `g-` to `gl-`, for example `g-clipping` to `gl-clipping`. If you use another editor, create the folder and the files, and type the finished listings. The finished entries:
+
    ```xml {title="topics/glossary/g-sample-rate.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE glossentry PUBLIC "-//OASIS//DTD DITA Glossary Entry//EN" "glossentry.dtd">
@@ -5448,6 +5538,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 2. **Create `topics/glossary/audio-units.dita`** A `<glossgroup>` with two entries whose terms have abbreviations.
 
+   Create `audio-units.dita` in the `glossary` folder, and choose the **Glossary Group** template:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
+
+   <glossgroup id="audio-units">
+     <title>Glossary</title>
+     <glossentry id="term">
+       <glossterm>Term</glossterm>
+       <glossdef></glossdef>
+     </glossentry>
+   </glossgroup>
+   ```
+
+   The group's `@id` comes from the file name and needs no editing. Replace the title with `Units`. The sample entry keeps the id `term`, so change it to `gl-decibel`, fill in the entry, and add its `<glossBody>`. Then add the `gl-hertz` entry after it. If you use another editor, create the file and type the finished listing. The finished group:
+
    ```xml {title="topics/glossary/audio-units.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE glossgroup PUBLIC "-//OASIS//DTD DITA Glossary Group//EN" "glossgroup.dtd">
@@ -5489,7 +5596,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Key the entries and put them in the guide {#step-2-key-the-entries-and-put-them-in-the-guide}
 
 :::steps
-1. **Create `keydefs-glossary.ditamap`**
+1. **Create `keydefs-glossary.ditamap`** Create the file in the project root from the **Key Definition Map** template, as in stage 10 (choose the template explicitly, because the dialog selects **Bookmap** first). Replace the title with `Glossary key definitions`, and replace the two sample key definitions with the eight glossary keys. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="keydefs-glossary.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
