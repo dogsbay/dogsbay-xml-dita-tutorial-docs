@@ -113,7 +113,7 @@ stages are written, so every row links to its page.
 | `<enumerationdef>`, `<attributedef name>`, `<subjectdef keyref>` | [15](/part-3-conditions/stage-15-subject-scheme) |
 | `<hasNarrower>` | [15](/part-3-conditions/stage-15-subject-scheme) |
 | `<mapref type="subjectScheme">` | [15](/part-3-conditions/stage-15-subject-scheme) |
-| `dogsbay-xml list-subjects`, `dogsbay-xml validate-conditions -m <rootmap>`; DITA-OT `DOTJ049W` | [15](/part-3-conditions/stage-15-subject-scheme) |
+| `dogsbay-xml list-subjects`, `dogsbay-xml validate-conditions .`, **Check Project**; DITA-OT `DOTJ049W` | [15](/part-3-conditions/stage-15-subject-scheme) |
 | `<ditavalref href>` under a `<topicref>` (one filters, several copy) | [16](/part-3-conditions/stage-16-branch-filtering) |
 | `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` | [16](/part-3-conditions/stage-16-branch-filtering) |
 | `dogsbay-xml list-branches <map>` | [16](/part-3-conditions/stage-16-branch-filtering) |
