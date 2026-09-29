@@ -2,7 +2,7 @@
 
 ## Core: Topics and first publication
 
-- [Stage 00: Set up the project](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup.md): An empty DITA project that the tools recognize, with the shared editor settings, a README, and a first check of your work.
+- [Stage 00: Set up the project](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup.md): An empty DITA project that the tools recognize, with a README, a license, and a first check of your work.
 - [Stage 01: A concept topic](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept.md): Write What is Audacity? as a DITA concept, learn the parts every topic has, and check your work.
 - [Stage 02: First map](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map.md): Add your first topic to a DITA map and select the map as the project root.
 - [Stage 03: First build](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build.md): Define an HTML deliverable, build the guide with DITA-OT, and inspect its generated pages.

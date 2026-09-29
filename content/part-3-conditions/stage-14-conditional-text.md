@@ -12,7 +12,7 @@ Publish platform and audience variants from the same topics. Use
 `@rev` to identify revised content for review.
 
 Create DITAVAL files to include, exclude, or flag content. Add beginner and
-podcaster maps, then define four more deliverables in `project.json`:
+podcaster maps, then define four more deliverables in the editor:
 two beginner guides, a Linux podcaster guide, and a review build.
 
 **Time:** about 40 minutes.
@@ -490,104 +490,34 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 5: Deliverables, README and the check
 
 ::::steps
-1. **Edit `project.json`**
-   Four deliverables join `full`. Each names its map, its DITAVAL under
-   `profiles.ditavals`, and its own output folder. The first hunk only
-   reformats the existing `params` entry.
+1. **Add the deliverables**
+   Four deliverables join `full`. Each names its map, its DITAVAL file,
+   and its own output folder. Choose **Project** > **Project Tools** >
+   **Manage Deliverables...**. For each deliverable, click **Add...**,
+   enter the values, click **Save...**, and click **OK** to write the
+   deliverable.
 
-   ```diff title="project.json"
-   --- a/project.json
-   +++ b/project.json
-   @@ -10,8 +10,87 @@
-          "publication": {
-            "transtype": "html5",
-            "params": [
-   -          { "name": "nav-toc", "value": "full" }
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "full"
-   +          }
-            ]
-   +      }
-   +    },
-   +    {
-   +      "name": "beginner-mac",
-   +      "context": {
-   +        "id": "beginner-mac",
-   +        "input": "beginner-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/mac-beginner.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/beginner-mac",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "partial"
-   +          }
-   +        ]
-   +      }
-   +    },
-   +    {
-   +      "name": "beginner-windows",
-   +      "context": {
-   +        "id": "beginner-windows",
-   +        "input": "beginner-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/windows-beginner.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/beginner-windows",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "partial"
-   +          }
-   +        ]
-   +      }
-   +    },
-   +    {
-   +      "name": "podcaster-linux",
-   +      "context": {
-   +        "id": "podcaster-linux",
-   +        "input": "podcaster-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/linux-podcaster.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/podcaster-linux",
-   +      "publication": {
-   +        "transtype": "html5"
-   +      }
-   +    },
-   +    {
-   +      "name": "review",
-   +      "context": {
-   +        "id": "review",
-   +        "input": "audacity-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/review.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/review",
-   +      "publication": {
-   +        "transtype": "html5"
-          }
-        }
-      ]
-   ```
+   | Field | `beginner-mac` | `beginner-windows` | `podcaster-linux` | `review` |
+   |---|---|---|---|---|
+   | **Input map** | `beginner-guide.ditamap` | `beginner-guide.ditamap` | `podcaster-guide.ditamap` | `audacity-guide.ditamap` |
+   | **DITAVAL (optional)** | `filters/mac-beginner.ditaval` | `filters/windows-beginner.ditaval` | `filters/linux-podcaster.ditaval` | `filters/review.ditaval` |
+   | **Transtype** | `html5` | `html5` | `html5` | `html5` |
+   | **Output (optional)** | `out/beginner-mac` | `out/beginner-windows` | `out/podcaster-linux` | `out/review` |
+   | **Publication parameters** | `nav-toc` = `partial` | `nav-toc` = `partial` | (none) | (none) |
+
+   Enter the deliverable name in **Name**. Choose each map from the
+   **Input map** list and each filter from the **DITAVAL (optional)**
+   list, or click **Browse...** to select the file.
+
+   - **DITAVAL** applies one filter to the build. The two beginner guides
+     share a map and differ only in their DITAVAL file.
+   - The `nav-toc` parameter with the value `partial` shows the navigation
+     around the current page instead of the whole guide.
+   - The `review` deliverable publishes the full guide with the review
+     filter, which excludes nothing and flags podcaster and revised
+     content.
+
+   When you finish, the table lists five deliverables. Click **Close**.
 
 2. **Change the "You are on" line and the layout**
 
@@ -720,8 +650,8 @@ Confirm that the check reports `Ready` before you continue.
   `<style-conflict>`.
 - A profiling attribute on a `<topicref>` or `<topichead>` filters a branch
   of the map.
-- One topic set, several maps, one DITAVAL per deliverable in
-  `project.json`, under `profiles.ditavals`.
+- One topic set, several maps, and one DITAVAL per deliverable, chosen in
+  the **DITAVAL** field of **Manage Deliverables**.
 - Every root map defines every key its topics use; the health check reads
   the default root map, and the build checks each map.
 

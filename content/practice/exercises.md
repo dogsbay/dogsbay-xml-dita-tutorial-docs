@@ -43,8 +43,10 @@ your new checking task.
 Before adding another reusable step, compare its purpose with the shared
 save step. Explain whether you can use the existing element unchanged.
 
-**Check:** Add a deliverable named `practice` to `project.json`, with
-`practice.ditamap` as its input and `out/practice` as its output. Then
+**Check:** In **Project** > **Project Tools** > **Manage Deliverables...**,
+add a deliverable named `practice`, with `practice.ditamap` as its
+**Input map**, `html5` as its **Transtype**, and `out/practice` as its
+**Output**. Then
 check that deliverable. In the editor, **Project** > **Check Project**
 checks every deliverable. From the command line, run:
 

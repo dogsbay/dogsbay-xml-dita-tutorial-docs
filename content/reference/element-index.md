@@ -15,7 +15,7 @@ stages are written, so every row links to its page.
 | Element or attribute | Stage |
 |---|---|
 | DOCTYPE and the DITA-OT catalog | [00](/part-1-topics/stage-00-setup) |
-| `.dogsbay/config.xml` (project type, framework, format style) | [00](/part-1-topics/stage-00-setup) |
+| Project settings (project type, framework, format style), kept by the editor | [00](/part-1-topics/stage-00-setup) |
 | `<concept>`, `<conbody>` | [01](/part-1-topics/stage-01-concept) |
 | `@id` on a topic | [01](/part-1-topics/stage-01-concept) |
 | `<title>`, `<shortdesc>` | [01](/part-1-topics/stage-01-concept) |
@@ -59,10 +59,9 @@ stages are written, so every row links to its page.
 | `<topicref>` with `@href` | [02](/part-1-topics/stage-02-first-map) |
 | `<topichead>` with `@navtitle` | [09](/part-2-maps/stage-09-map-structure) |
 | `<topicmeta>` with `<shortdesc>` | [09](/part-2-maps/stage-09-map-structure) |
-| `project.json`: deliverables, `transtype` `html5`, `params` (`nav-toc`) | [03](/part-1-topics/stage-03-first-build) |
-| `dita --project=project.json` | [03](/part-1-topics/stage-03-first-build) |
-| `.dogsbay/config.xml`: `<default-root-map>` | [02](/part-1-topics/stage-02-first-map) |
-| `.dogsbay/config.xml`: `<default-deliverable>` | [03](/part-1-topics/stage-03-first-build) |
+| **Manage Deliverables**: a deliverable, **Transtype** `html5`, **Publication parameters** (`nav-toc`) | [03](/part-1-topics/stage-03-first-build) |
+| **Manage Projects**: **Default Root Map** | [02](/part-1-topics/stage-02-first-map) |
+| The active deliverable (**Set active**, or the status bar) | [03](/part-1-topics/stage-03-first-build) |
 | nested `<topicref>` (parent and child) | [09](/part-2-maps/stage-09-map-structure) |
 | `@collection-type` (`family`, `sequence`) | [09](/part-2-maps/stage-09-map-structure) |
 | `<topicgroup>` | [09](/part-2-maps/stage-09-map-structure) |
@@ -96,7 +95,7 @@ stages are written, so every row links to its page.
 | `<indexterm>` (nested), `<index-see>`, `<index-see-also>`, `<index-sort-as>` | [13](/part-2-maps/stage-13-metadata-and-index) |
 | `<resourceid>`, `<data>` | [13](/part-2-maps/stage-13-metadata-and-index) |
 | map `<topicmeta>`: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>`, `<keywords>` | [13](/part-2-maps/stage-13-metadata-and-index) |
-| `.dogsbay/config.xml`: `<metadata-policy>`, `<rule field presence topic-type pattern>` | [13](/part-2-maps/stage-13-metadata-and-index) |
+| **Metadata** > **Edit Policy**: rules by topic type, field, presence, and pattern | [13](/part-2-maps/stage-13-metadata-and-index) |
 
 ## Part 3: Conditions and variants
 
@@ -108,7 +107,7 @@ stages are written, so every row links to its page.
 | `@audience` on a `<topichead>` (filtering a map branch) | [14](/part-3-conditions/stage-14-conditional-text) |
 | DITAVAL: `<val>`, `<prop att val action>` (`include`, `exclude`, `flag`), `@backcolor`, `@color` | [14](/part-3-conditions/stage-14-conditional-text) |
 | DITAVAL: `<revprop val action changebar>`, `<startflag>`, `<endflag>`, `<alt-text>`, `<style-conflict>` | [14](/part-3-conditions/stage-14-conditional-text) |
-| `project.json`: `profiles.ditavals`, one deliverable per DITAVAL | [14](/part-3-conditions/stage-14-conditional-text) |
+| **Manage Deliverables**: the **DITAVAL** field, one deliverable per DITAVAL | [14](/part-3-conditions/stage-14-conditional-text) |
 | `<subjectScheme>` and its DOCTYPE; nested `<subjectdef keys>` with `<navtitle>` | [15](/part-3-conditions/stage-15-subject-scheme) |
 | `<enumerationdef>`, `<attributedef name>`, `<subjectdef keyref>` | [15](/part-3-conditions/stage-15-subject-scheme) |
 | `<hasNarrower>` | [15](/part-3-conditions/stage-15-subject-scheme) |
@@ -136,7 +135,7 @@ stages are written, so every row links to its page.
 | `<bookmeta>`: `<publisherinformation>`, `<organization>`, `<bookid>`, `<bookpartno>`, `<edition>`, `<bookrights>`, `<copyrfirst>`, `<year>`, `<bookowner>` | [19](/part-4-books/stage-19-bookmap) |
 | `<frontmatter>` (keydefs, maprefs and resource-only refs inside it), `<booklists>`, `<toc>`, `<figurelist>`, `<tablelist>`, `<notices>`, `<preface>` | [19](/part-4-books/stage-19-bookmap) |
 | `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`, `<glossarylist>`, `<indexlist>` | [19](/part-4-books/stage-19-bookmap) |
-| `project.json`: a deliverable with the `pdf` transtype | [19](/part-4-books/stage-19-bookmap) |
+| **Manage Deliverables**: a deliverable with the `pdf` transtype | [19](/part-4-books/stage-19-bookmap) |
 | `<troubleshooting>` and its DOCTYPE, `<troublebody>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>` | [20](/part-4-books/stage-20-troubleshooting) |
 | `<steps-informal>`; a profiling attribute on a `<troubleSolution>` | [20](/part-4-books/stage-20-troubleshooting) |
 | `<note type="trouble">` | [20](/part-4-books/stage-20-troubleshooting) |
@@ -166,7 +165,7 @@ stages are written, so every row links to its page.
 | `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [24](/part-5-governance/stage-24-drafts-and-localization) |
 | `project-health`'s *Authoring leftovers* warnings | [24](/part-5-governance/stage-24-drafts-and-localization) |
 | Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/part-5-governance/stage-25-house-rules) |
-| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the house rules in **Check Project** | [25](/part-5-governance/stage-25-house-rules) |
+| **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/part-5-governance/stage-25-house-rules) |
 | `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/part-5-governance/stage-25-house-rules) |
 | `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [25](/part-5-governance/stage-25-house-rules) |
-| Nothing new: the README's stage table and deliverables, `project.json` in full, the `tutorial/final` tag | [26](/part-5-governance/stage-26-final) |
+| Nothing new: the README's stage table and the eight deliverables, the `tutorial/final` tag | [26](/part-5-governance/stage-26-final) |

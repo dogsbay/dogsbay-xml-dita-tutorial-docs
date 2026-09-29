@@ -16,6 +16,12 @@ import MarkdownContentStack from "@/components/wrappers/MarkdownContentStack.ast
 import RightRailStack from "@/components/wrappers/RightRailStack.astro";
 const siteConfig = siteConfigData as SiteConfig;
 import CodeBlock from "@ui/code-block/CodeBlock.astro";
+import Table from "@ui/table/Table.astro";
+import TableBody from "@ui/table/TableBody.astro";
+import TableCell from "@ui/table/TableCell.astro";
+import TableHead from "@ui/table/TableHead.astro";
+import TableHeader from "@ui/table/TableHeader.astro";
+import TableRow from "@ui/table/TableRow.astro";
 
 const headings = [{"depth":1,"slug":"stage-03-publish-the-first-guide","text":"Stage 03: Publish the first guide"},{"depth":2,"slug":"define-the-deliverable","text":"Define the deliverable"},{"depth":2,"slug":"build-and-inspect","text":"Build and inspect"},{"depth":2,"slug":"next-lesson","text":"Next lesson"}];
 const nav = navData;
@@ -41,7 +47,7 @@ const pageCategory = ["part-1-topics"];
 const pageTaxonomies = null;
 const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Stage 03: Publish the first guide {#stage-03-publish-the-first-guide}\n\nPublish the map from stage 02. Keep this build throughout the course so you can inspect every topic, link, and navigation change as you make it.\n\n**You need:** stage 02 complete. **Time:** about 10 minutes.\n\n## Define the deliverable {#define-the-deliverable}\n\nCreate `project.json` in the project root:\n\n```json\n{\n  \"deliverables\": [{\n    \"name\": \"full\",\n    \"context\": {\"id\": \"full\", \"input\": \"audacity-guide.ditamap\"},\n    \"output\": \"out/full\",\n    \"publication\": {\"transtype\": \"html5\", \"params\": [{\"name\": \"nav-toc\", \"value\": \"full\"}]}\n  }]\n}\n```\n\nThe context identifies the root map. The publication selects the HTML5 transformation and requests navigation on each page. The output folder is relative to the project root, so this deliverable builds into `out/full/`. Select `full` as the default deliverable in the editor's project settings.\n\n## Build and inspect {#build-and-inspect}\n\nCheck your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.\n\nIn the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the project root on the command line, run:\n\n```bash\ndogsbay-xml check .\n```\n\nThe output looks like this example:\n\n```\nhealth   clean\nbuild    full                 ok  /home/you/audacity-guide/out/full\noutput   clean (full)\nReady: the project is healthy, every deliverable built, and the output of full holds together.\n```\n\nThe `build` line shows where the deliverable was built. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.\n\nChange the topic title, check again, and refresh the browser. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.\n\nIf the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).\n\n## Next lesson {#next-lesson}\n\nContinue with [Stage 04: task and reference](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference).\n\nFor the core course, use the [learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) to skip optional modules.\n\n[Compare this stage with its predecessor](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/02-first-map...tutorial/03-first-build).\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Stage 03: Publish the first guide {#stage-03-publish-the-first-guide}\n\nPublish the map from stage 02. Keep this build throughout the course so you can inspect every topic, link, and navigation change as you make it.\n\n**You need:** stage 02 complete. **Time:** about 10 minutes.\n\n## Define the deliverable {#define-the-deliverable}\n\nA deliverable names a map, a transformation, and an output folder. Define one deliverable, named `full`, for the whole guide:\n\n1. Choose **Project** > **Project Tools** > **Manage Deliverables...**. The table is empty.\n2. Click **Add...**.\n3. Enter these values:\n\n   | Field | Value |\n   | --- | --- |\n   | **Name** | `full` |\n   | **Input map** | `audacity-guide.ditamap` |\n   | **DITAVAL (optional)** | (leave empty) |\n   | **Transtype** | `html5` |\n   | **Output (optional)** | `out/full` |\n   | **Publication parameters** | `nav-toc` = `full` |\n\n   To add the parameter, click **Add param**, double-click the **Name** cell and type `nav-toc`, then double-click the **value** cell and type `full`.\n4. Click **Save...**. The editor asks whether to write the deliverable. Click **OK**.\n5. Click **Close**.\n\nThe fields have these effects:\n\n- **Input map** is the root map of the publication.\n- **Transtype** `html5` selects the HTML5 transformation.\n- **Output** is relative to the project root, so this deliverable builds into `out/full/`.\n- The `nav-toc` parameter with the value `full` puts the navigation of the whole guide on each page.\n\nThe editor stores deliverables in `project.json` in the project root. You do not need to edit it.\n\nThe active deliverable is the one that **Build Deliverables** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.\n\n## Build and inspect {#build-and-inspect}\n\nCheck your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.\n\nIn the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the project root on the command line, run:\n\n```bash\ndogsbay-xml check .\n```\n\nThe output looks like this example:\n\n```\nhealth   clean\nbuild    full                 ok  /home/you/audacity-guide/out/full\noutput   clean (full)\nReady: the project is healthy, every deliverable built, and the output of full holds together.\n```\n\nThe `build` line shows where the deliverable was built. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.\n\nChange the topic title, check again, and refresh the browser. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.\n\nIf the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).\n\n## Next lesson {#next-lesson}\n\nContinue with [Stage 04: task and reference](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference).\n\nFor the core course, use the [learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) to skip optional modules.\n\n[Compare this stage with its predecessor](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/02-first-map...tutorial/03-first-build).\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -99,9 +105,60 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <p>Publish the map from stage 02. Keep this build throughout the course so you can inspect every topic, link, and navigation change as you make it.</p>
       <p><strong>You need:</strong> stage 02 complete. <strong>Time:</strong> about 10 minutes.</p>
       <h2 id="define-the-deliverable" class="group scroll-mt-20">Define the deliverable<a href="#define-the-deliverable" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
-      <p>Create <code>project.json</code> in the project root:</p>
-      <CodeBlock code={"{\n  \"deliverables\": [{\n    \"name\": \"full\",\n    \"context\": {\"id\": \"full\", \"input\": \"audacity-guide.ditamap\"},\n    \"output\": \"out/full\",\n    \"publication\": {\"transtype\": \"html5\", \"params\": [{\"name\": \"nav-toc\", \"value\": \"full\"}]}\n  }]\n}"} lang="json" />
-      <p>The context identifies the root map. The publication selects the HTML5 transformation and requests navigation on each page. The output folder is relative to the project root, so this deliverable builds into <code>out/full/</code>. Select <code>full</code> as the default deliverable in the editor's project settings.</p>
+      <p>A deliverable names a map, a transformation, and an output folder. Define one deliverable, named <code>full</code>, for the whole guide:</p>
+      <ol>
+      <li>Choose <strong>Project</strong> &gt; <strong>Project Tools</strong> &gt; <strong>Manage Deliverables...</strong>. The table is empty.</li>
+      <li>Click <strong>Add...</strong>.</li>
+      <li>
+      Enter these values:
+      <Table class="my-4">
+      <TableHeader>
+      <TableRow>
+      <TableHead>Field</TableHead>
+      <TableHead>Value</TableHead>
+      </TableRow>
+      </TableHeader>
+      <TableBody>
+      <TableRow>
+      <TableCell><strong>Name</strong></TableCell>
+      <TableCell><code>full</code></TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell><strong>Input map</strong></TableCell>
+      <TableCell><code>audacity-guide.ditamap</code></TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell><strong>DITAVAL (optional)</strong></TableCell>
+      <TableCell>(leave empty)</TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell><strong>Transtype</strong></TableCell>
+      <TableCell><code>html5</code></TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell><strong>Output (optional)</strong></TableCell>
+      <TableCell><code>out/full</code></TableCell>
+      </TableRow>
+      <TableRow>
+      <TableCell><strong>Publication parameters</strong></TableCell>
+      <TableCell><code>nav-toc</code> = <code>full</code></TableCell>
+      </TableRow>
+      </TableBody>
+      </Table>
+      <p>To add the parameter, click <strong>Add param</strong>, double-click the <strong>Name</strong> cell and type <code>nav-toc</code>, then double-click the <strong>value</strong> cell and type <code>full</code>.</p>
+      </li>
+      <li>Click <strong>Save...</strong>. The editor asks whether to write the deliverable. Click <strong>OK</strong>.</li>
+      <li>Click <strong>Close</strong>.</li>
+      </ol>
+      <p>The fields have these effects:</p>
+      <ul>
+      <li><strong>Input map</strong> is the root map of the publication.</li>
+      <li><strong>Transtype</strong> <code>html5</code> selects the HTML5 transformation.</li>
+      <li><strong>Output</strong> is relative to the project root, so this deliverable builds into <code>out/full/</code>.</li>
+      <li>The <code>nav-toc</code> parameter with the value <code>full</code> puts the navigation of the whole guide on each page.</li>
+      </ul>
+      <p>The editor stores deliverables in <code>project.json</code> in the project root. You do not need to edit it.</p>
+      <p>The active deliverable is the one that <strong>Build Deliverables</strong> builds by default. If the status bar does not show <code>full</code>, choose <code>full</code> in the status bar's deliverable menu. You can also select the deliverable in <strong>Manage Deliverables</strong> and click <strong>Set active</strong>.</p>
       <h2 id="build-and-inspect" class="group scroll-mt-20">Build and inspect<a href="#build-and-inspect" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
       <p>Check your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.</p>
       <p>In the editor, choose <strong>Project</strong> &gt; <strong>Check Project</strong>. The result appears in the <strong>Project Validation</strong> panel. From the project root on the command line, run:</p>

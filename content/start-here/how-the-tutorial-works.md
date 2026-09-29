@@ -104,7 +104,7 @@ Besides the topics, every stage branch has:
 |---|---|
 | `README.md` | The "You are on" line, the stage table, the maintainer check commands |
 | `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
-| `.dogsbay/config.xml` | Shared editor project settings: project type, framework, format style |
+| Project settings | The project type, framework, and format style. The editor keeps them, and the **Explorer** does not show them. See them in **Project** > **Manage Projects...** |
 | `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/reference/the-gate) |
 | `.gitignore` | Keeps DITA-OT output out of Git |
 

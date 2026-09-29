@@ -516,20 +516,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `grep -rl 'metadata tags step' out/`, prints nothing.
 
    To see them, give the `review` deliverable the parameter for one
-   build. In `project.json`, add a `params` list to the `publication` of
-   the `review` deliverable:
+   build:
 
-   ```json
-   "publication": {
-     "transtype": "html5",
-     "params": [
-       {
-         "name": "args.draft",
-         "value": "yes"
-       }
-     ]
-   }
-   ```
+   1. Choose **Project** > **Project Tools** > **Manage Deliverables...**.
+   2. Select `review` and click **Edit...**.
+   3. Under **Publication parameters**, click **Add param**. Double-click
+      the **Name** cell and type `args.draft`, then double-click the
+      **value** cell and type `yes`.
+   4. Click **Save...**, click **OK**, and click **Close**.
 
    Then build and check that deliverable only:
 
@@ -549,8 +543,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The comment and the cleanup are rendered in place, boxed and colored,
    with the author, disposition and date. Use `args.draft=yes` to include
    this markup during review, and resolve it before release. Remove the
-   `params` list from `project.json` again before you continue, so that
-   the `review` deliverable matches the stage branch.
+   parameter again before you continue, so that the `review` deliverable
+   matches the stage branch: in **Manage Deliverables**, select `review`,
+   click **Edit...**, select the `args.draft` row, click **Remove**, click
+   **Save...** and **OK**, and click **Close**.
 ::::
 
 Test an invalid value. Change the new row in `topics/effects-reference.dita`

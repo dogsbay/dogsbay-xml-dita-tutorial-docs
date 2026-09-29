@@ -15,9 +15,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ## Review the project
 
-`project.json` defines eight deliverables: full, beginner-mac,
-beginner-windows, podcaster-linux, review, install-variants, collection,
-and book-pdf. The chunking examples have separate maps and are built manually.
+**Project** > **Project Tools** > **Manage Deliverables...** lists eight
+deliverables: `full`, `beginner-mac`, `beginner-windows`,
+`podcaster-linux`, `review`, `install-variants`, `collection`, and
+`book-pdf`. The chunking examples have separate maps and are built manually.
 
 The README records the complete branch sequence:
 

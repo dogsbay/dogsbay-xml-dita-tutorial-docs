@@ -67,13 +67,18 @@ introduce hierarchy and generated links.
 
 Set the default root map for the project:
 
-1. Click **Project** > **Manage Projects**.
-2. Select the project.
-3. In the **Default Root Map** field, enter `audacity-guide.ditamap`.
+1. Choose **Project** > **Manage Projects...**. The dialog lists your
+   projects on the left.
+2. Click your project. It has the name of your project folder. The
+   project settings appear on the right. **Project Type** is `DITA` and
+   **Framework** is `DITA-OT 4.3.5`.
+3. In the **Default Root Map** list, which shows `(none)`, choose
+   `audacity-guide.ditamap`. If the map is not in the list, click
+   **Browse...** and select it.
+4. Click **Save**.
 
-The project stores the setting in `.dogsbay/config.xml` as
-`<default-root-map>audacity-guide.ditamap</default-root-map>`. The health
-check uses this map to decide which topics belong to the publication.
+The health check uses the default root map to decide which topics belong to
+the publication.
 
 Validate the map in the editor with **XML** > **Validate**, or run this
 command from the project root:

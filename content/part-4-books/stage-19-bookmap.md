@@ -170,34 +170,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: The deliverable
 
 ::::steps
-1. **Edit `project.json`**
+1. **Add the deliverable**
+   Choose **Project** > **Project Tools** > **Manage Deliverables...** and
+   click **Add...**. Enter these values:
 
-   ```diff title="project.json"
-   --- a/project.json
-   +++ b/project.json
-   @@ -120,6 +120,17 @@
-              }
-            ]
-          }
-   +    },
-   +    {
-   +      "name": "book-pdf",
-   +      "context": {
-   +        "id": "book-pdf",
-   +        "input": "audacity-book.ditamap"
-   +      },
-   +      "output": "out/book-pdf",
-   +      "publication": {
-   +        "transtype": "pdf"
-   +      }
-        }
-      ]
-    }
-   ```
+   | Field | Value |
+   |---|---|
+   | **Name** | `book-pdf` |
+   | **Input map** | `audacity-book.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `pdf` |
+   | **Output (optional)** | `out/book-pdf` |
+   | **Publication parameters** | (none) |
+
+   Change **Transtype** from `html5` to `pdf`. Click **Save...**, click
+   **OK** to write the deliverable, and click **Close**.
 
 2. **Read it**
-   The eighth deliverable, `book-pdf`, is the bookmap with
-   `"transtype": "pdf"`. DITA-OT's built-in PDF transform, `org.dita.pdf2`,
+   The eighth deliverable, `book-pdf`, is the bookmap with the `pdf`
+   transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`,
    renders the book with Apache FOP. The editor includes both, and
    **Check Project** builds the PDF with the other seven deliverables into
    `out/book-pdf/`.
@@ -338,7 +329,7 @@ before you continue.
   `<booklists>` (`<toc>`, `<figurelist>`, `<tablelist>`), `<notices>` and
   `<preface>`; `<backmatter>` holds `<glossarylist>` and `<indexlist>`.
 - `<part>`, `<chapter>`, `<appendix>`, and how the PDF numbers them.
-- `project.json`: a deliverable with the `pdf` transtype.
+- A deliverable with the `pdf` transtype, added in **Manage Deliverables**.
 - The bookmap content model defines the permitted metadata, book divisions,
   and relationship tables at the top level.
 

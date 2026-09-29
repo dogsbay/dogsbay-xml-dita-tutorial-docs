@@ -7,7 +7,7 @@ type: explanation
 # What you will build
 
 Build a DITA 1.3 documentation set using an Audacity user guide as the
-example. Start with project settings and a concept topic. Add maps, keys,
+example. Start with a project folder and a concept topic. Add maps, keys,
 reusable content, conditional publishing, a PDF book, and house-style checks
 across 27 stages.
 
@@ -33,10 +33,10 @@ The maintainer's completed version is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 |---|---|---|---|
-| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, checking your work |
+| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, checking your work |
 | [01](/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
-| [03](/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | `project.json`, DITA-OT, output inspection |
+| [03](/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |
 | [04](/part-1-topics/stage-04-task-and-reference) | `tutorial/04-task-and-reference` | *Recording your first track*, *Supported audio formats* | `<task>`, `<steps>`, `<cmd>`, `<reference>`, CALS `<table>`; the three information types |
 | [05](/part-1-topics/stage-05-inline-and-block) | `tutorial/05-inline-and-block` | *What is digital audio?*, *Trimming audio* | `<uicontrol>`, `<menucascade>`, `<term>`, `<filepath>`, `<note>`, `<dl>`, `<ol>`, `<sl>`, `<fn>`, `<simpletable>`, `<codeblock>` |
 | [06](/part-1-topics/stage-06-rich-tasks) | `tutorial/06-rich-tasks` | *Installing Audacity*, *Exporting audio*, *Removing background noise*, *Preparing to record* | `<prereq>`, `<postreq>`, `<substeps>`, `<choices>`, `<choicetable>`, `<stepxmp>`, `<stepresult>`, `<steps-unordered>`, `<example>` |
@@ -47,7 +47,7 @@ The maintainer's completed version is tagged `tutorial/final`.
 | [11](/part-2-maps/stage-11-reuse) | `tutorial/11-reuse` | Shared steps and notes | `@conref`, `@conrefend`, `@conkeyref`, conref push with `@conaction`, `@processing-role="resource-only"` |
 | [12](/part-2-maps/stage-12-glossary) | `tutorial/12-glossary` | Glossary entries and abbreviations | `<glossentry>`, `<glossterm>`, `<glossdef>`, `<glossAlt>`, `<abbreviated-form>`, `<term keyref>`, `<glossgroup>` |
 | [13](/part-2-maps/stage-13-metadata-and-index) | `tutorial/13-metadata-and-index` | Prolog metadata and a real index | `<prolog>`, `<metadata>`, `<author>`, `<critdates>`, `<audience>`, `<indexterm>`, `<index-see>`; the metadata policy |
-| [14](/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; `profiles.ditavals` |
+| [14](/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; one DITAVAL per deliverable |
 | [15](/part-3-conditions/stage-15-subject-scheme) | `tutorial/15-subject-scheme` | A controlled vocabulary for the conditions | `<subjectScheme>`, `<subjectdef>`, `<enumerationdef>`, `<attributedef>`, `<hasNarrower>`, `<mapref type="subjectScheme">`; `validate-conditions` |
 | [16](/part-3-conditions/stage-16-branch-filtering) | `tutorial/16-branch-filtering` | Three install variants from one topic | `<ditavalref>`, `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` |
 | [17](/part-3-conditions/stage-17-key-scopes) | `tutorial/17-key-scopes` | One collection of three guides | `@keyscope`, scoped keys, `<mapref scope="peer">` |
@@ -58,7 +58,7 @@ The maintainer's completed version is tagged `tutorial/final`.
 | [22](/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
 | [23](/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |
 | [24](/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
-| [25](/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; house rules in the check |
+| [25](/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, **House Rules (Schematron)**, `AGENTS.md`, the house-style skill; house rules in the check |
 | [26](/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it
