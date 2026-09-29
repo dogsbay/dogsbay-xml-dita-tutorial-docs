@@ -15,7 +15,8 @@ requires a short description for each concept, task, and reference topic;
 the DTD makes some of these elements optional.
 
 **Time:** about 15 minutes.
-**You need:** stage 00 complete, with the check reporting `health   clean`.
+**You need:** stage 00 complete: `my-audacity-guide` open in the editor,
+with an empty `topics` folder.
 
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
@@ -52,6 +53,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    every concept needs. The editor recognizes the file as a DITA concept
    from its name, so validation and formatting work from the start.
 
+   This first topic makes `my-audacity-guide` a DITA project: the editor
+   saves the project settings, such as the format style, and keeps them
+   hidden in the **Explorer**. You do not edit them.
+
    If you use another editor, create the file and type the finished topic
    shown in step 3.
 
@@ -65,7 +70,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    paragraph, the list, and the section inside `<conbody>`. When you type
    the `>` of a start tag, the editor inserts the matching end tag after
    the cursor. Type the content, then move the cursor past the end tag to
-   continue. Leave the indentation to the formatter in "Step 3: Format and
+   continue. Leave the indentation to the formatter in "Step 2: Format and
    check your work".
 
    The finished topic:
@@ -121,31 +126,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      second level, you want a second topic.
 ::::
 
-## Step 2: Update the README
-
-::::steps
-1. **Change the "You are on" line**
-   Every stage moves it. The rest of the README is unchanged.
-
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 00: setup.
-   +You are on stage 01: concept.
-    
-    ## Stages
-    
-   ````
-
-2. **Remove `topics/.gitkeep`**
-   The folder is no longer empty.
-::::
-
-## Step 3: Format and check your work
+## Step 2: Format and check your work
 
 ::::steps
 1. **Format the topic**
@@ -174,7 +155,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+     orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
    Project health is clean — no deliverables yet, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
    ```
 
@@ -202,10 +183,10 @@ errors, and stops at the health stage. The output looks like this example:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/what-is-audacity.dita
     27:15  The content of element type "section" does not match its content model.
   (run project-health for the full report)
-  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+  orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -217,10 +198,10 @@ parser finds that its content does not fit. For the full report, open the
 ```
 Root map: none (none configured); house rules: none (none configured)
 Invalid files (1 of 1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita:
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita:
     27:15  error: The content of element type "section" does not match its content model.
 Orphan topics (1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita
 
 Summary
   Invalid files                 1  of 1
@@ -245,6 +226,8 @@ Undo the change and check again. Confirm that the check reports
 - Format, then check your work, every time.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/01-concept`. If you use Git, commit your work.
 
 Continue with [Stage 02: first map](/part-1-topics/stage-02-first-map).
 

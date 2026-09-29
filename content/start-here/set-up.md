@@ -1,29 +1,22 @@
 ---
 title: Set up your tools
-description: Install the DogsBay XML editor, which includes the dogsbay-xml command line and DITA-OT 4.3.5, and clone the tutorial repository at its first stage.
+description: Install the DogsBay XML editor, create and open an empty my-audacity-guide folder, and optionally track your work with Git.
 type: how-to
 ---
 
 # Set up your tools
 
-The tutorial needs two tools: the DogsBay XML editor and Git. The editor
-includes the `dogsbay-xml` command line and DITA-OT 4.3.5. You check your
-work with either one: **Project** > **Check Project** in the editor, or
-`dogsbay-xml check` on the command line. Both validate the files, check the
-project, and build the guide with the included DITA-OT. You do not need to
-install DITA-OT or set any environment variables.
+Install the DogsBay XML editor and open an empty folder, `my-audacity-guide`,
+where you build the guide. You do not need Git or the command line. Git is
+optional and recommended.
 
-The shell examples use Bash and Unix utilities. On Windows, use a Bash
-environment. The editor validates as you type against the same DTDs that
-the check uses. Any editor that can save UTF-8 text works for writing the
-files, but you need the DogsBay XML editor or its command line to check your
-work.
+The editor includes the `dogsbay-xml` command line and DITA-OT 4.3.5. You
+check your work with either one: **Project** > **Check Project** in the
+editor, or `dogsbay-xml check` on the command line. Both validate the
+files, check the project, and build the guide with the included DITA-OT.
+You do not need to install DITA-OT or set any environment variables.
 
 ## Install the DogsBay XML editor
-
-The command line is installed with the editor. It needs neither a running
-editor nor a separate JDK. The recorded examples use the included DITA-OT
-4.3.5.
 
 :::steps
 1. **Install the editor**
@@ -32,115 +25,143 @@ editor nor a separate JDK. The recorded examples use the included DITA-OT
    from the [releases page](https://github.com/dogsbay/dogsbay-xml/releases)
    and install it the usual way.
 
-2. **Put the command line on your PATH**
-   If you work from the command line, `dogsbay-xml` must be on your `PATH`.
-   The installation page shows the directory for each platform. On Linux:
+2. **Optional: put the command line on your PATH**
+   The lessons show a command-line equivalent for each check. To use it,
+   `dogsbay-xml` must be on your `PATH`. The installation page shows the
+   directory for each platform. On Linux:
 
    ```bash
    export PATH="/opt/dogsbay-xml-editor/bin:$PATH"
    dogsbay-xml --version
    ```
 
-   Add the export to your Bash profile to use it in future sessions. If you
-   check your work only in the editor, you can skip this step.
+   The second command prints the version of the command line. Add the
+   export to your Bash profile to use it in future sessions. The command
+   line needs neither a running editor nor a separate JDK. If you check your
+   work only in the editor, skip this step.
 :::
+
+The shell examples use Bash. On Windows, use a Bash environment.
 
 > [!NOTE]
-> Use `dogsbay-xml` to check your work. In the environment used for
-> the recorded runs, `xmllint` rejected the DITA 1.3 DTDs with "Maximum
-> entity amplification factor exceeded", including with `--huge`.
-> `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
+> Use `dogsbay-xml` to check your work from the command line. In the
+> environment used for the recorded runs, `xmllint` rejected the DITA 1.3
+> DTDs with "Maximum entity amplification factor exceeded", including with
+> `--huge`. `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
 
-## Clone the repository
+## Create and open your project folder
+
+Your guide lives in one folder, `my-audacity-guide`. Create it from the
+editor:
 
 :::steps
-1. **Clone it**
+1. **Open the folder chooser**
+   Choose **File** > **Open Project Folder...**. On the welcome screen, you
+   can click **Open Project Folder…** instead. A folder tree opens, with the
+   **Make New Folder**, **Open**, and **Cancel** buttons.
 
-   ```bash
-   git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
-   ```
+2. **Create the folder**
+   Select the folder where you want to keep your work, for example your
+   Documents folder. Click **Make New Folder**. In the **Enter Folder Name**
+   dialog, type `my-audacity-guide` and confirm.
 
-   The clone opens on `main`, which contains the separate repair exercise.
-   Use the stage branches for this tutorial.
-
-2. **Open the clone in the editor**
-   In the DogsBay XML editor, open the `dogsbay-xml-dita-tutorial` folder
-   as a project. The status bar shows the current branch, `main`.
-
-3. **Switch to the first stage**
-   Click the branch name in the status bar. The list shows the stage
-   branches as `origin/tutorial/NN-slug`. Choose
-   `origin/tutorial/00-setup`. The editor creates a local branch,
-   `tutorial/00-setup`, that tracks it, and switches to it.
-
-   The working tree is replaced: `tutorial/00-setup` shares no history with
-   `main`. See [How the tutorial works](/start-here/how-the-tutorial-works).
-
-   From the command line, run this command in the clone instead:
-
-   ```bash
-   git switch tutorial/00-setup
-   ```
-
-   Git creates the same tracking branch from `origin/tutorial/00-setup`.
-
-4. **Confirm where you are**
-   Open `README.md`. Its "You are on" line names the stage:
-
-   ```
-   You are on stage 00: setup.
-   ```
-
-   From the command line, run `grep 'You are on' README.md`.
+3. **Open it**
+   Select `my-audacity-guide` and click **Open**.
 :::
 
-## Move between stages
+The **Explorer** shows `my-audacity-guide`, which is empty.
+[Stage 00](/part-1-topics/stage-00-setup) adds the first folder.
 
-To look at another completed stage in the clone, click the branch name in
-the status bar and choose its `origin/tutorial/NN-slug` branch. The editor
-creates a local tracking branch and switches to it. From the command line,
-run `git switch tutorial/NN-slug`.
+## Optional: track your work with Git
 
-The stage branches are references. Keep your own work in the separate
-`audacity-guide` repository that stage 00 creates.
+Git records each version of your files. With Git, you can compare your work
+with an earlier stage and undo changes that you do not want. The tutorial
+works without it.
 
-## Open your own project in the editor
+To use Git, initialize a repository in your project folder once:
 
-For the authoring workflow, stage 00 creates a separate `audacity-guide`
-repository. Open that folder as a project after you create it, and keep the
-clone as a reference. For the inspection workflow, work in the clone.
+:::steps
+1. **Open the terminal**
+   Open the editor's **Terminal** panel. If it does not start in
+   `my-audacity-guide`, change to that folder with `cd`.
 
-The project settings on every stage branch set the project type to DITA,
-the framework to DITA-OT 4.3.5, and the format style, so the editor and the
-command line agree on what a valid, well-formatted file is. To see them,
-choose **Project** > **Manage Projects...** and click the project. You do
-not edit them.
+2. **Initialize the repository**
+   Run this command:
 
-## Check the tools
+   ```bash
+   git init
+   ```
 
-Check stage 00 once. There is nothing to validate yet, so the check should
-finish at once. In the editor, choose **Project** > **Check Project**. From
-the command line, run this command from the project root:
+   For now, the editor has no command that initializes a repository. An
+   editor action is planned.
+:::
+
+At the end of each stage, commit your work in the **Git** panel in the
+sidebar: enter a message, such as `Stage 01: concept`, and click
+**Commit**. To keep each stage on its own branch, create a branch from the
+**…** menu of the **Git** panel.
+
+## The sample project
+
+The [sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial)
+on GitHub is the finished tutorial, with one branch for each stage, from
+`tutorial/00-setup` to `tutorial/26-final`. The tag `tutorial/final` marks
+the completed guide. Each lesson ends with the name of the branch, the
+*checkpoint*, that matches your project at the end of that lesson.
+
+You do not need the sample project to follow the lessons. Use it to:
+
+- Compare a file with the checkpoint when your check fails and you cannot
+  find the cause.
+- Copy files that you cannot type, such as the images in stage 08.
+- Start a later stage from its checkpoint when you skip a lesson. See
+  [Choose a learning path](/start-here/learning-path).
+
+The editor's **File** > **Open Sample Project...** opens a different
+project, a bundled demo. It is not the stage-by-stage tutorial.
+
+### Get the sample project
+
+Keep the sample project in its own folder, next to `my-audacity-guide`,
+not inside it. In the editor, choose **Project** > **Manage Projects...**,
+click **Clone from GitHub**, and clone this address:
+
+```
+https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
+```
+
+From the command line, run this command from the folder where you keep
+your work instead:
 
 ```bash
-dogsbay-xml check .
+git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
 ```
 
-The output looks like this example:
+The copy opens on `main`, which contains a separate repair exercise. The
+stages are on the `tutorial/NN-slug` branches.
 
-```
-health   clean
-Project health is clean — no deliverables yet, so nothing here speaks for the output.
-```
+### Move between stages
 
-The next page explains the result.
+To see a checkpoint, open the sample project in the editor and click the
+branch name in the status bar. The list shows the stage branches as
+`origin/tutorial/NN-slug`. Choose one, for example
+`origin/tutorial/01-concept`. The editor creates a local branch,
+`tutorial/01-concept`, that tracks it, and switches to it. From the command
+line, run `git switch tutorial/01-concept` in the sample project.
+
+Switching replaces the files in the sample project folder with the files of
+that stage. Your own project in `my-audacity-guide` does not change.
+
+Each branch also has files that you do not create, such as `README.md`,
+`LICENSE`, `NOTICE`, and a `scripts/` folder. They are for the maintainers
+and visitors on GitHub. Compare only the files that the lessons create.
 
 ## Where to go next
 
 :::cards
+- **[Stage 00: Create your project folder](/part-1-topics/stage-00-setup)** {icon="play"}
+  Add the first folder to `my-audacity-guide`.
+
 - **[Check your work](/start-here/run-the-gate)** {icon="check"}
   What the check does, what it prints, and where to find the details.
-
-- **[Stage 00: Set up the project](/part-1-topics/stage-00-setup)** {icon="play"}
-  The empty project, file by file.
 :::

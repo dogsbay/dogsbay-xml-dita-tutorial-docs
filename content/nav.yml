@@ -13,7 +13,7 @@
     - Set up your tools: start-here/set-up.md
     - Check your work: start-here/run-the-gate.md
 - "Core: Topics and first publication":
-    - "Stage 00: Set up the project": part-1-topics/stage-00-setup.md
+    - "Stage 00: Create your project folder": part-1-topics/stage-00-setup.md
     - "Stage 01: A concept topic": part-1-topics/stage-01-concept.md
     - "Stage 02: First map": part-1-topics/stage-02-first-map.md
     - "Stage 03: First build": part-1-topics/stage-03-first-build.md

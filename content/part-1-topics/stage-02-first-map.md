@@ -15,8 +15,8 @@ one now so that later lessons can add topics to a working guide.
 
 Create the map from a template:
 
-1. In the **Explorer**, right-click the project root and choose
-   **New File**.
+1. In the **Explorer**, right-click the project folder,
+   `my-audacity-guide`, and choose **New File**.
 2. Enter `audacity-guide.ditamap` and press Enter. The
    **New XML Document** dialog lists the templates for `.ditamap` files.
 3. Choose **Map** and click **OK**.
@@ -36,7 +36,7 @@ The editor opens the new file with the template's content:
 Click inside the title, choose **XML** > **Select Element Content**
 (Ctrl+Shift+E), and type `Audio user guide`. Then replace the placeholder
 `topic.dita` in the `@href` with `topics/what-is-audacity.dita`. If you use
-another editor, create the file in the project root and type the finished
+another editor, create the file in the project folder and type the finished
 listing.
 
 The finished map:
@@ -69,8 +69,8 @@ Set the default root map for the project:
 
 1. Choose **Project** > **Manage Projects...**. The dialog lists your
    projects on the left.
-2. Click your project. It has the name of your project folder. The
-   project settings appear on the right. **Project Type** is `DITA` and
+2. Click your project, `my-audacity-guide`. It has the name of your
+   project folder. The project settings appear on the right. **Project Type** is `DITA` and
    **Framework** is `DITA-OT 4.3.5`.
 3. In the **Default Root Map** list, which shows `(none)`, choose
    `audacity-guide.ditamap`. If the map is not in the list, click
@@ -81,7 +81,7 @@ The health check uses the default root map to decide which topics belong to
 the publication.
 
 Validate the map in the editor with **XML** > **Validate**, or run this
-command from the project root:
+command from `my-audacity-guide`:
 
 ```bash
 dogsbay-xml validate audacity-guide.ditamap
@@ -115,9 +115,9 @@ includes. The following output is an example:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita" — target not found
+  /home/you/my-audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita" — target not found
   (run project-health for the full report)
-  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+  orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -127,9 +127,9 @@ the full report. For example:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
-  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
+  /home/you/my-audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
 Orphan topics (1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita
 
 Summary
   Broken references             1
@@ -140,6 +140,8 @@ Restore the file name and check again. Confirm that the check reports
 `health   clean` before you continue.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/02-first-map`. If you use Git, commit your work.
 
 Continue with [Stage 03: first build](/part-1-topics/stage-03-first-build).
 
