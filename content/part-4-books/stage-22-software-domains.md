@@ -431,7 +431,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
       <appendix href="topics/effects-reference.dita" keys="effects"/>
       <appendix href="topics/effect-presets.dita"/>
-   +  <appendix href="topics/scripting-reference.dita">
+   +  <appendix href="topics/scripting-reference.dita" keys="scripting">
    +    <topicref href="topics/exporting-from-a-script.dita"/>
    +  </appendix>
     
@@ -442,8 +442,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The full guide gets an *Automation* head for the task and the
    reference under *Reference* with the key `scripting`; the podcaster
    guide takes both under its *Reference*; in the book the reference is a
-   fourth appendix with the task as its section. The beginner guide does
-   not get them.
+   fourth appendix with the task as its section, and carries the key
+   `scripting` too, so the podcast workflow's link to it resolves in the
+   PDF. The beginner guide does not get them.
 
 7. **Edit `topics/podcast-production-workflow.dita`**
 

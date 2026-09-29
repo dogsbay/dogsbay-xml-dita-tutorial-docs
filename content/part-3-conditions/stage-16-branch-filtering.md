@@ -83,6 +83,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
      <topicref href="topics/glossary/audio-units.dita" toc="no"/>
      <keydef keys="common-notes" href="shared/common-notes.dita"/>
+     <!-- The exporting task links to the formats topic by key; toc="no" publishes it without a TOC entry. -->
+     <topicref href="topics/supported-audio-formats.dita" keys="formats" toc="no"/>
      <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
      <!-- Branch filtering (DITA 1.3): each ditavalref makes DITA-OT copy this branch
           and filter the copy for one platform. The copies get the prefix and suffix
@@ -139,6 +141,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      the glossary group. The topicref publishes the group so that those
      links have a page to land on, and keeps it out of the table of
      contents.
+   - The `<topicref toc="no">` to `supported-audio-formats.dita` does the
+     same for the formats topic, and defines the key `formats`. The
+     exporting task, which this map reaches through links, says "see
+     `<xref keyref="formats/choosing"/>`". Without the key in this map,
+     that reference resolves to nothing and the output reads "see )";
+     with only a `<keydef>`, the link resolves but the page is not
+     published.
 
 3. **List the branches**
 
