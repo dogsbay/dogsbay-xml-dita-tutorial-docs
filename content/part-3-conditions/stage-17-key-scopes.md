@@ -237,15 +237,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     16 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
+
+   The note lines count DITA-OT notes from each build. To print them,
+   run `dogsbay-xml check -v .`, or read them in the
+   **Project Validation** panel. The notes of the `collection`
+   deliverable include `DOTJ047I` notes for glossary keys, such as
+   `gl-decibel`, that DITA-OT did not find in the root scope. The output
+   check finds no broken links in the collection.
 
 3. **Read the output**
    `out/collection/index.html` has the three
@@ -260,18 +271,27 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 Test an unqualified key at the root. Add `<topicref keyref="start-here"/>`
 to `audacity-collection.ditamap`, above the first `<topichead>`, and check
-your work. The check reports `Ready`. DITA-OT drops the topicref, and only
-a verbose DITA-OT log records it, as an informational message:
+your work. The check reports `Ready`, and the `collection` build reports
+one more note than before. DITA-OT drops the topicref and records it as an
+informational note. To see it, check the `collection` deliverable with the
+`-v` option:
+
+```bash
+dogsbay-xml check --deliverable=collection -v .
+```
+
+Among the notes, the output includes this line. In the editor, the
+**Project Validation** panel shows the same note after **Check Project**.
 
 ```
-[keyref] file:/home/you/my-audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
+  INFO  [DOTJ047I] file:/home/you/my-audacity-guide/audacity-collection.ditamap:16  Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
 ```
 
 There is no `@href`, so the entry is missing from the table of contents and
 nothing else. The build succeeds and no link breaks, so the output check
 has nothing to report. Health does not see it either: it checks the
-default root map, the full guide. The tool that does object is the key
-resolver, pointed at the collection:
+default root map, the full guide. The key resolver, pointed at the
+collection, reports an error:
 
 ```bash
 dogsbay-xml keys audacity-collection.ditamap --resolve start-here

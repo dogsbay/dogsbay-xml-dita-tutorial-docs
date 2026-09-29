@@ -370,14 +370,20 @@ read these files.
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     7 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     18 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     6 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -397,7 +403,7 @@ Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
