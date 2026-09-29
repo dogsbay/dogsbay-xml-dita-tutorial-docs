@@ -66,10 +66,18 @@ earlier builds had and how the stage branches fixed them.
 
 ## Mark your result
 
-If you use Git, commit your work in the **Git** panel. To mark the finished
-guide, create a branch from the **…** menu of the **Git** panel, for example
-`my-tutorial-final`. The branch keeps this version of your project while
-you continue to change the guide.
+If you use Git, commit your work in the **Git** panel. Then mark the
+finished guide with a tag:
+
+1. In the **Git** panel, open the **…** menu and choose **Tag** >
+   **Create Tag...**.
+2. In **Tag name**, type `my-tutorial-final`. In **Message**, type a short
+   note, such as `Finished the DITA tutorial`.
+3. Click **OK**.
+
+A tag marks one commit and does not move when you commit again, so it keeps
+this version of your project while you continue to change the guide.
+**Tag** > **Tags...** lists your tags.
 
 **Checkpoint:** `tutorial/26-final`, also tagged `tutorial/final` in the
 [sample project](/start-here/set-up#the-sample-project). It includes every
