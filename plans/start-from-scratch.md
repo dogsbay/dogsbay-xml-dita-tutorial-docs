@@ -83,11 +83,38 @@ The narrated videos (`dogsbay-promo/xml/voice`) record in `/tmp/my-audacity-guid
 3. **Manage Projects**: set the root map and house rules; diff `config.xml` with the branches.
 4. **Edit Policy**: enter stage 13's three rules; diff.
 
+## Verification results, 2026-09-29 (dogsbay-xml `d3564ad`)
+
+Run in the editor on an empty `/tmp/my-audacity-guide`:
+
+| Check | Result |
+|---|---|
+| **New Folder** `topics`, then **New File** `what-is-audacity.dita` from **Concept** | Works. Creating the first topic wrote `.dogsbay/config.xml` (type, framework, format style with `newline="lf"`) and `.dogsbay/.gitignore`: editor request 1 is already in this build |
+| That `config.xml` against `tutorial/01-concept` | Byte-identical |
+| `.dogsbay/.gitignore` | Same rule (`local.xml`), different comment: the branches take the editor's comment |
+| **XML** > **Validate**, **Project** > **Check Project** | Valid Document; health clean, the orphan warning, "no deliverables yet" |
+| **Manage Projects**: Default Root Map, **Save** | Saved, but the in-place edit drops the blank line after the declaration, appends `<default-root-map>` on the closing tag's line, and leaves no final newline. The field also shows the only map before anything is saved |
+| **Manage Deliverables**: `full` as in stage 03 (map, html5, `out/full`, `nav-toc` = `full`) | Same content as the branch's `project.json`; different layout (`"key" : value`, `[ {`, no final newline) |
+| **Metadata** > **Edit Policy**: stage 13's three rules | Rules identical. The full rewrite puts `<format-style>` after `<metadata-policy>` (the branch has it before), and there is no `<default-deliverable>` (the branches have it from stage 03; only **Save Project Settings** writes it) |
+
+Editor requests from this run:
+
+1. One element order for `config.xml`, used by both the in-place edit and the full rewrite, and the in-place edit keeps the file formatted (blank line after the declaration, one element per line, final newline).
+2. `project.json` in a conventional layout: `"key": value`, one array element per line, final newline.
+3. The Default Root Map field shows what is saved, or marks an unsaved suggestion (reported before, still open).
+
+Decisions for the branches:
+
+- `<default-deliverable>` is dropped from the branches: with one deliverable it changes nothing, and readers never set it. Stage 14, which adds deliverables, says how to choose the active one in the status bar.
+- `config.xml` and `project.json` on the branches take the editor's layout once requests 1 and 2 land.
+
+Also noted: the menus were reorganized (**Project** now starts with **Check Project**; **Types** and **Transform** are gone), so the stage 01 video's click coordinates need re-measuring before the next take.
+
 ## Phases
 
 | Phase | What | Depends on |
 |---|---|---|
-| 1 | Verification above | Nothing (editor requests agreed with the xml team, 2026-09-29) |
+| 1 | Verification above: done, see results | Nothing |
 | 2 | Start-here pages and stages 00 to 03 rewritten; branches' `config.xml` and `project.json` aligned from stage 00 | Editor: first topic makes a DITA project and writes the config |
 | 3 | Stages 04 to 26: bookkeeping removed, settings through the editor, assets from the sample project, paths re-recorded | Editor: bulk attribute action (stage 24), Git init |
 | 4 | Videos re-recorded from an empty folder | Phases 2 and 3 |
