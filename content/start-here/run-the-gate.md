@@ -25,7 +25,7 @@ it passed:
 | Stage | Checks |
 |---|---|
 | Health | Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound |
-| Build | Every deliverable in `project.json` builds with DITA-OT |
+| Build | Every deliverable in **Manage Deliverables** builds with DITA-OT |
 | Output | Every link, image, and fragment in the built output leads somewhere |
 
 It stops at the first stage that fails, because later stages would only
@@ -117,7 +117,7 @@ exercise, undo the change and check again before you continue.
 
 ## Find the output
 
-Each deliverable builds into its own folder, as `project.json` declares it:
+Each deliverable builds into the folder in its **Output** field:
 `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner
 guide, and so on. The `out/` folder is ignored by Git.
 

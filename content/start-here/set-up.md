@@ -110,9 +110,11 @@ For the authoring workflow, stage 00 creates a separate `audacity-guide`
 repository. Open that folder as a project after you create it, and keep the
 clone as a reference. For the inspection workflow, work in the clone.
 
-The `.dogsbay/config.xml` on every stage branch sets the project type to
-DITA, the framework to DITA-OT 4.3.5 and the format style, so the editor and
-the command line agree on what a valid, well-formatted file is.
+The project settings on every stage branch set the project type to DITA,
+the framework to DITA-OT 4.3.5, and the format style, so the editor and the
+command line agree on what a valid, well-formatted file is. To see them,
+choose **Project** > **Manage Projects...** and click the project. You do
+not edit them.
 
 ## Check the tools
 

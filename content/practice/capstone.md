@@ -27,7 +27,7 @@ completed work or `origin/tutorial/25-house-rules` in a practice worktree.
 5. Include one beginner explanation and one podcaster note with the
    controlled audience values. Explain your choice of content boundaries.
 6. Include the required metadata and satisfy the existing house rules.
-7. Build the deliverables in `project.json`. Inspect the new page in
+7. Build the deliverables. Inspect the new page in
    `out/beginner-windows/` and `out/podcaster-linux/`, including its links,
    resolved keys, reused content, and audience-specific text.
 

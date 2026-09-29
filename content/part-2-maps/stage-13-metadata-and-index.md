@@ -10,8 +10,8 @@ Add author, date, audience, keyword, and index metadata to the topics.
 Place it in `<prolog>`, between the short description and the body. Add
 publication metadata to the map's `<topicmeta>`.
 
-Configure a metadata policy in `.dogsbay/config.xml` to require keywords
-on topics and creation dates on tasks. The examples show each topic type;
+Set a metadata policy in the editor to require keywords on topics and
+creation dates on tasks. The examples show each topic type;
 expand the remaining examples to apply the same structure.
 
 **Optional module.** See [Choose a learning path](/start-here/learning-path)
@@ -695,36 +695,34 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 5: The metadata policy, the README and the check
 
 ::::steps
-1. **Edit `.dogsbay/config.xml`**
+1. **Set the metadata policy**
+   Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows
+   a table of rules, one rule per row. Add three rules:
 
-   ```diff title=".dogsbay/config.xml"
-   --- a/.dogsbay/config.xml
-   +++ b/.dogsbay/config.xml
-   @@ -6,4 +6,9 @@
-      <framework>DITA-OT 4.3.5</framework>
-      <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-      <default-deliverable file="project.json" name="full"/>
-   +  <metadata-policy>
-   +    <rule topic-type="task" field="created" presence="required" pattern="\d{4}-\d\d-\d\d"/>
-   +    <rule field="author" presence="recommended"/>
-   +    <rule field="keyword" presence="required"/>
-   +  </metadata-policy>
-    </dogsbay-project>
-   ```
+   | Topic type (blank = any) | Field | Presence | Allowed values (space-separated) | Pattern |
+   |---|---|---|---|---|
+   | `task` | `created` | `required` | (empty) | `\d{4}-\d\d-\d\d` |
+   | (empty) | `author` | `recommended` | (empty) | (empty) |
+   | (empty) | `keyword` | `required` | (empty) | (empty) |
+
+   For each rule, click **Add rule**. A new row starts with the field
+   `author` and the presence `required`. Choose the **Field** and the
+   **Presence** from their lists, and double-click a text cell to type in
+   it. When the table shows the three rules, click **OK**.
 
 2. **Read the rules**
 
-   - Each `<rule>` names a `field`, a `presence` and, optionally, a
-     `topic-type` and a `pattern`. A missing `required` field is an error
-     and fails the check; a missing `recommended` field is a warning, shown
-     beside a file's errors.
+   - Each rule names a field, a presence and, optionally, a topic type and
+     a pattern. A missing `required` field is an error and fails the check;
+     a missing `recommended` field is a warning, shown beside a file's
+     errors.
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`.
      Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere,
      which is the rule that reaches the glossary group.
    - `project-health` applies the policy as one of its checks, so the
      health stage of **Check Project** and `dogsbay-xml check` enforces it.
-     The editor reads the same file.
+     The editor applies the same policy.
 
 3. **Change the "You are on" line**
 
@@ -853,8 +851,9 @@ before you continue.
 - A `<glossgroup>` and a shared topic are topics and carry prologs like any
   other.
 - Map `<topicmeta>` takes the same elements for the publication.
-- A metadata policy in `.dogsbay/config.xml`: `<rule field presence
-  topic-type pattern>`, enforced by `project-health` and so by the check.
+- A metadata policy, set in **Project** > **Metadata** > **Edit Policy...**:
+  rules by topic type, field, presence and pattern, enforced by
+  `project-health` and so by the check.
 - End of Part 2: a map with structure and a reltable, a key space, a
   shared topic, a glossary and metadata, published as one HTML5 deliverable.
 

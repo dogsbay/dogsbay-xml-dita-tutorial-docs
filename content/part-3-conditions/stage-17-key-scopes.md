@@ -196,36 +196,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: The deliverable, the README and the check
 
 ::::steps
-1. **Edit `project.json`**
+1. **Add the deliverable**
+   Choose **Project** > **Project Tools** > **Manage Deliverables...** and
+   click **Add...**. Enter these values:
 
-   ```diff title="project.json"
-   --- a/project.json
-   +++ b/project.json
-   @@ -103,6 +103,23 @@
-          "publication": {
-            "transtype": "html5"
-          }
-   +    },
-   +    {
-   +      "name": "collection",
-   +      "context": {
-   +        "id": "collection",
-   +        "input": "audacity-collection.ditamap"
-   +      },
-   +      "output": "out/collection",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "full"
-   +          }
-   +        ]
-   +      }
-        }
-      ]
-    }
-   ```
+   | Field | Value |
+   |---|---|
+   | **Name** | `collection` |
+   | **Input map** | `audacity-collection.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/collection` |
+   | **Publication parameters** | `nav-toc` = `full` |
+
+   The `nav-toc` parameter with the value `full` puts the navigation of
+   the whole collection on each page, as it does for `full`. Click
+   **Save...**, click **OK** to write the deliverable, and click
+   **Close**.
 
 2. **Change the "You are on" line and the layout**
 

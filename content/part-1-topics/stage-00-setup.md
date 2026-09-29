@@ -1,14 +1,13 @@
 ---
 title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognize, with the shared editor settings, a README, and a first check of your work.
+description: An empty DITA project that the tools recognize, with a README, a license, and a first check of your work.
 type: tutorial
 ---
 
 # Stage 00: Set up the project
 
-Create the project settings and README for the guide, then check the
-project. The DogsBay XML editor uses `.dogsbay/config.xml` to select the
-DITA framework and formatting settings. At the end of every lesson, you check
+Create the project folder and README for the guide, then check the
+project. At the end of every lesson, you check
 your work with **Project** > **Check Project** in the editor or
 `dogsbay-xml check` on the command line.
 
@@ -37,7 +36,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    git init
    git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
    git fetch origin
-   mkdir -p .dogsbay topics
+   mkdir topics
    touch topics/.gitkeep
    ```
 
@@ -48,32 +47,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Each stage branch also has a `scripts/` folder. Its scripts are checks
    for the tutorial maintainers. You do not need them in your repository.
 
-2. **Write the editor settings**
-   `.dogsbay/config.xml` is shared by everyone who opens the project. It sets
-   the project type, the framework the DOCTYPEs resolve against, and the
-   format style that `dogsbay-xml format` and the editor apply, so diffs
-   between stages stay about the feature and not about whitespace.
+   The editor creates its project settings when you create the first topic
+   in stage 01. You do not edit them.
 
-   ```xml title=".dogsbay/config.xml"
-   <?xml version="1.0" encoding="UTF-8"?>
-   
-   <dogsbay-project>
-     <project-type>DITA</project-type>
-     <framework>DITA-OT 4.3.5</framework>
-     <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-   </dogsbay-project>
-   ```
-
-3. **Keep personal settings out of Git**
-   The editor writes a `local.xml` beside `config.xml` for the active
-   deliverable and window state. Ignore it inside the folder.
-
-   ```gitignore title=".dogsbay/.gitignore"
-   # Personal editor overrides (active deliverable, window state). Not shared.
-   local.xml
-   ```
-
-4. **Ignore the build output**
+2. **Ignore the build output**
    DITA-OT writes generated HTML and PDF. Keep it out of the repository.
 
    ```gitignore title=".gitignore"
@@ -222,13 +199,13 @@ add the command line to your `PATH`. For more about the result, see
 ## What you learned
 
 - A DITA project is a folder of topics and maps; nothing declares it except
-  the files themselves and, for the editor, `.dogsbay/config.xml`.
+  the files themselves.
 - DOCTYPEs are resolved through the catalog of the bundled DITA-OT, so a project states which
   DITA-OT it targets and the DTDs come from there.
 - **Project** > **Check Project**, or `dogsbay-xml check`, checks your
   work. Before stage 03, `health   clean` means a stage is done.
-- Format style lives in the project so every stage's diff is about the
-  feature.
+- The editor keeps the project settings, including the format style, so
+  every stage's diff is about the feature.
 
 ## Next lesson
 

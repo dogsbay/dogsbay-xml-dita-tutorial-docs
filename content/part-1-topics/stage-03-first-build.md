@@ -13,23 +13,46 @@ can inspect every topic, link, and navigation change as you make it.
 
 ## Define the deliverable
 
-Create `project.json` in the project root:
+A deliverable names a map, a transformation, and an output folder. Define
+one deliverable, named `full`, for the whole guide:
 
-```json
-{
-  "deliverables": [{
-    "name": "full",
-    "context": {"id": "full", "input": "audacity-guide.ditamap"},
-    "output": "out/full",
-    "publication": {"transtype": "html5", "params": [{"name": "nav-toc", "value": "full"}]}
-  }]
-}
-```
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...**. The
+   table is empty.
+2. Click **Add...**.
+3. Enter these values:
 
-The context identifies the root map. The publication selects the HTML5
-transformation and requests navigation on each page. The output folder is
-relative to the project root, so this deliverable builds into `out/full/`. Select `full` as the default deliverable
-in the editor's project settings.
+   | Field | Value |
+   |---|---|
+   | **Name** | `full` |
+   | **Input map** | `audacity-guide.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/full` |
+   | **Publication parameters** | `nav-toc` = `full` |
+
+   To add the parameter, click **Add param**, double-click the **Name**
+   cell and type `nav-toc`, then double-click the **value** cell and type
+   `full`.
+4. Click **Save...**. The editor asks whether to write the deliverable.
+   Click **OK**.
+5. Click **Close**.
+
+The fields have these effects:
+
+- **Input map** is the root map of the publication.
+- **Transtype** `html5` selects the HTML5 transformation.
+- **Output** is relative to the project root, so this deliverable builds
+  into `out/full/`.
+- The `nav-toc` parameter with the value `full` puts the navigation of the
+  whole guide on each page.
+
+The editor stores deliverables in `project.json` in the project root. You
+do not need to edit it.
+
+The active deliverable is the one that **Build Deliverables** builds by
+default. If the status bar does not show `full`, choose `full` in the status
+bar's deliverable menu. You can also select the deliverable in **Manage
+Deliverables** and click **Set active**.
 
 ## Build and inspect
 

@@ -1,6 +1,6 @@
 ---
 title: "Stage 25: House rules"
-description: Write the house style as Schematron, name it in the project config so that the check enforces it, explain it to agents, and fix the ten violations it finds.
+description: Write the house style as Schematron, select it in the project settings so that the check enforces it, explain it to agents, and fix the ten violations it finds.
 type: tutorial
 ---
 
@@ -10,7 +10,7 @@ Add Schematron rules for the project's house style: require short
 descriptions, use semantic markup for UI labels, reference product names
 through keys, and resolve review markup before release.
 
-Configure `house-style.sch` in `.dogsbay/config.xml` and document the
+Select `house-style.sch` as the project's house rules and document the
 rules in `AGENTS.md` and the project skill. Resolve the ten reported
 violations, including converting the cleanup content to a table and
 recording the review decision in the change history.
@@ -133,28 +133,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Run them on stage 24
 
 ::::steps
-1. **Edit `.dogsbay/config.xml`**
+1. **Select the house rules**
+   Choose **Project** > **Manage Projects...** and click your project. In
+   the **House Rules (Schematron)** list, which shows `(none)`, choose
+   `house-style.sch`. Click **Save**.
 
-   ```diff title=".dogsbay/config.xml"
-   --- a/.dogsbay/config.xml
-   +++ b/.dogsbay/config.xml
-   @@ -6,6 +6,7 @@
-      <framework>DITA-OT 4.3.5</framework>
-      <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-      <default-deliverable file="project.json" name="full"/>
-   +  <default-schematron>house-style.sch</default-schematron>
-      <metadata-policy>
-        <rule topic-type="task" field="created" presence="required" pattern="\d{4}-\d\d-\d\d"/>
-        <rule field="author" presence="recommended"/>
-   ```
-
-   `<default-schematron>` names the rules file relative to the project
-   root. From now on `project-health` runs it with everything else, the
-   editor uses the same setting, and the `house rules:` part of the
-   health report's first line names it instead of saying *none*.
+   From now on `project-health` runs the rules with everything else, the
+   editor applies the same rules, and the `house rules:` part of the
+   health report's first line names `house-style.sch` instead of saying
+   *none*.
 
 2. **Run the rules before you change anything else**
-   With the rules file and the config line in place, and the files still
+   With the rules file selected, and the files still
    as they were at the end of stage 24:
 
    ```bash
@@ -505,8 +495,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   Health now runs the house rules with everything else, because
-   `.dogsbay/config.xml` names them. Step 3 resolved the ten violations,
+   Health now runs the house rules with everything else, because the
+   project names them. Step 3 resolved the ten violations,
    including the two stage 24 warnings, so health is clean. From now on a
    house-rule violation stops the check at health, so a branch cannot
    carry unresolved review markup.
@@ -553,7 +543,7 @@ before you continue.
   and `<report test>`, with the message as content.
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are
   exempt; `test="true()"` to forbid an element.
-- `<default-schematron>` in `.dogsbay/config.xml`;
+- **House Rules (Schematron)** in **Manage Projects**;
   `project-health --include=schematron`; a house-rule violation stops
   the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes

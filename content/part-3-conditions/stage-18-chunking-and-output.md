@@ -284,7 +284,7 @@ audio-formats topic a different output filename.
 ## Compare combined and split pages
 
 Create these files under `examples/chunking/`. This example has its own maps
-and is excluded from the deliverables in `project.json`.
+and is not one of the project's deliverables.
 
 ```xml title="examples/chunking/topics/nested.dita"
 <?xml version="1.0" encoding="UTF-8"?>

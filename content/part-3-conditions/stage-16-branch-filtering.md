@@ -11,7 +11,7 @@ Apply three DITAVAL files to one branch of
 Windows, macOS, and Linux in a single build.
 
 Use `<ditavalmeta>` to assign distinct output names and key scopes to the
-copies. Add the map as a deliverable in `project.json`.
+copies. Add the map as a deliverable in the editor.
 
 **Optional module.** See [Choose a learning path](/start-here/learning-path)
 for the starting checkpoint and the next core lesson.
@@ -155,31 +155,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: The deliverable, the README and the check
 
 ::::steps
-1. **Edit `project.json`**
-   No `profiles` entry: the filtering is in the map.
+1. **Add the deliverable**
+   Choose **Project** > **Project Tools** > **Manage Deliverables...** and
+   click **Add...**. Enter these values:
 
-   ```diff title="project.json"
-   --- a/project.json
-   +++ b/project.json
-   @@ -92,6 +92,17 @@
-          "publication": {
-            "transtype": "html5"
-          }
-   +    },
-   +    {
-   +      "name": "install-variants",
-   +      "context": {
-   +        "id": "install-variants",
-   +        "input": "installation-variants.ditamap"
-   +      },
-   +      "output": "out/install-variants",
-   +      "publication": {
-   +        "transtype": "html5"
-   +      }
-        }
-      ]
-    }
-   ```
+   | Field | Value |
+   |---|---|
+   | **Name** | `install-variants` |
+   | **Input map** | `installation-variants.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/install-variants` |
+   | **Publication parameters** | (none) |
+
+   Leave **DITAVAL** empty: the `<ditavalref>` elements in the map do the
+   filtering. Click **Save...**, click **OK** to write the deliverable, and
+   click **Close**.
 
 2. **Change the "You are on" line and the layout**
 
@@ -301,7 +292,7 @@ Confirm that the check reports `Ready` before you continue.
 - `<ditavalmeta>` with `<dvrResourcePrefix>`, `<dvrResourceSuffix>` and
   `<dvrKeyscopePrefix>` names the copies and their key scopes; the
   prefixes must differ.
-- A branch-filtered map needs no `profiles` in `project.json`; a
+- A branch-filtered map needs no DITAVAL in its deliverable; a
   collision between variants builds without an error, and only the
   output check sees the links it breaks.
 - `dogsbay-xml list-branches <map>` enumerates the variants.
