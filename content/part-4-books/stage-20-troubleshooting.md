@@ -262,7 +262,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     </map>
    ```
 
-6. **Read the five references**
+6. **Edit `audacity-collection.ditamap`**
+   Add the key to the collection's root scope, beside `formats` from stage
+   17, so the root-scope copy of the recording task resolves its trouble
+   note too.
+
+   ````diff title="audacity-collection.ditamap"
+   --- a/audacity-collection.ditamap
+   +++ b/audacity-collection.ditamap
+   @@ -12,6 +12,7 @@
+      <mapref href="keydefs-glossary.ditamap"/>
+      <keydef keys="common-notes" href="shared/common-notes.dita"/>
+      <keydef keys="formats" href="topics/supported-audio-formats.dita"/>
+   +  <keydef keys="silent" href="topics/recording-is-silent.dita"/>
+      <!-- Each guide defines its own "start-here" key. Combined flat they would
+           collide (first definition wins). A key scope on each mapref keeps them
+           apart: userguide.start-here, beginner.start-here, podcaster.start-here. -->
+   ````
+
+7. **Read the six references**
 
    - The full guide gives the topic a `<topichead>` of its own, with an
      `id` so a later stage can reference the branch, and the key `silent`.
@@ -290,6 +308,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The book and the podcaster guide do not define `silent`, so the
      `href` fallback applies there. Both contain the topic, so the link
      resolves in every deliverable.
+   - The collection defines `silent` in its root scope. The guides it
+     aggregates keep their own `silent` keys in their scopes.
 ::::
 
 ## Step 3: Check your work
