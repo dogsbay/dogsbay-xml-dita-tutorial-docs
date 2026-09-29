@@ -1,14 +1,19 @@
 ---
 title: Verify excerpts and output links
-description: Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables.
+description: "For maintainers. Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables."
 type: how-to
 ---
 
 # Verify excerpts and output links
 
 The tutorial repository's `main` branch supplies checks for documentation
-drift and generated links. Run them alongside the stage gate. They require
-Python 3.9 or later and Git; they use only the Python standard library.
+drift and generated links. This page is for maintainers of the tutorial.
+Readers do not need these scripts, a clone, or Git: they check their work
+with **Project** > **Check Project** in the editor, or `dogsbay-xml check`;
+see [Check your work](/start-here/run-the-gate).
+
+Run the scripts alongside the stage gate. They require Python 3.9 or later
+and Git; they use only the Python standard library.
 
 Keep a clone of `main` for these scripts if you are working in a stage
 worktree. Historical stage branches do not include the new scripts.

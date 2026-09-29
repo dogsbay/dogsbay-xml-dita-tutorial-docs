@@ -28,7 +28,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `learning/check-your-understanding.dita`**
    A new folder, `learning/`, keeps the learning content apart from the
-   topics.
+   topics. In the **Explorer**, right-click `my-audacity-guide`, choose
+   **New Folder**, and enter `learning`. Then create the file in it with
+   **New File**.
 
    ```xml title="learning/check-your-understanding.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -251,31 +253,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    installation.
 ::::
 
-## Step 4: Update the README and check your work
+## Step 4: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 22: software domains.
-   +You are on stage 23: learning.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** >
+   **Format** and save the file. From the command line, format them all:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita *.ditamap
+   dogsbay-xml format -i learning/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** >
@@ -290,15 +277,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -307,10 +294,6 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The assessment is validated with every other file, and each HTML
    deliverable whose map includes it builds it as a page, for example
    `out/full/learning/check-your-understanding.html`.
-
-   The stage branch also changes `scripts/check-stage.sh`, the script
-   that maintainers use to verify the branches. You do not need it. See
-   [The stage gate](/reference/the-gate).
 ::::
 
 Test the duration content model. Replace the `<lcTime>` line with
@@ -319,7 +302,7 @@ check your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/learning/check-your-understanding.dita
+  invalid: /home/you/my-audacity-guide/learning/check-your-understanding.dita
     33:18  The content of element type "lcDuration" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -356,6 +339,8 @@ before you continue.
   software domains and an assessment, on the same guide.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/23-learning`. If you use Git, commit your work.
 
 Continue with [Stage 24: drafts and localization](/part-5-governance/stage-24-drafts-and-localization).
 

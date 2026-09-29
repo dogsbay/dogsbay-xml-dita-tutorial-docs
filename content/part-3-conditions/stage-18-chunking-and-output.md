@@ -17,9 +17,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ## Add the production topics
 
-Create the following files. The effects reference and presets use separate
-source files. Each gets an explicit topicref in the production maps.
-The effect-order concept supports the reusable cleanup branch. The guide
+Create the following files in the `topics` folder. In the **Explorer**,
+right-click `topics`, choose **New File**, enter the file name, and choose
+the template for the root element: **Reference**, **Concept**, or
+**Topic**. Replace the template's content with the listing. The effects
+reference and presets use separate source files. Each gets an explicit
+topicref in the production maps. The effect-order concept supports the reusable cleanup branch. The guide
 information topic is published in print output.
 
 ```xml title="topics/effects-reference.dita"
@@ -283,8 +286,11 @@ audio-formats topic a different output filename.
 
 ## Compare combined and split pages
 
-Create these files under `examples/chunking/`. This example has its own maps
-and is not one of the project's deliverables.
+Create these files under `examples/chunking/`. In the **Explorer**,
+right-click `my-audacity-guide`, choose **New Folder**, and create
+`examples`. Create `chunking` inside `examples` and `topics` inside
+`chunking` the same way. This example has its own maps and is not one of
+the project's deliverables.
 
 ```xml title="examples/chunking/topics/nested.dita"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -346,48 +352,55 @@ and is not one of the project's deliverables.
 </map>
 ```
 
-The example is not a deliverable, so **Check Project** does not build it.
-To build both maps with the DITA-OT that the editor includes, give the
-example folder a `project.json` of its own. Create
-`examples/chunking/project.json`:
+The example is not one of the project's deliverables, so **Check Project**
+does not build it yet. Add its two maps as temporary deliverables, check
+them, and delete the deliverables when you finish. The two deliverables
+take these values:
 
-```json
-{
-  "deliverables": [
-    {
-      "name": "chunk-combined",
-      "context": { "id": "chunk-combined", "input": "combined.ditamap" },
-      "output": "out/chunk-combined",
-      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
-    },
-    {
-      "name": "chunk-split",
-      "context": { "id": "chunk-split", "input": "split.ditamap" },
-      "output": "out/chunk-split",
-      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
-    }
-  ]
-}
-```
+| Field | `chunk-combined` | `chunk-split` |
+|---|---|---|
+| **Name** | `chunk-combined` | `chunk-split` |
+| **Input map** | `examples/chunking/combined.ditamap` | `examples/chunking/split.ditamap` |
+| **DITAVAL (optional)** | (leave empty) | (leave empty) |
+| **Transtype** | `html5` | `html5` |
+| **Output (optional)** | `out/chunk-combined` | `out/chunk-split` |
+| **Publication parameters** | `nav-toc` = `full` | `nav-toc` = `full` |
 
-The stage branch does not contain this file. Then check the example folder
-as a project of its own:
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...** and
+   click **Add...**. Enter the values in the `chunk-combined` column of the
+   table, click **Save...**, and click **OK** to write the deliverable.
+2. Click **Add...** again and enter the values in the `chunk-split`
+   column. Click **Save...**, click **OK**, and click **Close**.
+
+Check your work. In the editor, choose **Project** > **Check Project**. From
+the command line, run:
 
 ```bash
-dogsbay-xml check examples/chunking
+dogsbay-xml check .
 ```
 
-The output looks like this example:
+The check builds the two example deliverables after the others. The output
+looks like this example:
 
 ```
 health   clean
-build    chunk-combined       ok  /home/you/audacity-guide/examples/chunking/out/chunk-combined
-build    chunk-split          ok  /home/you/audacity-guide/examples/chunking/out/chunk-split
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+build    collection           ok  /home/you/my-audacity-guide/out/collection
+build    chunk-combined       ok  /home/you/my-audacity-guide/out/chunk-combined
+build    chunk-split          ok  /home/you/my-audacity-guide/out/chunk-split
 output   2 broken link(s)
-  /home/you/audacity-guide/examples/chunking/out/chunk-split/97fc308b7a258ea5c2fbc53def61887c5203182b.html:12  @href="602efa29ceccc1cbad72daac54430cff43f917d2.html#chunk-parent" — there is no 602efa29ceccc1cbad72daac54430cff43f917d2.html
-  /home/you/audacity-guide/examples/chunking/out/chunk-split/topics/chunk-parent.html:13  @href="97fc308b7a258ea5c2fbc53def61887c5203182b.html" — there is no topics/97fc308b7a258ea5c2fbc53def61887c5203182b.html
+  /home/you/my-audacity-guide/out/chunk-split/39502c951f484001bc0a8ddb78f535deccc74ba8.html:12  @href="6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html#chunk-parent" — there is no 6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html
+  /home/you/my-audacity-guide/out/chunk-split/topics/chunk-parent.html:13  @href="39502c951f484001bc0a8ddb78f535deccc74ba8.html" — there is no topics/39502c951f484001bc0a8ddb78f535deccc74ba8.html
 Not ready: 2 links in the built output lead nowhere.
 ```
+
+To build and check one deliverable only from the command line, run
+`dogsbay-xml check --deliverable=chunk-split .`.
 
 Open each output's `index.html`. The combined version,
 `out/chunk-combined/topics/nested.html`, keeps the parent and child on one
@@ -402,8 +415,17 @@ was never written. Generated file names can differ between runs.
 Nested topics with `chunk="by-topic"` are valid DITA. The broken links
 come from how this processor version writes the split pages. Record the
 results for your version and transformation, and check generated links
-before you publish split pages. When you finish, delete
-`examples/chunking/project.json` and `examples/chunking/out/`.
+before you publish split pages.
+
+When you finish, remove the two example deliverables:
+
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...**.
+2. Select `chunk-combined`, click **Delete**, and click **OK**. Repeat for
+   `chunk-split`.
+3. Select `full` and click **Set active**, then click **Close**.
+
+The example maps stay in `examples/chunking/`. They are not deliverables
+of the checkpoint.
 
 ## Check the guide
 
@@ -418,13 +440,13 @@ Example output:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
-build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-build    review               ok  /home/you/audacity-guide/out/review
-build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-build    collection           ok  /home/you/audacity-guide/out/collection
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+build    collection           ok  /home/you/my-audacity-guide/out/collection
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
@@ -449,6 +471,9 @@ stylesheet must define its visual effect.
 - `topicset` and `topicsetref` reuse map branches.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/18-chunking-and-output`. If you use Git, commit
+your work.
 
 Continue with [Stage 19: bookmap](/part-4-books/stage-19-bookmap).
 

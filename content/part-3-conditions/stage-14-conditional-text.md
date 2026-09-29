@@ -206,6 +206,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Three sections for podcasters and one for beginners, so the same topic
    reads differently in each guide.
 
+   In the **Explorer**, right-click the `topics` folder, choose
+   **New File**, enter `podcast-production-workflow.dita`, and choose the
+   **Concept** template. Replace the template's content with the listing.
+
    ```xml title="topics/podcast-production-workflow.dita"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
@@ -307,6 +311,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    One file per deliverable. Each names every value of every attribute the
    topics use.
 
+   In the **Explorer**, right-click `my-audacity-guide`, choose
+   **New Folder**, and enter `filters`. Then right-click the `filters`
+   folder, choose **New File**, enter `mac-beginner.ditaval`, and choose
+   the **DITAVAL** template. The template contains one sample rule:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+
+   <val>
+     <prop att="audience" val="internal" action="exclude"/>
+   </val>
+   ```
+
+   Replace the sample rule with the rules in the listing. Create the other
+   two files the same way.
+
    ```text title="filters/mac-beginner.ditaval"
    <?xml version="1.0" encoding="UTF-8"?>
    
@@ -346,7 +366,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Create `filters/review.ditaval`**
    The review build excludes nothing. It flags podcaster content with a
    background color and bracketed text, and draws a change bar beside
-   anything marked `rev="3.4"`.
+   anything marked `rev="3.4"`. Create it from the **DITAVAL** template
+   in the same way.
 
    ```text title="filters/review.ditaval"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -396,6 +417,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Six topics in three chapters, no glossary chapter, no reltable. One
    glossary topic is published without a table of contents entry.
 
+   In the **Explorer**, right-click `my-audacity-guide`, choose
+   **New File**, enter `beginner-guide.ditamap`, and choose the **Map**
+   template, as in stage 02. Replace the template's title and sample
+   `<topicref>` with the content of the listing.
+
    ```xml title="beginner-guide.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
@@ -425,6 +451,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
 2. **Create `podcaster-guide.ditamap`**
+   Create the file from the **Map** template in the same way.
 
    ```xml title="podcaster-guide.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -487,7 +514,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      no extra entry.
 ::::
 
-## Step 5: Deliverables, README and the check
+## Step 5: Deliverables and the check
 
 ::::steps
 1. **Add the deliverables**
@@ -519,25 +546,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    When you finish, the table lists five deliverables. Click **Close**.
 
-2. **Change the "You are on" line and the layout**
+   `full` stays the active deliverable, the one that **Build
+   Deliverables** builds by default. To build another one from the
+   editor, choose it in the status bar's deliverable menu. The check
+   builds all five.
 
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 13: metadata and index.
-   +You are on stage 14: conditional text.
-    
-    ## Stages
-    
-   ````
+2. **Format and check your work**
 
-3. **Format and check your work**
-
-   Format the changed files:
+   Format the changed files: choose **XML** > **Format** in each one and
+   save it, or choose **Project** > **Project Tools** > **Format Project**
+   to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap filters/*.ditaval
@@ -555,14 +573,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -571,7 +589,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    and checks the links in each. `podcast-workflow` is unused until stage
    18 refers to it.
 
-4. **Read the output**
+3. **Read the output**
    `out/` contains one folder per deliverable. Compare these files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select
@@ -602,16 +620,16 @@ example:
 
 ```
 health   clean, with warnings
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
-build    full                 ok  /home/you/audacity-guide/out/full
-build    beginner-mac         FAILED  /home/you/audacity-guide/out/beginner-mac
-  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
-build    beginner-windows     FAILED  /home/you/audacity-guide/out/beginner-windows
-  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
-build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-build    review               ok  /home/you/audacity-guide/out/review
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         FAILED  /home/you/my-audacity-guide/out/beginner-mac
+  [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    beginner-windows     FAILED  /home/you/my-audacity-guide/out/beginner-windows
+  [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
 Not ready: beginner-mac, beginner-windows failed to build. The built output was not read.
 ```
 
@@ -625,12 +643,12 @@ stops at health. The output looks like this example:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+  invalid: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
     61:13  The content of element type "conbody" does not match its content model.
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -656,6 +674,9 @@ Confirm that the check reports `Ready` before you continue.
   the default root map, and the build checks each map.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/14-conditional-text`. If you use Git, commit
+your work.
 
 Continue with [Stage 15: subject scheme](/part-3-conditions/stage-15-subject-scheme).
 

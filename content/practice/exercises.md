@@ -6,10 +6,13 @@ type: tutorial
 
 # Practice exercises
 
-Complete each exercise in your authoring repository or a separate practice
-worktree. Each checkpoint below is a fetched reference branch. Use the
-[worktree procedure](/start-here/learning-path#continue-across-a-skipped-stage)
-to keep practice changes separate from the supplied lessons.
+Each exercise names a checkpoint: the stage after which you can do it.
+Complete the exercise in your own project once you finish that stage, or
+in the [sample project](/start-here/set-up#the-sample-project) switched to
+that checkpoint, as described in
+[Continue across a skipped stage](/start-here/learning-path#continue-across-a-skipped-stage).
+To keep practice changes apart from your guide, create a branch first from
+the **…** menu of the **Git** panel, or practice in the sample project.
 
 Try the exercise before reading the [suggested solutions](/practice/solutions).
 Passing XML validation is one check; also explain your design choices and
@@ -17,7 +20,7 @@ inspect the requested result.
 
 ## Topics
 
-**Checkpoint:** `origin/tutorial/07-links`.
+**Checkpoint:** `tutorial/07-links`.
 
 Add a task called *Checking a recording before export*. Include a short
 description, prerequisites, three or four actions, and an observable result.
@@ -25,7 +28,7 @@ Use UI markup only for actual control labels. Link to the existing export
 task. Decide whether background about export formats belongs in this task
 or in the existing reference topic.
 
-**Check:** Validate the new topic with `dogsbay-xml validate`. Read only its
+**Check:** Validate the new topic with **XML** > **Validate** or `dogsbay-xml validate`. Read only its
 `cmd` elements and confirm that the actions form a usable procedure. At this
 checkpoint the guide already has a map and HTML deliverable. Add the topic
 to the map, [check your work](/start-here/run-the-gate), and inspect the
@@ -33,7 +36,7 @@ new page in `out/full/`.
 
 ## Maps and reuse
 
-**Checkpoint:** `origin/tutorial/11-reuse`.
+**Checkpoint:** `tutorial/11-reuse`.
 
 Add a practice map that publishes the recording and export tasks. Include
 the key definitions and shared resources those tasks require. Reference the
@@ -61,7 +64,7 @@ does not check the key space of your new map.
 
 ## Conditions
 
-**Checkpoint:** `origin/tutorial/15-subject-scheme`.
+**Checkpoint:** `tutorial/15-subject-scheme`.
 
 Add a short note for podcasters to an existing topic. Publish a beginner
 variant and the Linux podcaster variant. Predict which output contains the
@@ -75,7 +78,7 @@ different purposes.
 
 ## Published output
 
-**Checkpoint:** `origin/tutorial/19-bookmap`.
+**Checkpoint:** `tutorial/19-bookmap`.
 
 Build the HTML guide and PDF book. Select one figure, one table, and one
 cross-reference. Check each in both formats. Write a short report separating
@@ -88,7 +91,7 @@ alone is insufficient for this exercise.
 
 ## House rules
 
-**Checkpoint:** `origin/tutorial/25-house-rules`.
+**Checkpoint:** `tutorial/25-house-rules`.
 
 Choose a concept and temporarily remove its short description. Run DTD
 validation and the Schematron check separately:

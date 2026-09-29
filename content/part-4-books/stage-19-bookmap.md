@@ -28,6 +28,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `audacity-book.ditamap`**
+   Right-click `my-audacity-guide` in the **Explorer**, choose
+   **New File**, enter `audacity-book.ditamap`, and choose the
+   **Bookmap** template. Replace the template's content with this
+   bookmap:
 
    ```xml title="audacity-book.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -194,28 +198,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `out/book-pdf/`.
 ::::
 
-## Step 3: Update the README and check your work
+## Step 3: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 18: chunking and output.
-   +You are on stage 19: bookmap.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the files:
+   Format the changed files: choose **XML** > **Format** in each changed
+   file and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -233,15 +224,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -253,7 +244,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    do not fail the check. The output check reads links in HTML pages only,
    so for the PDF it confirms that the build wrote a file.
 
-3. **Read the book**
+2. **Read the book**
    The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your
    project. Open it in any PDF viewer. `pdftotext` shows the contents page
    without a viewer:
@@ -302,7 +293,7 @@ check your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/audacity-book.ditamap
+  invalid: /home/you/my-audacity-guide/audacity-book.ditamap
     86:11  The content of element type "bookmap" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -334,6 +325,8 @@ before you continue.
   and relationship tables at the top level.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/19-bookmap`. If you use Git, commit your work.
 
 Continue with [Stage 20: troubleshooting](/part-4-books/stage-20-troubleshooting).
 

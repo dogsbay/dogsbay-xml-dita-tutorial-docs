@@ -27,6 +27,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `topics/recording-is-silent.dita`**
+   Right-click `topics` in the **Explorer**, choose **New File**, enter
+   `recording-is-silent.dita`, and choose the **Troubleshooting**
+   template. Replace the template's content with this topic:
 
    ```xml title="topics/recording-is-silent.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -289,28 +292,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      resolves in every deliverable.
 ::::
 
-## Step 3: Update the README and check your work
+## Step 3: Check your work
 
 ::::steps
-1. **Change the "You are on" line**
+1. **Format and check your work**
 
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 19: bookmap.
-   +You are on stage 20: troubleshooting.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the files:
+   Format the changed files: choose **XML** > **Format** in each changed
+   file and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -328,15 +318,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 13 warnings (9 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -353,7 +343,7 @@ Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/recording-is-silent.dita
+  invalid: /home/you/my-audacity-guide/topics/recording-is-silent.dita
     76:16  The content of element type "remedy" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -381,6 +371,8 @@ before you continue.
   branch-filtered map.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/20-troubleshooting`. If you use Git, commit your work.
 
 Continue with [Stage 21: hazards and safety](/part-4-books/stage-21-hazards-and-safety).
 

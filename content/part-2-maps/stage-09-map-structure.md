@@ -245,31 +245,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    links and link descriptions.
 ::::
 
-## Step 3: Update the README, check your work and look at the output
+## Step 3: Check your work and look at the output
 
 ::::steps
-1. **Change the "You are on" line**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 08: figures.
-   +You are on stage 09: map structure.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the topics:
+1. **Format and check your work**
+   Format the map and the topics: choose **XML** > **Format** in each
+   changed file and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** >
@@ -284,12 +270,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
 
-3. **Read the generated links**
+2. **Read the generated links**
    The check builds the guide into `out/full/`. Open the pages under
    `out/full/topics/`. The link blocks at the foot of each page are now
    generated. The text of three of them, as DITA-OT 4.3.5 writes it:
@@ -313,7 +299,7 @@ health and names the broken reference. Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
+  /home/you/my-audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -324,7 +310,7 @@ line, `dogsbay-xml project-health .` prints the full report:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
-  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
+  /home/you/my-audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
 
 Summary
   Broken references             1
@@ -346,6 +332,8 @@ before you continue.
 - Use `<related-links>` for relationships that belong with the topic.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/09-map-structure`. If you use Git, commit your work.
 
 Continue with [Stage 10: keys](/part-2-maps/stage-10-keys).
 

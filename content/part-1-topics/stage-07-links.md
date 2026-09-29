@@ -232,27 +232,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    validator rejects it anywhere else.
 ::::
 
-## Step 3: Update the README and check your work
+## Step 3: Check your work
 
 ::::steps
-1. **Change the "You are on" line**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 06: rich tasks.
-   +You are on stage 07: links.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-   Format the topics:
+1. **Format and check your work**
+   Format the topics: choose **XML** > **Format** in each changed topic and
+   save it, or choose **Project** > **Project Tools** > **Format Project** to
+   format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -264,7 +250,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -280,7 +266,7 @@ the check stops. The following output is an example:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
+  /home/you/my-audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -297,9 +283,9 @@ with the page, the line, and the target. The following output is an example:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
+build    full                 ok  /home/you/my-audacity-guide/out/full
 output   1 broken link(s)
-  /home/you/audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
+  /home/you/my-audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
 Not ready: 1 link in the built output leads nowhere.
 ```
 
@@ -325,9 +311,10 @@ its own.
 After each error exercise, undo the deliberate change and check again.
 Confirm that the check reports `Ready` before you continue.
 
-## Publish your changes
+## The map at this checkpoint
 
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
+This lesson adds no topics, so the map does not change. For reference, the
+complete map at this checkpoint is:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -347,10 +334,6 @@ Add the lesson's topics to `audacity-guide.ditamap`, then check your work again.
 </map>
 ```
 
-```bash
-dogsbay-xml check .
-```
-
 ## What you learned
 
 - `<xref>` in the text; `<link>` in `<related-links>` after the body.
@@ -365,6 +348,8 @@ dogsbay-xml check .
   nowhere, such as a wrong fragment.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/07-links`. If you use Git, commit your work.
 
 Continue with [Stage 08: figures](/part-1-topics/stage-08-figures).
 

@@ -1,5 +1,20 @@
 # Tutorial documentation review
 
+## Start from an empty folder, stages 04 to 26, September 29, 2026
+
+Phase 3 of `plans/start-from-scratch.md`. Every lesson from stage 04 builds
+on the reader's own `my-audacity-guide`: no README, "You are on",
+`.gitkeep` or scripts steps, and no Git commands readers must run. Files
+readers cannot type (the images in stages 08 and 21, the sample script in
+stage 22) are copied from the sample project's checkpoint. New files name
+their editor template; formatting names **XML** > **Format** and **Format
+Project** first. Stage 18's chunking examples are temporary deliverables in
+**Manage Deliverables** instead of a separate hand-written project file.
+Stage 25's agent files are optional; stage 26 marks the result with a
+branch. `reference/branches.md` is rewritten around checkpoints. Every
+lesson ends with its checkpoint branch, and every recorded output was
+re-recorded under `/home/you/my-audacity-guide` (dogsbay-xml `b615a5d`).
+
 ## Start from an empty folder, set-up and stages 00 to 03, September 29, 2026
 
 Phase 2 of `plans/start-from-scratch.md`. Readers start with an empty
