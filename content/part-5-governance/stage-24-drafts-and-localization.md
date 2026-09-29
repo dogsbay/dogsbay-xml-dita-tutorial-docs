@@ -42,14 +42,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <prolog>
    ```
 
-   Make the same one-line change on the root element of each `.dita` and
-   `.ditamap` file in your project, 36 files in all: every topic, every
-   glossary entry, the shared topics in `shared/`, the assessment in
-   `learning/`, and all nine maps. Open each file, add
-   `xml:lang="en-GB"` to its root element, and save the file. Leave the
-   three files in `examples/chunking/` from stage 18 unchanged: they are
-   examples that no deliverable publishes. To see every changed file,
-   use the compare link at the end of this lesson.
+   Make the same change on the root element of every `.dita` and
+   `.ditamap` file in your project, 39 files in all, in one step:
+
+   1. Choose **Refactor** > **Set Attribute...**.
+   2. **Attribute** already reads `xml:lang`. In **Value**, type `en-GB`.
+      Leave **On element** as `/*`, the root element of each file, and
+      leave **Scope** empty, for the whole project.
+   3. Keep **Only where the attribute is missing** selected, so a file
+      that already declares a language keeps it.
+   4. Click **OK**. The editor lists every file it will change, before it
+      changes anything: `Set @xml:lang="en-GB" on /* in 39 of 39 file(s)`.
+      Check the list, then click **OK** again.
+
+   The editor rewrites only each root element's start tag, so the rest of
+   every file, its formatting included, stays as it was. From the command
+   line, `dogsbay-xml set-attribute . --name xml:lang --value en-GB
+   --only-if-absent` prints the same plan, and `--apply` writes it.
 
 2. **Read it**
 

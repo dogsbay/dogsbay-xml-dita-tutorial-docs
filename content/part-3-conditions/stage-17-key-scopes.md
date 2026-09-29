@@ -132,7 +132,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           topic resolves its keys here. Keys used by such content must exist in the
           root scope too. -->
      <mapref href="keydefs-product.ditamap"/>
+     <mapref href="keydefs-glossary.ditamap"/>
      <keydef keys="common-notes" href="shared/common-notes.dita"/>
+     <keydef keys="formats" href="topics/supported-audio-formats.dita"/>
      <!-- Each guide defines its own "start-here" key. Combined flat they would
           collide (first definition wins). A key scope on each mapref keeps them
           apart: userguide.start-here, beginner.start-here, podcaster.start-here. -->
@@ -156,6 +158,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 2. **Read the scopes**
 
+   - The root scope defines the product keys, `common-notes`, the glossary
+     keys and `formats`. Some topics are processed outside any guide's
+     scope: the recording task through the conref push, and topics that
+     other root-scope topics link to. Their key references resolve in the
+     root scope. Without the glossary keys there, an
+     `<abbreviated-form keyref="gl-decibel"/>` in such a copy renders as
+     nothing at all.
    - `keyscope="userguide"` on a `<mapref>` puts the whole full guide in
      a scope: every key it defines is `userguide.<key>` from the
      collection's point of view, and inside the guide the bare names go
