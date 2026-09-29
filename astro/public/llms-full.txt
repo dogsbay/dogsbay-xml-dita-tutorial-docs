@@ -6250,6 +6250,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <!-- Abbreviated forms link into this glossary group; toc="no" publishes it without a TOC entry. -->
      <topicref href="topics/glossary/audio-units.dita" toc="no"/>
      <keydef keys="common-notes" href="shared/common-notes.dita"/>
+     <!-- The exporting task links to the formats topic by key; toc="no" publishes it without a TOC entry. -->
+     <topicref href="topics/supported-audio-formats.dita" keys="formats" toc="no"/>
      <topicref href="shared/common-steps.dita" processing-role="resource-only"/>
      <!-- Branch filtering (DITA 1.3): each ditavalref makes DITA-OT copy this branch
           and filter the copy for one platform. The copies get the prefix and suffix
@@ -6285,6 +6287,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<dvrKeyscopePrefix>` puts the copies in separate key scopes. The branch defines `install` and `first-track`; without the prefixes, three copies would define the same keys, and the first would win. With them the keys are `win.install`, `mac.install` and `linux.install`, and the same for `first-track`. Stage 17 is about key scopes.
    - The rest of the map is what any root map needs: the scheme, the product and glossary keys, the shared topics.
    - The `<topicref toc="no">` to `audio-units.dita` is the same one the beginner map got in stage 14. *Recording your first track* links to pages that use `<abbreviated-form>`, and a `<keydef>` to a fragment such as `audio-units.dita#gl-decibel` does not make DITA-OT publish the glossary group. The topicref publishes the group so that those links have a page to land on, and keeps it out of the table of contents.
+   - The `<topicref toc="no">` to `supported-audio-formats.dita` does the same for the formats topic, and defines the key `formats`. The exporting task, which this map reaches through links, says "see `<xref keyref="formats/choosing"/>`". Without the key in this map, that reference resolves to nothing and the output reads "see )"; with only a `<keydef>`, the link resolves but the page is not published.
 3. **List the branches**
 
    ```bash
@@ -7581,7 +7584,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```diff {title="installation-variants.ditamap"}
    --- a/installation-variants.ditamap
    +++ b/installation-variants.ditamap
-   @@ -33,6 +33,8 @@
+   @@ -35,6 +35,8 @@
             <dvrKeyscopePrefix>linux.</dvrKeyscopePrefix>
           </ditavalmeta>
         </ditavalref>
@@ -8260,7 +8263,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <appendix href="topics/supported-audio-formats.dita" keys="formats"/>
       <appendix href="topics/effects-reference.dita" keys="effects"/>
       <appendix href="topics/effect-presets.dita"/>
-   +  <appendix href="topics/scripting-reference.dita">
+   +  <appendix href="topics/scripting-reference.dita" keys="scripting">
    +    <topicref href="topics/exporting-from-a-script.dita"/>
    +  </appendix>
 
@@ -8268,7 +8271,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
         <booklists>
    ```
 
-   The full guide gets an *Automation* head for the task and the reference under *Reference* with the key `scripting`; the podcaster guide takes both under its *Reference*; in the book the reference is a fourth appendix with the task as its section. The beginner guide does not get them.
+   The full guide gets an *Automation* head for the task and the reference under *Reference* with the key `scripting`; the podcaster guide takes both under its *Reference*; in the book the reference is a fourth appendix with the task as its section, and carries the key `scripting` too, so the podcast workflow's link to it resolves in the PDF. The beginner guide does not get them.
 7. **Edit `topics/podcast-production-workflow.dita`**
 
    ```diff {title="topics/podcast-production-workflow.dita"}
