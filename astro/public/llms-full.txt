@@ -14,21 +14,21 @@ type: explanation
 
 # What you will build {#what-you-will-build}
 
-Build a DITA 1.3 documentation set using an Audacity user guide as the example. Start with a project folder and a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages.
+Build a DITA 1.3 documentation set using an Audacity user guide as the example. Start with an empty folder, `my-audacity-guide`, in the DogsBay XML editor, and add a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages. You do not need Git or the command line.
 
 Choose the [core course or optional modules](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path). Start with [Plan your topics](/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics), then publish a one-topic HTML guide in stages 02 and 03. Each module includes [practice exercises](/dogsbay-xml-dita-tutorial-docs/practice/exercises), and the core course ends with an [interview-workflow capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).
 
-Every stage is a Git branch in the [tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Compare adjacent branches to see each lesson's changes. Check your work with **Project** > **Check Project** in the DogsBay XML editor, or `dogsbay-xml check` on the command line, and inspect the output.
+Check your work at the end of every stage with **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line, and inspect the output. Every completed stage is also a checkpoint branch in the [sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Use it to compare your files, copy files that you cannot type, or start a later stage.
 
 The sample guide is teaching material adapted from the Audacity Manual. Use the current Audacity documentation for product instructions.
 
 ## Stages {#stages}
 
-The tutorial has five parts. Each stage has a branch and a lesson page. The maintainer's completed version is tagged `tutorial/final`.
+The tutorial has five parts. Each stage has a lesson page and a checkpoint branch. The maintainer's completed version is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 | --- | --- | --- | --- |
-| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, checking your work |
+| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | The `my-audacity-guide` project folder, with a `topics` folder | The project folder, **New Folder**, optional Git |
 | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
 | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |
@@ -59,13 +59,13 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 ## How to use it {#how-to-use-it}
 
 :::steps
-1. **Read [**How the tutorial works**](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works)** Choose whether to author the files or inspect completed stages.
-2. [**Set up your tools**](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) DITA-OT 4.3.5, the DogsBay XML command line, and a clone of the repository.
-3. **Follow your chosen learning path** Each page lists prerequisites, provides source examples, and ends with checks. Write the files in your authoring repository or inspect the corresponding reference branch. Use the checkpoint instructions when skipping optional modules; stage diffs assume the preceding stage's files.
+1. **Read [**How the tutorial works**](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works)** One project, built stage by stage, with a checkpoint at each stage.
+2. [**Set up your tools**](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty `my-audacity-guide` folder.
+3. **Follow your chosen learning path** Each page lists prerequisites, provides source examples, and ends with checks. Write the files in `my-audacity-guide`. Use the checkpoint instructions when skipping optional modules; each lesson assumes the preceding stage's files.
 4. **Compare when you are stuck** Every page links to the GitHub compare view for its stage, which shows exactly what changed.
 :::
 
-**Time:** 10 to 40 minutes per stage, plus practice exercises. **You need:** a text editor, Git, and the tools on the set-up page. The DogsBay XML editor is recommended but not required.
+**Time:** 10 to 40 minutes per stage, plus practice exercises. **You need:** the DogsBay XML editor. Git is optional.
 
 Follow the core course for topic authoring, maps, reuse, variants, and validation. Choose optional modules when you need their publishing features. Use the checkpoints in the learning path when skipping stages. Allow additional time for setup, troubleshooting, and the capstone.
 
@@ -76,12 +76,12 @@ Follow the core course for topic authoring, maps, reuse, variants, and validatio
   The core course, optional modules, and starting checkpoints.
 
 - **[How the tutorial works](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works){icon="git-branch"}**
-  Branches, diffs, the orphan root and the "You are on" line.
+  One project, stage by stage, and the checkpoint branches.
 
 - **[Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up){icon="wrench"}**
   Install the DogsBay XML editor and its command line.
 
-- **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
+- **[Stage 00: Create your project folder](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
   Start building.
 :::
 
@@ -115,7 +115,7 @@ Stage 11 introduces pull reuse with `conref` and `conkeyref`. Its range and push
 
 ## Continue across a skipped stage {#continue-across-a-skipped-stage}
 
-Reference branches form one cumulative sequence. Skipping a lesson means using its completed source before starting the next lesson. Your authored work stays in its existing directory.
+The checkpoints form one cumulative sequence. Skipping a lesson means starting the next lesson from the checkpoint of the lesson before it, which contains the skipped files.
 
 | Next core lesson | Starting checkpoint |
 | --- | --- |
@@ -123,15 +123,9 @@ Reference branches form one cumulative sequence. Skipping a lesson means using i
 | Stage 14 after skipping glossary and metadata | `origin/tutorial/13-metadata-and-index` |
 | Stage 25 after skipping specialized modules | `origin/tutorial/24-drafts-and-localization` |
 
-From the tutorial clone, create a practice branch and worktree, for example:
+To continue from a checkpoint, [get the sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#get-the-sample-project), click the branch name in the status bar, and choose the starting checkpoint. Continue the next lesson in the sample project. The checkpoint contains the project settings of the skipped lessons as well as their files. To keep your changes apart from the checkpoint, create a branch of your own first, from the **…** menu of the **Git** panel.
 
-```bash
-git worktree add -b practice-conditions ../audacity-conditions origin/tutorial/13-metadata-and-index
-cd ../audacity-conditions
-dogsbay-xml check .
-```
-
-Use a new branch and directory name if either already exists. To only inspect a checkpoint, switch the clone to it instead: in the editor, click the branch name in the status bar and choose the `origin/tutorial/NN-slug` branch. The checkpoint includes the skipped examples so later diffs apply cleanly.
+The checkpoint includes the skipped examples so later lessons apply cleanly.
 
 ## Optional modules {#optional-modules}
 
@@ -212,22 +206,27 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutori
 
 ---
 title: How the tutorial works
-description: The tutorial is a chain of Git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
+description: You build one project, stage by stage, in your own folder. Each lesson ends with the checkpoint branch of the sample project that matches its end.
 type: explanation
 ---
 
 # How the tutorial works {#how-the-tutorial-works}
 
-The [learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) separates the core course from optional modules. The numbered branches still form one complete reference sequence. Skipping a module means starting the next lesson from its supplied checkpoint, which already contains the prerequisite files.
+Build a DITA guide in 27 stages, in one project folder, `my-audacity-guide`. Each lesson starts from the files of the previous lesson and adds one feature. At the end of a lesson, you check your work.
 
-Build a DITA guide in 27 stages. The [tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial) contains a branch for each completed stage. Each lesson explains how to produce that stage from the previous one.
+The [learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) separates the core course from optional modules. Skipping a module means starting the next lesson from its checkpoint, which already contains the prerequisite files.
 
-Choose one workflow:
+## Checkpoints {#checkpoints}
 
-- Build the guide in a separate `audacity-guide` repository, starting at stage 00. Fetch the reference branches there to compare your files and retrieve supplied images.
-- Inspect completed stages in the tutorial clone. Compare adjacent branches and check your work on the stage that you switch to.
+The [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) has one branch for each completed stage. Each lesson ends with the name of its branch, for example:
 
-The command examples use `origin/tutorial/NN-slug` for fetched reference branches. These refs are available after cloning or fetching; local stage branches exist only after you create them. In the editor, click the branch name in the status bar and choose `origin/tutorial/NN-slug`: the editor creates the local tracking branch and switches to it. See [Move between stages](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#move-between-stages).
+> **Checkpoint:** `tutorial/01-concept`.
+
+The branch contains the files that you have at the end of that lesson. The branches are the reference: when your project and a checkpoint differ, the checkpoint shows the intended result. The branches also carry files that the lessons do not create, such as `README.md`, `LICENSE`, `NOTICE`, and maintainer scripts. You do not need them in your project.
+
+In a clone of the sample project, the branches are available as `origin/tutorial/NN-slug`. In the editor, click the branch name in the status bar and choose `origin/tutorial/NN-slug`: the editor creates the local tracking branch and switches to it. See [Move between stages](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#move-between-stages).
+
+If you track your project with Git, commit your work at the end of each lesson.
 
 ## The branch chain {#the-branch-chain}
 
@@ -265,29 +264,7 @@ Each completed stage passes the check. Error exercises show the diagnostics for 
 
 `tutorial/00-setup` is an *orphan* branch: it shares no history with `main`. The `main` branch of the same repository is a finished, deliberately broken demo project used by the [DogsBay XML tutorial](https://dogsbay.ai/dogsbay-xml-docs/getting-started/tutorial-agentic), and the step-by-step tutorial has to start empty. So `git log tutorial/00-setup` shows one commit, and nothing on `main` is an ancestor of any stage branch.
 
-The consequence for you: switching from `main` to `tutorial/00-setup`, in the status bar or with `git switch`, replaces the whole working tree. That is expected.
-
-## The "You are on" line {#the-you-are-on-line}
-
-Every stage branch carries the same `README.md`, with one line that changes at each stage:
-
-```
-You are on stage 05: inline and block.
-```
-
-Read it after you switch branches to confirm where you are. The README's stage table is the whole ladder, so you can also see what is ahead.
-
-## What every branch carries {#what-every-branch-carries}
-
-Besides the topics, every stage branch has:
-
-| File | Purpose |
-| --- | --- |
-| `README.md` | The "You are on" line, the stage table, the maintainer check commands |
-| `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
-| Project settings | The project type, framework, and format style. The editor keeps them, and the **Explorer** does not show them. See them in **Project** > **Manage Projects...** |
-| `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate) |
-| `.gitignore` | Keeps DITA-OT output out of Git |
+In a clone of the sample project, switching from `main` to `tutorial/00-setup` replaces the whole working tree. That is expected.
 
 ## Check your work {#check-your-work}
 
@@ -297,7 +274,7 @@ Besides the topics, every stage branch has:
 
 :::cards
 - **[Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up){icon="wrench"}**
-  The DogsBay XML editor and command line, and the clone.
+  The DogsBay XML editor, your project folder, and the sample project.
 
 - **[Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
   What the check does and what its output means.
@@ -311,103 +288,110 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/set-up.md
 
 ---
 title: Set up your tools
-description: Install the DogsBay XML editor, which includes the dogsbay-xml command line and DITA-OT 4.3.5, and clone the tutorial repository at its first stage.
+description: Install the DogsBay XML editor, create and open an empty my-audacity-guide folder, and optionally track your work with Git.
 type: how-to
 ---
 
 # Set up your tools {#set-up-your-tools}
 
-The tutorial needs two tools: the DogsBay XML editor and Git. The editor includes the `dogsbay-xml` command line and DITA-OT 4.3.5. You check your work with either one: **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line. Both validate the files, check the project, and build the guide with the included DITA-OT. You do not need to install DITA-OT or set any environment variables.
+Install the DogsBay XML editor and open an empty folder, `my-audacity-guide`, where you build the guide. You do not need Git or the command line. Git is optional and recommended.
 
-The shell examples use Bash and Unix utilities. On Windows, use a Bash environment. The editor validates as you type against the same DTDs that the check uses. Any editor that can save UTF-8 text works for writing the files, but you need the DogsBay XML editor or its command line to check your work.
+The editor includes the `dogsbay-xml` command line and DITA-OT 4.3.5. You check your work with either one: **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line. Both validate the files, check the project, and build the guide with the included DITA-OT. You do not need to install DITA-OT or set any environment variables.
 
 ## Install the DogsBay XML editor {#install-the-dogsbay-xml-editor}
 
-The command line is installed with the editor. It needs neither a running editor nor a separate JDK. The recorded examples use the included DITA-OT 4.3.5.
-
 :::steps
 1. **Install the editor** Follow [Installing](https://dogsbay.ai/dogsbay-xml-docs/getting-started/install) in the DogsBay XML documentation: download the package for your platform from the [releases page](https://github.com/dogsbay/dogsbay-xml/releases) and install it the usual way.
-2. **Put the command line on your PATH** If you work from the command line, `dogsbay-xml` must be on your `PATH`. The installation page shows the directory for each platform. On Linux:
+2. **Optional: put the command line on your PATH** The lessons show a command-line equivalent for each check. To use it, `dogsbay-xml` must be on your `PATH`. The installation page shows the directory for each platform. On Linux:
 
    ```bash
    export PATH="/opt/dogsbay-xml-editor/bin:$PATH"
    dogsbay-xml --version
    ```
 
-   Add the export to your Bash profile to use it in future sessions. If you check your work only in the editor, you can skip this step.
+   The second command prints the version of the command line. Add the export to your Bash profile to use it in future sessions. The command line needs neither a running editor nor a separate JDK. If you check your work only in the editor, skip this step.
 :::
+
+The shell examples use Bash. On Windows, use a Bash environment.
 
 > [!NOTE]
-> Use `dogsbay-xml` to check your work. In the environment used for the recorded runs, `xmllint` rejected the DITA 1.3 DTDs with "Maximum entity amplification factor exceeded", including with `--huge`. `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
+> Use `dogsbay-xml` to check your work from the command line. In the environment used for the recorded runs, `xmllint` rejected the DITA 1.3 DTDs with "Maximum entity amplification factor exceeded", including with `--huge`. `dogsbay-xml` uses Xerces and an XML catalog to resolve the DTDs.
 
-## Clone the repository {#clone-the-repository}
+## Create and open your project folder {#create-and-open-your-project-folder}
+
+Your guide lives in one folder, `my-audacity-guide`. Create it from the editor:
 
 :::steps
-1. **Clone it**
-
-   ```bash
-   git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
-   ```
-
-   The clone opens on `main`, which contains the separate repair exercise. Use the stage branches for this tutorial.
-2. **Open the clone in the editor** In the DogsBay XML editor, open the `dogsbay-xml-dita-tutorial` folder as a project. The status bar shows the current branch, `main`.
-3. **Switch to the first stage** Click the branch name in the status bar. The list shows the stage branches as `origin/tutorial/NN-slug`. Choose `origin/tutorial/00-setup`. The editor creates a local branch, `tutorial/00-setup`, that tracks it, and switches to it.
-
-   The working tree is replaced: `tutorial/00-setup` shares no history with `main`. See [How the tutorial works](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works).
-
-   From the command line, run this command in the clone instead:
-
-   ```bash
-   git switch tutorial/00-setup
-   ```
-
-   Git creates the same tracking branch from `origin/tutorial/00-setup`.
-4. **Confirm where you are** Open `README.md`. Its "You are on" line names the stage:
-
-   ```
-   You are on stage 00: setup.
-   ```
-
-   From the command line, run `grep 'You are on' README.md`.
+1. **Open the folder chooser** Choose **File** > **Open Project Folder...**. On the welcome screen, you can click **Open Project Folder…** instead. A folder tree opens, with the **Make New Folder**, **Open**, and **Cancel** buttons.
+2. **Create the folder** Select the folder where you want to keep your work, for example your Documents folder. Click **Make New Folder**. In the **Enter Folder Name** dialog, type `my-audacity-guide` and confirm.
+3. **Open it** Select `my-audacity-guide` and click **Open**.
 :::
 
-## Move between stages {#move-between-stages}
+The **Explorer** shows `my-audacity-guide`, which is empty. [Stage 00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) adds the first folder.
 
-To look at another completed stage in the clone, click the branch name in the status bar and choose its `origin/tutorial/NN-slug` branch. The editor creates a local tracking branch and switches to it. From the command line, run `git switch tutorial/NN-slug`.
+## Optional: track your work with Git {#optional-track-your-work-with-git}
 
-The stage branches are references. Keep your own work in the separate `audacity-guide` repository that stage 00 creates.
+Git records each version of your files. With Git, you can compare your work with an earlier stage and undo changes that you do not want. The tutorial works without it.
 
-## Open your own project in the editor {#open-your-own-project-in-the-editor}
+To use Git, initialize a repository in your project folder once:
 
-For the authoring workflow, stage 00 creates a separate `audacity-guide` repository. Open that folder as a project after you create it, and keep the clone as a reference. For the inspection workflow, work in the clone.
+:::steps
+1. **Open the terminal** Open the editor's **Terminal** panel. If it does not start in `my-audacity-guide`, change to that folder with `cd`.
+2. **Initialize the repository** Run this command:
 
-The project settings on every stage branch set the project type to DITA, the framework to DITA-OT 4.3.5, and the format style, so the editor and the command line agree on what a valid, well-formatted file is. To see them, choose **Project** > **Manage Projects...** and click the project. You do not edit them.
+   ```bash
+   git init
+   ```
 
-## Check the tools {#check-the-tools}
+   For now, the editor has no command that initializes a repository. An editor action is planned.
+:::
 
-Check stage 00 once. There is nothing to validate yet, so the check should finish at once. In the editor, choose **Project** > **Check Project**. From the command line, run this command from the project root:
+At the end of each stage, commit your work in the **Git** panel in the sidebar: enter a message, such as `Stage 01: concept`, and click **Commit**. To keep each stage on its own branch, create a branch from the **…** menu of the **Git** panel.
+
+## The sample project {#the-sample-project}
+
+The [sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial) on GitHub is the finished tutorial, with one branch for each stage, from `tutorial/00-setup` to `tutorial/26-final`. The tag `tutorial/final` marks the completed guide. Each lesson ends with the name of the branch, the *checkpoint*, that matches your project at the end of that lesson.
+
+You do not need the sample project to follow the lessons. Use it to:
+
+- Compare a file with the checkpoint when your check fails and you cannot find the cause.
+- Copy files that you cannot type, such as the images in stage 08.
+- Start a later stage from its checkpoint when you skip a lesson. See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path).
+
+The editor's **File** > **Open Sample Project...** opens a different project, a bundled demo. It is not the stage-by-stage tutorial.
+
+### Get the sample project {#get-the-sample-project}
+
+Keep the sample project in its own folder, next to `my-audacity-guide`, not inside it. In the editor, choose **Project** > **Manage Projects...**, click **Clone from GitHub**, and clone this address:
+
+```
+https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
+```
+
+From the command line, run this command from the folder where you keep your work instead:
 
 ```bash
-dogsbay-xml check .
+git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
 ```
 
-The output looks like this example:
+The copy opens on `main`, which contains a separate repair exercise. The stages are on the `tutorial/NN-slug` branches.
 
-```
-health   clean
-Project health is clean — no deliverables yet, so nothing here speaks for the output.
-```
+### Move between stages {#move-between-stages}
 
-The next page explains the result.
+To see a checkpoint, open the sample project in the editor and click the branch name in the status bar. The list shows the stage branches as `origin/tutorial/NN-slug`. Choose one, for example `origin/tutorial/01-concept`. The editor creates a local branch, `tutorial/01-concept`, that tracks it, and switches to it. From the command line, run `git switch tutorial/01-concept` in the sample project.
+
+Switching replaces the files in the sample project folder with the files of that stage. Your own project in `my-audacity-guide` does not change.
+
+Each branch also has files that you do not create, such as `README.md`, `LICENSE`, `NOTICE`, and a `scripts/` folder. They are for the maintainers and visitors on GitHub. Compare only the files that the lessons create.
 
 ## Where to go next {#where-to-go-next}
 
 :::cards
+- **[Stage 00: Create your project folder](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
+  Add the first folder to my-audacity-guide.
+
 - **[Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate){icon="check"}**
   What the check does, what it prints, and where to find the details.
-
-- **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
-  The empty project, file by file.
 :::
 
 ---
@@ -443,18 +427,24 @@ The check runs three stages in order, and each runs only when the one before it 
 
 It stops at the first stage that fails, because later stages would only report consequences of the same fault. A broken reference in the source, for example, produces a broken link in the output.
 
-Health uses the root map and house rules set in the project settings once later stages add them.
+Health uses the root map and house rules set in the project settings once later stages add them. Before stage 02, the project has no root map, so every topic that no map refers to is reported as an orphan.
 
 ## Before stage 03: no deliverables yet {#before-stage-03-no-deliverables-yet}
 
-Deliverables arrive in stage 03. Until then there is nothing to build, so the check reports on the source only:
+Deliverables arrive in stage 03. Until then there is nothing to build, so the check reports on the source only. For example, on stage 02:
 
 ```
 health   clean
 Project health is clean — no deliverables yet, so nothing here speaks for the output.
 ```
 
-In stages 00 to 02, this is the result to look for. A warning, such as the orphan topic in stage 01, is listed under `health` and does not make the check fail.
+In stages 00 to 02, this is the result to look for. A warning, such as the orphan topic in stage 01, is listed under `health` and does not make the check fail. For example, on stage 01:
+
+```
+health   clean, with warnings
+  orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+Project health is clean — no deliverables yet, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
+```
 
 ## A ready project {#a-ready-project}
 
@@ -462,7 +452,7 @@ From stage 03, a finished lesson checks as ready. For example, on stage 03:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
+build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
 Ready: the project is healthy, every deliverable built, and the output of full holds together.
 ```
@@ -473,9 +463,9 @@ A PDF deliverable, from stage 19, is one file with no pages to link between, so 
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
-build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-  PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+  PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -489,7 +479,7 @@ When health fails, the check names the files with problems. For an invalid file,
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/what-is-audacity.dita
     27:15  The content of element type "section" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -507,7 +497,7 @@ Fix the problem and check again. After a lesson's deliberate-error exercise, und
 
 ## Find the output {#find-the-output}
 
-Each deliverable builds into the folder in its **Output** field: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on. The `out/` folder is ignored by Git.
+Each deliverable builds into the folder in its **Output** field: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on, inside `my-audacity-guide`. If you track your project with Git, stage 03 adds `out/` to `.gitignore` so that Git ignores the output.
 
 To build and check one deliverable only:
 
@@ -517,13 +507,13 @@ dogsbay-xml check --deliverable=full .
 
 ## For maintainers {#for-maintainers}
 
-Each stage branch also carries `scripts/check-stage.sh`, the script used to verify the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate).
+Each branch of the sample project also carries `scripts/check-stage.sh`, the script used to verify the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate).
 
 ## Where to go next {#where-to-go-next}
 
 :::cards
-- **[Stage 00: Set up the project](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
-  The empty project, file by file.
+- **[Stage 00: Create your project folder](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon="play"}**
+  Start the guide in an empty folder.
 
 - **[The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate){icon="book-open"}**
   The maintainers' script, and why xmllint is not used.
@@ -531,181 +521,63 @@ Each stage branch also carries `scripts/check-stage.sh`, the script used to veri
 
 ---
 
-# Stage 00: Set up the project
+# Stage 00: Create your project folder
 
 URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup.md
 
 ---
-title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognize, with a README, a license, and a first check of your work.
+title: "Stage 00: Create your project folder"
+description: Open the empty my-audacity-guide folder in DogsBay XML, add a topics folder, and optionally start tracking it with Git.
 type: tutorial
 ---
 
-# Stage 00: Set up the project {#stage-00-set-up-the-project}
+# Stage 00: Create your project folder {#stage-00-create-your-project-folder}
 
-Create the project folder and README for the guide, then check the project. At the end of every lesson, you check your work with **Project** > **Check Project** in the editor or `dogsbay-xml check` on the command line.
+Prepare the folder for the guide. At the end of this lesson, the `my-audacity-guide` folder contains an empty `topics` folder, where the topics of later lessons go.
 
-A topic's DOCTYPE identifies its grammar. For example, `-//OASIS//DTD DITA Concept//EN` identifies the concept DTD. An XML catalog maps that identifier to a local DTD. The tools can then validate the topic without downloading the grammar.
+**Time:** about 5 minutes. **You need:** the DogsBay XML editor, and the empty `my-audacity-guide` folder open in it. See [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up).
 
-**Time:** about 10 minutes. **You need:** the tools from [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up), and a clone of the repository on `tutorial/00-setup` if you want to compare.
+## Step 1: Create the topics folder {#step-1-create-the-topics-folder}
 
-Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
-
-## Step 1: Create the project folder {#step-1-create-the-project-folder}
+A DITA project is a folder of topics and maps. Maps stay in the project folder, and topics go in a folder of their own, so that the project stays readable as it grows.
 
 :::steps
-1. **Create your authoring repository** Run these commands from the directory where you want to keep your work. If you are inspecting completed stages in the clone, read the examples and skip the file-creation steps.
-
-   ```bash
-   mkdir audacity-guide && cd audacity-guide
-   git init
-   git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
-   git fetch origin
-   mkdir topics
-   touch topics/.gitkeep
-   ```
-
-   Fetching adds the reference branches as `origin/tutorial/NN-slug` without adding their files to your working directory. Later lessons use these refs to retrieve images and compare your work.
-
-   Each stage branch also has a `scripts/` folder. Its scripts are checks for the tutorial maintainers. You do not need them in your repository.
-
-   The editor creates its project settings when you create the first topic in stage 01. You do not edit them.
-2. **Ignore the build output** DITA-OT writes generated HTML and PDF. Keep it out of the repository.
-
-   ```gitignore {title=".gitignore"}
-   # Built deliverables (DITA-OT output): each deliverable's output in project.json
-   # is under out/. Keep generated HTML/PDF out of git.
-   out/
-   output/
-   *.tmp
-   ```
+1. **Create the folder** In the **Explorer**, right-click `my-audacity-guide` and choose **New Folder**. Type `topics` and press Enter.
+2. **Confirm the result** The **Explorer** shows `topics` inside `my-audacity-guide`.
 :::
 
-## Step 2: Write the README and license {#step-2-write-the-readme-and-license}
+## Step 2: Optional: start tracking with Git {#step-2-optional-start-tracking-with-git}
 
-:::steps
-1. **Write the README** The "You are on" line is the one line that changes at every stage. The stage table lists the whole ladder. The "Verification" section names `scripts/`, which holds maintainer checks that readers do not need.
-
-   ```md {title="README.md"}
-   # DITA tutorial
-
-   Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   You are on stage 00: setup.
-
-   ## Stages
-
-   | Branch | Lesson |
-   |---|---|
-   | `tutorial/00-setup` | setup |
-   | `tutorial/01-concept` | concept |
-   | `tutorial/02-first-map` | first map |
-   | `tutorial/03-first-build` | first build |
-   | `tutorial/04-task-and-reference` | task and reference |
-   | `tutorial/05-inline-and-block` | inline and block |
-   | `tutorial/06-rich-tasks` | rich tasks |
-   | `tutorial/07-links` | links |
-   | `tutorial/08-figures` | figures |
-   | `tutorial/09-map-structure` | map structure |
-   | `tutorial/10-keys` | keys |
-   | `tutorial/11-reuse` | reuse |
-   | `tutorial/12-glossary` | glossary |
-   | `tutorial/13-metadata-and-index` | metadata and index |
-   | `tutorial/14-conditional-text` | conditional text |
-   | `tutorial/15-subject-scheme` | subject scheme |
-   | `tutorial/16-branch-filtering` | branch filtering |
-   | `tutorial/17-key-scopes` | key scopes |
-   | `tutorial/18-chunking-and-output` | chunking and output |
-   | `tutorial/19-bookmap` | bookmap |
-   | `tutorial/20-troubleshooting` | troubleshooting |
-   | `tutorial/21-hazards-and-safety` | hazards and safety |
-   | `tutorial/22-software-domains` | software domains |
-   | `tutorial/23-learning` | learning |
-   | `tutorial/24-drafts-and-localization` | drafts and localization |
-   | `tutorial/25-house-rules` | house rules |
-   | `tutorial/26-final` | final |
-
-   ## Verification
-
-   Run `scripts/check-stage.sh` from the project root. From stage 03, the gate builds the deliverables in `project.json`.
-   Run `python3 scripts/check-output-links.py <output-directory>` after publishing HTML. Source health and generated output checks report separate results.
-
-   The chunking experiment under `examples/chunking/` is available from stage 18. Build its maps separately; they are not release deliverables.
-
-   Topic text is adapted from the Audacity Manual. See LICENSE and NOTICE for licensing and attribution.
-   ```
-2. **Add the license and the credit** The project is CC BY 4.0. The topic text in later stages is adapted from the Audacity Manual, which is CC BY 3.0 and requires a credit, so `NOTICE` carries it from the first stage.
-
-   ```text {title="NOTICE"}
-   DogsBay DITA tutorial — step by step
-   Copyright (C) 2026 DogsBay Ltd.
-
-   This work is licensed under the Creative Commons Attribution 4.0
-   International licence. See LICENSE for the full text.
-
-   -------------------------------------------------------------------------------
-   Adapted material: the Audacity Manual
-   -------------------------------------------------------------------------------
-   Files:    topics/**, shared/**
-   Source:   The Audacity Manual, https://manual.audacityteam.org/
-   Credit:   Copyright the Audacity Team and the Manual's authors.
-   Licence:  Creative Commons Attribution 3.0
-             https://creativecommons.org/licenses/by/3.0/
-
-   The Manual states: "Pages in this Manual are available under the terms of the
-   Creative Commons Attribution 3.0 license. In essence, you are free to (1) copy,
-   distribute and transmit the work (2) to adapt the work, under condition you
-   must attribute the work to the authors (but not in any way that suggests that
-   they endorse you or your use of the work). For any reuse or distribution, you
-   may not remove our copyright notice and must make clear to others the license
-   terms of this work."
-
-   That notice is retained here, and the licence terms of the source work are
-   stated above, as the licence requires.
-
-   Changes made: the material was rewritten as DITA 1.3 topics, shortened, and
-   restructured into maps to teach DITA. It is a teaching sample, not Audacity's
-   documentation, and may be out of date or simplified. The Audacity Team does not
-   endorse this work and is not affiliated with it.
-
-   Audacity(R) is a registered trademark of Dominic Mazzoni.
-
-   -------------------------------------------------------------------------------
-   Original material
-   -------------------------------------------------------------------------------
-   README.md, the DITAVAL filters under filters/, house-style.sch, project.json,
-   the scripts/ and the .dogsbay/ and .xagent/ configuration are original work by
-   DogsBay Ltd., under the same CC BY 4.0 licence as this work.
-   ```
-
-   `LICENSE` is the full text of the Creative Commons Attribution 4.0 International license; copy it from [creativecommons.org](https://creativecommons.org/licenses/by/4.0/legalcode.txt) or from the branch.
-:::
+If you want to track your work with Git, initialize the repository now, as described in [Track your work with Git](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#optional-track-your-work-with-git). Git does not track empty folders, so there is nothing to commit until stage 01 adds the first topic.
 
 ## Step 3: Check your work {#step-3-check-your-work}
 
-Check the project. In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the command line, run this command from the project root:
+The project has no topics yet, so there is nothing for the editor to check. You check your work in the editor from stage 01, when the project has its first topic.
+
+If you installed the command line, you can confirm that it works on your project. Run this command from `my-audacity-guide`:
 
 ```bash
 dogsbay-xml check .
 ```
 
-With no topics and no map, the source is clean. The project declares no deliverables until stage 03, so there is nothing to build yet, and the check reports on the source only. The output looks like this example:
+The output looks like this example:
 
 ```
 health   clean
 Project health is clean — no deliverables yet, so nothing here speaks for the output.
 ```
 
-Before stage 03, `health   clean` means the stage is done. If the command is not found, go back to [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) and add the command line to your `PATH`. For more about the result, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
+`health   clean` means that the check found nothing wrong. With no topics, there is nothing to find. "No deliverables yet" means that the project does not publish anything yet. You add the first deliverable in stage 03. If the command is not found, see [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up).
 
 ## What you learned {#what-you-learned}
 
-- A DITA project is a folder of topics and maps; nothing declares it except the files themselves.
-- DOCTYPEs are resolved through the catalog of the bundled DITA-OT, so a project states which DITA-OT it targets and the DTDs come from there.
-- **Project** > **Check Project**, or `dogsbay-xml check`, checks your work. Before stage 03, `health   clean` means a stage is done.
-- The editor keeps the project settings, including the format style, so every stage's diff is about the feature.
+- A DITA project is a folder of topics and maps.
+- Topics go in a `topics` folder of their own.
+- Git is optional. If you use it, you commit at the end of each stage.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/00-setup`. The checkpoint branch also contains files that you do not create, such as `README.md` and `LICENSE`.
 
 Continue with [Stage 01: concept](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept).
 
@@ -729,7 +601,7 @@ Write the guide's first topic, *What is Audacity?*, as a DITA `<concept>`. A con
 
 Add a topic identifier, title, short description, and body. The tutorial requires a short description for each concept, task, and reference topic; the DTD makes some of these elements optional.
 
-**Time:** about 15 minutes. **You need:** stage 00 complete, with the check reporting `health   clean`.
+**Time:** about 15 minutes. **You need:** stage 00 complete: `my-audacity-guide` open in the editor, with an empty `topics` folder.
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
@@ -757,9 +629,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    The template supplies the XML declaration, the DOCTYPE, and the parts every concept needs. The editor recognizes the file as a DITA concept from its name, so validation and formatting work from the start.
 
+   This first topic makes `my-audacity-guide` a DITA project: the editor saves the project settings, such as the format style, and keeps them hidden in the **Explorer**. You do not edit them.
+
    If you use another editor, create the file and type the finished topic shown in step 3.
 2. **Replace the title and add the short description** Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `What is Audacity?`. Then click between `<shortdesc>` and `</shortdesc>` and type the short description.
-3. **Complete the topic** Type the first paragraph in the empty `<p></p>`, then add the other paragraph, the list, and the section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 3: Format and check your work".
+3. **Complete the topic** Type the first paragraph in the empty `<p></p>`, then add the other paragraph, the list, and the section inside `<conbody>`. When you type the `>` of a start tag, the editor inserts the matching end tag after the cursor. Type the content, then move the cursor past the end tag to continue. Leave the indentation to the formatter in "Step 2: Format and check your work".
 
    The finished topic:
 
@@ -801,28 +675,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<section>` groups part of the body under its own `<title>`. Sections do not nest, and a section cannot contain another section; when you want a second level, you want a second topic.
 :::
 
-## Step 2: Update the README {#step-2-update-the-readme}
-
-:::steps
-1. **Change the "You are on" line** Every stage moves it. The rest of the README is unchanged.
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 00: setup.
-   +You are on stage 01: concept.
-
-    ## Stages
-
-   ```
-2. **Remove `topics/.gitkeep`** The folder is no longer empty.
-:::
-
-## Step 3: Format and check your work {#step-3-format-and-check-your-work}
+## Step 2: Format and check your work {#step-2-format-and-check-your-work}
 
 :::steps
 1. **Format the topic** Apply the project's format style before every check, so your diff stays about the feature. This is how every stage branch was written.
@@ -844,7 +697,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+     orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
    Project health is clean — no deliverables yet, so nothing here speaks for the output. 1 orphan topic above: worth knowing, and not treated as failures.
    ```
 
@@ -866,10 +719,10 @@ The check names the file, with the line, column, and message of the first errors
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/what-is-audacity.dita
     27:15  The content of element type "section" does not match its content model.
   (run project-health for the full report)
-  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+  orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -878,10 +731,10 @@ The error is reported on the closing tag of the outer `<section>`, where the par
 ```
 Root map: none (none configured); house rules: none (none configured)
 Invalid files (1 of 1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita:
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita:
     27:15  error: The content of element type "section" does not match its content model.
 Orphan topics (1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita
 
 Summary
   Invalid files                 1  of 1
@@ -901,6 +754,8 @@ Undo the change and check again. Confirm that the check reports `health   clean`
 - Format, then check your work, every time.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/01-concept`. If you use Git, commit your work.
 
 Continue with [Stage 02: first map](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map).
 
@@ -930,7 +785,7 @@ A map selects the topics in a publication and their navigation order. Create one
 
 Create the map from a template:
 
-1. In the **Explorer**, right-click the project root and choose **New File**.
+1. In the **Explorer**, right-click the project folder, `my-audacity-guide`, and choose **New File**.
 2. Enter `audacity-guide.ditamap` and press Enter. The **New XML Document** dialog lists the templates for `.ditamap` files.
 3. Choose **Map** and click **OK**.
 
@@ -946,7 +801,7 @@ The editor opens the new file with the template's content:
 </map>
 ```
 
-Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `Audio user guide`. Then replace the placeholder `topic.dita` in the `@href` with `topics/what-is-audacity.dita`. If you use another editor, create the file in the project root and type the finished listing.
+Click inside the title, choose **XML** > **Select Element Content** (Ctrl+Shift+E), and type `Audio user guide`. Then replace the placeholder `topic.dita` in the `@href` with `topics/what-is-audacity.dita`. If you use another editor, create the file in the project folder and type the finished listing.
 
 The finished map:
 
@@ -973,13 +828,13 @@ Add a `<topicref>` each time you add a topic to the guide. Later lessons introdu
 Set the default root map for the project:
 
 1. Choose **Project** > **Manage Projects...**. The dialog lists your projects on the left.
-2. Click your project. It has the name of your project folder. The project settings appear on the right. **Project Type** is `DITA` and **Framework** is `DITA-OT 4.3.5`.
+2. Click your project, `my-audacity-guide`. It has the name of your project folder. The project settings appear on the right. **Project Type** is `DITA` and **Framework** is `DITA-OT 4.3.5`.
 3. In the **Default Root Map** list, which shows `(none)`, choose `audacity-guide.ditamap`. If the map is not in the list, click **Browse...** and select it.
 4. Click **Save**.
 
 The health check uses the default root map to decide which topics belong to the publication.
 
-Validate the map in the editor with **XML** > **Validate**, or run this command from the project root:
+Validate the map in the editor with **XML** > **Validate**, or run this command from `my-audacity-guide`:
 
 ```bash
 dogsbay-xml validate audacity-guide.ditamap
@@ -1004,9 +859,9 @@ Validation checks the map against its grammar only. It does not check that each 
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita" — target not found
+  /home/you/my-audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita" — target not found
   (run project-health for the full report)
-  orphan topic: /home/you/audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
+  orphan topic: /home/you/my-audacity-guide/topics/what-is-audacity.dita — nothing refers to it, so it will not appear in the output
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -1015,9 +870,9 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
-  /home/you/audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
+  /home/you/my-audacity-guide/audacity-guide.ditamap:6  @href="topics/what-is-audacty.dita"
 Orphan topics (1):
-  /home/you/audacity-guide/topics/what-is-audacity.dita
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita
 
 Summary
   Broken references             1
@@ -1027,6 +882,8 @@ Summary
 Restore the file name and check again. Confirm that the check reports `health   clean` before you continue.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/02-first-map`. If you use Git, commit your work.
 
 Continue with [Stage 03: first build](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build).
 
@@ -1080,7 +937,7 @@ The fields have these effects:
 - **Output** is relative to the project root, so this deliverable builds into `out/full/`.
 - The `nav-toc` parameter with the value `full` puts the navigation of the whole guide on each page.
 
-The editor stores deliverables in `project.json` in the project root. You do not need to edit it.
+The editor stores deliverables in `project.json` in the project folder. You do not need to edit it.
 
 The active deliverable is the one that **Build Deliverables** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.
 
@@ -1088,7 +945,7 @@ The active deliverable is the one that **Build Deliverables** builds by default.
 
 Check your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.
 
-In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From the project root on the command line, run:
+In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From `my-audacity-guide` on the command line, run:
 
 ```bash
 dogsbay-xml check .
@@ -1098,18 +955,34 @@ The output looks like this example:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
+build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
 Ready: the project is healthy, every deliverable built, and the output of full holds together.
 ```
 
-The `build` line shows where the deliverable was built. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.
+The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.
 
 Change the topic title, check again, and refresh the browser. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.
 
 If the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
+## Keep the output out of Git {#keep-the-output-out-of-git}
+
+If you track your project with Git, tell Git to ignore the build output. The output is generated from your source, so it does not belong in the repository.
+
+1. In the **Explorer**, right-click `my-audacity-guide` and choose **New File**.
+2. Enter `.gitignore` and press Enter. The file opens empty.
+3. Type the following line and save the file:
+
+   ```
+   out/
+   ```
+
+Git now ignores everything in `out/`. If you do not use Git, skip this section.
+
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/03-first-build`. If you use Git, commit your work. The checkpoint's `.gitignore` has more rules than `out/`, for files that this tutorial does not create.
 
 Continue with [Stage 04: task and reference](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference).
 

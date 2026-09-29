@@ -32,7 +32,7 @@
     "label": "Core: Topics and first publication",
     "children": [
       {
-        "label": "Stage 00: Set up the project",
+        "label": "Stage 00: Create your project folder",
         "href": "/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup"
       },
       {
