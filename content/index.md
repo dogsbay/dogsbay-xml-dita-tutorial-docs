@@ -7,9 +7,10 @@ type: explanation
 # What you will build
 
 Build a DITA 1.3 documentation set using an Audacity user guide as the
-example. Start with a project folder and a concept topic. Add maps, keys,
-reusable content, conditional publishing, a PDF book, and house-style checks
-across 27 stages.
+example. Start with an empty folder, `my-audacity-guide`, in the DogsBay XML
+editor, and add a concept topic. Add maps, keys, reusable content,
+conditional publishing, a PDF book, and house-style checks across 27 stages.
+You do not need Git or the command line.
 
 Choose the [core course or optional modules](/start-here/learning-path).
 Start with [Plan your topics](/start-here/plan-your-topics), then publish a
@@ -17,23 +18,25 @@ one-topic HTML guide in stages 02 and 03. Each module includes
 [practice exercises](/practice/exercises), and the core course ends with an
 [interview-workflow capstone](/practice/capstone).
 
-Every stage is a Git branch in the
-[tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial).
-Compare adjacent branches to see each lesson's changes. Check your work with
-**Project** > **Check Project** in the DogsBay XML editor, or
-`dogsbay-xml check` on the command line, and inspect the output.
+Check your work at the end of every stage with **Project** > **Check
+Project** in the editor, or `dogsbay-xml check` on the command line, and
+inspect the output. Every completed stage is also a checkpoint branch in the
+[sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Use
+it to compare your files, copy files that you cannot type, or start a later
+stage.
 
 The sample guide is teaching material adapted from the Audacity Manual.
 Use the current Audacity documentation for product instructions.
 
 ## Stages
 
-The tutorial has five parts. Each stage has a branch and a lesson page.
+The tutorial has five parts. Each stage has a lesson page and a checkpoint
+branch.
 The maintainer's completed version is tagged `tutorial/final`.
 
 | Stage | Branch | Builds | Introduces |
 |---|---|---|---|
-| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, checking your work |
+| [00](/part-1-topics/stage-00-setup) | `tutorial/00-setup` | The `my-audacity-guide` project folder, with a `topics` folder | The project folder, **New Folder**, optional Git |
 | [01](/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
 | [03](/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |
@@ -65,16 +68,17 @@ The maintainer's completed version is tagged `tutorial/final`.
 
 :::steps
 1. **Read [How the tutorial works](/start-here/how-the-tutorial-works)**
-   Choose whether to author the files or inspect completed stages.
+   One project, built stage by stage, with a checkpoint at each stage.
 
 2. **[Set up your tools](/start-here/set-up)**
-   DITA-OT 4.3.5, the DogsBay XML command line, and a clone of the repository.
+   The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty
+   `my-audacity-guide` folder.
 
 3. **Follow your chosen learning path**
    Each page lists prerequisites, provides source examples, and ends with
-   checks. Write the files in your authoring repository or inspect the
-   corresponding reference branch. Use the checkpoint instructions when
-   skipping optional modules; stage diffs assume the preceding stage's files.
+   checks. Write the files in `my-audacity-guide`. Use the checkpoint
+   instructions when skipping optional modules; each lesson assumes the
+   preceding stage's files.
 
 4. **Compare when you are stuck**
    Every page links to the GitHub compare view for its stage, which shows
@@ -82,8 +86,7 @@ The maintainer's completed version is tagged `tutorial/final`.
 :::
 
 **Time:** 10 to 40 minutes per stage, plus practice exercises.
-**You need:** a text editor, Git, and the tools on the set-up page. The
-DogsBay XML editor is recommended but not required.
+**You need:** the DogsBay XML editor. Git is optional.
 
 Follow the core course for topic authoring, maps, reuse, variants, and
 validation. Choose optional modules when you need their publishing features.
@@ -97,11 +100,11 @@ additional time for setup, troubleshooting, and the capstone.
   The core course, optional modules, and starting checkpoints.
 
 - **[How the tutorial works](/start-here/how-the-tutorial-works)** {icon="git-branch"}
-  Branches, diffs, the orphan root and the "You are on" line.
+  One project, stage by stage, and the checkpoint branches.
 
 - **[Set up your tools](/start-here/set-up)** {icon="wrench"}
   Install the DogsBay XML editor and its command line.
 
-- **[Stage 00: Set up the project](/part-1-topics/stage-00-setup)** {icon="play"}
+- **[Stage 00: Create your project folder](/part-1-topics/stage-00-setup)** {icon="play"}
   Start building.
 :::

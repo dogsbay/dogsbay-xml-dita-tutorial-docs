@@ -1,5 +1,21 @@
 # Tutorial documentation review
 
+## Start from an empty folder, set-up and stages 00 to 03, September 29, 2026
+
+Phase 2 of `plans/start-from-scratch.md`. Readers start with an empty
+`my-audacity-guide` folder opened in the editor (**File** > **Open Project
+Folder...** > **Make New Folder**), not a clone. Git is optional; the sample
+project on GitHub is a reference for comparing, copying and checkpoints.
+Stages 00 to 03 have no README, `.gitkeep`, LICENSE or scripts steps, and
+every lesson ends with its checkpoint branch. Settings are set in the
+editor's dialogs, and the stage branches' settings files are what the
+editor writes (branches rebuilt, backups under
+`refs/backup/2026-09-29-settings/`). Recorded output uses
+`/home/you/my-audacity-guide`.
+
+The docs source audit and the excerpt check (178 listings, 0 failures)
+passed. Stages 04 to 26 still describe the clone-based workflow (phase 3).
+
 ## Source fixes and Check Project for every stage, September 28, 2026
 
 The tutorial branches were rebuilt from stage 11 with the phase 3 source

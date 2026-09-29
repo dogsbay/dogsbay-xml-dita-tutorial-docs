@@ -25,9 +25,9 @@ with stage 14 if you skip those examples.
 
 ## Continue across a skipped stage
 
-Reference branches form one cumulative sequence. Skipping a lesson means
-using its completed source before starting the next lesson. Your authored
-work stays in its existing directory.
+The checkpoints form one cumulative sequence. Skipping a lesson means
+starting the next lesson from the checkpoint of the lesson before it, which
+contains the skipped files.
 
 | Next core lesson | Starting checkpoint |
 |---|---|
@@ -35,19 +35,14 @@ work stays in its existing directory.
 | Stage 14 after skipping glossary and metadata | `origin/tutorial/13-metadata-and-index` |
 | Stage 25 after skipping specialized modules | `origin/tutorial/24-drafts-and-localization` |
 
-From the tutorial clone, create a practice branch and worktree, for example:
+To continue from a checkpoint, [get the sample project](/start-here/set-up#get-the-sample-project),
+click the branch name in the status bar, and choose the starting
+checkpoint. Continue the next lesson in the sample project. The checkpoint
+contains the project settings of the skipped lessons as well as their
+files. To keep your changes apart from the checkpoint, create a branch of
+your own first, from the **…** menu of the **Git** panel.
 
-```bash
-git worktree add -b practice-conditions ../audacity-conditions origin/tutorial/13-metadata-and-index
-cd ../audacity-conditions
-dogsbay-xml check .
-```
-
-Use a new branch and directory name if either already exists. To only
-inspect a checkpoint, switch the clone to it instead: in the editor, click
-the branch name in the status bar and choose the `origin/tutorial/NN-slug`
-branch. The checkpoint
-includes the skipped examples so later diffs apply cleanly.
+The checkpoint includes the skipped examples so later lessons apply cleanly.
 
 ## Optional modules
 

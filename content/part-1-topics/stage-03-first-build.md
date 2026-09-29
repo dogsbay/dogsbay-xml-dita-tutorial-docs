@@ -46,7 +46,7 @@ The fields have these effects:
 - The `nav-toc` parameter with the value `full` puts the navigation of the
   whole guide on each page.
 
-The editor stores deliverables in `project.json` in the project root. You
+The editor stores deliverables in `project.json` in the project folder. You
 do not need to edit it.
 
 The active deliverable is the one that **Build Deliverables** builds by
@@ -61,8 +61,8 @@ checks the built output. You do not need to install DITA-OT: the editor and
 the command line include DITA-OT 4.3.5.
 
 In the editor, choose **Project** > **Check Project**. The result appears in
-the **Project Validation** panel. From the project root on the command line,
-run:
+the **Project Validation** panel. From `my-audacity-guide` on the command
+line, run:
 
 ```bash
 dogsbay-xml check .
@@ -72,13 +72,13 @@ The output looks like this example:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
+build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
 Ready: the project is healthy, every deliverable built, and the output of full holds together.
 ```
 
-The `build` line shows where the deliverable was built. Open
-`out/full/index.html`, follow the topic link, and check the heading, short
+The `build` line shows where the deliverable was built: the `out/full`
+folder inside `my-audacity-guide`. Open `out/full/index.html`, follow the topic link, and check the heading, short
 description, list, and section.
 
 Change the topic title, check again, and refresh the browser. Check both the
@@ -89,7 +89,29 @@ If the check fails, check the working directory and the map-relative paths.
 The check stops at the first stage that fails. For details, see
 [Check your work](/start-here/run-the-gate).
 
+## Keep the output out of Git
+
+If you track your project with Git, tell Git to ignore the build output. The
+output is generated from your source, so it does not belong in the
+repository.
+
+1. In the **Explorer**, right-click `my-audacity-guide` and choose
+   **New File**.
+2. Enter `.gitignore` and press Enter. The file opens empty.
+3. Type the following line and save the file:
+
+   ```
+   out/
+   ```
+
+Git now ignores everything in `out/`. If you do not use Git, skip this
+section.
+
 ## Next lesson
+
+**Checkpoint:** `tutorial/03-first-build`. If you use Git, commit your work.
+The checkpoint's `.gitignore` has more rules than `out/`, for files that
+this tutorial does not create.
 
 Continue with [Stage 04: task and reference](/part-1-topics/stage-04-task-and-reference).
 

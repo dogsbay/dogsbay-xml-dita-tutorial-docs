@@ -1,35 +1,41 @@
 ---
 title: How the tutorial works
-description: The tutorial is a chain of Git branches. Each branch is the previous one plus one lesson, and the diff between two branches is what the stage teaches.
+description: You build one project, stage by stage, in your own folder. Each lesson ends with the checkpoint branch of the sample project that matches its end.
 type: explanation
 ---
 
 # How the tutorial works
 
+Build a DITA guide in 27 stages, in one project folder, `my-audacity-guide`.
+Each lesson starts from the files of the previous lesson and adds one
+feature. At the end of a lesson, you check your work.
+
 The [learning path](/start-here/learning-path) separates the core course from
-optional modules. The numbered branches still form one complete reference
-sequence. Skipping a module means starting the next lesson from its supplied
+optional modules. Skipping a module means starting the next lesson from its
 checkpoint, which already contains the prerequisite files.
 
-Build a DITA guide in 27 stages. The
-[tutorial repository](https://github.com/dogsbay/dogsbay-xml-dita-tutorial)
-contains a branch for each completed stage. Each lesson explains how to
-produce that stage from the previous one.
+## Checkpoints
 
-Choose one workflow:
+The [sample project](/start-here/set-up#the-sample-project) has one branch
+for each completed stage. Each lesson ends with the name of its branch, for
+example:
 
-- Build the guide in a separate `audacity-guide` repository, starting at
-  stage 00. Fetch the reference branches there to compare your files and
-  retrieve supplied images.
-- Inspect completed stages in the tutorial clone. Compare adjacent branches
-  and check your work on the stage that you switch to.
+> **Checkpoint:** `tutorial/01-concept`.
 
-The command examples use `origin/tutorial/NN-slug` for fetched reference
-branches. These refs are available after cloning or fetching; local stage
-branches exist only after you create them. In the editor, click the branch
-name in the status bar and choose `origin/tutorial/NN-slug`: the editor
-creates the local tracking branch and switches to it. See
+The branch contains the files that you have at the end of that lesson. The
+branches are the reference: when your project and a checkpoint differ, the
+checkpoint shows the intended result. The branches also carry files that
+the lessons do not create, such as `README.md`, `LICENSE`, `NOTICE`, and
+maintainer scripts. You do not need them in your project.
+
+In a clone of the sample project, the branches are available as
+`origin/tutorial/NN-slug`. In the editor, click the branch name in the
+status bar and choose `origin/tutorial/NN-slug`: the editor creates the
+local tracking branch and switches to it. See
 [Move between stages](/start-here/set-up#move-between-stages).
+
+If you track your project with Git, commit your work at the end of each
+lesson.
 
 ## The branch chain
 
@@ -80,33 +86,8 @@ demo project used by the
 and the step-by-step tutorial has to start empty. So `git log tutorial/00-setup`
 shows one commit, and nothing on `main` is an ancestor of any stage branch.
 
-The consequence for you: switching from `main` to `tutorial/00-setup`, in
-the status bar or with `git switch`, replaces the whole working tree. That
-is expected.
-
-## The "You are on" line
-
-Every stage branch carries the same `README.md`, with one line that changes at
-each stage:
-
-```
-You are on stage 05: inline and block.
-```
-
-Read it after you switch branches to confirm where you are. The README's stage table
-is the whole ladder, so you can also see what is ahead.
-
-## What every branch carries
-
-Besides the topics, every stage branch has:
-
-| File | Purpose |
-|---|---|
-| `README.md` | The "You are on" line, the stage table, the maintainer check commands |
-| `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
-| Project settings | The project type, framework, and format style. The editor keeps them, and the **Explorer** does not show them. See them in **Project** > **Manage Projects...** |
-| `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/reference/the-gate) |
-| `.gitignore` | Keeps DITA-OT output out of Git |
+In a clone of the sample project, switching from `main` to
+`tutorial/00-setup` replaces the whole working tree. That is expected.
 
 ## Check your work
 
@@ -121,7 +102,7 @@ checking your work.
 
 :::cards
 - **[Set up your tools](/start-here/set-up)** {icon="wrench"}
-  The DogsBay XML editor and command line, and the clone.
+  The DogsBay XML editor, your project folder, and the sample project.
 
 - **[Check your work](/start-here/run-the-gate)** {icon="check"}
   What the check does and what its output means.
