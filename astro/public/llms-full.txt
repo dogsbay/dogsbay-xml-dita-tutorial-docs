@@ -939,7 +939,7 @@ The fields have these effects:
 
 The editor stores deliverables in `project.json` in the project folder. You do not need to edit it.
 
-The active deliverable is the one that **Build Deliverables** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.
+The active deliverable is the one that **Project** > **Build Deliverables...** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.
 
 ## Build and inspect {#build-and-inspect}
 
@@ -1190,25 +1190,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<thead>` and `<tbody>` hold header and body rows; each `<row>` holds one `<entry>` per column.
 :::
 
-## Step 3: Update the map and the README, and check your work {#step-3-update-the-map-and-the-readme-and-check-your-work}
+## Step 3: Update the map and check your work {#step-3-update-the-map-and-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 03: first build.
-   +You are on stage 04: task and reference.
-
-    ## Stages
-
-   ```
-2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
 
    ```xml {title="audacity-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1221,17 +1206,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <topicref href="topics/what-is-audacity.dita"/>
    </map>
    ```
-3. **Format and check your work** Format the topics:
+2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -1241,7 +1226,7 @@ To see the type split enforced, move the `<p>` in the reference out of its `<sec
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/supported-audio-formats.dita
+  invalid: /home/you/my-audacity-guide/topics/supported-audio-formats.dita
     57:13  The content of element type "refbody" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -1252,7 +1237,7 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Invalid files (1 of 4):
-  /home/you/audacity-guide/topics/supported-audio-formats.dita:
+  /home/you/my-audacity-guide/topics/supported-audio-formats.dita:
     57:13  error: The content of element type "refbody" does not match its content model.
 
 Summary
@@ -1269,6 +1254,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - The three types provide content models for different reader needs.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/04-task-and-reference`. If you use Git, commit your work.
 
 Continue with [Stage 05: inline and block](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block).
 
@@ -1465,7 +1452,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 >
 > ```
 > health   NOT CLEAN
->   invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+>   invalid: /home/you/my-audacity-guide/topics/trimming-audio.dita
 >     22:170  The content of element type "cmd" does not match its content model.
 >   (run project-health for the full report)
 > Not ready: the project itself has faults. The build and the built output were not checked.
@@ -1474,7 +1461,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 > ```
 > Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 > Invalid files (1 of 6):
->   /home/you/audacity-guide/topics/trimming-audio.dita:
+>   /home/you/my-audacity-guide/topics/trimming-audio.dita:
 >     22:170  error: The content of element type "cmd" does not match its content model.
 >
 > Summary
@@ -1579,25 +1566,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<ph>` is a phrase with no more specific meaning. It carries attributes (conditions in stage 14, ids for reuse in stage 11) when you need a handle on a run of text and none of the other inline elements fits.
 :::
 
-## Step 4: Update the map and the README, and check your work {#step-4-update-the-map-and-the-readme-and-check-your-work}
+## Step 4: Update the map and check your work {#step-4-update-the-map-and-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 04: task and reference.
-   +You are on stage 05: inline and block.
-
-    ## Stages
-
-   ```
-2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
 
    ```xml {title="audacity-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1612,17 +1584,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <topicref href="topics/what-is-digital-audio.dita"/>
    </map>
    ```
-3. **Format and check your work** Format the topics:
+2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -1639,6 +1611,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 - `<shortcut>` only inside `<uicontrol>`.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/05-inline-and-block`. If you use Git, commit your work.
 
 Continue with [Stage 06: rich tasks](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks).
 
@@ -1942,25 +1916,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<tutorialinfo>` is additional information for a reader who is learning, as opposed to `<info>`, which is for anyone doing the step. A stylesheet for expert readers can drop it.
 :::
 
-## Step 5: Update the map and the README, and check your work {#step-5-update-the-map-and-the-readme-and-check-your-work}
+## Step 5: Update the map and check your work {#step-5-update-the-map-and-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 05: inline and block.
-   +You are on stage 06: rich tasks.
-
-    ## Stages
-
-   ```
-2. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
 
    ```xml {title="audacity-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1979,17 +1938,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <topicref href="topics/what-is-digital-audio.dita"/>
    </map>
    ```
-3. **Format and check your work** Format the topics:
+2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -1999,7 +1958,7 @@ The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then `<steps
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/installing-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/installing-audacity.dita
     68:14  The content of element type "taskbody" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -2010,7 +1969,7 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Invalid files (1 of 10):
-  /home/you/audacity-guide/topics/installing-audacity.dita:
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:
     68:14  error: The content of element type "taskbody" does not match its content model.
 
 Summary
@@ -2028,6 +1987,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `<tutorialinfo>` for the learner, `<info>` for everyone.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/06-rich-tasks`. If you use Git, commit your work.
 
 Continue with [Stage 07: links](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links).
 
@@ -2238,25 +2199,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 5. **Read the placement** `<related-links>` is a child of the topic, after the body, not inside it. In a task it follows `</taskbody>`; in a concept, `</conbody>`. The validator rejects it anywhere else.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 06: rich tasks.
-   +You are on stage 07: links.
-
-    ## Stages
-
-   ```
-2. **Format and check your work** Format the topics:
+1. **Format and check your work** Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -2266,7 +2212,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -2276,7 +2222,7 @@ This is the first stage with links inside topics. The health check has resolved 
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
+  /home/you/my-audacity-guide/topics/exporting-audio.dita:61  @href="trimming-audo.dita" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -2287,9 +2233,9 @@ The health and output stages cover different problems. In *Exporting audio*, fin
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
+build    full                 ok  /home/you/my-audacity-guide/out/full
 output   1 broken link(s)
-  /home/you/audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
+  /home/you/my-audacity-guide/out/full/topics/exporting-audio.html:17  @href="supported-audio-formats.html#supported-audio-formats__choose" — nothing in topics/supported-audio-formats.html has id "supported-audio-formats__choose"
 Not ready: 1 link in the built output leads nowhere.
 ```
 
@@ -2305,9 +2251,9 @@ Writing these links first shows the relationships that the map later generates. 
 
 After each error exercise, undo the deliberate change and check again. Confirm that the check reports `Ready` before you continue.
 
-## Publish your changes {#publish-your-changes}
+## The map at this checkpoint {#the-map-at-this-checkpoint}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
+This lesson adds no topics, so the map does not change. For reference, the complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -2327,10 +2273,6 @@ Add the lesson's topics to `audacity-guide.ditamap`, then check your work again.
 </map>
 ```
 
-```bash
-dogsbay-xml check .
-```
-
 ## What you learned {#what-you-learned}
 
 - `<xref>` in the text; `<link>` in `<related-links>` after the body.
@@ -2341,6 +2283,8 @@ dogsbay-xml check .
 - The check's health stage catches broken references that validation cannot. Its output stage catches links in the built HTML that lead nowhere, such as a wrong fragment.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/07-links`. If you use Git, commit your work.
 
 Continue with [Stage 08: figures](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures).
 
@@ -2555,30 +2499,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read why** A hand-written `<link>` states a relationship inside one of the two topics, once, in one direction. The map states it once for both directions, keeps the topic free of assumptions about its neighbors, and lets the same topic sit in another guide with other neighbors. Retain topic-level links where they provide useful context, such as the titled `<linklist>` and its descriptions. Maps can also define external links and link descriptions.
 :::
 
-## Step 3: Update the README, check your work and look at the output {#step-3-update-the-readme-check-your-work-and-look-at-the-output}
+## Step 3: Check your work and look at the output {#step-3-check-your-work-and-look-at-the-output}
 
 :::steps
-1. **Change the "You are on" line**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 08: figures.
-   +You are on stage 09: map structure.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the topics:
+1. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
@@ -2591,11 +2518,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
-3. **Read the generated links** The check builds the guide into `out/full/`. Open the pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
+2. **Read the generated links** The check builds the guide into `out/full/`. Open the pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
 
    | Page | Generated links |
    | --- | --- |
@@ -2610,7 +2537,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
+  /home/you/my-audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -2620,7 +2547,7 @@ The **Project Validation** panel lists the same problem. From the command line, 
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Broken references (1):
-  /home/you/audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
+  /home/you/my-audacity-guide/audacity-guide.ditamap:56  @href="topics/export-audio.dita"
 
 Summary
   Broken references             1
@@ -2637,6 +2564,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - Use `<related-links>` for relationships that belong with the topic.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/09-map-structure`. If you use Git, commit your work.
 
 Continue with [Stage 10: keys](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys).
 
@@ -2669,7 +2598,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Define the product keys {#step-1-define-the-product-keys}
 
 :::steps
-1. **Create `keydefs-product.ditamap`** in the project root. In the **Explorer**, right-click the project root, choose **New File**, and enter `keydefs-product.ditamap`. In the **New XML Document** dialog, choose **Key Definition Map** and click **OK**. The template contains two sample key definitions:
+1. **Create `keydefs-product.ditamap`** in `my-audacity-guide`. In the **Explorer**, right-click `my-audacity-guide`, choose **New File**, and enter `keydefs-product.ditamap`. In the **New XML Document** dialog, choose **Key Definition Map** and click **OK**. The template contains two sample key definitions:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
@@ -3023,41 +2952,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    ```
-   start-here  →  topics/what-is-audacity.dita   [/home/you/audacity-guide/audacity-guide.ditamap:11]  file: /home/you/audacity-guide/topics/what-is-audacity.dita
-   digital-audio  →  topics/what-is-digital-audio.dita   [/home/you/audacity-guide/audacity-guide.ditamap:15]  file: /home/you/audacity-guide/topics/what-is-digital-audio.dita
-   install  →  topics/installing-audacity.dita   [/home/you/audacity-guide/audacity-guide.ditamap:17]  file: /home/you/audacity-guide/topics/installing-audacity.dita
-   formats  →  topics/supported-audio-formats.dita   [/home/you/audacity-guide/audacity-guide.ditamap:31]  file: /home/you/audacity-guide/topics/supported-audio-formats.dita
-   product-name  →  "Audacity"   [/home/you/audacity-guide/keydefs-product.ditamap:7]
-   product-version  →  "3.4"   [/home/you/audacity-guide/keydefs-product.ditamap:14]
-   download-url  →  "the Audacity download page"   [/home/you/audacity-guide/keydefs-product.ditamap:21]
-   project-extension  →  ".aup3"   [/home/you/audacity-guide/keydefs-product.ditamap:26]
+   start-here  →  topics/what-is-audacity.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/what-is-audacity.dita
+   digital-audio  →  topics/what-is-digital-audio.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:15]  file: /home/you/my-audacity-guide/topics/what-is-digital-audio.dita
+   install  →  topics/installing-audacity.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:17]  file: /home/you/my-audacity-guide/topics/installing-audacity.dita
+   formats  →  topics/supported-audio-formats.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:31]  file: /home/you/my-audacity-guide/topics/supported-audio-formats.dita
+   product-name  →  "Audacity"   [/home/you/my-audacity-guide/keydefs-product.ditamap:7]
+   product-version  →  "3.4"   [/home/you/my-audacity-guide/keydefs-product.ditamap:14]
+   download-url  →  "the Audacity download page"   [/home/you/my-audacity-guide/keydefs-product.ditamap:21]
+   project-extension  →  ".aup3"   [/home/you/my-audacity-guide/keydefs-product.ditamap:26]
    8 key(s).
    ```
 
    A topic key shows the file it resolves to; a text key shows its text; each shows the map and line that defines it. Keys from the `<mapref>` are listed as part of the guide's key space.
 :::
 
-## Step 5: Update the README and check your work {#step-5-update-the-readme-and-check-your-work}
+## Step 5: Check your work {#step-5-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 09: map structure.
-   +You are on stage 10: keys.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -3073,10 +2987,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
-     unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15] — nothing references it
+     unused key: project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -3090,13 +3004,13 @@ Test an undefined key reference. Change both occurrences of `keyref="product-ver
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
-  /home/you/audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
-  unused key: product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14] — nothing references it
-  unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15] — nothing references it
+  unused key: product-version  [/home/you/my-audacity-guide/keydefs-product.ditamap:14] — nothing references it
+  unused key: project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -3105,13 +3019,13 @@ The **Project Validation** panel lists the same problems. From the command line,
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (2):
-  /home/you/audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
-  /home/you/audacity-guide/topics/installing-audacity.dita:63  key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:63  key 'product-verson' not defined
 Unused keys (4):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15]
-  product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14]
-  project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15]
+  product-version  [/home/you/my-audacity-guide/keydefs-product.ditamap:14]
+  project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26]
 
 Summary
   Undefined keys                2
@@ -3130,6 +3044,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `dogsbay-xml keys <rootmap>` lists the key space; `project-health` reports undefined keys.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/10-keys`. If you use Git, commit your work.
 
 Continue with [Stage 11: reuse](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse).
 
@@ -3205,7 +3121,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `shared/common-steps.dita`** A task whose steps exist to be referenced. Every reusable element has an `@id`.
 
-   In the **Explorer**, right-click the project root, choose **New Folder**, and enter `shared`. Then right-click the `shared` folder, choose **New File**, enter `common-steps.dita`, and choose the **Task** template. Replace the title placeholder, type the short description, and build the steps from the template's first `<step>`. If you use another editor, create the folder and the file, and type the finished listing.
+   In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `shared`. Then right-click the `shared` folder, choose **New File**, enter `common-steps.dita`, and choose the **Task** template. Replace the title placeholder, type the short description, and build the steps from the template's first `<step>`. If you use another editor, create the folder and the file, and type the finished listing.
 
    ```xml {title="shared/common-steps.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -3414,25 +3330,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The referencing element and the target must be the same element type, and the target may not need anything the referencing context does not allow. A `<step>` into `<steps>`, a `<note>` into `<context>`, `<li>`s into a `<ul>`.
 :::
 
-## Step 4: Update the README, check your work and check what was published {#step-4-update-the-readme-check-your-work-and-check-what-was-published}
+## Step 4: Check your work and check what was published {#step-4-check-your-work-and-check-what-was-published}
 
 :::steps
-1. **Change the "You are on" line and the layout**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 10: keys.
-   +You are on stage 11: reuse.
-
-    ## Stages
-
-   ```
-2. **Format and check your work** The format command covers `shared/` too.
+1. **Format and check your work** Format the changed topics: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. On the command line, the format command covers `shared/` too:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita
@@ -3448,9 +3349,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -3461,11 +3362,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   NOT CLEAN
-     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
-     /home/you/audacity-guide/shared/common-steps.dita:28  <step> — push target id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  <step> — push target id 'play-back' not found in recording-your-first-track.dita
      (run project-health for the full report)
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
    Not ready: the project itself has faults. The build and the built output were not checked.
    ```
 
@@ -3473,13 +3374,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    Conref pushes (1):
-     /home/you/audacity-guide/shared/common-steps.dita:28  <step> push target id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  <step> push target id 'play-back' not found in recording-your-first-track.dita
    Broken element ids (1):
-     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
    ```
 
    The diagnostics name the id that the push looks for, `play-back`, not the new id. Restore the id and check again.
-3. **Check the output** The check builds the guide into `out/full/`. The folder has one page per topic in the table of contents and nothing for the shared topics:
+2. **Check the output** The check builds the guide into `out/full/`. The folder has one page per topic in the table of contents and nothing for the shared topics:
 
    ```bash
    find out/full -name '*.html' | sort
@@ -3505,10 +3406,10 @@ Test two errors. First, use a `@conkeyref` with an undefined key. Change `common
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
+  /home/you/my-audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -3517,10 +3418,10 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
-  /home/you/audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
+  /home/you/my-audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
 Unused keys (2):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18]
 
 Summary
   Undefined keys                1
@@ -3536,8 +3437,8 @@ dogsbay-xml build . full
 The first lines of the example output:
 
 ```
-full (html5) → /home/you/audacity-guide/out/full: FAILED — 1 error(s)
-    file:/home/you/audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
+full (html5) → /home/you/my-audacity-guide/out/full: FAILED — 1 error(s)
+    [DOTJ046E] file:/home/you/my-audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
 ```
 
 DITA-OT resolves `@conkeyref` only through the root map's key space, and an undefined key produces build error `DOTJ046E`: the note would be missing from the page. The health check reports the same key before anything is built.
@@ -3546,11 +3447,11 @@ Undo the key change. Next, remove the placeholder. Replace the trimming task's `
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+  invalid: /home/you/my-audacity-guide/topics/trimming-audio.dita
     37:77  The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -3558,7 +3459,7 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 
 ```
 Invalid files (1 of 13):
-  /home/you/audacity-guide/topics/trimming-audio.dita:
+  /home/you/my-audacity-guide/topics/trimming-audio.dita:
     37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
 ```
 
@@ -3576,6 +3477,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - An undefined key behind a `@conkeyref` is a DITA-OT error, `DOTJ046E`.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/11-reuse`. If you use Git, commit your work.
 
 Continue with [Stage 12: glossary](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary).
 
@@ -3754,6 +3657,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `topics/podcast-production-workflow.dita`** Three sections for podcasters and one for beginners, so the same topic reads differently in each guide.
 
+   In the **Explorer**, right-click the `topics` folder, choose **New File**, enter `podcast-production-workflow.dita`, and choose the **Concept** template. Replace the template's content with the listing.
+
    ```xml {title="topics/podcast-production-workflow.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd">
@@ -3842,6 +3747,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `filters/mac-beginner.ditaval`, `filters/windows-beginner.ditaval` and `filters/linux-podcaster.ditaval`** One file per deliverable. Each names every value of every attribute the topics use.
 
+   In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `filters`. Then right-click the `filters` folder, choose **New File**, enter `mac-beginner.ditaval`, and choose the **DITAVAL** template. The template contains one sample rule:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+
+   <val>
+     <prop att="audience" val="internal" action="exclude"/>
+   </val>
+   ```
+
+   Replace the sample rule with the rules in the listing. Create the other two files the same way.
+
    ```text {title="filters/mac-beginner.ditaval"}
    <?xml version="1.0" encoding="UTF-8"?>
 
@@ -3877,7 +3794,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      <prop att="audience" val="podcaster" action="include"/>
    </val>
    ```
-2. **Create `filters/review.ditaval`** The review build excludes nothing. It flags podcaster content with a background color and bracketed text, and draws a change bar beside anything marked `rev="3.4"`.
+2. **Create `filters/review.ditaval`** The review build excludes nothing. It flags podcaster content with a background color and bracketed text, and draws a change bar beside anything marked `rev="3.4"`. Create it from the **DITAVAL** template in the same way.
 
    ```text {title="filters/review.ditaval"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -3913,6 +3830,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Create `beginner-guide.ditamap`** Six topics in three chapters, no glossary chapter, no reltable. One glossary topic is published without a table of contents entry.
 
+   In the **Explorer**, right-click `my-audacity-guide`, choose **New File**, enter `beginner-guide.ditamap`, and choose the **Map** template, as in stage 02. Replace the template's title and sample `<topicref>` with the content of the listing.
+
    ```xml {title="beginner-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
    <!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
@@ -3940,7 +3859,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      </topichead>
    </map>
    ```
-2. **Create `podcaster-guide.ditamap`**
+2. **Create `podcaster-guide.ditamap`** Create the file from the **Map** template in the same way.
 
    ```xml {title="podcaster-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -3983,7 +3902,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The beginner map has no glossary chapter, but *Recording your first track* cross-references *What is digital audio?* and *Preparing to record*, so DITA-OT publishes those two pages too. They use `<abbreviated-form keyref="gl-decibel"/>` and `gl-hertz`, which render as links to the entries in the `audio-units.dita` group. Those keys point to fragments, `audio-units.dita#gl-decibel`, and a `<keydef>` to a fragment does not make DITA-OT publish the topic, so the links would have nowhere to land. The `<topicref toc="no">` publishes the group as a page and leaves it out of the table of contents. The podcaster map lists the group in its *Reference* chapter, so it needs no extra entry.
 :::
 
-## Step 5: Deliverables, README and the check {#step-5-deliverables-readme-and-the-check}
+## Step 5: Deliverables and the check {#step-5-deliverables-and-the-check}
 
 :::steps
 1. **Add the deliverables** Four deliverables join `full`. Each names its map, its DITAVAL file, and its own output folder. Choose **Project** > **Project Tools** > **Manage Deliverables...**. For each deliverable, click **Add...**, enter the values, click **Save...**, and click **OK** to write the deliverable.
@@ -4003,24 +3922,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The `review` deliverable publishes the full guide with the review filter, which excludes nothing and flags podcaster and revised content.
 
    When you finish, the table lists five deliverables. Click **Close**.
-2. **Change the "You are on" line and the layout**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
+   `full` stays the active deliverable, the one that **Build Deliverables** builds by default. To build another one from the editor, choose it in the status bar's deliverable menu. The check builds all five.
+2. **Format and check your work**
 
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 13: metadata and index.
-   +You are on stage 14: conditional text.
-
-    ## Stages
-
-   ```
-3. **Format and check your work**
-
-   Format the changed files:
+   Format the changed files: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap filters/*.ditaval
@@ -4036,20 +3942,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The check takes longer now: it builds five deliverables instead of one, and checks the links in each. `podcast-workflow` is unused until stage 18 refers to it.
-4. **Read the output** `out/` contains one folder per deliverable. Compare these files:
+3. **Read the output** `out/` contains one folder per deliverable. Compare these files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select the whole track with Ctrl+A." under `beginner-windows` and `podcaster-linux`, and "Select the whole track with Cmd+A." under `beginner-mac`. Under `full` and `review`, which filter nothing on `@platform`, it reads "Select the whole track with Ctrl+A or, on macOS, Cmd+A." The backup warning at the top of the page reads the same way with `Ctrl+Z` and `Cmd+Z`.
    - `beginner-windows/topics/installing-audacity.html` has one row in the choice table, the `.exe` one; `beginner-mac` has the `.dmg` row, `podcaster-linux` the `apt install` row.
@@ -4061,16 +3967,16 @@ Test a missing key definition. In `beginner-guide.ditamap`, remove `keys="instal
 
 ```
 health   clean, with warnings
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
-build    full                 ok  /home/you/audacity-guide/out/full
-build    beginner-mac         FAILED  /home/you/audacity-guide/out/beginner-mac
-  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
-build    beginner-windows     FAILED  /home/you/audacity-guide/out/beginner-windows
-  [DOTX028E] file:/home/you/audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
-build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-build    review               ok  /home/you/audacity-guide/out/review
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         FAILED  /home/you/my-audacity-guide/out/beginner-mac
+  [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    beginner-windows     FAILED  /home/you/my-audacity-guide/out/beginner-windows
+  [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
 Not ready: beginner-mac, beginner-windows failed to build. The built output was not read.
 ```
 
@@ -4080,12 +3986,12 @@ Undo the key change, then test the topic structure. Add a `<p>` after the last `
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+  invalid: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
     61:13  The content of element type "conbody" does not match its content model.
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:49] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -4102,6 +4008,8 @@ After each error exercise, undo the deliberate change and check again. Confirm t
 - Every root map defines every key its topics use; the health check reads the default root map, and the build checks each map.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/14-conditional-text`. If you use Git, commit your work.
 
 Continue with [Stage 15: subject scheme](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme).
 
@@ -4134,7 +4042,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The vocabulary {#step-1-the-vocabulary}
 
 :::steps
-1. **Create `subject-scheme.ditamap`**
+1. **Create `subject-scheme.ditamap`** In the **Explorer**, right-click `my-audacity-guide`, choose **New File**, and enter `subject-scheme.ditamap`. In the **New XML Document** dialog, choose **Subject Scheme** and click **OK**. The template binds `@audience` to two sample values:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE subjectScheme PUBLIC "-//OASIS//DTD DITA Subject Scheme Map//EN" "subjectScheme.dtd">
+
+   <subjectScheme>
+     <title>Controlled Values</title>
+     <subjectdef keys="audience-values">
+       <subjectdef keys="internal"/>
+       <subjectdef keys="customer"/>
+     </subjectdef>
+     <enumerationdef>
+       <attributedef name="audience"/>
+       <subjectdef keyref="audience-values"/>
+     </enumerationdef>
+   </subjectScheme>
+   ```
+
+   Replace the title, the subject definitions, and the enumeration with the content of the listing. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="subject-scheme.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -4271,22 +4198,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Check the values and your work {#step-3-check-the-values-and-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 14: conditional text.
-   +You are on stage 15: subject scheme.
-
-    ## Stages
-
-   ```
-2. **Check the controlled values** In the editor, choose **Project** > **Validate** > **Controlled Values (Subject Scheme)** and read the result in the **Project Validation** panel. From the command line, run:
+1. **Check the controlled values** In the editor, choose **Project** > **Validate Files** > **Controlled Values (Subject Scheme)...** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml validate-conditions .
@@ -4299,7 +4211,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The command finds the scheme through the project's root map and its `<mapref type="subjectScheme">`. **Check Project** runs the same check as part of health; this command runs it on its own, which is quicker after you change a profiling attribute.
-3. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -4309,14 +4221,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -4328,25 +4240,25 @@ Test a value outside the controlled vocabulary. In `topics/installing-audacity.d
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/installing-audacity.dita:54  @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:54  @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 `dogsbay-xml validate-conditions .` reports the same line:
 
 ```
-/home/you/audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+/home/you/my-audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
 29 file(s): 28 pass, 1 with violations.
 ```
 
 The value is valid against the DTD, and DITA-OT on its own would build the project anyway. It sees the value only as a warning in its build log:
 
 ```
-[topic-reader] file:/home/you/audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W][WARN] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
+Warning: file:/home/you/my-audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
 ```
 
 Because no DITAVAL has a rule for `macos`, the row would be included in every filtered build: `beginner-windows`, `beginner-mac` and `podcaster-linux` would all show the `.dmg` row. That is why the check treats a value outside the scheme as an error.
@@ -4357,10 +4269,12 @@ After each error exercise, undo the deliberate change and check your work again.
 
 - `<subjectScheme>` with nested `<subjectdef keys>` for the taxonomy, `<enumerationdef>` with `<attributedef name>` and `<subjectdef keyref>` to bind an attribute to it, `<hasNarrower>` to state the hierarchy.
 - `<mapref type="subjectScheme">` in every root map; a scheme applies only where it is referenced.
-- `dogsbay-xml list-subjects` shows the vocabulary; **Project** > **Validate** > **Controlled Values (Subject Scheme)**, or `dogsbay-xml validate-conditions .`, fails on a value outside it; DITA-OT warns with `DOTJ049W` and builds anyway.
+- `dogsbay-xml list-subjects` shows the vocabulary; **Project** > **Validate Files** > **Controlled Values (Subject Scheme)...**, or `dogsbay-xml validate-conditions .`, fails on a value outside it; DITA-OT warns with `DOTJ049W` and builds anyway.
 - **Check Project** fails on a value outside the scheme, before anything is built.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/15-subject-scheme`. If you use Git, commit your work.
 
 Continue with [Stage 16: branch filtering](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering).
 
@@ -4376,7 +4290,7 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-2
 
 ---
 title: "Stage 25: House rules"
-description: Write the house style as Schematron, select it in the project settings so that the check enforces it, explain it to agents, and fix the ten violations it finds.
+description: Write the house style as Schematron, select it in the project settings so that the check enforces it, and fix the ten violations it finds.
 type: tutorial
 ---
 
@@ -4384,7 +4298,7 @@ type: tutorial
 
 Add Schematron rules for the project's house style: require short descriptions, use semantic markup for UI labels, reference product names through keys, and resolve review markup before release.
 
-Select `house-style.sch` as the project's house rules and document the rules in `AGENTS.md` and the project skill. Resolve the ten reported violations, including converting the cleanup content to a table and recording the review decision in the change history.
+Select `house-style.sch` as the project's house rules. Resolve the ten reported violations, including converting the cleanup content to a table and recording the review decision in the change history. If you use an AI agent, add the files that describe the rules to it.
 
 **Time:** about 40 minutes. **You need:** stage 24 complete.
 
@@ -4393,7 +4307,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The rules {#step-1-the-rules}
 
 :::steps
-1. **Create `house-style.sch`**
+1. **Create `house-style.sch`** In the **Explorer**, right-click `my-audacity-guide` and choose **New File**. Enter `house-style.sch` and press Enter. In the **New XML Document** dialog, choose **Schematron Rules** and click **OK**. Replace the template's content with this listing and save the file:
 
    ```xml {title="house-style.sch"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -4490,16 +4404,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
    House rules (4 of 46 files):
-     /home/you/audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
-     /home/you/audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
-     /home/you/audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
-     /home/you/audacity-guide/topics/exporting-audio.dita:78 — Remove draft-comment before publishing.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:49 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:50 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:51 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:52 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
+     /home/you/my-audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
+     /home/you/my-audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/my-audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/my-audacity-guide/topics/exporting-audio.dita:78 — Remove draft-comment before publishing.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:49 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:50 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:51 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:52 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
 
    Summary
      House rules                  10  in 4 of 46 files
@@ -4510,7 +4424,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
        Remove required-cleanup before publishing.                        1
    ```
 
-   Ten violations in four files, every one a house-style decision the README had stated and nobody had checked. The main map's `<shortdesc>` spells out the product name. *About this guide* names it twice in prose, once as part of a title and once as part of an organization. The podcast workflow has five decorative `<b>`s and the `<required-cleanup>` from stage 24; *Exporting audio* has the `<draft-comment>`. `--include=schematron` runs only the rules, which is the fast loop while you fix them.
+   Ten violations in four files, every one a house-style decision that nothing had checked until now. The main map's `<shortdesc>` spells out the product name. *About this guide* names it twice in prose, once as part of a title and once as part of an organization. The podcast workflow has five decorative `<b>`s and the `<required-cleanup>` from stage 24; *Exporting audio* has the `<draft-comment>`. `--include=schematron` runs only the rules, which is the fast loop while you fix them.
 :::
 
 ## Step 3: Resolve the violations {#step-3-resolve-the-violations}
@@ -4628,138 +4542,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The reviewer's question has been answered, so the comment goes and the answer is recorded where the next reviewer will look for it, in the `<change-summary>` of the `<change-historylist>` from stage 24.
 :::
 
-## Step 4: Tell the agents {#step-4-tell-the-agents}
+## Step 4: Optional: tell your AI agent {#step-4-optional-tell-your-ai-agent}
+
+If you use an AI agent to edit the guide, copy two files from the checkpoint `tutorial/25-house-rules` of the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) into the same paths in `my-audacity-guide`:
+
+- `AGENTS.md`, in the project folder. An AI coding agent reads this file before it changes a project; most agent tools look for it by that name. It describes the layout of the project, states the house style in prose, including the rules that Schematron cannot check, such as titles in sentence case, and names the checks to run.
+- `.xagent/skills/audacity-house-style/SKILL.md`, a skill: a recipe for one task, *apply house style*. The `name` and `description` in its front matter are what an agent matches a request against. The body lists the steps and ends with *validate before reporting done*.
+
+Some statements in `AGENTS.md` are for the maintainers of the sample project, for example the `scripts/check-stage.sh` script. In your own project, check your work with **Check Project** or `dogsbay-xml check .`.
+
+With these files, the same rules exist for three readers: the machine in `house-style.sch`, which fails the check; the person or agent reading the project in `AGENTS.md`; and the agent given a task in the skill. Keep them in step: when you add a rule to the Schematron, add it to the prose the same day. If you do not use an AI agent, skip this step. The check does not read these files.
+
+## Step 5: Check your work {#step-5-check-your-work}
 
 :::steps
-1. **Create `AGENTS.md`**
+1. **Format and check your work**
 
-   ```md {title="AGENTS.md"}
-   # Project context — Audacity User Guide (DITA)
-
-   This is the documentation set for **Audacity**, authored in DITA 1.3 and built
-   with DogsBay XML. It is also the finished state of a step-by-step DITA tutorial:
-   every `tutorial/NN-*` branch adds one feature, and this file describes the
-   conventions the finished project keeps.
-
-   ## Layout
-
-   - `audacity-guide.ditamap` — the main guide (start here). `beginner-guide`,
-     `podcaster-guide`, `audacity-book` (PDF), `audacity-collection` (all three
-     guides, key-scoped) and `installation-variants` (branch filtering) reuse the
-     same topics.
-   - `topics/` — concepts, tasks, references, a troubleshooting topic;
-     `topics/glossary/` — glossary entries; `learning/` — a learning assessment;
-     `shared/` — warehouses pulled in by conref; `samples/` — code pulled in by
-     coderef; `images/` — illustrations.
-   - `keydefs-product.ditamap`, `keydefs-glossary.ditamap` — key definitions.
-   - `subject-scheme.ditamap` — the controlled values for `@platform`
-     (`windows`, `mac`, `linux`) and `@audience` (`beginner`, `podcaster`).
-   - `filters/` — DITAVAL files, one per deliverable plus `review.ditaval` (flags).
-   - `project.json` — the DITA-OT project file: every deliverable this guide ships.
-   - `.dogsbay/config.xml` — default root map and deliverable, the metadata
-     policy, the house rules (`house-style.sch`) and the format style.
-   - `scripts/check-stage.sh` — the gate: validation, project health,
-     controlled values, house rules and a build of every deliverable.
-
-   ## House style
-
-   - **Never hardcode the product name, version, download URL or project
-     extension.** Use the keys `product-name`, `product-version`, `download-url`,
-     `project-extension`: `<keyword keyref="product-name"/>`. Literals inside
-     `<filepath>`, `<codeph>`, `<codeblock>` and `<cite>` are fine.
-   - **UI labels** use `<uicontrol>`, never `<b>`; menu paths use
-     `<menucascade>`; a mnemonic is `<shortcut>` inside `<uicontrol>`.
-   - **Reuse, don't repeat.** Shared steps, notes and hazards live in `shared/`
-     and are pulled in with `conref` or `conkeyref`.
-   - **Conditions** use only the values in `subject-scheme.ditamap`;
-     `validate-conditions` fails on anything else.
-   - **Every topic needs a `<shortdesc>`** right after the title, under about 155
-     characters, leading with what the topic is about.
-   - **Every topic needs keywords** in its prolog; tasks need a `<created>` date;
-     an `<author>` is recommended. The metadata policy in `.dogsbay/config.xml`
-     enforces this.
-   - **Review markup does not ship.** Resolve `<draft-comment>` and
-     `<required-cleanup>` before a release; the house rules report them.
-   - **Titles** are sentence case. **Language** is `xml:lang="en-GB"` on every
-     root element; product names and code carry `translate="no"`.
-   - **Format** every file with `dogsbay-xml format -i` before committing. Do not
-     put character entities such as `&amp;` in text; write "and".
-
-   ## Checks
-
-   Run `scripts/check-stage.sh` before every commit; it must print `STAGE OK`.
-   For one dimension: `dogsbay-xml validate-project .`, `project-health .`,
-   `validate-conditions -S subject-scheme.ditamap .`,
-   `project-health --include=schematron .`, or `dita --project=project.json`.
-   ```
-2. **Create `.xagent/skills/audacity-house-style/SKILL.md`**
-
-   ```md {title=".xagent/skills/audacity-house-style/SKILL.md"}
-   ---
-   name: audacity-house-style
-   description: Apply the Audacity guide's house style to DITA topics — use product keys instead of hardcoded names, semantic UI elements instead of bold, conref shared content, and sentence-case titles. Use when asked to apply house style, clean up a topic, or make content consistent.
-   ---
-
-   # Audacity guide house style
-
-   When asked to apply house style (or to "clean up" / "make consistent") to one or
-   more DITA topics, apply these rules and re-validate afterwards:
-
-   1. **Product references → keys.** Replace any literal "Audacity", the version
-      number, the download URL, or the project extension (`.aup3`) with the matching
-      key:
-      - `Audacity` → `<keyword keyref="product-name"/>`
-      - version (e.g. `3.4`) → `<keyword keyref="product-version"/>`
-      - download URL → `<keyword keyref="download-url"/>`
-      - `.aup3` → `<keyword keyref="project-extension"/>`
-      Keys are defined in `keydefs-product.ditamap`. Use `list_keys` to confirm.
-      Do **not** replace literals inside `<codeblock>` or `<filepath>` examples
-      (e.g. a shell command or `C:\Program Files\Audacity`).
-
-   2. **UI labels → `<uicontrol>`.** Replace `<b>Record</b>`-style highlighting of
-      buttons, menu items, and field names with `<uicontrol>Record</uicontrol>`.
-      Multi-level menu paths use
-      `<menucascade><uicontrol>…</uicontrol>…</menucascade>`.
-
-   3. **Deduplicate via conref.** If a step or note is copied verbatim from
-      `shared/common-steps.dita` or `shared/common-notes.dita`, replace the copy with
-      a `conref` to the shared element instead of repeating it.
-
-   4. **Titles** are sentence case.
-
-   5. After editing, **validate** each changed topic and fix any errors before
-      reporting done.
-
-   Make the minimal edits needed; preserve meaning and surrounding markup.
-   ```
-3. **Read them**
-
-   - `AGENTS.md` is the file an AI coding agent reads before it touches a project; most agent tools look for it by that name. It is also the shortest description of the project for a person. The layout section says where things are; the house style section says the same rules as `house-style.sch`, plus the ones a rule cannot check, such as titles in sentence case and the formatter's `&amp;` limitation; the checks section names the commands for each part of the check. `scripts/check-stage.sh` is the script that maintainers use to verify the stage branches; in your own project, use **Check Project** or `dogsbay-xml check .`.
-   - The skill is a recipe for one task. Its front matter `name` and `description` are what an agent matches a request against, so the description names the task in the words a person would use, *apply house style*, *clean up a topic*, *make consistent*. The body is the steps, in order, ending with *validate before reporting done*.
-   - The same rules now exist three times, for three readers: the machine in `house-style.sch`, which fails the check; the person or agent reading the project in `AGENTS.md`; the agent given a task in the skill. Keep them in step: a rule added to the Schematron is added to the prose the same day.
-:::
-
-## Step 5: Update the README and check your work {#step-5-update-the-readme-and-check-your-work}
-
-:::steps
-1. **Change the "You are on" line and the layout**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 24: drafts and localization.
-   +You are on stage 25: house rules.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -4775,28 +4574,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   Health now runs the house rules with everything else, because the project names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a branch cannot carry unresolved review markup.
+   Health now runs the house rules with everything else, because the project names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a release cannot carry unresolved review markup.
 :::
 
 Test an invalid value. Put one `<b>` back in `topics/podcast-production-workflow.dita`, around *Noise reduction* in the post-production list, and check your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -4806,7 +4605,7 @@ The **Project Validation** panel, or `dogsbay-xml project-health --include=schem
 ```
 Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
 House rules (1 of 46 files):
-  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
 
 Summary
   House rules                   1  in 1 of 46 files
@@ -4823,9 +4622,11 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are exempt; `test="true()"` to forbid an element.
 - **House Rules (Schematron)** in **Manage Projects**; `project-health --include=schematron`; a house-rule violation stops the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes its table, an answered `<draft-comment>` becomes a `<change-summary>`.
-- The same rules for three readers: the Schematron, `AGENTS.md` and a skill.
+- Optionally, the same rules for three readers: the Schematron, `AGENTS.md` and a skill.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/25-house-rules`. If you use Git, commit your work.
 
 Continue with [Stage 26: final](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final).
 
@@ -4849,7 +4650,7 @@ type: tutorial
 
 Extend the guide for a reader who wants to record and review an interview. Plan the content, implement it, and verify two audience variants. Use the requirements below without copying an existing topic in full.
 
-**Time:** about 60 to 90 minutes. **You need:** the core course complete, including stage 25. Start from your completed work or `origin/tutorial/25-house-rules` in a practice worktree.
+**Time:** about 60 to 90 minutes. **You need:** the core course complete, including stage 25. Start from your own project in `my-audacity-guide`, or from the checkpoint `tutorial/25-house-rules` of the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project).
 
 ## Requirements {#requirements}
 
@@ -4876,13 +4677,13 @@ Use placeholder interview details that do not include personal information. The 
 | Accessibility | Link text, reading order, and any image or table alternatives are reviewed |
 | Change review | The diff contains only the intended additions and required map changes |
 
-Use the [automated checks](/dogsbay-xml-dita-tutorial-docs/reference/verification) alongside manual output inspection. Record the commands, output directories, and any limitations you found. If the check reports `Ready` but output is wrong, investigate the affected map and transform before accepting the result.
+Use the [automated check](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) alongside manual output inspection. Record the commands, output directories, and any limitations you found. If the check reports `Ready` but output is wrong, investigate the affected map and transform before accepting the result.
 
 The reference guide checks clean (see [Known output issues](/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues)), so any failure that the check reports in your project comes from your changes. Your new topic and its links must pass the acceptance checks, and the check must report `Ready` before you hand off your work.
 
 ## Explain your design {#explain-your-design}
 
-Write a short handoff note describing one topic-boundary decision, one reuse decision, and how you verified filtering. Include any tradeoff you would revisit if the guide grew. Finish with [Stage 26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) to record and tag your completed work.
+Write a short handoff note describing one topic-boundary decision, one reuse decision, and how you verified filtering. Include any tradeoff you would revisit if the guide grew. Finish with [Stage 26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) to check and mark your completed work.
 
 ---
 
@@ -4892,13 +4693,13 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-2
 
 ---
 title: "Stage 26: Final"
-description: Verify every deliverable and generated link, complete the capstone, and tag your finished guide.
+description: Verify every deliverable and generated link, complete the capstone, and mark your finished guide.
 type: tutorial
 ---
 
 # Stage 26: Final {#stage-26-final}
 
-Complete the [capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone), check the source, and inspect every deliverable before tagging your work.
+Complete the [capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone), check the source, and inspect every deliverable before you mark your finished guide.
 
 **You need:** stage 25 complete. **Time:** about 15 minutes, plus corrections.
 
@@ -4908,60 +4709,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 **Project** > **Project Tools** > **Manage Deliverables...** lists eight deliverables: `full`, `beginner-mac`, `beginner-windows`, `podcaster-linux`, `review`, `install-variants`, `collection`, and `book-pdf`. The chunking examples have separate maps and are built manually.
 
-The README records the complete branch sequence:
-
-```md {title="README.md"}
-# DITA tutorial
-
-Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-You are on stage 26: final.
-
-## Stages
-
-| Branch | Lesson |
-|---|---|
-| `tutorial/00-setup` | setup |
-| `tutorial/01-concept` | concept |
-| `tutorial/02-first-map` | first map |
-| `tutorial/03-first-build` | first build |
-| `tutorial/04-task-and-reference` | task and reference |
-| `tutorial/05-inline-and-block` | inline and block |
-| `tutorial/06-rich-tasks` | rich tasks |
-| `tutorial/07-links` | links |
-| `tutorial/08-figures` | figures |
-| `tutorial/09-map-structure` | map structure |
-| `tutorial/10-keys` | keys |
-| `tutorial/11-reuse` | reuse |
-| `tutorial/12-glossary` | glossary |
-| `tutorial/13-metadata-and-index` | metadata and index |
-| `tutorial/14-conditional-text` | conditional text |
-| `tutorial/15-subject-scheme` | subject scheme |
-| `tutorial/16-branch-filtering` | branch filtering |
-| `tutorial/17-key-scopes` | key scopes |
-| `tutorial/18-chunking-and-output` | chunking and output |
-| `tutorial/19-bookmap` | bookmap |
-| `tutorial/20-troubleshooting` | troubleshooting |
-| `tutorial/21-hazards-and-safety` | hazards and safety |
-| `tutorial/22-software-domains` | software domains |
-| `tutorial/23-learning` | learning |
-| `tutorial/24-drafts-and-localization` | drafts and localization |
-| `tutorial/25-house-rules` | house rules |
-| `tutorial/26-final` | final |
-
-## Verification
-
-Run `scripts/check-stage.sh` from the project root. From stage 03, the gate builds the deliverables in `project.json`.
-Run `python3 scripts/check-output-links.py <output-directory>` after publishing HTML. Source health and generated output checks report separate results.
-
-The chunking experiment under `examples/chunking/` is available from stage 18. Build its maps separately; they are not release deliverables.
-
-Topic text is adapted from the Audacity Manual. See LICENSE and NOTICE for licensing and attribution.
-```
+The last stage adds no files. Your project now holds everything that the lessons create: the topics, glossary entries, shared content, the learning assessment, the sample script, nine maps, the filters, the house rules, and the project settings.
 
 ## Check and publish {#check-and-publish}
 
-Check the finished project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run from the project root:
+Check the finished project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run from `my-audacity-guide`:
 
 ```bash
 dogsbay-xml check .
@@ -4971,36 +4723,29 @@ The check validates the source, runs project health with the metadata policy and
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
-build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-build    review               ok  /home/you/audacity-guide/out/review
-build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-build    collection           ok  /home/you/audacity-guide/out/collection
-build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-  PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+build    collection           ok  /home/you/my-audacity-guide/out/collection
+build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
 
-The README's *Verification* section names `scripts/check-stage.sh` and `scripts/check-output-links.py`, the scripts that maintainers use to verify the stage branches. You do not need them. See [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
-
 The output check reads HTML pages only. For the PDF, it confirms that the build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF and inspect its navigation, layout, and accessibility yourself.
 
 The final reference build checks clean. See [Known output issues](/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues) for the defects that earlier builds had and how the stage branches fixed them.
 
-## Tag your result {#tag-your-result}
+## Mark your result {#mark-your-result}
 
-Commit your lesson changes and confirm that `git status` is clean. After completing the checks, create a tag for your own result:
+If you use Git, commit your work in the **Git** panel. To mark the finished guide, create a branch from the **…** menu of the **Git** panel, for example `my-tutorial-final`. The branch keeps this version of your project while you continue to change the guide.
 
-```bash
-git tag my-tutorial-final
-git show --stat my-tutorial-final
-```
-
-The supplied reference is `tutorial/26-final`, also tagged `tutorial/final`. It includes every optional lesson, and it checks as `Ready`.
+**Checkpoint:** `tutorial/26-final`, also tagged `tutorial/final` in the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project). It includes every optional lesson, and it checks as `Ready`. Compare your files with it to find any differences that remain.
 
 [Compare this stage with its predecessor](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/25-house-rules...tutorial/26-final).
 
@@ -5024,31 +4769,24 @@ The supplied images are generated illustrations of audio concepts and controls. 
 
 **Optional module.** See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) for the starting checkpoint and the next core lesson.
 
-**Time:** about 25 minutes. **You need:** stage 07 complete, and the two PNG files from the branch (see step 1).
+**Time:** about 25 minutes. **You need:** stage 07 complete, and the two PNG files from the sample project (see step 1).
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Add the images {#step-1-add-the-images}
 
+You cannot type an image, so copy the two PNG files from the sample project. The image map coordinates in step 3 assume the sample project's `device-toolbar.png`. If you draw your own images, adjust the coordinates.
+
 :::steps
-1. **Create `images/` and copy the two files** Take `images/waveform.png` and `images/device-toolbar.png` from the `tutorial/08-figures` branch, or draw your own; the image map coordinates in step 3 assume the branch's `device-toolbar.png`.
+1. **Create the `images` folder** In the **Explorer**, right-click `my-audacity-guide` and choose **New Folder**. Enter `images` and press Enter.
+2. **Copy the two images into it** Get `waveform.png` and `device-toolbar.png` from the `images` folder at the `tutorial/08-figures` checkpoint of the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) in one of these ways:
 
-   ```bash
-   mkdir images
-   git restore --source=origin/tutorial/08-figures -- images/waveform.png images/device-toolbar.png
-   ```
-2. **Write `images/README.md`** It records where the images came from and the MathML caveat below.
+   - If you have a copy of the sample project, switch it to the `tutorial/08-figures` branch and copy the two files from its `images` folder.
+   - Otherwise, open the [images folder of the checkpoint](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/tree/tutorial/08-figures/images) on GitHub, open each PNG file, and click **Download raw file**.
 
-   ```md {title="images/README.md"}
-   Illustrations for the tutorial, generated (not screenshots): `waveform.png`
-   and `device-toolbar.png`. CC BY 4.0 like the rest of the project.
+   Save both files in `my-audacity-guide/images`, with the same names. To open that folder in your file manager, right-click `images` in the **Explorer** and choose **Reveal in System**.
 
-   Note on equations: `what-is-digital-audio.dita` carries the decibel formula as
-   MathML inside `<equation-block>`, with a plain-text `<ph>` alternative beside
-   it. DITA-OT's html5 transform drops `<mathml>` (it is a `foreign` element)
-   unless a MathML plugin is installed, so the HTML shows the text form; a
-   processor that renders MathML shows the formula.
-   ```
+   The **Explorer** shows the two files under `images`. If they do not appear, right-click `images` and choose **Refresh**.
 :::
 
 ## Step 2: Figures, SVG and an equation {#step-2-figures-svg-and-an-equation}
@@ -5173,25 +4911,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The cross-reference `what-is-digital-audio.dita#what-is-digital-audio/fig-waveform` reaches the figure by its `@id`, the same `file#topic/element` form as a section link in stage 07.
 :::
 
-## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
+## Step 4: Check your work {#step-4-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout** The layout section gains the `images/` folder.
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 07: links.
-   +You are on stage 08: figures.
-
-    ## Stages
-
-   ```
-2. **Format and check your work** Format the topics:
+1. **Format and check your work** Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -5201,7 +4924,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -5211,16 +4934,16 @@ The health stage checks image references too. Misspell `waveform.png` in the `<f
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
+  /home/you/my-audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
-## Publish your changes {#publish-your-changes}
+## The map at this checkpoint {#the-map-at-this-checkpoint}
 
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
+This lesson adds no topics, so the map does not change. For reference, the complete map at this checkpoint is:
 
 ```xml {title="audacity-guide.ditamap"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -5240,10 +4963,6 @@ Add the lesson's topics to `audacity-guide.ditamap`, then check your work again.
 </map>
 ```
 
-```bash
-dogsbay-xml check .
-```
-
 ## What you learned {#what-you-learned}
 
 - `<fig>` with `<title>` and an `@id`; `<image>` with `@href`, `@placement`, `@scale` and an `<alt>`.
@@ -5254,6 +4973,8 @@ dogsbay-xml check .
 - End of Part 1: nine topics, every base element you need for the body of a guide, published through the map and build introduced in stages 02 and 03.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/08-figures`. If you use Git, commit your work.
 
 Continue with [Stage 09: map structure](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure).
 
@@ -5423,7 +5144,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Key the entries and put them in the guide {#step-2-key-the-entries-and-put-them-in-the-guide}
 
 :::steps
-1. **Create `keydefs-glossary.ditamap`** Create the file in the project root from the **Key Definition Map** template, as in stage 10. Replace the title with `Glossary key definitions`, and replace the two sample key definitions with the eight glossary keys. If you use another editor, create the file and type the finished listing.
+1. **Create `keydefs-glossary.ditamap`** Create the file in `my-audacity-guide` from the **Key Definition Map** template, as in stage 10. Replace the title with `Glossary key definitions`, and replace the two sample key definitions with the eight glossary keys. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="keydefs-glossary.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -5585,27 +5306,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The *Clipping* `<dt>` is laid out on three lines because that is how the formatter writes a `<dt>` whose only content is an element; the meaning is unchanged.
 :::
 
-## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
+## Step 4: Check your work {#step-4-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 11: reuse.
-   +You are on stage 12: glossary.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each new or changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
@@ -5621,10 +5327,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
-     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19] — nothing references it
+     unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -5638,11 +5344,11 @@ A glossary key is a key like any other. Change the `<term keyref>` in *Preparing
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
+  /home/you/my-audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -5651,11 +5357,11 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
-  /home/you/audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
+  /home/you/my-audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
 Unused keys (3):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19]
-  gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19]
+  gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10]
 
 Summary
   Undefined keys                1
@@ -5674,6 +5380,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `<term keyref>` binds a written term to its entry; `<abbreviated-form keyref>` lets the processor write the surface form.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/12-glossary`. If you use Git, commit your work.
 
 Continue with [Stage 13: metadata and index](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index).
 
@@ -6315,7 +6023,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read the map metadata** The map's `<topicmeta>` takes the same elements as a prolog, in the same order, without the `<metadata>` wrapper: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and `<keywords>` sit directly inside it. Map metadata applies to the publication and, for the HTML5 transform, cascades into every page: the `<meta name="rights">` tag on each page comes from this copyright.
 :::
 
-## Step 5: The metadata policy, the README and the check {#step-5-the-metadata-policy-the-readme-and-the-check}
+## Step 5: The metadata policy and the check {#step-5-the-metadata-policy-and-the-check}
 
 :::steps
 1. **Set the metadata policy** Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows a table of rules, one rule per row. Add three rules:
@@ -6333,24 +6041,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`. Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere, which is the rule that reaches the glossary group.
    - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor applies the same policy.
-3. **Change the "You are on" line**
+3. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 12: glossary.
-   +You are on stage 13: metadata and index.
-
-    ## Stages
-
-   ```
-4. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita
@@ -6366,10 +6059,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -6383,11 +6076,11 @@ Test the metadata policy. Delete the `<critdates>` block from *Trimming audio* a
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/trimming-audio.dita:7  created — missing required <created @date>
+  /home/you/my-audacity-guide/topics/trimming-audio.dita:7  created — missing required <created @date>
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -6396,11 +6089,11 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Metadata policy (1 of 21 files):
-  /home/you/audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
+  /home/you/my-audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
 Unused keys (3):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33]
-  gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33]
+  gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10]
 
 Summary
   Metadata policy               1  in 1 of 21 files (1 error(s), 0 warning(s))
@@ -6414,12 +6107,12 @@ Undo the policy test, then test the element order. Move `<resourceid>` and `<dat
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/what-is-audacity.dita
     29:12  The content of element type "prolog" does not match its content model.
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -6427,7 +6120,7 @@ The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the f
 
 ```
 Invalid files (1 of 21):
-  /home/you/audacity-guide/topics/what-is-audacity.dita:
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita:
     29:12  error: The content of element type "prolog" does not match its content model.
 ```
 
@@ -6443,6 +6136,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - End of Part 2: a map with structure and a reltable, a key space, a shared topic, a glossary and metadata, published as one HTML5 deliverable.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/13-metadata-and-index`. If you use Git, commit your work.
 
 Continue with [Stage 14: conditional text](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text).
 
@@ -6477,7 +6172,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: A DITAVAL per platform {#step-1-a-ditaval-per-platform}
 
 :::steps
-1. **Create `filters/platform-windows.ditaval`, `filters/platform-mac.ditaval` and `filters/platform-linux.ditaval`** Platform only; no audience rules, because the variants map has no audience-specific content.
+1. **Create `filters/platform-windows.ditaval`, `filters/platform-mac.ditaval` and `filters/platform-linux.ditaval`** In the **Explorer**, right-click the `filters` folder, choose **New File**, enter the file name, and choose the **DITAVAL** template. Replace the template's rule with the rules below. The files filter by platform only; they have no audience rules, because the variants map has no audience-specific content.
 
    ```text {title="filters/platform-windows.ditaval"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -6513,7 +6208,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: The map with three branches {#step-2-the-map-with-three-branches}
 
 :::steps
-1. **Create `installation-variants.ditamap`**
+1. **Create `installation-variants.ditamap`** Right-click `my-audacity-guide` in the **Explorer**, choose **New File**, enter `installation-variants.ditamap`, and choose the **Map** template. Replace the template's content with this map:
 
    ```xml {title="installation-variants.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -6578,7 +6273,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Each line is one variant: its prefix, the topic it filters, the DITAVAL and the key scope. A variant with no prefix is labeled by its DITAVAL file.
 :::
 
-## Step 3: The deliverable, the README and the check {#step-3-the-deliverable-the-readme-and-the-check}
+## Step 3: The deliverable and the check {#step-3-the-deliverable-and-the-check}
 
 :::steps
 1. **Add the deliverable** Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter these values:
@@ -6593,22 +6288,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | (none) |
 
    Leave **DITAVAL** empty: the `<ditavalref>` elements in the map do the filtering. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Change the "You are on" line and the layout**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 15: subject scheme.
-   +You are on stage 16: branch filtering.
-
-    ## Stages
-
-   ```
-3. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -6618,21 +6298,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The new filters use only controlled values: the check includes the controlled values from stage 15, and it reads the DITAVAL files too.
-4. **Read the output** `out/install-variants/topics/` has three copies of each of the two topics:
+3. **Read the output** `out/install-variants/topics/` has three copies of each of the two topics:
 
    ```
    win-installing-audacity.html
@@ -6661,17 +6341,17 @@ Two variants now want the same file names. DITA-OT logs no error and no warning,
 
 ```
 health   clean, with warnings
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
 output   2 broken link(s)
-  /home/you/audacity-guide/out/install-variants/index.html:19  @href="bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html" — there is no bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html
-  /home/you/audacity-guide/out/install-variants/index.html:20  @href="3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html" — there is no 3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html
+  /home/you/my-audacity-guide/out/install-variants/index.html:23  @href="e676c532f446de854f19d505d53ab754fc11517b-1.html" — there is no e676c532f446de854f19d505d53ab754fc11517b-1.html
+  /home/you/my-audacity-guide/out/install-variants/index.html:24  @href="397e15314df15a1ce6ffe81cf005134f385e5428-1.html" — there is no 397e15314df15a1ce6ffe81cf005134f385e5428-1.html
 Not ready: 2 links in the built output lead nowhere.
 ```
 
-The generated names can differ between runs. The check reports the symptom, two links that lead nowhere, and not the cause. Check the `list-branches` output, and the output folder, whenever you add a variant.
+The generated names and line numbers can differ between runs. The check reports the symptom, two links that lead nowhere, and not the cause. Check the `list-branches` output, and the output folder, whenever you add a variant.
 
 After each error exercise, undo the deliberate change and check again. Confirm that the check reports `Ready` before you continue.
 
@@ -6683,6 +6363,8 @@ After each error exercise, undo the deliberate change and check again. Confirm t
 - `dogsbay-xml list-branches <map>` enumerates the variants.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/16-branch-filtering`. If you use Git, commit your work.
 
 Continue with [Stage 17: key scopes](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes).
 
@@ -6774,18 +6456,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The guide's own keys come first, then the peer's, each with the scope prefix:
 
    ```
-   start-here  →  topics/podcast-production-workflow.dita   [/home/you/audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+   common-notes  →  shared/common-notes.dita   [/home/you/my-audacity-guide/podcaster-guide.ditamap:9]  file: /home/you/my-audacity-guide/shared/common-notes.dita
+   start-here  →  topics/podcast-production-workflow.dita   [/home/you/my-audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
    …
-   beginner.start-here  →  topics/recording-your-first-track.dita   [/home/you/audacity-guide/beginner-guide.ditamap:11]  file: /home/you/audacity-guide/topics/recording-your-first-track.dita
-   beginner.install  →  topics/installing-audacity.dita   [/home/you/audacity-guide/beginner-guide.ditamap:16]  file: /home/you/audacity-guide/topics/installing-audacity.dita
-   beginner.formats  →  topics/supported-audio-formats.dita   [/home/you/audacity-guide/beginner-guide.ditamap:24]  file: /home/you/audacity-guide/topics/supported-audio-formats.dita
+   beginner.common-notes  →  shared/common-notes.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:11]  file: /home/you/my-audacity-guide/shared/common-notes.dita
+   beginner.start-here  →  topics/recording-your-first-track.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:13]  file: /home/you/my-audacity-guide/topics/recording-your-first-track.dita
+   beginner.install  →  topics/installing-audacity.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:18]  file: /home/you/my-audacity-guide/topics/installing-audacity.dita
+   beginner.formats  →  topics/supported-audio-formats.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:26]  file: /home/you/my-audacity-guide/topics/supported-audio-formats.dita
+   …
+   47 key(s).
    ```
 :::
 
 ## Step 2: The collection {#step-2-the-collection}
 
 :::steps
-1. **Create `audacity-collection.ditamap`** The comments are part of the lesson.
+1. **Create `audacity-collection.ditamap`** Right-click `my-audacity-guide` in the **Explorer**, choose **New File**, enter `audacity-collection.ditamap`, and choose the **Map** template. Replace the template's content with this map. The comments are part of the lesson.
 
    ```xml {title="audacity-collection.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -6835,9 +6521,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    ```
-   start-here  →  topics/what-is-audacity.dita  (scope: userguide)   [/home/you/audacity-guide/audacity-guide.ditamap:27]  file: /home/you/audacity-guide/topics/what-is-audacity.dita
-   start-here  →  topics/recording-your-first-track.dita  (scope: beginner)   [/home/you/audacity-guide/beginner-guide.ditamap:11]  file: /home/you/audacity-guide/topics/recording-your-first-track.dita
-   start-here  →  topics/podcast-production-workflow.dita  (scope: podcaster)   [/home/you/audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+   start-here  →  topics/what-is-audacity.dita  (scope: userguide)   [/home/you/my-audacity-guide/audacity-guide.ditamap:27]  file: /home/you/my-audacity-guide/topics/what-is-audacity.dita
+   start-here  →  topics/recording-your-first-track.dita  (scope: beginner)   [/home/you/my-audacity-guide/beginner-guide.ditamap:13]  file: /home/you/my-audacity-guide/topics/recording-your-first-track.dita
+   start-here  →  topics/podcast-production-workflow.dita  (scope: podcaster)   [/home/you/my-audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
    ```
 
    The same key resolves to a different target in each scope. Without `--scope`:
@@ -6847,7 +6533,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 :::
 
-## Step 3: The deliverable, the README and the check {#step-3-the-deliverable-the-readme-and-the-check}
+## Step 3: The deliverable and the check {#step-3-the-deliverable-and-the-check}
 
 :::steps
 1. **Add the deliverable** Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter these values:
@@ -6862,22 +6548,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | `nav-toc` = `full` |
 
    The `nav-toc` parameter with the value `full` puts the navigation of the whole collection on each page, as it does for `full`. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Change the "You are on" line and the layout**
-
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 16: branch filtering.
-   +You are on stage 17: key scopes.
-
-    ## Stages
-
-   ```
-3. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -6887,26 +6558,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
-4. **Read the output** `out/collection/index.html` has the three guides one after another, and `topics/` has a page per use of each topic: `what-is-audacity.html` for the full guide, then `what-is-audacity-1.html` for the beginner guide and `what-is-audacity-2.html` for the podcaster guide. A topic used in several scopes is a page in each, so that each copy's links resolve in its own scope. A topic with no key references, such as *Trimming audio* or a glossary entry, is one page that the three chapters share.
+3. **Read the output** `out/collection/index.html` has the three guides one after another, and `topics/` has a page per use of each topic: `what-is-audacity.html` for the full guide, then `what-is-audacity-1.html` for the beginner guide and `what-is-audacity-2.html` for the podcaster guide. A topic used in several scopes is a page in each, so that each copy's links resolve in its own scope. A topic with no key references, such as *Trimming audio* or a glossary entry, is one page that the three chapters share.
 :::
 
 Test an unqualified key at the root. Add `<topicref keyref="start-here"/>` to `audacity-collection.ditamap`, above the first `<topichead>`, and check your work. The check reports `Ready`. DITA-OT drops the topicref, and only a verbose DITA-OT log records it, as an informational message:
 
 ```
-[keyref] file:/home/you/audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
+[keyref] file:/home/you/my-audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
 ```
 
 There is no `@href`, so the entry is missing from the table of contents and nothing else. The build succeeds and no link breaks, so the output check has nothing to report. Health does not see it either: it checks the default root map, the full guide. The tool that does object is the key resolver, pointed at the collection:
@@ -6932,6 +6603,8 @@ After each error exercise, undo the deliberate change and check again. Confirm t
 - A topic whose key references resolve differently across scopes can produce multiple output pages.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/17-key-scopes`. If you use Git, commit your work.
 
 Continue with [Stage 18: chunking and output](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output).
 
@@ -6961,7 +6634,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ## Add the production topics {#add-the-production-topics}
 
-Create the following files. The effects reference and presets use separate source files. Each gets an explicit topicref in the production maps. The effect-order concept supports the reusable cleanup branch. The guide information topic is published in print output.
+Create the following files in the `topics` folder. In the **Explorer**, right-click `topics`, choose **New File**, enter the file name, and choose the template for the root element: **Reference**, **Concept**, or **Topic**. Replace the template's content with the listing. The effects reference and presets use separate source files. Each gets an explicit topicref in the production maps. The effect-order concept supports the reusable cleanup branch. The guide information topic is published in print output.
 
 ```xml {title="topics/effects-reference.dita"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -7220,7 +6893,7 @@ The `cleanup` topicset names a reusable branch. The podcaster map includes that 
 
 ## Compare combined and split pages {#compare-combined-and-split-pages}
 
-Create these files under `examples/chunking/`. This example has its own maps and is not one of the project's deliverables.
+Create these files under `examples/chunking/`. In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and create `examples`. Create `chunking` inside `examples` and `topics` inside `chunking` the same way. This example has its own maps and is not one of the project's deliverables.
 
 ```xml {title="examples/chunking/topics/nested.dita"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -7282,48 +6955,58 @@ Create these files under `examples/chunking/`. This example has its own maps and
 </map>
 ```
 
-The example is not a deliverable, so **Check Project** does not build it. To build both maps with the DITA-OT that the editor includes, give the example folder a `project.json` of its own. Create `examples/chunking/project.json`:
+The example is not one of the project's deliverables, so **Check Project** does not build it yet. Add its two maps as temporary deliverables, check them, and delete the deliverables when you finish. The two deliverables take these values:
 
-```json
-{
-  "deliverables": [
-    {
-      "name": "chunk-combined",
-      "context": { "id": "chunk-combined", "input": "combined.ditamap" },
-      "output": "out/chunk-combined",
-      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
-    },
-    {
-      "name": "chunk-split",
-      "context": { "id": "chunk-split", "input": "split.ditamap" },
-      "output": "out/chunk-split",
-      "publication": { "transtype": "html5", "params": [ { "name": "nav-toc", "value": "full" } ] }
-    }
-  ]
-}
-```
+| Field | `chunk-combined` | `chunk-split` |
+| --- | --- | --- |
+| **Name** | `chunk-combined` | `chunk-split` |
+| **Input map** | `examples/chunking/combined.ditamap` | `examples/chunking/split.ditamap` |
+| **DITAVAL (optional)** | (leave empty) | (leave empty) |
+| **Transtype** | `html5` | `html5` |
+| **Output (optional)** | `out/chunk-combined` | `out/chunk-split` |
+| **Publication parameters** | `nav-toc` = `full` | `nav-toc` = `full` |
 
-The stage branch does not contain this file. Then check the example folder as a project of its own:
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter the values in the `chunk-combined` column of the table, click **Save...**, and click **OK** to write the deliverable.
+2. Click **Add...** again and enter the values in the `chunk-split` column. Click **Save...**, click **OK**, and click **Close**.
+
+Check your work. In the editor, choose **Project** > **Check Project**. From the command line, run:
 
 ```bash
-dogsbay-xml check examples/chunking
+dogsbay-xml check .
 ```
 
-The output looks like this example:
+The check builds the two example deliverables after the others. The output looks like this example:
 
 ```
 health   clean
-build    chunk-combined       ok  /home/you/audacity-guide/examples/chunking/out/chunk-combined
-build    chunk-split          ok  /home/you/audacity-guide/examples/chunking/out/chunk-split
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+build    collection           ok  /home/you/my-audacity-guide/out/collection
+build    chunk-combined       ok  /home/you/my-audacity-guide/out/chunk-combined
+build    chunk-split          ok  /home/you/my-audacity-guide/out/chunk-split
 output   2 broken link(s)
-  /home/you/audacity-guide/examples/chunking/out/chunk-split/97fc308b7a258ea5c2fbc53def61887c5203182b.html:12  @href="602efa29ceccc1cbad72daac54430cff43f917d2.html#chunk-parent" — there is no 602efa29ceccc1cbad72daac54430cff43f917d2.html
-  /home/you/audacity-guide/examples/chunking/out/chunk-split/topics/chunk-parent.html:13  @href="97fc308b7a258ea5c2fbc53def61887c5203182b.html" — there is no topics/97fc308b7a258ea5c2fbc53def61887c5203182b.html
+  /home/you/my-audacity-guide/out/chunk-split/39502c951f484001bc0a8ddb78f535deccc74ba8.html:12  @href="6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html#chunk-parent" — there is no 6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html
+  /home/you/my-audacity-guide/out/chunk-split/topics/chunk-parent.html:13  @href="39502c951f484001bc0a8ddb78f535deccc74ba8.html" — there is no topics/39502c951f484001bc0a8ddb78f535deccc74ba8.html
 Not ready: 2 links in the built output lead nowhere.
 ```
 
+To build and check one deliverable only from the command line, run `dogsbay-xml check --deliverable=chunk-split .`.
+
 Open each output's `index.html`. The combined version, `out/chunk-combined/topics/nested.html`, keeps the parent and child on one page. The split version writes two pages: `topics/chunk-parent.html` for the parent, and a page with a generated name at the top of the output folder for the child. The table of contents links to both pages correctly. The links that DITA-OT 4.3.5 generates between parent and child do not: the child link on the parent page looks for the child page in `topics/`, and the parent link on the child page names another generated file that was never written. Generated file names can differ between runs.
 
-Nested topics with `chunk="by-topic"` are valid DITA. The broken links come from how this processor version writes the split pages. Record the results for your version and transformation, and check generated links before you publish split pages. When you finish, delete `examples/chunking/project.json` and `examples/chunking/out/`.
+Nested topics with `chunk="by-topic"` are valid DITA. The broken links come from how this processor version writes the split pages. Record the results for your version and transformation, and check generated links before you publish split pages.
+
+When you finish, remove the two example deliverables:
+
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...**.
+2. Select `chunk-combined`, click **Delete**, and click **OK**. Repeat for `chunk-split`.
+3. Select `full` and click **Set active**, then click **Close**.
+
+The example maps stay in `examples/chunking/`. They are not deliverables of the checkpoint.
 
 ## Check the guide {#check-the-guide}
 
@@ -7337,13 +7020,13 @@ Example output:
 
 ```
 health   clean
-build    full                 ok  /home/you/audacity-guide/out/full
-build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-build    review               ok  /home/you/audacity-guide/out/review
-build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-build    collection           ok  /home/you/audacity-guide/out/collection
+build    full                 ok  /home/you/my-audacity-guide/out/full
+build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+build    review               ok  /home/you/my-audacity-guide/out/review
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+build    collection           ok  /home/you/my-audacity-guide/out/collection
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
@@ -7361,6 +7044,8 @@ Check that the effects and presets pages have stable filenames (`out/full/topics
 - `topicset` and `topicsetref` reuse map branches.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/18-chunking-and-output`. If you use Git, commit your work.
 
 Continue with [Stage 19: bookmap](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap).
 
@@ -7395,7 +7080,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The bookmap {#step-1-the-bookmap}
 
 :::steps
-1. **Create `audacity-book.ditamap`**
+1. **Create `audacity-book.ditamap`** Right-click `my-audacity-guide` in the **Explorer**, choose **New File**, enter `audacity-book.ditamap`, and choose the **Bookmap** template. Replace the template's content with this bookmap:
 
    ```xml {title="audacity-book.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -7519,27 +7204,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read it** The eighth deliverable, `book-pdf`, is the bookmap with the `pdf` transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`, renders the book with Apache FOP. The editor includes both, and **Check Project** builds the PDF with the other seven deliverables into `out/book-pdf/`.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 18: chunking and output.
-   +You are on stage 19: bookmap.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -7555,22 +7225,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
    The check builds eight deliverables. The `book-pdf` line reports the PDF, and the indented line under it summarizes the layout warnings from Apache FOP, such as content that is wider than its column. The warnings do not fail the check. The output check reads links in HTML pages only, so for the PDF it confirms that the build wrote a file.
-3. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. Open it in any PDF viewer. `pdftotext` shows the contents page without a viewer:
+2. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. Open it in any PDF viewer. `pdftotext` shows the contents page without a viewer:
 
    ```bash
    pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
@@ -7612,7 +7282,7 @@ Test the placement of key definitions. Move the two `<keydef>` lines out of `<fr
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/audacity-book.ditamap
+  invalid: /home/you/my-audacity-guide/audacity-book.ditamap
     86:11  The content of element type "bookmap" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -7632,6 +7302,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - The bookmap content model defines the permitted metadata, book divisions, and relationship tables at the top level.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/19-bookmap`. If you use Git, commit your work.
 
 Continue with [Stage 20: troubleshooting](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting).
 
@@ -7666,7 +7338,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The troubleshooting topic {#step-1-the-troubleshooting-topic}
 
 :::steps
-1. **Create `topics/recording-is-silent.dita`**
+1. **Create `topics/recording-is-silent.dita`** Right-click `topics` in the **Explorer**, choose **New File**, enter `recording-is-silent.dita`, and choose the **Troubleshooting** template. Replace the template's content with this topic:
 
    ```xml {title="topics/recording-is-silent.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -7878,27 +7550,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - The book and the podcaster guide do not define `silent`, so the `href` fallback applies there. Both contain the topic, so the link resolves in every deliverable.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 19: bookmap.
-   +You are on stage 20: troubleshooting.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -7914,15 +7571,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 4 warnings (1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, 1 The contents of fo:inline line n exceed the available area in the inline-progression direc…, and 1 other kind)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 13 warnings (9 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -7935,7 +7592,7 @@ Test the content model for a remedy. In the macOS solution, replace the `<steps-
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/recording-is-silent.dita
+  invalid: /home/you/my-audacity-guide/topics/recording-is-silent.dita
     76:16  The content of element type "remedy" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -7955,6 +7612,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - One topic referenced by five maps, including a nested reference in a branch-filtered map.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/20-troubleshooting`. If you use Git, commit your work.
 
 Continue with [Stage 21: hazards and safety](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety).
 
@@ -7989,11 +7648,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The hazard in the shared topic {#step-1-the-hazard-in-the-shared-topic}
 
 :::steps
-1. **Add `images/hazard-hearing.png`** Retrieve the supplied warning-triangle illustration:
+1. **Copy `images/hazard-hearing.png` into your project** You cannot type an image, so copy the warning-triangle illustration from the `images` folder at the `tutorial/21-hazards-and-safety` checkpoint of the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) in one of these ways:
 
-   ```bash
-   git restore --source=origin/tutorial/21-hazards-and-safety -- images/hazard-hearing.png
-   ```
+   - If you have a copy of the sample project, switch it to the `tutorial/21-hazards-and-safety` branch and copy the file from its `images` folder.
+   - Otherwise, open [hazard-hearing.png on the checkpoint](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/21-hazards-and-safety/images/hazard-hearing.png) on GitHub and click **Download raw file**.
+
+   Save the file in `my-audacity-guide/images`, with the same name. To open that folder in your file manager, right-click `images` in the **Explorer** and choose **Reveal in System**. The **Explorer** shows `hazard-hearing.png` under `images`. If it does not appear, right-click `images` and choose **Refresh**.
 2. **Edit `shared/common-notes.dita`**
 
    ```diff {title="shared/common-notes.dita"}
@@ -8119,27 +7779,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The signal word is the `class`: `hazardstatement--caution`, with the panel's parts each a `div` of their own, for a stylesheet to lay out.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 20: troubleshooting.
-   +You are on stage 21: hazards and safety.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap
@@ -8155,15 +7800,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 8 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 17 warnings (11 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -8174,7 +7819,7 @@ Test the hazard statement without its placeholder. Make the reference in the rec
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/recording-your-first-track.dita
+  invalid: /home/you/my-audacity-guide/topics/recording-your-first-track.dita
     31:65  The content of element type "hazardstatement" is incomplete, it must match "(messagepanel+,hazardsymbol*)".
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -8193,6 +7838,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - Every key defined gets used: `silent`, and a key a topic uses is defined in every map that publishes the topic.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/21-hazards-and-safety`. If you use Git, commit your work.
 
 Continue with [Stage 22: software domains](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains).
 
@@ -8347,7 +7994,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: The task and the sample {#step-2-the-task-and-the-sample}
 
 :::steps
-1. **Create `samples/export-mp3.py`**
+1. **Add `samples/export-mp3.py`** The task in the next step pulls this Python script into its listing. In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `samples`. Then add the script to the new folder in one of these ways:
+
+   - Copy `samples/export-mp3.py` from the checkpoint `tutorial/22-software-domains` of the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) into the same path in `my-audacity-guide`. You can also download the file from its [GitHub page](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/22-software-domains/samples/export-mp3.py).
+   - Right-click `samples`, choose **New File**, and enter `export-mp3.py`. The editor creates the file empty. Type or paste the listing, and save the file.
 
    ```text {title="samples/export-mp3.py"}
    #!/usr/bin/env python3
@@ -8561,27 +8211,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The `scripting` key is used the stage it is defined.
 :::
 
-## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
+## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 21: hazards and safety.
-   +You are on stage 22: software domains.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -8597,15 +8232,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -8616,7 +8251,7 @@ Test the position of the repetition separator. Move the `<repsep>` line out of t
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/scripting-reference.dita
+  invalid: /home/you/my-audacity-guide/topics/scripting-reference.dita
     39:20  The content of element type "groupseq" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -8636,6 +8271,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - Code lives in a file and the topic references it.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/22-software-domains`. If you use Git, commit your work.
 
 Continue with [Stage 23: learning](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning).
 
@@ -8670,7 +8307,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The assessment {#step-1-the-assessment}
 
 :::steps
-1. **Create `learning/check-your-understanding.dita`** A new folder, `learning/`, keeps the learning content apart from the topics.
+1. **Create `learning/check-your-understanding.dita`** A new folder, `learning/`, keeps the learning content apart from the topics. In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `learning`. Then create the file in it with **New File**.
 
    ```xml {title="learning/check-your-understanding.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -8856,30 +8493,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The DOCTYPE's public identifier, `-//OASIS//DTD DITA Learning Assessment//EN`, resolves through the editor's built-in catalog, which includes the DITA 1.3 Learning and Training DTDs. You do not need a catalog option or a separate DITA-OT installation.
 :::
 
-## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
+## Step 4: Check your work {#step-4-check-your-work}
 
 :::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 22: software domains.
-   +You are on stage 23: learning.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita *.ditamap
+   dogsbay-xml format -i learning/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
@@ -8892,30 +8514,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
    The assessment is validated with every other file, and each HTML deliverable whose map includes it builds it as a page, for example `out/full/learning/check-your-understanding.html`.
-
-   The stage branch also changes `scripts/check-stage.sh`, the script that maintainers use to verify the branches. You do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate).
 :::
 
 Test the duration content model. Replace the `<lcTime>` line with `<p>About 5 minutes</p>` so that `<lcDuration>` holds a paragraph, and check your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/learning/check-your-understanding.dita
+  invalid: /home/you/my-audacity-guide/learning/check-your-understanding.dita
     33:18  The content of element type "lcDuration" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -8940,6 +8560,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - End of Part 4: a book, a troubleshooting topic, hazard statements, the software domains and an assessment, on the same guide.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/23-learning`. If you use Git, commit your work.
 
 Continue with [Stage 24: drafts and localization](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization).
 
@@ -8990,7 +8612,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <prolog>
    ```
 
-   The same one-line change goes on the root element of 36 `.dita` and `.ditamap` files on the branch: every topic, every glossary entry, the shared topics in `shared/`, the assessment in `learning/`, and all nine maps. The three files in `examples/chunking/` from stage 18 are examples that no deliverable publishes, and they are left unchanged. The `compare` link at the end shows every change.
+   Make the same one-line change on the root element of each `.dita` and `.ditamap` file in your project, 36 files in all: every topic, every glossary entry, the shared topics in `shared/`, the assessment in `learning/`, and all nine maps. Open each file, add `xml:lang="en-GB"` to its root element, and save the file. Leave the three files in `examples/chunking/` from stage 18 unchanged: they are examples that no deliverable publishes. To see every changed file, use the compare link at the end of this lesson.
 2. **Read it**
 
    - `xml:lang` is XML's own language attribute, in the `xml` namespace, so it needs no declaration. Its value is a BCP 47 language tag: `en-GB` for British English, `de` for German, `pt-BR` for Brazilian Portuguese. An element without one inherits its parent's, so one attribute on the root covers the file.
@@ -9279,30 +8901,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    A new effect for the next release, as a table row. `rev="3.4"` is the revision mark from stage 14, which `filters/review.ditaval` flags; `status="new"` says the same thing to a tool that reads status rather than revisions. The new effect's name also joins the `<keywords>` in the prolog, which the metadata policy from stage 13 asks for.
 :::
 
-## Step 4: Update the README and check your work {#step-4-update-the-readme-and-check-your-work}
+## Step 4: Check your work {#step-4-check-your-work}
 
 :::steps
-1. **Change the "You are on" line**
+1. **Format and check your work**
 
-   ```diff {title="README.md"}
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-
-   -You are on stage 23: learning.
-   +You are on stage 24: drafts and localization.
-
-    ## Stages
-
-   ```
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita *.ditamap
+   dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita learning/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
@@ -9315,15 +8922,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -9340,13 +8947,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
    Authoring leftovers (2; warnings):
-     /home/you/audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
+     /home/you/my-audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
    Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
    ```
 
    *Authoring leftovers* is the health report's name for review markup. It counts the draft comment and the required cleanup, two, with the file and line of each. They are warnings: the project is still healthy, the check still reports `Ready`, and the markup goes into the repository as the record of what is unfinished. Stage 25 adds a house rule that makes the same two findings failures, so that they cannot reach a release.
-3. **Read the review build** The check built every deliverable into `out/` in your project.
+2. **Read the review build** The check built every deliverable into `out/` in your project.
 
    The `review` deliverable from stage 14 flags revision `3.4`, so in `out/review/topics/effects-reference.html` the new row carries the flag's color:
 
@@ -9386,22 +8993,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    <div class="required-cleanup" style="background-color: #FFFF99; color:#CC3333; border: 1pt black solid;"><strong>Required cleanup: </strong>[table] Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table once the list is confirmed.</div>
    ```
 
-   The comment and the cleanup are rendered in place, boxed and colored, with the author, disposition and date. Use `args.draft=yes` to include this markup during review, and resolve it before release. Remove the parameter again before you continue, so that the `review` deliverable matches the stage branch: in **Manage Deliverables**, select `review`, click **Edit...**, select the `args.draft` row, click **Remove**, click **Save...** and **OK**, and click **Close**.
+   The comment and the cleanup are rendered in place, boxed and colored, with the author, disposition and date. Use `args.draft=yes` to include this markup during review, and resolve it before release. Remove the parameter again before you continue, so that the `review` deliverable matches the checkpoint: in **Manage Deliverables**, select `review`, click **Edit...**, select the `args.draft` row, click **Remove**, click **Save...** and **OK**, and click **Close**.
 :::
 
 Test an invalid value. Change the new row in `topics/effects-reference.dita` to `status="draft"`, a value that reads well and does not exist, and check your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/effects-reference.dita
+  invalid: /home/you/my-audacity-guide/topics/effects-reference.dita
     72:41  Attribute "status" with value "draft" must have a value from the list "changed deleted new unchanged -dita-use-conref-target ".
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 `status` is an enumerated attribute in the DTD, unlike `rev`, which takes any string. The four values, plus `-dita-use-conref-target`, which every enumerated attribute accepts for conref, are the whole vocabulary; a workflow state such as *draft* or *in review* belongs in a `<draft-comment disposition>` or in `<change-historylist>`, not in `status`.
-
-The formatter used for the recorded examples escaped ampersands repeatedly, changing `&amp;` to `&amp;amp;` on a subsequent pass. Check the diff after formatting with your installed version. Preserve valid XML escaping when an ampersand is required; use *and* where it expresses the intended wording.
 
 Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
@@ -9414,6 +9019,8 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `project-health` reports review markup as *Authoring leftovers*, warnings until a house rule says otherwise.
 
 ## Next lesson {#next-lesson}
+
+**Checkpoint:** `tutorial/24-drafts-and-localization`. If you use Git, commit your work.
 
 Continue with [Stage 25: house rules](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules).
 
@@ -9435,21 +9042,21 @@ type: tutorial
 
 # Practice exercises {#practice-exercises}
 
-Complete each exercise in your authoring repository or a separate practice worktree. Each checkpoint below is a fetched reference branch. Use the [worktree procedure](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path#continue-across-a-skipped-stage) to keep practice changes separate from the supplied lessons.
+Each exercise names a checkpoint: the stage after which you can do it. Complete the exercise in your own project once you finish that stage, or in the [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project) switched to that checkpoint, as described in [Continue across a skipped stage](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path#continue-across-a-skipped-stage). To keep practice changes apart from your guide, create a branch first from the **…** menu of the **Git** panel, or practice in the sample project.
 
 Try the exercise before reading the [suggested solutions](/dogsbay-xml-dita-tutorial-docs/practice/solutions). Passing XML validation is one check; also explain your design choices and inspect the requested result.
 
 ## Topics {#topics}
 
-**Checkpoint:** `origin/tutorial/07-links`.
+**Checkpoint:** `tutorial/07-links`.
 
 Add a task called *Checking a recording before export*. Include a short description, prerequisites, three or four actions, and an observable result. Use UI markup only for actual control labels. Link to the existing export task. Decide whether background about export formats belongs in this task or in the existing reference topic.
 
-**Check:** Validate the new topic with `dogsbay-xml validate`. Read only its `cmd` elements and confirm that the actions form a usable procedure. At this checkpoint the guide already has a map and HTML deliverable. Add the topic to the map, [check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate), and inspect the new page in `out/full/`.
+**Check:** Validate the new topic with **XML** > **Validate** or `dogsbay-xml validate`. Read only its `cmd` elements and confirm that the actions form a usable procedure. At this checkpoint the guide already has a map and HTML deliverable. Add the topic to the map, [check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate), and inspect the new page in `out/full/`.
 
 ## Maps and reuse {#maps-and-reuse}
 
-**Checkpoint:** `origin/tutorial/11-reuse`.
+**Checkpoint:** `tutorial/11-reuse`.
 
 Add a practice map that publishes the recording and export tasks. Include the key definitions and shared resources those tasks require. Reference the existing topics. Add a key for the recording task and link to it by key from your new checking task.
 
@@ -9465,7 +9072,7 @@ The check builds the practice map into `out/practice/` and checks the links in t
 
 ## Conditions {#conditions}
 
-**Checkpoint:** `origin/tutorial/15-subject-scheme`.
+**Checkpoint:** `tutorial/15-subject-scheme`.
 
 Add a short note for podcasters to an existing topic. Publish a beginner variant and the Linux podcaster variant. Predict which output contains the note before building. Then deliberately use `audience="podcatser"` and run `dogsbay-xml validate-conditions -S subject-scheme.ditamap .`.
 
@@ -9473,7 +9080,7 @@ Add a short note for podcasters to an existing topic. Publish a beginner variant
 
 ## Published output {#published-output}
 
-**Checkpoint:** `origin/tutorial/19-bookmap`.
+**Checkpoint:** `tutorial/19-bookmap`.
 
 Build the HTML guide and PDF book. Select one figure, one table, and one cross-reference. Check each in both formats. Write a short report separating source content problems from publishing or layout problems.
 
@@ -9481,7 +9088,7 @@ Build the HTML guide and PDF book. Select one figure, one table, and one cross-r
 
 ## House rules {#house-rules}
 
-**Checkpoint:** `origin/tutorial/25-house-rules`.
+**Checkpoint:** `tutorial/25-house-rules`.
 
 Choose a concept and temporarily remove its short description. Run DTD validation and the Schematron check separately:
 
@@ -9583,13 +9190,15 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/verification.md
 
 ---
 title: Verify excerpts and output links
-description: Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables.
+description: For maintainers. Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables.
 type: how-to
 ---
 
 # Verify excerpts and output links {#verify-excerpts-and-output-links}
 
-The tutorial repository's `main` branch supplies checks for documentation drift and generated links. Run them alongside the stage gate. They require Python 3.9 or later and Git; they use only the Python standard library.
+The tutorial repository's `main` branch supplies checks for documentation drift and generated links. This page is for maintainers of the tutorial. Readers do not need these scripts, a clone, or Git: they check their work with **Project** > **Check Project** in the editor, or `dogsbay-xml check`; see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
+
+Run the scripts alongside the stage gate. They require Python 3.9 or later and Git; they use only the Python standard library.
 
 Keep a clone of `main` for these scripts if you are working in a stage worktree. Historical stage branches do not include the new scripts.
 
@@ -9852,9 +9461,9 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `project-health`'s *Authoring leftovers* warnings | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |
 | Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
 | **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
-| `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
+| Optional: `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
 | `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
-| Nothing new: the README's stage table and the eight deliverables, the `tutorial/final` tag | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
+| Nothing new: the eight deliverables, the final check, and the `tutorial/final` tag | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
 
 ---
 
@@ -10083,19 +9692,25 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/branches.md
 
 ---
 title: Branches
-description: Compare tutorial branches and inspect completed stages in a separate worktree while keeping your own work.
+description: Use the checkpoint branches of the sample project to compare your files, copy files you cannot type, and start a stage from its checkpoint.
 type: reference
 ---
 
 # Branches {#branches}
 
-The tutorial repository is [dogsbay/dogsbay-xml-dita-tutorial](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Stage branches are named `tutorial/NN-slug` and form one chain from an orphan root; see [How the tutorial works](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works).
+The [sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#the-sample-project), [dogsbay/dogsbay-xml-dita-tutorial](https://github.com/dogsbay/dogsbay-xml-dita-tutorial) on GitHub, has one branch for each stage. Each branch is a *checkpoint*: the project as it is at the end of that stage's lesson. The branches are named `tutorial/NN-slug` and form one chain; see [How the tutorial works](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works).
+
+You build the guide in your own folder, `my-audacity-guide`. You do not need the sample project to follow the lessons. Use the checkpoints to:
+
+- Compare a file with the checkpoint when your check fails and you cannot find the cause.
+- Copy files that you cannot type, such as images and the sample script.
+- Start a later stage from its checkpoint when you skip a lesson.
 
 ## The branches {#the-branches}
 
 | Branch | Stage | Page |
 | --- | --- | --- |
-| `tutorial/00-setup` | An empty project the tools recognize | [Stage 00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |
+| `tutorial/00-setup` | The project folder with an empty `topics` folder | [Stage 00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |
 | `tutorial/01-concept` | One concept topic | [Stage 01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |
 | `tutorial/02-first-map` | The first map | [Stage 02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |
 | `tutorial/03-first-build` | The first HTML deliverable | [Stage 03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
@@ -10120,24 +9735,38 @@ The tutorial repository is [dogsbay/dogsbay-xml-dita-tutorial](https://github.co
 | `tutorial/22-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |
 | `tutorial/23-learning` | A learning assessment, validated against the Learning and Training DTDs | [Stage 23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |
 | `tutorial/24-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |
-| `tutorial/25-house-rules` | The house style as Schematron, named in the project config and run by the check; `AGENTS.md` and a skill; the ten violations resolved | [Stage 25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
-| `tutorial/26-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
+| `tutorial/25-house-rules` | The house style as Schematron, selected in the project settings and run by the check; the ten violations resolved; optional `AGENTS.md` and a skill | [Stage 25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
+| `tutorial/26-final` | The complete guide, with every deliverable built | [Stage 26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
 
-`tutorial/26-final` is also tagged `tutorial/final`, a stable name for the finished tree. The branch moves when a middle stage is edited and the chain is rebased; the tag is moved to the new tip by hand once the ladder has been re-checked, so `git show tutorial/final:README.md` always reads a tree that passed the checks.
+`tutorial/26-final` is also tagged `tutorial/final`, a stable name for the finished guide.
+
+Each branch also has files that the lessons do not create, such as `README.md`, `LICENSE`, `NOTICE`, and a `scripts/` folder. They are for the maintainers and for visitors on GitHub. Compare only the files that the lessons create.
 
 `main` is not part of the chain. It is the finished, deliberately broken demo project that the DogsBay XML tutorial uses, and it shares no history with the stage branches.
 
-## Compare two stages {#compare-two-stages}
+## Open a checkpoint {#open-a-checkpoint}
 
-The diff between adjacent branches is the lesson. Locally:
+To open a checkpoint in the editor, [get the sample project](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#get-the-sample-project) and open it. Click the branch name in the status bar. The list shows the stage branches as `origin/tutorial/NN-slug`. Choose one, for example `origin/tutorial/08-figures`. The editor creates a local branch, `tutorial/08-figures`, that tracks it, and switches to it. See [Move between stages](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#move-between-stages).
 
-```bash
-git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
-git diff --stat origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
-git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks -- topics/installing-audacity.dita
+Switching replaces the files in the sample project folder with the files of that checkpoint. Your own project in `my-audacity-guide` does not change.
+
+## Compare your work with a checkpoint {#compare-your-work-with-a-checkpoint}
+
+To compare one file, open the same file in your project and in the sample project, switched to the checkpoint of the lesson that you finished. For example, after stage 06, compare your `topics/exporting-audio.dita` with the one on `tutorial/06-rich-tasks`.
+
+On GitHub, each branch has its own page, and you can read any file there without the sample project. The file `topics/what-is-digital-audio.dita` on `tutorial/08-figures` is at:
+
+```
+https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/08-figures/topics/what-is-digital-audio.dita
 ```
 
-On GitHub, the compare URL is the two branch names joined by three dots:
+## Copy a file from a checkpoint {#copy-a-file-from-a-checkpoint}
+
+Some files cannot be typed from a listing, such as the images in stages 08 and 21. Copy them from the checkpoint of the lesson that adds them into the same path in `my-audacity-guide`. Create any missing folder first with **New Folder** in the **Explorer**. You can also download a file from its GitHub page.
+
+## Compare two stages {#compare-two-stages}
+
+The difference between two adjacent checkpoints is the lesson. Each lesson ends with a link that shows it on GitHub. The compare URL is the two branch names joined by three dots:
 
 ```
 https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/<from>...<to>
@@ -10145,43 +9774,11 @@ https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/<from>...<to>
 
 For example, [compare these stages](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/05-inline-and-block...tutorial/06-rich-tasks). Non-adjacent branches work too: compare `tutorial/00-setup` to `tutorial/08-figures` to see all of Part 1 at once, or `tutorial/08-figures` to `tutorial/13-metadata-and-index` for all of Part 2, or `tutorial/13-metadata-and-index` to `tutorial/18-chunking-and-output` for all of Part 3, `tutorial/18-chunking-and-output` to `tutorial/23-learning` for all of Part 4, or `tutorial/23-learning` to `tutorial/26-final` for all of Part 5. The whole ladder is [compare `tutorial/00-setup` to `tutorial/26-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/26-final).
 
-To read one file as it is on a branch without checking the branch out:
+The comparison also shows changes to the files that the lessons do not create, such as `README.md`.
 
-```bash
-git show origin/tutorial/08-figures:topics/what-is-digital-audio.dita
-git ls-tree -r --name-only origin/tutorial/08-figures
-git log --oneline origin/tutorial/08-figures
-```
+## Start a stage from its checkpoint {#start-a-stage-from-its-checkpoint}
 
-## Inspect a stage and keep your work {#inspect-a-stage-and-keep-your-work}
-
-To switch the tutorial clone to a completed stage in the editor, click the branch name in the status bar and choose the stage's `origin/tutorial/NN-slug` branch. The editor creates a local tracking branch and switches to it. See [Move between stages](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#move-between-stages).
-
-From the command line, you can instead open a completed stage in a separate directory. Run these commands in the tutorial clone, and choose a directory that does not already exist:
-
-```bash
-git worktree add --detach ../audacity-stage-04 origin/tutorial/06-rich-tasks
-cd ../audacity-stage-04
-dogsbay-xml check .
-```
-
-The worktree contains the reference stage. Your original working directory retains its files and uncommitted changes. Switching branches with `git checkout` can carry compatible uncommitted changes across branches; it does not reset your work.
-
-To start a lesson from the preceding reference stage, create a branch in a clean clone or worktree:
-
-```bash
-git switch -c my-stage-04 origin/tutorial/05-inline-and-block
-# ... write the stage ...
-git diff origin/tutorial/06-rich-tasks
-```
-
-After you switch branches, the "You are on" line near the top of `README.md` names the stage:
-
-```bash
-grep 'You are on' README.md
-```
-
-`git diff` compares tracked files. Use `git status --short` as well to find new files that Git has not yet tracked. Review and commit your lesson files when you reach a passing checkpoint.
+To skip a lesson, start the next lesson from the checkpoint of the skipped one. Switch the sample project to that checkpoint and continue the next lesson there. To keep your changes apart from the checkpoint, first create a branch of your own from the **…** menu of the **Git** panel. See [Continue across a skipped stage](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path#continue-across-a-skipped-stage).
 
 ## Editing a middle stage {#editing-a-middle-stage}
 
