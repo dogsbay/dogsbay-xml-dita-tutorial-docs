@@ -27,24 +27,29 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The hazard in the shared topic
 
 ::::steps
-1. **Copy `images/hazard-hearing.png` into your project**
-   You cannot type an image, so copy the warning-triangle illustration
-   from the `images` folder at the `tutorial/21-hazards-and-safety`
-   checkpoint of the [sample project](/start-here/set-up#the-sample-project)
-   in one of these ways:
+1. **Add `images/hazard-hearing.png` to your project**
+   You cannot type an image, so download the warning-triangle
+   illustration from the `images` folder at the
+   `tutorial/21-hazards-and-safety` checkpoint of the
+   [sample project](/start-here/set-up#the-sample-project) in one of these
+   ways:
 
    - If you have a copy of the sample project, switch it to the
-     `tutorial/21-hazards-and-safety` branch and copy the file from its
+     `tutorial/21-hazards-and-safety` branch and use the file in its
      `images` folder.
    - Otherwise, open
      [hazard-hearing.png on the checkpoint](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/21-hazards-and-safety/images/hazard-hearing.png)
      on GitHub and click **Download raw file**.
 
-   Save the file in `my-audacity-guide/images`, with the same name. To
-   open that folder in your file manager, right-click `images` in the
-   **Explorer** and choose **Reveal in System**. The **Explorer** shows
-   `hazard-hearing.png` under `images`. If it does not appear, right-click
-   `images` and choose **Refresh**.
+   If your project has no `images` folder, right-click `my-audacity-guide`
+   in the **Explorer**, choose **New Folder**, enter `images`, and press
+   Enter. Right-click `images` and choose **Add Files...**. In the file
+   chooser, use **Look In** to go to the folder that holds
+   `hazard-hearing.png`, select the file, and click **Add**. The editor
+   copies the file into `images` with the same name. You can also drag the
+   file from your desktop onto `images` in the **Explorer**.
+
+   The **Explorer** shows `hazard-hearing.png` under `images`.
 
 2. **Edit `shared/common-notes.dita`**
 
@@ -242,18 +247,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     7 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     18 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 17 warnings (11 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 17 warnings (11 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
+
+   The note lines count DITA-OT notes from each build. To print them, run
+   `dogsbay-xml check -v .`, or read them in the **Project Validation**
+   panel.
 ::::
 
 Test the hazard statement without its placeholder. Make the reference in the recording task a single

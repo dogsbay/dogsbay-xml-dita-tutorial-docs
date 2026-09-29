@@ -192,11 +192,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    **New Folder**, and enter `samples`. Then add the script to the new
    folder in one of these ways:
 
-   - Copy `samples/export-mp3.py` from the checkpoint
-     `tutorial/22-software-domains` of the
-     [sample project](/start-here/set-up#the-sample-project) into the same
-     path in `my-audacity-guide`. You can also download the file from its
-     [GitHub page](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/22-software-domains/samples/export-mp3.py).
+   - Add the file from the checkpoint `tutorial/22-software-domains` of
+     the [sample project](/start-here/set-up#the-sample-project). Download
+     the file from its
+     [GitHub page](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/22-software-domains/samples/export-mp3.py),
+     or save it from a copy of the sample project on that branch. Then
+     right-click `samples` in the **Explorer** and choose
+     **Add Files...**. In the file chooser, use **Look In** to go to the
+     folder that holds `export-mp3.py`, select the file, and click
+     **Add**. The editor copies the file into `samples`. You can also drag
+     the file from your desktop onto `samples` in the **Explorer**.
    - Right-click `samples`, choose **New File**, and enter
      `export-mp3.py`. The editor creates the file empty. Type or paste the
      listing, and save the file.
@@ -484,18 +489,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     7 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     18 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     6 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
+
+   The note lines count DITA-OT notes from each build. To print them, run
+   `dogsbay-xml check -v .`, or read them in the **Project Validation**
+   panel.
 ::::
 
 Test the position of the repetition separator. Move the

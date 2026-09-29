@@ -26,7 +26,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ## Step 1: Add the images
 
-You cannot type an image, so copy the two PNG files from the sample
+You cannot type an image, so add the two PNG files from the sample
 project. The image map coordinates in step 3 assume the sample project's
 `device-toolbar.png`. If you draw your own images, adjust the coordinates.
 
@@ -35,25 +35,30 @@ project. The image map coordinates in step 3 assume the sample project's
    In the **Explorer**, right-click `my-audacity-guide` and choose
    **New Folder**. Enter `images` and press Enter.
 
-2. **Copy the two images into it**
+2. **Download the two images**
    Get `waveform.png` and `device-toolbar.png` from the `images` folder at
    the `tutorial/08-figures` checkpoint of the
    [sample project](/start-here/set-up#the-sample-project) in one of these
    ways:
 
    - If you have a copy of the sample project, switch it to the
-     `tutorial/08-figures` branch and copy the two files from its `images`
+     `tutorial/08-figures` branch and use the two files in its `images`
      folder.
    - Otherwise, open the
      [images folder of the checkpoint](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/tree/tutorial/08-figures/images)
      on GitHub, open each PNG file, and click **Download raw file**.
 
-   Save both files in `my-audacity-guide/images`, with the same names. To
-   open that folder in your file manager, right-click `images` in the
-   **Explorer** and choose **Reveal in System**.
+3. **Add the images to the `images` folder**
+   In the **Explorer**, right-click `images` and choose **Add Files...**.
+   In the file chooser, use **Look In** to go to the folder that holds the
+   two PNG files, select both files, and click **Add**. The editor copies
+   the files into `images` with the same names.
 
-   The **Explorer** shows the two files under `images`. If they do not
-   appear, right-click `images` and choose **Refresh**.
+   You can also drag the two files from your desktop onto `images` in the
+   **Explorer**.
+
+   The **Explorer** shows `waveform.png` and `device-toolbar.png` under
+   `images`.
 ::::
 
 ## Step 2: Figures, SVG and an equation

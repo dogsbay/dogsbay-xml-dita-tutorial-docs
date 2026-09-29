@@ -385,17 +385,21 @@ looks like this example:
 ```
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
+  5 note(s) — run with --verbose to see them
 build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
 build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
 build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
 build    review               ok  /home/you/my-audacity-guide/out/review
+  4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+  6 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
+  16 note(s) — run with --verbose to see them
 build    chunk-combined       ok  /home/you/my-audacity-guide/out/chunk-combined
 build    chunk-split          ok  /home/you/my-audacity-guide/out/chunk-split
 output   2 broken link(s)
-  /home/you/my-audacity-guide/out/chunk-split/39502c951f484001bc0a8ddb78f535deccc74ba8.html:12  @href="6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html#chunk-parent" — there is no 6fbc57c5fd346376e3c6ad9361ab7bddc42989a8.html
-  /home/you/my-audacity-guide/out/chunk-split/topics/chunk-parent.html:13  @href="39502c951f484001bc0a8ddb78f535deccc74ba8.html" — there is no topics/39502c951f484001bc0a8ddb78f535deccc74ba8.html
+  /home/you/my-audacity-guide/out/chunk-split/40bd459f6b660bc87c8e81941a93d5fa87bcabeb.html:12  @href="f4ef196bd51532a63551187cfa611d619a01bdc0.html#chunk-parent" — there is no f4ef196bd51532a63551187cfa611d619a01bdc0.html
+  /home/you/my-audacity-guide/out/chunk-split/topics/chunk-parent.html:13  @href="40bd459f6b660bc87c8e81941a93d5fa87bcabeb.html" — there is no topics/40bd459f6b660bc87c8e81941a93d5fa87bcabeb.html
 Not ready: 2 links in the built output lead nowhere.
 ```
 
@@ -421,8 +425,10 @@ When you finish, remove the two example deliverables:
 
 1. Choose **Project** > **Project Tools** > **Manage Deliverables...**.
 2. Select `chunk-combined`, click **Delete**, and click **OK**. Repeat for
-   `chunk-split`.
-3. Select `full` and click **Set active**, then click **Close**.
+   `chunk-split`, and click **Close**.
+
+If a deleted deliverable was the active one, `full` becomes the active
+deliverable again.
 
 The example maps stay in `examples/chunking/`. They are not deliverables
 of the checkpoint.
@@ -441,18 +447,23 @@ Example output:
 ```
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
+  5 note(s) — run with --verbose to see them
 build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
 build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
 build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
 build    review               ok  /home/you/my-audacity-guide/out/review
+  4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+  6 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
+  16 note(s) — run with --verbose to see them
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
 
 The unused-key warnings are gone: *About this guide* refers to
-`start-here`, `digital-audio` and `podcast-workflow`.
+`start-here`, `digital-audio` and `podcast-workflow`. The note lines count
+DITA-OT notes from each build; run `dogsbay-xml check -v .` to print them.
 
 Check that the effects and presets pages have stable filenames
 (`out/full/topics/effects-reference.html` and `effect-presets.html`), that

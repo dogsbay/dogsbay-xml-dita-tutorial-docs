@@ -247,16 +247,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The scheme is a map with its own DOCTYPE, and health validates it like
    any other file.
+
+   The note lines count DITA-OT notes from the build. Run
+   `dogsbay-xml check -v .` to print them, or read them in the
+   **Project Validation** panel after **Check Project**. Here they are
+   `DOTJ031I` notes. The `full` deliverable has no DITAVAL file, and the
+   `review` DITAVAL file has no rule for values such as `platform=mac`, so
+   DITA-OT uses the default action and includes the content.
 ::::
 
 Test a value outside the controlled vocabulary. In
@@ -281,11 +290,20 @@ Not ready: the project itself has faults. The build and the built output were no
 29 file(s): 28 pass, 1 with violations.
 ```
 
-The value is valid against the DTD, and DITA-OT on its own would build
-the project anyway. It sees the value only as a warning in its build log:
+The value is valid against the DTD, and DITA-OT on its own builds the
+project anyway. It reports the value only as a warning. To see the
+warning, build the `full` deliverable with the `-v` option, which prints
+DITA-OT warnings and notes:
+
+```bash
+dogsbay-xml build . full -v
+```
+
+The build reports `OK`. Among the notes, the output includes these lines:
 
 ```
-Warning: file:/home/you/my-audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
+    INFO  [DOTJ031I] No rule for 'platform=macos' was found in the DITAVAL file. Using the default action, or a parent prop action if specified. To remove this message, specify a rule for 'platform=macos' in the DITAVAL file.
+    WARN  [DOTJ049W] file:/home/you/my-audacity-guide/topics/installing-audacity.dita:54 The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
 ```
 
 Because no DITAVAL has a rule for `macos`, the row would be included in
@@ -307,7 +325,8 @@ again. Confirm that the check reports `Ready` before you continue.
   **Project** > **Validate Files** >
   **Controlled Values (Subject Scheme)...**, or
   `dogsbay-xml validate-conditions .`, fails on a value outside it;
-  DITA-OT warns with `DOTJ049W` and builds anyway.
+  DITA-OT warns with `DOTJ049W` and builds anyway, and
+  `dogsbay-xml build . full -v` prints the warning.
 - **Check Project** fails on a value outside the scheme, before anything
   is built.
 
