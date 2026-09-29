@@ -110,13 +110,30 @@ Decisions for the branches:
 
 Also noted: the menus were reorganized (**Project** now starts with **Check Project**; **Types** and **Transform** are gone), so the stage 01 video's click coordinates need re-measuring before the next take.
 
+## Editor requests from phase 3, 2026-09-29
+
+The lessons for stages 04 to 26 are converted; where the editor lacks a feature, the lesson keeps the dialog or menu step it should have and the gap is listed here.
+
+| # | Stage | Request | Today |
+|---|---|---|---|
+| 1 | 08, 21, 22 | Bring outside files into the project: drop files from the desktop onto the Explorer, and/or **Add Files...**, or "Copy from sample project" | The Explorer's copy and paste is internal; readers use **Reveal in System** and their file manager |
+| 2 | 24 | Bulk "set attribute" over many files, with dry run and only-if-absent (agreed; `SetAttributeCommand` in progress) | Readers edit 36 files one by one |
+| 3 | 26 | **Create Tag...** in the Git panel's **…** menu | The lesson marks the result with a branch |
+| 4 | 25 | **Check Project** prints the Schematron test (`true() — …`) before the message; `project-health` does not | The lesson quotes it |
+| 5 | 10 | A key-space view (each key, where it is defined) | `dogsbay-xml keys` on the command line |
+| 6 | 15 | A view of a subject scheme's allowed values | `dogsbay-xml list-subjects` on the command line |
+| 7 | 15, 17 | DITA-OT warnings and INFO messages (DOTJ049W, DOTJ047I) are not shown by build or check; a build log panel or verbose option | The lessons quote lines recorded from DITA-OT directly |
+| 8 | 18 | Optional: deliverables in a second project file (**Add...** with a target file, nested project discovery, **Check Project** on a subfolder) | The lesson uses temporary deliverables in the main `project.json` |
+| 9 | 18 | Deleting the active deliverable leaves no active one; fall back to another | The lesson adds a **Set active** step |
+| 10 | Set-up | The folder chooser's **Make New Folder** label is cut off ("Make New F..."); the chooser opens at `/` | Cosmetic |
+
 ## Phases
 
 | Phase | What | Depends on |
 |---|---|---|
 | 1 | Verification above: done, see results | Nothing |
 | 2 | Start-here pages and stages 00 to 03 rewritten; branches' `config.xml` and `project.json` aligned from stage 00 | Editor: first topic makes a DITA project and writes the config |
-| 3 | Stages 04 to 26: bookkeeping removed, settings through the editor, assets from the sample project, paths re-recorded | Editor: bulk attribute action (stage 24), Git init |
+| 3 | Stages 04 to 26: bookkeeping removed, settings through the editor, assets from the sample project, paths re-recorded (done 2026-09-29; editor requests above) | Editor: bulk attribute action (stage 24), Git init |
 | 4 | Videos re-recorded from an empty folder | Phases 2 and 3 |
 
 ## Tests
