@@ -191,6 +191,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    appears in the output.
 
 3. **List the subjects**
+   Choose **Project** > **Map** > **Controlled Values...**. The dialog lists
+   each attribute that the scheme governs, with its **Allowed values**:
+   `@audience` with `beginner` and `podcaster`, and `@platform` with
+   `linux`, `mac` and `windows`.
+
+   From the command line:
 
    ```bash
    dogsbay-xml list-subjects subject-scheme.ditamap
@@ -321,7 +327,7 @@ again. Confirm that the check reports `Ready` before you continue.
   to bind an attribute to it, `<hasNarrower>` to state the hierarchy.
 - `<mapref type="subjectScheme">` in every root map; a scheme applies only
   where it is referenced.
-- `dogsbay-xml list-subjects` shows the vocabulary;
+- **Project** > **Map** > **Controlled Values...**, or `dogsbay-xml list-subjects`, shows the vocabulary;
   **Project** > **Validate Files** >
   **Controlled Values (Subject Scheme)...**, or
   `dogsbay-xml validate-conditions .`, fails on a value outside it;

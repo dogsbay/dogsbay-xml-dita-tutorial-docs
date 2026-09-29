@@ -407,9 +407,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 4: List the key space
 
 ::::steps
-1. **Run the keys command**
-   The DogsBay XML command line resolves the key space of a root map. Pass
-   the root map as the argument.
+1. **Open the key space**
+   Choose **Project** > **Map** > **Key Space...**. The editor resolves the
+   key space of the root map, `audacity-guide.ditamap`, and lists every key
+   with the columns **Key**, **Resolves to**, **Text**, **Defined in** and
+   **Line**. Type in the box above the table to filter the list, and
+   double-click a key to open the map at the line that defines it.
+
+   From the command line, pass the root map to the `keys` command:
 
    ```bash
    dogsbay-xml keys audacity-guide.ditamap
@@ -530,7 +535,7 @@ before you continue.
   of contents.
 - `<keyword keyref>`, `<xref keyref>`, `<link keyref>`, and
   `key/element-id` for an element inside a keyed topic.
-- `dogsbay-xml keys <rootmap>` lists the key space; `project-health`
+- **Project** > **Map** > **Key Space...**, or `dogsbay-xml keys <rootmap>`, lists the key space; `project-health`
   reports undefined keys.
 
 ## Next lesson
