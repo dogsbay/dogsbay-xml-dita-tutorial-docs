@@ -118,13 +118,13 @@ The lessons for stages 04 to 26 are converted; where the editor lacks a feature,
 |---|---|---|---|---|
 | 1 | 08, 21, 22 | Bring outside files into the project: drop files from the desktop onto the Explorer, and/or **Add Files...**, or "Copy from sample project" | The Explorer's copy and paste is internal; readers use **Reveal in System** and their file manager | Done: 17d2a3a. Stages 08, 21 and 22 use **Add Files...** |
 | 2 | 24 | Bulk "set attribute" over many files, with dry run and only-if-absent (agreed; `SetAttributeCommand` in progress) | Readers edit 36 files one by one | Done: 7d1de95, menu c0e0111. Stage 24 not yet updated |
-| 3 | 26 | **Create Tag...** in the Git panel's **…** menu | The lesson marks the result with a branch | Open |
+| 3 | 26 | **Create Tag...** in the Git panel's **…** menu | Stage 26 uses **Tag** > **Create Tag...** | Done, 21cde2a |
 | 4 | 25 | **Check Project** prints the Schematron test (`true() — …`) before the message; `project-health` does not | The lesson quotes it | Done: 891e2a2. Stage 25 quotes the message without the test |
 | 5 | 10 | A key-space view (each key, where it is defined) | `dogsbay-xml keys` on the command line | Open |
 | 6 | 15 | A view of a subject scheme's allowed values | `dogsbay-xml list-subjects` on the command line | Open |
 | 7 | 15, 17 | DITA-OT warnings and INFO messages (DOTJ049W, DOTJ047I) are not shown by build or check; a build log panel or verbose option | The lessons quote lines recorded from DITA-OT directly | Done: 891e2a2, repeats collapsed c0e0111. Stages 15 and 17 record the lines with `-v` |
 | 8 | 18 | Optional: deliverables in a second project file (**Add...** with a target file, nested project discovery, **Check Project** on a subfolder) | The lesson uses temporary deliverables in the main `project.json` | Open |
-| 9 | 18 | Deleting the active deliverable leaves no active one; fall back to another | The lesson adds a **Set active** step | Done: 891e2a2. Stage 18 drops the **Set active** step |
+| 9 | 18 | Deleting the active deliverable leaves no active one; fall back to another | The lesson adds a **Set active** step | Done: 891e2a2, corrected in dd47a88. Stage 18 drops the **Set active** step |
 | 10 | Set-up | The folder chooser's **Make New Folder** label is cut off ("Make New F..."); the chooser opens at `/` | Cosmetic | Done: b615a5d |
 
 ## Phases
