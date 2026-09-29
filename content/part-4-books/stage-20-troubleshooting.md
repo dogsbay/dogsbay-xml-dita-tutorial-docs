@@ -250,7 +250,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```diff title="installation-variants.ditamap"
    --- a/installation-variants.ditamap
    +++ b/installation-variants.ditamap
-   @@ -33,6 +33,8 @@
+   @@ -35,6 +35,8 @@
             <dvrKeyscopePrefix>linux.</dvrKeyscopePrefix>
           </ditavalmeta>
         </ditavalref>
