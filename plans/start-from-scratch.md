@@ -83,13 +83,13 @@ The narrated videos (`dogsbay-promo/xml/voice`) record in `/tmp/my-audacity-guid
 3. **Manage Projects**: set the root map and house rules; diff `config.xml` with the branches.
 4. **Edit Policy**: enter stage 13's three rules; diff.
 
-## Verification results, 2026-09-29 (dogsbay-xml `d3564ad`)
+## Verification results, 2026-09-29 (dogsbay-xml `feature/project-auto-config`, uncommitted, on `d3564ad`)
 
 Run in the editor on an empty `/tmp/my-audacity-guide`:
 
 | Check | Result |
 |---|---|
-| **New Folder** `topics`, then **New File** `what-is-audacity.dita` from **Concept** | Works. Creating the first topic wrote `.dogsbay/config.xml` (type, framework, format style with `newline="lf"`) and `.dogsbay/.gitignore`: editor request 1 is already in this build |
+| **New Folder** `topics`, then **New File** `what-is-audacity.dita` from **Concept** | Works. Creating the first topic wrote `.dogsbay/config.xml` (type, framework, format style with `newline="lf"`) and `.dogsbay/.gitignore`. This is the xml team's implementation of requests 1 and 2 (`ProjectAutoConfigurer` on the first file, the declared style), not yet merged |
 | That `config.xml` against `tutorial/01-concept` | Byte-identical |
 | `.dogsbay/.gitignore` | Same rule (`local.xml`), different comment: the branches take the editor's comment |
 | **XML** > **Validate**, **Project** > **Check Project** | Valid Document; health clean, the orphan warning, "no deliverables yet" |
