@@ -24,8 +24,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Define the product keys
 
 ::::steps
-1. **Create `keydefs-product.ditamap`** in the project root.
-   In the **Explorer**, right-click the project root, choose **New File**,
+1. **Create `keydefs-product.ditamap`** in `my-audacity-guide`.
+   In the **Explorer**, right-click `my-audacity-guide`, choose **New File**,
    and enter `keydefs-product.ditamap`. In the **New XML Document** dialog,
    choose **Key Definition Map** and click **OK**. The template contains
    two sample key definitions:
@@ -416,14 +416,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    ```
-   start-here  →  topics/what-is-audacity.dita   [/home/you/audacity-guide/audacity-guide.ditamap:11]  file: /home/you/audacity-guide/topics/what-is-audacity.dita
-   digital-audio  →  topics/what-is-digital-audio.dita   [/home/you/audacity-guide/audacity-guide.ditamap:15]  file: /home/you/audacity-guide/topics/what-is-digital-audio.dita
-   install  →  topics/installing-audacity.dita   [/home/you/audacity-guide/audacity-guide.ditamap:17]  file: /home/you/audacity-guide/topics/installing-audacity.dita
-   formats  →  topics/supported-audio-formats.dita   [/home/you/audacity-guide/audacity-guide.ditamap:31]  file: /home/you/audacity-guide/topics/supported-audio-formats.dita
-   product-name  →  "Audacity"   [/home/you/audacity-guide/keydefs-product.ditamap:7]
-   product-version  →  "3.4"   [/home/you/audacity-guide/keydefs-product.ditamap:14]
-   download-url  →  "the Audacity download page"   [/home/you/audacity-guide/keydefs-product.ditamap:21]
-   project-extension  →  ".aup3"   [/home/you/audacity-guide/keydefs-product.ditamap:26]
+   start-here  →  topics/what-is-audacity.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/what-is-audacity.dita
+   digital-audio  →  topics/what-is-digital-audio.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:15]  file: /home/you/my-audacity-guide/topics/what-is-digital-audio.dita
+   install  →  topics/installing-audacity.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:17]  file: /home/you/my-audacity-guide/topics/installing-audacity.dita
+   formats  →  topics/supported-audio-formats.dita   [/home/you/my-audacity-guide/audacity-guide.ditamap:31]  file: /home/you/my-audacity-guide/topics/supported-audio-formats.dita
+   product-name  →  "Audacity"   [/home/you/my-audacity-guide/keydefs-product.ditamap:7]
+   product-version  →  "3.4"   [/home/you/my-audacity-guide/keydefs-product.ditamap:14]
+   download-url  →  "the Audacity download page"   [/home/you/my-audacity-guide/keydefs-product.ditamap:21]
+   project-extension  →  ".aup3"   [/home/you/my-audacity-guide/keydefs-product.ditamap:26]
    8 key(s).
    ```
 
@@ -432,28 +432,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    are listed as part of the guide's key space.
 ::::
 
-## Step 5: Update the README and check your work
+## Step 5: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 09: map structure.
-   +You are on stage 10: keys.
-    
-    ## Stages
-    
-   ````
-
-2. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each changed topic and
+   save it, or choose **Project** > **Project Tools** > **Format Project**
+   to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -471,10 +457,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
-     unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15] — nothing references it
+     unused key: project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -497,13 +483,13 @@ names both references. Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
-  /home/you/audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:17  @keyref="product-verson" — key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:63  @keyref="product-verson" — key 'product-verson' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15] — nothing references it
-  unused key: product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14] — nothing references it
-  unused key: project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15] — nothing references it
+  unused key: product-version  [/home/you/my-audacity-guide/keydefs-product.ditamap:14] — nothing references it
+  unused key: project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -513,13 +499,13 @@ line, `dogsbay-xml project-health .` prints the full report:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (2):
-  /home/you/audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
-  /home/you/audacity-guide/topics/installing-audacity.dita:63  key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:17  key 'product-verson' not defined
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:63  key 'product-verson' not defined
 Unused keys (4):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:15]
-  product-version  [/home/you/audacity-guide/keydefs-product.ditamap:14]
-  project-extension  [/home/you/audacity-guide/keydefs-product.ditamap:26]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:15]
+  product-version  [/home/you/my-audacity-guide/keydefs-product.ditamap:14]
+  project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26]
 
 Summary
   Undefined keys                2
@@ -548,6 +534,8 @@ before you continue.
   reports undefined keys.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/10-keys`. If you use Git, commit your work.
 
 Continue with [Stage 11: reuse](/part-2-maps/stage-11-reuse).
 

@@ -1,6 +1,6 @@
 ---
 title: "Stage 25: House rules"
-description: Write the house style as Schematron, select it in the project settings so that the check enforces it, explain it to agents, and fix the ten violations it finds.
+description: Write the house style as Schematron, select it in the project settings so that the check enforces it, and fix the ten violations it finds.
 type: tutorial
 ---
 
@@ -10,10 +10,10 @@ Add Schematron rules for the project's house style: require short
 descriptions, use semantic markup for UI labels, reference product names
 through keys, and resolve review markup before release.
 
-Select `house-style.sch` as the project's house rules and document the
-rules in `AGENTS.md` and the project skill. Resolve the ten reported
-violations, including converting the cleanup content to a table and
-recording the review decision in the change history.
+Select `house-style.sch` as the project's house rules. Resolve the ten
+reported violations, including converting the cleanup content to a table
+and recording the review decision in the change history. If you use an AI
+agent, add the files that describe the rules to it.
 
 **Time:** about 40 minutes.
 **You need:** stage 24 complete.
@@ -25,6 +25,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `house-style.sch`**
+   In the **Explorer**, right-click `my-audacity-guide` and choose
+   **New File**. Enter `house-style.sch` and press Enter. In the
+   **New XML Document** dialog, choose **Schematron Rules** and click
+   **OK**. Replace the template's content with this listing and save the
+   file:
 
    ```xml title="house-style.sch"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -154,16 +159,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
    House rules (4 of 46 files):
-     /home/you/audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
-     /home/you/audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
-     /home/you/audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
-     /home/you/audacity-guide/topics/exporting-audio.dita:78 — Remove draft-comment before publishing.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:49 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:50 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:51 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:52 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
+     /home/you/my-audacity-guide/audacity-guide.ditamap:7 — Do not hardcode the product name "Audacity" in a shortdesc; use keyref="product-name".
+     /home/you/my-audacity-guide/topics/about-this-guide.dita:19 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/my-audacity-guide/topics/about-this-guide.dita:25 — Do not hardcode the product name "Audacity" in prose; use a keyword with keyref="product-name".
+     /home/you/my-audacity-guide/topics/exporting-audio.dita:78 — Remove draft-comment before publishing.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:49 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:50 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:51 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:52 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:54 — Remove required-cleanup before publishing.
 
    Summary
      House rules                  10  in 4 of 46 files
@@ -174,8 +179,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
        Remove required-cleanup before publishing.                        1
    ```
 
-   Ten violations in four files, every one a house-style decision the
-   README had stated and nobody had checked. The main map's `<shortdesc>`
+   Ten violations in four files, every one a house-style decision that
+   nothing had checked until now. The main map's `<shortdesc>`
    spells out the product name. *About this guide* names it twice in
    prose, once as part of a title and once as part of an organization.
    The podcast workflow has five decorative `<b>`s and the
@@ -312,158 +317,41 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `<change-summary>` of the `<change-historylist>` from stage 24.
 ::::
 
-## Step 4: Tell the agents
+## Step 4: Optional: tell your AI agent
+
+If you use an AI agent to edit the guide, copy two files from the
+checkpoint `tutorial/25-house-rules` of the
+[sample project](/start-here/set-up#the-sample-project) into the same paths
+in `my-audacity-guide`:
+
+- `AGENTS.md`, in the project folder. An AI coding agent reads this file
+  before it changes a project; most agent tools look for it by that name.
+  It describes the layout of the project, states the house style in
+  prose, including the rules that Schematron cannot check, such as titles
+  in sentence case, and names the checks to run.
+- `.xagent/skills/audacity-house-style/SKILL.md`, a skill: a recipe for one
+  task, *apply house style*. The `name` and `description` in its front
+  matter are what an agent matches a request against. The body lists the
+  steps and ends with *validate before reporting done*.
+
+Some statements in `AGENTS.md` are for the maintainers of the sample
+project, for example the `scripts/check-stage.sh` script. In your own
+project, check your work with **Check Project** or `dogsbay-xml check .`.
+
+With these files, the same rules exist for three readers: the machine in
+`house-style.sch`, which fails the check; the person or agent reading the
+project in `AGENTS.md`; and the agent given a task in the skill. Keep them
+in step: when you add a rule to the Schematron, add it to the prose the
+same day. If you do not use an AI agent, skip this step. The check does not
+read these files.
+
+## Step 5: Check your work
 
 ::::steps
-1. **Create `AGENTS.md`**
+1. **Format and check your work**
 
-   ```md title="AGENTS.md"
-   # Project context — Audacity User Guide (DITA)
-   
-   This is the documentation set for **Audacity**, authored in DITA 1.3 and built
-   with DogsBay XML. It is also the finished state of a step-by-step DITA tutorial:
-   every `tutorial/NN-*` branch adds one feature, and this file describes the
-   conventions the finished project keeps.
-   
-   ## Layout
-   
-   - `audacity-guide.ditamap` — the main guide (start here). `beginner-guide`,
-     `podcaster-guide`, `audacity-book` (PDF), `audacity-collection` (all three
-     guides, key-scoped) and `installation-variants` (branch filtering) reuse the
-     same topics.
-   - `topics/` — concepts, tasks, references, a troubleshooting topic;
-     `topics/glossary/` — glossary entries; `learning/` — a learning assessment;
-     `shared/` — warehouses pulled in by conref; `samples/` — code pulled in by
-     coderef; `images/` — illustrations.
-   - `keydefs-product.ditamap`, `keydefs-glossary.ditamap` — key definitions.
-   - `subject-scheme.ditamap` — the controlled values for `@platform`
-     (`windows`, `mac`, `linux`) and `@audience` (`beginner`, `podcaster`).
-   - `filters/` — DITAVAL files, one per deliverable plus `review.ditaval` (flags).
-   - `project.json` — the DITA-OT project file: every deliverable this guide ships.
-   - `.dogsbay/config.xml` — default root map and deliverable, the metadata
-     policy, the house rules (`house-style.sch`) and the format style.
-   - `scripts/check-stage.sh` — the gate: validation, project health,
-     controlled values, house rules and a build of every deliverable.
-   
-   ## House style
-   
-   - **Never hardcode the product name, version, download URL or project
-     extension.** Use the keys `product-name`, `product-version`, `download-url`,
-     `project-extension`: `<keyword keyref="product-name"/>`. Literals inside
-     `<filepath>`, `<codeph>`, `<codeblock>` and `<cite>` are fine.
-   - **UI labels** use `<uicontrol>`, never `<b>`; menu paths use
-     `<menucascade>`; a mnemonic is `<shortcut>` inside `<uicontrol>`.
-   - **Reuse, don't repeat.** Shared steps, notes and hazards live in `shared/`
-     and are pulled in with `conref` or `conkeyref`.
-   - **Conditions** use only the values in `subject-scheme.ditamap`;
-     `validate-conditions` fails on anything else.
-   - **Every topic needs a `<shortdesc>`** right after the title, under about 155
-     characters, leading with what the topic is about.
-   - **Every topic needs keywords** in its prolog; tasks need a `<created>` date;
-     an `<author>` is recommended. The metadata policy in `.dogsbay/config.xml`
-     enforces this.
-   - **Review markup does not ship.** Resolve `<draft-comment>` and
-     `<required-cleanup>` before a release; the house rules report them.
-   - **Titles** are sentence case. **Language** is `xml:lang="en-GB"` on every
-     root element; product names and code carry `translate="no"`.
-   - **Format** every file with `dogsbay-xml format -i` before committing. Do not
-     put character entities such as `&amp;` in text; write "and".
-   
-   ## Checks
-   
-   Run `scripts/check-stage.sh` before every commit; it must print `STAGE OK`.
-   For one dimension: `dogsbay-xml validate-project .`, `project-health .`,
-   `validate-conditions -S subject-scheme.ditamap .`,
-   `project-health --include=schematron .`, or `dita --project=project.json`.
-   ```
-
-2. **Create `.xagent/skills/audacity-house-style/SKILL.md`**
-
-   ```md title=".xagent/skills/audacity-house-style/SKILL.md"
-   ---
-   name: audacity-house-style
-   description: Apply the Audacity guide's house style to DITA topics — use product keys instead of hardcoded names, semantic UI elements instead of bold, conref shared content, and sentence-case titles. Use when asked to apply house style, clean up a topic, or make content consistent.
-   ---
-   
-   # Audacity guide house style
-   
-   When asked to apply house style (or to "clean up" / "make consistent") to one or
-   more DITA topics, apply these rules and re-validate afterwards:
-   
-   1. **Product references → keys.** Replace any literal "Audacity", the version
-      number, the download URL, or the project extension (`.aup3`) with the matching
-      key:
-      - `Audacity` → `<keyword keyref="product-name"/>`
-      - version (e.g. `3.4`) → `<keyword keyref="product-version"/>`
-      - download URL → `<keyword keyref="download-url"/>`
-      - `.aup3` → `<keyword keyref="project-extension"/>`
-      Keys are defined in `keydefs-product.ditamap`. Use `list_keys` to confirm.
-      Do **not** replace literals inside `<codeblock>` or `<filepath>` examples
-      (e.g. a shell command or `C:\Program Files\Audacity`).
-   
-   2. **UI labels → `<uicontrol>`.** Replace `<b>Record</b>`-style highlighting of
-      buttons, menu items, and field names with `<uicontrol>Record</uicontrol>`.
-      Multi-level menu paths use
-      `<menucascade><uicontrol>…</uicontrol>…</menucascade>`.
-   
-   3. **Deduplicate via conref.** If a step or note is copied verbatim from
-      `shared/common-steps.dita` or `shared/common-notes.dita`, replace the copy with
-      a `conref` to the shared element instead of repeating it.
-   
-   4. **Titles** are sentence case.
-   
-   5. After editing, **validate** each changed topic and fix any errors before
-      reporting done.
-   
-   Make the minimal edits needed; preserve meaning and surrounding markup.
-   ```
-
-3. **Read them**
-
-   - `AGENTS.md` is the file an AI coding agent reads before it touches a
-     project; most agent tools look for it by that name. It is also the
-     shortest description of the project for a person. The layout section
-     says where things are; the house style section says the same rules
-     as `house-style.sch`, plus the ones a rule cannot check, such as
-     titles in sentence case and the formatter's `&amp;` limitation; the
-     checks section names the commands for each part of the check.
-     `scripts/check-stage.sh` is the script that maintainers use to
-     verify the stage branches; in your own project, use
-     **Check Project** or `dogsbay-xml check .`.
-   - The skill is a recipe for one task. Its front matter `name` and
-     `description` are what an agent matches a request against, so the
-     description names the task in the words a person would use, *apply
-     house style*, *clean up a topic*, *make consistent*. The body is the
-     steps, in order, ending with *validate before reporting done*.
-   - The same rules now exist three times, for three readers: the
-     machine in `house-style.sch`, which fails the check; the person or
-     agent reading the project in `AGENTS.md`; the agent given a task in
-     the skill. Keep them in step: a rule added to the Schematron is added
-     to the prose the same day.
-::::
-
-## Step 5: Update the README and check your work
-
-::::steps
-1. **Change the "You are on" line and the layout**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 24: drafts and localization.
-   +You are on stage 25: house rules.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** >
+   **Format** and save the file. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -481,15 +369,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -498,7 +386,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Health now runs the house rules with everything else, because the
    project names them. Step 3 resolved the ten violations,
    including the two stage 24 warnings, so health is clean. From now on a
-   house-rule violation stops the check at health, so a branch cannot
+   house-rule violation stops the check at health, so a release cannot
    carry unresolved review markup.
 ::::
 
@@ -509,7 +397,7 @@ Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48  true() — Use uicontrol for UI labels (and drop decorative bold); do not use b.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -521,7 +409,7 @@ the rules:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: house-style.sch (project config)
 House rules (1 of 46 files):
-  /home/you/audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
+  /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:48 — Use uicontrol for UI labels (and drop decorative bold); do not use b.
 
 Summary
   House rules                   1  in 1 of 46 files
@@ -548,10 +436,12 @@ before you continue.
   the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes
   its table, an answered `<draft-comment>` becomes a `<change-summary>`.
-- The same rules for three readers: the Schematron, `AGENTS.md` and a
-  skill.
+- Optionally, the same rules for three readers: the Schematron,
+  `AGENTS.md` and a skill.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/25-house-rules`. If you use Git, commit your work.
 
 Continue with [Stage 26: final](/part-5-governance/stage-26-final).
 

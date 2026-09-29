@@ -26,8 +26,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `filters/platform-windows.ditaval`, `filters/platform-mac.ditaval` and `filters/platform-linux.ditaval`**
-   Platform only; no audience rules, because the variants map has no
-   audience-specific content.
+   In the **Explorer**, right-click the `filters` folder, choose
+   **New File**, enter the file name, and choose the **DITAVAL** template.
+   Replace the template's rule with the rules below. The files filter by
+   platform only; they have no audience rules, because the variants map
+   has no audience-specific content.
 
    ```text title="filters/platform-windows.ditaval"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -64,6 +67,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `installation-variants.ditamap`**
+   Right-click `my-audacity-guide` in the **Explorer**, choose
+   **New File**, enter `installation-variants.ditamap`, and choose the
+   **Map** template. Replace the template's content with this map:
 
    ```xml title="installation-variants.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -152,7 +158,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    DITAVAL file.
 ::::
 
-## Step 3: The deliverable, the README and the check
+## Step 3: The deliverable and the check
 
 ::::steps
 1. **Add the deliverable**
@@ -172,23 +178,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    filtering. Click **Save...**, click **OK** to write the deliverable, and
    click **Close**.
 
-2. **Change the "You are on" line and the layout**
-
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 15: subject scheme.
-   +You are on stage 16: branch filtering.
-    
-    ## Stages
-    
-   ````
-
-3. **Check your work**
+2. **Check your work**
    In the editor, choose **Project** > **Check Project** and read the
    result in the **Project Validation** panel. From the command line, run:
 
@@ -200,15 +190,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -216,7 +206,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The new filters use only controlled values: the check includes the
    controlled values from stage 15, and it reads the DITAVAL files too.
 
-4. **Read the output**
+3. **Read the output**
    `out/install-variants/topics/` has three copies
    of each of the two topics:
 
@@ -268,17 +258,17 @@ looks like this example:
 
 ```
 health   clean, with warnings
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-build    install-variants     ok  /home/you/audacity-guide/out/install-variants
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
 output   2 broken link(s)
-  /home/you/audacity-guide/out/install-variants/index.html:19  @href="bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html" — there is no bb4ce8d590aa4237e46b531b3aefefc4bd59bc72-1.html
-  /home/you/audacity-guide/out/install-variants/index.html:20  @href="3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html" — there is no 3a9565a84e5dcf731b49a1210f5c81a0353d3532-1.html
+  /home/you/my-audacity-guide/out/install-variants/index.html:23  @href="e676c532f446de854f19d505d53ab754fc11517b-1.html" — there is no e676c532f446de854f19d505d53ab754fc11517b-1.html
+  /home/you/my-audacity-guide/out/install-variants/index.html:24  @href="397e15314df15a1ce6ffe81cf005134f385e5428-1.html" — there is no 397e15314df15a1ce6ffe81cf005134f385e5428-1.html
 Not ready: 2 links in the built output lead nowhere.
 ```
 
-The generated names can differ between runs. The check reports the symptom,
+The generated names and line numbers can differ between runs. The check reports the symptom,
 two links that lead nowhere, and not the cause. Check the `list-branches`
 output, and the output folder, whenever you add a variant.
 
@@ -298,6 +288,9 @@ Confirm that the check reports `Ready` before you continue.
 - `dogsbay-xml list-branches <map>` enumerates the variants.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/16-branch-filtering`. If you use Git, commit your
+work.
 
 Continue with [Stage 17: key scopes](/part-3-conditions/stage-17-key-scopes).
 

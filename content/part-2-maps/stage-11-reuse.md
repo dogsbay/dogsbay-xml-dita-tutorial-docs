@@ -30,7 +30,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    A task whose steps exist to be referenced. Every reusable element has an
    `@id`.
 
-   In the **Explorer**, right-click the project root, choose
+   In the **Explorer**, right-click `my-audacity-guide`, choose
    **New Folder**, and enter `shared`. Then right-click the `shared`
    folder, choose **New File**, enter `common-steps.dita`, and choose the
    **Task** template. Replace the title placeholder, type the short
@@ -301,27 +301,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      into a `<ul>`.
 ::::
 
-## Step 4: Update the README, check your work and check what was published
+## Step 4: Check your work and check what was published
 
 ::::steps
-1. **Change the "You are on" line and the layout**
-
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 10: keys.
-   +You are on stage 11: reuse.
-    
-    ## Stages
-    
-   ````
-
-2. **Format and check your work**
-   The format command covers `shared/` too.
+1. **Format and check your work**
+   Format the changed topics: choose **XML** > **Format** in each one and
+   save it, or choose **Project** > **Project Tools** > **Format Project**
+   to format every file at once. On the command line, the format command
+   covers `shared/` too:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita
@@ -339,9 +326,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -358,11 +345,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   NOT CLEAN
-     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
-     /home/you/audacity-guide/shared/common-steps.dita:28  <step> — push target id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  <step> — push target id 'play-back' not found in recording-your-first-track.dita
      (run project-health for the full report)
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
    Not ready: the project itself has faults. The build and the built output were not checked.
    ```
 
@@ -371,15 +358,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    Conref pushes (1):
-     /home/you/audacity-guide/shared/common-steps.dita:28  <step> push target id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  <step> push target id 'play-back' not found in recording-your-first-track.dita
    Broken element ids (1):
-     /home/you/audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
+     /home/you/my-audacity-guide/shared/common-steps.dita:28  @conref="../topics/recording-your-first-track.dita#recording-your-first-track/play-back" — element id 'play-back' not found in recording-your-first-track.dita
    ```
 
    The diagnostics name the id that the push looks for, `play-back`, not the
    new id. Restore the id and check again.
 
-3. **Check the output**
+2. **Check the output**
    The check builds the guide into `out/full/`. The folder has one page
    per topic in the table of contents and nothing for the shared topics:
 
@@ -412,10 +399,10 @@ health. Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
+  /home/you/my-audacity-guide/topics/removing-background-noise.dita:11  @conkeyref="common-note/backup-warning" — key 'common-note' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -425,10 +412,10 @@ the full report:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
-  /home/you/audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
+  /home/you/my-audacity-guide/topics/removing-background-noise.dita:11  key 'common-note' not defined
 Unused keys (2):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18]
 
 Summary
   Undefined keys                1
@@ -445,8 +432,8 @@ dogsbay-xml build . full
 The first lines of the example output:
 
 ```
-full (html5) → /home/you/audacity-guide/out/full: FAILED — 1 error(s)
-    file:/home/you/audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
+full (html5) → /home/you/my-audacity-guide/out/full: FAILED — 1 error(s)
+    [DOTJ046E] file:/home/you/my-audacity-guide/topics/removing-background-noise.dita:11 The @conkeyref attribute value 'common-note/backup-warning' cannot be resolved because it does not contain a key or the key is not defined. Using the @conref attribute as fallback if it exists.
 ```
 
 DITA-OT resolves `@conkeyref` only through the root map's key space, and an
@@ -461,11 +448,11 @@ and the check names it with the line, column, and message. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/trimming-audio.dita
+  invalid: /home/you/my-audacity-guide/topics/trimming-audio.dita
     37:77  The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:11] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:18] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:11] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -474,7 +461,7 @@ the full report. It begins:
 
 ```
 Invalid files (1 of 13):
-  /home/you/audacity-guide/topics/trimming-audio.dita:
+  /home/you/my-audacity-guide/topics/trimming-audio.dita:
     37:77  error: The content of element type "step" is incomplete, it must match "((note|hazardstatement)*,cmd,(choices|choicetable|info|itemgroup|stepxmp|substeps|tutorialinfo)*,stepresult?,steptroubleshooting?)".
 ```
 
@@ -498,6 +485,8 @@ before you continue.
 - An undefined key behind a `@conkeyref` is a DITA-OT error, `DOTJ046E`.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/11-reuse`. If you use Git, commit your work.
 
 Continue with [Stage 12: glossary](/part-2-maps/stage-12-glossary).
 

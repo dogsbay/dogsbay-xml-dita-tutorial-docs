@@ -3,8 +3,8 @@
 ## Reference
 
 - [Review accessibility](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/accessibility.md): Review link text, image alternatives, table headers, keyboard navigation, and reading order in the published tutorial output.
-- [Verify excerpts and output links](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/verification.md): Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables.
+- [Verify excerpts and output links](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/verification.md): For maintainers. Check lesson excerpts against stage branches and detect missing pages, fragment targets, and assets across built HTML deliverables.
 - [Known output issues](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues.md): The final reference guide checks clean. Review the output defects of earlier builds, how the stages fixed them, and what the check does not cover.
 - [Element index](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/element-index.md): Every DITA element and attribute in the tutorial, with the stage that introduces it, from stage 00 to stage 26.
 - [The stage gate (maintainers)](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/the-gate.md): For maintainers. scripts/check-stage.sh, the script that verifies every stage branch: its steps, switches, variables, exit codes, and why not xmllint.
-- [Branches](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/branches.md): Compare tutorial branches and inspect completed stages in a separate worktree while keeping your own work.
+- [Branches](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/branches.md): Use the checkpoint branches of the sample project to compare your files, copy files you cannot type, and start a stage from its checkpoint.

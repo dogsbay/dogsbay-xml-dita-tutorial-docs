@@ -340,26 +340,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      for expert readers can drop it.
 ::::
 
-## Step 5: Update the map and the README, and check your work
+## Step 5: Update the map and check your work
 
 ::::steps
-1. **Change the "You are on" line**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 05: inline and block.
-   +You are on stage 06: rich tasks.
-    
-    ## Stages
-    
-   ```
-
-2. **Add the topics to the map**
+1. **Add the topics to the map**
    Add a `<topicref>` for each new topic to `audacity-guide.ditamap`.
    Do this before you check your work: the check reports a topic that
    no map refers to as an orphan topic. The complete map at this
@@ -383,11 +367,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    </map>
    ```
 
-3. **Format and check your work**
-   Format the topics:
+2. **Format and check your work**
+   Format the map and the topics: choose **XML** > **Format** in each
+   changed file and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then choose **Project** > **Check Project** in the editor, or run
@@ -396,7 +383,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -410,7 +397,7 @@ and stops. The output looks like this example:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/installing-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/installing-audacity.dita
     68:14  The content of element type "taskbody" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -422,7 +409,7 @@ the full report. For example:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Invalid files (1 of 10):
-  /home/you/audacity-guide/topics/installing-audacity.dita:
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:
     68:14  error: The content of element type "taskbody" does not match its content model.
 
 Summary
@@ -445,6 +432,8 @@ before you continue.
 - `<tutorialinfo>` for the learner, `<info>` for everyone.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/06-rich-tasks`. If you use Git, commit your work.
 
 Continue with [Stage 07: links](/part-1-topics/stage-07-links).
 

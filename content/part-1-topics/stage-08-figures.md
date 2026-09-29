@@ -18,38 +18,42 @@ topics therefore start with `../images/`.
 for the starting checkpoint and the next core lesson.
 
 **Time:** about 25 minutes.
-**You need:** stage 07 complete, and the two PNG files from the branch (see
-step 1).
+**You need:** stage 07 complete, and the two PNG files from the sample
+project (see step 1).
 
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
 ## Step 1: Add the images
 
+You cannot type an image, so copy the two PNG files from the sample
+project. The image map coordinates in step 3 assume the sample project's
+`device-toolbar.png`. If you draw your own images, adjust the coordinates.
+
 ::::steps
-1. **Create `images/` and copy the two files**
-   Take `images/waveform.png` and `images/device-toolbar.png` from the
-   `tutorial/08-figures` branch, or draw your own; the image map coordinates
-   in step 3 assume the branch's `device-toolbar.png`.
+1. **Create the `images` folder**
+   In the **Explorer**, right-click `my-audacity-guide` and choose
+   **New Folder**. Enter `images` and press Enter.
 
-   ```bash
-   mkdir images
-   git restore --source=origin/tutorial/08-figures -- images/waveform.png images/device-toolbar.png
-   ```
+2. **Copy the two images into it**
+   Get `waveform.png` and `device-toolbar.png` from the `images` folder at
+   the `tutorial/08-figures` checkpoint of the
+   [sample project](/start-here/set-up#the-sample-project) in one of these
+   ways:
 
-2. **Write `images/README.md`**
-   It records where the images came from and the MathML caveat below.
+   - If you have a copy of the sample project, switch it to the
+     `tutorial/08-figures` branch and copy the two files from its `images`
+     folder.
+   - Otherwise, open the
+     [images folder of the checkpoint](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/tree/tutorial/08-figures/images)
+     on GitHub, open each PNG file, and click **Download raw file**.
 
-   ```md title="images/README.md"
-   Illustrations for the tutorial, generated (not screenshots): `waveform.png`
-   and `device-toolbar.png`. CC BY 4.0 like the rest of the project.
-   
-   Note on equations: `what-is-digital-audio.dita` carries the decibel formula as
-   MathML inside `<equation-block>`, with a plain-text `<ph>` alternative beside
-   it. DITA-OT's html5 transform drops `<mathml>` (it is a `foreign` element)
-   unless a MathML plugin is installed, so the HTML shows the text form; a
-   processor that renders MathML shows the formula.
-   ```
+   Save both files in `my-audacity-guide/images`, with the same names. To
+   open that folder in your file manager, right-click `images` in the
+   **Explorer** and choose **Reveal in System**.
+
+   The **Explorer** shows the two files under `images`. If they do not
+   appear, right-click `images` and choose **Refresh**.
 ::::
 
 ## Step 2: Figures, SVG and an equation
@@ -205,28 +209,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      section link in stage 07.
 ::::
 
-## Step 4: Update the README and check your work
+## Step 4: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
-   The layout section gains the `images/` folder.
-
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 07: links.
-   +You are on stage 08: figures.
-    
-    ## Stages
-    
-   ````
-
-2. **Format and check your work**
-   Format the topics:
+1. **Format and check your work**
+   Format the topics: choose **XML** > **Format** in each changed topic and
+   save it, or choose **Project** > **Project Tools** > **Format Project** to
+   format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
@@ -238,7 +227,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
@@ -251,7 +240,7 @@ example:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
+  /home/you/my-audacity-guide/topics/what-is-digital-audio.dita:18  @href="../images/wavefrom.png" — target not found
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
@@ -259,9 +248,10 @@ Not ready: the project itself has faults. The build and the built output were no
 Undo the change and check again. Confirm that the check reports `Ready`
 before you continue.
 
-## Publish your changes
+## The map at this checkpoint
 
-Add the lesson's topics to `audacity-guide.ditamap`, then check your work again. The check rebuilds the guide in `out/full/`. The complete map at this checkpoint is:
+This lesson adds no topics, so the map does not change. For reference, the
+complete map at this checkpoint is:
 
 ```xml title="audacity-guide.ditamap"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -281,10 +271,6 @@ Add the lesson's topics to `audacity-guide.ditamap`, then check your work again.
 </map>
 ```
 
-```bash
-dogsbay-xml check .
-```
-
 ## What you learned
 
 - `<fig>` with `<title>` and an `@id`; `<image>` with `@href`, `@placement`,
@@ -300,6 +286,8 @@ dogsbay-xml check .
   guide, published through the map and build introduced in stages 02 and 03.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/08-figures`. If you use Git, commit your work.
 
 Continue with [Stage 09: map structure](/part-2-maps/stage-09-map-structure).
 

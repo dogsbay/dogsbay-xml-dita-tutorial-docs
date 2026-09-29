@@ -186,7 +186,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: The task and the sample
 
 ::::steps
-1. **Create `samples/export-mp3.py`**
+1. **Add `samples/export-mp3.py`**
+   The task in the next step pulls this Python script into its listing.
+   In the **Explorer**, right-click `my-audacity-guide`, choose
+   **New Folder**, and enter `samples`. Then add the script to the new
+   folder in one of these ways:
+
+   - Copy `samples/export-mp3.py` from the checkpoint
+     `tutorial/22-software-domains` of the
+     [sample project](/start-here/set-up#the-sample-project) into the same
+     path in `my-audacity-guide`. You can also download the file from its
+     [GitHub page](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/22-software-domains/samples/export-mp3.py).
+   - Right-click `samples`, choose **New File**, and enter
+     `export-mp3.py`. The editor creates the file empty. Type or paste the
+     listing, and save the file.
 
    ```text title="samples/export-mp3.py"
    #!/usr/bin/env python3
@@ -446,28 +459,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The `scripting` key is used the stage it is defined.
 ::::
 
-## Step 3: Update the README and check your work
+## Step 3: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 21: hazards and safety.
-   +You are on stage 22: software domains.
-    
-    ## Stages
-    
-   ````
-
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** >
+   **Format** and save the file. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
@@ -485,15 +483,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -507,7 +505,7 @@ at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/scripting-reference.dita
+  invalid: /home/you/my-audacity-guide/topics/scripting-reference.dita
     39:20  The content of element type "groupseq" does not match its content model.
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -536,6 +534,8 @@ before you continue.
 - Code lives in a file and the topic references it.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/22-software-domains`. If you use Git, commit your work.
 
 Continue with [Stage 23: learning](/part-4-books/stage-23-learning).
 

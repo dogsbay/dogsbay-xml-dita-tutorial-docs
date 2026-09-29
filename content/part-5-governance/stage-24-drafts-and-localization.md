@@ -42,12 +42,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <prolog>
    ```
 
-   The same one-line change goes on the root element of 36 `.dita` and
-   `.ditamap` files on the branch: every topic, every glossary entry, the
-   shared topics in `shared/`, the assessment in `learning/`, and all
-   nine maps. The three files in `examples/chunking/` from stage 18 are
-   examples that no deliverable publishes, and they are left unchanged.
-   The `compare` link at the end shows every change.
+   Make the same one-line change on the root element of each `.dita` and
+   `.ditamap` file in your project, 36 files in all: every topic, every
+   glossary entry, the shared topics in `shared/`, the assessment in
+   `learning/`, and all nine maps. Open each file, add
+   `xml:lang="en-GB"` to its root element, and save the file. Leave the
+   three files in `examples/chunking/` from stage 18 unchanged: they are
+   examples that no deliverable publishes. To see every changed file,
+   use the compare link at the end of this lesson.
 
 2. **Read it**
 
@@ -405,31 +407,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    the prolog, which the metadata policy from stage 13 asks for.
 ::::
 
-## Step 4: Update the README and check your work
+## Step 4: Check your work
 
 ::::steps
-1. **Change the "You are on" line**
+1. **Format and check your work**
 
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 23: learning.
-   +You are on stage 24: drafts and localization.
-    
-    ## Stages
-    
-   ```
-
-2. **Format and check your work**
-
-   Format the files:
+   Format each file that you changed: in the editor, choose **XML** >
+   **Format** and save the file. From the command line, format them all:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita *.ditamap
+   dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita learning/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** >
@@ -444,15 +431,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
-   build    book-pdf             ok  /home/you/audacity-guide/out/book-pdf
-     PDF rendering reported 9 warnings (2 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
+   build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
+     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -471,8 +458,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
    Authoring leftovers (2; warnings):
-     /home/you/audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
-     /home/you/audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
+     /home/you/my-audacity-guide/topics/exporting-audio.dita:78  draft-comment: Check the 3.4 export dialog: is the metadata tags step still a separate dialog?
+     /home/you/my-audacity-guide/topics/podcast-production-workflow.dita:54  required-cleanup: Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table…
    Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
    ```
 
@@ -484,7 +471,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    rule that makes the same two findings failures, so that they cannot
    reach a release.
 
-3. **Read the review build**
+2. **Read the review build**
    The check built every deliverable into `out/` in your project.
 
    The `review` deliverable from stage 14 flags revision `3.4`, so in
@@ -544,7 +531,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    with the author, disposition and date. Use `args.draft=yes` to include
    this markup during review, and resolve it before release. Remove the
    parameter again before you continue, so that the `review` deliverable
-   matches the stage branch: in **Manage Deliverables**, select `review`,
+   matches the checkpoint: in **Manage Deliverables**, select `review`,
    click **Edit...**, select the `args.draft` row, click **Remove**, click
    **Save...** and **OK**, and click **Close**.
 ::::
@@ -555,7 +542,7 @@ your work. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/effects-reference.dita
+  invalid: /home/you/my-audacity-guide/topics/effects-reference.dita
     72:41  Attribute "status" with value "draft" must have a value from the list "changed deleted new unchanged -dita-use-conref-target ".
   (run project-health for the full report)
 Not ready: the project itself has faults. The build and the built output were not checked.
@@ -566,11 +553,6 @@ any string. The four values, plus `-dita-use-conref-target`, which every
 enumerated attribute accepts for conref, are the whole vocabulary; a workflow state such
 as *draft* or *in review* belongs in a `<draft-comment disposition>` or in
 `<change-historylist>`, not in `status`.
-
-The formatter used for the recorded examples escaped ampersands repeatedly,
-changing `&amp;` to `&amp;amp;` on a subsequent pass. Check the diff after
-formatting with your installed version. Preserve valid XML escaping when an
-ampersand is required; use *and* where it expresses the intended wording.
 
 Undo the change and check again. Confirm that the check reports `Ready`
 before you continue.
@@ -589,6 +571,8 @@ before you continue.
   warnings until a house rule says otherwise.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/24-drafts-and-localization`. If you use Git, commit your work.
 
 Continue with [Stage 25: house rules](/part-5-governance/stage-25-house-rules).
 

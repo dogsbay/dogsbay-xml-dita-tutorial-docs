@@ -166,6 +166,6 @@ stages are written, so every row links to its page.
 | `project-health`'s *Authoring leftovers* warnings | [24](/part-5-governance/stage-24-drafts-and-localization) |
 | Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/part-5-governance/stage-25-house-rules) |
 | **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/part-5-governance/stage-25-house-rules) |
-| `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/part-5-governance/stage-25-house-rules) |
+| Optional: `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/part-5-governance/stage-25-house-rules) |
 | `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [25](/part-5-governance/stage-25-house-rules) |
-| Nothing new: the README's stage table and the eight deliverables, the `tutorial/final` tag | [26](/part-5-governance/stage-26-final) |
+| Nothing new: the eight deliverables, the final check, and the `tutorial/final` tag | [26](/part-5-governance/stage-26-final) |

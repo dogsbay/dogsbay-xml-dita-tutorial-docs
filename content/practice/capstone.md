@@ -12,7 +12,9 @@ requirements below without copying an existing topic in full.
 
 **Time:** about 60 to 90 minutes.
 **You need:** the core course complete, including stage 25. Start from your
-completed work or `origin/tutorial/25-house-rules` in a practice worktree.
+own project in `my-audacity-guide`, or from the checkpoint
+`tutorial/25-house-rules` of the
+[sample project](/start-here/set-up#the-sample-project).
 
 ## Requirements
 
@@ -48,7 +50,7 @@ make a real recording.
 | Accessibility | Link text, reading order, and any image or table alternatives are reviewed |
 | Change review | The diff contains only the intended additions and required map changes |
 
-Use the [automated checks](/reference/verification) alongside manual output
+Use the [automated check](/start-here/run-the-gate) alongside manual output
 inspection. Record the commands, output directories, and any limitations
 you found. If the check reports `Ready` but output is wrong, investigate the affected
 map and transform before accepting the result.
@@ -64,4 +66,4 @@ report `Ready` before you hand off your work.
 Write a short handoff note describing one topic-boundary decision, one reuse
 decision, and how you verified filtering. Include any tradeoff you would
 revisit if the guide grew. Finish with [Stage 26](/part-5-governance/stage-26-final)
-to record and tag your completed work.
+to check and mark your completed work.

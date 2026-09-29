@@ -99,11 +99,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    prefix:
 
    ```
-   start-here  →  topics/podcast-production-workflow.dita   [/home/you/audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+   common-notes  →  shared/common-notes.dita   [/home/you/my-audacity-guide/podcaster-guide.ditamap:9]  file: /home/you/my-audacity-guide/shared/common-notes.dita
+   start-here  →  topics/podcast-production-workflow.dita   [/home/you/my-audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
    …
-   beginner.start-here  →  topics/recording-your-first-track.dita   [/home/you/audacity-guide/beginner-guide.ditamap:11]  file: /home/you/audacity-guide/topics/recording-your-first-track.dita
-   beginner.install  →  topics/installing-audacity.dita   [/home/you/audacity-guide/beginner-guide.ditamap:16]  file: /home/you/audacity-guide/topics/installing-audacity.dita
-   beginner.formats  →  topics/supported-audio-formats.dita   [/home/you/audacity-guide/beginner-guide.ditamap:24]  file: /home/you/audacity-guide/topics/supported-audio-formats.dita
+   beginner.common-notes  →  shared/common-notes.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:11]  file: /home/you/my-audacity-guide/shared/common-notes.dita
+   beginner.start-here  →  topics/recording-your-first-track.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:13]  file: /home/you/my-audacity-guide/topics/recording-your-first-track.dita
+   beginner.install  →  topics/installing-audacity.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:18]  file: /home/you/my-audacity-guide/topics/installing-audacity.dita
+   beginner.formats  →  topics/supported-audio-formats.dita   [/home/you/my-audacity-guide/beginner-guide.ditamap:26]  file: /home/you/my-audacity-guide/topics/supported-audio-formats.dita
+   …
+   47 key(s).
    ```
 ::::
 
@@ -111,7 +115,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `audacity-collection.ditamap`**
-   The comments are part of the lesson.
+   Right-click `my-audacity-guide` in the **Explorer**, choose
+   **New File**, enter `audacity-collection.ditamap`, and choose the
+   **Map** template. Replace the template's content with this map. The
+   comments are part of the lesson.
 
    ```xml title="audacity-collection.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -180,9 +187,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    ```
-   start-here  →  topics/what-is-audacity.dita  (scope: userguide)   [/home/you/audacity-guide/audacity-guide.ditamap:27]  file: /home/you/audacity-guide/topics/what-is-audacity.dita
-   start-here  →  topics/recording-your-first-track.dita  (scope: beginner)   [/home/you/audacity-guide/beginner-guide.ditamap:11]  file: /home/you/audacity-guide/topics/recording-your-first-track.dita
-   start-here  →  topics/podcast-production-workflow.dita  (scope: podcaster)   [/home/you/audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/audacity-guide/topics/podcast-production-workflow.dita
+   start-here  →  topics/what-is-audacity.dita  (scope: userguide)   [/home/you/my-audacity-guide/audacity-guide.ditamap:27]  file: /home/you/my-audacity-guide/topics/what-is-audacity.dita
+   start-here  →  topics/recording-your-first-track.dita  (scope: beginner)   [/home/you/my-audacity-guide/beginner-guide.ditamap:13]  file: /home/you/my-audacity-guide/topics/recording-your-first-track.dita
+   start-here  →  topics/podcast-production-workflow.dita  (scope: podcaster)   [/home/you/my-audacity-guide/podcaster-guide.ditamap:11]  file: /home/you/my-audacity-guide/topics/podcast-production-workflow.dita
    ```
 
    The same key resolves to a different target in each scope. Without
@@ -193,7 +200,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 ::::
 
-## Step 3: The deliverable, the README and the check
+## Step 3: The deliverable and the check
 
 ::::steps
 1. **Add the deliverable**
@@ -214,23 +221,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    **Save...**, click **OK** to write the deliverable, and click
    **Close**.
 
-2. **Change the "You are on" line and the layout**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 16: branch filtering.
-   +You are on stage 17: key scopes.
-    
-    ## Stages
-    
-   ```
-
-3. **Check your work**
+2. **Check your work**
    In the editor, choose **Project** > **Check Project** and read the
    result in the **Project Validation** panel. From the command line, run:
 
@@ -242,21 +233,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
-   build    install-variants     ok  /home/you/audacity-guide/out/install-variants
-   build    collection           ok  /home/you/audacity-guide/out/collection
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
+   build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+   build    collection           ok  /home/you/my-audacity-guide/out/collection
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-4. **Read the output**
+3. **Read the output**
    `out/collection/index.html` has the three
    guides one after another, and `topics/` has a page per use of each
    topic: `what-is-audacity.html` for the full guide, then
@@ -273,7 +264,7 @@ your work. The check reports `Ready`. DITA-OT drops the topicref, and only
 a verbose DITA-OT log records it, as an informational message:
 
 ```
-[keyref] file:/home/you/audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
+[keyref] file:/home/you/my-audacity-guide/audacity-collection.ditamap:16:34: [DOTJ047I][INFO] Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
 ```
 
 There is no `@href`, so the entry is missing from the table of contents and
@@ -312,6 +303,8 @@ Confirm that the check reports `Ready` before you continue.
   produce multiple output pages.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/17-key-scopes`. If you use Git, commit your work.
 
 Continue with [Stage 18: chunking and output](/part-3-conditions/stage-18-chunking-and-output).
 

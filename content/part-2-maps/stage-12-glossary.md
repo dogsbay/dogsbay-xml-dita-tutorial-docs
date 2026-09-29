@@ -191,7 +191,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `keydefs-glossary.ditamap`**
-   Create the file in the project root from the **Key Definition Map**
+   Create the file in `my-audacity-guide` from the **Key Definition Map**
    template, as in stage 10. Replace the title with
    `Glossary key definitions`, and replace the two sample key definitions
    with the eight glossary keys. If you use another editor, create the file
@@ -382,28 +382,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      meaning is unchanged.
 ::::
 
-## Step 4: Update the README and check your work
+## Step 4: Check your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
+1. **Format and check your work**
 
-   ````diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 11: reuse.
-   +You are on stage 12: glossary.
-    
-    ## Stages
-    
-   ````
-
-2. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each new or changed
+   topic and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
@@ -421,10 +408,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
-     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19] — nothing references it
+     unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -445,11 +432,11 @@ stops at health. Example output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
+  /home/you/my-audacity-guide/topics/preparing-to-record.dita:15  @keyref="gl-clippng" — key 'gl-clippng' not defined
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -459,11 +446,11 @@ the full report:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Undefined keys (1):
-  /home/you/audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
+  /home/you/my-audacity-guide/topics/preparing-to-record.dita:15  key 'gl-clippng' not defined
 Unused keys (3):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:12]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:19]
-  gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:12]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:19]
+  gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10]
 
 Summary
   Undefined keys                1
@@ -489,6 +476,8 @@ before you continue.
   `<abbreviated-form keyref>` lets the processor write the surface form.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/12-glossary`. If you use Git, commit your work.
 
 Continue with [Stage 13: metadata and index](/part-2-maps/stage-13-metadata-and-index).
 

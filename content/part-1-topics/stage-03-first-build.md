@@ -49,7 +49,7 @@ The fields have these effects:
 The editor stores deliverables in `project.json` in the project folder. You
 do not need to edit it.
 
-The active deliverable is the one that **Build Deliverables** builds by
+The active deliverable is the one that **Project** > **Build Deliverables...** builds by
 default. If the status bar does not show `full`, choose `full` in the status
 bar's deliverable menu. You can also select the deliverable in **Manage
 Deliverables** and click **Set active**.

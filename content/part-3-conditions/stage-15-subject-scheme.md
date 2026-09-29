@@ -26,6 +26,31 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `subject-scheme.ditamap`**
+   In the **Explorer**, right-click `my-audacity-guide`, choose
+   **New File**, and enter `subject-scheme.ditamap`. In the
+   **New XML Document** dialog, choose **Subject Scheme** and click **OK**.
+   The template binds `@audience` to two sample values:
+
+   ```xml
+   <?xml version="1.0" encoding="UTF-8"?>
+   <!DOCTYPE subjectScheme PUBLIC "-//OASIS//DTD DITA Subject Scheme Map//EN" "subjectScheme.dtd">
+
+   <subjectScheme>
+     <title>Controlled Values</title>
+     <subjectdef keys="audience-values">
+       <subjectdef keys="internal"/>
+       <subjectdef keys="customer"/>
+     </subjectdef>
+     <enumerationdef>
+       <attributedef name="audience"/>
+       <subjectdef keyref="audience-values"/>
+     </enumerationdef>
+   </subjectScheme>
+   ```
+
+   Replace the title, the subject definitions, and the enumeration with
+   the content of the listing. If you use another editor, create the file
+   and type the finished listing.
 
    ```xml title="subject-scheme.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -186,25 +211,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Check the values and your work
 
 ::::steps
-1. **Change the "You are on" line and the layout**
-
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 14: conditional text.
-   +You are on stage 15: subject scheme.
-    
-    ## Stages
-    
-   ```
-
-2. **Check the controlled values**
-   In the editor, choose **Project** > **Validate** >
-   **Controlled Values (Subject Scheme)** and read the result in the
+1. **Check the controlled values**
+   In the editor, choose **Project** > **Validate Files** >
+   **Controlled Values (Subject Scheme)...** and read the result in the
    **Project Validation** panel. From the command line, run:
 
    ```bash
@@ -222,7 +231,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    as part of health; this command runs it on its own, which is quicker
    after you change a profiling attribute.
 
-3. **Check your work**
+2. **Check your work**
    In the editor, choose **Project** > **Check Project** and read the
    result in the **Project Validation** panel. From the command line, run:
 
@@ -234,14 +243,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-     unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
-   build    beginner-mac         ok  /home/you/audacity-guide/out/beginner-mac
-   build    beginner-windows     ok  /home/you/audacity-guide/out/beginner-windows
-   build    podcaster-linux      ok  /home/you/audacity-guide/out/podcaster-linux
-   build    review               ok  /home/you/audacity-guide/out/review
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+     unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
+   build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
+   build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
+   build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+   build    review               ok  /home/you/my-audacity-guide/out/review
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -257,18 +266,18 @@ The output looks like this example:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/installing-audacity.dita:54  @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+  /home/you/my-audacity-guide/topics/installing-audacity.dita:54  @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:27] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:34] — nothing references it
-  unused key: podcast-workflow  [/home/you/audacity-guide/audacity-guide.ditamap:50] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:27] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
+  unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
 `dogsbay-xml validate-conditions .` reports the same line:
 
 ```
-/home/you/audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
+/home/you/my-audacity-guide/topics/installing-audacity.dita:54 — @platform="macos" — “macos” is not a controlled value for @platform (did you mean “mac”?)
 29 file(s): 28 pass, 1 with violations.
 ```
 
@@ -276,7 +285,7 @@ The value is valid against the DTD, and DITA-OT on its own would build
 the project anyway. It sees the value only as a warning in its build log:
 
 ```
-[topic-reader] file:/home/you/audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W][WARN] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
+Warning: file:/home/you/my-audacity-guide/topics/installing-audacity.dita:54:35: [DOTJ049W] The @platform attribute value 'macos' on the <chrow> element does not comply with the specified subject scheme. According to the subject scheme map, the following values are valid for the @platform attribute: 'linux,windows,mac'.
 ```
 
 Because no DITAVAL has a rule for `macos`, the row would be included in
@@ -295,13 +304,17 @@ again. Confirm that the check reports `Ready` before you continue.
 - `<mapref type="subjectScheme">` in every root map; a scheme applies only
   where it is referenced.
 - `dogsbay-xml list-subjects` shows the vocabulary;
-  **Project** > **Validate** > **Controlled Values (Subject Scheme)**, or
+  **Project** > **Validate Files** >
+  **Controlled Values (Subject Scheme)...**, or
   `dogsbay-xml validate-conditions .`, fails on a value outside it;
   DITA-OT warns with `DOTJ049W` and builds anyway.
 - **Check Project** fails on a value outside the scheme, before anything
   is built.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/15-subject-scheme`. If you use Git, commit your
+work.
 
 Continue with [Stage 16: branch filtering](/part-3-conditions/stage-16-branch-filtering).
 

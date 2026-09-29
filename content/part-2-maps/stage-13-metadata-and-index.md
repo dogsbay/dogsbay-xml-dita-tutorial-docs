@@ -692,7 +692,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `<meta name="rights">` tag on each page comes from this copyright.
 ::::
 
-## Step 5: The metadata policy, the README and the check
+## Step 5: The metadata policy and the check
 
 ::::steps
 1. **Set the metadata policy**
@@ -724,25 +724,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      health stage of **Check Project** and `dogsbay-xml check` enforces it.
      The editor applies the same policy.
 
-3. **Change the "You are on" line**
+3. **Format and check your work**
 
-   ```diff title="README.md"
-   --- a/README.md
-   +++ b/README.md
-   @@ -2,7 +2,7 @@
-    
-    Build a guide through 27 stages. Maps begin at stage 02; HTML publication begins at stage 03.
-    
-   -You are on stage 12: glossary.
-   +You are on stage 13: metadata and index.
-    
-    ## Stages
-    
-   ```
-
-4. **Format and check your work**
-
-   Format the topics:
+   Format the topics: choose **XML** > **Format** in each changed topic
+   and save it, or choose **Project** > **Project Tools** >
+   **Format Project** to format every file at once. From the command line,
+   run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita
@@ -760,10 +747,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    ```
    health   clean, with warnings
-     unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-     unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-     unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
-   build    full                 ok  /home/you/audacity-guide/out/full
+     unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+     unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+     unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+   build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -783,11 +770,11 @@ output:
 
 ```
 health   NOT CLEAN
-  /home/you/audacity-guide/topics/trimming-audio.dita:7  created — missing required <created @date>
+  /home/you/my-audacity-guide/topics/trimming-audio.dita:7  created — missing required <created @date>
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -797,11 +784,11 @@ the full report:
 ```
 Root map: audacity-guide.ditamap (project config); house rules: none (none configured)
 Metadata policy (1 of 21 files):
-  /home/you/audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
+  /home/you/my-audacity-guide/topics/trimming-audio.dita — [error] missing required <created @date>
 Unused keys (3):
-  start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26]
-  digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33]
-  gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10]
+  start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26]
+  digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33]
+  gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10]
 
 Summary
   Metadata policy               1  in 1 of 21 files (1 error(s), 0 warning(s))
@@ -819,12 +806,12 @@ Example output:
 
 ```
 health   NOT CLEAN
-  invalid: /home/you/audacity-guide/topics/what-is-audacity.dita
+  invalid: /home/you/my-audacity-guide/topics/what-is-audacity.dita
     29:12  The content of element type "prolog" does not match its content model.
   (run project-health for the full report)
-  unused key: start-here  [/home/you/audacity-guide/audacity-guide.ditamap:26] — nothing references it
-  unused key: digital-audio  [/home/you/audacity-guide/audacity-guide.ditamap:33] — nothing references it
-  unused key: gl-normalization  [/home/you/audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
+  unused key: start-here  [/home/you/my-audacity-guide/audacity-guide.ditamap:26] — nothing references it
+  unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
+  unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
@@ -833,7 +820,7 @@ the full report. It begins:
 
 ```
 Invalid files (1 of 21):
-  /home/you/audacity-guide/topics/what-is-audacity.dita:
+  /home/you/my-audacity-guide/topics/what-is-audacity.dita:
     29:12  error: The content of element type "prolog" does not match its content model.
 ```
 
@@ -858,6 +845,9 @@ before you continue.
   shared topic, a glossary and metadata, published as one HTML5 deliverable.
 
 ## Next lesson
+
+**Checkpoint:** `tutorial/13-metadata-and-index`. If you use Git, commit
+your work.
 
 Continue with [Stage 14: conditional text](/part-3-conditions/stage-14-conditional-text).
 

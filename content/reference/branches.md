@@ -1,21 +1,31 @@
 ---
 title: Branches
-description: Compare tutorial branches and inspect completed stages in a separate worktree while keeping your own work.
+description: Use the checkpoint branches of the sample project to compare your files, copy files you cannot type, and start a stage from its checkpoint.
 type: reference
 ---
 
 # Branches
 
-The tutorial repository is
-[dogsbay/dogsbay-xml-dita-tutorial](https://github.com/dogsbay/dogsbay-xml-dita-tutorial).
-Stage branches are named `tutorial/NN-slug` and form one chain from an orphan
-root; see [How the tutorial works](/start-here/how-the-tutorial-works).
+The [sample project](/start-here/set-up#the-sample-project),
+[dogsbay/dogsbay-xml-dita-tutorial](https://github.com/dogsbay/dogsbay-xml-dita-tutorial)
+on GitHub, has one branch for each stage. Each branch is a *checkpoint*: the
+project as it is at the end of that stage's lesson. The branches are named
+`tutorial/NN-slug` and form one chain; see
+[How the tutorial works](/start-here/how-the-tutorial-works).
+
+You build the guide in your own folder, `my-audacity-guide`. You do not need
+the sample project to follow the lessons. Use the checkpoints to:
+
+- Compare a file with the checkpoint when your check fails and you cannot
+  find the cause.
+- Copy files that you cannot type, such as images and the sample script.
+- Start a later stage from its checkpoint when you skip a lesson.
 
 ## The branches
 
 | Branch | Stage | Page |
 |---|---|---|
-| `tutorial/00-setup` | An empty project the tools recognize | [Stage 00](/part-1-topics/stage-00-setup) |
+| `tutorial/00-setup` | The project folder with an empty `topics` folder | [Stage 00](/part-1-topics/stage-00-setup) |
 | `tutorial/01-concept` | One concept topic | [Stage 01](/part-1-topics/stage-01-concept) |
 | `tutorial/02-first-map` | The first map | [Stage 02](/part-1-topics/stage-02-first-map) |
 | `tutorial/03-first-build` | The first HTML deliverable | [Stage 03](/part-1-topics/stage-03-first-build) |
@@ -40,30 +50,62 @@ root; see [How the tutorial works](/start-here/how-the-tutorial-works).
 | `tutorial/22-software-domains` | The software and programming domains, a syntax diagram, and code pulled in by coderef | [Stage 22](/part-4-books/stage-22-software-domains) |
 | `tutorial/23-learning` | A learning assessment, validated against the Learning and Training DTDs | [Stage 23](/part-4-books/stage-23-learning) |
 | `tutorial/24-drafts-and-localization` | Language, translate flags, direction and sort keys; draft comments, required cleanup, status and a change history | [Stage 24](/part-5-governance/stage-24-drafts-and-localization) |
-| `tutorial/25-house-rules` | The house style as Schematron, named in the project config and run by the check; `AGENTS.md` and a skill; the ten violations resolved | [Stage 25](/part-5-governance/stage-25-house-rules) |
-| `tutorial/26-final` | The complete guide: the README's full stage table and deliverable list, every deliverable built | [Stage 26](/part-5-governance/stage-26-final) |
+| `tutorial/25-house-rules` | The house style as Schematron, selected in the project settings and run by the check; the ten violations resolved; optional `AGENTS.md` and a skill | [Stage 25](/part-5-governance/stage-25-house-rules) |
+| `tutorial/26-final` | The complete guide, with every deliverable built | [Stage 26](/part-5-governance/stage-26-final) |
 
 `tutorial/26-final` is also tagged `tutorial/final`, a stable name for the
-finished tree. The branch moves when a middle stage is edited and the chain
-is rebased; the tag is moved to the new tip by hand once the ladder has been
-re-checked, so `git show tutorial/final:README.md` always reads a tree that
-passed the checks.
+finished guide.
+
+Each branch also has files that the lessons do not create, such as
+`README.md`, `LICENSE`, `NOTICE`, and a `scripts/` folder. They are for the
+maintainers and for visitors on GitHub. Compare only the files that the
+lessons create.
 
 `main` is not part of the chain. It is the finished, deliberately broken demo
 project that the DogsBay XML tutorial uses, and it shares no history with the
 stage branches.
 
-## Compare two stages
+## Open a checkpoint
 
-The diff between adjacent branches is the lesson. Locally:
+To open a checkpoint in the editor,
+[get the sample project](/start-here/set-up#get-the-sample-project) and open
+it. Click the branch name in the status bar. The list shows the stage
+branches as `origin/tutorial/NN-slug`. Choose one, for example
+`origin/tutorial/08-figures`. The editor creates a local branch,
+`tutorial/08-figures`, that tracks it, and switches to it. See
+[Move between stages](/start-here/set-up#move-between-stages).
 
-```bash
-git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
-git diff --stat origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks
-git diff origin/tutorial/05-inline-and-block origin/tutorial/06-rich-tasks -- topics/installing-audacity.dita
+Switching replaces the files in the sample project folder with the files of
+that checkpoint. Your own project in `my-audacity-guide` does not change.
+
+## Compare your work with a checkpoint
+
+To compare one file, open the same file in your project and in the sample
+project, switched to the checkpoint of the lesson that you finished. For
+example, after stage 06, compare your `topics/exporting-audio.dita` with the
+one on `tutorial/06-rich-tasks`.
+
+On GitHub, each branch has its own page, and you can read any file there
+without the sample project. The file
+`topics/what-is-digital-audio.dita` on `tutorial/08-figures` is at:
+
+```
+https://github.com/dogsbay/dogsbay-xml-dita-tutorial/blob/tutorial/08-figures/topics/what-is-digital-audio.dita
 ```
 
-On GitHub, the compare URL is the two branch names joined by three dots:
+## Copy a file from a checkpoint
+
+Some files cannot be typed from a listing, such as the images in stages 08
+and 21. Copy them from the checkpoint of the lesson that adds them into the
+same path in `my-audacity-guide`. Create any missing folder first with
+**New Folder** in the **Explorer**. You can also download a file from its
+GitHub page.
+
+## Compare two stages
+
+The difference between two adjacent checkpoints is the lesson. Each lesson
+ends with a link that shows it on GitHub. The compare URL is the two branch
+names joined by three dots:
 
 ```
 https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/<from>...<to>
@@ -80,56 +122,16 @@ for all of Part 4, or `tutorial/23-learning` to `tutorial/26-final` for all
 of Part 5. The whole ladder is
 [compare `tutorial/00-setup` to `tutorial/26-final`](https://github.com/dogsbay/dogsbay-xml-dita-tutorial/compare/tutorial/00-setup...tutorial/26-final).
 
-To read one file as it is on a branch without checking the branch out:
+The comparison also shows changes to the files that the lessons do not
+create, such as `README.md`.
 
-```bash
-git show origin/tutorial/08-figures:topics/what-is-digital-audio.dita
-git ls-tree -r --name-only origin/tutorial/08-figures
-git log --oneline origin/tutorial/08-figures
-```
+## Start a stage from its checkpoint
 
-## Inspect a stage and keep your work
-
-To switch the tutorial clone to a completed stage in the editor, click the
-branch name in the status bar and choose the stage's
-`origin/tutorial/NN-slug` branch. The editor creates a local tracking branch
-and switches to it. See
-[Move between stages](/start-here/set-up#move-between-stages).
-
-From the command line, you can instead open a completed stage in a separate
-directory. Run these commands in the tutorial clone, and choose a directory
-that does not already exist:
-
-```bash
-git worktree add --detach ../audacity-stage-04 origin/tutorial/06-rich-tasks
-cd ../audacity-stage-04
-dogsbay-xml check .
-```
-
-The worktree contains the reference stage. Your original working directory
-retains its files and uncommitted changes. Switching branches with
-`git checkout` can carry compatible uncommitted changes across branches;
-it does not reset your work.
-
-To start a lesson from the preceding reference stage, create a branch in a
-clean clone or worktree:
-
-```bash
-git switch -c my-stage-04 origin/tutorial/05-inline-and-block
-# ... write the stage ...
-git diff origin/tutorial/06-rich-tasks
-```
-
-After you switch branches, the "You are on" line near the top of `README.md` names
-the stage:
-
-```bash
-grep 'You are on' README.md
-```
-
-`git diff` compares tracked files. Use `git status --short` as well to find
-new files that Git has not yet tracked. Review and commit your lesson files
-when you reach a passing checkpoint.
+To skip a lesson, start the next lesson from the checkpoint of the skipped
+one. Switch the sample project to that checkpoint and continue the next
+lesson there. To keep your changes apart from the checkpoint, first create
+a branch of your own from the **…** menu of the **Git** panel. See
+[Continue across a skipped stage](/start-here/learning-path#continue-across-a-skipped-stage).
 
 ## Editing a middle stage
 
