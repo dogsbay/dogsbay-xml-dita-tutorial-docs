@@ -14,7 +14,7 @@ type: explanation
 
 # What you will build {#what-you-will-build}
 
-Build a DITA 1.3 documentation set using an Audacity user guide as the example. Start with project settings and a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages.
+Build a DITA 1.3 documentation set using an Audacity user guide as the example. Start with a project folder and a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages.
 
 Choose the [core course or optional modules](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path). Start with [Plan your topics](/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics), then publish a one-topic HTML guide in stages 02 and 03. Each module includes [practice exercises](/dogsbay-xml-dita-tutorial-docs/practice/exercises), and the core course ends with an [interview-workflow capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).
 
@@ -28,10 +28,10 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 
 | Stage | Branch | Builds | Introduces |
 | --- | --- | --- | --- |
-| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, `.dogsbay/config.xml`, checking your work |
+| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | An empty project the tools recognize | DOCTYPEs and the DITA-OT catalog, checking your work |
 | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |
 | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |
-| [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | `project.json`, DITA-OT, output inspection |
+| [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |
 | [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) | `tutorial/04-task-and-reference` | *Recording your first track*, *Supported audio formats* | `<task>`, `<steps>`, `<cmd>`, `<reference>`, CALS `<table>`; the three information types |
 | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) | `tutorial/05-inline-and-block` | *What is digital audio?*, *Trimming audio* | `<uicontrol>`, `<menucascade>`, `<term>`, `<filepath>`, `<note>`, `<dl>`, `<ol>`, `<sl>`, `<fn>`, `<simpletable>`, `<codeblock>` |
 | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) | `tutorial/06-rich-tasks` | *Installing Audacity*, *Exporting audio*, *Removing background noise*, *Preparing to record* | `<prereq>`, `<postreq>`, `<substeps>`, `<choices>`, `<choicetable>`, `<stepxmp>`, `<stepresult>`, `<steps-unordered>`, `<example>` |
@@ -42,7 +42,7 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) | `tutorial/11-reuse` | Shared steps and notes | `@conref`, `@conrefend`, `@conkeyref`, conref push with `@conaction`, `@processing-role="resource-only"` |
 | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) | `tutorial/12-glossary` | Glossary entries and abbreviations | `<glossentry>`, `<glossterm>`, `<glossdef>`, `<glossAlt>`, `<abbreviated-form>`, `<term keyref>`, `<glossgroup>` |
 | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) | `tutorial/13-metadata-and-index` | Prolog metadata and a real index | `<prolog>`, `<metadata>`, `<author>`, `<critdates>`, `<audience>`, `<indexterm>`, `<index-see>`; the metadata policy |
-| [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; `profiles.ditavals` |
+| [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; one DITAVAL per deliverable |
 | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) | `tutorial/15-subject-scheme` | A controlled vocabulary for the conditions | `<subjectScheme>`, `<subjectdef>`, `<enumerationdef>`, `<attributedef>`, `<hasNarrower>`, `<mapref type="subjectScheme">`; `validate-conditions` |
 | [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering) | `tutorial/16-branch-filtering` | Three install variants from one topic | `<ditavalref>`, `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` |
 | [17](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes) | `tutorial/17-key-scopes` | One collection of three guides | `@keyscope`, scoped keys, `<mapref scope="peer">` |
@@ -53,7 +53,7 @@ The tutorial has five parts. Each stage has a branch and a lesson page. The main
 | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |
 | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) | `tutorial/23-learning` | A "check your understanding" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |
 | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |
-| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, `<default-schematron>`, `AGENTS.md`, the house-style skill; house rules in the check |
+| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, **House Rules (Schematron)**, `AGENTS.md`, the house-style skill; house rules in the check |
 | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |
 
 ## How to use it {#how-to-use-it}
@@ -285,7 +285,7 @@ Besides the topics, every stage branch has:
 | --- | --- |
 | `README.md` | The "You are on" line, the stage table, the maintainer check commands |
 | `LICENSE`, `NOTICE` | CC BY 4.0, and the credit to the Audacity Manual that the topic text is adapted from |
-| `.dogsbay/config.xml` | Shared editor project settings: project type, framework, format style |
+| Project settings | The project type, framework, and format style. The editor keeps them, and the **Explorer** does not show them. See them in **Project** > **Manage Projects...** |
 | `scripts/check-stage.sh` | The maintainers' check for the branches. Readers do not need it. See [The stage gate](/dogsbay-xml-dita-tutorial-docs/reference/the-gate) |
 | `.gitignore` | Keeps DITA-OT output out of Git |
 
@@ -381,7 +381,7 @@ The stage branches are references. Keep your own work in the separate `audacity-
 
 For the authoring workflow, stage 00 creates a separate `audacity-guide` repository. Open that folder as a project after you create it, and keep the clone as a reference. For the inspection workflow, work in the clone.
 
-The `.dogsbay/config.xml` on every stage branch sets the project type to DITA, the framework to DITA-OT 4.3.5 and the format style, so the editor and the command line agree on what a valid, well-formatted file is.
+The project settings on every stage branch set the project type to DITA, the framework to DITA-OT 4.3.5, and the format style, so the editor and the command line agree on what a valid, well-formatted file is. To see them, choose **Project** > **Manage Projects...** and click the project. You do not edit them.
 
 ## Check the tools {#check-the-tools}
 
@@ -438,7 +438,7 @@ The check runs three stages in order, and each runs only when the one before it 
 | Stage | Checks |
 | --- | --- |
 | Health | Every topic and map is valid against its DOCTYPE, and references, keys, reuse targets, metadata, and any configured house rules are sound |
-| Build | Every deliverable in `project.json` builds with DITA-OT |
+| Build | Every deliverable in **Manage Deliverables** builds with DITA-OT |
 | Output | Every link, image, and fragment in the built output leads somewhere |
 
 It stops at the first stage that fails, because later stages would only report consequences of the same fault. A broken reference in the source, for example, produces a broken link in the output.
@@ -507,7 +507,7 @@ Fix the problem and check again. After a lesson's deliberate-error exercise, und
 
 ## Find the output {#find-the-output}
 
-Each deliverable builds into its own folder, as `project.json` declares it: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on. The `out/` folder is ignored by Git.
+Each deliverable builds into the folder in its **Output** field: `out/full/` for the full guide, `out/beginner-mac/` for the macOS beginner guide, and so on. The `out/` folder is ignored by Git.
 
 To build and check one deliverable only:
 
@@ -537,13 +537,13 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-se
 
 ---
 title: "Stage 00: Set up the project"
-description: An empty DITA project that the tools recognize, with the shared editor settings, a README, and a first check of your work.
+description: An empty DITA project that the tools recognize, with a README, a license, and a first check of your work.
 type: tutorial
 ---
 
 # Stage 00: Set up the project {#stage-00-set-up-the-project}
 
-Create the project settings and README for the guide, then check the project. The DogsBay XML editor uses `.dogsbay/config.xml` to select the DITA framework and formatting settings. At the end of every lesson, you check your work with **Project** > **Check Project** in the editor or `dogsbay-xml check` on the command line.
+Create the project folder and README for the guide, then check the project. At the end of every lesson, you check your work with **Project** > **Check Project** in the editor or `dogsbay-xml check` on the command line.
 
 A topic's DOCTYPE identifies its grammar. For example, `-//OASIS//DTD DITA Concept//EN` identifies the concept DTD. An XML catalog maps that identifier to a local DTD. The tools can then validate the topic without downloading the grammar.
 
@@ -561,31 +561,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    git init
    git remote add origin https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
    git fetch origin
-   mkdir -p .dogsbay topics
+   mkdir topics
    touch topics/.gitkeep
    ```
 
    Fetching adds the reference branches as `origin/tutorial/NN-slug` without adding their files to your working directory. Later lessons use these refs to retrieve images and compare your work.
 
    Each stage branch also has a `scripts/` folder. Its scripts are checks for the tutorial maintainers. You do not need them in your repository.
-2. **Write the editor settings** `.dogsbay/config.xml` is shared by everyone who opens the project. It sets the project type, the framework the DOCTYPEs resolve against, and the format style that `dogsbay-xml format` and the editor apply, so diffs between stages stay about the feature and not about whitespace.
 
-   ```xml {title=".dogsbay/config.xml"}
-   <?xml version="1.0" encoding="UTF-8"?>
-
-   <dogsbay-project>
-     <project-type>DITA</project-type>
-     <framework>DITA-OT 4.3.5</framework>
-     <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-   </dogsbay-project>
-   ```
-3. **Keep personal settings out of Git** The editor writes a `local.xml` beside `config.xml` for the active deliverable and window state. Ignore it inside the folder.
-
-   ```gitignore {title=".dogsbay/.gitignore"}
-   # Personal editor overrides (active deliverable, window state). Not shared.
-   local.xml
-   ```
-4. **Ignore the build output** DITA-OT writes generated HTML and PDF. Keep it out of the repository.
+   The editor creates its project settings when you create the first topic in stage 01. You do not edit them.
+2. **Ignore the build output** DITA-OT writes generated HTML and PDF. Keep it out of the repository.
 
    ```gitignore {title=".gitignore"}
    # Built deliverables (DITA-OT output): each deliverable's output in project.json
@@ -715,10 +700,10 @@ Before stage 03, `health   clean` means the stage is done. If the command is not
 
 ## What you learned {#what-you-learned}
 
-- A DITA project is a folder of topics and maps; nothing declares it except the files themselves and, for the editor, `.dogsbay/config.xml`.
+- A DITA project is a folder of topics and maps; nothing declares it except the files themselves.
 - DOCTYPEs are resolved through the catalog of the bundled DITA-OT, so a project states which DITA-OT it targets and the DTDs come from there.
 - **Project** > **Check Project**, or `dogsbay-xml check`, checks your work. Before stage 03, `health   clean` means a stage is done.
-- Format style lives in the project so every stage's diff is about the feature.
+- The editor keeps the project settings, including the format style, so every stage's diff is about the feature.
 
 ## Next lesson {#next-lesson}
 
@@ -987,11 +972,12 @@ Add a `<topicref>` each time you add a topic to the guide. Later lessons introdu
 
 Set the default root map for the project:
 
-1. Click **Project** > **Manage Projects**.
-2. Select the project.
-3. In the **Default Root Map** field, enter `audacity-guide.ditamap`.
+1. Choose **Project** > **Manage Projects...**. The dialog lists your projects on the left.
+2. Click your project. It has the name of your project folder. The project settings appear on the right. **Project Type** is `DITA` and **Framework** is `DITA-OT 4.3.5`.
+3. In the **Default Root Map** list, which shows `(none)`, choose `audacity-guide.ditamap`. If the map is not in the list, click **Browse...** and select it.
+4. Click **Save**.
 
-The project stores the setting in `.dogsbay/config.xml` as `<default-root-map>audacity-guide.ditamap</default-root-map>`. The health check uses this map to decide which topics belong to the publication.
+The health check uses the default root map to decide which topics belong to the publication.
 
 Validate the map in the editor with **XML** > **Validate**, or run this command from the project root:
 
@@ -1068,20 +1054,35 @@ Publish the map from stage 02. Keep this build throughout the course so you can 
 
 ## Define the deliverable {#define-the-deliverable}
 
-Create `project.json` in the project root:
+A deliverable names a map, a transformation, and an output folder. Define one deliverable, named `full`, for the whole guide:
 
-```json
-{
-  "deliverables": [{
-    "name": "full",
-    "context": {"id": "full", "input": "audacity-guide.ditamap"},
-    "output": "out/full",
-    "publication": {"transtype": "html5", "params": [{"name": "nav-toc", "value": "full"}]}
-  }]
-}
-```
+1. Choose **Project** > **Project Tools** > **Manage Deliverables...**. The table is empty.
+2. Click **Add...**.
+3. Enter these values:
 
-The context identifies the root map. The publication selects the HTML5 transformation and requests navigation on each page. The output folder is relative to the project root, so this deliverable builds into `out/full/`. Select `full` as the default deliverable in the editor's project settings.
+   | Field | Value |
+   | --- | --- |
+   | **Name** | `full` |
+   | **Input map** | `audacity-guide.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/full` |
+   | **Publication parameters** | `nav-toc` = `full` |
+
+   To add the parameter, click **Add param**, double-click the **Name** cell and type `nav-toc`, then double-click the **value** cell and type `full`.
+4. Click **Save...**. The editor asks whether to write the deliverable. Click **OK**.
+5. Click **Close**.
+
+The fields have these effects:
+
+- **Input map** is the root map of the publication.
+- **Transtype** `html5` selects the HTML5 transformation.
+- **Output** is relative to the project root, so this deliverable builds into `out/full/`.
+- The `nav-toc` parameter with the value `full` puts the navigation of the whole guide on each page.
+
+The editor stores deliverables in `project.json` in the project root. You do not need to edit it.
+
+The active deliverable is the one that **Build Deliverables** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.
 
 ## Build and inspect {#build-and-inspect}
 
@@ -3725,7 +3726,7 @@ type: tutorial
 
 Publish platform and audience variants from the same topics. Use `@platform` for keyboard shortcuts and installation instructions, and `@audience` for content intended for beginners or podcasters. Use `@rev` to identify revised content for review.
 
-Create DITAVAL files to include, exclude, or flag content. Add beginner and podcaster maps, then define four more deliverables in `project.json`: two beginner guides, a Linux podcaster guide, and a review build.
+Create DITAVAL files to include, exclude, or flag content. Add beginner and podcaster maps, then define four more deliverables in the editor: two beginner guides, a Linux podcaster guide, and a review build.
 
 **Time:** about 40 minutes. **You need:** stage 13 complete.
 
@@ -4112,101 +4113,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 5: Deliverables, README and the check {#step-5-deliverables-readme-and-the-check}
 
 :::steps
-1. **Edit `project.json`** Four deliverables join `full`. Each names its map, its DITAVAL under `profiles.ditavals`, and its own output folder. The first hunk only reformats the existing `params` entry.
+1. **Add the deliverables** Four deliverables join `full`. Each names its map, its DITAVAL file, and its own output folder. Choose **Project** > **Project Tools** > **Manage Deliverables...**. For each deliverable, click **Add...**, enter the values, click **Save...**, and click **OK** to write the deliverable.
 
-   ```diff {title="project.json"}
-   --- a/project.json
-   +++ b/project.json
-   @@ -10,8 +10,87 @@
-          "publication": {
-            "transtype": "html5",
-            "params": [
-   -          { "name": "nav-toc", "value": "full" }
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "full"
-   +          }
-            ]
-   +      }
-   +    },
-   +    {
-   +      "name": "beginner-mac",
-   +      "context": {
-   +        "id": "beginner-mac",
-   +        "input": "beginner-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/mac-beginner.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/beginner-mac",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "partial"
-   +          }
-   +        ]
-   +      }
-   +    },
-   +    {
-   +      "name": "beginner-windows",
-   +      "context": {
-   +        "id": "beginner-windows",
-   +        "input": "beginner-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/windows-beginner.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/beginner-windows",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "partial"
-   +          }
-   +        ]
-   +      }
-   +    },
-   +    {
-   +      "name": "podcaster-linux",
-   +      "context": {
-   +        "id": "podcaster-linux",
-   +        "input": "podcaster-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/linux-podcaster.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/podcaster-linux",
-   +      "publication": {
-   +        "transtype": "html5"
-   +      }
-   +    },
-   +    {
-   +      "name": "review",
-   +      "context": {
-   +        "id": "review",
-   +        "input": "audacity-guide.ditamap",
-   +        "profiles": {
-   +          "ditavals": [
-   +            "filters/review.ditaval"
-   +          ]
-   +        }
-   +      },
-   +      "output": "out/review",
-   +      "publication": {
-   +        "transtype": "html5"
-          }
-        }
-      ]
-   ```
+   | Field | `beginner-mac` | `beginner-windows` | `podcaster-linux` | `review` |
+   | --- | --- | --- | --- | --- |
+   | **Input map** | `beginner-guide.ditamap` | `beginner-guide.ditamap` | `podcaster-guide.ditamap` | `audacity-guide.ditamap` |
+   | **DITAVAL (optional)** | `filters/mac-beginner.ditaval` | `filters/windows-beginner.ditaval` | `filters/linux-podcaster.ditaval` | `filters/review.ditaval` |
+   | **Transtype** | `html5` | `html5` | `html5` | `html5` |
+   | **Output (optional)** | `out/beginner-mac` | `out/beginner-windows` | `out/podcaster-linux` | `out/review` |
+   | **Publication parameters** | `nav-toc` = `partial` | `nav-toc` = `partial` | (none) | (none) |
+
+   Enter the deliverable name in **Name**. Choose each map from the **Input map** list and each filter from the **DITAVAL (optional)** list, or click **Browse...** to select the file.
+
+   - **DITAVAL** applies one filter to the build. The two beginner guides share a map and differ only in their DITAVAL file.
+   - The `nav-toc` parameter with the value `partial` shows the navigation around the current page instead of the whole guide.
+   - The `review` deliverable publishes the full guide with the review filter, which excludes nothing and flags podcaster and revised content.
+
+   When you finish, the table lists five deliverables. Click **Close**.
 2. **Change the "You are on" line and the layout**
 
    ```diff {title="README.md"}
@@ -4302,7 +4225,7 @@ After each error exercise, undo the deliberate change and check again. Confirm t
 - `@platform`, `@audience`, `@product`, `@otherprops` and `@props` on any element; space-separated values; two `<ph>` alternatives for text that differs; `@rev` to mark a change without filtering.
 - A DITAVAL: `<val>`, `<prop att val action>` with `include`, `exclude` or `flag`, `<revprop>`, `<startflag>`/`<endflag>` with `<alt-text>`, `<style-conflict>`.
 - A profiling attribute on a `<topicref>` or `<topichead>` filters a branch of the map.
-- One topic set, several maps, one DITAVAL per deliverable in `project.json`, under `profiles.ditavals`.
+- One topic set, several maps, and one DITAVAL per deliverable, chosen in the **DITAVAL** field of **Manage Deliverables**.
 - Every root map defines every key its topics use; the health check reads the default root map, and the build checks each map.
 
 ## Next lesson {#next-lesson}
@@ -4580,7 +4503,7 @@ URL: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-2
 
 ---
 title: "Stage 25: House rules"
-description: Write the house style as Schematron, name it in the project config so that the check enforces it, explain it to agents, and fix the ten violations it finds.
+description: Write the house style as Schematron, select it in the project settings so that the check enforces it, explain it to agents, and fix the ten violations it finds.
 type: tutorial
 ---
 
@@ -4588,7 +4511,7 @@ type: tutorial
 
 Add Schematron rules for the project's house style: require short descriptions, use semantic markup for UI labels, reference product names through keys, and resolve review markup before release.
 
-Configure `house-style.sch` in `.dogsbay/config.xml` and document the rules in `AGENTS.md` and the project skill. Resolve the ten reported violations, including converting the cleanup content to a table and recording the review decision in the change history.
+Select `house-style.sch` as the project's house rules and document the rules in `AGENTS.md` and the project skill. Resolve the ten reported violations, including converting the cleanup content to a table and recording the review decision in the change history.
 
 **Time:** about 40 minutes. **You need:** stage 24 complete.
 
@@ -4682,23 +4605,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Run them on stage 24 {#step-2-run-them-on-stage-24}
 
 :::steps
-1. **Edit `.dogsbay/config.xml`**
+1. **Select the house rules** Choose **Project** > **Manage Projects...** and click your project. In the **House Rules (Schematron)** list, which shows `(none)`, choose `house-style.sch`. Click **Save**.
 
-   ```diff {title=".dogsbay/config.xml"}
-   --- a/.dogsbay/config.xml
-   +++ b/.dogsbay/config.xml
-   @@ -6,6 +6,7 @@
-      <framework>DITA-OT 4.3.5</framework>
-      <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-      <default-deliverable file="project.json" name="full"/>
-   +  <default-schematron>house-style.sch</default-schematron>
-      <metadata-policy>
-        <rule topic-type="task" field="created" presence="required" pattern="\d{4}-\d\d-\d\d"/>
-        <rule field="author" presence="recommended"/>
-   ```
-
-   `<default-schematron>` names the rules file relative to the project root. From now on `project-health` runs it with everything else, the editor uses the same setting, and the `house rules:` part of the health report's first line names it instead of saying *none*.
-2. **Run the rules before you change anything else** With the rules file and the config line in place, and the files still as they were at the end of stage 24:
+   From now on `project-health` runs the rules with everything else, the editor applies the same rules, and the `house rules:` part of the health report's first line names `house-style.sch` instead of saying *none*.
+2. **Run the rules before you change anything else** With the rules file selected, and the files still as they were at the end of stage 24:
 
    ```bash
    dogsbay-xml project-health --include=schematron .
@@ -5006,7 +4916,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   Health now runs the house rules with everything else, because `.dogsbay/config.xml` names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a branch cannot carry unresolved review markup.
+   Health now runs the house rules with everything else, because the project names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a branch cannot carry unresolved review markup.
 :::
 
 Test an invalid value. Put one `<b>` back in `topics/podcast-production-workflow.dita`, around *Noise reduction* in the post-production list, and check your work. The check stops at health. Example output:
@@ -5038,7 +4948,7 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 
 - Schematron: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>` and `<report test>`, with the message as content.
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are exempt; `test="true()"` to forbid an element.
-- `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; a house-rule violation stops the check at health.
+- **House Rules (Schematron)** in **Manage Projects**; `project-health --include=schematron`; a house-rule violation stops the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes its table, an answered `<draft-comment>` becomes a `<change-summary>`.
 - The same rules for three readers: the Schematron, `AGENTS.md` and a skill.
 
@@ -5076,7 +4986,7 @@ Extend the guide for a reader who wants to record and review an interview. Plan 
 4. Add the task to the beginner and podcaster maps. Define every key the topic uses in both publication contexts.
 5. Include one beginner explanation and one podcaster note with the controlled audience values. Explain your choice of content boundaries.
 6. Include the required metadata and satisfy the existing house rules.
-7. Build the deliverables in `project.json`. Inspect the new page in `out/beginner-windows/` and `out/podcaster-linux/`, including its links, resolved keys, reused content, and audience-specific text.
+7. Build the deliverables. Inspect the new page in `out/beginner-windows/` and `out/podcaster-linux/`, including its links, resolved keys, reused content, and audience-specific text.
 
 Use placeholder interview details that do not include personal information. The exercise tests documentation design and publishing; you do not need to make a real recording.
 
@@ -5123,7 +5033,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ## Review the project {#review-the-project}
 
-`project.json` defines eight deliverables: full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection, and book-pdf. The chunking examples have separate maps and are built manually.
+**Project** > **Project Tools** > **Manage Deliverables...** lists eight deliverables: `full`, `beginner-mac`, `beginner-windows`, `podcaster-linux`, `review`, `install-variants`, `collection`, and `book-pdf`. The chunking examples have separate maps and are built manually.
 
 The README records the complete branch sequence:
 
@@ -5914,7 +5824,7 @@ type: tutorial
 
 Add author, date, audience, keyword, and index metadata to the topics. Place it in `<prolog>`, between the short description and the body. Add publication metadata to the map's `<topicmeta>`.
 
-Configure a metadata policy in `.dogsbay/config.xml` to require keywords on topics and creation dates on tasks. The examples show each topic type; expand the remaining examples to apply the same structure.
+Set a metadata policy in the editor to require keywords on topics and creation dates on tasks. The examples show each topic type; expand the remaining examples to apply the same structure.
 
 **Optional module.** See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) for the starting checkpoint and the next core lesson.
 
@@ -6535,28 +6445,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 5: The metadata policy, the README and the check {#step-5-the-metadata-policy-the-readme-and-the-check}
 
 :::steps
-1. **Edit `.dogsbay/config.xml`**
+1. **Set the metadata policy** Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows a table of rules, one rule per row. Add three rules:
 
-   ```diff {title=".dogsbay/config.xml"}
-   --- a/.dogsbay/config.xml
-   +++ b/.dogsbay/config.xml
-   @@ -6,4 +6,9 @@
-      <framework>DITA-OT 4.3.5</framework>
-      <format-style indent="spaces" size="2" max-line-width="0" preserve-mixed="true" newline="lf" final-newline="true" preserve-text-breaks="true" preserve-blank-lines="true" text-continuation="block" trim-whitespace="true"/>
-      <default-deliverable file="project.json" name="full"/>
-   +  <metadata-policy>
-   +    <rule topic-type="task" field="created" presence="required" pattern="\d{4}-\d\d-\d\d"/>
-   +    <rule field="author" presence="recommended"/>
-   +    <rule field="keyword" presence="required"/>
-   +  </metadata-policy>
-    </dogsbay-project>
-   ```
+   | Topic type (blank = any) | Field | Presence | Allowed values (space-separated) | Pattern |
+   | --- | --- | --- | --- | --- |
+   | `task` | `created` | `required` | (empty) | `\d{4}-\d\d-\d\d` |
+   | (empty) | `author` | `recommended` | (empty) | (empty) |
+   | (empty) | `keyword` | `required` | (empty) | (empty) |
+
+   For each rule, click **Add rule**. A new row starts with the field `author` and the presence `required`. Choose the **Field** and the **Presence** from their lists, and double-click a text cell to type in it. When the table shows the three rules, click **OK**.
 2. **Read the rules**
 
-   - Each `<rule>` names a `field`, a `presence` and, optionally, a `topic-type` and a `pattern`. A missing `required` field is an error and fails the check; a missing `recommended` field is a warning, shown beside a file's errors.
+   - Each rule names a field, a presence and, optionally, a topic type and a pattern. A missing `required` field is an error and fails the check; a missing `recommended` field is a warning, shown beside a file's errors.
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`. Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere, which is the rule that reaches the glossary group.
-   - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor reads the same file.
+   - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor applies the same policy.
 3. **Change the "You are on" line**
 
    ```diff {title="README.md"}
@@ -6663,7 +6566,7 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `<indexterm>`, nested for sub-entries; `<index-see>`, `<index-see-also>` and `<index-sort-as>` inside an entry.
 - A `<glossgroup>` and a shared topic are topics and carry prologs like any other.
 - Map `<topicmeta>` takes the same elements for the publication.
-- A metadata policy in `.dogsbay/config.xml`: `<rule field presence topic-type pattern>`, enforced by `project-health` and so by the check.
+- A metadata policy, set in **Project** > **Metadata** > **Edit Policy...**: rules by topic type, field, presence and pattern, enforced by `project-health` and so by the check.
 - End of Part 2: a map with structure and a reltable, a key space, a shared topic, a glossary and metadata, published as one HTML5 deliverable.
 
 ## Next lesson {#next-lesson}
@@ -6690,7 +6593,7 @@ type: tutorial
 
 Apply three DITAVAL files to one branch of `installation-variants.ditamap`. DITA-OT creates a filtered copy for Windows, macOS, and Linux in a single build.
 
-Use `<ditavalmeta>` to assign distinct output names and key scopes to the copies. Add the map as a deliverable in `project.json`.
+Use `<ditavalmeta>` to assign distinct output names and key scopes to the copies. Add the map as a deliverable in the editor.
 
 **Optional module.** See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) for the starting checkpoint and the next core lesson.
 
@@ -6805,30 +6708,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: The deliverable, the README and the check {#step-3-the-deliverable-the-readme-and-the-check}
 
 :::steps
-1. **Edit `project.json`** No `profiles` entry: the filtering is in the map.
+1. **Add the deliverable** Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter these values:
 
-   ```diff {title="project.json"}
-   --- a/project.json
-   +++ b/project.json
-   @@ -92,6 +92,17 @@
-          "publication": {
-            "transtype": "html5"
-          }
-   +    },
-   +    {
-   +      "name": "install-variants",
-   +      "context": {
-   +        "id": "install-variants",
-   +        "input": "installation-variants.ditamap"
-   +      },
-   +      "output": "out/install-variants",
-   +      "publication": {
-   +        "transtype": "html5"
-   +      }
-        }
-      ]
-    }
-   ```
+   | Field | Value |
+   | --- | --- |
+   | **Name** | `install-variants` |
+   | **Input map** | `installation-variants.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/install-variants` |
+   | **Publication parameters** | (none) |
+
+   Leave **DITAVAL** empty: the `<ditavalref>` elements in the map do the filtering. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
 2. **Change the "You are on" line and the layout**
 
    ```diff {title="README.md"}
@@ -6915,7 +6806,7 @@ After each error exercise, undo the deliberate change and check again. Confirm t
 
 - `<ditavalref>` under a `<topicref>`: one filters the branch in place, several copy it once per DITAVAL.
 - `<ditavalmeta>` with `<dvrResourcePrefix>`, `<dvrResourceSuffix>` and `<dvrKeyscopePrefix>` names the copies and their key scopes; the prefixes must differ.
-- A branch-filtered map needs no `profiles` in `project.json`; a collision between variants builds without an error, and only the output check sees the links it breaks.
+- A branch-filtered map needs no DITAVAL in its deliverable; a collision between variants builds without an error, and only the output check sees the links it breaks.
 - `dogsbay-xml list-branches <map>` enumerates the variants.
 
 ## Next lesson {#next-lesson}
@@ -7086,36 +6977,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: The deliverable, the README and the check {#step-3-the-deliverable-the-readme-and-the-check}
 
 :::steps
-1. **Edit `project.json`**
+1. **Add the deliverable** Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter these values:
 
-   ```diff {title="project.json"}
-   --- a/project.json
-   +++ b/project.json
-   @@ -103,6 +103,23 @@
-          "publication": {
-            "transtype": "html5"
-          }
-   +    },
-   +    {
-   +      "name": "collection",
-   +      "context": {
-   +        "id": "collection",
-   +        "input": "audacity-collection.ditamap"
-   +      },
-   +      "output": "out/collection",
-   +      "publication": {
-   +        "transtype": "html5",
-   +        "params": [
-   +          {
-   +            "name": "nav-toc",
-   +            "value": "full"
-   +          }
-   +        ]
-   +      }
-        }
-      ]
-    }
-   ```
+   | Field | Value |
+   | --- | --- |
+   | **Name** | `collection` |
+   | **Input map** | `audacity-collection.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `html5` |
+   | **Output (optional)** | `out/collection` |
+   | **Publication parameters** | `nav-toc` = `full` |
+
+   The `nav-toc` parameter with the value `full` puts the navigation of the whole collection on each page, as it does for `full`. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
 2. **Change the "You are on" line and the layout**
 
    ```diff {title="README.md"}
@@ -7474,7 +7347,7 @@ The `cleanup` topicset names a reusable branch. The podcaster map includes that 
 
 ## Compare combined and split pages {#compare-combined-and-split-pages}
 
-Create these files under `examples/chunking/`. This example has its own maps and is excluded from the deliverables in `project.json`.
+Create these files under `examples/chunking/`. This example has its own maps and is not one of the project's deliverables.
 
 ```xml {title="examples/chunking/topics/nested.dita"}
 <?xml version="1.0" encoding="UTF-8"?>
@@ -7758,31 +7631,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: The deliverable {#step-2-the-deliverable}
 
 :::steps
-1. **Edit `project.json`**
+1. **Add the deliverable** Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter these values:
 
-   ```diff {title="project.json"}
-   --- a/project.json
-   +++ b/project.json
-   @@ -120,6 +120,17 @@
-              }
-            ]
-          }
-   +    },
-   +    {
-   +      "name": "book-pdf",
-   +      "context": {
-   +        "id": "book-pdf",
-   +        "input": "audacity-book.ditamap"
-   +      },
-   +      "output": "out/book-pdf",
-   +      "publication": {
-   +        "transtype": "pdf"
-   +      }
-        }
-      ]
-    }
-   ```
-2. **Read it** The eighth deliverable, `book-pdf`, is the bookmap with `"transtype": "pdf"`. DITA-OT's built-in PDF transform, `org.dita.pdf2`, renders the book with Apache FOP. The editor includes both, and **Check Project** builds the PDF with the other seven deliverables into `out/book-pdf/`.
+   | Field | Value |
+   | --- | --- |
+   | **Name** | `book-pdf` |
+   | **Input map** | `audacity-book.ditamap` |
+   | **DITAVAL (optional)** | (leave empty) |
+   | **Transtype** | `pdf` |
+   | **Output (optional)** | `out/book-pdf` |
+   | **Publication parameters** | (none) |
+
+   Change **Transtype** from `html5` to `pdf`. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
+2. **Read it** The eighth deliverable, `book-pdf`, is the bookmap with the `pdf` transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`, renders the book with Apache FOP. The editor includes both, and **Check Project** builds the PDF with the other seven deliverables into `out/book-pdf/`.
 :::
 
 ## Step 3: Update the README and check your work {#step-3-update-the-readme-and-check-your-work}
@@ -7894,7 +7755,7 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - `<bookmeta>`: `<publisherinformation>`, `<bookid>` with `<bookpartno>` and `<edition>`, `<bookrights>` with `<copyrfirst>` and `<bookowner>`.
 - `<frontmatter>` holds the keydefs, maprefs and resource-only refs, the `<booklists>` (`<toc>`, `<figurelist>`, `<tablelist>`), `<notices>` and `<preface>`; `<backmatter>` holds `<glossarylist>` and `<indexlist>`.
 - `<part>`, `<chapter>`, `<appendix>`, and how the PDF numbers them.
-- `project.json`: a deliverable with the `pdf` transtype.
+- A deliverable with the `pdf` transtype, added in **Manage Deliverables**.
 - The bookmap content model defines the permitted metadata, book divisions, and relationship tables at the top level.
 
 ## Next lesson {#next-lesson}
@@ -9632,19 +9493,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    The draft comment is in neither build, nor is the required cleanup: DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the build asks for them with `args.draft=yes`. A search for the comment's text across every deliverable that the check built, `grep -rl 'metadata tags step' out/`, prints nothing.
 
-   To see them, give the `review` deliverable the parameter for one build. In `project.json`, add a `params` list to the `publication` of the `review` deliverable:
+   To see them, give the `review` deliverable the parameter for one build:
 
-   ```json
-   "publication": {
-     "transtype": "html5",
-     "params": [
-       {
-         "name": "args.draft",
-         "value": "yes"
-       }
-     ]
-   }
-   ```
+   1. Choose **Project** > **Project Tools** > **Manage Deliverables...**.
+   2. Select `review` and click **Edit...**.
+   3. Under **Publication parameters**, click **Add param**. Double-click the **Name** cell and type `args.draft`, then double-click the **value** cell and type `yes`.
+   4. Click **Save...**, click **OK**, and click **Close**.
 
    Then build and check that deliverable only:
 
@@ -9659,7 +9513,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    <div class="required-cleanup" style="background-color: #FFFF99; color:#CC3333; border: 1pt black solid;"><strong>Required cleanup: </strong>[table] Target loudness per platform: Spotify -14 LUFS, Apple -16 LUFS, YouTube -14 LUFS. Turn into a table once the list is confirmed.</div>
    ```
 
-   The comment and the cleanup are rendered in place, boxed and colored, with the author, disposition and date. Use `args.draft=yes` to include this markup during review, and resolve it before release. Remove the `params` list from `project.json` again before you continue, so that the `review` deliverable matches the stage branch.
+   The comment and the cleanup are rendered in place, boxed and colored, with the author, disposition and date. Use `args.draft=yes` to include this markup during review, and resolve it before release. Remove the parameter again before you continue, so that the `review` deliverable matches the stage branch: in **Manage Deliverables**, select `review`, click **Edit...**, select the `args.draft` row, click **Remove**, click **Save...** and **OK**, and click **Close**.
 :::
 
 Test an invalid value. Change the new row in `topics/effects-reference.dita` to `status="draft"`, a value that reads well and does not exist, and check your work. The check stops at health. Example output:
@@ -9728,7 +9582,7 @@ Add a practice map that publishes the recording and export tasks. Include the ke
 
 Before adding another reusable step, compare its purpose with the shared save step. Explain whether you can use the existing element unchanged.
 
-**Check:** Add a deliverable named `practice` to `project.json`, with `practice.ditamap` as its input and `out/practice` as its output. Then check that deliverable. In the editor, **Project** > **Check Project** checks every deliverable. From the command line, run:
+**Check:** In **Project** > **Project Tools** > **Manage Deliverables...**, add a deliverable named `practice`, with `practice.ditamap` as its **Input map**, `html5` as its **Transtype**, and `out/practice` as its **Output**. Then check that deliverable. In the editor, **Project** > **Check Project** checks every deliverable. From the command line, run:
 
 ```bash
 dogsbay-xml check --deliverable=practice .
@@ -9974,7 +9828,7 @@ The stage that introduces each element or attribute. Look an element up here, th
 | Element or attribute | Stage |
 | --- | --- |
 | DOCTYPE and the DITA-OT catalog | [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |
-| `.dogsbay/config.xml` (project type, framework, format style) | [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |
+| Project settings (project type, framework, format style), kept by the editor | [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |
 | `<concept>`, `<conbody>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |
 | `@id` on a topic | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |
 | `<title>`, `<shortdesc>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |
@@ -10018,10 +9872,9 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `<topicref>` with `@href` | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |
 | `<topichead>` with `@navtitle` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |
 | `<topicmeta>` with `<shortdesc>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |
-| `project.json`: deliverables, `transtype` `html5`, `params` (`nav-toc`) | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
-| `dita --project=project.json` | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
-| `.dogsbay/config.xml`: `<default-root-map>` | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |
-| `.dogsbay/config.xml`: `<default-deliverable>` | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
+| **Manage Deliverables**: a deliverable, **Transtype** `html5`, **Publication parameters** (`nav-toc`) | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
+| **Manage Projects**: **Default Root Map** | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |
+| The active deliverable (**Set active**, or the status bar) | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |
 | nested `<topicref>` (parent and child) | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |
 | `@collection-type` (`family`, `sequence`) | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |
 | `<topicgroup>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |
@@ -10055,7 +9908,7 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `<indexterm>` (nested), `<index-see>`, `<index-see-also>`, `<index-sort-as>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |
 | `<resourceid>`, `<data>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |
 | map `<topicmeta>`: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>`, `<keywords>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |
-| `.dogsbay/config.xml`: `<metadata-policy>`, `<rule field presence topic-type pattern>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |
+| **Metadata** > **Edit Policy**: rules by topic type, field, presence, and pattern | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |
 
 ## Part 3: Conditions and variants {#part-3-conditions-and-variants}
 
@@ -10067,7 +9920,7 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `@audience` on a `<topichead>` (filtering a map branch) | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |
 | DITAVAL: `<val>`, `<prop att val action>` (`include`, `exclude`, `flag`), `@backcolor`, `@color` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |
 | DITAVAL: `<revprop val action changebar>`, `<startflag>`, `<endflag>`, `<alt-text>`, `<style-conflict>` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |
-| `project.json`: `profiles.ditavals`, one deliverable per DITAVAL | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |
+| **Manage Deliverables**: the **DITAVAL** field, one deliverable per DITAVAL | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |
 | `<subjectScheme>` and its DOCTYPE; nested `<subjectdef keys>` with `<navtitle>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |
 | `<enumerationdef>`, `<attributedef name>`, `<subjectdef keyref>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |
 | `<hasNarrower>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |
@@ -10095,7 +9948,7 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `<bookmeta>`: `<publisherinformation>`, `<organization>`, `<bookid>`, `<bookpartno>`, `<edition>`, `<bookrights>`, `<copyrfirst>`, `<year>`, `<bookowner>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |
 | `<frontmatter>` (keydefs, maprefs and resource-only refs inside it), `<booklists>`, `<toc>`, `<figurelist>`, `<tablelist>`, `<notices>`, `<preface>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |
 | `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`, `<glossarylist>`, `<indexlist>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |
-| `project.json`: a deliverable with the `pdf` transtype | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |
+| **Manage Deliverables**: a deliverable with the `pdf` transtype | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |
 | `<troubleshooting>` and its DOCTYPE, `<troublebody>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |
 | `<steps-informal>`; a profiling attribute on a `<troubleSolution>` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |
 | `<note type="trouble">` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |
@@ -10125,10 +9978,10 @@ The stage that introduces each element or attribute. Look an element up here, th
 | `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |
 | `project-health`'s *Authoring leftovers* warnings | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |
 | Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
-| `<default-schematron>` in `.dogsbay/config.xml`; `project-health --include=schematron`; the house rules in **Check Project** | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
+| **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
 | `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
 | `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap="table">` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |
-| Nothing new: the README's stage table and deliverables, `project.json` in full, the `tutorial/final` tag | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
+| Nothing new: the README's stage table and the eight deliverables, the `tutorial/final` tag | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |
 
 ---
 
