@@ -187,7 +187,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    filtering. Click **Save...**, click **OK** to write the deliverable, and
    click **Close**.
 
-2. **Check your work**
+2. **Preview a branch**
+   In the status bar's deliverable menu, choose `install-variants`. Open
+   `topics/installing-audacity.dita` and choose **View** > **Preview in
+   Split**. Because the map has branches, the bar above the preview adds
+   **Branch**, set to **Whole map**. Choose **mac-**: the preview applies
+   that branch's filter, **platform-mac.ditaval**, and keeps only the macOS
+   install row. Choose `full` in the status bar again before you continue.
+
+3. **Check your work**
    In the editor, choose **Project** > **Check Project** and read the
    result in the **Project Validation** panel. From the command line, run:
 
@@ -215,7 +223,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The new filters use only controlled values: the check includes the
    controlled values from stage 15, and it reads the DITAVAL files too.
 
-3. **Read the output**
+4. **Read the output**
    `out/install-variants/topics/` has three copies
    of each of the two topics:
 
