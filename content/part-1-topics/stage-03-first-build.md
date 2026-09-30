@@ -78,11 +78,13 @@ Ready: the project is healthy, every deliverable built, and the output of full h
 ```
 
 The `build` line shows where the deliverable was built: the `out/full`
-folder inside `my-audacity-guide`. Open `out/full/index.html`, follow the topic link, and check the heading, short
-description, list, and section.
+folder inside `my-audacity-guide`. To see it, open `out/full/index.html`
+from the **Explorer** and choose **View** > **Preview in Tab**. The preview
+shows the page as a browser does. Follow the topic link, and check the
+heading, short description, list, and section.
 
-Change the topic title, check again, and refresh the browser. Check both the
-page heading and navigation label. Restore the title and check again when
+Change the topic title, check again, and preview `index.html` again. Check
+both the page heading and navigation label. Restore the title and check again when
 you finish the exercise.
 
 If the check fails, check the working directory and the map-relative paths.
