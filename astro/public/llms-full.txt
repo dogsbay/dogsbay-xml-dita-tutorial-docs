@@ -664,7 +664,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      </conbody>
    </concept>
    ```
-4. **Read it element by element**
+4. **Preview the topic** Choose **View** > **Preview in Split**. The preview opens beside the source and shows the topic as it will look when published: the title as a heading, the short description, the list, and the section. It updates as you type, so keep it open while you write. **View** > **Preview in Tab** opens the same preview in a tab of its own.
+5. **Read it element by element**
 
    - The XML declaration and the DOCTYPE come first. `-//OASIS//DTD DITA Concept//EN` is the public identifier the catalog resolves; `concept.dtd` is the system identifier, kept relative so the file does not depend on where DITA-OT is installed.
    - `<concept id="…">` is the topic. Every topic has an `@id`, and a link to a topic points at that id. Use lowercase words joined by hyphens.
@@ -2933,7 +2934,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           </simpletable>
         </section>
    ```
-2. **Read the four forms of reference**
+2. **Preview a keyed topic** Open `topics/what-is-audacity.dita` and choose **View** > **Preview in Split**. The bar above the preview reads **Map: audacity-guide.ditamap**: the preview resolves keys through the map of the active deliverable, `full`, so every `product-name` reference shows as *Audacity*, underlined to mark it as text that comes from a key.
+3. **Read the four forms of reference**
 
    - `<keyword keyref="product-name"/>`: variable text. The element is empty; the processor fills in the `<keyword>` from the keydef. It works in a `<title>` and a `<shortdesc>` as well as in a `<p>`.
    - `<xref keyref="download-url"/>`: a link through a key to an external page. The text is the keydef's `<linktext>`.
