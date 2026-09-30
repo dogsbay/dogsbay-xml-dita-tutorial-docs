@@ -406,7 +406,8 @@ Not ready: 2 links in the built output lead nowhere.
 To build and check one deliverable only from the command line, run
 `dogsbay-xml check --deliverable=chunk-split .`.
 
-Open each output's `index.html`. The combined version,
+Open each output's `index.html` from the **Explorer**, and choose **View** >
+**Preview in Tab** to follow its links. The combined version,
 `out/chunk-combined/topics/nested.html`, keeps the parent and child on one
 page. The split version writes two pages: `topics/chunk-parent.html` for
 the parent, and a page with a generated name at the top of the output
