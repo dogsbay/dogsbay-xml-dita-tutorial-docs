@@ -225,21 +225,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     5 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
    The check builds eight deliverables. The `book-pdf` line reports the
-   PDF, and the indented line under it summarizes the layout warnings from
+   PDF, and the `WARN` line under it summarizes the layout warnings from
    Apache FOP, such as content that is wider than its column. The warnings
    do not fail the check. The output check reads links in HTML pages only,
    so for the PDF it confirms that the build wrote a file.

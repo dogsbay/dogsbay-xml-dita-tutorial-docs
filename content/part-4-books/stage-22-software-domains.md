@@ -462,7 +462,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
         <section audience="beginner">
    ```
 
-   The `scripting` key is used the stage it is defined.
+   The `scripting` key is used in the same stage that defines it.
 ::::
 
 ## Step 3: Check your work
@@ -498,12 +498,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     7 note(s) — run with --verbose to see them
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     18 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
      WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
-     6 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -528,8 +528,8 @@ Not ready: the project itself has faults. The build and the built output were no
 ```
 
 A `<repsep>` follows the optional title and precedes the items in its
-group. The message names the element it found instead of what the model
-allows.
+group. The message names the element whose content is wrong, `groupseq`,
+not the misplaced `<repsep>` inside it.
 
 Undo the change and check again. Confirm that the check reports `Ready`
 before you continue.
