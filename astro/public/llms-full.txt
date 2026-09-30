@@ -6607,30 +6607,24 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     6 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     16 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel. The notes of the `collection` deliverable include `DOTJ047I` notes for glossary keys, such as `gl-decibel`, that DITA-OT did not find in the root scope. The output check finds no broken links in the collection.
+   The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
 3. **Read the output** `out/collection/index.html` has the three guides one after another, and `topics/` has a page per use of each topic: `what-is-audacity.html` for the full guide, then `what-is-audacity-1.html` for the beginner guide and `what-is-audacity-2.html` for the podcaster guide. A topic used in several scopes is a page in each, so that each copy's links resolve in its own scope. A topic with no key references, such as *Trimming audio* or a glossary entry, is one page that the three chapters share.
 :::
 
-Test an unqualified key at the root. Add `<topicref keyref="start-here"/>` to `audacity-collection.ditamap`, above the first `<topichead>`, and check your work. The check reports `Ready`, and the `collection` build reports one more note than before. DITA-OT drops the topicref and records it as an informational note. To see it, check the `collection` deliverable with the `-v` option:
-
-```bash
-dogsbay-xml check --deliverable=collection -v .
-```
-
-Among the notes, the output includes this line. In the editor, the **Project Validation** panel shows the same note after **Check Project**.
+Test an unqualified key at the root. Add `<topicref keyref="start-here"/>` to `audacity-collection.ditamap`, above the first `<topichead>`, and check your work. The check reports `Ready`, and warns under the `collection` build:
 
 ```
-  INFO  [DOTJ047I] file:/home/you/my-audacity-guide/audacity-collection.ditamap:16  Unable to find key definition for key reference 'start-here' in root scope. Using the @href attribute as fallback if it exists.
+WARN  audacity-collection.ditamap:18  'start-here' resolves to nothing here, and has no @href to fall back on
 ```
 
-There is no `@href`, so the entry is missing from the table of contents and nothing else. The build succeeds and no link breaks, so the output check has nothing to report. Health does not see it either: it checks the default root map, the full guide. The key resolver, pointed at the collection, reports an error:
+DITA-OT drops the topicref, so the entry is missing from the table of contents, and the verdict counts one key reference that resolves to nothing. Health does not see it: it checks the default root map, the full guide, where the key exists. The warning comes from the collection's own build. The key resolver, pointed at the collection, reports the same gap as an error:
 
 ```bash
 dogsbay-xml keys audacity-collection.ditamap --resolve start-here
@@ -7840,7 +7834,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <appendix href="topics/effect-presets.dita"/>
    ```
 
-   Stage 20 defined `silent` in the full guide, the beginner guide and the installation variants, but not in the book: the book's `<appendix>` for the same topic had no `keys`. The trouble note from stage 20 did not need it, because its `href` fallback resolves without the key. The new sentence has only a `keyref`. Without this line the notices page of `out/book-pdf/audacity-book.pdf` reads *Recording nothing but silence? See .* with nothing after *See*, and the check still reports `Ready`. Health resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, the PDF build does not fail on an unresolved key, and the output check reads links in HTML pages only. A key that a topic uses must be defined in every map that publishes the topic; with it, the sentence in the PDF reads *Recording nothing but silence? See The recording is silent on page 37.*
+   Stage 20 defined `silent` in the full guide, the beginner guide and the installation variants, but not in the book: the book's `<appendix>` for the same topic had no `keys`. The trouble note from stage 20 did not need it, because its `href` fallback resolves without the key. The new sentence has only a `keyref`. Without this line the notices page of `out/book-pdf/audacity-book.pdf` reads *Recording nothing but silence? See .* with nothing after *See*. Health resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, so health passes, but the book's own build does not find it. The check reports `Ready` and warns under `book-pdf`:
+
+   ```
+   WARN  topics/about-this-guide.dita:24  'silent' resolves to nothing here, and has no @href to fall back on
+   ```
+
+   A key that a topic uses must be defined in every map that publishes the topic; with it, the sentence in the PDF reads *Recording nothing but silence? See The recording is silent on page 37.*
 6. **Read the output** The check's HTML5 build of the full guide, `out/full/topics/recording-your-first-track.html`, has the hazard in place (the inline SVG is shortened here):
 
    ```
