@@ -158,13 +158,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    win-                 filters topics/installing-audacity.dita ditaval=filters/platform-windows.ditaval  keyscope=win.
    mac-                 filters topics/installing-audacity.dita ditaval=filters/platform-mac.ditaval  keyscope=mac.
-   platform-linux.ditaval filters topics/installing-audacity.dita ditaval=filters/platform-linux.ditaval  keyscope=linux.
+   -linux               filters topics/installing-audacity.dita ditaval=filters/platform-linux.ditaval  keyscope=linux.
    3 branch variant(s).
    ```
 
    Each line is one variant: its prefix, the topic it filters, the
    DITAVAL and the key scope. A variant with no prefix is labeled by its
-   DITAVAL file.
+   suffix.
 ::::
 
 ## Step 3: The deliverable and the check
@@ -211,11 +211,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -279,6 +282,7 @@ health   clean, with warnings
   unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
   unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+  7 note(s) — run with --verbose to see them
 output   2 broken link(s)
   /home/you/my-audacity-guide/out/install-variants/index.html:23  @href="e676c532f446de854f19d505d53ab754fc11517b-1.html" — there is no e676c532f446de854f19d505d53ab754fc11517b-1.html
   /home/you/my-audacity-guide/out/install-variants/index.html:24  @href="397e15314df15a1ce6ffe81cf005134f385e5428-1.html" — there is no 397e15314df15a1ce6ffe81cf005134f385e5428-1.html

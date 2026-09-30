@@ -205,8 +205,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Example output:
 
    ```
-   @platform: linux, mac, windows
    @audience: beginner, podcaster
+   @platform: linux, mac, windows
    ```
 
    The containers `os` and `readers` are not values: the enumeration

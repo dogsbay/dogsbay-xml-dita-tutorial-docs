@@ -260,9 +260,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     7 note(s) — run with --verbose to see them
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     18 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
      WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 17 warnings (11 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
      5 note(s) — run with --verbose to see them

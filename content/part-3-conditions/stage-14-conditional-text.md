@@ -587,10 +587,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -634,12 +636,16 @@ health   clean, with warnings
   unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
   unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
 build    full                 ok  /home/you/my-audacity-guide/out/full
+  5 note(s) — run with --verbose to see them
 build    beginner-mac         FAILED  /home/you/my-audacity-guide/out/beginner-mac
+  1 note(s) — run with --verbose to see them
   [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
 build    beginner-windows     FAILED  /home/you/my-audacity-guide/out/beginner-windows
+  1 note(s) — run with --verbose to see them
   [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
 build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
 build    review               ok  /home/you/my-audacity-guide/out/review
+  4 note(s) — run with --verbose to see them
 Not ready: beginner-mac, beginner-windows failed to build. The built output was not read.
 ```
 

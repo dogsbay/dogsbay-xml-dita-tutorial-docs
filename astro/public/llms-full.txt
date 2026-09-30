@@ -3951,10 +3951,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -3976,12 +3978,16 @@ health   clean, with warnings
   unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:33] — nothing references it
   unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:49] — nothing references it
 build    full                 ok  /home/you/my-audacity-guide/out/full
+  5 note(s) — run with --verbose to see them
 build    beginner-mac         FAILED  /home/you/my-audacity-guide/out/beginner-mac
+  1 note(s) — run with --verbose to see them
   [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
 build    beginner-windows     FAILED  /home/you/my-audacity-guide/out/beginner-windows
+  1 note(s) — run with --verbose to see them
   [DOTX028E] file:/home/you/my-audacity-guide/topics/what-is-audacity.dita:49  Link or cross reference must contain a valid @href or @keyref attribute; no link target is specified.
 build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
 build    review               ok  /home/you/my-audacity-guide/out/review
+  4 note(s) — run with --verbose to see them
 Not ready: beginner-mac, beginner-windows failed to build. The built output was not read.
 ```
 
@@ -4195,8 +4201,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Example output:
 
    ```
-   @platform: linux, mac, windows
    @audience: beginner, podcaster
+   @platform: linux, mac, windows
    ```
 
    The containers `os` and `readers` are not values: the enumeration binds each attribute to the subjects below them. See [Binding controlled values to an attribute](https://docs.oasis-open.org/dita/dita/v1.3/errata01/os/complete/part2-tech-content/archSpec/base/binding-controlled-values-to-attribute.html).
@@ -4601,12 +4607,12 @@ With these files, the same rules exist for three readers: the machine in `house-
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     7 note(s) — run with --verbose to see them
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     18 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
      WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
-     6 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -4748,14 +4754,20 @@ The check validates the source, runs project health with the metadata policy and
 ```
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
+  5 note(s) — run with --verbose to see them
 build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
 build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
 build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+  1 note(s) — run with --verbose to see them
 build    review               ok  /home/you/my-audacity-guide/out/review
+  4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+  6 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
+  5 note(s) — run with --verbose to see them
 build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+  WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+  5 note(s) — run with --verbose to see them
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -6300,11 +6312,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    win-                 filters topics/installing-audacity.dita ditaval=filters/platform-windows.ditaval  keyscope=win.
    mac-                 filters topics/installing-audacity.dita ditaval=filters/platform-mac.ditaval  keyscope=mac.
-   platform-linux.ditaval filters topics/installing-audacity.dita ditaval=filters/platform-linux.ditaval  keyscope=linux.
+   -linux               filters topics/installing-audacity.dita ditaval=filters/platform-linux.ditaval  keyscope=linux.
    3 branch variant(s).
    ```
 
-   Each line is one variant: its prefix, the topic it filters, the DITAVAL and the key scope. A variant with no prefix is labeled by its DITAVAL file.
+   Each line is one variant: its prefix, the topic it filters, the DITAVAL and the key scope. A variant with no prefix is labeled by its suffix.
 :::
 
 ## Step 3: The deliverable and the check {#step-3-the-deliverable-and-the-check}
@@ -6337,11 +6349,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
      unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
@@ -6380,6 +6395,7 @@ health   clean, with warnings
   unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:34] — nothing references it
   unused key: podcast-workflow  [/home/you/my-audacity-guide/audacity-guide.ditamap:50] — nothing references it
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+  7 note(s) — run with --verbose to see them
 output   2 broken link(s)
   /home/you/my-audacity-guide/out/install-variants/index.html:23  @href="e676c532f446de854f19d505d53ab754fc11517b-1.html" — there is no e676c532f446de854f19d505d53ab754fc11517b-1.html
   /home/you/my-audacity-guide/out/install-variants/index.html:24  @href="397e15314df15a1ce6ffe81cf005134f385e5428-1.html" — there is no 397e15314df15a1ce6ffe81cf005134f385e5428-1.html
@@ -7031,9 +7047,9 @@ build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linu
 build    review               ok  /home/you/my-audacity-guide/out/review
   4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-  6 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
-  16 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    chunk-combined       ok  /home/you/my-audacity-guide/out/chunk-combined
 build    chunk-split          ok  /home/you/my-audacity-guide/out/chunk-split
 output   2 broken link(s)
@@ -7077,9 +7093,9 @@ build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linu
 build    review               ok  /home/you/my-audacity-guide/out/review
   4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-  6 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
-  16 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
@@ -7279,20 +7295,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     5 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The check builds eight deliverables. The `book-pdf` line reports the PDF, and the indented line under it summarizes the layout warnings from Apache FOP, such as content that is wider than its column. The warnings do not fail the check. The output check reads links in HTML pages only, so for the PDF it confirms that the build wrote a file.
+   The check builds eight deliverables. The `book-pdf` line reports the PDF, and the `WARN` line under it summarizes the layout warnings from Apache FOP, such as content that is wider than its column. The warnings do not fail the check. The output check reads links in HTML pages only, so for the PDF it confirms that the build wrote a file.
 2. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. Open it in any PDF viewer. `pdftotext` shows the contents page without a viewer:
 
    ```bash
@@ -7640,14 +7661,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 13 warnings (9 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 13 warnings (9 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
+     6 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -7885,9 +7912,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     7 note(s) — run with --verbose to see them
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     18 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
      WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 17 warnings (11 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, and 3 other kinds)
      5 note(s) — run with --verbose to see them
@@ -8292,7 +8319,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
         <section audience="beginner">
    ```
 
-   The `scripting` key is used the stage it is defined.
+   The `scripting` key is used in the same stage that defines it.
 :::
 
 ## Step 3: Check your work {#step-3-check-your-work}
@@ -8325,12 +8352,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-     7 note(s) — run with --verbose to see them
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
-     18 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
      WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
-     6 note(s) — run with --verbose to see them
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -8349,7 +8376,7 @@ health   NOT CLEAN
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-A `<repsep>` follows the optional title and precedes the items in its group. The message names the element it found instead of what the model allows.
+A `<repsep>` follows the optional title and precedes the items in its group. The message names the element whose content is wrong, `groupseq`, not the misplaced `<repsep>` inside it.
 
 Undo the change and check again. Confirm that the check reports `Ready` before you continue.
 
@@ -8607,14 +8634,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
@@ -9022,14 +9055,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
+     5 note(s) — run with --verbose to see them
    build    beginner-mac         ok  /home/you/my-audacity-guide/out/beginner-mac
    build    beginner-windows     ok  /home/you/my-audacity-guide/out/beginner-windows
    build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linux
+     1 note(s) — run with --verbose to see them
    build    review               ok  /home/you/my-audacity-guide/out/review
+     4 note(s) — run with --verbose to see them
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
+     6 note(s) — run with --verbose to see them
    build    collection           ok  /home/you/my-audacity-guide/out/collection
+     5 note(s) — run with --verbose to see them
    build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
-     PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     WARN  /home/you/my-audacity-guide/audacity-book.ditamap  PDF rendering reported 19 warnings (12 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 2 The contents of fo:inline line n exceed the available area in the inline-progression direc…, 2 The contents of fo:block line n exceed the available area in the inline-progression direct…, and 3 other kinds)
+     5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.

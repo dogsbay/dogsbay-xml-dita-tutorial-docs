@@ -392,9 +392,9 @@ build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linu
 build    review               ok  /home/you/my-audacity-guide/out/review
   4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-  6 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
-  16 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    chunk-combined       ok  /home/you/my-audacity-guide/out/chunk-combined
 build    chunk-split          ok  /home/you/my-audacity-guide/out/chunk-split
 output   2 broken link(s)
@@ -455,9 +455,9 @@ build    podcaster-linux      ok  /home/you/my-audacity-guide/out/podcaster-linu
 build    review               ok  /home/you/my-audacity-guide/out/review
   4 note(s) — run with --verbose to see them
 build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
-  6 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 build    collection           ok  /home/you/my-audacity-guide/out/collection
-  16 note(s) — run with --verbose to see them
+  5 note(s) — run with --verbose to see them
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
