@@ -960,9 +960,9 @@ output   clean (full)
 Ready: the project is healthy, every deliverable built, and the output of full holds together.
 ```
 
-The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. Open `out/full/index.html`, follow the topic link, and check the heading, short description, list, and section.
+The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. To see it, open `out/full/index.html` from the **Explorer** and choose **View** > **Preview in Tab**. The preview shows the page as a browser does. Follow the topic link, and check the heading, short description, list, and section.
 
-Change the topic title, check again, and refresh the browser. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.
+Change the topic title, check again, and preview `index.html` again. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.
 
 If the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
@@ -7046,7 +7046,7 @@ Not ready: 2 links in the built output lead nowhere.
 
 To build and check one deliverable only from the command line, run `dogsbay-xml check --deliverable=chunk-split .`.
 
-Open each output's `index.html`. The combined version, `out/chunk-combined/topics/nested.html`, keeps the parent and child on one page. The split version writes two pages: `topics/chunk-parent.html` for the parent, and a page with a generated name at the top of the output folder for the child. The table of contents links to both pages correctly. The links that DITA-OT 4.3.5 generates between parent and child do not: the child link on the parent page looks for the child page in `topics/`, and the parent link on the child page names another generated file that was never written. Generated file names can differ between runs.
+Open each output's `index.html` from the **Explorer**, and choose **View** > **Preview in Tab** to follow its links. The combined version, `out/chunk-combined/topics/nested.html`, keeps the parent and child on one page. The split version writes two pages: `topics/chunk-parent.html` for the parent, and a page with a generated name at the top of the output folder for the child. The table of contents links to both pages correctly. The links that DITA-OT 4.3.5 generates between parent and child do not: the child link on the parent page looks for the child page in `topics/`, and the parent link on the child page names another generated file that was never written. Generated file names can differ between runs.
 
 Nested topics with `chunk="by-topic"` are valid DITA. The broken links come from how this processor version writes the split pages. Record the results for your version and transformation, and check generated links before you publish split pages.
 
