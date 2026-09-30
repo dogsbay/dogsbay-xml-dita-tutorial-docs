@@ -551,7 +551,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    editor, choose it in the status bar's deliverable menu. The check
    builds all five.
 
-2. **Format and check your work**
+2. **Preview what each guide shows**
+   Open `topics/removing-background-noise.dita` and choose **View** >
+   **Preview in Split**. The bar above the preview names the active
+   deliverable's map and filter: **Map: audacity-guide.ditamap** and
+   **Filter: none**, so the warning reads "undo with Ctrl+Z or, on macOS,
+   Cmd+Z". In the status bar's deliverable menu, choose `beginner-mac`. The
+   preview follows at once: **Map: beginner-guide.ditamap**, **Filter:
+   mac-beginner.ditaval**, and the warning reads "undo with Cmd+Z". Choose
+   `full` again before you continue.
+
+3. **Format and check your work**
 
    Format the changed files: choose **XML** > **Format** in each one and
    save it, or choose **Project** > **Project Tools** > **Format Project**
@@ -589,7 +599,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    and checks the links in each. `podcast-workflow` is unused until stage
    18 refers to it.
 
-3. **Read the output**
+4. **Read the output**
    `out/` contains one folder per deliverable. Compare these files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select
