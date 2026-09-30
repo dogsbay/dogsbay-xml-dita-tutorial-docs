@@ -3928,7 +3928,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    When you finish, the table lists five deliverables. Click **Close**.
 
    `full` stays the active deliverable, the one that **Build Deliverables** builds by default. To build another one from the editor, choose it in the status bar's deliverable menu. The check builds all five.
-2. **Format and check your work**
+2. **Preview what each guide shows** Open `topics/removing-background-noise.dita` and choose **View** > **Preview in Split**. The bar above the preview names the active deliverable's map and filter: **Map: audacity-guide.ditamap** and **Filter: none**, so the warning reads "undo with Ctrl+Z or, on macOS, Cmd+Z". In the status bar's deliverable menu, choose `beginner-mac`. The preview follows at once: **Map: beginner-guide.ditamap**, **Filter: mac-beginner.ditaval**, and the warning reads "undo with Cmd+Z". Choose `full` again before you continue.
+3. **Format and check your work**
 
    Format the changed files: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
@@ -3959,7 +3960,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The check takes longer now: it builds five deliverables instead of one, and checks the links in each. `podcast-workflow` is unused until stage 18 refers to it.
-3. **Read the output** `out/` contains one folder per deliverable. Compare these files:
+4. **Read the output** `out/` contains one folder per deliverable. Compare these files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select the whole track with Ctrl+A." under `beginner-windows` and `podcaster-linux`, and "Select the whole track with Cmd+A." under `beginner-mac`. Under `full` and `review`, which filter nothing on `@platform`, it reads "Select the whole track with Ctrl+A or, on macOS, Cmd+A." The backup warning at the top of the page reads the same way with `Ctrl+Z` and `Cmd+Z`.
    - `beginner-windows/topics/installing-audacity.html` has one row in the choice table, the `.exe` one; `beginner-mac` has the `.dmg` row, `podcaster-linux` the `apt install` row.
@@ -6321,7 +6322,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | (none) |
 
    Leave **DITAVAL** empty: the `<ditavalref>` elements in the map do the filtering. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Preview a branch** In the status bar's deliverable menu, choose `install-variants`. Open `topics/installing-audacity.dita` and choose **View** > **Preview in Split**. Because the map has branches, the bar above the preview adds **Branch**, set to **Whole map**. Choose **mac-**: the preview applies that branch's filter, **platform-mac.ditaval**, and keeps only the macOS install row. Choose `full` in the status bar again before you continue.
+3. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -6345,7 +6347,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The new filters use only controlled values: the check includes the controlled values from stage 15, and it reads the DITAVAL files too.
-3. **Read the output** `out/install-variants/topics/` has three copies of each of the two topics:
+4. **Read the output** `out/install-variants/topics/` has three copies of each of the two topics:
 
    ```
    win-installing-audacity.html
