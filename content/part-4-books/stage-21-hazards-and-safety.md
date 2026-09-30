@@ -193,12 +193,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    stage 20 did not need it, because its `href` fallback resolves without
    the key. The new sentence has only a `keyref`. Without this line the
    notices page of `out/book-pdf/audacity-book.pdf` reads *Recording
-   nothing but silence? See .* with nothing after *See*, and the check
-   still reports `Ready`. Health resolves keys against the root map,
-   `audacity-guide.ditamap`, where the key exists, the PDF build does not
-   fail on an unresolved key, and the output check reads links in HTML
-   pages only. A key that a topic uses must be
-   defined in every map that publishes the topic; with it, the sentence
+   nothing but silence? See .* with nothing after *See*. Health resolves
+   keys against the root map, `audacity-guide.ditamap`, where the key
+   exists, so health passes, but the book's own build does not find it.
+   The check reports `Ready` and warns under `book-pdf`:
+
+   ```
+   WARN  topics/about-this-guide.dita:24  'silent' resolves to nothing here, and has no @href to fall back on
+   ```
+
+   A key that a topic uses must be defined in every map that publishes
+   the topic; with it, the sentence
    in the PDF reads *Recording nothing but silence? See The recording is
    silent on page 37.*
 
