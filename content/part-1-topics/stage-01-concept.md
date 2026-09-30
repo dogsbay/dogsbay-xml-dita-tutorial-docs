@@ -103,7 +103,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    </concept>
    ```
 
-4. **Read it element by element**
+4. **Preview the topic**
+   Choose **View** > **Preview in Split**. The preview opens beside the
+   source and shows the topic as it will look when published: the title as
+   a heading, the short description, the list, and the section. It updates
+   as you type, so keep it open while you write. **View** > **Preview in
+   Tab** opens the same preview in a tab of its own.
+
+5. **Read it element by element**
 
    - The XML declaration and the DOCTYPE come first. `-//OASIS//DTD DITA
      Concept//EN` is the public identifier the catalog resolves; `concept.dtd`

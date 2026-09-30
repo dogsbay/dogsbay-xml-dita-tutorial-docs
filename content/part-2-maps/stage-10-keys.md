@@ -388,7 +388,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
         </section>
    ```
 
-2. **Read the four forms of reference**
+2. **Preview a keyed topic**
+   Open `topics/what-is-audacity.dita` and choose **View** > **Preview in
+   Split**. The bar above the preview reads **Map:
+   audacity-guide.ditamap**: the preview resolves keys through the map of
+   the active deliverable, `full`, so every `product-name` reference shows
+   as *Audacity*, underlined to mark it as text that comes from a key.
+
+3. **Read the four forms of reference**
 
    - `<keyword keyref="product-name"/>`: variable text. The element is
      empty; the processor fills in the `<keyword>` from the keydef. It
