@@ -25,8 +25,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `topics/what-is-digital-audio.dita`**
    In the **Explorer**, right-click the `topics` folder, choose
-   **New File**, and enter `what-is-digital-audio.dita`. Choose the
-   **Concept** template and click **OK**. Replace the title placeholder, type the short
+   **New File**, and enter `what-is-digital-audio.dita`. Click the
+   **Concept** template. Replace the title placeholder, type the short
    description, and start the body in the empty `<p></p>`. If you use
    another editor, create the file and type the finished listing.
 

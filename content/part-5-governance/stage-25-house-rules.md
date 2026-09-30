@@ -27,8 +27,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `house-style.sch`**
    In the **Explorer**, right-click `my-audacity-guide` and choose
    **New File**. Enter `house-style.sch` and press Enter. In the
-   **New XML Document** dialog, choose **Schematron Rules** and click
-   **OK**. Replace the template's content with this listing and save the
+   **New XML Document** dialog, click **Schematron Rules**. Replace the
+   template's content with this listing and save the
    file:
 
    ```xml title="house-style.sch"

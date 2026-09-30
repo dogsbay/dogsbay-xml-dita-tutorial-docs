@@ -27,7 +27,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `topics/recording-your-first-track.dita`**
    In the **Explorer**, right-click the `topics` folder, choose
    **New File**, and enter `recording-your-first-track.dita`. In the
-   **New XML Document** dialog, choose **Task** and click **OK**. As in
+   **New XML Document** dialog, click **Task**. As in
    stage 01, the editor sets the `@id` from the file name. The template
    gives you the task skeleton:
 

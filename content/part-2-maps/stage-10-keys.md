@@ -27,7 +27,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `keydefs-product.ditamap`** in `my-audacity-guide`.
    In the **Explorer**, right-click `my-audacity-guide`, choose **New File**,
    and enter `keydefs-product.ditamap`. In the **New XML Document** dialog,
-   choose **Key Definition Map** and click **OK**. The template contains
+   click **Key Definition Map**. The template contains
    two sample key definitions:
 
    ```xml
