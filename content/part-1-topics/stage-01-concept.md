@@ -28,7 +28,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    In the **Explorer**, right-click the `topics` folder and choose
    **New File**. Enter `what-is-audacity.dita` and press Enter. The
    **New XML Document** dialog lists the templates for `.dita` files.
-   Choose **Concept** and click **OK**.
+   Click **Concept**. One click creates the file: there is no **OK** to
+   press.
 
    Use the topic `@id` as the file name to keep links readable. This is a
    project convention. The editor sets the root `@id` from the file name,

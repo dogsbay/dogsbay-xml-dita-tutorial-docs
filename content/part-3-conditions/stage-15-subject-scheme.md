@@ -28,7 +28,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `subject-scheme.ditamap`**
    In the **Explorer**, right-click `my-audacity-guide`, choose
    **New File**, and enter `subject-scheme.ditamap`. In the
-   **New XML Document** dialog, choose **Subject Scheme** and click **OK**.
+   **New XML Document** dialog, click **Subject Scheme**.
    The template binds `@audience` to two sample values:
 
    ```xml

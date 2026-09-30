@@ -27,8 +27,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `topics/installing-audacity.dita`**
    Each topic in this lesson is a task. In the **Explorer**, right-click
    the `topics` folder, choose **New File**, and enter
-   `installing-audacity.dita`. Choose the **Task** template and click
-   **OK**. Replace the title placeholder, type the short description, and
+   `installing-audacity.dita`. Click the **Task** template. Replace the
+   title placeholder, type the short description, and
    build the task body around the template's `<steps>`. If you use another
    editor, create the file and type the finished listing.
 

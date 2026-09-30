@@ -19,7 +19,7 @@ Create the map from a template:
    `my-audacity-guide`, and choose **New File**.
 2. Enter `audacity-guide.ditamap` and press Enter. The
    **New XML Document** dialog lists the templates for `.ditamap` files.
-3. Choose **Map** and click **OK**.
+3. Click **Map**.
 
 The editor opens the new file with the template's content:
 
