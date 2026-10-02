@@ -136,9 +136,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    -      <parml>
    +      <parml translate="no">
             <plentry>
-              <pt>
-                <cmdname>SelectAll:</cmdname>
-   @@ -68,7 +68,7 @@
+              <pt><cmdname>SelectAll:</cmdname></pt>
+              <pd>Selects every track from start to end. No parameters.</pd>
+   @@ -66,7 +66,7 @@
           <title>Responses</title>
           <p>Every reply ends with a status line.
           Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>

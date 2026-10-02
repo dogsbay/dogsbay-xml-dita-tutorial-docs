@@ -5608,17 +5608,6 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <refbody>
         <section>
           <p><keyword keyref="product-name"/> imports and exports audio in several formats.
-   @@ -46,7 +66,9 @@
-              </row>
-              <row>
-                <entry>MP3</entry>
-   -            <entry><term keyref="gl-compression">Compressed</term></entry>
-   +            <entry>
-   +              <term keyref="gl-compression">Compressed</term>
-   +            </entry>
-                <entry>Lossy</entry>
-                <entry>Widely supported, small files.
-                Needs the <i>LAME</i> encoder, bundled since version 2.3.2.
    ```
 4. **Read the index terms**
 
@@ -8031,9 +8020,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
          <title>Commands</title>
          <parml>
            <plentry>
-             <pt>
-               <cmdname>SelectAll:</cmdname>
-             </pt>
+             <pt><cmdname>SelectAll:</cmdname></pt>
              <pd>Selects every track from start to end. No parameters.</pd>
            </plentry>
            <plentry>
@@ -8067,16 +8054,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
          </prophead>
          <property platform="linux mac">
            <proptype>Linux, macOS</proptype>
-           <propvalue>
-             <filepath>/tmp/audacity_script_pipe.to.<varname>uid</varname></filepath>
-           </propvalue>
+           <propvalue><filepath>/tmp/audacity_script_pipe.to.<varname>uid</varname></filepath></propvalue>
            <propdesc>A named pipe per user id; open it for writing.</propdesc>
          </property>
          <property platform="windows">
            <proptype>Windows</proptype>
-           <propvalue>
-             <filepath>\\.\pipe\ToSrvPipe</filepath>
-           </propvalue>
+           <propvalue><filepath>\\.\pipe\ToSrvPipe</filepath></propvalue>
            <propdesc>A Windows named pipe; open it in text mode.</propdesc>
          </property>
        </properties>
@@ -8801,9 +8784,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    -      <parml>
    +      <parml translate="no">
             <plentry>
-              <pt>
-                <cmdname>SelectAll:</cmdname>
-   @@ -68,7 +68,7 @@
+              <pt><cmdname>SelectAll:</cmdname></pt>
+              <pd>Selects every track from start to end. No parameters.</pd>
+   @@ -66,7 +66,7 @@
           <title>Responses</title>
           <p>Every reply ends with a status line.
           Success looks like <msgph>BatchCommand finished: OK</msgph>; a failure names the command:</p>
