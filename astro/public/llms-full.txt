@@ -5288,14 +5288,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
               <equation-block>
                 <mathml>
                   <m:math xmlns:m="http://www.w3.org/1998/Math/MathML" display="block">
-   @@ -93,7 +93,9 @@
+   @@ -93,7 +93,7 @@
               A level of <equation-inline><mathml><m:math xmlns:m="http://www.w3.org/1998/Math/MathML"><m:mrow><m:mo>−</m:mo><m:mn>6</m:mn><m:mtext>dB</m:mtext></m:mrow></m:math></mathml><ph>−6 dB</ph></equation-inline> is half the amplitude of the reference.</dd>
             </dlentry>
             <dlentry>
    -          <dt>Clipping</dt>
-   +          <dt>
-   +            <term keyref="gl-clipping">Clipping</term>
-   +          </dt>
+   +          <dt><term keyref="gl-clipping">Clipping</term></dt>
               <dd>Distortion that occurs when the signal exceeds the maximum amplitude the system can represent.
               It appears as flat-topped waveforms.</dd>
             </dlentry>
@@ -5346,7 +5344,6 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<abbreviated-form keyref="gl-decibel"/>` is empty. The processor writes the term for you: the `<glossSurfaceForm>` where the reader first meets it, and the `<glossAbbreviation>` after that. In the HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
    - `<abbreviated-form>` inserts the surface form exactly as the glossary entry writes it, in the singular. The output reads "-12 decibel (dB)" and "Measured in decibel (dB)". For a measurement after a number, where the reader expects "-12 dB", keep the plain unit instead.
    - The `<term>` elements without a `@keyref`, such as *Lossless* and *lossy*, are unchanged: they mark a term but have no entry to link to.
-   - The *Clipping* `<dt>` is laid out on three lines because that is how the formatter writes a `<dt>` whose only content is an element; the meaning is unchanged.
 :::
 
 ## Step 4: Check your work {#step-4-check-your-work}
@@ -8875,7 +8872,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           </keywords>
         </metadata>
       </prolog>
-   @@ -133,6 +134,7 @@
+   @@ -131,6 +132,7 @@
             </dlentry>
           </dl>
           <lq reftitle="The Audacity Manual">Audio is measured in decibels because the ear hears ratios, not differences.</lq>
