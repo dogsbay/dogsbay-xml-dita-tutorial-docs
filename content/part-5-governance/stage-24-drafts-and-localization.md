@@ -215,7 +215,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           </keywords>
         </metadata>
       </prolog>
-   @@ -131,6 +132,7 @@
+   @@ -133,6 +134,7 @@
             </dlentry>
           </dl>
           <lq reftitle="The Audacity Manual">Audio is measured in decibels because the ear hears ratios, not differences.</lq>
