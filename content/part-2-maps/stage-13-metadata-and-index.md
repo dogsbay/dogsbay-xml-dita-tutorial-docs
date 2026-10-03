@@ -204,6 +204,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <refbody>
         <section>
           <p><keyword keyref="product-name"/> imports and exports audio in several formats.
+   @@ -46,7 +66,9 @@
+              </row>
+              <row>
+                <entry>MP3</entry>
+   -            <entry><term keyref="gl-compression">Compressed</term></entry>
+   +            <entry>
+   +              <term keyref="gl-compression">Compressed</term>
+   +            </entry>
+                <entry>Lossy</entry>
+                <entry>Widely supported, small files.
+                Needs the <i>LAME</i> encoder, bundled since version 2.3.2.
    ```
 
 4. **Read the index terms**

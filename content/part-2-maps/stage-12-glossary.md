@@ -306,12 +306,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
               <equation-block>
                 <mathml>
                   <m:math xmlns:m="http://www.w3.org/1998/Math/MathML" display="block">
-   @@ -93,7 +93,7 @@
+   @@ -93,7 +93,9 @@
               A level of <equation-inline><mathml><m:math xmlns:m="http://www.w3.org/1998/Math/MathML"><m:mrow><m:mo>−</m:mo><m:mn>6</m:mn><m:mtext>dB</m:mtext></m:mrow></m:math></mathml><ph>−6 dB</ph></equation-inline> is half the amplitude of the reference.</dd>
             </dlentry>
             <dlentry>
    -          <dt>Clipping</dt>
-   +          <dt><term keyref="gl-clipping">Clipping</term></dt>
+   +          <dt>
+   +            <term keyref="gl-clipping">Clipping</term>
+   +          </dt>
               <dd>Distortion that occurs when the signal exceeds the maximum amplitude the system can represent.
               It appears as flat-topped waveforms.</dd>
             </dlentry>
@@ -375,6 +377,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      where the reader expects "-12 dB", keep the plain unit instead.
    - The `<term>` elements without a `@keyref`, such as *Lossless* and
      *lossy*, are unchanged: they mark a term but have no entry to link to.
+   - The *Clipping* `<dt>` is laid out on three lines because that is how
+     the formatter writes a `<dt>` whose only content is an element; the
+     meaning is unchanged.
 ::::
 
 ## Step 4: Check your work
