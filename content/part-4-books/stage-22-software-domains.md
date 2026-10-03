@@ -75,7 +75,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
          <title>Commands</title>
          <parml>
            <plentry>
-             <pt><cmdname>SelectAll:</cmdname></pt>
+             <pt>
+               <cmdname>SelectAll:</cmdname>
+             </pt>
              <pd>Selects every track from start to end. No parameters.</pd>
            </plentry>
            <plentry>
@@ -109,12 +111,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
          </prophead>
          <property platform="linux mac">
            <proptype>Linux, macOS</proptype>
-           <propvalue><filepath>/tmp/audacity_script_pipe.to.<varname>uid</varname></filepath></propvalue>
+           <propvalue>
+             <filepath>/tmp/audacity_script_pipe.to.<varname>uid</varname></filepath>
+           </propvalue>
            <propdesc>A named pipe per user id; open it for writing.</propdesc>
          </property>
          <property platform="windows">
            <proptype>Windows</proptype>
-           <propvalue><filepath>\\.\pipe\ToSrvPipe</filepath></propvalue>
+           <propvalue>
+             <filepath>\\.\pipe\ToSrvPipe</filepath>
+           </propvalue>
            <propdesc>A Windows named pipe; open it in text mode.</propdesc>
          </property>
        </properties>
