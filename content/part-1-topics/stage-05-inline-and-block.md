@@ -378,11 +378,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    
    <map>
      <title>Audio user guide</title>
+     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/recording-your-first-track.dita"/>
      <topicref href="topics/supported-audio-formats.dita"/>
-     <topicref href="topics/trimming-audio.dita"/>
-     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/what-is-digital-audio.dita"/>
+     <topicref href="topics/trimming-audio.dita"/>
    </map>
    ```
 

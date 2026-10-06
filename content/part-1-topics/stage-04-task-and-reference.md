@@ -239,7 +239,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Add the topics to the map**
-   Add a `<topicref>` for each new topic to `audacity-guide.ditamap`.
+   Add a `<topicref>` for each new topic to `audacity-guide.ditamap`,
+   after the existing one, in the order you wrote them: the map lists
+   topics in the order readers meet them.
    Do this before you check your work: the check reports a topic that
    no map refers to as an orphan topic. The complete map at this
    checkpoint is:
@@ -250,9 +252,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    
    <map>
      <title>Audio user guide</title>
+     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/recording-your-first-track.dita"/>
      <topicref href="topics/supported-audio-formats.dita"/>
-     <topicref href="topics/what-is-audacity.dita"/>
    </map>
    ```
 
