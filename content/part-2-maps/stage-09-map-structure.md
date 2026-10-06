@@ -32,15 +32,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     
     <map>
    -  <title>Audio user guide</title>
-   -  <topicref href="topics/exporting-audio.dita"/>
-   -  <topicref href="topics/installing-audacity.dita"/>
-   -  <topicref href="topics/preparing-to-record.dita"/>
-   -  <topicref href="topics/recording-your-first-track.dita"/>
-   -  <topicref href="topics/removing-background-noise.dita"/>
-   -  <topicref href="topics/supported-audio-formats.dita"/>
-   -  <topicref href="topics/trimming-audio.dita"/>
    -  <topicref href="topics/what-is-audacity.dita"/>
+   -  <topicref href="topics/recording-your-first-track.dita"/>
+   -  <topicref href="topics/supported-audio-formats.dita"/>
    -  <topicref href="topics/what-is-digital-audio.dita"/>
+   -  <topicref href="topics/trimming-audio.dita"/>
+   -  <topicref href="topics/installing-audacity.dita"/>
+   -  <topicref href="topics/exporting-audio.dita"/>
+   -  <topicref href="topics/removing-background-noise.dita"/>
+   -  <topicref href="topics/preparing-to-record.dita"/>
    +  <title>Audacity User Guide</title>
    +  <topicmeta>
    +    <shortdesc>Record, edit and export audio with Audacity, from your first track to a finished file.</shortdesc>
