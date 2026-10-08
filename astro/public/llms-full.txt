@@ -408,7 +408,7 @@ type: how-to
 
 # Check your work {#check-your-work}
 
-Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the checks on the built pages find any problems.
+Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether every link in the built pages leads somewhere.
 
 - In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel.
 - From the command line, run `dogsbay-xml check .` from the project root.
@@ -454,7 +454,7 @@ From stage 03, a finished lesson checks as ready. For example, on stage 03:
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
-Ready: the project is healthy, every deliverable built, and the output of full holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
 ```
 
 Later stages list one `build` line for each deliverable. Paths in recorded output are examples.
@@ -468,7 +468,7 @@ build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
   PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
 ```
 
 The PDF is built with the DITA-OT that the editor includes. You do not need to install anything else.
@@ -962,10 +962,10 @@ The output looks like this example:
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
-Ready: the project is healthy, every deliverable built, and the output of full holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
 ```
 
-The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. The `output   clean` line means that the checks on the built pages found no problems. To see the pages, open `out/full/index.html` from the **Explorer** and choose **View** > **Preview in Tab**. The preview shows the page as a browser does. Follow the topic link, and check the heading, short description, list, and section. The navigation comes from the map. You wrote no HTML: the build made it all.
+The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. The `output   clean` line means that every link in the built pages leads somewhere. To see the pages, open `out/full/index.html` from the **Explorer** and choose **View** > **Preview in Tab**. The preview shows the page as a browser does. Follow the topic link, and check the heading, short description, list, and section. The navigation comes from the map. You wrote no HTML: the build made it all.
 
 Your markup says what each part is. The look of the pages comes from the transform: DITA-OT's `html5` transtype, which the deliverable chose.
 
@@ -1229,10 +1229,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 
-   `Ready` means that the project is healthy, every deliverable built, and the checks on the built pages found no problems.
+   `Ready` means that the project is healthy, every deliverable built, and every link in the built pages leads somewhere.
 3. **See the built guide** In the **Explorer**, open `out/full/topics`. The build made a page for each topic. Open `recording-your-first-track.html` and choose **View** > **Preview in Tab**. The navigation lists all three topics in the order of the map, and the task shows its numbered steps, as the preview showed.
 :::
 
@@ -1617,7 +1617,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 3. **See the built guide** Open `out/full/topics/what-is-digital-audio.html`. Where the footnote was, the sentence now ends with a numbered link, and the footnote text is at the end of the page. Choose **View** > **Preview in Tab** to see the page as a browser shows it: the terms are in italics, the simple list has no bullets, and the number after the sentence about file size links to the footnote text at the foot of the page.
 
@@ -1977,7 +1977,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 3. **See the built guide** Predict how the built guide shows the steps of *Preparing to record*: numbered, or some other way. Then open `out/full/topics/preparing-to-record.html` and choose **View** > **Preview in Tab** to see the page as a browser shows it. The steps are bullets, not numbers. You chose `<steps-unordered>` for its purpose, and the transform, DITA-OT's `html5` transtype, shows that purpose as bullets.
 :::
@@ -2252,10 +2252,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 
-   The check reports `Ready`: the project is healthy, the guide built, and the checks on the built pages found no links that lead nowhere.
+   The check reports `Ready`: the project is healthy, the guide built, and every link in the built pages leads somewhere.
 2. **See the grouped links** Open `out/full/topics/what-is-digital-audio.html`. The link list kept its title, **Put it into practice**. The build sorted the links in the link pool by kind, under headings such as **Related information**. Choose **View** > **Preview in Tab**. In the first paragraph, the shortcut is a link titled *Recording your first track*.
 :::
 
@@ -2572,7 +2572,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 2. **Read the generated links** Predict what is under **Related reference** on the export page now. Then open `out/full/topics/exporting-audio.html`, preview it, and scroll to the foot. *Supported audio formats* is listed once, from the table. **Previous topic** comes from the sequence, and *Trimming audio* is still related, by the link you kept because it has a description.
 
@@ -3055,7 +3055,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: project-extension  [/home/you/my-audacity-guide/keydefs-product.ditamap:26] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The three unused keys are defined for later stages: stage 11 uses `project-extension` in a reused step, and stage 18 uses `start-here` and `digital-audio` in a new topic.
@@ -3419,7 +3419,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 2 unused keys above: worth knowing, and not treated as failures.
    ```
 
    `start-here` and `digital-audio` are defined for a later stage: stage 18 uses them in a new topic.
@@ -4024,7 +4024,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 5 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The build and the check take longer now: they build five deliverables instead of one, and the check also checks the links in each. `podcast-workflow` is unused until stage 18 refers to it.
@@ -4311,7 +4311,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 5 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The scheme is a map with its own DOCTYPE, and health validates it like any other file.
@@ -4683,7 +4683,7 @@ With these files, the same rules exist for three readers: the machine in `house-
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    Health now runs the house rules with everything else, because the project names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a release cannot carry unresolved review markup.
@@ -4839,7 +4839,7 @@ build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
   5 note(s) — run with --verbose to see them
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
 ```
 
 `Ready` also tells you that the lessons' exercises are undone. A short description removed for the house rules would fail health, and two branches with the same prefix would fail the output check.
@@ -5061,7 +5061,7 @@ You cannot type an image, so add the two PNG files from the sample project. The 
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 2. **See the figures built** The cross-reference to the figure had no text in the source. Predict what the link says in the built recording task. Then open `out/full/topics/recording-your-first-track.html`, choose **View** > **Preview in Tab**, and scroll down to the steps. In the **Record** step, the link says *Figure 1*: its text comes from the figure's number, not its caption. In the step above it, the toolbar picture is an image map, and its two regions link to *Preparing to record* and *What is digital audio?*.
 
@@ -5472,7 +5472,7 @@ The steps below group the work by file type. You can also take one term all the 
      unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The project now has twenty-one files: nine topics, two shared topics, seven glossary files and three maps. The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
@@ -6213,7 +6213,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
@@ -6464,7 +6464,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
      5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 6 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The new filters use only controlled values: the full check includes the controlled values from stage 15, and it reads the DITAVAL files too.
@@ -6733,7 +6733,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    collection           ok  /home/you/my-audacity-guide/out/collection
      5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or choose **Project** > **Check Project** and read them in the **Project Validation** panel.
@@ -7221,7 +7221,7 @@ build    install-variants     ok  /home/you/my-audacity-guide/out/install-varian
 build    collection           ok  /home/you/my-audacity-guide/out/collection
   5 note(s) — run with --verbose to see them
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
 ```
 
 The unused-key warnings are gone: *About this guide* refers to `start-here`, `digital-audio` and `podcast-workflow`. The note lines count DITA-OT notes from each build; run `dogsbay-xml check -v .` to print them.
@@ -7460,7 +7460,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    The check builds eight deliverables. The `book-pdf` line reports the PDF, and the `WARN` line under it summarizes the layout warnings from Apache FOP, such as content that is wider than its column. The warnings do not fail the check. The output check reads links in HTML pages only, so for the PDF it confirms that the build wrote a file.
@@ -7835,7 +7835,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      6 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    The checks on the `install-variants` pages found no problems: each platform copy of the recording task links to the troubleshooting copy in its own branch.
@@ -8107,7 +8107,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
@@ -8578,7 +8578,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
@@ -8887,7 +8887,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    Each HTML deliverable whose map includes the assessment builds it as a page, for example `out/full/learning/check-your-understanding.html`.
@@ -9318,7 +9318,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    The guide now holds an open draft comment and an unfinished cleanup. The check still reports `health   clean`, because review markup is a warning, not a fault. To see the warnings, open the **Project Validation** panel after **Check Project**, or run this command in the **Terminal** panel and wait for it to finish before you continue:

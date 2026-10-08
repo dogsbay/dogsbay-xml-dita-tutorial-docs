@@ -791,7 +791,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: gl-normalization  [/home/you/my-audacity-guide/keydefs-glossary.ditamap:10] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The unused keys are defined for later stages: stage 14 refers to

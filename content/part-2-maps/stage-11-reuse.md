@@ -349,7 +349,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      unused key: digital-audio  [/home/you/my-audacity-guide/audacity-guide.ditamap:18] — nothing references it
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together. 2 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere. 2 unused keys above: worth knowing, and not treated as failures.
    ```
 
    `start-here` and `digital-audio` are defined for a later stage: stage 18

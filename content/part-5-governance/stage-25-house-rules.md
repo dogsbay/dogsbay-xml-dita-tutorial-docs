@@ -402,7 +402,7 @@ read these files.
      5 note(s) — run with --verbose to see them
    output   wrote a file, no pages to check links in book-pdf
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
    ```
 
    Health now runs the house rules with everything else, because the

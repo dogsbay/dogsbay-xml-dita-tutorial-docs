@@ -8,8 +8,8 @@ type: how-to
 
 Check your project at the end of every lesson. The check tells you whether
 the project is ready to publish: whether its source is sound, whether every
-deliverable builds, and whether the checks on the built pages find any
-problems.
+deliverable builds, and whether every link in the built pages leads
+somewhere.
 
 - In the editor, choose **Project** > **Check Project**. The result appears
   in the **Project Validation** panel.
@@ -65,7 +65,7 @@ From stage 03, a finished lesson checks as ready. For example, on stage 03:
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
-Ready: the project is healthy, every deliverable built, and the output of full holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
 ```
 
 Later stages list one `build` line for each deliverable. Paths in recorded
@@ -83,7 +83,7 @@ build    book-pdf             ok  /home/you/my-audacity-guide/out/book-pdf
   PDF rendering reported 11 warnings (7 The following feature isn't implemented by Apache FOP, yet: table-layout=… (on fo:table) (…, 1 The contents of fo:external-graphic line n exceed the available area in the inline-progres…, 1 The contents of fo:instream-foreign-object line n exceed the available area in the inline-…, and 2 other kinds)
 output   wrote a file, no pages to check links in book-pdf
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
 ```
 
 The PDF is built with the DITA-OT that the editor includes. You do not need

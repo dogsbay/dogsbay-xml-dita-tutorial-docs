@@ -225,7 +225,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    install-variants     ok  /home/you/my-audacity-guide/out/install-variants
      5 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 6 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The new filters use only controlled values: the full check includes
