@@ -11,7 +11,7 @@ the symptom in `<condition>`, then pair each likely cause with a remedy.
 One of the three solutions applies only to macOS.
 
 Link to the topic from a `<note type="trouble">` in the recording task
-and add it to five maps. This extends the task-level troubleshooting
+and add it to six maps. This extends the task-level troubleshooting
 elements introduced in stage 06.
 
 **Optional module.** See [Choose a learning path](/start-here/learning-path)
@@ -315,9 +315,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Check your work
 
 ::::steps
-1. **Format and check your work**
+1. **Format and build**
 
-   Format the changed files: choose **XML** > **Format** in each changed
+   Eight files have changes: the new topic, the recording task, and six
+   maps. Save them all. Format the changed files: choose **XML** > **Format** in each changed
    file and save it, or choose **Project** > **Project Tools** >
    **Format Project** to format every file at once. From the command line,
    run:
@@ -326,9 +327,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Before you build, predict how many copies of the troubleshooting topic
+   the `install-variants` build makes, and which of them keep the macOS
+   solution. Then choose **Project** > **Build Deliverables...** and click
+   **Build All** to build all eight deliverables. **Project** > **Check
+   Project** also builds every deliverable, and checks the project and the
+   built pages as well. Read its result in the **Project Validation**
+   panel. From the command line, the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -358,13 +363,58 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The `install-variants` output is clean: each platform copy of the
-   recording task links to the troubleshooting copy in its own branch.
+   The checks on the `install-variants` pages found no problems: each
+   platform copy of the recording task links to the troubleshooting copy
+   in its own branch.
+
+2. **Read the output**
+   In the **Explorer**, open `out/install-variants/topics/`. It has three
+   filtered copies of the topic, one per branch, beside that branch's copy
+   of the recording task. It also has an unfiltered
+   `recording-is-silent.html`, like the unprefixed pages in stage 16. Open `win-recording-is-silent.html` and choose
+   **View** > **Preview in Tab**. The symptom comes first, under
+   *Condition*. Each cause follows as a heading, with its remedy under
+   it.
+
+   To see which copies kept the macOS solution, run these commands in the
+   **Terminal** panel:
+
+   ```bash
+   cd out/install-variants/topics
+   grep -c "microphone access" *-recording-is-silent.html recording-is-silent-linux.html
+   ```
+
+   Example output:
+
+   ```
+   mac-recording-is-silent.html:2
+   win-recording-is-silent.html:0
+   recording-is-silent-linux.html:0
+   ```
+
+   Only the `mac-` copy has matching lines. The Windows and Linux filters
+   exclude content marked `platform="mac"`. To see where each copy of the
+   trouble note links, run:
+
+   ```bash
+   grep -o 'href="[^"]*silent[^"]*"' *-recording-your-first-track.html recording-your-first-track-linux.html | sort -u
+   ```
+
+   Example output:
+
+   ```
+   mac-recording-your-first-track.html:href="mac-recording-is-silent.html"
+   recording-your-first-track-linux.html:href="recording-is-silent-linux.html"
+   win-recording-your-first-track.html:href="win-recording-is-silent.html"
+   ```
+
+   Each copy links within its own branch, as described in Step 2.
 ::::
 
 Test the content model for a remedy. In the macOS solution, replace the
 `<steps-informal>` element with its `<p>` alone, so that `<remedy>` holds a
-title and a paragraph, and check your work. The check stops at health.
+title and a paragraph. Save, and choose **Project** > **Check Project**.
+The check stops at health.
 Example output:
 
 ```
@@ -380,8 +430,10 @@ Not ready: the project itself has faults. The build and the built output were no
 always a steps element, even when it is one sentence: that is what
 `<steps-informal>` is for.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change with **Edit** > **Undo**, and save. Choose **XML** >
+**Validate**: the **Errors** panel reports **Valid Document**, so the
+remedy has its steps element again. To rerun the full check, choose
+**Project** > **Check Project** and confirm that it reports `Ready`.
 
 ## What you learned
 
@@ -393,7 +445,7 @@ before you continue.
   in place of a warning that carried the fix itself.
 - An `<xref>` with a `keyref` and an `href` fallback, so that each
   branch-filtered copy links within its own key scope.
-- One topic referenced by five maps, including a nested reference in a
+- One topic referenced by six maps, including a nested reference in a
   branch-filtered map.
 
 ## Next lesson

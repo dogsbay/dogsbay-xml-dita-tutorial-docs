@@ -322,8 +322,8 @@ The shell examples use Bash. On Windows, use a Bash environment.
 Your guide lives in one folder, `my-audacity-guide`. Create it from the editor:
 
 :::steps
-1. **Open the folder chooser** Choose **File** > **Open Project Folder...**. On the welcome screen, you can click **Open Project Folder…** instead. A folder tree opens, with the **Make New Folder**, **Open**, and **Cancel** buttons.
-2. **Create the folder** Select the folder where you want to keep your work, for example your Documents folder. Click **Make New Folder**. In the **Enter Folder Name** dialog, type `my-audacity-guide` and confirm.
+1. **Open the folder chooser** Choose **File** > **Open Project Folder...**. On the welcome screen, you can click **Open Project Folder…** instead. A folder chooser opens.
+2. **Create the folder** Go to the folder where you want to keep your work, for example double-click your Documents folder. Click **Create New Folder** (the folder icon at the top of the chooser). A new folder appears with its name ready to edit. Type `my-audacity-guide` and press Enter.
 3. **Open it** Select `my-audacity-guide` and click **Open**.
 :::
 
@@ -408,7 +408,7 @@ type: how-to
 
 # Check your work {#check-your-work}
 
-Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the built output holds together.
+Check your project at the end of every lesson. The check tells you whether the project is ready to publish: whether its source is sound, whether every deliverable builds, and whether the checks on the built pages find any problems.
 
 - In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel.
 - From the command line, run `dogsbay-xml check .` from the project root.
@@ -535,7 +535,7 @@ type: tutorial
 
 Prepare the folder for the guide. At the end of this lesson, the `my-audacity-guide` folder contains an empty `topics` folder, where the topics of later lessons go.
 
-**Time:** about 5 minutes. **You need:** the DogsBay XML editor, and the empty `my-audacity-guide` folder open in it. See [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up).
+**Time:** about 5 minutes. **You need:** the DogsBay XML editor, and the empty `my-audacity-guide` folder open in it. To create and open the folder, use **File** > **Open Project Folder...** as described in [Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up#create-and-open-your-project-folder).
 
 ## Step 1: Create the topics folder {#step-1-create-the-topics-folder}
 
@@ -554,7 +554,7 @@ If you want to track your work with Git, initialize the repository now, as descr
 
 The project has no topics yet, so there is nothing for the editor to check. You check your work in the editor from stage 01, when the project has its first topic.
 
-If you installed the command line, you can confirm that it works on your project. Run this command from `my-audacity-guide`:
+If you installed the command line, you can confirm that it works on your project. Open the editor's **Terminal** panel and run this command from `my-audacity-guide`:
 
 ```bash
 dogsbay-xml check .
@@ -598,6 +598,8 @@ type: tutorial
 # Stage 01: A concept topic {#stage-01-a-concept-topic}
 
 Write the guide's first topic, *What is Audacity?*, as a DITA `<concept>`. A concept provides background information about a subject or explains how something works.
+
+Three terms run through the course. A *topic* is one document about one subject. A *map* is the structure of the publication. A *deliverable* says how to make output from a map. You write a topic in this stage, a map in stage 02, and a deliverable in stage 03.
 
 Add a topic identifier, title, short description, and body. The tutorial requires a short description for each concept, task, and reference topic; the DTD makes some of these elements optional.
 
@@ -707,7 +709,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The project declares no deliverables until stage 03, so the check reports on the source only. Look for `health   clean`.
 :::
 
-To see a validation error, put a `<section>` inside another `<section>` and check again. For example, add this inside the *Who uses it* section, after its `<p>`:
+To see a validation error, put a `<section>` inside another `<section>`. For example, add this inside the *Who uses it* section, after its `<p>`. Before you validate, guess what the editor will report.
 
 ```xml
 <section>
@@ -716,7 +718,9 @@ To see a validation error, put a `<section>` inside another `<section>` and chec
 </section>
 ```
 
-The check names the file, with the line, column, and message of the first errors, and stops at the health stage. The output looks like this example:
+Choose **XML** > **Validate**. The **Errors** panel reports that the document is not valid: the content of the outer `<section>` does not match its content model. The grammar does not allow a section there. When you want a second level, you want a second topic.
+
+**Project** > **Check Project** and `dogsbay-xml check .` find the same error. The check names the file, with the line, column, and message of the first errors, and stops at the health stage. The output looks like this example:
 
 ```
 health   NOT CLEAN
@@ -742,9 +746,7 @@ Summary
   Orphan topics                 1
 ```
 
-In the editor, **XML** > **Validate** also reports the error in the **Errors** panel.
-
-Undo the change and check again. Confirm that the check reports `health   clean` before you continue.
+Undo the change, save, and choose **XML** > **Validate** again. Confirm that the **Errors** panel reports `Valid Document` and that the check reports `health   clean` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -822,7 +824,7 @@ The map has three elements:
 - `<title>` is the title of the publication.
 - `<topicref>` adds one topic to the publication. Its `@href` is relative to the map file. The navigation label comes from the title of the topic, so the map does not repeat it.
 
-Add a `<topicref>` each time you add a topic to the guide. Later lessons introduce hierarchy and generated links.
+Add a `<topicref>` each time you add a topic to the guide. Later lessons introduce hierarchy and generated links. Save the map, as you save every file that you change.
 
 ## Select and validate the map {#select-and-validate-the-map}
 
@@ -856,7 +858,9 @@ Project health is clean — no deliverables yet, so nothing here speaks for the 
 
 The orphan warning from stage 01 is gone, because the map now refers to the topic. The check reads the source only. Stage 03 adds a deliverable, so the check can also build HTML. Until then, look for `health   clean`.
 
-Validation checks the map against its grammar only. It does not check that each `@href` points to a file. To see the difference, change the `@href` to `topics/what-is-audacty.dita` and run `dogsbay-xml validate audacity-guide.ditamap` again. It still prints `VALID`. Now check your work. The check reports the broken reference, and the topic that the map no longer includes. The following output is an example:
+Validation checks the map against its grammar only. It does not check that each `@href` points to a file. Before you try the next step, predict which of the two would catch a typo in the `@href`.
+
+To see the difference, delete the `i` near the end of `audacity` in the `@href`, so that it reads `topics/what-is-audacty.dita`, and save the map. Choose **XML** > **Validate** (or run `dogsbay-xml validate audacity-guide.ditamap`). The **Errors** panel still reports `Valid Document`, and the command still prints `VALID`: the map still matches its grammar. Now choose **Project** > **Check Project** (or run `dogsbay-xml check .`). The check is not clean. It reports the broken reference, and the topic is an orphan again because the map no longer reaches it. Only the check looks at where an `@href` points. The following output is an example:
 
 ```
 health   NOT CLEAN
@@ -880,7 +884,7 @@ Summary
   Orphan topics                 1
 ```
 
-Restore the file name and check again. Confirm that the check reports `health   clean` before you continue.
+Type the `i` again, save the map, and check again. Confirm that the check reports `health   clean` before you continue.
 
 ## Next lesson {#next-lesson}
 
@@ -928,7 +932,7 @@ A deliverable names a map, a transformation, and an output folder. Define one de
    | **Publication parameters** | `nav-toc` = `full` |
 
    To add the parameter, click **Add param**, double-click the **Name** cell and type `nav-toc`, then double-click the **value** cell and type `full`.
-4. Click **Save...**. The editor asks whether to write the deliverable. Click **OK**.
+4. Click **Save...**. The editor asks whether to write the deliverable to `project.json`. Click **OK**.
 5. Click **Close**.
 
 The fields have these effects:
@@ -938,15 +942,15 @@ The fields have these effects:
 - **Output** is relative to the project root, so this deliverable builds into `out/full/`.
 - The `nav-toc` parameter with the value `full` puts the navigation of the whole guide on each page.
 
-The editor stores deliverables in `project.json` in the project folder. You do not need to edit it.
+The editor stores deliverables in `project.json` in the project folder. You do not need to edit it. To see what the dialog wrote, open `project.json` from the **Explorer**: it holds the deliverable's name, the input map, the output folder, the transtype, and the `nav-toc` parameter. The editor reads this file every time it builds.
 
 The active deliverable is the one that **Project** > **Build Deliverables...** builds by default. If the status bar does not show `full`, choose `full` in the status bar's deliverable menu. You can also select the deliverable in **Manage Deliverables** and click **Set active**.
 
 ## Build and inspect {#build-and-inspect}
 
-Check your work. From now on, the check also builds every deliverable and checks the built output. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.
+Build the guide. In the editor, choose **Project** > **Build Deliverables...** and click **Build All**. When the build finishes, click **OK**. You do not need to install DITA-OT: the editor and the command line include DITA-OT 4.3.5.
 
-In the editor, choose **Project** > **Check Project**. The result appears in the **Project Validation** panel. From `my-audacity-guide` on the command line, run:
+You can also choose **Project** > **Check Project**. From now on, the check also builds every deliverable and checks the built output. The result appears in the **Project Validation** panel. From `my-audacity-guide` on the command line, run:
 
 ```bash
 dogsbay-xml check .
@@ -961,9 +965,11 @@ output   clean (full)
 Ready: the project is healthy, every deliverable built, and the output of full holds together.
 ```
 
-The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. To see it, open `out/full/index.html` from the **Explorer** and choose **View** > **Preview in Tab**. The preview shows the page as a browser does. Follow the topic link, and check the heading, short description, list, and section.
+The `build` line shows where the deliverable was built: the `out/full` folder inside `my-audacity-guide`. The `output   clean` line means that the checks on the built pages found no problems. To see the pages, open `out/full/index.html` from the **Explorer** and choose **View** > **Preview in Tab**. The preview shows the page as a browser does. Follow the topic link, and check the heading, short description, list, and section. The navigation comes from the map. You wrote no HTML: the build made it all.
 
-Change the topic title, check again, and preview `index.html` again. Check both the page heading and navigation label. Restore the title and check again when you finish the exercise.
+Your markup says what each part is. The look of the pages comes from the transform: DITA-OT's `html5` transtype, which the deliverable chose.
+
+Before the next exercise, predict where on the page a change to the topic title appears. Then change the topic title, build again, and preview `index.html` again. Check the navigation label, then follow the link and check the page heading. The heading of `index.html` is the map title, so it does not change. Restore the title and build again when you finish the exercise.
 
 If the check fails, check the working directory and the map-relative paths. The check stops at the first stage that fails. For details, see [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate).
 
@@ -1095,12 +1101,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<cmd>` is the action itself, and is the one required child of a step. Write it as an imperative sentence. A reader who only reads the `<cmd>` elements should be able to complete the task.
    - `<info>` is extra information about a step: what to expect, where to find the control. It is optional and sits after the `<cmd>`.
    - `<result>` says what is true when the steps are done. It comes after the steps.
+3. **Preview the task** Before you preview it, predict how the steps will look to a reader. Then choose **View** > **Preview in Tab**. The steps become a numbered list, one number for each `<cmd>`. The context comes before them, each `<info>` sits under its step, and the result closes the task.
+
+   You wrote structure. How it looks comes from the transform: for the guide, DITA-OT's `html5` transtype, which the deliverable chooses.
 :::
 
 ## Step 2: Write the reference {#step-2-write-the-reference}
 
 :::steps
-1. **Create `topics/supported-audio-formats.dita`** Create the file in the `topics` folder in the same way, and choose the **Reference** template:
+1. **Create `topics/supported-audio-formats.dita`** Create the file in the `topics` folder in the same way. The template that you used last is now at the top of the list. Click **Reference**:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1189,12 +1198,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<tgroup cols="4">` declares the number of columns and holds everything else. One table can have several `tgroup`s with different column layouts.
    - `<colspec>` names each column and sets its width. `colwidth="2*"` is a proportional width: this column gets twice the share of the `1*` columns.
    - `<thead>` and `<tbody>` hold header and body rows; each `<row>` holds one `<entry>` per column.
+3. **Preview the reference** Before you preview it, predict where the table title will appear and how a reader will tell the header row from the rest. Then choose **View** > **Preview in Tab**. The title is the caption above the table, and the `<thead>` row is the header, set apart from the four body rows. A reader looks up a format by its row, and a fact by its column.
 :::
 
 ## Step 3: Update the map and check your work {#step-3-update-the-map-and-check-your-work}
 
 :::steps
-1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`, after the existing one, in the order you wrote them: the map lists topics in the order readers meet them. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
 
    ```xml {title="audacity-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1202,9 +1212,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    <map>
      <title>Audio user guide</title>
+     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/recording-your-first-track.dita"/>
      <topicref href="topics/supported-audio-formats.dita"/>
-     <topicref href="topics/what-is-audacity.dita"/>
    </map>
    ```
 2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
@@ -1213,7 +1223,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
+   Before you check, predict what the navigation of the built guide will show, and in what order. Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
 
    ```
    health   clean
@@ -1221,9 +1231,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+   `Ready` means that the project is healthy, every deliverable built, and the checks on the built pages found no problems.
+3. **See the built guide** In the **Explorer**, open `out/full/topics`. The build made a page for each topic. Open `recording-your-first-track.html` and choose **View** > **Preview in Tab**. The navigation lists all three topics in the order of the map, and the task shows its numbered steps, as the preview showed.
 :::
 
-To see the type split enforced, move the `<p>` in the reference out of its `<section>` so it is a direct child of `<refbody>`, and check your work. The reference body does not allow it. A concept body would. The check names the file with the line, column, and message of the error, and stops. The output looks like this example:
+To see the type split enforced, move the `<p>` in the reference out of its `<section>` so it is a direct child of `<refbody>`, save the file, and predict what the check will say. Then check your work. The reference body does not allow it. A concept body would. The check names the file with the line, column, and message of the error, and stops. The output looks like this example:
 
 ```
 health   NOT CLEAN
@@ -1245,7 +1258,7 @@ Summary
   Invalid files                 1  of 4
 ```
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change, save the file, and check again. Confirm that the check reports `Ready` before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -1374,11 +1387,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - Choose markup that describes the text. For example, use `<uicontrol>` for a control label and leave a measurement such as "44,100 Hz" as text.
 3. **Read the block elements**
 
-   - `<sl>` with `<sli>` is a simple list: short items, one line each, no bullets in most outputs. Use `<ul>` when items are sentences.
-   - `<fn>` is a footnote. It sits inline where the reference goes, and output moves the text to the foot of the page and leaves a marker.
+   - `<sl>` with `<sli>` is a simple list: short items, one line each. Most transforms show it without bullets. Use `<ul>` when items are sentences.
+   - `<fn>` is a footnote. It sits inline where the reference goes. The build moves the text to the foot of the page and leaves a numbered marker.
    - `<simpletable>` uses `<sthead>`, `<strow>`, and `<stentry>` for a regular grid. It supports column headers, `@keycol` for row headers, and `@relcolwidth` for relative widths, such as `relcolwidth="1* 2*"`. Use CALS `<table>` when you need spanning or a table title. See the [simple-table attributes](https://docs.oasis-open.org/dita/dita/v1.3/os/part2-tech-content/langRef/attributes/simpletableAttributes.html).
    - `<dl>` is a definition list: each `<dlentry>` pairs a `<dt>` (the term) with a `<dd>` (its definition). It is the element for a list of named things with descriptions, which a `<ul>` of "Name: description" items would leave unmarked.
    - `<lq>` is a long quotation, set off as a block. `@reftitle` names the source.
+4. **Preview the concept** Choose **View** > **Preview in Tab**. The terms are in italics, and the sample rates are a short list, one line each. The simple table is a grid, with its header row set apart. The footnote text still runs on inside its sentence: the preview shows the source as you typed it, and only the build moves the footnote to the foot of the page. You see that in "Step 4: Update the map and build".
 :::
 
 ## Step 2: Write the task {#step-2-write-the-task}
@@ -1439,17 +1453,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read the user-interface elements**
 
    - `<uicontrol>` is the name of a button, menu item, field or key as it appears in the interface: `Delete`, `Ctrl+A`, `Edit`.
-   - `<menucascade>` is a path through menus. Its children are `<uicontrol>` elements in order, and output joins them with an arrow: **Edit > Remove Special > Trim Audio**.
+   - `<menucascade>` is a path through menus. Its children are `<uicontrol>` elements in order, and the transform joins them with a `>` separator, so you never type the separators yourself: **Edit > Remove Special > Trim Audio**.
    - `<shortcut>` marks the accelerator letter inside a control name, the underlined letter in a menu: `<uicontrol><shortcut>D</shortcut>elete</uicontrol>`.
    - `<wintitle>` is the title of a window or dialog: the *Save Project* dialog.
    - `<filepath>` is a file name, path or extension: `.aup3`.
 3. **Read the notes**
 
    - `<note>` is a block that stands out from the text. `@type` says why: `tip` for a shortcut or a better way, `important` for something the reader must not skip, `warning` when something can go wrong, `caution` for a milder version, `note` (the default) for anything else. Stage 20 adds `trouble`. A note may sit in `<context>`. Inside a step, a note is allowed before the `<cmd>`. After the command, put the note inside `<info>`.
+4. **Preview the task** Choose **View** > **Preview in Tab**. Each note is a colored box, labeled with its type, and the menu path reads as one. In the preview, the controls look much like the text around them. In the built guide, the `html5` transform sets them apart.
 :::
 
 > [!NOTE]
-> `<shortcut>` is only valid inside `<uicontrol>` in DITA 1.3. It marks the accelerator letter of a control, not a key combination. Key combinations such as `Ctrl+A` are plain `<uicontrol>` text. If you write `<cmd>Press <shortcut>Delete</shortcut></cmd>`, the check names the file with the line, column, and message, and stops at the health stage. The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the full report. The following output is an example:
+> `<shortcut>` is only valid inside `<uicontrol>` in DITA 1.3. It marks the accelerator letter of a control, not a key combination. Key combinations such as `Ctrl+A` are plain `<uicontrol>` text.
+>
+> To see this, in step 2 of `trimming-audio.dita`, replace `<uicontrol>Delete</uicontrol>` with `<shortcut>Delete</shortcut>` and save. Predict what validation says, then choose **XML** > **Validate**. The **Errors** panel names the line and the error: the content of `<cmd>` does not match its content model. **Project** > **Check Project** and `dogsbay-xml check .` find the same error. The check names the file with the line, column, and message, and stops at the health stage. The **Project Validation** panel, or `dogsbay-xml project-health .`, gives the full report. The following output is an example:
 >
 > ```
 > health   NOT CLEAN
@@ -1469,7 +1486,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 >   Invalid files                 1  of 6
 > ```
 >
-> If you try this, undo the change and check again.
+> Put the `<uicontrol>` back, save, and validate again. The **Errors** panel reports `Valid Document`.
 
 ## Step 3: Mark up the stage 04 topics {#step-3-mark-up-the-stage-04-topics}
 
@@ -1565,9 +1582,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<cmdname>` is the name of a command-line program. `<codeph>` (in the next stage) is a fragment of code inline; `<codeblock>` is a block of code, lines and spaces preserved. `<pre>` is the same for preformatted text that is not code.
    - `<i>` and `<b>` exist, and *LAME* uses one because the encoder's name is conventionally set in italics. That is the case for them: typographic convention with no semantic element. When there is a semantic element, `<term>`, `<uicontrol>`, `<cmdname>`, `<filepath>`, `<ph>`, use it instead; `<b>` says nothing a stylesheet or a translator can use.
    - `<ph>` is a phrase with no more specific meaning. It carries attributes (conditions in stage 14, ids for reuse in stage 11) when you need a handle on a run of text and none of the other inline elements fits.
+4. **Preview the changed topics** Open each topic and choose **View** > **Preview in Tab**. In the task, the tip stands out from the context, and the warning stands out under its step. The controls are marked, but the preview sets them much like the text around them. In the reference, the terms are in italics, the file names and the command are in code type, the list is numbered, and the code block is set apart.
 :::
 
-## Step 4: Update the map and check your work {#step-4-update-the-map-and-check-your-work}
+## Step 4: Update the map and build {#step-4-update-the-map-and-build}
 
 :::steps
 1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
@@ -1578,11 +1596,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    <map>
      <title>Audio user guide</title>
+     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/recording-your-first-track.dita"/>
      <topicref href="topics/supported-audio-formats.dita"/>
-     <topicref href="topics/trimming-audio.dita"/>
-     <topicref href="topics/what-is-audacity.dita"/>
      <topicref href="topics/what-is-digital-audio.dita"/>
+     <topicref href="topics/trimming-audio.dita"/>
    </map>
    ```
 2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
@@ -1591,7 +1609,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
+   Before you build, predict where the footnote text will be in the built page. Then choose **Project** > **Build Deliverables...** and click **Build All**. When the build finishes, click **OK**. The build rebuilds the guide in `out/full/`, with a page for each new topic.
+
+   To make sure that the project is also healthy, choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check also builds every deliverable. The output looks like this example:
 
    ```
    health   clean
@@ -1599,6 +1619,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+3. **See the built guide** Open `out/full/topics/what-is-digital-audio.html`. Where the footnote was, the sentence now ends with a numbered link, and the footnote text is at the end of the page. Choose **View** > **Preview in Tab** to see the page as a browser shows it: the terms are in italics, the simple list has no bullets, and the number after the sentence about file size links to the footnote text at the foot of the page.
+
+   Then open `out/full/topics/recording-your-first-track.html` and preview it. **Record**, **Stop**, and **Play** are in bold. The markup says what they are, and the `html5` transform chose the look.
 :::
 
 ## What you learned {#what-you-learned}
@@ -1646,7 +1669,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Installing Audacity {#step-1-installing-audacity}
 
 :::steps
-1. **Create `topics/installing-audacity.dita`** Each topic in this lesson is a task. In the **Explorer**, right-click the `topics` folder, choose **New File**, and enter `installing-audacity.dita`. Click the **Task** template. Replace the title placeholder, type the short description, and build the task body around the template's `<steps>`. If you use another editor, create the file and type the finished listing.
+1. **Create `topics/installing-audacity.dita`** Each topic in this lesson is a task. In the **Explorer**, right-click the `topics` folder, choose **New File**, and enter `installing-audacity.dita`. Click the **Task** template. Replace the title placeholder (**XML** > **Select Element Content**, or Ctrl+Shift+E) and type the short description. Then click inside `<taskbody>`, select its content the same way, and replace it with the body from the finished listing: type it, or paste it. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/installing-audacity.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1723,18 +1746,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    - `<prereq>` states what must be true before the reader starts. It goes before `<context>`.
    - `<postreq>` states what to do after the task is done. It goes after `<result>`.
-   - The default HTML5 build shows both sections without a heading. To add the labels "Before you begin" and "What to do next", set the DITA-OT parameter `args.gen.task.lbl` to `YES`.
+   - The editor's preview labels these sections. The guide's build uses DITA-OT's `html5` transtype, which by default shows both sections without a heading. To add the labels "Before you begin" and "What to do next" to the built pages, set the DITA-OT parameter `args.gen.task.lbl` to `YES`.
    - `<choicetable>` is a step whose action depends on a condition, laid out as a two-column table: `<chhead>` with `<choptionhd>` and `<chdeschd>` for the headings, then one `<chrow>` per option with `<choption>` and `<chdesc>`. It sits inside a `<step>` after the `<cmd>`.
    - `<substeps>` breaks a step into `<substep>` elements, each with its own `<cmd>` and optional `<info>`. Substeps do not nest further; if they would, the step is a separate task.
-   - `@importance="optional"` on a `<step>` or `<substep>` marks it as one the reader may skip. Output prefixes it with "Optional:".
+   - `@importance="optional"` on a `<step>` or `<substep>` marks it as one the reader may skip. The `html5` transform prefixes it with "Optional:".
    - `<stepresult>` says what happens after one step, as distinct from `<result>` for the whole task.
    - `<codeph>` is inline code: the `apt` command inside a sentence.
+3. **Preview the task** Before you preview, predict how a reader will see the choice table and the prerequisite. Then choose **View** > **Preview in Tab**. The prerequisite has the label **Before you begin**, and the choice table is a table inside step 2, with its headings. Further down, the substeps are a list of their own inside the launch step, followed by the step result. After the steps come the **Result** and **What to do next** blocks.
 :::
 
 ## Step 2: Exporting audio {#step-2-exporting-audio}
 
 :::steps
-1. **Create `topics/exporting-audio.dita`** Create `exporting-audio.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. If you use another editor, create the file and type the finished listing.
+1. **Create `topics/exporting-audio.dita`** Create `exporting-audio.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. Replace the title, type the short description, and replace the content of `<taskbody>` with the body from the listing. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/exporting-audio.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1808,7 +1832,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Removing background noise {#step-3-removing-background-noise}
 
 :::steps
-1. **Create `topics/removing-background-noise.dita`** Create `removing-background-noise.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. If you use another editor, create the file and type the finished listing.
+1. **Create `topics/removing-background-noise.dita`** Create `removing-background-noise.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. Replace the title, type the short description, and replace the content of `<taskbody>` with the body from the listing. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/removing-background-noise.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1878,7 +1902,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 4: Preparing to record {#step-4-preparing-to-record}
 
 :::steps
-1. **Create `topics/preparing-to-record.dita`** Create `preparing-to-record.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. This task uses `<steps-unordered>`, so change the template's `<steps>` and `</steps>` tags to `<steps-unordered>` and `</steps-unordered>`. If you use another editor, create the file and type the finished listing.
+1. **Create `topics/preparing-to-record.dita`** Create `preparing-to-record.dita` in the `topics` folder from the **Task** template, as for *Installing Audacity*. Replace the title and type the short description. This task uses `<steps-unordered>` instead of `<steps>`, because numbered steps would tell the reader that the order matters. Replace the content of `<taskbody>` with the body from the listing, or change the template's `<steps>` and `</steps>` tags to `<steps-unordered>` and `</steps-unordered>` and type the rest. If you use another editor, create the file and type the finished listing.
 
    ```xml {title="topics/preparing-to-record.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1913,14 +1937,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 2. **Read the new elements**
 
-   - `<steps-unordered>` replaces `<steps>` when the order does not matter. The children are still `<step>` elements; output renders them as a bulleted rather than numbered list. Say in the `<context>` that the order is free, as this topic does.
+   - `<steps-unordered>` replaces `<steps>` when the order does not matter. The children are still `<step>` elements. The `html5` transform renders them as a bulleted list instead of a numbered one. Say in the `<context>` that the order is free, as this topic does.
    - `<tutorialinfo>` is additional information for a reader who is learning, as opposed to `<info>`, which is for anyone doing the step. A stylesheet for expert readers can drop it.
 :::
 
-## Step 5: Update the map and check your work {#step-5-update-the-map-and-check-your-work}
+## Step 5: Update the map and build {#step-5-update-the-map-and-build}
 
 :::steps
-1. **Add the topics to the map** Add a `<topicref>` for each new topic to `audacity-guide.ditamap`. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
+1. **Add the topics to the map** Add a `<topicref>` for each new topic at the end of `audacity-guide.ditamap`, in the order you wrote them, so that the build includes them. Do this before you check your work: the check reports a topic that no map refers to as an orphan topic. The complete map at this checkpoint is:
 
    ```xml {title="audacity-guide.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -1928,24 +1952,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    <map>
      <title>Audio user guide</title>
-     <topicref href="topics/exporting-audio.dita"/>
-     <topicref href="topics/installing-audacity.dita"/>
-     <topicref href="topics/preparing-to-record.dita"/>
-     <topicref href="topics/recording-your-first-track.dita"/>
-     <topicref href="topics/removing-background-noise.dita"/>
-     <topicref href="topics/supported-audio-formats.dita"/>
-     <topicref href="topics/trimming-audio.dita"/>
      <topicref href="topics/what-is-audacity.dita"/>
+     <topicref href="topics/recording-your-first-track.dita"/>
+     <topicref href="topics/supported-audio-formats.dita"/>
      <topicref href="topics/what-is-digital-audio.dita"/>
+     <topicref href="topics/trimming-audio.dita"/>
+     <topicref href="topics/installing-audacity.dita"/>
+     <topicref href="topics/exporting-audio.dita"/>
+     <topicref href="topics/removing-background-noise.dita"/>
+     <topicref href="topics/preparing-to-record.dita"/>
    </map>
    ```
-2. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+2. **Format and build** Save your files. Format the map and the topics: choose **Project** > **Project Tools** > **Format Project** to format every file at once, or choose **XML** > **Format** in each changed file and save it. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check rebuilds the guide in `out/full/`. The output looks like this example:
+   Then choose **Project** > **Build Deliverables...** and click **Build All**. When the build finishes, click **OK**. The build rebuilds the guide in `out/full/`, now with nine topics, each a page of its own.
+
+   To make sure that the project is also healthy, choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check also builds every deliverable. The output looks like this example:
 
    ```
    health   clean
@@ -1953,9 +1979,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+3. **See the built guide** Predict how the built guide shows the steps of *Preparing to record*: numbered, or some other way. Then open `out/full/topics/preparing-to-record.html` and choose **View** > **Preview in Tab** to see the page as a browser shows it. The steps are bullets, not numbers. You chose `<steps-unordered>` for its purpose, and the transform, DITA-OT's `html5` transtype, shows that purpose as bullets.
 :::
 
-The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order, move the `<postreq>` in *Installing Audacity* above `<result>` and check your work. The check names the file with the line, column, and message of the error, and stops. The output looks like this example:
+The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order, open *Installing Audacity* and swap `<result>` and `<postreq>`, so that `<postreq>` comes first. Save the file. Predict what validation says, then choose **XML** > **Validate**. The topic is not valid: the **Errors** panel names the line and the error, which says that the content of `<taskbody>` does not match its content model.
+
+**Project** > **Check Project** and `dogsbay-xml check .` find the same error. The check names the file with the line, column, and message of the error, and stops. The output looks like this example:
 
 ```
 health   NOT CLEAN
@@ -1977,7 +2006,7 @@ Summary
   Invalid files                 1  of 10
 ```
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Swap the two elements back, so that `<result>` comes first, and save. Choose **XML** > **Validate** again and confirm that the topic is valid before you continue. If you ran the check, run it again and confirm that it reports `Ready`.
 
 ## What you learned {#what-you-learned}
 
@@ -2022,7 +2051,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Cross-references in the text {#step-1-cross-references-in-the-text}
 
 :::steps
-1. **Edit `topics/installing-audacity.dita`** The postrequisite gets an `<xref>` to the recording task.
+1. **Edit `topics/installing-audacity.dita`** The postrequisite sends the reader on to recording, but in plain words. Replace the end of its sentence with an `<xref>` to the recording task. The `@href` names the target topic's file, and the `<xref>` has no text of its own.
 
    ```diff {title="topics/installing-audacity.dita"}
    --- a/topics/installing-audacity.dita
@@ -2037,7 +2066,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       </taskbody>
     </task>
    ```
-2. **Edit `topics/exporting-audio.dita`** The format step links to a *section* of the reference. The target of an `<xref>` is `file#topic-id/element-id`; the section needs an `@id` for that, which the next step adds.
+
+   Save the file. From here on, save each topic when you finish with it, so that the build sees your changes.
+2. **Build and follow the link** The `<xref>` is empty. Predict what words the reader will click in the built page. Then choose **Project** > **Build Deliverables...** and click **Build All**. When the build finishes, click **OK**. You can also choose **Project** > **Check Project** to make sure that every link resolves; you do that at the end of this lesson.
+
+   Open `out/full/topics/installing-audacity.html`. The `<xref>` is now an HTML link to `recording-your-first-track.html`, and its text is that topic's title, *Recording your first track*. Open `out/full/topics/recording-your-first-track.html` and choose **View** > **Preview in Tab**. Its heading is the text that the reader clicked.
+3. **Edit `topics/exporting-audio.dita`** The format step links to a *section* of the reference. The target of an `<xref>` is `file#topic-id/element-id`; the section needs an `@id` for that, which the next step adds. After `</taskbody>`, add two related links, to the formats reference and to *Trimming audio*, the second with a short description.
 
    ```diff {title="topics/exporting-audio.dita"}
    --- a/topics/exporting-audio.dita
@@ -2063,7 +2097,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    +  </related-links>
     </task>
    ```
-3. **Edit `topics/supported-audio-formats.dita`** `id="choosing"` on the section makes it a link target. The related links include an external one with `@scope="external"`, `@format="html"` and its own `<linktext>`, because there is no DITA title to take the text from.
+4. **Edit `topics/supported-audio-formats.dita`** `id="choosing"` on the section makes it a link target. The related links include an external one with `@scope="external"`, `@format="html"` and its own `<linktext>`, because there is no DITA title to take the text from.
 
    ```diff {title="topics/supported-audio-formats.dita"}
    --- a/topics/supported-audio-formats.dita
@@ -2089,12 +2123,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    +  </related-links>
     </reference>
    ```
-4. **Read the elements**
+5. **Build and see the section link** The cross-reference in *Exporting audio* points at a section. Predict whose title its link shows: the formats topic's, or the section's. Then choose **Project** > **Build Deliverables...**, click **Build All**, and click **OK** when the build finishes.
 
-   - `<xref href="…"/>` with no content: output supplies the target's `<title>` as the link text. This is the usual form for a link to a DITA topic, and it updates the link text when the target title changes.
+   Open `out/full/topics/exporting-audio.html`. The link goes to `supported-audio-formats.html#supported-audio-formats__choosing`, an anchor made from the topic and section ids, and its text is the section's title, *Choosing a format*. Choose **View** > **Preview in Tab**: in step 2, the reader sees *Choosing a format* as a link where they choose a format. At the end of the page source, the build sorts the related links by the kind of topic they lead to, under **Related tasks** and **Related reference**. The `<desc>` text is the link's `title` attribute, which the browser shows as a tooltip.
+6. **Read the elements**
+
+   - `<xref href="…"/>` with no content: the build supplies the target's `<title>` as the link text. This is the usual form for a link to a DITA topic, and it updates the link text when the target title changes.
    - `href="file.dita"` links to the topic. `href="file.dita#topic/element"` links to an element inside it that has an `@id`; the topic id is required in the fragment because one file can hold several topics.
    - `@scope="external"` says the target is outside the project and is not to be resolved or copied. `@format="html"` says what kind of thing it is, so the processor does not try to parse it as DITA.
-   - `<link>` is the same reference as `<xref>` but as a list entry in `<related-links>`. It takes `<linktext>` for the text when the target has no title, and `<desc>` for a short description. The HTML5 output shows the description as a tooltip (the `title` attribute of the link), not as text under the link.
+   - `<link>` is the same reference as `<xref>` but as a list entry in `<related-links>`. It takes `<linktext>` for the text when the target has no title, and `<desc>` for a short description. The `html5` transform shows the description as a tooltip (the `title` attribute of the link), not as text under the link.
 :::
 
 ## Step 2: Related links on the remaining topics {#step-2-related-links-on-the-remaining-topics}
@@ -2203,13 +2240,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Format and check your work** Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+1. **Format and check your work** Save all your files. Format the topics: choose **Project** > **Project Tools** > **Format Project** to format every file at once, or choose **XML** > **Format** in each changed topic and save it. The editor can also format each file when you save it, with an option in its preferences. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The output looks like this example:
+   Predict whether the link list and the link pool in *What is digital audio?* keep the shape you wrote in the built page. Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The health stage resolves every link in every topic, the check builds the guide, and the output stage follows every link in the built pages. The output looks like this example:
 
    ```
    health   clean
@@ -2217,6 +2254,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+   The check reports `Ready`: the project is healthy, the guide built, and the checks on the built pages found no links that lead nowhere.
+2. **See the grouped links** Open `out/full/topics/what-is-digital-audio.html`. The link list kept its title, **Put it into practice**. The build sorted the links in the link pool by kind, under headings such as **Related information**. Choose **View** > **Preview in Tab**. In the first paragraph, the shortcut is a link titled *Recording your first track*.
 :::
 
 This is the first stage with links inside topics. The health check has resolved the `@href` of each `<topicref>` in the map since stage 02; now it also resolves each `@href` in a topic. Misspell the target of the `<link>` to *Trimming audio* in *Exporting audio* as `trimming-audo.dita` and check your work. The file still validates, because a broken link is not a grammar error, but the health stage reports it with the file and line, and the check stops. The following output is an example:
@@ -2228,7 +2268,7 @@ health   NOT CLEAN
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-Undo the change and check again.
+Undo the change, save, and check again. Confirm that the check reports `Ready`.
 
 The health and output stages cover different problems. In *Exporting audio*, find the `<xref>` to the *Choosing a format* section. Change the fragment `#supported-audio-formats/choosing` to `#supported-audio-formats/choose` and check your work. The source passes the health stage and the DITA-OT build. The link renders and points at an anchor that the page does not have. The output stage reads the built HTML and reports each link that leads nowhere, with the page, the line, and the target. The following output is an example:
 
@@ -2262,15 +2302,15 @@ This lesson adds no topics, so the map does not change. For reference, the compl
 
 <map>
   <title>Audio user guide</title>
-  <topicref href="topics/exporting-audio.dita"/>
-  <topicref href="topics/installing-audacity.dita"/>
-  <topicref href="topics/preparing-to-record.dita"/>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/removing-background-noise.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/trimming-audio.dita"/>
   <topicref href="topics/what-is-audacity.dita"/>
+  <topicref href="topics/recording-your-first-track.dita"/>
+  <topicref href="topics/supported-audio-formats.dita"/>
   <topicref href="topics/what-is-digital-audio.dita"/>
+  <topicref href="topics/trimming-audio.dita"/>
+  <topicref href="topics/installing-audacity.dita"/>
+  <topicref href="topics/exporting-audio.dita"/>
+  <topicref href="topics/removing-background-noise.dita"/>
+  <topicref href="topics/preparing-to-record.dita"/>
 </map>
 ```
 
@@ -2318,7 +2358,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Structure the map {#step-1-structure-the-map}
 
 :::steps
-1. **Edit `audacity-guide.ditamap`**
+1. **See the flat contents** Open `audacity-guide.ditamap`. It lists the nine topics one after another, in the order you wrote them, with no headings and no reading order. Choose **Project** > **Build Deliverables...**, click **Build All**, and click **OK** when the build finishes. Open `out/full/index.html` and choose **View** > **Preview in Tab**. The table of contents is the same flat list: concepts, tasks, and reference are mixed together, and *Preparing to record* comes last, long after *Recording your first track*.
+2. **Edit `audacity-guide.ditamap`** Make the change in two passes, so that you can see what each part generates. First, click inside `<map>`, choose **XML** > **Select Element Content**, and delete the content. Type the new title and the `<topicmeta>` with the short description, then add the three `<topichead>` elements. Save the map, and continue with items 3 and 4. Later, in item 5, you add the `<reltable>` at the end of the map.
 
    ```diff {title="audacity-guide.ditamap"}
    --- a/audacity-guide.ditamap
@@ -2328,15 +2369,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
     <map>
    -  <title>Audio user guide</title>
-   -  <topicref href="topics/exporting-audio.dita"/>
-   -  <topicref href="topics/installing-audacity.dita"/>
-   -  <topicref href="topics/preparing-to-record.dita"/>
-   -  <topicref href="topics/recording-your-first-track.dita"/>
-   -  <topicref href="topics/removing-background-noise.dita"/>
-   -  <topicref href="topics/supported-audio-formats.dita"/>
-   -  <topicref href="topics/trimming-audio.dita"/>
    -  <topicref href="topics/what-is-audacity.dita"/>
+   -  <topicref href="topics/recording-your-first-track.dita"/>
+   -  <topicref href="topics/supported-audio-formats.dita"/>
    -  <topicref href="topics/what-is-digital-audio.dita"/>
+   -  <topicref href="topics/trimming-audio.dita"/>
+   -  <topicref href="topics/installing-audacity.dita"/>
+   -  <topicref href="topics/exporting-audio.dita"/>
+   -  <topicref href="topics/removing-background-noise.dita"/>
+   -  <topicref href="topics/preparing-to-record.dita"/>
    +  <title>Audacity User Guide</title>
    +  <topicmeta>
    +    <shortdesc>Record, edit and export audio with Audacity, from your first track to a finished file.</shortdesc>
@@ -2398,19 +2439,27 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    +  </reltable>
     </map>
    ```
-2. **Read the hierarchy**
+3. **Read the hierarchy**
 
-   - A `<topicref>` inside a `<topicref>` is a child topic. The output nests it in the table of contents and generates a "Parent topic" link on the child. *What is digital audio?* is now a child of *What is Audacity?*.
+   - A `<topichead>` is a heading in the table of contents, with no page of its own. Its `@navtitle` is the text of the heading.
+   - A `<topicref>` inside a `<topicref>` is a child topic. The build nests it in the table of contents and generates a "Parent topic" link on the child. *What is digital audio?* is now a child of *What is Audacity?*.
    - `@collection-type` on the parent says how its children relate. `family` means the children link to each other and to the parent; `sequence` means they are read in order, and each child gets "Previous topic" and "Next topic" links.
    - `<topicgroup>` groups `<topicref>`s without adding a heading, which is how the four recording tasks become a sequence without a fifth entry in the table of contents. Compare `<topichead>`, which is a heading.
    - `@linking="targetonly"` on *Removing background noise* means other topics may link to it, but it generates no links of its own. The other values are `sourceonly`, `normal` (the default) and `none`.
    - `@id="reference"` on the `<topichead>` gives the heading an id, so it can be referenced like any element with an id; the map is XML too.
    - `@locktitle="yes"` with a `<navtitle>` inside `<topicmeta>` makes the table of contents show *Audio formats* while the page keeps its own title, *Supported audio formats*. Without `@locktitle`, the navigation title is ignored and the topic's title is used.
-3. **Read the relationship table**
+4. **Build and see the contents and the sequence** Predict how many entries the top level of the contents has, and what the reference entry is called. Then build again with **Project** > **Build Deliverables...** and **Build All**, open `out/full/index.html`, and preview it. The top level has three entries, the three headings. *What is digital audio?* is indented under its parent, the four recording tasks follow in order with no group heading, and the reference entry is *Audio formats*.
+
+   Open `out/full/topics/recording-your-first-track.html`, preview it, and scroll to the foot of the page. **Previous topic** (*Preparing to record*) and **Next topic** (*Trimming audio*) come from the sequence. *Preparing to record* is listed again below them, from the link you wrote in stage 07.
+5. **Add the relationship table** Add the `<reltable>` from the listing at the end of the map, before `</map>`, and save the map.
+6. **Read the relationship table**
 
    - `<reltable>` is a table of relationships. Each `<relcolspec>` in the `<relheader>` names a column, here typed `concept`, `task` and `reference`, so the generated links are grouped as "Related concepts", "Related tasks" and "Related reference".
    - Each `<relrow>` relates the topics in one cell to the topics in the other cells of the row. Links go across columns: in the first row the concept links to both tasks and the reference, and each of them links back. Topics in the same `<relcell>` do not link to each other unless the cell has `@collection-type="family"`. An empty `<relcell/>` in the second row means no concept is involved.
    - Links are generated in both directions from one statement, and a topic can be related to different neighbors in a different map, which is what a hand-written `<link>` cannot do.
+7. **Build and see the related links** *Recording your first track* is in the first row. Predict which new groups of links its page gets. Then build again, open `out/full/topics/recording-your-first-track.html`, preview it, and scroll to the foot. There are two new groups, both from the first row: **Related concepts** (*What is digital audio?*) and **Related reference** (*Supported audio formats*). The topic did not change. The map did.
+
+   Now open `out/full/topics/exporting-audio.html`, preview it, and scroll to the foot. *Supported audio formats* is listed twice under **Related reference**: once from the table, and once from the link you wrote. The map generates that link now, so the hand-written copy is only a second place to keep up to date.
 :::
 
 ## Step 2: Remove the links the map now generates {#step-2-remove-the-links-the-map-now-generates}
@@ -2500,16 +2549,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read why** A hand-written `<link>` states a relationship inside one of the two topics, once, in one direction. The map states it once for both directions, keeps the topic free of assumptions about its neighbors, and lets the same topic sit in another guide with other neighbors. Retain topic-level links where they provide useful context, such as the titled `<linklist>` and its descriptions. Maps can also define external links and link descriptions.
 :::
 
-## Step 3: Check your work and look at the output {#step-3-check-your-work-and-look-at-the-output}
+## Step 3: Build and look at the output {#step-3-build-and-look-at-the-output}
 
 :::steps
-1. **Format and check your work** Format the map and the topics: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+1. **Format and build** Save every changed file. Format the map and the topics: choose **Project** > **Project Tools** > **Format Project** to format every file at once, or choose **XML** > **Format** in each changed file and save it. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then choose **Project** > **Build Deliverables...**, click **Build All**, and click **OK** when the build finishes.
+
+   To make sure that the project is also healthy, check it. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. The check also builds every deliverable. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -2523,7 +2574,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
-2. **Read the generated links** The check builds the guide into `out/full/`. Open the pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
+2. **Read the generated links** Predict what is under **Related reference** on the export page now. Then open `out/full/topics/exporting-audio.html`, preview it, and scroll to the foot. *Supported audio formats* is listed once, from the table. **Previous topic** comes from the sequence, and *Trimming audio* is still related, by the link you kept because it has a description.
+
+   Open the other pages under `out/full/topics/`. The link blocks at the foot of each page are now generated. The text of three of them, as DITA-OT 4.3.5 writes it:
 
    | Page | Generated links |
    | --- | --- |
@@ -2558,7 +2611,7 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 
 ## What you learned {#what-you-learned}
 
-- Nested `<topicref>`s make a hierarchy; `@collection-type="family"` and `"sequence"` say how children relate, and the output links accordingly.
+- Nested `<topicref>`s make a hierarchy; `@collection-type="family"` and `"sequence"` say how children relate, and the build links accordingly.
 - `<topicgroup>` groups without a heading; `<topichead>` is a heading.
 - `@linking` controls which links a topic gives and receives; `@locktitle="yes"` with `<navtitle>` changes the table of contents but not the page.
 - `<reltable>`, `<relheader>`, `<relcolspec type>`, `<relrow>`, `<relcell>` state relationships once for both directions, typed by information type.
@@ -2618,7 +2671,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    </map>
    ```
 
-   Replace the title with `Product key definitions`. Delete the sample `installing` key definition, because this map defines text and URL keys only; step 2 keys the topics in the guide map. Keep the `product-name` key definition and replace `Product Name` with `Audacity`, then add the other key definitions. If you use another editor, create the file and type the finished listing. The finished map:
+   Replace the title with `Product key definitions`. Delete the sample `installing` key definition, because this map defines text and URL keys only; step 2 keys the topics in the guide map. Keep the `product-name` key definition and replace `Product Name` with `Audacity`, then add the other three key definitions. Save the file, so that the build sees it. If you use another editor, create the file and type the finished listing. The finished map:
 
    ```xml {title="keydefs-product.ditamap"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -2666,7 +2719,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 2: Bring the keys into the guide and key the topics {#step-2-bring-the-keys-into-the-guide-and-key-the-topics}
 
 :::steps
-1. **Edit `audacity-guide.ditamap`**
+1. **Edit `audacity-guide.ditamap`** After the `<topicmeta>`, add a `<mapref>` and one more `<keydef>`. Then add `@keys` to three `<topicref>` elements that are already in the guide. Save the map.
 
    ```diff {title="audacity-guide.ditamap"}
    --- a/audacity-guide.ditamap
@@ -2708,7 +2761,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Use the keys in the topics {#step-3-use-the-keys-in-the-topics}
 
 :::steps
-1. **Edit the topics** Every literal "Audacity" becomes `<keyword keyref="product-name"/>`, the install task gains the version and the download link, and three links go through keys.
+1. **Key one topic first** Open `topics/installing-audacity.dita`. In the download step, replace `Audacity` and the address after it with `<keyword keyref="product-name"/>`, then add `<keyword keyref="product-version"/>` and the link `<xref keyref="download-url"/>`. Do the same in the result, with the name and the version, and in the title. The listing in item 3 shows the finished lines. Leave the rest of the topic for item 3, and save the file.
+
+   The title and the download step now hold empty elements. Predict what the built page shows there. Then choose **Project** > **Check Project**. The check covers the keys too, and it rebuilds the guide in `out/full/`. Open `out/full/topics/installing-audacity.html` and choose **View** > **Preview in Tab**. The title reads *Installing Audacity*, and the download step reads "Download Audacity 3.4 from the Audacity download page", with a link to the download address. The words come from the key definitions, not from the topic.
+2. **Change the definition once** In `keydefs-product.ditamap`, change `Audacity` to `Audacity Pro` and save the file. You have not changed the topic. Predict what its title and download step say after the next build. Then choose **Project** > **Check Project** again, and preview the built install page as before. Every reference changed, including the title, *Installing Audacity Pro*, and the download step, "Download Audacity Pro 3.4". The table of contents shows the new title too. The short description still says *Audacity*, because it is typed text, not a key.
+
+   Change the name back to `Audacity`, exactly, and save the file. The rest of the course uses it.
+3. **Key the rest of the topics** Every other literal "Audacity" becomes `<keyword keyref="product-name"/>`, and three links go through keys. In each topic, use **Edit** > **Replace...** to find `Audacity` and replace it with the keyword. Skip the places that must stay literal, such as the Windows install folder, which is a file path, the web addresses, and the title of the quoted manual in *What is digital audio?*, which is an attribute value.
 
    ```diff {title="topics/installing-audacity.dita"}
    --- a/topics/installing-audacity.dita
@@ -2934,8 +2993,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           </simpletable>
         </section>
    ```
-2. **Preview a keyed topic** Open `topics/what-is-audacity.dita` and choose **View** > **Preview in Split**. The bar above the preview reads **Map: audacity-guide.ditamap**: the preview resolves keys through the map of the active deliverable, `full`, so every `product-name` reference shows as *Audacity*, underlined to mark it as text that comes from a key.
-3. **Read the four forms of reference**
+4. **Preview a keyed topic** Open `topics/what-is-audacity.dita` and choose **View** > **Preview in Tab**. The bar above the preview reads **Map: audacity-guide.ditamap**: the preview resolves keys through the map of the active deliverable, `full`, so every `product-name` reference shows as *Audacity*, underlined to mark it as text that comes from a key.
+5. **Read the four forms of reference**
 
    - `<keyword keyref="product-name"/>`: variable text. The element is empty; the processor fills in the `<keyword>` from the keydef. It works in a `<title>` and a `<shortdesc>` as well as in a `<p>`.
    - `<xref keyref="download-url"/>`: a link through a key to an external page. The text is the keydef's `<linktext>`.
@@ -2975,10 +3034,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Format and check your work**
 
-   Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+   Save all your files. Format the maps and the topics: choose **Project** > **Project Tools** > **Format Project** to format every file at once, or choose **XML** > **Format** in each changed file and save it. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
@@ -3001,7 +3060,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    The three unused keys are defined for later stages: stage 11 uses `project-extension` in a reused step, and stage 18 uses `start-here` and `digital-audio` in a new topic.
 
-   The check builds the guide into `out/full/`. Open `out/full/topics/installing-audacity.html`: the title reads *Installing Audacity*, the download step reads "Download Audacity 3.4 from the Audacity download page" with the link on the last five words, after DITA-OT resolves the key references.
+   The check builds the guide into `out/full/`. Open `out/full/topics/what-is-audacity.html`, preview it, and scroll to the foot of the page. *Installing Audacity* is among the related links. You wrote only the key. The build took the link text from the task's title, which itself comes from the `product-name` key.
 :::
 
 Test an undefined key reference. Change both occurrences of `keyref="product-version"` in the install task to `product-verson` and check your work. The check stops at health and names both references. Example output:
@@ -3038,7 +3097,7 @@ Summary
 
 The file validates, since `@keyref` is only a name to the DTD, and DITA-OT would build the page with the version missing. The unused keys are warnings. `product-version` appears in the list now because the misspelled references no longer use it.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change: retype the `i` in both references, save the file, and check again. Confirm that the check reports `Ready`, with only the three unused keys that you saw before, before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -3234,12 +3293,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<keydef keys="common-notes" href="shared/common-notes.dita"/>` gives the notes shared topic a key. A keydef is resource-only, so the topic is part of the map's key space and is processed, but is not a page.
    - `<topicref href="shared/common-steps.dita" processing-role="resource-only"/>` does the same by path. `@processing-role="resource-only"` is what a keydef sets by default: the topic is read, so its conref push can act, but it gets no entry in the table of contents and no output page.
    - The shared topics need to be in the map. A conref by path would resolve without it, but a conkeyref needs the key, and a conref push acts only when DITA-OT processes the pushing topic as part of the publication.
+
+   Save the map, so that the preview in the next step finds the new key.
 :::
 
 ## Step 3: Pull the content into the tasks {#step-3-pull-the-content-into-the-tasks}
 
 :::steps
-1. **Edit `topics/trimming-audio.dita`** The save step becomes a reference to the shared topic.
+1. **Edit `topics/trimming-audio.dita`** The save step becomes a reference to the shared topic. Add the `@conref` attribute to the step's start tag. Then put the cursor in the step, choose **XML** > **Select Element Content**, and replace the content with an empty `<cmd/>`.
 
    ```diff {title="topics/trimming-audio.dita"}
    --- a/topics/trimming-audio.dita
@@ -3332,18 +3393,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `@conrefend` on the `<li>` makes the reference a range: every element from the `@conref` target to the `@conrefend` target, in this case all three list items, replaces the one `<li>`. Both targets must be siblings of the same type.
    - **The `<cmd/>` placeholder.** A conref'd `<step>` still has to validate as a `<step>` before it is resolved, and the DTD says a step contains a `<cmd>`. So the referencing step carries an empty `<cmd/>` that the conref replaces. The same rule applies to any element whose content model requires a child. A `<note conkeyref="…"/>` needs nothing, because a note may be empty.
    - The referencing element and the target must be the same element type, and the target may not need anything the referencing context does not allow. A `<step>` into `<steps>`, a `<note>` into `<context>`, `<li>`s into a `<ul>`.
+5. **Preview the reuse** The preview reads a shared topic from disk, so save the shared topics as you go. Save each task, and choose **View** > **Preview in Tab**. The preview resolves the references: the trimming task ends with the shared save step, with its menu path and the explanation below it, and the noise task's second step reads "Select the region of audio you want to work on." A faint purple border at the left marks an included note, such as the warning in the noise task. Fix the shared step once, and every task that includes it changes with it.
 :::
 
 ## Step 4: Check your work and check what was published {#step-4-check-your-work-and-check-what-was-published}
 
 :::steps
-1. **Format and check your work** Format the changed topics: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. On the command line, the format command covers `shared/` too:
+1. **Format, build, and check your work** Format the changed files: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. On the command line, the format command covers `shared/` too:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build the guide: choose **Project** > **Build Deliverables...**, and click **Build All**. The build resolves every `@conref` and `@conkeyref` and applies the push. To check everything as well, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. **Check Project** checks the project's health, builds every deliverable, and checks the built pages. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -3384,7 +3446,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The diagnostics name the id that the push looks for, `play-back`, not the new id. Restore the id and check again.
-2. **Check the output** The check builds the guide into `out/full/`. The folder has one page per topic in the table of contents and nothing for the shared topics:
+2. **Check the output** The build writes the guide to `out/full/`. To list the pages, run `find` in the **Terminal** panel. The folder has one page per topic in the table of contents and nothing for the shared topics:
 
    ```bash
    find out/full -name '*.html' | sort
@@ -3403,7 +3465,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    out/full/topics/what-is-digital-audio.html
    ```
 
-   The folder does not contain `common-steps.html` or `common-notes.html`. Open `recording-your-first-track.html`: the step "Turn the playback volume down before you listen" sits before "Click Play", pushed there from the shared topic, and the task's own file never mentions it.
+   The folder does not contain `common-steps.html` or `common-notes.html`. Their content appears only where a task includes it.
+
+   Open `out/full/topics/removing-background-noise.html` and find the list in step 5. It has all three settings, from "Noise reduction: 12 dB" to "Frequency smoothing: 3": the range brought the middle item along.
+
+   Open `recording-your-first-track.html`: the step "Turn the playback volume down before you listen" sits before "Click Play", pushed there from the shared topic, and the task's own file never mentions it. Pull is the usual way to reuse content. Push suits content owned by another team, added to a task without editing it, but it is harder to follow, so use it sparingly.
 :::
 
 Test two errors. First, use a `@conkeyref` with an undefined key. Change `common-notes/backup-warning` in the noise task to `common-note/backup-warning` and check your work. The check stops at health. Example output:
@@ -3919,7 +3985,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Output (optional)** | `out/beginner-mac` | `out/beginner-windows` | `out/podcaster-linux` | `out/review` |
    | **Publication parameters** | `nav-toc` = `partial` | `nav-toc` = `partial` | (none) | (none) |
 
-   Enter the deliverable name in **Name**. Choose each map from the **Input map** list and each filter from the **DITAVAL (optional)** list, or click **Browse...** to select the file.
+   Enter the deliverable name in **Name**. Choose each map from the **Input map** list and each filter from the **DITAVAL (optional)** list, or click **Browse...** to select the file. Leave **Transtype** at `html5`. For a publication parameter, click **Add param**, double-click the name cell and type `nav-toc`, then double-click the value cell and type `partial`.
 
    - **DITAVAL** applies one filter to the build. The two beginner guides share a map and differ only in their DITAVAL file.
    - The `nav-toc` parameter with the value `partial` shows the navigation around the current page instead of the whole guide.
@@ -3927,9 +3993,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    When you finish, the table lists five deliverables. Click **Close**.
 
-   `full` stays the active deliverable, the one that **Build Deliverables** builds by default. To build another one from the editor, choose it in the status bar's deliverable menu. The check builds all five.
-2. **Preview what each guide shows** Open `topics/removing-background-noise.dita` and choose **View** > **Preview in Split**. The bar above the preview names the active deliverable's map and filter: **Map: audacity-guide.ditamap** and **Filter: none**, so the warning reads "undo with Ctrl+Z or, on macOS, Cmd+Z". In the status bar's deliverable menu, choose `beginner-mac`. The preview follows at once: **Map: beginner-guide.ditamap**, **Filter: mac-beginner.ditaval**, and the warning reads "undo with Cmd+Z". Choose `full` again before you continue.
-3. **Format and check your work**
+   `full` stays the active deliverable, the one that the preview and **Build Deliverables** use by default. To make another one active, choose it in the status bar's deliverable menu. **Build All** and **Check Project** build all five.
+2. **Preview what each guide shows** Open `topics/removing-background-noise.dita` and choose **View** > **Preview in Tab**. The bar above the preview names the active deliverable's map and filter: **Map: audacity-guide.ditamap** and **Filter: none**. Nothing is filtered, so the warning reads "undo with Ctrl+Z or, on macOS, Cmd+Z", and the podcaster tip is there. Close the preview. In the status bar's deliverable menu, choose `beginner-mac`, and preview the topic again: **Map: beginner-guide.ditamap**, **Filter: mac-beginner.ditaval**. The warning reads "undo with Cmd+Z", and the podcaster tip is gone. Preview `topics/installing-audacity.dita` the same way: the Linux paragraph is gone, and the choice table has one row, macOS. The topics have not changed; the filter did the work. Choose `full` again before you continue.
+3. **Format, build, and check your work**
 
    Format the changed files: choose **XML** > **Format** in each one and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
@@ -3937,7 +4003,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap filters/*.ditaval
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build all five guides: choose **Project** > **Build Deliverables...**, and click **Build All**. To check everything as well, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -3961,8 +4027,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The check takes longer now: it builds five deliverables instead of one, and checks the links in each. `podcast-workflow` is unused until stage 18 refers to it.
-4. **Read the output** `out/` contains one folder per deliverable. Compare these files:
+   The build and the check take longer now: they build five deliverables instead of one, and the check also checks the links in each. `podcast-workflow` is unused until stage 18 refers to it.
+4. **Read the output** `out/` contains one folder per deliverable. To see a page as a reader does, open it and choose **View** > **Preview in Tab**. Compare these files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select the whole track with Ctrl+A." under `beginner-windows` and `podcaster-linux`, and "Select the whole track with Cmd+A." under `beginner-mac`. Under `full` and `review`, which filter nothing on `@platform`, it reads "Select the whole track with Ctrl+A or, on macOS, Cmd+A." The backup warning at the top of the page reads the same way with `Ctrl+Z` and `Cmd+Z`.
    - `beginner-windows/topics/installing-audacity.html` has one row in the choice table, the `.exe` one; `beginner-mac` has the `.dmg` row, `podcaster-linux` the `apt install` row.
@@ -4042,7 +4108,7 @@ type: tutorial
 
 # Stage 15: Subject scheme {#stage-15-subject-scheme}
 
-Define the allowed platform and audience values in a subject scheme. Without a controlled vocabulary, `platform="macos"` passes DTD validation even though the filters expect `mac`. The unrecognized value leaves the macOS content in Windows and Linux output.
+Define the allowed platform and audience values in a subject scheme. Without a controlled vocabulary, `platform="macos"` passes DTD validation even though the filters expect `mac`. Before the scheme exists, the controlled values check also passes every file, because nothing says which values `@platform` may take. The unrecognized value leaves the macOS content in Windows and Linux output, and no build fails.
 
 Create `subject-scheme.ditamap`, reference it from each root map, and check the values against it. DITA-OT only warns about a value outside the scheme and builds anyway. **Check Project** treats it as an error, so a typo cannot quietly change which content a build includes.
 
@@ -4224,7 +4290,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The command finds the scheme through the project's root map and its `<mapref type="subjectScheme">`. **Check Project** runs the same check as part of health; this command runs it on its own, which is quicker after you change a profiling attribute.
-2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Build and check your work** Rebuild the guides: choose **Project** > **Build Deliverables...**, and click **Build All**. The five guides build as before; the scheme adds no pages of its own. To check everything as well, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -4253,7 +4319,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The note lines count DITA-OT notes from the build. Run `dogsbay-xml check -v .` to print them, or read them in the **Project Validation** panel after **Check Project**. Here they are `DOTJ031I` notes. The `full` deliverable has no DITAVAL file, and the `review` DITAVAL file has no rule for values such as `platform=mac`, so DITA-OT uses the default action and includes the content.
 :::
 
-Test a value outside the controlled vocabulary. In `topics/installing-audacity.dita`, change the macOS row to `<chrow platform="macos">` and check your work. The check stops at health. The output looks like this example:
+Test a value outside the controlled vocabulary. In `topics/installing-audacity.dita`, change the macOS row to `<chrow platform="macos">` and save. Choose **Project** > **Validate Files** > **Controlled Values (Subject Scheme)...**. With the scheme in place, the check fails on the install row and suggests `mac`. Then choose **Project** > **Check Project**. The check stops at health and builds nothing, so no guide ships with the typo. The output looks like this example:
 
 ```
 health   NOT CLEAN
@@ -4418,8 +4484,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Select the house rules** Choose **Project** > **Manage Projects...** and click your project. In the **House Rules (Schematron)** list, which shows `(none)`, choose `house-style.sch`. Click **Save**.
 
-   From now on `project-health` runs the rules with everything else, the editor applies the same rules, and the `house rules:` part of the health report's first line names `house-style.sch` instead of saying *none*.
-2. **Run the rules before you change anything else** With the rules file selected, and the files still as they were at the end of stage 24:
+   A rules file does nothing until the project names it. From now on project health, the first step of **Check Project**, runs the rules with everything else, the editor applies the same rules, and the `house rules:` part of the health report's first line names `house-style.sch` instead of saying *none*.
+2. **Run the rules before you change anything else** With the rules file selected, and the files still as they were at the end of stage 24, run only the rules, without building: choose **Project** > **Validate Files** > **With Schematron**. The result appears in the **Project Validation** panel, each violation with its file, its line, and the message from its rule. From the command line, run this command and wait for it to finish:
 
    ```bash
    dogsbay-xml project-health --include=schematron .
@@ -4448,7 +4514,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
        Remove required-cleanup before publishing.                        1
    ```
 
-   Ten violations in four files, every one a house-style decision that nothing had checked until now. The main map's `<shortdesc>` spells out the product name. *About this guide* names it twice in prose, once as part of a title and once as part of an organization. The podcast workflow has five decorative `<b>`s and the `<required-cleanup>` from stage 24; *Exporting audio* has the `<draft-comment>`. `--include=schematron` runs only the rules, which is the fast loop while you fix them.
+   Ten violations in four files, every one a house-style decision that nothing had checked until now. The main map's `<shortdesc>` spells out the product name. *About this guide* names it twice in prose, once as part of a title and once as part of an organization. The podcast workflow has five decorative `<b>`s and the `<required-cleanup>` from stage 24; *Exporting audio* has the `<draft-comment>`. **Check Project** would stop at health on these and build nothing. **Validate Files** > **With Schematron**, like `--include=schematron`, runs only the rules, which is the fast loop while you fix them.
 :::
 
 ## Step 3: Resolve the violations {#step-3-resolve-the-violations}
@@ -4582,13 +4648,15 @@ With these files, the same rules exist for three readers: the machine in `house-
 :::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor, choose **XML** > **Format** and save the file, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Run the rules again with **Project** > **Validate Files** > **With Schematron**. Every file passes. This runs only the house rules; the full check also validates, builds, and checks the output.
+
+   Then build. Choose **Project** > **Build Deliverables...** and click **Build All**. Every deliverable builds. Before a release, choose **Project** > **Check Project**, which runs the house rules first, as part of health, and then builds and checks the output, and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -4619,9 +4687,10 @@ With these files, the same rules exist for three readers: the machine in `house-
    ```
 
    Health now runs the house rules with everything else, because the project names them. Step 3 resolved the ten violations, including the two stage 24 warnings, so health is clean. From now on a house-rule violation stops the check at health, so a release cannot carry unresolved review markup.
+2. **Read the built page** Open `out/full/topics/podcast-production-workflow.html`, choose **View** > **Preview in Tab**, and scroll down to *Post-production*. The steps are plain text, with the terms still linked, and the loudness targets are a table. As a required cleanup, they never reached a reader.
 :::
 
-Test an invalid value. Put one `<b>` back in `topics/podcast-production-workflow.dita`, around *Noise reduction* in the post-production list, and check your work. The check stops at health. Example output:
+Test the bold rule. Put one `<b>` back in `topics/podcast-production-workflow.dita`, around *Noise reduction* in the post-production list, save, and choose **Project** > **Validate Files** > **With Schematron**. One file fails, with the bold rule's message. **Check Project** runs the same rules in health and stops there. Example output of the check:
 
 ```
 health   NOT CLEAN
@@ -4644,13 +4713,13 @@ Summary
 
 The message is the one from the `ui-labels-use-uicontrol` pattern, with the file and line, and the check stops at health. Nothing else changed: the file is valid DITA, the links resolve, the metadata is complete. The house rule is the only thing that knows this project does not use `<b>`, which is what the rule is for.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Replace the `<b>` element with its words, save, and run **Validate Files** > **With Schematron** again. Confirm that every file passes before you continue.
 
 ## What you learned {#what-you-learned}
 
 - Schematron: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>` and `<report test>`, with the message as content.
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are exempt; `test="true()"` to forbid an element.
-- **House Rules (Schematron)** in **Manage Projects**; `project-health --include=schematron`; a house-rule violation stops the check at health.
+- **House Rules (Schematron)** in **Manage Projects**; **Validate Files** > **With Schematron** and `project-health --include=schematron` to run only the rules; a house-rule violation stops the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes its table, an answered `<draft-comment>` becomes a `<change-summary>`.
 - Optionally, the same rules for three readers: the Schematron, `AGENTS.md` and a skill.
 
@@ -4773,7 +4842,26 @@ output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, i
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
 
-The output check reads HTML pages only. For the PDF, it confirms that the build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF and inspect its navigation, layout, and accessibility yourself.
+`Ready` also tells you that the lessons' exercises are undone. A short description removed for the house rules would fail health, and two branches with the same prefix would fail the output check.
+
+The output check reads HTML pages only. For the PDF, it confirms that the build wrote `out/book-pdf/audacity-book.pdf`. No check reads a page the way a reader does, so inspect the output yourself:
+
+1. **One page reads right.** Since stage 18, the digital audio topic is part of the full guide's `out/full/topics/what-is-audacity.html` page. Open that page and find the link to `recording-your-first-track.html`, the image `waveform.png`, which the build copied to the output, and the table header from the `<sthead>`. Then open `topics/what-is-digital-audio.dita` and choose **View** > **Preview in Tab**. Read the title and the short description, and follow the link once. Check that the figure's picture matches its title, and that the bit depth table's headers say what each column holds.
+2. **A filtered page holds only its own content.** Open `out/beginner-windows/topics/installing-audacity.html` and choose **View** > **Preview in Tab**. The install step shows one row, the Windows installer. A row for every platform would mean that a deliverable lost its filter, and no check would report it.
+3. **The book is complete.** In the **Terminal** panel, print the PDF's first page:
+
+   ```bash
+   pdftotext -l 1 out/book-pdf/audacity-book.pdf -
+   ```
+
+   Example output:
+
+   ```
+   Audacity User Guide
+   Record, edit and export audio with Audacity
+   ```
+
+   The cover carries the book's title and subtitle from the bookmap. Then open `audacity-book.pdf` in your PDF viewer. Check the contents, the opening page of a chapter, a table, and the index, and follow one bookmark and one index entry. Inspect its navigation, layout, and accessibility.
 
 The final reference build checks clean. See [Known output issues](/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues) for the defects that earlier builds had and how the stage branches fixed them.
 
@@ -4892,11 +4980,12 @@ You cannot type an image, so add the two PNG files from the sample project. The 
    ```
 2. **Read the figure elements**
 
-   - `<fig>` is a figure: a `<title>` and some content, numbered in output. Give it an `@id` when something links to it, as `fig-waveform` is linked from the recording task.
+   - `<fig>` is a figure: a `<title>`, which is the caption, and some content. The guide's build numbers the caption. Give it an `@id` when something links to it, as `fig-waveform` is linked from the recording task.
    - `<image href="…">` places an image. `@placement="break"` puts it on its own line rather than inline with the text; `@scale="80"` renders it at 80 percent of its size. `@href` is relative to the topic file, hence `../images/`.
    - `<alt>` is the text alternative, read by screen readers and shown when the image cannot be. Describe the information that the image conveys.
    - `<svg-container>` holds inline SVG. The SVG elements must carry the `svg:` prefix, `<svg:svg xmlns:svg="http://www.w3.org/2000/svg">`, because that is how the DITA DTDs declare them; an unprefixed `<svg>` does not validate.
-3. **Read the equation elements**
+3. **Preview the topic** Save the file and choose **View** > **Preview in Tab**. The waveform is on its own line, with its caption, in the *Waveforms* section. The alternative text is not shown, because the image loaded; it is in the page for readers who cannot see the image. The editor's preview shows the SVG drawing as text. You see it drawn in the built guide in step 4.
+4. **Read the equation elements**
 
    - `<equation-block>` is a displayed equation; `<equation-inline>` is one inside a sentence. Both are from the equation domain, which the base DTDs include.
    - `<mathml>` holds MathML, here with the `m:` prefix bound to the MathML namespace. The formula is `L(dB) = 20 log10 (A / A0)`.
@@ -4951,19 +5040,22 @@ You cannot type an image, so add the two PNG files from the sample project. The 
 
    - `<imagemap>` is an `<image>` followed by one or more `<area>` elements. It is from the utilities domain.
    - Each `<area>` has a `<shape>` (`rect`, `circle` or `poly`), `<coords>` in pixels of the image, and an `<xref>` for the link. Here the `<xref>` elements have content, so the link text is the given label rather than the target's title.
+   - The cross-reference to the figure has no text of its own. When the guide is built, the link takes its text from the figure.
    - The cross-reference `what-is-digital-audio.dita#what-is-digital-audio/fig-waveform` reaches the figure by its `@id`, the same `file#topic/element` form as a section link in stage 07.
 :::
 
-## Step 4: Check your work {#step-4-check-your-work}
+## Step 4: Build the guide {#step-4-build-the-guide}
 
 :::steps
-1. **Format and check your work** Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+1. **Format and build** Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The output looks like this example:
+   Then choose **Project** > **Build Deliverables...** and click **Build All**. When the build finishes, click **OK**. The build copies the images into the output and turns both figures into HTML.
+
+   To make sure that every image and link also resolves, choose **Project** > **Check Project** in the editor, or run `dogsbay-xml check .` from the project root. The check also builds every deliverable. The output looks like this example:
 
    ```
    health   clean
@@ -4971,6 +5063,9 @@ You cannot type an image, so add the two PNG files from the sample project. The 
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+2. **See the figures built** The cross-reference to the figure had no text in the source. Predict what the link says in the built recording task. Then open `out/full/topics/recording-your-first-track.html`, choose **View** > **Preview in Tab**, and scroll down to the steps. In the **Record** step, the link says *Figure 1*: its text comes from the figure's number, not its caption. In the step above it, the toolbar picture is an image map, and its two regions link to *Preparing to record* and *What is digital audio?*.
+
+   Open `out/full/topics/what-is-digital-audio.html`, preview it, and scroll down to the *Waveforms* section. The waveform figure has a numbered caption, and its image comes from the PNG file that the build copied into the output. The second figure is the sine wave, drawn from the SVG in the topic, with a numbered caption of its own.
 :::
 
 The health stage checks image references too. Misspell `waveform.png` in the `<fig>` as `wavefrom.png` and check your work. The check reports the broken reference with the file and line, and stops. The following output is an example:
@@ -4994,15 +5089,15 @@ This lesson adds no topics, so the map does not change. For reference, the compl
 
 <map>
   <title>Audio user guide</title>
-  <topicref href="topics/exporting-audio.dita"/>
-  <topicref href="topics/installing-audacity.dita"/>
-  <topicref href="topics/preparing-to-record.dita"/>
-  <topicref href="topics/recording-your-first-track.dita"/>
-  <topicref href="topics/removing-background-noise.dita"/>
-  <topicref href="topics/supported-audio-formats.dita"/>
-  <topicref href="topics/trimming-audio.dita"/>
   <topicref href="topics/what-is-audacity.dita"/>
+  <topicref href="topics/recording-your-first-track.dita"/>
+  <topicref href="topics/supported-audio-formats.dita"/>
   <topicref href="topics/what-is-digital-audio.dita"/>
+  <topicref href="topics/trimming-audio.dita"/>
+  <topicref href="topics/installing-audacity.dita"/>
+  <topicref href="topics/exporting-audio.dita"/>
+  <topicref href="topics/removing-background-noise.dita"/>
+  <topicref href="topics/preparing-to-record.dita"/>
 </map>
 ```
 
@@ -5011,7 +5106,7 @@ This lesson adds no topics, so the map does not change. For reference, the compl
 - `<fig>` with `<title>` and an `@id`; `<image>` with `@href`, `@placement`, `@scale` and an `<alt>`.
 - Image paths are relative to the topic, so a sibling `images/` folder is `../images/`.
 - Inline SVG goes in `<svg-container>` with the `svg:` prefix.
-- `<equation-block>` and `<equation-inline>` carry `<mathml>` plus a `<ph>` text alternative; HTML5 output needs the alternative.
+- `<equation-block>` and `<equation-inline>` carry `<mathml>` plus a `<ph>` text alternative; the guide's `html5` build shows the alternative.
 - `<imagemap>`: an image, then `<area>` elements with `<shape>`, `<coords>` and an `<xref>`.
 - End of Part 1: nine topics, every base element you need for the body of a guide, published through the map and build introduced in stages 02 and 03.
 
@@ -5048,6 +5143,8 @@ Define a key for each entry. Use `<term keyref>` to link a term to its entry and
 **Time:** about 30 minutes. **You need:** stage 11 complete.
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate) to see the result for your own project.
+
+The steps below group the work by file type. You can also take one term all the way to the built page first: write `g-sample-rate.dita`, key it, add it to the map under a *Glossary* heading, bind the *sample rate* term, and build. Then do the same for one abbreviation, and add the rest. Save each file as you finish with it, so the build sees your changes.
 
 ## Step 1: Write the entries {#step-1-write-the-entries}
 
@@ -5342,8 +5439,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 2. **Read the two forms**
 
-   - `<term keyref="gl-clipping">clipping</term>` keeps the word as written and binds it to the entry. The output makes it a link to the definition, with the `<glossdef>` as the link's hover text. The content stays, so "Compressed" in a table cell and "clipping" in a sentence keep their own capitalization and grammar.
-   - `<abbreviated-form keyref="gl-decibel"/>` is empty. The processor writes the term for you: the `<glossSurfaceForm>` where the reader first meets it, and the `<glossAbbreviation>` after that. In the HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
+   - `<term keyref="gl-clipping">clipping</term>` keeps the word as written and binds it to the entry. DITA-OT's `html5` transform, which the `full` deliverable uses, makes it a link to the entry's page, with the `<glossdef>` as the link's hover text. The content stays, so "Compressed" in a table cell and "clipping" in a sentence keep their own capitalization and grammar.
+   - `<abbreviated-form keyref="gl-decibel"/>` is empty. The processor writes the term for you: the `<glossSurfaceForm>` at its first use in a topic, and the `<glossAbbreviation>` after that. Each topic expands the term again on its first use, because a reader can land on any page first. In the HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
    - `<abbreviated-form>` inserts the surface form exactly as the glossary entry writes it, in the singular. The output reads "-12 decibel (dB)" and "Measured in decibel (dB)". For a measurement after a number, where the reader expects "-12 dB", keep the plain unit instead.
    - The `<term>` elements without a `@keyref`, such as *Lossless* and *lossy*, are unchanged: they mark a term but have no entry to link to.
    - The *Clipping* `<dt>` is laid out on three lines because that is how the formatter writes a `<dt>` whose only content is an element; the meaning is unchanged.
@@ -5352,15 +5449,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 4: Check your work {#step-4-check-your-work}
 
 :::steps
-1. **Format and check your work**
+1. **Format, build, and check your work**
 
-   Format the topics: choose **XML** > **Format** in each new or changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+   Save all files. Format the topics: choose **XML** > **Format** in each new or changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build the guide: choose **Project** > **Build Deliverables...**, and click **Build All**. To check everything as well, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. **Check Project** also confirms that every key resolves. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -5380,7 +5477,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    The project now has twenty-one files: nine topics, two shared topics, seven glossary files and three maps. The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
 
-   The check builds the guide into `out/full/`. Open `out/full/topics/glossary/audio-units.html`: the group is one page with both entries, each showing the term, the definition, the surface form and the alternative forms.
+   The build writes the guide to `out/full/`. Open `out/full/topics/glossary/audio-units.html` and choose **View** > **Preview in Tab**. The table of contents lists the group and the six entries under *Glossary*. The group is one page with both entries, each showing the term, the definition, the surface form and the alternative forms.
+
+   In `out/full/topics/what-is-digital-audio.html`, *sample rate* keeps its words and links to `glossary/g-sample-rate.html`, with the definition as its hover text. Where you replaced "hertz (Hz)", the build wrote the surface form, "hertz (Hz)", linked to the hertz entry on the group's page.
 :::
 
 A glossary key is a key like any other. Change the `<term keyref>` in *Preparing to record* to `gl-clippng` and check your work. The check stops at health. Example output:
@@ -5448,7 +5547,9 @@ type: tutorial
 
 Add author, date, audience, keyword, and index metadata to the topics. Place it in `<prolog>`, between the short description and the body. Add publication metadata to the map's `<topicmeta>`.
 
-Set a metadata policy in the editor to require keywords on topics and creation dates on tasks. The examples show each topic type; expand the remaining examples to apply the same structure.
+DITA makes all of this metadata optional. To require fields, set a metadata policy that requires keywords on topics and creation dates on tasks. The metadata policy is a DogsBay XML feature, not part of DITA: the policy is stored with the project, and the DogsBay XML check enforces it.
+
+The examples show each topic type; expand the remaining examples to apply the same structure.
 
 **Optional module.** See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) for the starting checkpoint and the next core lesson.
 
@@ -5502,8 +5603,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<copyright>` holds a `<copyryear year="…"/>` and a `<copyrholder>`. Only this topic carries one; the map's copyright covers the guide.
    - `<critdates>` holds `<created date="…"/>` and, in the topics that have been revised, `<revised modified="…"/>`. Dates are `YYYY-MM-DD`.
    - `<metadata>` groups the classification: `<audience type="user" experiencelevel="novice"/>`, a `<category>`, and `<keywords>`.
-   - `<keywords>` holds `<keyword>`s, which the HTML5 output writes into a `<meta name="keywords">` tag, and `<indexterm>`s, which it does not render: an index is a print artifact, and the PDF in stage 19 builds one from them.
+   - `<keywords>` holds `<keyword>`s, which DITA-OT's `html5` transform writes into a `<meta name="keywords">` tag, and `<indexterm>`s, which the HTML pages do not show: a PDF does, and the book in stage 19 builds its index from them.
    - `<resourceid appname="…" id="…"/>` is an identifier for another system, here a help system that will link to this topic. `<data name="…" value="…"/>` is a named property with no defined meaning; a processor or a house rule can use it.
+4. **See what reaches the page** Save the file. Choose **Project** > **Build Deliverables...**, and click **Build All**. Open `out/full/topics/what-is-audacity.html` and look at its `<head>`. Before the prolog, it had only a `<meta name="description">` from the short description and a default copyright with no owner. Now it also carries `<meta name="keywords" content="Audacity, audio editor, open source">` and `<meta name="rights" content="© 2026 DogsBay Ltd.">`, which replaces the default.
+
+   That is all that reaches the head in the `html5` transform. The author, the dates, the audience, the category and the index terms stay in the source, for other outputs, for searches across the project, and for the policy in step 5.
 :::
 
 ## Step 2: The prologs of the other topics {#step-2-the-prologs-of-the-other-topics}
@@ -5629,6 +5733,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<index-see>` inside an entry redirects it: "codecs, *see* audio formats". The entry with `<index-see>` has no page of its own.
    - `<index-see-also>` adds a cross-reference under an entry that does have pages: "decibel … *see also* amplitude".
    - `<index-sort-as>` gives the text to sort by when it differs from the text shown: `Clipping (distortion)` sorts as `clipping`.
+   - The HTML pages do not show index entries, but you can list them. In the **Terminal** panel, run `dogsbay-xml index-audit .`. Each line is an index entry with the number of topics that carry it, and `>` separates an entry from its sub-entry, for example `installing > Windows`. A PDF index is built from the same terms.
    - `project-health` checks the index. Change the redirect to `audio format` and it reports, under *Index redirects to nothing*, `"codecs" see "audio format"`.
 5. **Edit the remaining five tasks** Same shape: author, `<created>`, audience, category, keywords and index terms. The noise task is the one topic for an intermediate audience.
 
@@ -6063,13 +6168,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
       <mapref href="keydefs-product.ditamap"/>
    ```
-2. **Read the map metadata** The map's `<topicmeta>` takes the same elements as a prolog, in the same order, without the `<metadata>` wrapper: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and `<keywords>` sit directly inside it. Map metadata applies to the publication and, for the HTML5 transform, cascades into every page: the `<meta name="rights">` tag on each page comes from this copyright.
+2. **Read the map metadata** The map's `<topicmeta>` takes the same elements as a prolog, in the same order, without the `<metadata>` wrapper: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and `<keywords>` sit directly inside it. Map metadata applies to the publication and, for the `html5` transform, cascades into every page: the `<meta name="rights">` tag on each page comes from this copyright.
+3. **See the publication metadata** Save the map, choose **Project** > **Build Deliverables...**, and click **Build All**. The start page, `out/full/index.html`, carries the map's keywords in `<meta name="keywords">` and a `<meta name="rights">` tag from the map's copyright. A topic page such as `out/full/topics/what-is-digital-audio.html` also has the rights tag, although its topic has no copyright of its own. Its keywords stay the topic's own.
 :::
 
 ## Step 5: The metadata policy and the check {#step-5-the-metadata-policy-and-the-check}
 
 :::steps
-1. **Set the metadata policy** Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows a table of rules, one rule per row. Add three rules:
+1. **Set the metadata policy** The policy is kept with the project, in `.dogsbay/config.xml`, and makes fields required or recommended. Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows a table of rules, one rule per row. Add three rules:
 
    | Topic type (blank = any) | Field | Presence | Allowed values (space-separated) | Pattern |
    | --- | --- | --- | --- | --- |
@@ -6077,13 +6183,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | (empty) | `author` | `recommended` | (empty) | (empty) |
    | (empty) | `keyword` | `required` | (empty) | (empty) |
 
-   For each rule, click **Add rule**. A new row starts with the field `author` and the presence `required`. Choose the **Field** and the **Presence** from their lists, and double-click a text cell to type in it. When the table shows the three rules, click **OK**.
+   For each rule, click **Add rule**. A new row starts with the field `author` and the presence `required`. Choose the **Field** and the **Presence** from their lists, and double-click a text cell to type in it. When the table shows the three rules, click **OK**. A message confirms that the rules were saved to `.dogsbay/config.xml`; click **OK**.
 2. **Read the rules**
 
    - Each rule names a field, a presence and, optionally, a topic type and a pattern. A missing `required` field is an error and fails the check; a missing `recommended` field is a warning, shown beside a file's errors.
    - `created` is required on every task, and must match `\d{4}-\d\d-\d\d`. Concepts, references and glossary entries may leave it out.
    - `author` is recommended everywhere. `keyword` is required everywhere, which is the rule that reaches the glossary group.
-   - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor applies the same policy.
+   - `project-health` applies the policy as one of its checks, so the health stage of **Check Project** and `dogsbay-xml check` enforces it. The editor applies the same policy. DITA-OT and other DITA tools do not read this policy.
 3. **Format and check your work**
 
    Format the topics: choose **XML** > **Format** in each changed topic and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
@@ -6112,10 +6218,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    The unused keys are defined for later stages: stage 14 refers to `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
 
-   The check builds the guide into `out/full/`. In `out/full/topics/what-is-audacity.html` the `<head>` now carries `<meta name="keywords" content="Audacity, audio editor, open source">` and `<meta name="rights" content="© 2026 DogsBay Ltd.">`. The PDF transform uses the index terms to generate an index.
+   The check also builds the guide into `out/full/`. The `html5` pages carry the keywords and rights tags from step 1 and step 4. The PDF transform uses the index terms to generate an index.
 :::
 
-Test the metadata policy. Delete the `<critdates>` block from *Trimming audio* and check your work. The check stops at health and names the file. Example output:
+Test the metadata policy. In *Trimming audio*, put the cursor in `<critdates>`, choose **XML** > **Select Element**, delete the element, save, and check your work. The check stops at health and names the file. Example output:
 
 ```
 health   NOT CLEAN
@@ -6144,9 +6250,9 @@ Summary
   Unused keys                   3
 ```
 
-The file is valid; `<critdates>` is optional to the DTD. The policy is what makes it required, for tasks, in this project.
+The file is valid; `<critdates>` is optional to the DTD. The DogsBay XML policy, not the DITA DTD, makes it required for tasks in this project.
 
-Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is Audacity?* to before `<metadata>`, and check your work. The file is no longer valid, and the check names it with the line, column, and message. Example output:
+Undo the policy test with **Edit** > **Undo**, save, and check again. Then test the element order. Move `<resourceid>` and `<data>` in *What is Audacity?* to before `<metadata>`, and check your work. The file is no longer valid, and the check names it with the line, column, and message. Example output:
 
 ```
 health   NOT CLEAN
@@ -6334,8 +6440,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | (none) |
 
    Leave **DITAVAL** empty: the `<ditavalref>` elements in the map do the filtering. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Preview a branch** In the status bar's deliverable menu, choose `install-variants`. Open `topics/installing-audacity.dita` and choose **View** > **Preview in Split**. Because the map has branches, the bar above the preview adds **Branch**, set to **Whole map**. Choose **mac-**: the preview applies that branch's filter, **platform-mac.ditaval**, and keeps only the macOS install row. Choose `full` in the status bar again before you continue.
-3. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Preview a branch** In the status bar's deliverable menu, choose `install-variants`. Open `topics/installing-audacity.dita` and choose **View** > **Preview in Tab**. Because the map has branches, the bar above the preview adds **Branch**, set to **Whole map**. Choose **win-** and scroll to the install step: the preview applies that branch's filter, **platform-windows.ditaval**, and keeps only the Windows install row. Choose **mac-**, and only the macOS row is left. The topic has not changed; the filter does the work. Close the preview, and choose `full` in the status bar again before you continue.
+3. **Build** Choose **Project** > **Build Deliverables...** and click **Build All**. **Project** > **Check Project** also builds every deliverable, and checks the project and the built pages as well. From the command line, the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -6361,7 +6467,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The new filters use only controlled values: the check includes the controlled values from stage 15, and it reads the DITAVAL files too.
+   The new filters use only controlled values: the full check includes the controlled values from stage 15, and it reads the DITAVAL files too.
 4. **Read the output** `out/install-variants/topics/` has three copies of each of the two topics:
 
    ```
@@ -6373,7 +6479,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    recording-your-first-track-linux.html
    ```
 
-   and the table of contents in `index.html` lists *Installing Audacity* and *Recording your first track* three times, in that order. Open `win-installing-audacity.html` and the choice table has the `.exe` row only; `installing-audacity-linux.html` has the `apt install` row, and inside a variant the links stay in it: `win-recording-your-first-track.html` links to `win-installing-audacity.html`.
+   and the table of contents in `index.html` lists *Installing Audacity* and *Recording your first track* three times, in that order. Open `win-installing-audacity.html` and choose **View** > **Preview in Tab** to see it as a browser shows it: the choice table has the `.exe` row only; `installing-audacity-linux.html` has the `apt install` row, and inside a variant the links stay in it: `win-recording-your-first-track.html` links to `win-installing-audacity.html`.
 
    The folder also holds pages the map never lists, `what-is-digital-audio.html`, `trimming-audio.html` and the rest, and an unprefixed `installing-audacity.html` with all three rows. The two branch topics link to other topics by `@href`, and DITA-OT writes every link target it can reach, once and unfiltered. A link by `@href` into the branch reaches the original, not a variant.
 :::
@@ -6387,7 +6493,7 @@ mac-                 filters topics/installing-audacity.dita ditaval=filters/pla
 3 branch variant(s).
 ```
 
-Two variants now want the same file names. DITA-OT logs no error and no warning, and the output has no Linux pages at all. `mac-installing-audacity.html` is the Linux copy (its choice table has the `apt install` row), the Mac copy is gone, and the table of contents links the Mac variant to generated names for pages that were never written. Check your work, or build this deliverable only with `dogsbay-xml check --deliverable=install-variants .`. The build succeeds, and the output check finds the two table of contents links. The output looks like this example:
+Two variants now want the same file names. DITA-OT logs no error and no warning, and the output has no Linux pages at all. `mac-installing-audacity.html` is the Linux copy (its choice table has the `apt install` row), the Mac copy is gone, and the table of contents links the Mac variant to generated names for pages that were never written. A build alone does not show the problem, so run the full check: choose **Project** > **Check Project**, or check this deliverable only with `dogsbay-xml check --deliverable=install-variants .`. The build succeeds, and the output check finds the two table of contents links. The output looks like this example:
 
 ```
 health   clean, with warnings
@@ -6492,7 +6598,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <topichead navtitle="Reference">
         <topicref href="topics/supported-audio-formats.dita" keys="formats"/>
    ```
-3. **Read the peer mapref**
+3. **Read the peer mapref** The peer reference shows an advanced case. The rest of the course does not need it.
 
    - `scope="peer"` on a `<mapref>` says the referenced map is published separately; its topics are not added to this publication.
    - `keyscope="beginner"` gives that map's keys a scope name. Inside the podcaster guide they are `beginner.start-here`, `beginner.install`, `beginner.formats`. A link by such a key is a link to the other deliverable. No topic in this stage uses one.
@@ -6602,7 +6708,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | `nav-toc` = `full` |
 
    The `nav-toc` parameter with the value `full` puts the navigation of the whole collection on each page, as it does for `full`. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Check your work** In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+2. **Build** Choose **Project** > **Build Deliverables...** and click **Build All**. It builds all seven deliverables, the collection with them. **Project** > **Check Project** also builds every deliverable, and checks the project and the built pages as well. From the command line, the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -6630,11 +6736,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
-3. **Read the output** `out/collection/index.html` has the three guides one after another, and `topics/` has a page per use of each topic: `what-is-audacity.html` for the full guide, then `what-is-audacity-1.html` for the beginner guide and `what-is-audacity-2.html` for the podcaster guide. A topic used in several scopes is a page in each, so that each copy's links resolve in its own scope. A topic with no key references, such as *Trimming audio* or a glossary entry, is one page that the three chapters share.
+   The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or choose **Project** > **Check Project** and read them in the **Project Validation** panel.
+3. **Read the output** Open `out/collection/index.html` and choose **View** > **Preview in Tab**. The page is the table of contents: the three guides one after another, each a top-level entry with its own headings and topics under it. In the **Explorer**, `out/collection/topics/` has a page per use of each topic: `what-is-audacity.html` for the full guide, then `what-is-audacity-1.html` for the beginner guide and `what-is-audacity-2.html` for the podcaster guide. A topic used in several scopes is a page in each, so that each copy's links resolve in its own scope. A topic with no key references, such as *Trimming audio* or a glossary entry, is one page that the three chapters share.
 :::
 
-Test an unqualified key at the root. Add `<topicref keyref="start-here"/>` to `audacity-collection.ditamap`, above the first `<topichead>`, and check your work. The check reports `Ready`, and warns under the `collection` build:
+Test an unqualified key at the root. Add `<topicref keyref="start-here"/>` to `audacity-collection.ditamap`, above the first `<topichead>`, save, and choose **Project** > **Check Project**. The check reports `Ready`, and warns under the `collection` build:
 
 ```
 WARN  audacity-collection.ditamap:18  'start-here' resolves to nothing here, and has no @href to fall back on
@@ -7015,7 +7121,7 @@ Create these files under `examples/chunking/`. In the **Explorer**, right-click 
 </map>
 ```
 
-The example is not one of the project's deliverables, so **Check Project** does not build it yet. Add its two maps as temporary deliverables, check them, and delete the deliverables when you finish. The two deliverables take these values:
+The example is not one of the project's deliverables, so a build does not include it yet. Add its two maps as temporary deliverables, build them, and delete the deliverables when you finish. The two deliverables take these values:
 
 | Field | `chunk-combined` | `chunk-split` |
 | --- | --- | --- |
@@ -7029,7 +7135,25 @@ The example is not one of the project's deliverables, so **Check Project** does 
 1. Choose **Project** > **Project Tools** > **Manage Deliverables...** and click **Add...**. Enter the values in the `chunk-combined` column of the table, click **Save...**, and click **OK** to write the deliverable.
 2. Click **Add...** again and enter the values in the `chunk-split` column. Click **Save...**, click **OK**, and click **Close**.
 
-Check your work. In the editor, choose **Project** > **Check Project**. From the command line, run:
+Before you build, predict how many pages each map makes from the one source file, and what each page is called. Then choose **Project** > **Build Deliverables...** and click **Build All**. To list the pages each example made, run this command in the **Terminal** panel:
+
+```bash
+find out/chunk-combined out/chunk-split -name '*.html' | sort
+```
+
+Example output:
+
+```
+out/chunk-combined/index.html
+out/chunk-combined/topics/nested.html
+out/chunk-split/40bd459f6b660bc87c8e81941a93d5fa87bcabeb.html
+out/chunk-split/index.html
+out/chunk-split/topics/chunk-parent.html
+```
+
+Besides its `index.html`, the combined example has one page, `topics/nested.html`, named after the source file. The split example has two: `topics/chunk-parent.html`, named after the parent topic's `@id`, and the child page, with a generated name at the top of the output folder.
+
+**Project** > **Check Project** builds every deliverable too, and also checks the links in the built pages. From the command line, the same check is:
 
 ```bash
 dogsbay-xml check .
@@ -7060,7 +7184,7 @@ Not ready: 2 links in the built output lead nowhere.
 
 To build and check one deliverable only from the command line, run `dogsbay-xml check --deliverable=chunk-split .`.
 
-Open each output's `index.html` from the **Explorer**, and choose **View** > **Preview in Tab** to follow its links. The combined version, `out/chunk-combined/topics/nested.html`, keeps the parent and child on one page. The split version writes two pages: `topics/chunk-parent.html` for the parent, and a page with a generated name at the top of the output folder for the child. The table of contents links to both pages correctly. The links that DITA-OT 4.3.5 generates between parent and child do not: the child link on the parent page looks for the child page in `topics/`, and the parent link on the child page names another generated file that was never written. Generated file names can differ between runs.
+Open each output's `index.html` from the **Explorer**, and choose **View** > **Preview in Tab** to follow its links and compare the two tables of contents. The combined version, `out/chunk-combined/topics/nested.html`, keeps the parent and child on one page. The split version writes two pages: `topics/chunk-parent.html` for the parent, and a page with a generated name at the top of the output folder for the child. The table of contents links to both pages correctly. The links that DITA-OT 4.3.5 generates between parent and child do not: the child link on the parent page looks for the child page in `topics/`, and the parent link on the child page names another generated file that was never written. Generated file names can differ between runs.
 
 Nested topics with `chunk="by-topic"` are valid DITA. The broken links come from how this processor version writes the split pages. Record the results for your version and transformation, and check generated links before you publish split pages.
 
@@ -7075,7 +7199,7 @@ The example maps stay in `examples/chunking/`. They are not deliverables of the 
 
 ## Check the guide {#check-the-guide}
 
-In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+Check the guide without the example deliverables. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
 
 ```bash
 dogsbay-xml check .
@@ -7102,7 +7226,31 @@ Ready: the project is healthy, every deliverable built, and the output of full, 
 
 The unused-key warnings are gone: *About this guide* refers to `start-here`, `digital-audio` and `podcast-workflow`. The note lines count DITA-OT notes from each build; run `dogsbay-xml check -v .` to print them.
 
-Check that the effects and presets pages have stable filenames (`out/full/topics/effects-reference.html` and `effect-presets.html`), that `out/full/topics/` has no `what-is-digital-audio.html` because `to-content` merged it into `what-is-audacity.html`, and that the beginner guides have `topics/formats-quick-reference.html`. `outputclass="compact"` on the effects table supplies a CSS class; a stylesheet must define its visual effect.
+Check that the effects and presets pages have stable filenames (`out/full/topics/effects-reference.html` and `effect-presets.html`), that `out/full/topics/` has no `what-is-digital-audio.html` because `to-content` merged it into `what-is-audacity.html`, and that the beginner guides have `topics/formats-quick-reference.html`. For example, in the **Terminal** panel:
+
+```bash
+ls out/full/topics out/beginner-mac/topics | grep -E 'effect|quick|what-is|:$'
+```
+
+Example output:
+
+```
+out/beginner-mac/topics:
+formats-quick-reference.html
+what-is-audacity.html
+what-is-digital-audio.html
+out/full/topics:
+effect-order.html
+effect-presets.html
+effects-reference.html
+what-is-audacity.html
+```
+
+The beginner guide's map has no `chunk`, so it keeps both *What is* pages.
+
+Open `out/full/topics/what-is-audacity.html` and choose **View** > **Preview in Tab**. The table of contents still lists *What is digital audio*, and its entry leads to a section of this page.
+
+`outputclass="compact"` on the effects table says nothing about how the table looks. The transform decides that: DITA-OT's `html5` transtype, which the deliverable chooses, writes the value into the page as a CSS class name, and a stylesheet must define its visual effect.
 
 ## What you learned {#what-you-learned}
 
@@ -7270,13 +7418,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    | **Publication parameters** | (none) |
 
    Change **Transtype** from `html5` to `pdf`. Click **Save...**, click **OK** to write the deliverable, and click **Close**.
-2. **Read it** The eighth deliverable, `book-pdf`, is the bookmap with the `pdf` transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`, renders the book with Apache FOP. The editor includes both, and **Check Project** builds the PDF with the other seven deliverables into `out/book-pdf/`.
+2. **Read it** The eighth deliverable, `book-pdf`, is the bookmap with the `pdf` transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`, renders the book with Apache FOP. The editor includes both, and **Project** > **Build Deliverables...** builds the PDF with the other seven deliverables into `out/book-pdf/`.
+
+   Before you build, predict: the seven chapters sit in three parts. Do the chapter numbers start again at 1 in each part, or run on through the book?
 :::
 
 ## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Format and check your work**
+1. **Format and build**
 
    Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
@@ -7284,7 +7434,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then choose **Project** > **Build Deliverables...** and click **Build All**. It builds eight deliverables now, the book among them. **Project** > **Check Project** also builds every deliverable, and checks the project and the built pages as well. Read its result in the **Project Validation** panel. From the command line, the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -7314,7 +7464,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The check builds eight deliverables. The `book-pdf` line reports the PDF, and the `WARN` line under it summarizes the layout warnings from Apache FOP, such as content that is wider than its column. The warnings do not fail the check. The output check reads links in HTML pages only, so for the PDF it confirms that the build wrote a file.
-2. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. Open it in any PDF viewer. `pdftotext` shows the contents page without a viewer:
+2. **Read the book** The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your project. In the **Explorer**, open `out`, then `book-pdf`: the build wrote one file, the whole book. Open it in your PDF viewer.
+
+   - Page 1 is the cover, with the main title and the subtitle from `<booktitle>`.
+   - The contents follow. The front matter pages are numbered in roman numerals.
+   - Chapter numbers run on through the book, so *Part II* opens with *Chapter 3*. Parts get roman numerals, and appendixes get letters.
+   - Each chapter opens on a new page with its number and title. A nested topic continues the chapter as a section.
+   - The index at the end lists the index terms from stage 13 under their letters. Most entries have a page number. The terms that come from the glossary entries, such as *Bit depth* and *hertz*, are listed without one. Follow an entry with a page number to its page.
+
+   `pdftotext` shows the contents page without a viewer:
 
    ```bash
    pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
@@ -7352,7 +7510,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The PDF transform generates the numbered parts, chapters, and appendixes, the lists of figures and tables, the glossary, and the index from the bookmap. The license topic appears as the notices page.
 :::
 
-Test the placement of key definitions. Move the two `<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`, and check your work. The check stops at health. Example output:
+Test the placement of key definitions. Move the two `<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`, save, and choose **Project** > **Check Project**. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
@@ -7364,7 +7522,7 @@ Not ready: the project itself has faults. The build and the built output were no
 
 `<bookmap>` does not allow a `<keydef>` at its top level. The error is reported at the closing `</bookmap>` tag, line 86, because that is where the parser stops matching the content model. The model is a title, then `<bookmeta>`, `<frontmatter>`, chapters or parts, appendixes, `<backmatter>`, and relationship tables, in that order. Because health failed, nothing was built. Keys, scheme maprefs and resource-only references live inside `<frontmatter>` in a bookmap.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change with **Edit** > **Undo**, and save. Choose **XML** > **Validate**: the **Errors** panel reports **Valid Document**, so the bookmap matches its content model again. To rerun the full check, choose **Project** > **Check Project** and confirm that it reports `Ready`.
 
 ## What you learned {#what-you-learned}
 
@@ -7401,7 +7559,7 @@ type: tutorial
 
 Create *The recording is silent* as a `<troubleshooting>` topic. Describe the symptom in `<condition>`, then pair each likely cause with a remedy. One of the three solutions applies only to macOS.
 
-Link to the topic from a `<note type="trouble">` in the recording task and add it to five maps. This extends the task-level troubleshooting elements introduced in stage 06.
+Link to the topic from a `<note type="trouble">` in the recording task and add it to six maps. This extends the task-level troubleshooting elements introduced in stage 06.
 
 **Optional module.** See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path) for the starting checkpoint and the next core lesson.
 
@@ -7642,15 +7800,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Check your work {#step-3-check-your-work}
 
 :::steps
-1. **Format and check your work**
+1. **Format and build**
 
-   Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+   Eight files have changes: the new topic, the recording task, and six maps. Save them all. Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Before you build, predict how many copies of the troubleshooting topic the `install-variants` build makes, and which of them keep the macOS solution. Then choose **Project** > **Build Deliverables...** and click **Build All** to build all eight deliverables. **Project** > **Check Project** also builds every deliverable, and checks the project and the built pages as well. Read its result in the **Project Validation** panel. From the command line, the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -7680,10 +7838,42 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The `install-variants` output is clean: each platform copy of the recording task links to the troubleshooting copy in its own branch.
+   The checks on the `install-variants` pages found no problems: each platform copy of the recording task links to the troubleshooting copy in its own branch.
+2. **Read the output** In the **Explorer**, open `out/install-variants/topics/`. It has three filtered copies of the topic, one per branch, beside that branch's copy of the recording task. It also has an unfiltered `recording-is-silent.html`, like the unprefixed pages in stage 16. Open `win-recording-is-silent.html` and choose **View** > **Preview in Tab**. The symptom comes first, under *Condition*. Each cause follows as a heading, with its remedy under it.
+
+   To see which copies kept the macOS solution, run these commands in the **Terminal** panel:
+
+   ```bash
+   cd out/install-variants/topics
+   grep -c "microphone access" *-recording-is-silent.html recording-is-silent-linux.html
+   ```
+
+   Example output:
+
+   ```
+   mac-recording-is-silent.html:2
+   win-recording-is-silent.html:0
+   recording-is-silent-linux.html:0
+   ```
+
+   Only the `mac-` copy has matching lines. The Windows and Linux filters exclude content marked `platform="mac"`. To see where each copy of the trouble note links, run:
+
+   ```bash
+   grep -o 'href="[^"]*silent[^"]*"' *-recording-your-first-track.html recording-your-first-track-linux.html | sort -u
+   ```
+
+   Example output:
+
+   ```
+   mac-recording-your-first-track.html:href="mac-recording-is-silent.html"
+   recording-your-first-track-linux.html:href="recording-is-silent-linux.html"
+   win-recording-your-first-track.html:href="win-recording-is-silent.html"
+   ```
+
+   Each copy links within its own branch, as described in Step 2.
 :::
 
-Test the content model for a remedy. In the macOS solution, replace the `<steps-informal>` element with its `<p>` alone, so that `<remedy>` holds a title and a paragraph, and check your work. The check stops at health. Example output:
+Test the content model for a remedy. In the macOS solution, replace the `<steps-informal>` element with its `<p>` alone, so that `<remedy>` holds a title and a paragraph. Save, and choose **Project** > **Check Project**. The check stops at health. Example output:
 
 ```
 health   NOT CLEAN
@@ -7695,7 +7885,7 @@ Not ready: the project itself has faults. The build and the built output were no
 
 `<remedy>` allows an optional `<title>`, then one of `<steps>`, `<steps-unordered>` or `<steps-informal>`, and nothing else. What to do is always a steps element, even when it is one sentence: that is what `<steps-informal>` is for.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change with **Edit** > **Undo**, and save. Choose **XML** > **Validate**: the **Errors** panel reports **Valid Document**, so the remedy has its steps element again. To rerun the full check, choose **Project** > **Check Project** and confirm that it reports `Ready`.
 
 ## What you learned {#what-you-learned}
 
@@ -7704,7 +7894,7 @@ Undo the change and check again. Confirm that the check reports `Ready` before y
 - A profiling attribute on a `<troubleSolution>`.
 - `<note type="trouble">` with an `<xref>` to the troubleshooting topic, in place of a warning that carried the fix itself.
 - An `<xref>` with a `keyref` and an `href` fallback, so that each branch-filtered copy links within its own key scope.
-- One topic referenced by five maps, including a nested reference in a branch-filtered map.
+- One topic referenced by six maps, including a nested reference in a branch-filtered map.
 
 ## Next lesson {#next-lesson}
 
@@ -7780,6 +7970,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<hazardstatement type="caution">` identifies the statement type. This example uses `caution` and an `id` so other topics can reuse it. Check the hazard domain's allowed values when choosing a type.
    - `<messagepanel>` holds `<typeofhazard>`, the hazard in a few words; `<consequence>`, what happens if it is ignored; and one or more `<howtoavoid>`, one per measure. The order is fixed and only `<typeofhazard>` and `<howtoavoid>` are required.
    - `<hazardsymbol>` is an `<image>` specialization, after the panel. The `href` is relative to the shared topic file, hence `../images/`, and the `<alt>` is required for the same reason it is on an image.
+4. **Save and preview the shared topic** Save the file, so that the topics that reuse it find it on disk. Then choose **View** > **Preview in Tab**. The hazard statement appears as one block, labeled HAZARD. The editor's preview shows only its text; the signal word, the warning triangle, and each part on a line of its own come with the built page.
 :::
 
 ## Step 2: Reuse it, and write one inline {#step-2-reuse-it-and-write-one-inline}
@@ -7805,6 +7996,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
           <step>
    ```
 2. **Read the placeholder panel** A conref'd `<note>` is an empty element: `<note conkeyref="common-notes/quiet-room-tip"/>`, the line above the new one. A conref'd `<hazardstatement>` cannot be, because the DTD requires a `<messagepanel>` with at least a `<typeofhazard>` and a `<howtoavoid>` in it, and validation checks the referencing element before the reference is resolved. So the reference carries an empty panel, `<messagepanel><typeofhazard/><howtoavoid/></messagepanel>`, exactly as a conref'd `<step>` carries an empty `<cmd/>` (stage 11). The build replaces the whole element with the shared topic copy, symbol and all. The demo at the end shows the error without the placeholder.
+
+   To see it, choose **View** > **Preview in Tab** in the recording task. The whole statement appears under the tip. Correct the wording in `common-notes.dita`, and every task that reuses it changes with it.
 3. **Edit `topics/effects-reference.dita`**
 
    ```diff {title="topics/effects-reference.dita"}
@@ -7861,39 +8054,33 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       <appendix href="topics/effect-presets.dita"/>
    ```
 
-   Stage 20 defined `silent` in the full guide, the beginner guide and the installation variants, but not in the book: the book's `<appendix>` for the same topic had no `keys`. The trouble note from stage 20 did not need it, because its `href` fallback resolves without the key. The new sentence has only a `keyref`. Without this line the notices page of `out/book-pdf/audacity-book.pdf` reads *Recording nothing but silence? See .* with nothing after *See*. Health resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, so health passes, but the book's own build does not find it. The check reports `Ready` and warns under `book-pdf`:
+   Stage 20 defined `silent` in the full guide, the beginner guide and the installation variants, but not in the book: the book's `<appendix>` for the same topic had no `keys`. The trouble note from stage 20 did not need it, because its `href` fallback resolves without the key. The new sentence has only a `keyref`. To ask whether the book defines it, run this command in the **Terminal** panel before and after you save the change:
+
+   ```bash
+   dogsbay-xml keys audacity-book.ditamap --resolve silent
+   ```
+
+   Before the change, `silent` is not defined in the book map. After it, `silent` resolves to `topics/recording-is-silent.dita`, from the `<appendix>`. Without this line the notices page of `out/book-pdf/audacity-book.pdf` reads *Recording nothing but silence? See .* with nothing after *See*. Health resolves keys against the root map, `audacity-guide.ditamap`, where the key exists, so health passes, but the book's own build does not find it. The check reports `Ready` and warns under `book-pdf`:
 
    ```
    WARN  topics/about-this-guide.dita:24  'silent' resolves to nothing here, and has no @href to fall back on
    ```
 
    A key that a topic uses must be defined in every map that publishes the topic; with it, the sentence in the PDF reads *Recording nothing but silence? See The recording is silent on page 37.*
-6. **Read the output** The check's HTML5 build of the full guide, `out/full/topics/recording-your-first-track.html`, has the hazard in place (the inline SVG is shortened here):
-
-   ```
-   <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
-   <div class="typeofhazard">Loud playback through headphones</div>
-   <div class="consequence">Sustained listening above 85 dB can damage your hearing permanently.</div>
-   <div class="howtoavoid">Set the playback volume low before you press Play and raise it gradually.</div>
-   <div class="howtoavoid">Take the headphones off before applying Amplify or Normalize with the track playing.</div>
-   </div></td></tr></table>
-   ```
-
-   The signal word is the `class`: `hazardstatement--caution`, with the panel's parts each a `div` of their own, for a stylesheet to lay out.
 :::
 
-## Step 3: Check your work {#step-3-check-your-work}
+## Step 3: Save and build {#step-3-save-and-build}
 
 :::steps
-1. **Format and check your work**
+1. **Format and build**
 
-   Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
+   Save all the files. Format the changed files: choose **XML** > **Format** in each changed file and save it, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...** and click **Build All** to build the guides and the PDF book. To check the project and the built output as well, choose **Project** > **Check Project** instead and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -7924,9 +8111,40 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
+2. **Read the output** Open `out/full/topics/recording-your-first-track.html` and choose **View** > **Preview in Tab**. Scroll past the guide's contents to the task's context: the signal word **CAUTION** is at the top, then the hazard, the consequence, and both measures, beside the warning triangle. The HTML5 build of the full guide has the hazard in place (the inline SVG is shortened here):
+
+   ```
+   <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
+   <div class="typeofhazard">Loud playback through headphones</div>
+   <div class="consequence">Sustained listening above 85 dB can damage your hearing permanently.</div>
+   <div class="howtoavoid">Set the playback volume low before you press Play and raise it gradually.</div>
+   <div class="howtoavoid">Take the headphones off before applying Amplify or Normalize with the track playing.</div>
+   </div></td></tr></table>
+   ```
+
+   The signal word is the `class`: `hazardstatement--caution`, with the panel's parts each a `div` of their own, for a stylesheet to lay out. The html5 transform writes the `type` attribute as the class, so its stylesheet can give each signal word its own color. To list the class on each page, run this command in the **Terminal** panel:
+
+   ```bash
+   grep -o 'hazardstatement--[a-z]*' out/full/topics/*.html
+   ```
+
+   It finds `hazardstatement--caution` in the recording task and `hazardstatement--warning` in the effects reference.
+
+   To find the new sentence in the book, extract the PDF's text:
+
+   ```bash
+   pdftotext out/book-pdf/audacity-book.pdf - | grep -B1 'but silence'
+   ```
+
+   Example output:
+
+   ```
+   Go straight to Podcast production workflow on page 35. Recording
+   nothing but silence? See The recording is silent on page 37.
+   ```
 :::
 
-Test the hazard statement without its placeholder. Make the reference in the recording task a single empty element, `<hazardstatement conkeyref="common-notes/hearing-hazard"/>`, and check your work. The check stops at health. Example output:
+Test the hazard statement without its placeholder. Make the reference in the recording task a single empty element, `<hazardstatement conkeyref="common-notes/hearing-hazard"/>`, save, and choose **Project** > **Check Project**. The check stops at health, so nothing is built. Example output:
 
 ```
 health   NOT CLEAN
@@ -7938,7 +8156,7 @@ Not ready: the project itself has faults. The build and the built output were no
 
 The DTD requires a `<messagepanel>` in every `<hazardstatement>`, whether or not it is going to be replaced. Give a conref'd hazard the empty panel the same way you give a conref'd step its empty `<cmd/>`.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change with **Edit** > **Undo**, save, and choose **XML** > **Validate**. Confirm that the **Errors** panel reports **Valid Document** before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -7985,7 +8203,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The scripting reference {#step-1-the-scripting-reference}
 
 :::steps
-1. **Create `topics/scripting-reference.dita`**
+1. **Create `topics/scripting-reference.dita`** Right-click `topics` in the **Explorer**, choose **New File**, enter `scripting-reference.dita`, and choose the **Reference** template. Replace the template's content with this topic:
 
    ```xml {title="topics/scripting-reference.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -8097,9 +8315,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    - `<refsyn>` is the reference section for syntax; a `<reference>` body may hold it beside plain `<section>`s.
    - `<parml>` is a definition list for parameters: each `<plentry>` has a `<pt>` (the term) and a `<pd>` (its description). Inside them, `<cmdname>` is the command, `<parmname>` a named parameter, `<varname>` a value the reader supplies, `<option>` a switch that selects a behavior, `<codeph>` a literal value.
-   - Everything a reader types or reads on a screen gets the element that says what it is, and a stylesheet can render `<cmdname>` in bold and `<varname>` in italic without you deciding it here.
+   - Everything a reader types or reads on a screen gets the element that says what it is. The transform that the deliverable chooses decides how each kind looks, so you do not decide it here.
 4. **Read the messages** `<msgph>` is a message quoted inline; `<msgblock>` is a message as a block, whitespace preserved like `<codeblock>`; `<msgnum>` is the message's identifier, here the status word `Failed!`. `<apiname>` is the name of a function, class or method in an API.
-5. **Read the properties table** `<properties>` is a reference table with three fixed columns: `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional `<prophead>` naming them. Each `<property>` row carries a `platform` attribute, so a filtered build keeps only the rows for its platform. No Windows-filtered deliverable includes the scripting reference: the `podcaster-linux` build drops the Windows row, and the unfiltered builds show both rows. `<filepath>` with a `<varname>` inside it names the pipe with the user id as a variable.
+5. **Read the properties table** `<properties>` is a reference table with three fixed columns: `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional `<prophead>` naming them. Each `<property>` row carries a `platform` attribute, so a filtered build keeps only the rows for its platform. A row is removed only when all its platforms are excluded. No Windows-filtered deliverable includes the scripting reference: the `podcaster-linux` build drops the Windows row, and the unfiltered builds show both rows. `<filepath>` with a `<varname>` inside it names the pipe with the user id as a variable.
 :::
 
 ## Step 2: The task and the sample {#step-2-the-task-and-the-sample}
@@ -8143,7 +8361,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
                            f"Export2: Filename={target} NumChannels=1"):
                print(send(to_pipe, from_pipe, command).strip())
    ```
-2. **Create `topics/exporting-from-a-script.dita`**
+2. **Create `topics/exporting-from-a-script.dita`** Right-click `topics` in the **Explorer**, choose **New File**, enter `exporting-from-a-script.dita`, and choose the **Task** template. Replace the template's content with this task:
 
    ```xml {title="topics/exporting-from-a-script.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -8206,7 +8424,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      </related-links>
    </task>
    ```
-3. **Read the coderef** `<codeblock outputclass="language-python"><coderef href="../samples/export-mp3.py"/></codeblock>` is the whole listing. `<coderef>` is an empty element that, at build time, is replaced by the text of the file it points at, relative to the topic. The script lives once, in `samples/`, where it can be run and tested; the topic never goes stale against it. `outputclass` on the `<codeblock>` becomes a class on the `<pre>` in the HTML5 output, `language-python`, the convention that syntax highlighters such as highlight.js and Prism read. In the check's build of the full guide, `out/full/topics/exporting-from-a-script.html`, the listing is in place:
+3. **Read the coderef** `<codeblock outputclass="language-python"><coderef href="../samples/export-mp3.py"/></codeblock>` is the whole listing. `<coderef>` is an empty element that, at build time, is replaced by the text of the file it points at, relative to the topic. The script lives once, in `samples/`, where it can be run and tested; the topic never goes stale against it. `outputclass` on the `<codeblock>` becomes a class on the `<pre>` in the HTML5 output, `language-python`, the convention that syntax highlighters such as highlight.js and Prism read. After you build (step 3), the listing is in place in the full guide's `out/full/topics/exporting-from-a-script.html`:
 
    ```
    <pre class="pre codeblock language-python"><code>#!/usr/bin/env python3
@@ -8327,13 +8545,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor, choose **XML** > **Format** and save the file, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...** and click **Build All**. All eight deliverables are built again. To check the project and the built output as well, choose **Project** > **Check Project** instead and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -8364,9 +8582,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The note lines count DITA-OT notes from each build. To print them, run `dogsbay-xml check -v .`, or read them in the **Project Validation** panel.
+2. **Read the built pages** Open `out/full/topics/scripting-reference.html` and choose **View** > **Preview in Tab**. Scroll past the guide's contents to the reference. The build drew the syntax diagram: the command name in bold, then the colon, and the optional group in square brackets, with the words the reader replaces in italics. The source has no brackets and no italics. You marked what each part is; the look comes from the transform, DITA-OT's html5 transtype, which the deliverable chose.
+
+   Preview `out/full/topics/exporting-from-a-script.html` the same way. Step 2's listing is the script from `samples/`, put in place by the `<coderef>`. Change the script, build again, and the page follows.
+
+   In the **Terminal** panel, list the task page's preformatted blocks:
+
+   ```bash
+   grep -o '<pre class="[^"]*"' out/full/topics/exporting-from-a-script.html
+   ```
+
+   There are two. The listing's class ends with `language-python`, from the `outputclass`. The other is the `<screen>` block in step 3.
+
+   Then count the Windows pipe in the reference of the unfiltered full guide and of the Linux podcaster guide:
+
+   ```bash
+   grep -c ToSrvPipe out/full/topics/scripting-reference.html out/podcaster-linux/topics/scripting-reference.html
+   ```
+
+   It appears once in the full guide and not at all in `podcaster-linux`: the filter dropped the Windows row and kept the row for Linux and macOS.
 :::
 
-Test the position of the repetition separator. Move the `<repsep>` line out of the inner `<groupseq>` to directly after `<delim>:</delim>` in the outer one, and check your work. The check stops at health. Example output:
+Test the position of the repetition separator. Move the `<repsep>` line out of the inner `<groupseq>` to directly after `<delim>:</delim>` in the outer one, save, and choose **XML** > **Validate**. The topic is not valid: the **Errors** panel reports that the content of `groupseq` must match its content model, at line 39. **Project** > **Check Project** reports the same fault, in shorter words, and stops at health. Example output:
 
 ```
 health   NOT CLEAN
@@ -8378,7 +8615,7 @@ Not ready: the project itself has faults. The build and the built output were no
 
 A `<repsep>` follows the optional title and precedes the items in its group. The message names the element whose content is wrong, `groupseq`, not the misplaced `<repsep>` inside it.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change with **Edit** > **Undo**, save, and validate again. Confirm that the topic is valid before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -8426,7 +8663,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: The assessment {#step-1-the-assessment}
 
 :::steps
-1. **Create `learning/check-your-understanding.dita`** A new folder, `learning/`, keeps the learning content apart from the topics. In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `learning`. Then create the file in it with **New File**.
+1. **Create `learning/check-your-understanding.dita`** A new folder, `learning/`, keeps the learning content apart from the topics. In the **Explorer**, right-click `my-audacity-guide`, choose **New Folder**, and enter `learning`. Then right-click `learning`, choose **New File**, and enter `check-your-understanding.dita`. There is no template for an assessment, so choose **Blank XML Document**. After the XML declaration, add the rest of this listing:
 
    ```xml {title="learning/check-your-understanding.dita"}
    <?xml version="1.0" encoding="UTF-8"?>
@@ -8593,13 +8830,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       </topichead>
    ```
 
-   A plain `<topicref>` in both: an assessment is a topic like any other to a map. The podcaster guide and the book do not carry it.
+   An assessment is a topic like any other to a map. In the full guide it is a chapter of its own, *Check your understanding*, after the chapters it tests and before *Troubleshooting*. In the beginner guide it is a plain `<topicref>` before *Troubleshooting*. A map publishes only the topics it references. The assessment is for novices, as its prolog says, so the podcaster guide and the book do not reference it.
 :::
 
 ## Step 3: Validate the assessment {#step-3-validate-the-assessment}
 
 :::steps
-1. **Validate the file** **Check Project** in step 4 validates the assessment with every other file. To validate the one file from the command line, run:
+1. **Validate the file** In the assessment, choose **XML** > **Validate**. The **Errors** panel reports **Valid Document**. To validate the one file from the command line, run:
 
    ```bash
    dogsbay-xml validate learning/check-your-understanding.dita
@@ -8617,13 +8854,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor, choose **XML** > **Format** and save the file, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i learning/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...** and click **Build All** to build every deliverable. To check the project and the built output as well, choose **Project** > **Check Project** instead and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -8653,10 +8890,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The assessment is validated with every other file, and each HTML deliverable whose map includes it builds it as a page, for example `out/full/learning/check-your-understanding.html`.
+   Each HTML deliverable whose map includes the assessment builds it as a page, for example `out/full/learning/check-your-understanding.html`.
+2. **Take the assessment** You added the assessment to two maps. To see how many deliverables publish it, list the `learning` folders in the output in the **Terminal** panel:
+
+   ```bash
+   ls -1d out/*/learning
+   ```
+
+   There are five, from two maps: `full` and `review` both build the full guide, `beginner-mac` and `beginner-windows` both build the beginner guide, and `collection` pulls in both maps. The podcaster guide, the installation variants, and the book have no `learning` folder.
+
+   Open `out/beginner-mac/learning/check-your-understanding.html` and choose **View** > **Preview in Tab**. The introduction and the objectives come first, then the questions. Each option is listed with its feedback, if it has any, so the page shows all the feedback at once and gives the answers away, as described in step 1. The duration section is empty.
 :::
 
-Test the duration content model. Replace the `<lcTime>` line with `<p>About 5 minutes</p>` so that `<lcDuration>` holds a paragraph, and check your work. The check stops at health. Example output:
+Test the duration content model. Replace the `<lcTime>` line with `<p>About 5 minutes</p>` so that `<lcDuration>` holds a paragraph, save, and choose **XML** > **Validate**. The **Errors** panel reports that the content of `lcDuration` must match `(title?,lcTime?)`. Project health fails the same way, so **Project** > **Check Project** stops at health and nothing is built. Example output:
 
 ```
 health   NOT CLEAN
@@ -8675,7 +8921,7 @@ INVALID
 
 `<lcDuration>` takes an optional title and an `<lcTime>`, and `<lcTime>` takes a `value`: the `value` supplies a machine-readable duration for a learning platform.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Undo the change, save, and validate again. Confirm that the **Errors** panel reports **Valid Document** before you continue.
 
 ## What you learned {#what-you-learned}
 
@@ -8887,6 +9133,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read it**
 
    - `xml:lang="he"` on a `<ph>` overrides the root's `en-GB` for that phrase alone. `dir="rtl"` says the phrase runs right to left; the values are `ltr`, `rtl`, `lro` and `rlo`, the last two overriding the characters' own direction. Hebrew and Arabic letters carry their direction, so the attribute matters most where a phrase mixes them with digits and punctuation, and it is what a stylesheet keys on.
+   - If the Hebrew shows as boxes in the editor, the file is fine: the editor's default font, Source Code Pro, has no Hebrew letters. To read them, choose a font that has them, such as Liberation Mono, in the editor's settings. The built pages use the browser's fonts, so readers see the letters.
    - `<index-see>`, from stage 13, adds an index entry that redirects: *dB, see decibel*. The abbreviation gets its own line in the index and the reader is sent to the entry that has the page numbers.
 3. **Edit `topics/glossary/audio-units.dita`**
 
@@ -9038,13 +9285,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 :::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** > **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor, choose **XML** > **Format** and save the file, or choose **Project** > **Project Tools** > **Format Project** to format every file at once. From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita learning/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** > **Check Project** and read the result in the **Project Validation** panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...** and click **Build All** to build every deliverable. To check the project and the built output as well, choose **Project** > **Check Project** instead and read the result in the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -9074,7 +9321,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The check reports `health   clean`, because review markup is a warning, not a fault. To see the warnings, open the **Project Validation** panel, or run:
+   The guide now holds an open draft comment and an unfinished cleanup. The check still reports `health   clean`, because review markup is a warning, not a fault. To see the warnings, open the **Project Validation** panel after **Check Project**, or run this command in the **Terminal** panel and wait for it to finish before you continue:
 
    ```bash
    dogsbay-xml project-health .
@@ -9090,8 +9337,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Project is healthy: valid, no broken references, keys, orphans, or broken element ids.
    ```
 
-   *Authoring leftovers* is the health report's name for review markup. It counts the draft comment and the required cleanup, two, with the file and line of each. They are warnings: the project is still healthy, the check still reports `Ready`, and the markup goes into the repository as the record of what is unfinished. Stage 25 adds a house rule that makes the same two findings failures, so that they cannot reach a release.
-2. **Read the review build** The check built every deliverable into `out/` in your project.
+   *Authoring leftovers* is the health report's name for review markup. It counts the draft comment and the required cleanup, two, with the file and line of each. They are warnings: the project is still healthy, **Check Project** still reports `Ready`, and the markup goes into the repository as the record of what is unfinished. Stage 25 adds a house rule that makes the same two findings failures, so that they cannot reach a release.
+2. **Read the built pages** The build put every deliverable into `out/` in your project.
+
+   Open `out/full/topics/what-is-audacity.html`. The topic's language is on the page's `<html lang="en-gb">` element. The digital audio topic is merged into this page, so the Hebrew phrase is there too, with its own language and `dir="rtl"`, so a browser lays it out right to left.
 
    The `review` deliverable from stage 14 flags revision `3.4`, so in `out/review/topics/effects-reference.html` the new row carries the flag's color:
 
@@ -9109,7 +9358,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    <span style="color:#b00020;" class="ph cmd">[new in 3.4]Fill in the <span class="keyword wintitle">Edit Metadata Tags</span> dialog and click <span class="ph uicontrol">OK</span>.</span>
    ```
 
-   The draft comment is in neither build, nor is the required cleanup: DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the build asks for them with `args.draft=yes`. A search for the comment's text across every deliverable that the check built, `grep -rl 'metadata tags step' out/`, prints nothing.
+   The draft comment is in neither build, nor is the required cleanup: DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the build asks for them with `args.draft=yes`. A search for the comment's text in the topics and in every deliverable that you built, `grep -rl 'metadata tags step' topics out`, prints only `topics/exporting-audio.dita`, the source file.
 
    To see them, give the `review` deliverable the parameter for one build:
 
@@ -9134,7 +9383,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The comment and the cleanup are rendered in place, boxed and colored, with the author, disposition and date. Use `args.draft=yes` to include this markup during review, and resolve it before release. Remove the parameter again before you continue, so that the `review` deliverable matches the checkpoint: in **Manage Deliverables**, select `review`, click **Edit...**, select the `args.draft` row, click **Remove**, click **Save...** and **OK**, and click **Close**.
 :::
 
-Test an invalid value. Change the new row in `topics/effects-reference.dita` to `status="draft"`, a value that reads well and does not exist, and check your work. The check stops at health. Example output:
+Test an invalid value. Change the new row in `topics/effects-reference.dita` to `status="draft"`, a value that reads well and does not exist, save, and choose **XML** > **Validate**. The **Errors** panel says that the value must come from a list. A project check fails too, and stops at health. Example output:
 
 ```
 health   NOT CLEAN
@@ -9146,7 +9395,7 @@ Not ready: the project itself has faults. The build and the built output were no
 
 `status` is an enumerated attribute in the DTD, unlike `rev`, which takes any string. The four values, plus `-dita-use-conref-target`, which every enumerated attribute accepts for conref, are the whole vocabulary; a workflow state such as *draft* or *in review* belongs in a `<draft-comment disposition>` or in `<change-historylist>`, not in `status`.
 
-Undo the change and check again. Confirm that the check reports `Ready` before you continue.
+Change `draft` back to `new`, save, and validate again. Confirm that the **Errors** panel reports **Valid Document** before you continue.
 
 ## What you learned {#what-you-learned}
 

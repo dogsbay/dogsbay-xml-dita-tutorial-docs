@@ -23,6 +23,12 @@ for the starting checkpoint and the next core lesson.
 
 Recorded output below is an example. File counts, paths, and stage numbers can differ. [Check your work](/start-here/run-the-gate) to see the result for your own project.
 
+The steps below group the work by file type. You can also take one term
+all the way to the built page first: write `g-sample-rate.dita`, key it,
+add it to the map under a *Glossary* heading, bind the *sample rate* term,
+and build. Then do the same for one abbreviation, and add the rest. Save
+each file as you finish with it, so the build sees your changes.
+
 ## Step 1: Write the entries
 
 ::::steps
@@ -362,13 +368,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read the two forms**
 
    - `<term keyref="gl-clipping">clipping</term>` keeps the word as
-     written and binds it to the entry. The output makes it a link to the
-     definition, with the `<glossdef>` as the link's hover text. The
+     written and binds it to the entry. DITA-OT's `html5` transform, which
+     the `full` deliverable uses, makes it a link to the entry's page, with
+     the `<glossdef>` as the link's hover text. The
      content stays, so "Compressed" in a table cell and "clipping" in a
      sentence keep their own capitalization and grammar.
    - `<abbreviated-form keyref="gl-decibel"/>` is empty. The processor
-     writes the term for you: the `<glossSurfaceForm>` where the reader
-     first meets it, and the `<glossAbbreviation>` after that. In the
+     writes the term for you: the `<glossSurfaceForm>` at its first use in
+     a topic, and the `<glossAbbreviation>` after that. Each topic expands
+     the term again on its first use, because a reader can land on any page
+     first. In the
      HTML5 output of DITA-OT 4.3.5 each of the two topics that uses it
      shows `decibel (dB)`, linked to the entry, and "hertz (Hz)" likewise.
    - `<abbreviated-form>` inserts the surface form exactly as the glossary
@@ -385,10 +394,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 4: Check your work
 
 ::::steps
-1. **Format and check your work**
+1. **Format, build, and check your work**
 
-   Format the topics: choose **XML** > **Format** in each new or changed
-   topic and save it, or choose **Project** > **Project Tools** >
+   Save all files. Format the topics: choose **XML** > **Format** in each
+   new or changed topic and save it, or choose **Project** > **Project Tools** >
    **Format Project** to format every file at once. From the command line,
    run:
 
@@ -396,9 +405,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build the guide: choose **Project** > **Build Deliverables...**,
+   and click **Build All**. To check everything as well, choose
+   **Project** > **Check Project** and read the result in the
+   **Project Validation** panel. **Check Project** also confirms that
+   every key resolves. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -421,9 +432,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    later stages: stage 14 refers to `gl-normalization`, and stage 18 uses
    `start-here` and `digital-audio`.
 
-   The check builds the guide into `out/full/`. Open
-   `out/full/topics/glossary/audio-units.html`: the group is one page with both entries, each showing the term,
-   the definition, the surface form and the alternative forms.
+   The build writes the guide to `out/full/`. Open
+   `out/full/topics/glossary/audio-units.html` and choose **View** >
+   **Preview in Tab**. The table of contents lists the group and the six
+   entries under *Glossary*. The group is one page with both entries, each
+   showing the term, the definition, the surface form and the alternative
+   forms.
+
+   In `out/full/topics/what-is-digital-audio.html`, *sample rate* keeps its
+   words and links to `glossary/g-sample-rate.html`, with the definition
+   as its hover text. Where you replaced "hertz (Hz)", the build wrote the
+   surface form, "hertz (Hz)", linked to the hertz entry on the group's
+   page.
 ::::
 
 A glossary key is a key like any other. Change the `<term keyref>` in

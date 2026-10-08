@@ -12,7 +12,9 @@ topics of later lessons go.
 
 **Time:** about 5 minutes.
 **You need:** the DogsBay XML editor, and the empty `my-audacity-guide`
-folder open in it. See [Set up your tools](/start-here/set-up).
+folder open in it. To create and open the folder, use **File** >
+**Open Project Folder...** as described in
+[Set up your tools](/start-here/set-up#create-and-open-your-project-folder).
 
 ## Step 1: Create the topics folder
 
@@ -43,7 +45,8 @@ check. You check your work in the editor from stage 01, when the project has
 its first topic.
 
 If you installed the command line, you can confirm that it works on your
-project. Run this command from `my-audacity-guide`:
+project. Open the editor's **Terminal** panel and run this command from
+`my-audacity-guide`:
 
 ```bash
 dogsbay-xml check .

@@ -28,8 +28,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Each topic in this lesson is a task. In the **Explorer**, right-click
    the `topics` folder, choose **New File**, and enter
    `installing-audacity.dita`. Click the **Task** template. Replace the
-   title placeholder, type the short description, and
-   build the task body around the template's `<steps>`. If you use another
+   title placeholder (**XML** > **Select Element Content**, or
+   Ctrl+Shift+E) and type the short description. Then click inside
+   `<taskbody>`, select its content the same way, and replace it with the
+   body from the finished listing: type it, or paste it. If you use another
    editor, create the file and type the finished listing.
 
    ```xml title="topics/installing-audacity.dita"
@@ -110,9 +112,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      before `<context>`.
    - `<postreq>` states what to do after the task is done. It goes after
      `<result>`.
-   - The default HTML5 build shows both sections without a heading. To add
-     the labels "Before you begin" and "What to do next", set the DITA-OT
-     parameter `args.gen.task.lbl` to `YES`.
+   - The editor's preview labels these sections. The guide's build uses
+     DITA-OT's `html5` transtype, which by default shows both sections
+     without a heading. To add the labels "Before you begin" and "What to
+     do next" to the built pages, set the DITA-OT parameter
+     `args.gen.task.lbl` to `YES`.
    - `<choicetable>` is a step whose action depends on a condition, laid out
      as a two-column table: `<chhead>` with `<choptionhd>` and `<chdeschd>`
      for the headings, then one `<chrow>` per option with `<choption>` and
@@ -121,10 +125,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      `<cmd>` and optional `<info>`. Substeps do not nest further; if they
      would, the step is a separate task.
    - `@importance="optional"` on a `<step>` or `<substep>` marks it as one
-     the reader may skip. Output prefixes it with "Optional:".
+     the reader may skip. The `html5` transform prefixes it with
+     "Optional:".
    - `<stepresult>` says what happens after one step, as distinct from
      `<result>` for the whole task.
    - `<codeph>` is inline code: the `apt` command inside a sentence.
+
+3. **Preview the task**
+   Before you preview, predict how a reader will see the choice table and
+   the prerequisite. Then choose **View** > **Preview in Tab**. The
+   prerequisite has the label **Before you begin**, and the choice table is
+   a table inside step 2, with its headings. Further down, the substeps are
+   a list of their own inside the launch step, followed by the step result.
+   After the steps come the **Result** and **What to do next** blocks.
 ::::
 
 ## Step 2: Exporting audio
@@ -132,7 +145,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `topics/exporting-audio.dita`**
    Create `exporting-audio.dita` in the `topics` folder from the **Task**
-   template, as for *Installing Audacity*. If you use another editor,
+   template, as for *Installing Audacity*. Replace the title, type the
+   short description, and replace the content of `<taskbody>` with the body
+   from the listing. If you use another editor,
    create the file and type the finished listing.
 
    ```xml title="topics/exporting-audio.dita"
@@ -215,7 +230,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `topics/removing-background-noise.dita`**
    Create `removing-background-noise.dita` in the `topics` folder from the
-   **Task** template, as for *Installing Audacity*. If you use another
+   **Task** template, as for *Installing Audacity*. Replace the title, type
+   the short description, and replace the content of `<taskbody>` with the
+   body from the listing. If you use another
    editor, create the file and type the finished listing.
 
    ```xml title="topics/removing-background-noise.dita"
@@ -292,9 +309,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Create `topics/preparing-to-record.dita`**
    Create `preparing-to-record.dita` in the `topics` folder from the
-   **Task** template, as for *Installing Audacity*. This task uses
-   `<steps-unordered>`, so change the template's `<steps>` and `</steps>`
-   tags to `<steps-unordered>` and `</steps-unordered>`. If you use another
+   **Task** template, as for *Installing Audacity*. Replace the title and
+   type the short description. This task uses `<steps-unordered>` instead
+   of `<steps>`, because numbered steps would tell the reader that the
+   order matters. Replace the content of `<taskbody>` with the body from
+   the listing, or change the template's `<steps>` and `</steps>` tags to
+   `<steps-unordered>` and `</steps-unordered>` and type the rest. If you
+   use another
    editor, create the file and type the finished listing.
 
    ```xml title="topics/preparing-to-record.dita"
@@ -332,20 +353,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Read the new elements**
 
    - `<steps-unordered>` replaces `<steps>` when the order does not matter.
-     The children are still `<step>` elements; output renders them as a
-     bulleted rather than numbered list. Say in the `<context>` that the
+     The children are still `<step>` elements. The `html5` transform
+     renders them as a bulleted list instead of a numbered one. Say in the `<context>` that the
      order is free, as this topic does.
    - `<tutorialinfo>` is additional information for a reader who is learning,
      as opposed to `<info>`, which is for anyone doing the step. A stylesheet
      for expert readers can drop it.
 ::::
 
-## Step 5: Update the map and check your work
+## Step 5: Update the map and build
 
 ::::steps
 1. **Add the topics to the map**
-   Add a `<topicref>` for each new topic to `audacity-guide.ditamap`.
-   Do this before you check your work: the check reports a topic that
+   Add a `<topicref>` for each new topic at the end of
+   `audacity-guide.ditamap`, in the order you wrote them, so that the build
+   includes them. Do this before you check your work: the check reports a topic that
    no map refers to as an orphan topic. The complete map at this
    checkpoint is:
 
@@ -367,19 +389,24 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    </map>
    ```
 
-2. **Format and check your work**
-   Format the map and the topics: choose **XML** > **Format** in each
-   changed file and save it, or choose **Project** > **Project Tools** >
-   **Format Project** to format every file at once. From the command line,
-   run:
+2. **Format and build**
+   Save your files. Format the map and the topics: choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once, or
+   choose **XML** > **Format** in each changed file and save it. From the
+   command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. The check rebuilds the
-   guide in `out/full/`. The output looks like this example:
+   Then choose **Project** > **Build Deliverables...** and click
+   **Build All**. When the build finishes, click **OK**. The build rebuilds
+   the guide in `out/full/`, now with nine topics, each a page of its own.
+
+   To make sure that the project is also healthy, choose **Project** >
+   **Check Project** in the editor, or run `dogsbay-xml check .` from the
+   project root. The check also builds every deliverable. The output looks
+   like this example:
 
    ```
    health   clean
@@ -387,13 +414,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+3. **See the built guide**
+   Predict how the built guide shows the steps of *Preparing to record*:
+   numbered, or some other way. Then open
+   `out/full/topics/preparing-to-record.html` and choose **View** >
+   **Preview in Tab** to see the page as a browser shows it. The steps are
+   bullets, not numbers. You chose `<steps-unordered>` for its purpose, and
+   the transform, DITA-OT's `html5` transtype, shows that purpose as
+   bullets.
 ::::
 
 The order inside `<taskbody>` is fixed: `<prereq>` and `<context>`, then
 `<steps>`, `<result>`, `<tasktroubleshooting>`, `<example>`, `<postreq>`. To see the validator hold that order,
-move the `<postreq>` in *Installing Audacity* above `<result>` and check
-your work. The check names the file with the line, column, and message of the error,
-and stops. The output looks like this example:
+open *Installing Audacity* and swap `<result>` and `<postreq>`, so that
+`<postreq>` comes first. Save the file. Predict what validation says, then
+choose **XML** > **Validate**. The topic is not valid: the **Errors** panel
+names the line and the error, which says that the content of `<taskbody>`
+does not match its content model.
+
+**Project** > **Check Project** and `dogsbay-xml check .` find the same
+error. The check names the file with the line, column, and message of the
+error, and stops. The output looks like this example:
 
 ```
 health   NOT CLEAN
@@ -416,8 +458,10 @@ Summary
   Invalid files                 1  of 10
 ```
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Swap the two elements back, so that `<result>` comes first, and save. Choose
+**XML** > **Validate** again and confirm that the topic is valid before you
+continue. If you ran the check, run it again and confirm that it reports
+`Ready`.
 
 ## What you learned
 

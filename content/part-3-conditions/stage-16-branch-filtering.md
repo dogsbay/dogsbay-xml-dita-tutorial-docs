@@ -190,14 +190,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 2. **Preview a branch**
    In the status bar's deliverable menu, choose `install-variants`. Open
    `topics/installing-audacity.dita` and choose **View** > **Preview in
-   Split**. Because the map has branches, the bar above the preview adds
-   **Branch**, set to **Whole map**. Choose **mac-**: the preview applies
-   that branch's filter, **platform-mac.ditaval**, and keeps only the macOS
-   install row. Choose `full` in the status bar again before you continue.
+   Tab**. Because the map has branches, the bar above the preview adds
+   **Branch**, set to **Whole map**. Choose **win-** and scroll to the
+   install step: the preview applies that branch's filter,
+   **platform-windows.ditaval**, and keeps only the Windows install row.
+   Choose **mac-**, and only the macOS row is left. The topic has not
+   changed; the filter does the work. Close the preview, and choose `full`
+   in the status bar again before you continue.
 
-3. **Check your work**
-   In the editor, choose **Project** > **Check Project** and read the
-   result in the **Project Validation** panel. From the command line, run:
+3. **Build**
+   Choose **Project** > **Build Deliverables...** and click **Build All**.
+   **Project** > **Check Project** also builds every deliverable, and
+   checks the project and the built pages as well. From the command line,
+   the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -223,8 +228,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The new filters use only controlled values: the check includes the
-   controlled values from stage 15, and it reads the DITAVAL files too.
+   The new filters use only controlled values: the full check includes
+   the controlled values from stage 15, and it reads the DITAVAL files
+   too.
 
 4. **Read the output**
    `out/install-variants/topics/` has three copies
@@ -241,7 +247,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    and the table of contents in `index.html` lists *Installing Audacity*
    and *Recording your first track* three times, in that order. Open
-   `win-installing-audacity.html` and the choice table has the `.exe`
+   `win-installing-audacity.html` and choose **View** > **Preview in Tab**
+   to see it as a browser shows it: the choice table has the `.exe`
    row only; `installing-audacity-linux.html` has the `apt install` row,
    and inside a variant the links stay in it:
    `win-recording-your-first-track.html` links to
@@ -270,8 +277,9 @@ Two variants now want the same file names. DITA-OT logs no error and no
 warning, and the output has no Linux pages at all.
 `mac-installing-audacity.html` is the Linux copy (its choice table has the
 `apt install` row), the Mac copy is gone, and the table of contents links
-the Mac variant to generated names for pages that were never written. Check
-your work, or build this deliverable only with
+the Mac variant to generated names for pages that were never written.
+A build alone does not show the problem, so run the full check: choose
+**Project** > **Check Project**, or check this deliverable only with
 `dogsbay-xml check --deliverable=install-variants .`. The build succeeds,
 and the output check finds the two table of contents links. The output
 looks like this example:

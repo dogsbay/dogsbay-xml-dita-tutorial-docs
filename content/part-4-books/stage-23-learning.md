@@ -29,8 +29,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 1. **Create `learning/check-your-understanding.dita`**
    A new folder, `learning/`, keeps the learning content apart from the
    topics. In the **Explorer**, right-click `my-audacity-guide`, choose
-   **New Folder**, and enter `learning`. Then create the file in it with
-   **New File**.
+   **New Folder**, and enter `learning`. Then right-click `learning`,
+   choose **New File**, and enter `check-your-understanding.dita`. There
+   is no template for an assessment, so choose **Blank XML Document**.
+   After the XML declaration, add the rest of this listing:
 
    ```xml title="learning/check-your-understanding.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -227,16 +229,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
       </topichead>
    ```
 
-   A plain `<topicref>` in both: an assessment is a topic like any other
-   to a map. The podcaster guide and the book do not carry it.
+   An assessment is a topic like any other to a map. In the full guide it
+   is a chapter of its own, *Check your understanding*, after the chapters
+   it tests and before *Troubleshooting*. In the beginner guide it is a
+   plain `<topicref>` before *Troubleshooting*. A map publishes only the
+   topics it references. The assessment is for novices, as its prolog
+   says, so the podcaster guide and the book do not reference it.
 ::::
 
 ## Step 3: Validate the assessment
 
 ::::steps
 1. **Validate the file**
-   **Check Project** in step 4 validates the assessment with every other
-   file. To validate the one file from the command line, run:
+   In the assessment, choose **XML** > **Validate**. The **Errors** panel
+   reports **Valid Document**. To validate the one file from the command
+   line, run:
 
    ```bash
    dogsbay-xml validate learning/check-your-understanding.dita
@@ -258,16 +265,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** >
-   **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor,
+   choose **XML** > **Format** and save the file, or choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once.
+   From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i learning/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...**
+   and click **Build All** to build every deliverable. To check the
+   project and the built output as well, choose **Project** >
+   **Check Project** instead and read the result in the
+   **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -297,14 +308,37 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The assessment is validated with every other file, and each HTML
-   deliverable whose map includes it builds it as a page, for example
-   `out/full/learning/check-your-understanding.html`.
+   Each HTML deliverable whose map includes the assessment builds it as a
+   page, for example `out/full/learning/check-your-understanding.html`.
+
+2. **Take the assessment**
+   You added the assessment to two maps. To see how many deliverables
+   publish it, list the `learning` folders in the output in the
+   **Terminal** panel:
+
+   ```bash
+   ls -1d out/*/learning
+   ```
+
+   There are five, from two maps: `full` and `review` both build the full
+   guide, `beginner-mac` and `beginner-windows` both build the beginner
+   guide, and `collection` pulls in both maps. The podcaster guide, the
+   installation variants, and the book have no `learning` folder.
+
+   Open `out/beginner-mac/learning/check-your-understanding.html` and
+   choose **View** > **Preview in Tab**. The introduction and the
+   objectives come first, then the questions. Each option is listed with
+   its feedback, if it has any, so the page shows all the feedback at
+   once and gives the answers away, as described in step 1. The duration
+   section is empty.
 ::::
 
 Test the duration content model. Replace the `<lcTime>` line with
-`<p>About 5 minutes</p>` so that `<lcDuration>` holds a paragraph, and
-check your work. The check stops at health. Example output:
+`<p>About 5 minutes</p>` so that `<lcDuration>` holds a paragraph, save,
+and choose **XML** > **Validate**. The **Errors** panel reports that the
+content of `lcDuration` must match `(title?,lcTime?)`. Project health
+fails the same way, so **Project** > **Check Project** stops at health and
+nothing is built. Example output:
 
 ```
 health   NOT CLEAN
@@ -326,8 +360,8 @@ INVALID
 takes a `value`: the `value` supplies a machine-readable duration for a
 learning platform.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change, save, and validate again. Confirm that the **Errors**
+panel reports **Valid Document** before you continue.
 
 ## What you learned
 

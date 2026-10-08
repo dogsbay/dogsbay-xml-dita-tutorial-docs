@@ -120,14 +120,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      find the control. It is optional and sits after the `<cmd>`.
    - `<result>` says what is true when the steps are done. It comes after the
      steps.
+
+3. **Preview the task**
+   Before you preview it, predict how the steps will look to a reader.
+   Then choose **View** > **Preview in Tab**. The steps become a numbered
+   list, one number for each `<cmd>`. The context comes before them, each
+   `<info>` sits under its step, and the result closes the task.
+
+   You wrote structure. How it looks comes from the transform: for the
+   guide, DITA-OT's `html5` transtype, which the deliverable chooses.
 ::::
 
 ## Step 2: Write the reference
 
 ::::steps
 1. **Create `topics/supported-audio-formats.dita`**
-   Create the file in the `topics` folder in the same way, and choose the
-   **Reference** template:
+   Create the file in the `topics` folder in the same way. The template
+   that you used last is now at the top of the list. Click **Reference**:
 
    ```xml
    <?xml version="1.0" encoding="UTF-8"?>
@@ -233,6 +242,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      columns.
    - `<thead>` and `<tbody>` hold header and body rows; each `<row>` holds one
      `<entry>` per column.
+
+3. **Preview the reference**
+   Before you preview it, predict where the table title will appear and how
+   a reader will tell the header row from the rest. Then choose **View** >
+   **Preview in Tab**. The title is the caption above the table, and the
+   `<thead>` row is the header, set apart from the four body rows. A reader
+   looks up a format by its row, and a fact by its column.
 ::::
 
 ## Step 3: Update the map and check your work
@@ -268,9 +284,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. The check rebuilds the
-   guide in `out/full/`. The output looks like this example:
+   Before you check, predict what the navigation of the built guide will
+   show, and in what order. Then choose **Project** > **Check Project** in
+   the editor, or run `dogsbay-xml check .` from the project root. The
+   check rebuilds the guide in `out/full/`. The output looks like this
+   example:
 
    ```
    health   clean
@@ -278,10 +296,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+   `Ready` means that the project is healthy, every deliverable built, and
+   the checks on the built pages found no problems.
+
+3. **See the built guide**
+   In the **Explorer**, open `out/full/topics`. The build made a page for
+   each topic. Open `recording-your-first-track.html` and choose **View** >
+   **Preview in Tab**. The navigation lists all three topics in the order of
+   the map, and the task shows its numbered steps, as the preview showed.
 ::::
 
 To see the type split enforced, move the `<p>` in the reference out of its
-`<section>` so it is a direct child of `<refbody>`, and check your work. The
+`<section>` so it is a direct child of `<refbody>`, save the file, and
+predict what the check will say. Then check your work. The
 reference body does not allow it. A concept body would. The check names the
 file with the line, column, and message of the error, and stops. The output
 looks like this example:
@@ -307,8 +335,8 @@ Summary
   Invalid files                 1  of 4
 ```
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change, save the file, and check again. Confirm that the check
+reports `Ready` before you continue.
 
 ## What you learned
 

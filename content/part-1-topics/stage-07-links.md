@@ -23,7 +23,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Edit `topics/installing-audacity.dita`**
-   The postrequisite gets an `<xref>` to the recording task.
+   The postrequisite sends the reader on to recording, but in plain words.
+   Replace the end of its sentence with an `<xref>` to the recording task.
+   The `@href` names the target topic's file, and the `<xref>` has no text
+   of its own.
 
    ```diff title="topics/installing-audacity.dita"
    --- a/topics/installing-audacity.dita
@@ -39,10 +42,28 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     </task>
    ```
 
-2. **Edit `topics/exporting-audio.dita`**
+   Save the file. From here on, save each topic when you finish with it,
+   so that the build sees your changes.
+
+2. **Build and follow the link**
+   The `<xref>` is empty. Predict what words the reader will click in the
+   built page. Then choose **Project** > **Build Deliverables...** and click
+   **Build All**. When the build finishes, click **OK**. You can also
+   choose **Project** > **Check Project** to make sure that every link
+   resolves; you do that at the end of this lesson.
+
+   Open `out/full/topics/installing-audacity.html`. The `<xref>` is now an
+   HTML link to `recording-your-first-track.html`, and its text is that
+   topic's title, *Recording your first track*. Open
+   `out/full/topics/recording-your-first-track.html` and choose **View** >
+   **Preview in Tab**. Its heading is the text that the reader clicked.
+
+3. **Edit `topics/exporting-audio.dita`**
    The format step links to a *section* of the reference. The target of an
    `<xref>` is `file#topic-id/element-id`; the section needs an `@id` for
-   that, which the next step adds.
+   that, which the next step adds. After `</taskbody>`, add two related
+   links, to the formats reference and to *Trimming audio*, the second with
+   a short description.
 
    ```diff title="topics/exporting-audio.dita"
    --- a/topics/exporting-audio.dita
@@ -69,7 +90,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     </task>
    ```
 
-3. **Edit `topics/supported-audio-formats.dita`**
+4. **Edit `topics/supported-audio-formats.dita`**
    `id="choosing"` on the section makes it a link target. The related links
    include an external one with `@scope="external"`, `@format="html"` and its
    own `<linktext>`, because there is no DITA title to take the text from.
@@ -99,9 +120,25 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     </reference>
    ```
 
-4. **Read the elements**
+5. **Build and see the section link**
+   The cross-reference in *Exporting audio* points at a section. Predict
+   whose title its link shows: the formats topic's, or the section's. Then
+   choose **Project** > **Build Deliverables...**, click **Build All**, and
+   click **OK** when the build finishes.
 
-   - `<xref href="…"/>` with no content: output supplies the target's
+   Open `out/full/topics/exporting-audio.html`. The link goes to
+   `supported-audio-formats.html#supported-audio-formats__choosing`, an
+   anchor made from the topic and section ids, and its text is the
+   section's title, *Choosing a format*. Choose **View** > **Preview in
+   Tab**: in step 2, the reader sees *Choosing a format* as a link where
+   they choose a format. At the end of the page source, the build sorts
+   the related links by the kind of topic they lead to, under
+   **Related tasks** and **Related reference**. The `<desc>` text is the
+   link's `title` attribute, which the browser shows as a tooltip.
+
+6. **Read the elements**
+
+   - `<xref href="…"/>` with no content: the build supplies the target's
      `<title>` as the link text. This is the usual form for a link to a DITA
      topic, and it updates the link text when the target title changes.
    - `href="file.dita"` links to the topic. `href="file.dita#topic/element"`
@@ -112,9 +149,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      is, so the processor does not try to parse it as DITA.
    - `<link>` is the same reference as `<xref>` but as a list entry in
      `<related-links>`. It takes `<linktext>` for the text when the target
-     has no title, and `<desc>` for a short description. The HTML5 output
-     shows the description as a tooltip (the `title` attribute of the link),
-     not as text under the link.
+     has no title, and `<desc>` for a short description. The `html5`
+     transform shows the description as a tooltip (the `title` attribute of
+     the link), not as text under the link.
 ::::
 
 ## Step 2: Related links on the remaining topics
@@ -236,16 +273,22 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Format and check your work**
-   Format the topics: choose **XML** > **Format** in each changed topic and
-   save it, or choose **Project** > **Project Tools** > **Format Project** to
-   format every file at once. From the command line, run:
+   Save all your files. Format the topics: choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once, or
+   choose **XML** > **Format** in each changed topic and save it. The
+   editor can also format each file when you save it, with an option in
+   its preferences. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. The output looks like this
+   Predict whether the link list and the link pool in *What is digital
+   audio?* keep the shape you wrote in the built page. Then choose
+   **Project** > **Check Project** in the editor, or run
+   `dogsbay-xml check .` from the project root. The health stage resolves
+   every link in every topic, the check builds the guide, and the output
+   stage follows every link in the built pages. The output looks like this
    example:
 
    ```
@@ -254,6 +297,16 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+   The check reports `Ready`: the project is healthy, the guide built, and
+   the checks on the built pages found no links that lead nowhere.
+
+2. **See the grouped links**
+   Open `out/full/topics/what-is-digital-audio.html`. The link list kept
+   its title, **Put it into practice**. The build sorted the links in the
+   link pool by kind, under headings such as **Related information**.
+   Choose **View** > **Preview in Tab**. In the first paragraph, the
+   shortcut is a link titled *Recording your first track*.
 ::::
 
 This is the first stage with links inside topics. The health check has
@@ -271,7 +324,8 @@ health   NOT CLEAN
 Not ready: the project itself has faults. The build and the built output were not checked.
 ```
 
-Undo the change and check again.
+Undo the change, save, and check again. Confirm that the check reports
+`Ready`.
 
 The health and output stages cover different problems. In *Exporting
 audio*, find the `<xref>` to the *Choosing a format* section. Change the fragment

@@ -57,13 +57,13 @@ editor:
 :::steps
 1. **Open the folder chooser**
    Choose **File** > **Open Project Folder...**. On the welcome screen, you
-   can click **Open Project Folder…** instead. A folder tree opens, with the
-   **Make New Folder**, **Open**, and **Cancel** buttons.
+   can click **Open Project Folder…** instead. A folder chooser opens.
 
 2. **Create the folder**
-   Select the folder where you want to keep your work, for example your
-   Documents folder. Click **Make New Folder**. In the **Enter Folder Name**
-   dialog, type `my-audacity-guide` and confirm.
+   Go to the folder where you want to keep your work, for example
+   double-click your Documents folder. Click **Create New Folder** (the
+   folder icon at the top of the chooser). A new folder appears with its
+   name ready to edit. Type `my-audacity-guide` and press Enter.
 
 3. **Open it**
    Select `my-audacity-guide` and click **Open**.

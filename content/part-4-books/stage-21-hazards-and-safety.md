@@ -88,6 +88,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<hazardsymbol>` is an `<image>` specialization, after the panel. The
      `href` is relative to the shared topic file, hence `../images/`, and
      the `<alt>` is required for the same reason it is on an image.
+
+4. **Save and preview the shared topic**
+   Save the file, so that the topics that reuse it find it on disk. Then
+   choose **View** > **Preview in Tab**. The hazard statement appears as
+   one block, labeled HAZARD. The editor's preview shows only its text;
+   the signal word, the warning triangle, and each part on a line of its
+   own come with the built page.
 ::::
 
 ## Step 2: Reuse it, and write one inline
@@ -124,6 +131,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    exactly as a conref'd `<step>` carries an empty `<cmd/>` (stage 11).
    The build replaces the whole element with the shared topic copy, symbol
    and all. The demo at the end shows the error without the placeholder.
+
+   To see it, choose **View** > **Preview in Tab** in the recording task.
+   The whole statement appears under the tip. Correct the wording in
+   `common-notes.dita`, and every task that reuses it changes with it.
 
 3. **Edit `topics/effects-reference.dita`**
 
@@ -191,7 +202,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    the installation variants, but not in the book: the book's
    `<appendix>` for the same topic had no `keys`. The trouble note from
    stage 20 did not need it, because its `href` fallback resolves without
-   the key. The new sentence has only a `keyref`. Without this line the
+   the key. The new sentence has only a `keyref`. To ask whether the book
+   defines it, run this command in the **Terminal** panel before and after
+   you save the change:
+
+   ```bash
+   dogsbay-xml keys audacity-book.ditamap --resolve silent
+   ```
+
+   Before the change, `silent` is not defined in the book map. After it,
+   `silent` resolves to `topics/recording-is-silent.dita`, from the
+   `<appendix>`. Without this line the
    notices page of `out/book-pdf/audacity-book.pdf` reads *Recording
    nothing but silence? See .* with nothing after *See*. Health resolves
    keys against the root map, `audacity-guide.ditamap`, where the key
@@ -206,42 +227,27 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    the topic; with it, the sentence
    in the PDF reads *Recording nothing but silence? See The recording is
    silent on page 37.*
-
-6. **Read the output**
-   The check's HTML5 build of the full guide,
-   `out/full/topics/recording-your-first-track.html`, has the hazard in
-   place (the inline SVG is shortened here):
-
-   ```
-   <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
-   <div class="typeofhazard">Loud playback through headphones</div>
-   <div class="consequence">Sustained listening above 85 dB can damage your hearing permanently.</div>
-   <div class="howtoavoid">Set the playback volume low before you press Play and raise it gradually.</div>
-   <div class="howtoavoid">Take the headphones off before applying Amplify or Normalize with the track playing.</div>
-   </div></td></tr></table>
-   ```
-
-   The signal word is the `class`: `hazardstatement--caution`, with the
-   panel's parts each a `div` of their own, for a stylesheet to lay out.
 ::::
 
-## Step 3: Check your work
+## Step 3: Save and build
 
 ::::steps
-1. **Format and check your work**
+1. **Format and build**
 
-   Format the changed files: choose **XML** > **Format** in each changed
-   file and save it, or choose **Project** > **Project Tools** >
-   **Format Project** to format every file at once. From the command line,
-   run:
+   Save all the files. Format the changed files: choose **XML** >
+   **Format** in each changed file and save it, or choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once.
+   From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...**
+   and click **Build All** to build the guides and the PDF book. To check
+   the project and the built output as well, choose **Project** >
+   **Check Project** instead and read the result in the
+   **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -274,11 +280,55 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The note lines count DITA-OT notes from each build. To print them, run
    `dogsbay-xml check -v .`, or read them in the **Project Validation**
    panel.
+
+2. **Read the output**
+   Open `out/full/topics/recording-your-first-track.html` and choose
+   **View** > **Preview in Tab**. Scroll past the guide's contents to the
+   task's context: the signal word **CAUTION** is at the top, then the
+   hazard, the consequence, and both measures, beside the warning
+   triangle. The HTML5 build of the full guide has the hazard in place
+   (the inline SVG is shortened here):
+
+   ```
+   <table role="presentation" border="1" class="note hazardstatement"><tr><th colspan="2" class="hazardstatement--caution"><svg class="hazardsymbol" …>…</svg> CAUTION</th></tr><tr><td><img class="image hazardsymbol" height="32" src="../images/hazard-hearing.png" alt="Warning triangle"></td><td><div class="messagepanel">
+   <div class="typeofhazard">Loud playback through headphones</div>
+   <div class="consequence">Sustained listening above 85 dB can damage your hearing permanently.</div>
+   <div class="howtoavoid">Set the playback volume low before you press Play and raise it gradually.</div>
+   <div class="howtoavoid">Take the headphones off before applying Amplify or Normalize with the track playing.</div>
+   </div></td></tr></table>
+   ```
+
+   The signal word is the `class`: `hazardstatement--caution`, with the
+   panel's parts each a `div` of their own, for a stylesheet to lay out.
+   The html5 transform writes the `type` attribute as the class, so its
+   stylesheet can give each signal word its own color. To list the class
+   on each page, run this command in the **Terminal** panel:
+
+   ```bash
+   grep -o 'hazardstatement--[a-z]*' out/full/topics/*.html
+   ```
+
+   It finds `hazardstatement--caution` in the recording task and
+   `hazardstatement--warning` in the effects reference.
+
+   To find the new sentence in the book, extract the PDF's text:
+
+   ```bash
+   pdftotext out/book-pdf/audacity-book.pdf - | grep -B1 'but silence'
+   ```
+
+   Example output:
+
+   ```
+   Go straight to Podcast production workflow on page 35. Recording
+   nothing but silence? See The recording is silent on page 37.
+   ```
 ::::
 
 Test the hazard statement without its placeholder. Make the reference in the recording task a single
 empty element, `<hazardstatement conkeyref="common-notes/hearing-hazard"/>`,
-and check your work. The check stops at health. Example output:
+save, and choose **Project** > **Check Project**. The check stops at
+health, so nothing is built. Example output:
 
 ```
 health   NOT CLEAN
@@ -292,8 +342,9 @@ The DTD requires a `<messagepanel>` in every `<hazardstatement>`, whether
 or not it is going to be replaced. Give a conref'd hazard the empty panel
 the same way you give a conref'd step its empty `<cmd/>`.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change with **Edit** > **Undo**, save, and choose **XML** >
+**Validate**. Confirm that the **Errors** panel reports
+**Valid Document** before you continue.
 
 ## What you learned
 

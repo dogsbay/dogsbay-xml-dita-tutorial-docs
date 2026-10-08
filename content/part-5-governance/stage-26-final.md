@@ -62,9 +62,48 @@ output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, i
 Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
 ```
 
+`Ready` also tells you that the lessons' exercises are undone. A short
+description removed for the house rules would fail health, and two
+branches with the same prefix would fail the output check.
+
 The output check reads HTML pages only. For the PDF, it confirms that the
-build wrote `out/book-pdf/audacity-book.pdf`. Open the PDF and inspect its
-navigation, layout, and accessibility yourself.
+build wrote `out/book-pdf/audacity-book.pdf`. No check reads a page the
+way a reader does, so inspect the output yourself:
+
+1. **One page reads right.** Since stage 18, the digital audio topic is
+   part of the full guide's `out/full/topics/what-is-audacity.html` page.
+   Open that page and find the link to `recording-your-first-track.html`,
+   the image `waveform.png`, which the build copied to the output, and the
+   table header from the `<sthead>`. Then open
+   `topics/what-is-digital-audio.dita` and choose **View** >
+   **Preview in Tab**. Read the title and the short description, and
+   follow the link once. Check that the figure's picture matches its
+   title, and that the bit depth table's headers say what each column
+   holds.
+2. **A filtered page holds only its own content.** Open
+   `out/beginner-windows/topics/installing-audacity.html` and choose
+   **View** > **Preview in Tab**. The install step shows one row, the
+   Windows installer. A row for every platform would mean that a
+   deliverable lost its filter, and no check would report it.
+3. **The book is complete.** In the **Terminal** panel, print the PDF's
+   first page:
+
+   ```bash
+   pdftotext -l 1 out/book-pdf/audacity-book.pdf -
+   ```
+
+   Example output:
+
+   ```
+   Audacity User Guide
+   Record, edit and export audio with Audacity
+   ```
+
+   The cover carries the book's title and subtitle from the bookmap.
+   Then open `audacity-book.pdf` in your PDF viewer. Check the contents,
+   the opening page of a chapter, a table, and the index, and follow one
+   bookmark and one index entry. Inspect its navigation, layout, and
+   accessibility.
 
 The final reference build checks clean. See
 [Known output issues](/reference/known-output-issues) for the defects that

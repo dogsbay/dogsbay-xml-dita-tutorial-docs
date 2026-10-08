@@ -10,9 +10,14 @@ Add author, date, audience, keyword, and index metadata to the topics.
 Place it in `<prolog>`, between the short description and the body. Add
 publication metadata to the map's `<topicmeta>`.
 
-Set a metadata policy in the editor to require keywords on topics and
-creation dates on tasks. The examples show each topic type;
-expand the remaining examples to apply the same structure.
+DITA makes all of this metadata optional. To require fields, set a
+metadata policy that requires keywords on topics and creation dates on
+tasks. The metadata policy is a DogsBay XML feature, not part of DITA:
+the policy is stored with the project, and the DogsBay XML check enforces
+it.
+
+The examples show each topic type; expand the remaining examples to
+apply the same structure.
 
 **Optional module.** See [Choose a learning path](/start-here/learning-path)
 for the starting checkpoint and the next core lesson.
@@ -84,14 +89,29 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      `YYYY-MM-DD`.
    - `<metadata>` groups the classification: `<audience type="user"
      experiencelevel="novice"/>`, a `<category>`, and `<keywords>`.
-   - `<keywords>` holds `<keyword>`s, which the HTML5 output writes into a
-     `<meta name="keywords">` tag, and `<indexterm>`s, which it does not
-     render: an index is a print artifact, and the PDF in stage 19 builds
-     one from them.
+   - `<keywords>` holds `<keyword>`s, which DITA-OT's `html5` transform
+     writes into a `<meta name="keywords">` tag, and `<indexterm>`s, which
+     the HTML pages do not show: a PDF does, and the book in stage 19
+     builds its index from them.
    - `<resourceid appname="…" id="…"/>` is an identifier for another
      system, here a help system that will link to this topic. `<data
      name="…" value="…"/>` is a named property with no defined meaning;
      a processor or a house rule can use it.
+
+4. **See what reaches the page**
+   Save the file. Choose **Project** > **Build Deliverables...**, and click
+   **Build All**. Open `out/full/topics/what-is-audacity.html` and look at
+   its `<head>`. Before the prolog, it had only a
+   `<meta name="description">` from the short description and a default
+   copyright with no owner. Now it also carries
+   `<meta name="keywords" content="Audacity, audio editor, open source">`
+   and `<meta name="rights" content="© 2026 DogsBay Ltd.">`, which replaces
+   the default.
+
+   That is all that reaches the head in the `html5` transform. The author,
+   the dates, the audience, the category and the index terms stay in the
+   source, for other outputs, for searches across the project, and for the
+   policy in step 5.
 ::::
 
 ## Step 2: The prologs of the other topics
@@ -228,6 +248,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      have pages: "decibel … *see also* amplitude".
    - `<index-sort-as>` gives the text to sort by when it differs from the
      text shown: `Clipping (distortion)` sorts as `clipping`.
+   - The HTML pages do not show index entries, but you can list them. In
+     the **Terminal** panel, run `dogsbay-xml index-audit .`. Each line is
+     an index entry with the number of topics that carry it, and `>`
+     separates an entry from its sub-entry, for example
+     `installing > Windows`. A PDF index is built from the same terms.
    - `project-health` checks the index. Change the redirect to
      `audio format` and it reports, under *Index redirects to nothing*,
      `"codecs" see "audio format"`.
@@ -688,16 +713,27 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    same order, without the `<metadata>` wrapper: `<author>`,
    `<publisher>`, `<copyright>`, `<critdates>`, `<audience>` and
    `<keywords>` sit directly inside it. Map metadata applies to the
-   publication and, for the HTML5 transform, cascades into every page: the
+   publication and, for the `html5` transform, cascades into every page: the
    `<meta name="rights">` tag on each page comes from this copyright.
+
+3. **See the publication metadata**
+   Save the map, choose **Project** > **Build Deliverables...**, and click
+   **Build All**. The start page, `out/full/index.html`, carries the map's
+   keywords in `<meta name="keywords">` and a `<meta name="rights">` tag
+   from the map's copyright. A topic page such as
+   `out/full/topics/what-is-digital-audio.html` also has the rights tag,
+   although its topic has no copyright of its own. Its keywords stay the
+   topic's own.
 ::::
 
 ## Step 5: The metadata policy and the check
 
 ::::steps
 1. **Set the metadata policy**
-   Choose **Project** > **Metadata** > **Edit Policy...**. The dialog shows
-   a table of rules, one rule per row. Add three rules:
+   The policy is kept with the project, in `.dogsbay/config.xml`, and
+   makes fields required or recommended. Choose **Project** >
+   **Metadata** > **Edit Policy...**. The dialog shows a table of rules,
+   one rule per row. Add three rules:
 
    | Topic type (blank = any) | Field | Presence | Allowed values (space-separated) | Pattern |
    |---|---|---|---|---|
@@ -708,7 +744,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    For each rule, click **Add rule**. A new row starts with the field
    `author` and the presence `required`. Choose the **Field** and the
    **Presence** from their lists, and double-click a text cell to type in
-   it. When the table shows the three rules, click **OK**.
+   it. When the table shows the three rules, click **OK**. A message
+   confirms that the rules were saved to `.dogsbay/config.xml`; click
+   **OK**.
 
 2. **Read the rules**
 
@@ -722,7 +760,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      which is the rule that reaches the glossary group.
    - `project-health` applies the policy as one of its checks, so the
      health stage of **Check Project** and `dogsbay-xml check` enforces it.
-     The editor applies the same policy.
+     The editor applies the same policy. DITA-OT and other DITA tools do
+     not read this policy.
 
 3. **Format and check your work**
 
@@ -758,14 +797,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The unused keys are defined for later stages: stage 14 refers to
    `gl-normalization`, and stage 18 uses `start-here` and `digital-audio`.
 
-   The check builds the guide into `out/full/`.
-   In `out/full/topics/what-is-audacity.html` the `<head>` now carries
-   `<meta name="keywords" content="Audacity, audio editor, open source">`
-   and `<meta name="rights" content="© 2026 DogsBay Ltd.">`. The PDF transform uses the index terms to generate an index.
+   The check also builds the guide into `out/full/`. The `html5` pages
+   carry the keywords and rights tags from step 1 and step 4. The PDF
+   transform uses the index terms to generate an index.
 ::::
 
-Test the metadata policy. Delete the `<critdates>` block from *Trimming audio*
-and check your work. The check stops at health and names the file. Example
+Test the metadata policy. In *Trimming audio*, put the cursor in
+`<critdates>`, choose **XML** > **Select Element**, delete the element,
+save, and check your work. The check stops at health and names the file. Example
 output:
 
 ```
@@ -796,10 +835,10 @@ Summary
   Unused keys                   3
 ```
 
-The file is valid; `<critdates>` is optional to the DTD. The policy is what
-makes it required, for tasks, in this project.
+The file is valid; `<critdates>` is optional to the DTD. The DogsBay XML
+policy, not the DITA DTD, makes it required for tasks in this project.
 
-Undo the policy test, then test the element order. Move `<resourceid>` and `<data>` in *What is
+Undo the policy test with **Edit** > **Undo**, save, and check again. Then test the element order. Move `<resourceid>` and `<data>` in *What is
 Audacity?* to before `<metadata>`, and check your work. The file is no
 longer valid, and the check names it with the line, column, and message.
 Example output:

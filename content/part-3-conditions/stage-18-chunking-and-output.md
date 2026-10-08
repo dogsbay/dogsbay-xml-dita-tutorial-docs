@@ -352,9 +352,9 @@ the project's deliverables.
 </map>
 ```
 
-The example is not one of the project's deliverables, so **Check Project**
-does not build it yet. Add its two maps as temporary deliverables, check
-them, and delete the deliverables when you finish. The two deliverables
+The example is not one of the project's deliverables, so a build does not
+include it yet. Add its two maps as temporary deliverables, build them, and
+delete the deliverables when you finish. The two deliverables
 take these values:
 
 | Field | `chunk-combined` | `chunk-split` |
@@ -372,8 +372,33 @@ take these values:
 2. Click **Add...** again and enter the values in the `chunk-split`
    column. Click **Save...**, click **OK**, and click **Close**.
 
-Check your work. In the editor, choose **Project** > **Check Project**. From
-the command line, run:
+Before you build, predict how many pages each map makes from the one
+source file, and what each page is called. Then choose **Project** >
+**Build Deliverables...** and click **Build All**. To list the pages each
+example made, run this command in the **Terminal** panel:
+
+```bash
+find out/chunk-combined out/chunk-split -name '*.html' | sort
+```
+
+Example output:
+
+```
+out/chunk-combined/index.html
+out/chunk-combined/topics/nested.html
+out/chunk-split/40bd459f6b660bc87c8e81941a93d5fa87bcabeb.html
+out/chunk-split/index.html
+out/chunk-split/topics/chunk-parent.html
+```
+
+Besides its `index.html`, the combined example has one page,
+`topics/nested.html`, named after the source file. The split example has
+two: `topics/chunk-parent.html`, named after the parent topic's `@id`, and
+the child page, with a generated name at the top of the output folder.
+
+**Project** > **Check Project** builds every deliverable too, and also
+checks the links in the built pages. From the command line, the same
+check is:
 
 ```bash
 dogsbay-xml check .
@@ -407,7 +432,8 @@ To build and check one deliverable only from the command line, run
 `dogsbay-xml check --deliverable=chunk-split .`.
 
 Open each output's `index.html` from the **Explorer**, and choose **View** >
-**Preview in Tab** to follow its links. The combined version,
+**Preview in Tab** to follow its links and compare the two tables of
+contents. The combined version,
 `out/chunk-combined/topics/nested.html`, keeps the parent and child on one
 page. The split version writes two pages: `topics/chunk-parent.html` for
 the parent, and a page with a generated name at the top of the output
@@ -436,8 +462,9 @@ of the checkpoint.
 
 ## Check the guide
 
-In the editor, choose **Project** > **Check Project** and read the result
-in the **Project Validation** panel. From the command line, run:
+Check the guide without the example deliverables. In the editor, choose
+**Project** > **Check Project** and read the result in the **Project
+Validation** panel. From the command line, run:
 
 ```bash
 dogsbay-xml check .
@@ -470,9 +497,38 @@ Check that the effects and presets pages have stable filenames
 (`out/full/topics/effects-reference.html` and `effect-presets.html`), that
 `out/full/topics/` has no `what-is-digital-audio.html` because
 `to-content` merged it into `what-is-audacity.html`, and that the beginner
-guides have `topics/formats-quick-reference.html`.
-`outputclass="compact"` on the effects table supplies a CSS class; a
-stylesheet must define its visual effect.
+guides have `topics/formats-quick-reference.html`. For example, in the
+**Terminal** panel:
+
+```bash
+ls out/full/topics out/beginner-mac/topics | grep -E 'effect|quick|what-is|:$'
+```
+
+Example output:
+
+```
+out/beginner-mac/topics:
+formats-quick-reference.html
+what-is-audacity.html
+what-is-digital-audio.html
+out/full/topics:
+effect-order.html
+effect-presets.html
+effects-reference.html
+what-is-audacity.html
+```
+
+The beginner guide's map has no `chunk`, so it keeps both *What is*
+pages.
+
+Open `out/full/topics/what-is-audacity.html` and choose **View** >
+**Preview in Tab**. The table of contents still lists *What is digital
+audio*, and its entry leads to a section of this page.
+
+`outputclass="compact"` on the effects table says nothing about how the
+table looks. The transform decides that: DITA-OT's `html5` transtype, which
+the deliverable chooses, writes the value into the page as a CSS class
+name, and a stylesheet must define its visual effect.
 
 ## What you learned
 

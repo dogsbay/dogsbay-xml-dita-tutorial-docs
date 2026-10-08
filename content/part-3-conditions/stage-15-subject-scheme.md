@@ -8,8 +8,10 @@ type: tutorial
 
 Define the allowed platform and audience values in a subject scheme.
 Without a controlled vocabulary, `platform="macos"` passes DTD validation
-even though the filters expect `mac`. The unrecognized value leaves the
-macOS content in Windows and Linux output.
+even though the filters expect `mac`. Before the scheme exists, the
+controlled values check also passes every file, because nothing says
+which values `@platform` may take. The unrecognized value leaves the
+macOS content in Windows and Linux output, and no build fails.
 
 Create `subject-scheme.ditamap`, reference it from each root map, and
 check the values against it. DITA-OT only warns about a value outside the
@@ -237,9 +239,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    as part of health; this command runs it on its own, which is quicker
    after you change a profiling attribute.
 
-2. **Check your work**
-   In the editor, choose **Project** > **Check Project** and read the
-   result in the **Project Validation** panel. From the command line, run:
+2. **Build and check your work**
+   Rebuild the guides: choose **Project** > **Build Deliverables...**, and
+   click **Build All**. The five guides build as before; the scheme adds
+   no pages of its own. To check everything as well, choose **Project** >
+   **Check Project** and read the result in the **Project Validation**
+   panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -276,8 +281,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 Test a value outside the controlled vocabulary. In
 `topics/installing-audacity.dita`, change the macOS row to
-`<chrow platform="macos">` and check your work. The check stops at health.
-The output looks like this example:
+`<chrow platform="macos">` and save. Choose **Project** >
+**Validate Files** > **Controlled Values (Subject Scheme)...**. With the
+scheme in place, the check fails on the install row and suggests `mac`.
+Then choose **Project** > **Check Project**. The check stops at health
+and builds nothing, so no guide ships with the typo. The output looks
+like this example:
 
 ```
 health   NOT CLEAN

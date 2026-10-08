@@ -27,6 +27,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Create `topics/scripting-reference.dita`**
+   Right-click `topics` in the **Explorer**, choose **New File**, enter
+   `scripting-reference.dita`, and choose the **Reference** template.
+   Replace the template's content with this topic:
 
    ```xml title="topics/scripting-reference.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -163,8 +166,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      `<varname>` a value the reader supplies, `<option>` a switch that
      selects a behavior, `<codeph>` a literal value.
    - Everything a reader types or reads on a screen gets the element
-     that says what it is, and a stylesheet can render `<cmdname>` in
-     bold and `<varname>` in italic without you deciding it here.
+     that says what it is. The transform that the deliverable chooses
+     decides how each kind looks, so you do not decide it here.
 
 4. **Read the messages**
    `<msgph>` is a message quoted inline; `<msgblock>` is a message as a
@@ -177,7 +180,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `<proptype>`, `<propvalue>` and `<propdesc>`, with an optional
    `<prophead>` naming them. Each `<property>` row carries a `platform`
    attribute, so a filtered build keeps only the rows for its platform.
-   No Windows-filtered deliverable includes the scripting reference: the
+   A row is removed only when all its platforms are excluded. No
+   Windows-filtered deliverable includes the scripting reference: the
    `podcaster-linux` build drops the Windows row, and the unfiltered builds
    show both rows. `<filepath>` with a `<varname>`
    inside it names the pipe with the user id as a variable.
@@ -243,6 +247,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
 2. **Create `topics/exporting-from-a-script.dita`**
+   Right-click `topics` in the **Explorer**, choose **New File**, enter
+   `exporting-from-a-script.dita`, and choose the **Task** template.
+   Replace the template's content with this task:
 
    ```xml title="topics/exporting-from-a-script.dita"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -314,9 +321,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    and tested; the topic never goes stale against it. `outputclass` on
    the `<codeblock>` becomes a class on the `<pre>` in the HTML5 output,
    `language-python`, the convention that syntax highlighters such as
-   highlight.js and Prism read. In the check's build of the full guide,
-   `out/full/topics/exporting-from-a-script.html`, the listing is in
-   place:
+   highlight.js and Prism read. After you build (step 3), the listing is
+   in place in the full guide's
+   `out/full/topics/exporting-from-a-script.html`:
 
    ```
    <pre class="pre codeblock language-python"><code>#!/usr/bin/env python3
@@ -470,16 +477,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** >
-   **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor,
+   choose **XML** > **Format** and save the file, or choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once.
+   From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...**
+   and click **Build All**. All eight deliverables are built again. To
+   check the project and the built output as well, choose **Project** >
+   **Check Project** instead and read the result in the
+   **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -512,12 +523,48 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The note lines count DITA-OT notes from each build. To print them, run
    `dogsbay-xml check -v .`, or read them in the **Project Validation**
    panel.
+
+2. **Read the built pages**
+   Open `out/full/topics/scripting-reference.html` and choose **View** >
+   **Preview in Tab**. Scroll past the guide's contents to the reference.
+   The build drew the syntax diagram: the command name in bold, then the
+   colon, and the optional group in square brackets, with the words the
+   reader replaces in italics. The source has no brackets and no italics.
+   You marked what each part is; the look comes from the transform,
+   DITA-OT's html5 transtype, which the deliverable chose.
+
+   Preview `out/full/topics/exporting-from-a-script.html` the same way.
+   Step 2's listing is the script from `samples/`, put in place by the
+   `<coderef>`. Change the script, build again, and the page follows.
+
+   In the **Terminal** panel, list the task page's preformatted blocks:
+
+   ```bash
+   grep -o '<pre class="[^"]*"' out/full/topics/exporting-from-a-script.html
+   ```
+
+   There are two. The listing's class ends with `language-python`, from
+   the `outputclass`. The other is the `<screen>` block in step 3.
+
+   Then count the Windows pipe in the reference of the unfiltered full
+   guide and of the Linux podcaster guide:
+
+   ```bash
+   grep -c ToSrvPipe out/full/topics/scripting-reference.html out/podcaster-linux/topics/scripting-reference.html
+   ```
+
+   It appears once in the full guide and not at all in
+   `podcaster-linux`: the filter dropped the Windows row and kept the row
+   for Linux and macOS.
 ::::
 
 Test the position of the repetition separator. Move the
 `<repsep>` line out of the inner `<groupseq>` to directly after
-`<delim>:</delim>` in the outer one, and check your work. The check stops
-at health. Example output:
+`<delim>:</delim>` in the outer one, save, and choose **XML** >
+**Validate**. The topic is not valid: the **Errors** panel reports that
+the content of `groupseq` must match its content model, at line 39.
+**Project** > **Check Project** reports the same fault, in shorter
+words, and stops at health. Example output:
 
 ```
 health   NOT CLEAN
@@ -531,8 +578,8 @@ A `<repsep>` follows the optional title and precedes the items in its
 group. The message names the element whose content is wrong, `groupseq`,
 not the misplaced `<repsep>` inside it.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change with **Edit** > **Undo**, save, and validate again.
+Confirm that the topic is valid before you continue.
 
 ## What you learned
 
