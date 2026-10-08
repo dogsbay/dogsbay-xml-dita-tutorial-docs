@@ -51,9 +51,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `installing` key definition, because this map defines text and URL
    keys only; step 2 keys the topics in the guide map. Keep the
    `product-name` key definition and replace `Product Name` with
-   `Audacity`, then add the other key definitions. If you use another
-   editor, create the file and type the finished listing. The finished
-   map:
+   `Audacity`, then add the other three key definitions. Save the file, so
+   that the build sees it. If you use another editor, create the file and
+   type the finished listing. The finished map:
 
    ```xml title="keydefs-product.ditamap"
    <?xml version="1.0" encoding="UTF-8"?>
@@ -109,6 +109,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 ::::steps
 1. **Edit `audacity-guide.ditamap`**
+   After the `<topicmeta>`, add a `<mapref>` and one more `<keydef>`. Then
+   add `@keys` to three `<topicref>` elements that are already in the
+   guide. Save the map.
 
    ```diff title="audacity-guide.ditamap"
    --- a/audacity-guide.ditamap
@@ -158,10 +161,45 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 3: Use the keys in the topics
 
 ::::steps
-1. **Edit the topics**
-   Every literal "Audacity" becomes `<keyword keyref="product-name"/>`,
-   the install task gains the version and the download link, and three
-   links go through keys.
+1. **Key one topic first**
+   Open `topics/installing-audacity.dita`. In the download step, replace
+   `Audacity` and the address after it with
+   `<keyword keyref="product-name"/>`, then add
+   `<keyword keyref="product-version"/>` and the link
+   `<xref keyref="download-url"/>`. Do the same in the result, with the
+   name and the version, and in the title. The listing in item 3 shows the
+   finished lines. Leave the rest of the topic for item 3, and save the
+   file.
+
+   The title and the download step now hold empty elements. Predict what
+   the built page shows there. Then choose **Project** > **Check Project**.
+   The check covers the keys too, and it rebuilds the guide in `out/full/`.
+   Open `out/full/topics/installing-audacity.html` and choose **View** >
+   **Preview in Tab**. The title reads *Installing Audacity*, and the
+   download step reads "Download Audacity 3.4 from the Audacity download
+   page", with a link to the download address. The words come from the key
+   definitions, not from the topic.
+
+2. **Change the definition once**
+   In `keydefs-product.ditamap`, change `Audacity` to `Audacity Pro` and
+   save the file. You have not changed the topic. Predict what its title
+   and download step say after the next build. Then choose **Project** >
+   **Check Project** again, and preview the built install page as before.
+   Every reference changed, including the title, *Installing Audacity
+   Pro*, and the download step, "Download Audacity Pro 3.4". The table of
+   contents shows the new title too. The short description still says *Audacity*, because
+   it is typed text, not a key.
+
+   Change the name back to `Audacity`, exactly, and save the file. The rest
+   of the course uses it.
+
+3. **Key the rest of the topics**
+   Every other literal "Audacity" becomes `<keyword keyref="product-name"/>`,
+   and three links go through keys. In each topic, use **Edit** >
+   **Replace...** to find `Audacity` and replace it with the keyword. Skip the
+   places that must stay literal, such as the Windows install folder, which
+   is a file path, the web addresses, and the title of the quoted manual in
+   *What is digital audio?*, which is an attribute value.
 
    ```diff title="topics/installing-audacity.dita"
    --- a/topics/installing-audacity.dita
@@ -388,14 +426,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
         </section>
    ```
 
-2. **Preview a keyed topic**
+4. **Preview a keyed topic**
    Open `topics/what-is-audacity.dita` and choose **View** > **Preview in
-   Split**. The bar above the preview reads **Map:
+   Tab**. The bar above the preview reads **Map:
    audacity-guide.ditamap**: the preview resolves keys through the map of
    the active deliverable, `full`, so every `product-name` reference shows
    as *Audacity*, underlined to mark it as text that comes from a key.
 
-3. **Read the four forms of reference**
+5. **Read the four forms of reference**
 
    - `<keyword keyref="product-name"/>`: variable text. The element is
      empty; the processor fills in the `<keyword>` from the keydef. It
@@ -449,12 +487,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Format and check your work**
 
-   Format the topics: choose **XML** > **Format** in each changed topic and
-   save it, or choose **Project** > **Project Tools** > **Format Project**
-   to format every file at once. From the command line, run:
+   Save all your files. Format the maps and the topics: choose
+   **Project** > **Project Tools** > **Format Project** to format every
+   file at once, or choose **XML** > **Format** in each changed file and
+   save it. From the command line, run:
 
    ```bash
-   dogsbay-xml format -i topics/*.dita
+   dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
    Then check the project. In the editor, choose **Project** >
@@ -481,11 +520,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    `project-extension` in a reused step, and stage 18 uses `start-here`
    and `digital-audio` in a new topic.
 
-   The check builds the guide into `out/full/`.
-   Open `out/full/topics/installing-audacity.html`: the
-   title reads *Installing Audacity*, the download step reads "Download
-   Audacity 3.4 from the Audacity download page" with the link on the last
-   five words, after DITA-OT resolves the key references.
+   The check builds the guide into `out/full/`. Open
+   `out/full/topics/what-is-audacity.html`, preview it, and scroll to the
+   foot of the page. *Installing Audacity* is among the related links. You
+   wrote only the key. The build took the link text from the task's title,
+   which itself comes from the `product-name` key.
 ::::
 
 Test an undefined key reference.
@@ -529,8 +568,9 @@ name to the DTD, and DITA-OT would build the page with the version missing.
 The unused keys are warnings. `product-version` appears in the list now
 because the misspelled references no longer use it.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change: retype the `i` in both references, save the file, and
+check again. Confirm that the check reports `Ready`, with only the three
+unused keys that you saw before, before you continue.
 
 ## What you learned
 

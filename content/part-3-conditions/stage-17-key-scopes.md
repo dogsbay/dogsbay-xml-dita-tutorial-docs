@@ -73,6 +73,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
 3. **Read the peer mapref**
+   The peer reference shows an advanced case. The rest of the course does
+   not need it.
 
    - `scope="peer"` on a `<mapref>` says the referenced map is published
      separately; its topics are not added to this publication.
@@ -230,9 +232,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    **Save...**, click **OK** to write the deliverable, and click
    **Close**.
 
-2. **Check your work**
-   In the editor, choose **Project** > **Check Project** and read the
-   result in the **Project Validation** panel. From the command line, run:
+2. **Build**
+   Choose **Project** > **Build Deliverables...** and click **Build All**.
+   It builds all seven deliverables, the collection with them.
+   **Project** > **Check Project** also builds every deliverable, and
+   checks the project and the built pages as well. From the command line,
+   the same full check is:
 
    ```bash
    dogsbay-xml check .
@@ -261,13 +266,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
    The note lines count DITA-OT notes from each build. To print them,
-   run `dogsbay-xml check -v .`, or read them in the
-   **Project Validation** panel.
+   run `dogsbay-xml check -v .`, or choose **Project** > **Check
+   Project** and read them in the **Project Validation** panel.
 
 3. **Read the output**
-   `out/collection/index.html` has the three
-   guides one after another, and `topics/` has a page per use of each
-   topic: `what-is-audacity.html` for the full guide, then
+   Open `out/collection/index.html` and choose **View** > **Preview in
+   Tab**. The page is the table of contents: the three guides one after
+   another, each a top-level entry with its own headings and topics
+   under it. In the **Explorer**, `out/collection/topics/` has a page per
+   use of each topic: `what-is-audacity.html` for the full guide, then
    `what-is-audacity-1.html` for the beginner guide and
    `what-is-audacity-2.html` for the podcaster guide. A topic used in
    several scopes is a page in each, so that each copy's links resolve in
@@ -276,8 +283,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::
 
 Test an unqualified key at the root. Add `<topicref keyref="start-here"/>`
-to `audacity-collection.ditamap`, above the first `<topichead>`, and check
-your work. The check reports `Ready`, and warns under the `collection`
+to `audacity-collection.ditamap`, above the first `<topichead>`, save, and
+choose **Project** > **Check Project**. The check reports `Ready`, and warns under the `collection`
 build:
 
 ```

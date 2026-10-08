@@ -194,14 +194,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The eighth deliverable, `book-pdf`, is the bookmap with the `pdf`
    transtype. DITA-OT's built-in PDF transform, `org.dita.pdf2`,
    renders the book with Apache FOP. The editor includes both, and
-   **Check Project** builds the PDF with the other seven deliverables into
-   `out/book-pdf/`.
+   **Project** > **Build Deliverables...** builds the PDF with the other
+   seven deliverables into `out/book-pdf/`.
+
+   Before you build, predict: the seven chapters sit in three parts. Do
+   the chapter numbers start again at 1 in each part, or run on through
+   the book?
 ::::
 
 ## Step 3: Check your work
 
 ::::steps
-1. **Format and check your work**
+1. **Format and build**
 
    Format the changed files: choose **XML** > **Format** in each changed
    file and save it, or choose **Project** > **Project Tools** >
@@ -212,9 +216,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then choose **Project** > **Build Deliverables...** and click
+   **Build All**. It builds eight deliverables now, the book among them.
+   **Project** > **Check Project** also builds every deliverable, and
+   checks the project and the built pages as well. Read its result in the
+   **Project Validation** panel. From the command line, the same full
+   check is:
 
    ```bash
    dogsbay-xml check .
@@ -251,8 +258,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 2. **Read the book**
    The editor writes the PDF to `out/book-pdf/audacity-book.pdf` in your
-   project. Open it in any PDF viewer. `pdftotext` shows the contents page
-   without a viewer:
+   project. In the **Explorer**, open `out`, then `book-pdf`: the build
+   wrote one file, the whole book. Open it in your PDF viewer.
+
+   - Page 1 is the cover, with the main title and the subtitle from
+     `<booktitle>`.
+   - The contents follow. The front matter pages are numbered in roman
+     numerals.
+   - Chapter numbers run on through the book, so *Part II* opens with
+     *Chapter 3*. Parts get roman numerals, and appendixes get letters.
+   - Each chapter opens on a new page with its number and title. A nested
+     topic continues the chapter as a section.
+   - The index at the end lists the index terms from stage 13 under their
+     letters. Most entries have a page number. The terms that come from
+     the glossary entries, such as *Bit depth* and *hertz*, are listed
+     without one. Follow an entry with a page number to its page.
+
+   `pdftotext` shows the contents page without a viewer:
 
    ```bash
    pdftotext out/book-pdf/audacity-book.pdf - | sed -n '/^Contents/,/^Index/p'
@@ -293,8 +315,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::
 
 Test the placement of key definitions. Move the two
-`<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`, and
-check your work. The check stops at health. Example output:
+`<keydef>` lines out of `<frontmatter>` to directly after `</bookmeta>`,
+save, and choose **Project** > **Check Project**. The check stops at
+health. Example output:
 
 ```
 health   NOT CLEAN
@@ -312,8 +335,10 @@ the parser stops matching the content model. The model is a title, then
 failed, nothing was built. Keys, scheme maprefs and resource-only
 references live inside `<frontmatter>` in a bookmap.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Undo the change with **Edit** > **Undo**, and save. Choose **XML** >
+**Validate**: the **Errors** panel reports **Valid Document**, so the
+bookmap matches its content model again. To rerun the full check, choose
+**Project** > **Check Project** and confirm that it reports `Ready`.
 
 ## What you learned
 

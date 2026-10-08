@@ -61,7 +61,8 @@ The map has three elements:
   so the map does not repeat it.
 
 Add a `<topicref>` each time you add a topic to the guide. Later lessons
-introduce hierarchy and generated links.
+introduce hierarchy and generated links. Save the map, as you save every
+file that you change.
 
 ## Select and validate the map
 
@@ -107,11 +108,19 @@ topic. The check reads the source only. Stage 03 adds a deliverable, so the
 check can also build HTML. Until then, look for `health   clean`.
 
 Validation checks the map against its grammar only. It does not check that
-each `@href` points to a file. To see the difference, change the `@href` to
-`topics/what-is-audacty.dita` and run `dogsbay-xml validate
-audacity-guide.ditamap` again. It still prints `VALID`. Now check your work.
-The check reports the broken reference, and the topic that the map no longer
-includes. The following output is an example:
+each `@href` points to a file. Before you try the next step, predict which of
+the two would catch a typo in the `@href`.
+
+To see the difference, delete the `i` near the end of `audacity` in the
+`@href`, so that it reads `topics/what-is-audacty.dita`, and save the map.
+Choose **XML** > **Validate** (or run `dogsbay-xml validate
+audacity-guide.ditamap`). The **Errors** panel still reports
+`Valid Document`, and the command still prints `VALID`: the map still matches
+its grammar. Now choose **Project** > **Check Project** (or run
+`dogsbay-xml check .`). The check is not clean. It reports the broken
+reference, and the topic is an orphan again because the map no longer reaches
+it. Only the check looks at where an `@href` points. The following output is
+an example:
 
 ```
 health   NOT CLEAN
@@ -136,7 +145,7 @@ Summary
   Orphan topics                 1
 ```
 
-Restore the file name and check again. Confirm that the check reports
+Type the `i` again, save the map, and check again. Confirm that the check reports
 `health   clean` before you continue.
 
 ## Next lesson

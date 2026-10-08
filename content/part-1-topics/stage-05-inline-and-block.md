@@ -118,10 +118,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
 3. **Read the block elements**
 
-   - `<sl>` with `<sli>` is a simple list: short items, one line each, no
-     bullets in most outputs. Use `<ul>` when items are sentences.
-   - `<fn>` is a footnote. It sits inline where the reference goes, and
-     output moves the text to the foot of the page and leaves a marker.
+   - `<sl>` with `<sli>` is a simple list: short items, one line each. Most
+     transforms show it without bullets. Use `<ul>` when items are sentences.
+   - `<fn>` is a footnote. It sits inline where the reference goes. The build
+     moves the text to the foot of the page and leaves a numbered marker.
    - `<simpletable>` uses `<sthead>`, `<strow>`, and `<stentry>` for a
      regular grid. It supports column headers, `@keycol` for row headers,
      and `@relcolwidth` for relative widths, such as `relcolwidth="1* 2*"`.
@@ -133,6 +133,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      would leave unmarked.
    - `<lq>` is a long quotation, set off as a block. `@reftitle` names the
      source.
+
+4. **Preview the concept**
+   Choose **View** > **Preview in Tab**. The terms are in italics, and the
+   sample rates are a short list, one line each. The simple table is a
+   grid, with its header row set apart. The footnote text still runs on
+   inside its sentence: the preview shows the source as you typed it, and
+   only the build moves the footnote to the foot of the page. You see that
+   in "Step 4: Update the map and build".
 ::::
 
 ## Step 2: Write the task
@@ -201,7 +209,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<uicontrol>` is the name of a button, menu item, field or key as it
      appears in the interface: `Delete`, `Ctrl+A`, `Edit`.
    - `<menucascade>` is a path through menus. Its children are `<uicontrol>`
-     elements in order, and output joins them with an arrow:
+     elements in order, and the transform joins them with a `>` separator,
+     so you never type the separators yourself:
      **Edit > Remove Special > Trim Audio**.
    - `<shortcut>` marks the accelerator letter inside a control name, the
      underlined letter in a menu: `<uicontrol><shortcut>D</shortcut>elete</uicontrol>`.
@@ -218,14 +227,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      adds `trouble`. A note may sit in `<context>`. Inside a step, a note is
      allowed before the `<cmd>`. After the command, put the note inside
      `<info>`.
+
+4. **Preview the task**
+   Choose **View** > **Preview in Tab**. Each note is a colored box,
+   labeled with its type, and the menu path reads as one. In the preview,
+   the controls look much like the text around them. In the built guide,
+   the `html5` transform sets them apart.
 ::::
 
 > [!NOTE]
 > `<shortcut>` is only valid inside `<uicontrol>` in DITA 1.3. It marks the
 > accelerator letter of a control, not a key combination. Key combinations
-> such as `Ctrl+A` are plain `<uicontrol>` text. If you write
-> `<cmd>Press <shortcut>Delete</shortcut></cmd>`, the check names the file
-> with the line, column, and message, and stops at the health stage. The
+> such as `Ctrl+A` are plain `<uicontrol>` text.
+>
+> To see this, in step 2 of `trimming-audio.dita`, replace
+> `<uicontrol>Delete</uicontrol>` with `<shortcut>Delete</shortcut>` and
+> save. Predict what validation says, then choose **XML** > **Validate**.
+> The **Errors** panel names the line and the error: the content of `<cmd>`
+> does not match its content model. **Project** > **Check Project** and
+> `dogsbay-xml check .` find the same error. The check names the file with
+> the line, column, and message, and stops at the health stage. The
 > **Project Validation** panel, or `dogsbay-xml project-health .`, gives the
 > full report. The following output is an example:
 >
@@ -247,7 +268,8 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 >   Invalid files                 1  of 6
 > ```
 >
-> If you try this, undo the change and check again.
+> Put the `<uicontrol>` back, save, and validate again. The **Errors** panel
+> reports `Valid Document`.
 
 ## Step 3: Mark up the stage 04 topics
 
@@ -361,9 +383,17 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - `<ph>` is a phrase with no more specific meaning. It carries attributes
      (conditions in stage 14, ids for reuse in stage 11) when you need a
      handle on a run of text and none of the other inline elements fits.
+
+4. **Preview the changed topics**
+   Open each topic and choose **View** > **Preview in Tab**. In the task,
+   the tip stands out from the context, and the warning stands out under
+   its step. The controls are marked, but the preview sets them much like
+   the text around them. In the reference, the terms are in italics, the
+   file names and the command are in code type, the list is numbered, and
+   the code block is set apart.
 ::::
 
-## Step 4: Update the map and check your work
+## Step 4: Update the map and build
 
 ::::steps
 1. **Add the topics to the map**
@@ -396,9 +426,15 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. The check rebuilds the
-   guide in `out/full/`. The output looks like this example:
+   Before you build, predict where the footnote text will be in the built
+   page. Then choose **Project** > **Build Deliverables...** and click
+   **Build All**. When the build finishes, click **OK**. The build rebuilds
+   the guide in `out/full/`, with a page for each new topic.
+
+   To make sure that the project is also healthy, choose **Project** >
+   **Check Project** in the editor, or run `dogsbay-xml check .` from the
+   project root. The check also builds every deliverable. The output looks
+   like this example:
 
    ```
    health   clean
@@ -406,6 +442,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+3. **See the built guide**
+   Open `out/full/topics/what-is-digital-audio.html`. Where the footnote
+   was, the sentence now ends with a numbered link, and the footnote text
+   is at the end of the page. Choose **View** > **Preview in Tab** to see
+   the page as a browser shows it: the terms are in italics, the simple
+   list has no bullets, and the number after the sentence about file size
+   links to the footnote text at the foot of the page.
+
+   Then open `out/full/topics/recording-your-first-track.html` and preview
+   it. **Record**, **Stop**, and **Play** are in bold. The markup says what
+   they are, and the `html5` transform chose the look.
 ::::
 
 ## What you learned

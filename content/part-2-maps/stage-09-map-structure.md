@@ -22,7 +22,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ## Step 1: Structure the map
 
 ::::steps
-1. **Edit `audacity-guide.ditamap`**
+1. **See the flat contents**
+   Open `audacity-guide.ditamap`. It lists the nine topics one after
+   another, in the order you wrote them, with no headings and no reading
+   order. Choose **Project** > **Build Deliverables...**, click
+   **Build All**, and click **OK** when the build finishes. Open
+   `out/full/index.html` and choose **View** > **Preview in Tab**. The
+   table of contents is the same flat list: concepts, tasks, and reference
+   are mixed together, and *Preparing to record* comes last, long after
+   *Recording your first track*.
+
+2. **Edit `audacity-guide.ditamap`**
+   Make the change in two passes, so that you can see what each part
+   generates. First, click inside `<map>`, choose **XML** > **Select
+   Element Content**, and delete the content. Type the new title and the
+   `<topicmeta>` with the short description, then add the three
+   `<topichead>` elements. Save the map, and continue with items 3 and 4.
+   Later, in item 5, you add the `<reltable>` at the end of the map.
 
    ```diff title="audacity-guide.ditamap"
    --- a/audacity-guide.ditamap
@@ -103,9 +119,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
     </map>
    ```
 
-2. **Read the hierarchy**
+3. **Read the hierarchy**
 
-   - A `<topicref>` inside a `<topicref>` is a child topic. The output nests
+   - A `<topichead>` is a heading in the table of contents, with no page of
+     its own. Its `@navtitle` is the text of the heading.
+   - A `<topicref>` inside a `<topicref>` is a child topic. The build nests
      it in the table of contents and generates a "Parent topic" link on the
      child. *What is digital audio?* is now a child of *What is Audacity?*.
    - `@collection-type` on the parent says how its children relate.
@@ -125,7 +143,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      title, *Supported audio formats*. Without `@locktitle`, the navigation
      title is ignored and the topic's title is used.
 
-3. **Read the relationship table**
+4. **Build and see the contents and the sequence**
+   Predict how many entries the top level of the contents has, and what
+   the reference entry is called. Then build again with **Project** >
+   **Build Deliverables...** and **Build All**, open `out/full/index.html`,
+   and preview it. The top level has three entries, the three headings.
+   *What is digital audio?* is indented under its parent, the four
+   recording tasks follow in order with no group heading, and the
+   reference entry is *Audio formats*.
+
+   Open `out/full/topics/recording-your-first-track.html`, preview it, and
+   scroll to the foot of the page. **Previous topic** (*Preparing to
+   record*) and **Next topic** (*Trimming audio*) come from the sequence.
+   *Preparing to record* is listed again below them, from the link you
+   wrote in stage 07.
+
+5. **Add the relationship table**
+   Add the `<reltable>` from the listing at the end of the map, before
+   `</map>`, and save the map.
+
+6. **Read the relationship table**
 
    - `<reltable>` is a table of relationships. Each `<relcolspec>` in the
      `<relheader>` names a column, here typed `concept`, `task` and
@@ -140,6 +177,21 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    - Links are generated in both directions from one statement, and a
      topic can be related to different neighbors in a different map,
      which is what a hand-written `<link>` cannot do.
+
+7. **Build and see the related links**
+   *Recording your first track* is in the first row. Predict which new
+   groups of links its page gets. Then build again, open
+   `out/full/topics/recording-your-first-track.html`, preview it, and
+   scroll to the foot. There are two new groups, both from the first row:
+   **Related concepts** (*What is digital audio?*) and **Related
+   reference** (*Supported audio formats*). The topic did not change. The
+   map did.
+
+   Now open `out/full/topics/exporting-audio.html`, preview it, and scroll
+   to the foot. *Supported audio formats* is listed twice under **Related
+   reference**: once from the table, and once from the link you wrote. The
+   map generates that link now, so the hand-written copy is only a second
+   place to keep up to date.
 ::::
 
 ## Step 2: Remove the links the map now generates
@@ -245,22 +297,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    links and link descriptions.
 ::::
 
-## Step 3: Check your work and look at the output
+## Step 3: Build and look at the output
 
 ::::steps
-1. **Format and check your work**
-   Format the map and the topics: choose **XML** > **Format** in each
-   changed file and save it, or choose **Project** > **Project Tools** >
-   **Format Project** to format every file at once. From the command line,
-   run:
+1. **Format and build**
+   Save every changed file. Format the map and the topics: choose
+   **Project** > **Project Tools** > **Format Project** to format every
+   file at once, or choose **XML** > **Format** in each changed file and
+   save it. From the command line, run:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then choose **Project** > **Build Deliverables...**, click
+   **Build All**, and click **OK** when the build finishes.
+
+   To make sure that the project is also healthy, check it. In the editor,
+   choose **Project** > **Check Project** and read the result in the
+   **Project Validation** panel. The check also builds every deliverable.
+   From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -276,8 +332,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    ```
 
 2. **Read the generated links**
-   The check builds the guide into `out/full/`. Open the pages under
-   `out/full/topics/`. The link blocks at the foot of each page are now
+   Predict what is under **Related reference** on the export page now.
+   Then open `out/full/topics/exporting-audio.html`, preview it, and scroll
+   to the foot. *Supported audio formats* is listed once, from the table.
+   **Previous topic** comes from the sequence, and *Trimming audio* is
+   still related, by the link you kept because it has a description.
+
+   Open the other pages under `out/full/topics/`. The link blocks at the foot of each page are now
    generated. The text of three of them, as DITA-OT 4.3.5 writes it:
 
    | Page | Generated links |
@@ -322,7 +383,7 @@ before you continue.
 ## What you learned
 
 - Nested `<topicref>`s make a hierarchy; `@collection-type="family"` and
-  `"sequence"` say how children relate, and the output links accordingly.
+  `"sequence"` say how children relate, and the build links accordingly.
 - `<topicgroup>` groups without a heading; `<topichead>` is a heading.
 - `@linking` controls which links a topic gives and receives;
   `@locktitle="yes"` with `<navtitle>` changes the table of contents but

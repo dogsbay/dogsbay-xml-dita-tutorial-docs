@@ -233,6 +233,11 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      the characters' own direction. Hebrew and Arabic letters carry their
      direction, so the attribute matters most where a phrase mixes them
      with digits and punctuation, and it is what a stylesheet keys on.
+   - If the Hebrew shows as boxes in the editor, the file is fine: the
+     editor's default font, Source Code Pro, has no Hebrew letters. To
+     read them, choose a font that has them, such as Liberation Mono, in
+     the editor's settings. The built pages use the browser's fonts, so
+     readers see the letters.
    - `<index-see>`, from stage 13, adds an index entry that redirects:
      *dB, see decibel*. The abbreviation gets its own line in the index
      and the reader is sent to the entry that has the page numbers.
@@ -421,16 +426,20 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** >
-   **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor,
+   choose **XML** > **Format** and save the file, or choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once.
+   From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita topics/glossary/*.dita shared/*.dita learning/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build. In the editor, choose **Project** > **Build Deliverables...**
+   and click **Build All** to build every deliverable. To check the
+   project and the built output as well, choose **Project** >
+   **Check Project** instead and read the result in the
+   **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -460,9 +469,12 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
    ```
 
-   The check reports `health   clean`, because review markup is a
+   The guide now holds an open draft comment and an unfinished cleanup.
+   The check still reports `health   clean`, because review markup is a
    warning, not a fault. To see the warnings, open the
-   **Project Validation** panel, or run:
+   **Project Validation** panel after **Check Project**, or run this
+   command in the **Terminal** panel and wait for it to finish before
+   you continue:
 
    ```bash
    dogsbay-xml project-health .
@@ -481,13 +493,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    *Authoring leftovers* is the health report's name for review markup.
    It counts the draft comment and the required cleanup, two, with the
    file and line of each. They are warnings: the project is still
-   healthy, the check still reports `Ready`, and the markup goes into the
+   healthy, **Check Project** still reports `Ready`, and the markup goes into the
    repository as the record of what is unfinished. Stage 25 adds a house
    rule that makes the same two findings failures, so that they cannot
    reach a release.
 
-2. **Read the review build**
-   The check built every deliverable into `out/` in your project.
+2. **Read the built pages**
+   The build put every deliverable into `out/` in your project.
+
+   Open `out/full/topics/what-is-audacity.html`. The topic's language is
+   on the page's `<html lang="en-gb">` element. The digital audio topic is
+   merged into this page, so the Hebrew phrase is there too, with its own
+   language and `dir="rtl"`, so a browser lays it out right to left.
 
    The `review` deliverable from stage 14 flags revision `3.4`, so in
    `out/review/topics/effects-reference.html` the new row carries the
@@ -514,8 +531,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    The draft comment is in neither build, nor is the required cleanup:
    DITA-OT drops `<draft-comment>` and `<required-cleanup>` unless the
    build asks for them with `args.draft=yes`. A search for the comment's
-   text across every deliverable that the check built,
-   `grep -rl 'metadata tags step' out/`, prints nothing.
+   text in the topics and in every deliverable that you built,
+   `grep -rl 'metadata tags step' topics out`, prints only
+   `topics/exporting-audio.dita`, the source file.
 
    To see them, give the `review` deliverable the parameter for one
    build:
@@ -552,8 +570,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 ::::
 
 Test an invalid value. Change the new row in `topics/effects-reference.dita`
-to `status="draft"`, a value that reads well and does not exist, and check
-your work. The check stops at health. Example output:
+to `status="draft"`, a value that reads well and does not exist, save,
+and choose **XML** > **Validate**. The **Errors** panel says that the
+value must come from a list. A project check fails too, and stops at
+health. Example output:
 
 ```
 health   NOT CLEAN
@@ -569,8 +589,8 @@ enumerated attribute accepts for conref, are the whole vocabulary; a workflow st
 as *draft* or *in review* belongs in a `<draft-comment disposition>` or in
 `<change-historylist>`, not in `status`.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Change `draft` back to `new`, save, and validate again. Confirm that the
+**Errors** panel reports **Valid Document** before you continue.
 
 ## What you learned
 

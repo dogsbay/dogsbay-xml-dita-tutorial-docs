@@ -8,7 +8,8 @@ type: how-to
 
 Check your project at the end of every lesson. The check tells you whether
 the project is ready to publish: whether its source is sound, whether every
-deliverable builds, and whether the built output holds together.
+deliverable builds, and whether the checks on the built pages find any
+problems.
 
 - In the editor, choose **Project** > **Check Project**. The result appears
   in the **Project Validation** panel.

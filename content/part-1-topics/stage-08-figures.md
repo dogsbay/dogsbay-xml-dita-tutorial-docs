@@ -124,7 +124,8 @@ project. The image map coordinates in step 3 assume the sample project's
 
 2. **Read the figure elements**
 
-   - `<fig>` is a figure: a `<title>` and some content, numbered in output.
+   - `<fig>` is a figure: a `<title>`, which is the caption, and some
+     content. The guide's build numbers the caption.
      Give it an `@id` when something links to it, as `fig-waveform` is
      linked from the recording task.
    - `<image href="…">` places an image. `@placement="break"` puts it on its
@@ -138,7 +139,14 @@ project. The image map coordinates in step 3 assume the sample project's
      because that is how the DITA DTDs declare them; an unprefixed `<svg>`
      does not validate.
 
-3. **Read the equation elements**
+3. **Preview the topic**
+   Save the file and choose **View** > **Preview in Tab**. The waveform is
+   on its own line, with its caption, in the *Waveforms* section. The
+   alternative text is not shown, because the image loaded; it is in the
+   page for readers who cannot see the image. The editor's preview shows
+   the SVG drawing as text. You see it drawn in the built guide in step 4.
+
+4. **Read the equation elements**
 
    - `<equation-block>` is a displayed equation; `<equation-inline>` is one
      inside a sentence. Both are from the equation domain, which the base
@@ -209,15 +217,17 @@ project. The image map coordinates in step 3 assume the sample project's
      in pixels of the image, and an `<xref>` for the link. Here the `<xref>`
      elements have content, so the link text is the given label rather than
      the target's title.
+   - The cross-reference to the figure has no text of its own. When the
+     guide is built, the link takes its text from the figure.
    - The cross-reference `what-is-digital-audio.dita#what-is-digital-audio/fig-waveform`
      reaches the figure by its `@id`, the same `file#topic/element` form as a
      section link in stage 07.
 ::::
 
-## Step 4: Check your work
+## Step 4: Build the guide
 
 ::::steps
-1. **Format and check your work**
+1. **Format and build**
    Format the topics: choose **XML** > **Format** in each changed topic and
    save it, or choose **Project** > **Project Tools** > **Format Project** to
    format every file at once. From the command line, run:
@@ -226,9 +236,14 @@ project. The image map coordinates in step 3 assume the sample project's
    dogsbay-xml format -i topics/*.dita
    ```
 
-   Then choose **Project** > **Check Project** in the editor, or run
-   `dogsbay-xml check .` from the project root. The output looks like this
-   example:
+   Then choose **Project** > **Build Deliverables...** and click
+   **Build All**. When the build finishes, click **OK**. The build copies
+   the images into the output and turns both figures into HTML.
+
+   To make sure that every image and link also resolves, choose
+   **Project** > **Check Project** in the editor, or run
+   `dogsbay-xml check .` from the project root. The check also builds every
+   deliverable. The output looks like this example:
 
    ```
    health   clean
@@ -236,6 +251,22 @@ project. The image map coordinates in step 3 assume the sample project's
    output   clean (full)
    Ready: the project is healthy, every deliverable built, and the output of full holds together.
    ```
+
+2. **See the figures built**
+   The cross-reference to the figure had no text in the source. Predict
+   what the link says in the built recording task. Then open
+   `out/full/topics/recording-your-first-track.html`, choose **View** >
+   **Preview in Tab**, and scroll down to the steps. In the **Record**
+   step, the link says *Figure 1*: its text comes from the figure's
+   number, not its caption. In the step above it, the
+   toolbar picture is an image map, and its two regions link to
+   *Preparing to record* and *What is digital audio?*.
+
+   Open `out/full/topics/what-is-digital-audio.html`, preview it, and
+   scroll down to the *Waveforms* section. The waveform figure has a
+   numbered caption, and its image comes from the PNG file that the build
+   copied into the output. The second figure is the sine wave, drawn from
+   the SVG in the topic, with a numbered caption of its own.
 ::::
 
 The health stage checks image references too. Misspell `waveform.png` in the
@@ -284,7 +315,7 @@ complete map at this checkpoint is:
   `../images/`.
 - Inline SVG goes in `<svg-container>` with the `svg:` prefix.
 - `<equation-block>` and `<equation-inline>` carry `<mathml>` plus a `<ph>`
-  text alternative; HTML5 output needs the alternative.
+  text alternative; the guide's `html5` build shows the alternative.
 - `<imagemap>`: an image, then `<area>` elements with `<shape>`, `<coords>`
   and an `<xref>`.
 - End of Part 1: nine topics, every base element you need for the body of a

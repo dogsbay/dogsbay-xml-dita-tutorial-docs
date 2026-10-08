@@ -10,6 +10,11 @@ Write the guide's first topic, *What is Audacity?*, as a DITA `<concept>`.
 A concept provides background information about a subject or explains how
 something works.
 
+Three terms run through the course. A *topic* is one document about one
+subject. A *map* is the structure of the publication. A *deliverable* says
+how to make output from a map. You write a topic in this stage, a map in
+stage 02, and a deliverable in stage 03.
+
 Add a topic identifier, title, short description, and body. The tutorial
 requires a short description for each concept, task, and reference topic;
 the DTD makes some of these elements optional.
@@ -175,9 +180,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    reports on the source only. Look for `health   clean`.
 ::::
 
-To see a validation error, put a `<section>` inside another `<section>` and
-check again. For example, add this inside the *Who uses it* section, after
-its `<p>`:
+To see a validation error, put a `<section>` inside another `<section>`.
+For example, add this inside the *Who uses it* section, after its `<p>`.
+Before you validate, guess what the editor will report.
 
 ```xml
 <section>
@@ -186,7 +191,13 @@ its `<p>`:
 </section>
 ```
 
-The check names the file, with the line, column, and message of the first
+Choose **XML** > **Validate**. The **Errors** panel reports that the
+document is not valid: the content of the outer `<section>` does not match
+its content model. The grammar does not allow a section there. When you
+want a second level, you want a second topic.
+
+**Project** > **Check Project** and `dogsbay-xml check .` find the same
+error. The check names the file, with the line, column, and message of the first
 errors, and stops at the health stage. The output looks like this example:
 
 ```
@@ -216,11 +227,9 @@ Summary
   Orphan topics                 1
 ```
 
-In the editor, **XML** > **Validate** also reports the error in the
-**Errors** panel.
-
-Undo the change and check again. Confirm that the check reports
-`health   clean` before you continue.
+Undo the change, save, and choose **XML** > **Validate** again. Confirm
+that the **Errors** panel reports `Valid Document` and that the check
+reports `health   clean` before you continue.
 
 ## What you learned
 

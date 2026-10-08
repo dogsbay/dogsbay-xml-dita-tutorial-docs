@@ -143,14 +143,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    the **House Rules (Schematron)** list, which shows `(none)`, choose
    `house-style.sch`. Click **Save**.
 
-   From now on `project-health` runs the rules with everything else, the
-   editor applies the same rules, and the `house rules:` part of the
-   health report's first line names `house-style.sch` instead of saying
-   *none*.
+   A rules file does nothing until the project names it. From now on
+   project health, the first step of **Check Project**, runs the rules
+   with everything else, the editor applies the same rules, and the
+   `house rules:` part of the health report's first line names
+   `house-style.sch` instead of saying *none*.
 
 2. **Run the rules before you change anything else**
    With the rules file selected, and the files still
-   as they were at the end of stage 24:
+   as they were at the end of stage 24, run only the rules, without
+   building: choose **Project** > **Validate Files** > **With Schematron**.
+   The result appears in the **Project Validation** panel, each violation
+   with its file, its line, and the message from its rule. From the
+   command line, run this command and wait for it to finish:
 
    ```bash
    dogsbay-xml project-health --include=schematron .
@@ -185,8 +190,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    prose, once as part of a title and once as part of an organization.
    The podcast workflow has five decorative `<b>`s and the
    `<required-cleanup>` from stage 24; *Exporting audio* has the
-   `<draft-comment>`. `--include=schematron` runs only the rules, which is
-   the fast loop while you fix them.
+   `<draft-comment>`. **Check Project** would stop at health on these and
+   build nothing. **Validate Files** > **With Schematron**, like
+   `--include=schematron`, runs only the rules, which is the fast loop
+   while you fix them.
 ::::
 
 ## Step 3: Resolve the violations
@@ -350,16 +357,25 @@ read these files.
 ::::steps
 1. **Format and check your work**
 
-   Format each file that you changed: in the editor, choose **XML** >
-   **Format** and save the file. From the command line, format them all:
+   Save all the files. Format each file that you changed: in the editor,
+   choose **XML** > **Format** and save the file, or choose **Project** >
+   **Project Tools** > **Format Project** to format every file at once.
+   From the command line, format them all:
 
    ```bash
    dogsbay-xml format -i topics/*.dita *.ditamap
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Run the rules again with **Project** > **Validate Files** >
+   **With Schematron**. Every file passes. This runs only the house
+   rules; the full check also validates, builds, and checks the output.
+
+   Then build. Choose **Project** > **Build Deliverables...** and click
+   **Build All**. Every deliverable builds. Before a release, choose
+   **Project** > **Check Project**, which runs the house rules first, as
+   part of health, and then builds and checks the output, and read the
+   result in the **Project Validation** panel. From the command line,
+   run:
 
    ```bash
    dogsbay-xml check .
@@ -394,12 +410,21 @@ read these files.
    including the two stage 24 warnings, so health is clean. From now on a
    house-rule violation stops the check at health, so a release cannot
    carry unresolved review markup.
+
+2. **Read the built page**
+   Open `out/full/topics/podcast-production-workflow.html`, choose
+   **View** > **Preview in Tab**, and scroll down to *Post-production*.
+   The steps are plain text, with the terms still linked, and the
+   loudness targets are a table. As a required cleanup, they never
+   reached a reader.
 ::::
 
-Test an invalid value. Put one `<b>` back in
+Test the bold rule. Put one `<b>` back in
 `topics/podcast-production-workflow.dita`, around *Noise reduction* in the
-post-production list, and check your work. The check stops at health.
-Example output:
+post-production list, save, and choose **Project** > **Validate Files** >
+**With Schematron**. One file fails, with the bold rule's message.
+**Check Project** runs the same rules in health and stops there. Example
+output of the check:
 
 ```
 health   NOT CLEAN
@@ -428,8 +453,9 @@ valid DITA, the links resolve, the metadata is complete. The house rule is
 the only thing that knows this project does not use `<b>`, which is what
 the rule is for.
 
-Undo the change and check again. Confirm that the check reports `Ready`
-before you continue.
+Replace the `<b>` element with its words, save, and run
+**Validate Files** > **With Schematron** again. Confirm that every file
+passes before you continue.
 
 ## What you learned
 
@@ -438,8 +464,9 @@ before you continue.
 - Testing `text()` so that literals inside `<filepath>` and `<cite>` are
   exempt; `test="true()"` to forbid an element.
 - **House Rules (Schematron)** in **Manage Projects**;
-  `project-health --include=schematron`; a house-rule violation stops
-  the check at health.
+  **Validate Files** > **With Schematron** and
+  `project-health --include=schematron` to run only the rules; a
+  house-rule violation stops the check at health.
 - Resolving review markup is content work: a `<required-cleanup>` becomes
   its table, an answered `<draft-comment>` becomes a `<change-summary>`.
 - Optionally, the same rules for three readers: the Schematron,

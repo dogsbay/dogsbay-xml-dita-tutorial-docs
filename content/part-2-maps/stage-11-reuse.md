@@ -177,13 +177,18 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      without it, but a conkeyref needs the key, and a conref push acts
      only when DITA-OT processes the pushing topic as part of the
      publication.
+
+   Save the map, so that the preview in the next step finds the new key.
 ::::
 
 ## Step 3: Pull the content into the tasks
 
 ::::steps
 1. **Edit `topics/trimming-audio.dita`**
-   The save step becomes a reference to the shared topic.
+   The save step becomes a reference to the shared topic. Add the
+   `@conref` attribute to the step's start tag. Then put the cursor in
+   the step, choose **XML** > **Select Element Content**, and replace the
+   content with an empty `<cmd/>`.
 
    ```diff title="topics/trimming-audio.dita"
    --- a/topics/trimming-audio.dita
@@ -299,13 +304,23 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
      and the target may not need anything the referencing context does not
      allow. A `<step>` into `<steps>`, a `<note>` into `<context>`, `<li>`s
      into a `<ul>`.
+
+5. **Preview the reuse**
+   The preview reads a shared topic from disk, so save the shared topics
+   as you go. Save each task, and choose **View** > **Preview in Tab**. The preview
+   resolves the references: the trimming task ends with the shared save
+   step, with its menu path and the explanation below it, and the noise
+   task's second step reads "Select the region of audio you want to work
+   on." A faint purple border at the left marks an included note, such as
+   the warning in the noise task. Fix the shared step once,
+   and every task that includes it changes with it.
 ::::
 
 ## Step 4: Check your work and check what was published
 
 ::::steps
-1. **Format and check your work**
-   Format the changed topics: choose **XML** > **Format** in each one and
+1. **Format, build, and check your work**
+   Format the changed files: choose **XML** > **Format** in each one and
    save it, or choose **Project** > **Project Tools** > **Format Project**
    to format every file at once. On the command line, the format command
    covers `shared/` too:
@@ -314,9 +329,13 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita shared/*.dita
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build the guide: choose **Project** > **Build Deliverables...**,
+   and click **Build All**. The build resolves every `@conref` and
+   `@conkeyref` and applies the push. To check everything as well, choose
+   **Project** > **Check Project** and read the result in the
+   **Project Validation** panel. **Check Project** checks the project's
+   health, builds every deliverable, and checks the built pages. From the
+   command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -367,8 +386,9 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    new id. Restore the id and check again.
 
 2. **Check the output**
-   The check builds the guide into `out/full/`. The folder has one page
-   per topic in the table of contents and nothing for the shared topics:
+   The build writes the guide to `out/full/`. To list the pages, run
+   `find` in the **Terminal** panel. The folder has one page per topic in
+   the table of contents and nothing for the shared topics:
 
    ```bash
    find out/full -name '*.html' | sort
@@ -387,10 +407,19 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    out/full/topics/what-is-digital-audio.html
    ```
 
-   The folder does not contain `common-steps.html` or `common-notes.html`. Open
-   `recording-your-first-track.html`: the step "Turn the playback volume
+   The folder does not contain `common-steps.html` or `common-notes.html`.
+   Their content appears only where a task includes it.
+
+   Open `out/full/topics/removing-background-noise.html` and find the list
+   in step 5. It has all three settings, from "Noise reduction: 12 dB" to
+   "Frequency smoothing: 3": the range brought the middle item along.
+
+   Open `recording-your-first-track.html`: the step "Turn the playback volume
    down before you listen" sits before "Click Play", pushed there from the
-   shared topic, and the task's own file never mentions it.
+   shared topic, and the task's own file never mentions it. Pull is the
+   usual way to reuse content. Push suits content owned by another team,
+   added to a task without editing it, but it is harder to follow, so use
+   it sparingly.
 ::::
 
 Test two errors. First, use a `@conkeyref` with an undefined key. Change `common-notes/backup-warning` in the noise task to

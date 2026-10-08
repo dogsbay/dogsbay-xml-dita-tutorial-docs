@@ -534,7 +534,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    Enter the deliverable name in **Name**. Choose each map from the
    **Input map** list and each filter from the **DITAVAL (optional)**
-   list, or click **Browse...** to select the file.
+   list, or click **Browse...** to select the file. Leave **Transtype** at
+   `html5`. For a publication parameter, click **Add param**, double-click
+   the name cell and type `nav-toc`, then double-click the value cell and
+   type `partial`.
 
    - **DITAVAL** applies one filter to the build. The two beginner guides
      share a map and differ only in their DITAVAL file.
@@ -546,22 +549,26 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
 
    When you finish, the table lists five deliverables. Click **Close**.
 
-   `full` stays the active deliverable, the one that **Build
-   Deliverables** builds by default. To build another one from the
-   editor, choose it in the status bar's deliverable menu. The check
-   builds all five.
+   `full` stays the active deliverable, the one that the preview and
+   **Build Deliverables** use by default. To make another one active,
+   choose it in the status bar's deliverable menu. **Build All** and
+   **Check Project** build all five.
 
 2. **Preview what each guide shows**
    Open `topics/removing-background-noise.dita` and choose **View** >
-   **Preview in Split**. The bar above the preview names the active
+   **Preview in Tab**. The bar above the preview names the active
    deliverable's map and filter: **Map: audacity-guide.ditamap** and
-   **Filter: none**, so the warning reads "undo with Ctrl+Z or, on macOS,
-   Cmd+Z". In the status bar's deliverable menu, choose `beginner-mac`. The
-   preview follows at once: **Map: beginner-guide.ditamap**, **Filter:
-   mac-beginner.ditaval**, and the warning reads "undo with Cmd+Z". Choose
-   `full` again before you continue.
+   **Filter: none**. Nothing is filtered, so the warning reads "undo with
+   Ctrl+Z or, on macOS, Cmd+Z", and the podcaster tip is there. Close the
+   preview. In the status bar's deliverable menu, choose `beginner-mac`,
+   and preview the topic again: **Map: beginner-guide.ditamap**, **Filter:
+   mac-beginner.ditaval**. The warning reads "undo with Cmd+Z", and the
+   podcaster tip is gone. Preview `topics/installing-audacity.dita` the
+   same way: the Linux paragraph is gone, and the choice table has one
+   row, macOS. The topics have not changed; the filter did the work.
+   Choose `full` again before you continue.
 
-3. **Format and check your work**
+3. **Format, build, and check your work**
 
    Format the changed files: choose **XML** > **Format** in each one and
    save it, or choose **Project** > **Project Tools** > **Format Project**
@@ -571,9 +578,10 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    dogsbay-xml format -i topics/*.dita shared/*.dita *.ditamap filters/*.ditaval
    ```
 
-   Then check the project. In the editor, choose **Project** >
-   **Check Project** and read the result in the **Project Validation**
-   panel. From the command line, run:
+   Then build all five guides: choose **Project** >
+   **Build Deliverables...**, and click **Build All**. To check everything
+   as well, choose **Project** > **Check Project** and read the result in
+   the **Project Validation** panel. From the command line, run:
 
    ```bash
    dogsbay-xml check .
@@ -597,12 +605,14 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
-   The check takes longer now: it builds five deliverables instead of one,
-   and checks the links in each. `podcast-workflow` is unused until stage
+   The build and the check take longer now: they build five deliverables
+   instead of one, and the check also checks the links in each. `podcast-workflow` is unused until stage
    18 refers to it.
 
 4. **Read the output**
-   `out/` contains one folder per deliverable. Compare these files:
+   `out/` contains one folder per deliverable. To see a page as a reader
+   does, open it and choose **View** > **Preview in Tab**. Compare these
+   files:
 
    - In `topics/removing-background-noise.html`, the step reads "Select
      the whole track with Ctrl+A." under `beginner-windows` and
