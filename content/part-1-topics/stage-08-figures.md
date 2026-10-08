@@ -249,7 +249,7 @@ project. The image map coordinates in step 3 assume the sample project's
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 
 2. **See the figures built**

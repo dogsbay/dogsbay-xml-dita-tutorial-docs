@@ -328,7 +328,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    health   clean
    build    full                 ok  /home/you/my-audacity-guide/out/full
    output   clean (full)
-   Ready: the project is healthy, every deliverable built, and the output of full holds together.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
    ```
 
 2. **Read the generated links**

@@ -265,7 +265,7 @@ Recorded output below is an example. File counts, paths, and stage numbers can d
    build    review               ok  /home/you/my-audacity-guide/out/review
      4 note(s) — run with --verbose to see them
    output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review)
-   Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review holds together. 3 unused keys above: worth knowing, and not treated as failures.
+   Ready: the project is healthy, every deliverable built, and every link in the pages of 5 deliverables leads somewhere. 3 unused keys above: worth knowing, and not treated as failures.
    ```
 
    The scheme is a map with its own DOCTYPE, and health validates it like

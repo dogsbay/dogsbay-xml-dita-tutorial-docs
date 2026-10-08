@@ -79,12 +79,12 @@ The output looks like this example:
 health   clean
 build    full                 ok  /home/you/my-audacity-guide/out/full
 output   clean (full)
-Ready: the project is healthy, every deliverable built, and the output of full holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of full leads somewhere.
 ```
 
 The `build` line shows where the deliverable was built: the `out/full`
-folder inside `my-audacity-guide`. The `output   clean` line means that the
-checks on the built pages found no problems. To see the pages, open `out/full/index.html`
+folder inside `my-audacity-guide`. The `output   clean` line means that every
+link in the built pages leads somewhere. To see the pages, open `out/full/index.html`
 from the **Explorer** and choose **View** > **Preview in Tab**. The preview
 shows the page as a browser does. Follow the topic link, and check the
 heading, short description, list, and section. The navigation comes from

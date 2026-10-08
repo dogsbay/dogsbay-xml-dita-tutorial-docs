@@ -486,7 +486,7 @@ build    install-variants     ok  /home/you/my-audacity-guide/out/install-varian
 build    collection           ok  /home/you/my-audacity-guide/out/collection
   5 note(s) — run with --verbose to see them
 output   clean (full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection)
-Ready: the project is healthy, every deliverable built, and the output of full, beginner-mac, beginner-windows, podcaster-linux, review, install-variants, collection holds together.
+Ready: the project is healthy, every deliverable built, and every link in the pages of 7 deliverables leads somewhere.
 ```
 
 The unused-key warnings are gone: *About this guide* refers to
