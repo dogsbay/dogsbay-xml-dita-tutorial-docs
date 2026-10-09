@@ -61,9 +61,12 @@ Each branch also has files that the lessons do not create, such as
 maintainers and for visitors on GitHub. Compare only the files that the
 lessons create.
 
-`main` is not part of the chain. It is the finished, deliberately broken demo
-project that the DogsBay XML tutorial uses, and it shares no history with the
-stage branches.
+`main` is the finished guide: the result of `tutorial/26-final`, plus the
+maintainers' files. It is what **File** > **Open Sample Project** gives you,
+and what a clone of the repository opens on. It is a healthy project — Check
+Project is clean and every deliverable builds — so it is the copy to compare
+your own work against. `main` is not a step in the chain, and it shares no
+history with the stage branches.
 
 ## Open a checkpoint
 
