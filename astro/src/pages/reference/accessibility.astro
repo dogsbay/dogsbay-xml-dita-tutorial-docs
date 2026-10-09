@@ -18,7 +18,7 @@ const siteConfig = siteConfigData as SiteConfig;
 
 const headings = [{"depth":1,"slug":"review-accessibility","text":"Review accessibility"},{"depth":2,"slug":"review-the-source","text":"Review the source"},{"depth":2,"slug":"review-the-output","text":"Review the output"},{"depth":2,"slug":"record-the-result","text":"Record the result"}];
 const nav = navData;
-const currentPath = "/dogsbay-xml-dita-tutorial-docs/reference/accessibility";
+const currentPath = "/dita-tutorial/reference/accessibility";
 const _navForPagination = filterNavByAxis(nav as any[], {
   basePath: "",
   namespace: null ?? undefined,
@@ -38,9 +38,9 @@ const pageType = "how-to";
 const pageAudience = null;
 const pageCategory = ["reference"];
 const pageTaxonomies = null;
-const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
+const tagsIndexPath = "/dita-tutorial/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Review accessibility {#review-accessibility}\n\nReview both the DITA source and each published format. Valid XML does not establish that the output is accessible.\n\n## Review the source {#review-the-source}\n\n1. Check that titles and link text identify their destination. Replace labels such as \"here\" with the subject or action readers can expect.\n2. Give informative images useful text alternatives. Describe the information readers need, including details of a waveform or diagram that support the surrounding instructions. Add a nearby text explanation when a short alternative cannot convey the full meaning.\n3. Supply text links for actions available through an image map. Readers should be able to reach the same destinations without selecting an area in the image.\n4. Identify table headers with the appropriate table elements. For a simple table, use `sthead` for column headers and consider `keycol` for row headers. Avoid using tables only to position text.\n5. Check that instructions and review flags remain understandable without color. Include a text label where color indicates a state.\n6. Declare the correct language and mark language changes in the text.\n\n## Review the output {#review-the-output}\n\nOpen the built HTML and use the keyboard to follow the navigation, topic links, and image-map alternatives. Confirm that focus is visible and that link destinations are correct. Check the heading order and enlarge the text to look for clipped or overlapping content.\n\nRead representative pages with a screen reader. Check whether image alternatives, table headers, and link names provide enough context. The rendered output can expose problems that are not apparent in the source.\n\nFor PDF, inspect reading order, bookmarks, text alternatives, and table structure with a PDF accessibility tool. Record problems in the publishing transform as well as source problems. An HTML check does not validate a PDF.\n\n## Record the result {#record-the-result}\n\nRecord the deliverable, page, interaction, expected behavior, and observed behavior for each issue. Recheck the affected output after a fix. This review is a practical tutorial exercise, not a claim of conformance to an accessibility standard.\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/accessibility.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Review accessibility {#review-accessibility}\n\nReview both the DITA source and each published format. Valid XML does not establish that the output is accessible.\n\n## Review the source {#review-the-source}\n\n1. Check that titles and link text identify their destination. Replace labels such as \"here\" with the subject or action readers can expect.\n2. Give informative images useful text alternatives. Describe the information readers need, including details of a waveform or diagram that support the surrounding instructions. Add a nearby text explanation when a short alternative cannot convey the full meaning.\n3. Supply text links for actions available through an image map. Readers should be able to reach the same destinations without selecting an area in the image.\n4. Identify table headers with the appropriate table elements. For a simple table, use `sthead` for column headers and consider `keycol` for row headers. Avoid using tables only to position text.\n5. Check that instructions and review flags remain understandable without color. Include a text label where color indicates a state.\n6. Declare the correct language and mark language changes in the text.\n\n## Review the output {#review-the-output}\n\nOpen the built HTML and use the keyboard to follow the navigation, topic links, and image-map alternatives. Confirm that focus is visible and that link destinations are correct. Check the heading order and enlarge the text to look for clipped or overlapping content.\n\nRead representative pages with a screen reader. Check whether image alternatives, table headers, and link names provide enough context. The rendered output can expose problems that are not apparent in the source.\n\nFor PDF, inspect reading order, bookmarks, text alternatives, and table structure with a PDF accessibility tool. Record problems in the publishing transform as well as source problems. An HTML check does not validate a PDF.\n\n## Record the result {#record-the-result}\n\nRecord the deliverable, page, interaction, expected behavior, and observed behavior for each issue. Recheck the affected output after a fix. This review is a practical tutorial exercise, not a claim of conformance to an accessibility standard.\n","mdUrl":"https://dogsbay.ai/dita-tutorial/reference/accessibility.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -83,9 +83,9 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
   poweredBy={siteConfig.poweredBy !== false}
   multiSource={null ?? undefined}
   switcherMap={switcherMapData}
-  basePath={"/dogsbay-xml-dita-tutorial-docs"}
+  basePath={"/dita-tutorial"}
   navMode={"client"}
-  pagefindUrl={"/dogsbay-xml-dita-tutorial-docs/pagefind/"}
+  pagefindUrl={"/dita-tutorial/pagefind/"}
   pagefindBaseUrl={"/"}
   favicon={false}
   wideLayout={false}

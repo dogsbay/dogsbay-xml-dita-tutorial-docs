@@ -3,6 +3,6 @@
 // dogsbay.config.yml. Edit dogsbay.config.yml and rebuild;
 // edits to this file will be overwritten on the next build.
 export const dogsbaySite = "https://dogsbay.ai";
-export const dogsbayBase = "/dogsbay-xml-dita-tutorial-docs";
+export const dogsbayBase = "/dita-tutorial";
 export const dogsbayInlineStylesheets = "auto";
-export const dogsbayOutDir = "./dist/dogsbay-xml-dita-tutorial-docs";
+export const dogsbayOutDir = "./dist/dita-tutorial";

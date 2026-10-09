@@ -4,7 +4,7 @@ import { rmSync, existsSync, mkdirSync, renameSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const MOUNT_DIR = "dist/dogsbay-xml-dita-tutorial-docs";
+const MOUNT_DIR = "dist/dita-tutorial";
 // Resolve against THIS FILE, never process.cwd(). `pnpm build` runs
 // with cwd set to the project, but this is an ordinary script sitting
 // in the project root, and the natural CI/debug invocation

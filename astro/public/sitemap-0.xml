@@ -1,132 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-00-setup/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-01-concept/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-02-first-map/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-03-first-build/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-04-task-and-reference/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-05-inline-and-block/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-06-rich-tasks/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-07-links/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-1-topics/stage-08-figures/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-2-maps/stage-09-map-structure/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-2-maps/stage-10-keys/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-2-maps/stage-11-reuse/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-2-maps/stage-12-glossary/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-2-maps/stage-13-metadata-and-index/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-3-conditions/stage-14-conditional-text/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-3-conditions/stage-15-subject-scheme/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-3-conditions/stage-16-branch-filtering/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-3-conditions/stage-17-key-scopes/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-3-conditions/stage-18-chunking-and-output/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-4-books/stage-19-bookmap/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-4-books/stage-20-troubleshooting/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-4-books/stage-21-hazards-and-safety/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-4-books/stage-22-software-domains/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-4-books/stage-23-learning/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-5-governance/stage-24-drafts-and-localization/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-5-governance/stage-25-house-rules/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/part-5-governance/stage-26-final/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/practice/capstone/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/practice/capstone/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/practice/exercises/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/practice/exercises/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/practice/solutions/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/practice/solutions/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/accessibility/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/accessibility/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/branches/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/branches/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/choosing-reuse/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/choosing-reuse/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/element-index/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/element-index/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/known-output-issues/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/known-output-issues/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/the-gate/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/the-gate/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/verification/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/reference/verification/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/start-here/how-the-tutorial-works/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/learning-path/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/start-here/learning-path/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/start-here/plan-your-topics/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/run-the-gate/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/start-here/run-the-gate/</loc>
   </url>
   <url>
-    <loc>https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/start-here/set-up/</loc>
+    <loc>https://dogsbay.ai/dita-tutorial/start-here/set-up/</loc>
   </url>
 </urlset>

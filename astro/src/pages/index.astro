@@ -31,7 +31,7 @@ import TableRow from "@ui/table/TableRow.astro";
 
 const headings = [{"depth":1,"slug":"what-you-will-build","text":"What you will build"},{"depth":2,"slug":"stages","text":"Stages"},{"depth":2,"slug":"how-to-use-it","text":"How to use it"},{"depth":2,"slug":"where-to-go-next","text":"Where to go next"}];
 const nav = navData;
-const currentPath = "/dogsbay-xml-dita-tutorial-docs";
+const currentPath = "/dita-tutorial";
 const _navForPagination = filterNavByAxis(nav as any[], {
   basePath: "",
   namespace: null ?? undefined,
@@ -51,9 +51,9 @@ const pageType = "explanation";
 const pageAudience = null;
 const pageCategory = null;
 const pageTaxonomies = null;
-const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
+const tagsIndexPath = "/dita-tutorial/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# What you will build {#what-you-will-build}\n\nBuild a DITA 1.3 documentation set using an Audacity user guide as the example. Start with an empty folder, `my-audacity-guide`, in the DogsBay XML editor, and add a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages. You do not need Git or the command line.\n\nChoose the [core course or optional modules](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path). Start with [Plan your topics](/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics), then publish a one-topic HTML guide in stages 02 and 03. Each module includes [practice exercises](/dogsbay-xml-dita-tutorial-docs/practice/exercises), and the core course ends with an [interview-workflow capstone](/dogsbay-xml-dita-tutorial-docs/practice/capstone).\n\nCheck your work at the end of every stage with **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line, and inspect the output. Every completed stage is also a checkpoint branch in the [sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Use it to compare your files, copy files that you cannot type, or start a later stage.\n\nThe sample guide is teaching material adapted from the Audacity Manual. Use the current Audacity documentation for product instructions.\n\n## Stages {#stages}\n\nThe tutorial has five parts. Each stage has a lesson page and a checkpoint branch. The maintainer's completed version is tagged `tutorial/final`.\n\n| Stage | Branch | Builds | Introduces |\n| --- | --- | --- | --- |\n| [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) | `tutorial/00-setup` | The `my-audacity-guide` project folder, with a `topics` folder | The project folder, **New Folder**, optional Git |\n| [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |\n| [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |\n| [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |\n| [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) | `tutorial/04-task-and-reference` | *Recording your first track*, *Supported audio formats* | `<task>`, `<steps>`, `<cmd>`, `<reference>`, CALS `<table>`; the three information types |\n| [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) | `tutorial/05-inline-and-block` | *What is digital audio?*, *Trimming audio* | `<uicontrol>`, `<menucascade>`, `<term>`, `<filepath>`, `<note>`, `<dl>`, `<ol>`, `<sl>`, `<fn>`, `<simpletable>`, `<codeblock>` |\n| [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) | `tutorial/06-rich-tasks` | *Installing Audacity*, *Exporting audio*, *Removing background noise*, *Preparing to record* | `<prereq>`, `<postreq>`, `<substeps>`, `<choices>`, `<choicetable>`, `<stepxmp>`, `<stepresult>`, `<steps-unordered>`, `<example>` |\n| [07](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links) | `tutorial/07-links` | Topics that point at each other | `<xref>`, `<related-links>`, `<link>`, `<linklist>`, `<linkpool>`, `<linktext>`, `<desc>` |\n| [08](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures) | `tutorial/08-figures` | Illustrations, an inline SVG, an image map and an equation | `<fig>`, `<image>`, `<alt>`, `<imagemap>`, `<svg-container>`, `<equation-block>`, `<mathml>` |\n| [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) | `tutorial/09-map-structure` | Hierarchy, sequences and generated links | nested `<topicref>`, `@collection-type`, `@linking`, `@locktitle`, `<navtitle>`, `<topicgroup>`, `<reltable>` |\n| [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) | `tutorial/10-keys` | Product variables and indirect links | `<keydef>`, `<keyword keyref>`, `@keyref`, `@keys`, `<mapref>`, `<linktext>` |\n| [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) | `tutorial/11-reuse` | Shared steps and notes | `@conref`, `@conrefend`, `@conkeyref`, conref push with `@conaction`, `@processing-role=\"resource-only\"` |\n| [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) | `tutorial/12-glossary` | Glossary entries and abbreviations | `<glossentry>`, `<glossterm>`, `<glossdef>`, `<glossAlt>`, `<abbreviated-form>`, `<term keyref>`, `<glossgroup>` |\n| [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) | `tutorial/13-metadata-and-index` | Prolog metadata and a real index | `<prolog>`, `<metadata>`, `<author>`, `<critdates>`, `<audience>`, `<indexterm>`, `<index-see>`; the metadata policy |\n| [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; one DITAVAL per deliverable |\n| [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) | `tutorial/15-subject-scheme` | A controlled vocabulary for the conditions | `<subjectScheme>`, `<subjectdef>`, `<enumerationdef>`, `<attributedef>`, `<hasNarrower>`, `<mapref type=\"subjectScheme\">`; `validate-conditions` |\n| [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering) | `tutorial/16-branch-filtering` | Three install variants from one topic | `<ditavalref>`, `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` |\n| [17](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes) | `tutorial/17-key-scopes` | One collection of three guides | `@keyscope`, scoped keys, `<mapref scope=\"peer\">` |\n| [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) | `tutorial/18-chunking-and-output` | Control over pages and file names | `@chunk`, `@copy-to`, nested topics, `@print`, `@toc`, `@search`, `@outputclass`, `<topicset>`, `<topicsetref>` |\n| [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) | `tutorial/19-bookmap` | The PDF book | `<bookmap>`, `<booktitle>`, `<bookmeta>`, `<frontmatter>`, `<booklists>`, `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`; the `pdf` transtype |\n| [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) | `tutorial/20-troubleshooting` | *The recording is silent* | `<troubleshooting>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>`, `<steps-informal>`, `<note type=\"trouble\">` |\n| [21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety) | `tutorial/21-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |\n| [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |\n| [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) | `tutorial/23-learning` | A \"check your understanding\" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |\n| [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |\n| [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, **House Rules (Schematron)**, `AGENTS.md`, the house-style skill; house rules in the check |\n| [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |\n\n## How to use it {#how-to-use-it}\n\n:::steps\n1. **Read [**How the tutorial works**](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works)** One project, built stage by stage, with a checkpoint at each stage.\n2. [**Set up your tools**](/dogsbay-xml-dita-tutorial-docs/start-here/set-up) The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty `my-audacity-guide` folder.\n3. **Follow your chosen learning path** Each page lists prerequisites, provides source examples, and ends with checks. Write the files in `my-audacity-guide`. Use the checkpoint instructions when skipping optional modules; each lesson assumes the preceding stage's files.\n4. **Compare when you are stuck** Every page links to the GitHub compare view for its stage, which shows exactly what changed.\n:::\n\n**Time:** 10 to 40 minutes per stage, plus practice exercises. **You need:** the DogsBay XML editor. Git is optional.\n\nFollow the core course for topic authoring, maps, reuse, variants, and validation. Choose optional modules when you need their publishing features. Use the checkpoints in the learning path when skipping stages. Allow additional time for setup, troubleshooting, and the capstone.\n\n## Where to go next {#where-to-go-next}\n\n:::cards\n- **[Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path){icon=\"book-open\"}**\n  The core course, optional modules, and starting checkpoints.\n\n- **[How the tutorial works](/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works){icon=\"git-branch\"}**\n  One project, stage by stage, and the checkpoint branches.\n\n- **[Set up your tools](/dogsbay-xml-dita-tutorial-docs/start-here/set-up){icon=\"wrench\"}**\n  Install the DogsBay XML editor and its command line.\n\n- **[Stage 00: Create your project folder](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup){icon=\"play\"}**\n  Start building.\n:::\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/index.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# What you will build {#what-you-will-build}\n\nBuild a DITA 1.3 documentation set using an Audacity user guide as the example. Start with an empty folder, `my-audacity-guide`, in the DogsBay XML editor, and add a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages. You do not need Git or the command line.\n\nChoose the [core course or optional modules](/dita-tutorial/start-here/learning-path). Start with [Plan your topics](/dita-tutorial/start-here/plan-your-topics), then publish a one-topic HTML guide in stages 02 and 03. Each module includes [practice exercises](/dita-tutorial/practice/exercises), and the core course ends with an [interview-workflow capstone](/dita-tutorial/practice/capstone).\n\nCheck your work at the end of every stage with **Project** > **Check Project** in the editor, or `dogsbay-xml check` on the command line, and inspect the output. Every completed stage is also a checkpoint branch in the [sample project](https://github.com/dogsbay/dogsbay-xml-dita-tutorial). Use it to compare your files, copy files that you cannot type, or start a later stage.\n\nThe sample guide is teaching material adapted from the Audacity Manual. Use the current Audacity documentation for product instructions.\n\n## Stages {#stages}\n\nThe tutorial has five parts. Each stage has a lesson page and a checkpoint branch. The maintainer's completed version is tagged `tutorial/final`.\n\n| Stage | Branch | Builds | Introduces |\n| --- | --- | --- | --- |\n| [00](/dita-tutorial/part-1-topics/stage-00-setup) | `tutorial/00-setup` | The `my-audacity-guide` project folder, with a `topics` folder | The project folder, **New Folder**, optional Git |\n| [01](/dita-tutorial/part-1-topics/stage-01-concept) | `tutorial/01-concept` | *What is Audacity?* | `<concept>`, `<title>`, `<shortdesc>`, `<conbody>`, `<p>`, `<ul>`, `<section>` |\n| [02](/dita-tutorial/part-1-topics/stage-02-first-map) | `tutorial/02-first-map` | A one-topic guide map | `<map>`, `<topicref>`, relative paths, project root |\n| [03](/dita-tutorial/part-1-topics/stage-03-first-build) | `tutorial/03-first-build` | The first HTML guide | **Manage Deliverables**, DITA-OT, output inspection |\n| [04](/dita-tutorial/part-1-topics/stage-04-task-and-reference) | `tutorial/04-task-and-reference` | *Recording your first track*, *Supported audio formats* | `<task>`, `<steps>`, `<cmd>`, `<reference>`, CALS `<table>`; the three information types |\n| [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) | `tutorial/05-inline-and-block` | *What is digital audio?*, *Trimming audio* | `<uicontrol>`, `<menucascade>`, `<term>`, `<filepath>`, `<note>`, `<dl>`, `<ol>`, `<sl>`, `<fn>`, `<simpletable>`, `<codeblock>` |\n| [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) | `tutorial/06-rich-tasks` | *Installing Audacity*, *Exporting audio*, *Removing background noise*, *Preparing to record* | `<prereq>`, `<postreq>`, `<substeps>`, `<choices>`, `<choicetable>`, `<stepxmp>`, `<stepresult>`, `<steps-unordered>`, `<example>` |\n| [07](/dita-tutorial/part-1-topics/stage-07-links) | `tutorial/07-links` | Topics that point at each other | `<xref>`, `<related-links>`, `<link>`, `<linklist>`, `<linkpool>`, `<linktext>`, `<desc>` |\n| [08](/dita-tutorial/part-1-topics/stage-08-figures) | `tutorial/08-figures` | Illustrations, an inline SVG, an image map and an equation | `<fig>`, `<image>`, `<alt>`, `<imagemap>`, `<svg-container>`, `<equation-block>`, `<mathml>` |\n| [09](/dita-tutorial/part-2-maps/stage-09-map-structure) | `tutorial/09-map-structure` | Hierarchy, sequences and generated links | nested `<topicref>`, `@collection-type`, `@linking`, `@locktitle`, `<navtitle>`, `<topicgroup>`, `<reltable>` |\n| [10](/dita-tutorial/part-2-maps/stage-10-keys) | `tutorial/10-keys` | Product variables and indirect links | `<keydef>`, `<keyword keyref>`, `@keyref`, `@keys`, `<mapref>`, `<linktext>` |\n| [11](/dita-tutorial/part-2-maps/stage-11-reuse) | `tutorial/11-reuse` | Shared steps and notes | `@conref`, `@conrefend`, `@conkeyref`, conref push with `@conaction`, `@processing-role=\"resource-only\"` |\n| [12](/dita-tutorial/part-2-maps/stage-12-glossary) | `tutorial/12-glossary` | Glossary entries and abbreviations | `<glossentry>`, `<glossterm>`, `<glossdef>`, `<glossAlt>`, `<abbreviated-form>`, `<term keyref>`, `<glossgroup>` |\n| [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) | `tutorial/13-metadata-and-index` | Prolog metadata and a real index | `<prolog>`, `<metadata>`, `<author>`, `<critdates>`, `<audience>`, `<indexterm>`, `<index-see>`; the metadata policy |\n| [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) | `tutorial/14-conditional-text` | Beginner and podcaster guides, per platform, and a review build | `@platform`, `@audience`, `@rev`, `<ph>` alternatives; DITAVAL `<prop action>`, `<revprop>`, `<startflag>`, `<style-conflict>`; one DITAVAL per deliverable |\n| [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) | `tutorial/15-subject-scheme` | A controlled vocabulary for the conditions | `<subjectScheme>`, `<subjectdef>`, `<enumerationdef>`, `<attributedef>`, `<hasNarrower>`, `<mapref type=\"subjectScheme\">`; `validate-conditions` |\n| [16](/dita-tutorial/part-3-conditions/stage-16-branch-filtering) | `tutorial/16-branch-filtering` | Three install variants from one topic | `<ditavalref>`, `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` |\n| [17](/dita-tutorial/part-3-conditions/stage-17-key-scopes) | `tutorial/17-key-scopes` | One collection of three guides | `@keyscope`, scoped keys, `<mapref scope=\"peer\">` |\n| [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) | `tutorial/18-chunking-and-output` | Control over pages and file names | `@chunk`, `@copy-to`, nested topics, `@print`, `@toc`, `@search`, `@outputclass`, `<topicset>`, `<topicsetref>` |\n| [19](/dita-tutorial/part-4-books/stage-19-bookmap) | `tutorial/19-bookmap` | The PDF book | `<bookmap>`, `<booktitle>`, `<bookmeta>`, `<frontmatter>`, `<booklists>`, `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`; the `pdf` transtype |\n| [20](/dita-tutorial/part-4-books/stage-20-troubleshooting) | `tutorial/20-troubleshooting` | *The recording is silent* | `<troubleshooting>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>`, `<steps-informal>`, `<note type=\"trouble\">` |\n| [21](/dita-tutorial/part-4-books/stage-21-hazards-and-safety) | `tutorial/21-hazards-and-safety` | Hearing-safety statements | `<hazardstatement>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>`; a conref'd hazard |\n| [22](/dita-tutorial/part-4-books/stage-22-software-domains) | `tutorial/22-software-domains` | Scripting Audacity from the command line | `<coderef>`, `<screen>`, `<userinput>`, `<systemoutput>`, `<cmdname>`, `<parmname>`, `<option>`, `<parml>`, `<msgblock>`, `<syntaxdiagram>`, `<properties>` |\n| [23](/dita-tutorial/part-4-books/stage-23-learning) | `tutorial/23-learning` | A \"check your understanding\" page | `<learningAssessment>`, `<lcObjectives>`, `<lcDuration>`, `<lcInteraction>`, `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcSequencing2>`; the check and the L&T DTDs |\n| [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) | `tutorial/24-drafts-and-localization` | Ready for review and translation | `@xml:lang`, `@translate`, `@dir`, `<sort-as>`, `<draft-comment>`, `<required-cleanup>`, `@status`, `<revised>`, `<change-historylist>` |\n| [25](/dita-tutorial/part-5-governance/stage-25-house-rules) | `tutorial/25-house-rules` | Rules as code | Schematron `house-style.sch`, **House Rules (Schematron)**, `AGENTS.md`, the house-style skill; house rules in the check |\n| [26](/dita-tutorial/part-5-governance/stage-26-final) | `tutorial/26-final` | The complete guide, tagged `tutorial/final` | Nothing new: every deliverable builds, the project is clean |\n\n## How to use it {#how-to-use-it}\n\n:::steps\n1. **Read [**How the tutorial works**](/dita-tutorial/start-here/how-the-tutorial-works)** One project, built stage by stage, with a checkpoint at each stage.\n2. [**Set up your tools**](/dita-tutorial/start-here/set-up) The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty `my-audacity-guide` folder.\n3. **Follow your chosen learning path** Each page lists prerequisites, provides source examples, and ends with checks. Write the files in `my-audacity-guide`. Use the checkpoint instructions when skipping optional modules; each lesson assumes the preceding stage's files.\n4. **Compare when you are stuck** Every page links to the GitHub compare view for its stage, which shows exactly what changed.\n:::\n\n**Time:** 10 to 40 minutes per stage, plus practice exercises. **You need:** the DogsBay XML editor. Git is optional.\n\nFollow the core course for topic authoring, maps, reuse, variants, and validation. Choose optional modules when you need their publishing features. Use the checkpoints in the learning path when skipping stages. Allow additional time for setup, troubleshooting, and the capstone.\n\n## Where to go next {#where-to-go-next}\n\n:::cards\n- **[Choose a learning path](/dita-tutorial/start-here/learning-path){icon=\"book-open\"}**\n  The core course, optional modules, and starting checkpoints.\n\n- **[How the tutorial works](/dita-tutorial/start-here/how-the-tutorial-works){icon=\"git-branch\"}**\n  One project, stage by stage, and the checkpoint branches.\n\n- **[Set up your tools](/dita-tutorial/start-here/set-up){icon=\"wrench\"}**\n  Install the DogsBay XML editor and its command line.\n\n- **[Stage 00: Create your project folder](/dita-tutorial/part-1-topics/stage-00-setup){icon=\"play\"}**\n  Start building.\n:::\n","mdUrl":"https://dogsbay.ai/dita-tutorial/index.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -96,9 +96,9 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
   poweredBy={siteConfig.poweredBy !== false}
   multiSource={null ?? undefined}
   switcherMap={switcherMapData}
-  basePath={"/dogsbay-xml-dita-tutorial-docs"}
+  basePath={"/dita-tutorial"}
   navMode={"client"}
-  pagefindUrl={"/dogsbay-xml-dita-tutorial-docs/pagefind/"}
+  pagefindUrl={"/dita-tutorial/pagefind/"}
   pagefindBaseUrl={"/"}
   favicon={false}
   wideLayout={false}
@@ -109,7 +109,7 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
     <article class="docs-prose">
       <h1 id="what-you-will-build" class="group scroll-mt-20">What you will build<a href="#what-you-will-build" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h1>
       <p>Build a DITA 1.3 documentation set using an Audacity user guide as the example. Start with an empty folder, <code>my-audacity-guide</code>, in the DogsBay XML editor, and add a concept topic. Add maps, keys, reusable content, conditional publishing, a PDF book, and house-style checks across 27 stages. You do not need Git or the command line.</p>
-      <p>Choose the <a href="/dogsbay-xml-dita-tutorial-docs/start-here/learning-path">core course or optional modules</a>. Start with <a href="/dogsbay-xml-dita-tutorial-docs/start-here/plan-your-topics">Plan your topics</a>, then publish a one-topic HTML guide in stages 02 and 03. Each module includes <a href="/dogsbay-xml-dita-tutorial-docs/practice/exercises">practice exercises</a>, and the core course ends with an <a href="/dogsbay-xml-dita-tutorial-docs/practice/capstone">interview-workflow capstone</a>.</p>
+      <p>Choose the <a href="/dita-tutorial/start-here/learning-path">core course or optional modules</a>. Start with <a href="/dita-tutorial/start-here/plan-your-topics">Plan your topics</a>, then publish a one-topic HTML guide in stages 02 and 03. Each module includes <a href="/dita-tutorial/practice/exercises">practice exercises</a>, and the core course ends with an <a href="/dita-tutorial/practice/capstone">interview-workflow capstone</a>.</p>
       <p>Check your work at the end of every stage with <strong>Project</strong> &gt; <strong>Check Project</strong> in the editor, or <code>dogsbay-xml check</code> on the command line, and inspect the output. Every completed stage is also a checkpoint branch in the <a href="https://github.com/dogsbay/dogsbay-xml-dita-tutorial">sample project</a>. Use it to compare your files, copy files that you cannot type, or start a later stage.</p>
       <p>The sample guide is teaching material adapted from the Audacity Manual. Use the current Audacity documentation for product instructions.</p>
       <h2 id="stages" class="group scroll-mt-20">Stages<a href="#stages" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
@@ -125,163 +125,163 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       </TableHeader>
       <TableBody>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup">00</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-00-setup">00</a></TableCell>
       <TableCell><code>tutorial/00-setup</code></TableCell>
       <TableCell>The <code>my-audacity-guide</code> project folder, with a <code>topics</code> folder</TableCell>
       <TableCell>The project folder, <strong>New Folder</strong>, optional Git</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       <TableCell><code>tutorial/01-concept</code></TableCell>
       <TableCell><em>What is Audacity?</em></TableCell>
       <TableCell><code>&lt;concept&gt;</code>, <code>&lt;title&gt;</code>, <code>&lt;shortdesc&gt;</code>, <code>&lt;conbody&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;section&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map">02</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-02-first-map">02</a></TableCell>
       <TableCell><code>tutorial/02-first-map</code></TableCell>
       <TableCell>A one-topic guide map</TableCell>
       <TableCell><code>&lt;map&gt;</code>, <code>&lt;topicref&gt;</code>, relative paths, project root</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build">03</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-03-first-build">03</a></TableCell>
       <TableCell><code>tutorial/03-first-build</code></TableCell>
       <TableCell>The first HTML guide</TableCell>
       <TableCell><strong>Manage Deliverables</strong>, DITA-OT, output inspection</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
       <TableCell><code>tutorial/04-task-and-reference</code></TableCell>
       <TableCell><em>Recording your first track</em>, <em>Supported audio formats</em></TableCell>
       <TableCell><code>&lt;task&gt;</code>, <code>&lt;steps&gt;</code>, <code>&lt;cmd&gt;</code>, <code>&lt;reference&gt;</code>, CALS <code>&lt;table&gt;</code>; the three information types</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       <TableCell><code>tutorial/05-inline-and-block</code></TableCell>
       <TableCell><em>What is digital audio?</em>, <em>Trimming audio</em></TableCell>
       <TableCell><code>&lt;uicontrol&gt;</code>, <code>&lt;menucascade&gt;</code>, <code>&lt;term&gt;</code>, <code>&lt;filepath&gt;</code>, <code>&lt;note&gt;</code>, <code>&lt;dl&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;sl&gt;</code>, <code>&lt;fn&gt;</code>, <code>&lt;simpletable&gt;</code>, <code>&lt;codeblock&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       <TableCell><code>tutorial/06-rich-tasks</code></TableCell>
       <TableCell><em>Installing Audacity</em>, <em>Exporting audio</em>, <em>Removing background noise</em>, <em>Preparing to record</em></TableCell>
       <TableCell><code>&lt;prereq&gt;</code>, <code>&lt;postreq&gt;</code>, <code>&lt;substeps&gt;</code>, <code>&lt;choices&gt;</code>, <code>&lt;choicetable&gt;</code>, <code>&lt;stepxmp&gt;</code>, <code>&lt;stepresult&gt;</code>, <code>&lt;steps-unordered&gt;</code>, <code>&lt;example&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links">07</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-07-links">07</a></TableCell>
       <TableCell><code>tutorial/07-links</code></TableCell>
       <TableCell>Topics that point at each other</TableCell>
       <TableCell><code>&lt;xref&gt;</code>, <code>&lt;related-links&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;linklist&gt;</code>, <code>&lt;linkpool&gt;</code>, <code>&lt;linktext&gt;</code>, <code>&lt;desc&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures">08</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-08-figures">08</a></TableCell>
       <TableCell><code>tutorial/08-figures</code></TableCell>
       <TableCell>Illustrations, an inline SVG, an image map and an equation</TableCell>
       <TableCell><code>&lt;fig&gt;</code>, <code>&lt;image&gt;</code>, <code>&lt;alt&gt;</code>, <code>&lt;imagemap&gt;</code>, <code>&lt;svg-container&gt;</code>, <code>&lt;equation-block&gt;</code>, <code>&lt;mathml&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       <TableCell><code>tutorial/09-map-structure</code></TableCell>
       <TableCell>Hierarchy, sequences and generated links</TableCell>
       <TableCell>nested <code>&lt;topicref&gt;</code>, <code>@collection-type</code>, <code>@linking</code>, <code>@locktitle</code>, <code>&lt;navtitle&gt;</code>, <code>&lt;topicgroup&gt;</code>, <code>&lt;reltable&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       <TableCell><code>tutorial/10-keys</code></TableCell>
       <TableCell>Product variables and indirect links</TableCell>
       <TableCell><code>&lt;keydef&gt;</code>, <code>&lt;keyword keyref&gt;</code>, <code>@keyref</code>, <code>@keys</code>, <code>&lt;mapref&gt;</code>, <code>&lt;linktext&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       <TableCell><code>tutorial/11-reuse</code></TableCell>
       <TableCell>Shared steps and notes</TableCell>
       <TableCell><code>@conref</code>, <code>@conrefend</code>, <code>@conkeyref</code>, conref push with <code>@conaction</code>, <code>@processing-role="resource-only"</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       <TableCell><code>tutorial/12-glossary</code></TableCell>
       <TableCell>Glossary entries and abbreviations</TableCell>
       <TableCell><code>&lt;glossentry&gt;</code>, <code>&lt;glossterm&gt;</code>, <code>&lt;glossdef&gt;</code>, <code>&lt;glossAlt&gt;</code>, <code>&lt;abbreviated-form&gt;</code>, <code>&lt;term keyref&gt;</code>, <code>&lt;glossgroup&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       <TableCell><code>tutorial/13-metadata-and-index</code></TableCell>
       <TableCell>Prolog metadata and a real index</TableCell>
       <TableCell><code>&lt;prolog&gt;</code>, <code>&lt;metadata&gt;</code>, <code>&lt;author&gt;</code>, <code>&lt;critdates&gt;</code>, <code>&lt;audience&gt;</code>, <code>&lt;indexterm&gt;</code>, <code>&lt;index-see&gt;</code>; the metadata policy</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       <TableCell><code>tutorial/14-conditional-text</code></TableCell>
       <TableCell>Beginner and podcaster guides, per platform, and a review build</TableCell>
       <TableCell><code>@platform</code>, <code>@audience</code>, <code>@rev</code>, <code>&lt;ph&gt;</code> alternatives; DITAVAL <code>&lt;prop action&gt;</code>, <code>&lt;revprop&gt;</code>, <code>&lt;startflag&gt;</code>, <code>&lt;style-conflict&gt;</code>; one DITAVAL per deliverable</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       <TableCell><code>tutorial/15-subject-scheme</code></TableCell>
       <TableCell>A controlled vocabulary for the conditions</TableCell>
       <TableCell><code>&lt;subjectScheme&gt;</code>, <code>&lt;subjectdef&gt;</code>, <code>&lt;enumerationdef&gt;</code>, <code>&lt;attributedef&gt;</code>, <code>&lt;hasNarrower&gt;</code>, <code>&lt;mapref type="subjectScheme"&gt;</code>; <code>validate-conditions</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
       <TableCell><code>tutorial/16-branch-filtering</code></TableCell>
       <TableCell>Three install variants from one topic</TableCell>
       <TableCell><code>&lt;ditavalref&gt;</code>, <code>&lt;ditavalmeta&gt;</code>, <code>&lt;dvrResourcePrefix&gt;</code>, <code>&lt;dvrResourceSuffix&gt;</code>, <code>&lt;dvrKeyscopePrefix&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
       <TableCell><code>tutorial/17-key-scopes</code></TableCell>
       <TableCell>One collection of three guides</TableCell>
       <TableCell><code>@keyscope</code>, scoped keys, <code>&lt;mapref scope="peer"&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       <TableCell><code>tutorial/18-chunking-and-output</code></TableCell>
       <TableCell>Control over pages and file names</TableCell>
       <TableCell><code>@chunk</code>, <code>@copy-to</code>, nested topics, <code>@print</code>, <code>@toc</code>, <code>@search</code>, <code>@outputclass</code>, <code>&lt;topicset&gt;</code>, <code>&lt;topicsetref&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       <TableCell><code>tutorial/19-bookmap</code></TableCell>
       <TableCell>The PDF book</TableCell>
       <TableCell><code>&lt;bookmap&gt;</code>, <code>&lt;booktitle&gt;</code>, <code>&lt;bookmeta&gt;</code>, <code>&lt;frontmatter&gt;</code>, <code>&lt;booklists&gt;</code>, <code>&lt;part&gt;</code>, <code>&lt;chapter&gt;</code>, <code>&lt;appendix&gt;</code>, <code>&lt;backmatter&gt;</code>; the <code>pdf</code> transtype</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting">20</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-20-troubleshooting">20</a></TableCell>
       <TableCell><code>tutorial/20-troubleshooting</code></TableCell>
       <TableCell><em>The recording is silent</em></TableCell>
       <TableCell><code>&lt;troubleshooting&gt;</code>, <code>&lt;condition&gt;</code>, <code>&lt;troubleSolution&gt;</code>, <code>&lt;cause&gt;</code>, <code>&lt;remedy&gt;</code>, <code>&lt;steps-informal&gt;</code>, <code>&lt;note type="trouble"&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
       <TableCell><code>tutorial/21-hazards-and-safety</code></TableCell>
       <TableCell>Hearing-safety statements</TableCell>
       <TableCell><code>&lt;hazardstatement&gt;</code>, <code>&lt;messagepanel&gt;</code>, <code>&lt;typeofhazard&gt;</code>, <code>&lt;consequence&gt;</code>, <code>&lt;howtoavoid&gt;</code>, <code>&lt;hazardsymbol&gt;</code>; a conref'd hazard</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       <TableCell><code>tutorial/22-software-domains</code></TableCell>
       <TableCell>Scripting Audacity from the command line</TableCell>
       <TableCell><code>&lt;coderef&gt;</code>, <code>&lt;screen&gt;</code>, <code>&lt;userinput&gt;</code>, <code>&lt;systemoutput&gt;</code>, <code>&lt;cmdname&gt;</code>, <code>&lt;parmname&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;parml&gt;</code>, <code>&lt;msgblock&gt;</code>, <code>&lt;syntaxdiagram&gt;</code>, <code>&lt;properties&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       <TableCell><code>tutorial/23-learning</code></TableCell>
       <TableCell>A "check your understanding" page</TableCell>
       <TableCell><code>&lt;learningAssessment&gt;</code>, <code>&lt;lcObjectives&gt;</code>, <code>&lt;lcDuration&gt;</code>, <code>&lt;lcInteraction&gt;</code>, <code>&lt;lcTrueFalse2&gt;</code>, <code>&lt;lcSingleSelect2&gt;</code>, <code>&lt;lcMultipleSelect2&gt;</code>, <code>&lt;lcSequencing2&gt;</code>; the check and the L&amp;T DTDs</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       <TableCell><code>tutorial/24-drafts-and-localization</code></TableCell>
       <TableCell>Ready for review and translation</TableCell>
       <TableCell><code>@xml:lang</code>, <code>@translate</code>, <code>@dir</code>, <code>&lt;sort-as&gt;</code>, <code>&lt;draft-comment&gt;</code>, <code>&lt;required-cleanup&gt;</code>, <code>@status</code>, <code>&lt;revised&gt;</code>, <code>&lt;change-historylist&gt;</code></TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules">25</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-25-house-rules">25</a></TableCell>
       <TableCell><code>tutorial/25-house-rules</code></TableCell>
       <TableCell>Rules as code</TableCell>
       <TableCell>Schematron <code>house-style.sch</code>, <strong>House Rules (Schematron)</strong>, <code>AGENTS.md</code>, the house-style skill; house rules in the check</TableCell>
       </TableRow>
       <TableRow>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final">26</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-26-final">26</a></TableCell>
       <TableCell><code>tutorial/26-final</code></TableCell>
       <TableCell>The complete guide, tagged <code>tutorial/final</code></TableCell>
       <TableCell>Nothing new: every deliverable builds, the project is clean</TableCell>
@@ -291,10 +291,10 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <h2 id="how-to-use-it" class="group scroll-mt-20">How to use it<a href="#how-to-use-it" class="ml-2 text-muted-foreground opacity-0 group-hover:opacity-100 no-underline" aria-hidden="true" tabindex="-1" data-pagefind-ignore>&para;</a></h2>
       <Steps>
       <Step>
-      <strong>Read </strong><a href="/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works"><strong>How the tutorial works</strong></a> One project, built stage by stage, with a checkpoint at each stage.
+      <strong>Read </strong><a href="/dita-tutorial/start-here/how-the-tutorial-works"><strong>How the tutorial works</strong></a> One project, built stage by stage, with a checkpoint at each stage.
       </Step>
       <Step>
-      <a href="/dogsbay-xml-dita-tutorial-docs/start-here/set-up"><strong>Set up your tools</strong></a> The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty <code>my-audacity-guide</code> folder.
+      <a href="/dita-tutorial/start-here/set-up"><strong>Set up your tools</strong></a> The DogsBay XML editor, which includes DITA-OT 4.3.5, and the empty <code>my-audacity-guide</code> folder.
       </Step>
       <Step>
       <strong>Follow your chosen learning path</strong> Each page lists prerequisites, provides source examples, and ends with checks. Write the files in <code>my-audacity-guide</code>. Use the checkpoint instructions when skipping optional modules; each lesson assumes the preceding stage's files.
@@ -309,7 +309,7 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <Grid cols={[1, 2]} gap={4}>
       <Card class="p-4 hover:border-foreground/20 transition-colors">
       <CardContent class="p-0">
-      <a href="/dogsbay-xml-dita-tutorial-docs/start-here/learning-path" class="[text-decoration:none] text-foreground">
+      <a href="/dita-tutorial/start-here/learning-path" class="[text-decoration:none] text-foreground">
       <Icon name="book-open" class="size-5 mb-2 text-muted-foreground" />
       <h3 class="text-base font-semibold">Choose a learning path</h3>
       <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">The core course, optional modules, and starting checkpoints.</p>
@@ -318,7 +318,7 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       </Card>
       <Card class="p-4 hover:border-foreground/20 transition-colors">
       <CardContent class="p-0">
-      <a href="/dogsbay-xml-dita-tutorial-docs/start-here/how-the-tutorial-works" class="[text-decoration:none] text-foreground">
+      <a href="/dita-tutorial/start-here/how-the-tutorial-works" class="[text-decoration:none] text-foreground">
       <Icon name="git-branch" class="size-5 mb-2 text-muted-foreground" />
       <h3 class="text-base font-semibold">How the tutorial works</h3>
       <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">One project, stage by stage, and the checkpoint branches.</p>
@@ -327,7 +327,7 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       </Card>
       <Card class="p-4 hover:border-foreground/20 transition-colors">
       <CardContent class="p-0">
-      <a href="/dogsbay-xml-dita-tutorial-docs/start-here/set-up" class="[text-decoration:none] text-foreground">
+      <a href="/dita-tutorial/start-here/set-up" class="[text-decoration:none] text-foreground">
       <Icon name="wrench" class="size-5 mb-2 text-muted-foreground" />
       <h3 class="text-base font-semibold">Set up your tools</h3>
       <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">Install the DogsBay XML editor and its command line.</p>
@@ -336,7 +336,7 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       </Card>
       <Card class="p-4 hover:border-foreground/20 transition-colors">
       <CardContent class="p-0">
-      <a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup" class="[text-decoration:none] text-foreground">
+      <a href="/dita-tutorial/part-1-topics/stage-00-setup" class="[text-decoration:none] text-foreground">
       <Icon name="play" class="size-5 mb-2 text-muted-foreground" />
       <h3 class="text-base font-semibold">Stage 00: Create your project folder</h3>
       <p class="text-sm text-muted-foreground mt-1 [text-decoration:none]">Start building.</p>
