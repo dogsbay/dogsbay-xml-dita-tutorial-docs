@@ -2,7 +2,7 @@ schemaVersion: 1
 site:
   name: DogsBay DITA tutorial
   basePath: ""
-  url: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs
+  url: https://dogsbay.ai/dita-tutorial
   description: Learn DITA 1.3 one feature at a time by building an Audacity
     user guide, stage by stage, with a check at every step.
   repoUrl: https://github.com/dogsbay/dogsbay-xml-dita-tutorial-docs

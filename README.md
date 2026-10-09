@@ -5,7 +5,7 @@ branch of [dogsbay-xml-dita-tutorial](https://github.com/dogsbay/dogsbay-xml-dit
 from an empty project to a complete Audacity user guide, with the exact files
 to write and the commands to run.
 
-Intended to be served at **https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/**.
+Intended to be served at **https://dogsbay.ai/dita-tutorial/**.
 
 Built with [DogsBay](https://github.com/dogsbay/dogsbay).
 
@@ -32,7 +32,7 @@ the instructional review and remaining improvements.
 
 ```bash
 dogsbay site build     # content/ -> astro/
-dogsbay site dev       # live preview at http://localhost:4321/dogsbay-xml-dita-tutorial-docs/
+dogsbay site dev       # live preview at http://localhost:4321/dita-tutorial/
 dogsbay site check     # link and structure audit
 ```
 
@@ -45,12 +45,23 @@ or code fences, or the build evaluates it as template syntax.
 
 ## Deploying
 
-`astro/wrangler.jsonc` targets Cloudflare Workers Static Assets on
-`dogsbay.ai/dogsbay-xml-dita-tutorial-docs` and
-`dogsbay.ai/dogsbay-xml-dita-tutorial-docs/*`, following dogsbay-xml-docs. The
-worker name, the repo name and the `name` in `wrangler.jsonc` are all
-`dogsbay-xml-dita-tutorial-docs`; keep them identical. `npm run build` in
-`astro/` runs `astro build`, the Pagefind index and the base-path mount step.
+Pushes to `main` trigger a Workers Build. It runs `npm run build` in `astro/`,
+which is `astro build` plus the Pagefind search index and the base-path mount
+step, and then `npx wrangler deploy`. Running only `astro build` produces a
+site whose search 404s.
+
+`astro/wrangler.jsonc` carries both routes: `dogsbay.ai/dita-tutorial` and
+`dogsbay.ai/dita-tutorial/*`. The second does not match the first, and without
+it the home page falls through to the apex worker.
+
+**The mount path and the name are deliberately different.** The worker name,
+the repo name and the `name` in `wrangler.jsonc` are all
+`dogsbay-xml-dita-tutorial-docs` and must stay identical to each other, but the
+site is served from `/dita-tutorial` because that is the URL spoken aloud at
+the end of a video. The path comes from `site.url` in `dogsbay.config.yml`, and
+everything under `astro/` — the routes, the Pagefind output path, the mount
+step — is generated from it. Change it there and run `dogsbay site build`;
+do not edit `astro/` to make the two match.
 
 ## Licence
 

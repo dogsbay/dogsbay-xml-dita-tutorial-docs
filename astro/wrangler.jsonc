@@ -10,11 +10,11 @@
   },
 
   "routes": [
-    // Both patterns, as the blog has: "/dogsbay-xml-dita-tutorial-docs/*" does
-    // not match the bare "/dogsbay-xml-dita-tutorial-docs", which would fall
+    // Both patterns, as the blog has: "/dita-tutorial/*" does
+    // not match the bare "/dita-tutorial", which would fall
     // through to the apex worker and 404 — and that path is the tutorial's
     // home page.
-    { "pattern": "dogsbay.ai/dogsbay-xml-dita-tutorial-docs", "zone_name": "dogsbay.ai" },
-    { "pattern": "dogsbay.ai/dogsbay-xml-dita-tutorial-docs/*", "zone_name": "dogsbay.ai" }
+    { "pattern": "dogsbay.ai/dita-tutorial", "zone_name": "dogsbay.ai" },
+    { "pattern": "dogsbay.ai/dita-tutorial/*", "zone_name": "dogsbay.ai" }
   ]
 }

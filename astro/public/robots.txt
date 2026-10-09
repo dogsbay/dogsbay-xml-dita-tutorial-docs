@@ -26,4 +26,4 @@
 User-agent: *
 Allow: /
 Content-Signal: search=yes, ai-input=yes, ai-train=no
-Sitemap: https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/sitemap-index.xml
+Sitemap: https://dogsbay.ai/dita-tutorial/sitemap-index.xml

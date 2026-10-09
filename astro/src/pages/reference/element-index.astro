@@ -24,7 +24,7 @@ import TableRow from "@ui/table/TableRow.astro";
 
 const headings = [{"depth":1,"slug":"element-index","text":"Element index"},{"depth":2,"slug":"part-1-topics","text":"Part 1: Topics"},{"depth":2,"slug":"part-2-maps-and-publishing","text":"Part 2: Maps and publishing"},{"depth":2,"slug":"part-3-conditions-and-variants","text":"Part 3: Conditions and variants"},{"depth":2,"slug":"part-4-books-and-specialized-topics","text":"Part 4: Books and specialized topics"},{"depth":2,"slug":"part-5-governance-and-the-finish","text":"Part 5: Governance and the finish"}];
 const nav = navData;
-const currentPath = "/dogsbay-xml-dita-tutorial-docs/reference/element-index";
+const currentPath = "/dita-tutorial/reference/element-index";
 const _navForPagination = filterNavByAxis(nav as any[], {
   basePath: "",
   namespace: null ?? undefined,
@@ -44,9 +44,9 @@ const pageType = "reference";
 const pageAudience = null;
 const pageCategory = ["reference"];
 const pageTaxonomies = null;
-const tagsIndexPath = "/dogsbay-xml-dita-tutorial-docs/tags";
+const tagsIndexPath = "/dita-tutorial/tags";
 const lastUpdated = null || undefined;
-const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Element index {#element-index}\n\nThe stage that introduces each element or attribute. Look an element up here, then read the stage page for what it is for and where it may appear. All 27 stages are written, so every row links to its page.\n\n## Part 1: Topics {#part-1-topics}\n\n| Element or attribute | Stage |\n| --- | --- |\n| DOCTYPE and the DITA-OT catalog | [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |\n| Project settings (project type, framework, format style), kept by the editor | [00](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup) |\n| `<concept>`, `<conbody>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |\n| `@id` on a topic | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |\n| `<title>`, `<shortdesc>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |\n| `<p>`, `<ul>`, `<li>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |\n| `<section>` | [01](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept) |\n| `<task>`, `<taskbody>` | [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) |\n| `<context>`, `<steps>`, `<step>`, `<cmd>`, `<info>`, `<result>` | [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) |\n| `<reference>`, `<refbody>` | [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) |\n| `<table>`, `<tgroup>`, `<colspec>`, `<thead>`, `<tbody>`, `<row>`, `<entry>` | [04](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference) |\n| `<uicontrol>`, `<menucascade>`, `<shortcut>`, `<wintitle>`, `<filepath>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<term>`, `<ph>`, `<cmdname>`, `<b>`, `<i>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<note>` and `@type` (`tip`, `important`, `warning`, `caution`) | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<dl>`, `<dlentry>`, `<dt>`, `<dd>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<ol>`, `<sl>`, `<sli>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<lq>`, `<fn>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<simpletable>`, `<sthead>`, `<strow>`, `<stentry>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<codeblock>`, `<pre>` | [05](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block) |\n| `<prereq>`, `<postreq>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<substeps>`, `<substep>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<choices>`, `<choice>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<choicetable>`, `<chhead>`, `<choptionhd>`, `<chdeschd>`, `<chrow>`, `<choption>`, `<chdesc>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<stepxmp>`, `<stepresult>`, `<steptroubleshooting>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<steps-unordered>`, `<tutorialinfo>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<example>`, `<tasktroubleshooting>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `@importance=\"optional\"` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<codeph>` | [06](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks) |\n| `<xref>` (local, `file#topic/element`, `@scope=\"external\"`, `@format`) | [07](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links) |\n| `@id` on a `<section>` as a link target | [07](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links) |\n| `<related-links>`, `<link>`, `<linktext>`, `<desc>` | [07](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links) |\n| `<linklist>`, `<linkpool>` | [07](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links) |\n| `<fig>`, `<image>` (`@href`, `@scale`, `@placement`), `<alt>` | [08](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures) |\n| `<svg-container>` and the `svg:` prefix | [08](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures) |\n| `<equation-block>`, `<equation-inline>`, `<mathml>` | [08](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures) |\n| `<imagemap>`, `<area>`, `<shape>`, `<coords>` | [08](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures) |\n\n## Part 2: Maps and publishing {#part-2-maps-and-publishing}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `<map>` and its DOCTYPE, `<title>` of a map | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |\n| `<topicref>` with `@href` | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |\n| `<topichead>` with `@navtitle` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `<topicmeta>` with `<shortdesc>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| **Manage Deliverables**: a deliverable, **Transtype** `html5`, **Publication parameters** (`nav-toc`) | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |\n| **Manage Projects**: **Default Root Map** | [02](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map) |\n| The active deliverable (**Set active**, or the status bar) | [03](/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build) |\n| nested `<topicref>` (parent and child) | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `@collection-type` (`family`, `sequence`) | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `<topicgroup>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `@linking=\"targetonly\"` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `@id` on a `<topichead>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `@locktitle=\"yes\"` with `<navtitle>` in `<topicmeta>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `<reltable>`, `<relheader>`, `<relcolspec type>`, `<relrow>`, `<relcell>` | [09](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure) |\n| `<keydef>` with `@keys`; `<keywords>`, `<keyword>` in `<topicmeta>` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `<keydef href scope=\"external\" format=\"html\">` with `<linktext>` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `<mapref>` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `@keys` on a `<topicref>`; `<keydef keys href>` for a topic | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `<keyword keyref>` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `<xref keyref>`, `<link keyref>`, `key/element-id` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| `dogsbay-xml keys <rootmap>` | [10](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys) |\n| shared topic topics: `<topic>`, `<body>`; `@id` on reusable elements | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| `@conref=\"file#topic/id\"` on `<step>`, `<note>`, `<li>` | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| `@conkeyref=\"key/id\"` | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| `@conrefend` (a conref range) | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| conref push: `@conaction` (`pushbefore`, `mark`; also `pushafter`, `pushreplace`) | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| `@processing-role=\"resource-only\"` | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| the `<cmd/>` placeholder in a conref'd `<step>` | [11](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse) |\n| `<glossentry>` and its DOCTYPE, `<glossterm>`, `<glossdef>` | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) |\n| `<glossgroup>` and its DOCTYPE | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) |\n| `<glossBody>`, `<glossSurfaceForm>`, `<glossAlt>`, `<glossAbbreviation>`, `<glossSynonym>` | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) |\n| `<keydef>` to an element inside a group, `file#id` | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) |\n| `<term keyref>`, `<abbreviated-form keyref>` | [12](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary) |\n| `<prolog>` and the order of its children | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| `<author type>`, `<copyright>`, `<copyryear>`, `<copyrholder>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| `<critdates>`, `<created date>`, `<revised modified>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| `<metadata>`, `<audience type experiencelevel>`, `<category>`, `<keywords>`, `<keyword>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| `<indexterm>` (nested), `<index-see>`, `<index-see-also>`, `<index-sort-as>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| `<resourceid>`, `<data>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| map `<topicmeta>`: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>`, `<keywords>` | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n| **Metadata** > **Edit Policy**: rules by topic type, field, presence, and pattern | [13](/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index) |\n\n## Part 3: Conditions and variants {#part-3-conditions-and-variants}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `@platform`, `@audience` on `<p>`, `<section>`, `<note>`, `<chrow>`, `<ph>`; multiple values; the other profiling attributes `@product`, `@otherprops`, `@props` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| two `<ph platform>` alternatives for text that differs | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| `@rev` on a `<cmd>` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| `@audience` on a `<topichead>` (filtering a map branch) | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| DITAVAL: `<val>`, `<prop att val action>` (`include`, `exclude`, `flag`), `@backcolor`, `@color` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| DITAVAL: `<revprop val action changebar>`, `<startflag>`, `<endflag>`, `<alt-text>`, `<style-conflict>` | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| **Manage Deliverables**: the **DITAVAL** field, one deliverable per DITAVAL | [14](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text) |\n| `<subjectScheme>` and its DOCTYPE; nested `<subjectdef keys>` with `<navtitle>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |\n| `<enumerationdef>`, `<attributedef name>`, `<subjectdef keyref>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |\n| `<hasNarrower>` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |\n| `<mapref type=\"subjectScheme\">` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |\n| `dogsbay-xml list-subjects`, `dogsbay-xml validate-conditions .`, **Check Project**; DITA-OT `DOTJ049W` | [15](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme) |\n| `<ditavalref href>` under a `<topicref>` (one filters, several copy) | [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering) |\n| `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` | [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering) |\n| `dogsbay-xml list-branches <map>` | [16](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering) |\n| `@keyscope` on a `<mapref>`; `scope.key` names; root-scope keys | [17](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes) |\n| `<mapref scope=\"peer\" keyscope=\"…\">` | [17](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes) |\n| `dogsbay-xml keys <map> --resolve <key> --scope <scope>` | [17](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes) |\n| `@chunk=\"to-content\"` on a parent `<topicref>` | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| a `<reference>` nested in a `<reference>`; `@chunk=\"by-topic\"`; `<dita>` (the composite root, and why not) | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| `@copy-to` | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| `@print=\"printonly\"`, `@toc=\"no\"`, `@search=\"no\"`; a generic `<topic>` as front matter | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| `<topicset id navtitle>`, `<topicsetref href=\"map#id\">` | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| `@outputclass` on a `<table>` | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n| `dogsbay-xml health` (unused keys on their own) | [18](/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output) |\n\n## Part 4: Books and specialized topics {#part-4-books-and-specialized-topics}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `<bookmap>` and its DOCTYPE; `<booktitle>`, `<mainbooktitle>`, `<booktitlealt>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |\n| `<bookmeta>`: `<publisherinformation>`, `<organization>`, `<bookid>`, `<bookpartno>`, `<edition>`, `<bookrights>`, `<copyrfirst>`, `<year>`, `<bookowner>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |\n| `<frontmatter>` (keydefs, maprefs and resource-only refs inside it), `<booklists>`, `<toc>`, `<figurelist>`, `<tablelist>`, `<notices>`, `<preface>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |\n| `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`, `<glossarylist>`, `<indexlist>` | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |\n| **Manage Deliverables**: a deliverable with the `pdf` transtype | [19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) |\n| `<troubleshooting>` and its DOCTYPE, `<troublebody>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |\n| `<steps-informal>`; a profiling attribute on a `<troubleSolution>` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |\n| `<note type=\"trouble\">` | [20](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting) |\n| `<hazardstatement type>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>` with `<alt>` | [21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety) |\n| the placeholder `<messagepanel>` in a conref'd `<hazardstatement>` | [21](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety) |\n| `<syntaxdiagram>`, `<groupseq>`, `<kwd>`, `<delim>`, `<var>`, `<repsep>`, `<synph>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<refsyn>`; `<parml>`, `<plentry>`, `<pt>`, `<pd>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<cmdname>`, `<parmname>`, `<varname>`, `<option>`, `<apiname>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<msgph>`, `<msgblock>`, `<msgnum>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<properties>`, `<prophead>`, `<proptypehd>`, `<propvaluehd>`, `<propdeschd>`, `<property>`, `<proptype>`, `<propvalue>`, `<propdesc>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<codeblock outputclass=\"language-…\">` with `<coderef href>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<screen>`, `<userinput>`, `<systemoutput>` | [22](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains) |\n| `<learningAssessment>` and its DOCTYPE, `<learningAssessmentbody>`, `<lcIntro>`, `<lcSummary>` | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |\n| `<lcObjectives>`, `<lcObjectivesStem>`, `<lcObjectivesGroup>`, `<lcObjective>`; `<lcDuration>`, `<lcTime value>` | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |\n| `<lcInteraction>`; `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcQuestion2>`, `<lcAnswerOptionGroup2>`, `<lcAnswerOption2>`, `<lcAnswerContent2>`, `<lcCorrectResponse2>`, `<lcFeedback2>` | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |\n| `<lcSequencing2>`, `<lcSequenceOptionGroup2>`, `<lcSequenceOption2>`, `<lcSequence2 value>` | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |\n| `dogsbay-xml validate` on a learning topic, with no catalog option | [23](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning) |\n\n## Part 5: Governance and the finish {#part-5-governance-and-the-finish}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `@xml:lang` on every root and on a `<ph>`; `@dir=\"rtl\"` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| `@translate=\"no\"` on a `<keyword>`, `<parml>`, `<msgblock>`, `<codeblock>`, `<screen>` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| `<sort-as value>` in a `<glossterm>`; `<index-see>` for an abbreviation | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| `<draft-comment author time disposition>`, `<required-cleanup remap>`; DITA-OT `args.draft` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| `project-health`'s *Authoring leftovers* warnings | [24](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization) |\n| Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |\n| **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |\n| Optional: `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |\n| `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap=\"table\">` | [25](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules) |\n| Nothing new: the eight deliverables, the final check, and the `tutorial/final` tag | [26](/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final) |\n","mdUrl":"https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/reference/element-index.md"} ?? undefined;
+const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplexity","gemini"],"placement":"header","copyButton":true,"footerLink":true,"markdownBody":"# Element index {#element-index}\n\nThe stage that introduces each element or attribute. Look an element up here, then read the stage page for what it is for and where it may appear. All 27 stages are written, so every row links to its page.\n\n## Part 1: Topics {#part-1-topics}\n\n| Element or attribute | Stage |\n| --- | --- |\n| DOCTYPE and the DITA-OT catalog | [00](/dita-tutorial/part-1-topics/stage-00-setup) |\n| Project settings (project type, framework, format style), kept by the editor | [00](/dita-tutorial/part-1-topics/stage-00-setup) |\n| `<concept>`, `<conbody>` | [01](/dita-tutorial/part-1-topics/stage-01-concept) |\n| `@id` on a topic | [01](/dita-tutorial/part-1-topics/stage-01-concept) |\n| `<title>`, `<shortdesc>` | [01](/dita-tutorial/part-1-topics/stage-01-concept) |\n| `<p>`, `<ul>`, `<li>` | [01](/dita-tutorial/part-1-topics/stage-01-concept) |\n| `<section>` | [01](/dita-tutorial/part-1-topics/stage-01-concept) |\n| `<task>`, `<taskbody>` | [04](/dita-tutorial/part-1-topics/stage-04-task-and-reference) |\n| `<context>`, `<steps>`, `<step>`, `<cmd>`, `<info>`, `<result>` | [04](/dita-tutorial/part-1-topics/stage-04-task-and-reference) |\n| `<reference>`, `<refbody>` | [04](/dita-tutorial/part-1-topics/stage-04-task-and-reference) |\n| `<table>`, `<tgroup>`, `<colspec>`, `<thead>`, `<tbody>`, `<row>`, `<entry>` | [04](/dita-tutorial/part-1-topics/stage-04-task-and-reference) |\n| `<uicontrol>`, `<menucascade>`, `<shortcut>`, `<wintitle>`, `<filepath>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<term>`, `<ph>`, `<cmdname>`, `<b>`, `<i>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<note>` and `@type` (`tip`, `important`, `warning`, `caution`) | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<dl>`, `<dlentry>`, `<dt>`, `<dd>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<ol>`, `<sl>`, `<sli>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<lq>`, `<fn>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<simpletable>`, `<sthead>`, `<strow>`, `<stentry>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<codeblock>`, `<pre>` | [05](/dita-tutorial/part-1-topics/stage-05-inline-and-block) |\n| `<prereq>`, `<postreq>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<substeps>`, `<substep>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<choices>`, `<choice>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<choicetable>`, `<chhead>`, `<choptionhd>`, `<chdeschd>`, `<chrow>`, `<choption>`, `<chdesc>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<stepxmp>`, `<stepresult>`, `<steptroubleshooting>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<steps-unordered>`, `<tutorialinfo>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<example>`, `<tasktroubleshooting>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `@importance=\"optional\"` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<codeph>` | [06](/dita-tutorial/part-1-topics/stage-06-rich-tasks) |\n| `<xref>` (local, `file#topic/element`, `@scope=\"external\"`, `@format`) | [07](/dita-tutorial/part-1-topics/stage-07-links) |\n| `@id` on a `<section>` as a link target | [07](/dita-tutorial/part-1-topics/stage-07-links) |\n| `<related-links>`, `<link>`, `<linktext>`, `<desc>` | [07](/dita-tutorial/part-1-topics/stage-07-links) |\n| `<linklist>`, `<linkpool>` | [07](/dita-tutorial/part-1-topics/stage-07-links) |\n| `<fig>`, `<image>` (`@href`, `@scale`, `@placement`), `<alt>` | [08](/dita-tutorial/part-1-topics/stage-08-figures) |\n| `<svg-container>` and the `svg:` prefix | [08](/dita-tutorial/part-1-topics/stage-08-figures) |\n| `<equation-block>`, `<equation-inline>`, `<mathml>` | [08](/dita-tutorial/part-1-topics/stage-08-figures) |\n| `<imagemap>`, `<area>`, `<shape>`, `<coords>` | [08](/dita-tutorial/part-1-topics/stage-08-figures) |\n\n## Part 2: Maps and publishing {#part-2-maps-and-publishing}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `<map>` and its DOCTYPE, `<title>` of a map | [02](/dita-tutorial/part-1-topics/stage-02-first-map) |\n| `<topicref>` with `@href` | [02](/dita-tutorial/part-1-topics/stage-02-first-map) |\n| `<topichead>` with `@navtitle` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `<topicmeta>` with `<shortdesc>` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| **Manage Deliverables**: a deliverable, **Transtype** `html5`, **Publication parameters** (`nav-toc`) | [03](/dita-tutorial/part-1-topics/stage-03-first-build) |\n| **Manage Projects**: **Default Root Map** | [02](/dita-tutorial/part-1-topics/stage-02-first-map) |\n| The active deliverable (**Set active**, or the status bar) | [03](/dita-tutorial/part-1-topics/stage-03-first-build) |\n| nested `<topicref>` (parent and child) | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `@collection-type` (`family`, `sequence`) | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `<topicgroup>` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `@linking=\"targetonly\"` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `@id` on a `<topichead>` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `@locktitle=\"yes\"` with `<navtitle>` in `<topicmeta>` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `<reltable>`, `<relheader>`, `<relcolspec type>`, `<relrow>`, `<relcell>` | [09](/dita-tutorial/part-2-maps/stage-09-map-structure) |\n| `<keydef>` with `@keys`; `<keywords>`, `<keyword>` in `<topicmeta>` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `<keydef href scope=\"external\" format=\"html\">` with `<linktext>` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `<mapref>` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `@keys` on a `<topicref>`; `<keydef keys href>` for a topic | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `<keyword keyref>` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `<xref keyref>`, `<link keyref>`, `key/element-id` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| `dogsbay-xml keys <rootmap>` | [10](/dita-tutorial/part-2-maps/stage-10-keys) |\n| shared topic topics: `<topic>`, `<body>`; `@id` on reusable elements | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| `@conref=\"file#topic/id\"` on `<step>`, `<note>`, `<li>` | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| `@conkeyref=\"key/id\"` | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| `@conrefend` (a conref range) | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| conref push: `@conaction` (`pushbefore`, `mark`; also `pushafter`, `pushreplace`) | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| `@processing-role=\"resource-only\"` | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| the `<cmd/>` placeholder in a conref'd `<step>` | [11](/dita-tutorial/part-2-maps/stage-11-reuse) |\n| `<glossentry>` and its DOCTYPE, `<glossterm>`, `<glossdef>` | [12](/dita-tutorial/part-2-maps/stage-12-glossary) |\n| `<glossgroup>` and its DOCTYPE | [12](/dita-tutorial/part-2-maps/stage-12-glossary) |\n| `<glossBody>`, `<glossSurfaceForm>`, `<glossAlt>`, `<glossAbbreviation>`, `<glossSynonym>` | [12](/dita-tutorial/part-2-maps/stage-12-glossary) |\n| `<keydef>` to an element inside a group, `file#id` | [12](/dita-tutorial/part-2-maps/stage-12-glossary) |\n| `<term keyref>`, `<abbreviated-form keyref>` | [12](/dita-tutorial/part-2-maps/stage-12-glossary) |\n| `<prolog>` and the order of its children | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| `<author type>`, `<copyright>`, `<copyryear>`, `<copyrholder>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| `<critdates>`, `<created date>`, `<revised modified>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| `<metadata>`, `<audience type experiencelevel>`, `<category>`, `<keywords>`, `<keyword>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| `<indexterm>` (nested), `<index-see>`, `<index-see-also>`, `<index-sort-as>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| `<resourceid>`, `<data>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| map `<topicmeta>`: `<author>`, `<publisher>`, `<copyright>`, `<critdates>`, `<audience>`, `<keywords>` | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n| **Metadata** > **Edit Policy**: rules by topic type, field, presence, and pattern | [13](/dita-tutorial/part-2-maps/stage-13-metadata-and-index) |\n\n## Part 3: Conditions and variants {#part-3-conditions-and-variants}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `@platform`, `@audience` on `<p>`, `<section>`, `<note>`, `<chrow>`, `<ph>`; multiple values; the other profiling attributes `@product`, `@otherprops`, `@props` | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| two `<ph platform>` alternatives for text that differs | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| `@rev` on a `<cmd>` | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| `@audience` on a `<topichead>` (filtering a map branch) | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| DITAVAL: `<val>`, `<prop att val action>` (`include`, `exclude`, `flag`), `@backcolor`, `@color` | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| DITAVAL: `<revprop val action changebar>`, `<startflag>`, `<endflag>`, `<alt-text>`, `<style-conflict>` | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| **Manage Deliverables**: the **DITAVAL** field, one deliverable per DITAVAL | [14](/dita-tutorial/part-3-conditions/stage-14-conditional-text) |\n| `<subjectScheme>` and its DOCTYPE; nested `<subjectdef keys>` with `<navtitle>` | [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) |\n| `<enumerationdef>`, `<attributedef name>`, `<subjectdef keyref>` | [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) |\n| `<hasNarrower>` | [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) |\n| `<mapref type=\"subjectScheme\">` | [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) |\n| `dogsbay-xml list-subjects`, `dogsbay-xml validate-conditions .`, **Check Project**; DITA-OT `DOTJ049W` | [15](/dita-tutorial/part-3-conditions/stage-15-subject-scheme) |\n| `<ditavalref href>` under a `<topicref>` (one filters, several copy) | [16](/dita-tutorial/part-3-conditions/stage-16-branch-filtering) |\n| `<ditavalmeta>`, `<dvrResourcePrefix>`, `<dvrResourceSuffix>`, `<dvrKeyscopePrefix>` | [16](/dita-tutorial/part-3-conditions/stage-16-branch-filtering) |\n| `dogsbay-xml list-branches <map>` | [16](/dita-tutorial/part-3-conditions/stage-16-branch-filtering) |\n| `@keyscope` on a `<mapref>`; `scope.key` names; root-scope keys | [17](/dita-tutorial/part-3-conditions/stage-17-key-scopes) |\n| `<mapref scope=\"peer\" keyscope=\"…\">` | [17](/dita-tutorial/part-3-conditions/stage-17-key-scopes) |\n| `dogsbay-xml keys <map> --resolve <key> --scope <scope>` | [17](/dita-tutorial/part-3-conditions/stage-17-key-scopes) |\n| `@chunk=\"to-content\"` on a parent `<topicref>` | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| a `<reference>` nested in a `<reference>`; `@chunk=\"by-topic\"`; `<dita>` (the composite root, and why not) | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| `@copy-to` | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| `@print=\"printonly\"`, `@toc=\"no\"`, `@search=\"no\"`; a generic `<topic>` as front matter | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| `<topicset id navtitle>`, `<topicsetref href=\"map#id\">` | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| `@outputclass` on a `<table>` | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n| `dogsbay-xml health` (unused keys on their own) | [18](/dita-tutorial/part-3-conditions/stage-18-chunking-and-output) |\n\n## Part 4: Books and specialized topics {#part-4-books-and-specialized-topics}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `<bookmap>` and its DOCTYPE; `<booktitle>`, `<mainbooktitle>`, `<booktitlealt>` | [19](/dita-tutorial/part-4-books/stage-19-bookmap) |\n| `<bookmeta>`: `<publisherinformation>`, `<organization>`, `<bookid>`, `<bookpartno>`, `<edition>`, `<bookrights>`, `<copyrfirst>`, `<year>`, `<bookowner>` | [19](/dita-tutorial/part-4-books/stage-19-bookmap) |\n| `<frontmatter>` (keydefs, maprefs and resource-only refs inside it), `<booklists>`, `<toc>`, `<figurelist>`, `<tablelist>`, `<notices>`, `<preface>` | [19](/dita-tutorial/part-4-books/stage-19-bookmap) |\n| `<part>`, `<chapter>`, `<appendix>`, `<backmatter>`, `<glossarylist>`, `<indexlist>` | [19](/dita-tutorial/part-4-books/stage-19-bookmap) |\n| **Manage Deliverables**: a deliverable with the `pdf` transtype | [19](/dita-tutorial/part-4-books/stage-19-bookmap) |\n| `<troubleshooting>` and its DOCTYPE, `<troublebody>`, `<condition>`, `<troubleSolution>`, `<cause>`, `<remedy>` | [20](/dita-tutorial/part-4-books/stage-20-troubleshooting) |\n| `<steps-informal>`; a profiling attribute on a `<troubleSolution>` | [20](/dita-tutorial/part-4-books/stage-20-troubleshooting) |\n| `<note type=\"trouble\">` | [20](/dita-tutorial/part-4-books/stage-20-troubleshooting) |\n| `<hazardstatement type>`, `<messagepanel>`, `<typeofhazard>`, `<consequence>`, `<howtoavoid>`, `<hazardsymbol>` with `<alt>` | [21](/dita-tutorial/part-4-books/stage-21-hazards-and-safety) |\n| the placeholder `<messagepanel>` in a conref'd `<hazardstatement>` | [21](/dita-tutorial/part-4-books/stage-21-hazards-and-safety) |\n| `<syntaxdiagram>`, `<groupseq>`, `<kwd>`, `<delim>`, `<var>`, `<repsep>`, `<synph>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<refsyn>`; `<parml>`, `<plentry>`, `<pt>`, `<pd>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<cmdname>`, `<parmname>`, `<varname>`, `<option>`, `<apiname>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<msgph>`, `<msgblock>`, `<msgnum>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<properties>`, `<prophead>`, `<proptypehd>`, `<propvaluehd>`, `<propdeschd>`, `<property>`, `<proptype>`, `<propvalue>`, `<propdesc>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<codeblock outputclass=\"language-…\">` with `<coderef href>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<screen>`, `<userinput>`, `<systemoutput>` | [22](/dita-tutorial/part-4-books/stage-22-software-domains) |\n| `<learningAssessment>` and its DOCTYPE, `<learningAssessmentbody>`, `<lcIntro>`, `<lcSummary>` | [23](/dita-tutorial/part-4-books/stage-23-learning) |\n| `<lcObjectives>`, `<lcObjectivesStem>`, `<lcObjectivesGroup>`, `<lcObjective>`; `<lcDuration>`, `<lcTime value>` | [23](/dita-tutorial/part-4-books/stage-23-learning) |\n| `<lcInteraction>`; `<lcTrueFalse2>`, `<lcSingleSelect2>`, `<lcMultipleSelect2>`, `<lcQuestion2>`, `<lcAnswerOptionGroup2>`, `<lcAnswerOption2>`, `<lcAnswerContent2>`, `<lcCorrectResponse2>`, `<lcFeedback2>` | [23](/dita-tutorial/part-4-books/stage-23-learning) |\n| `<lcSequencing2>`, `<lcSequenceOptionGroup2>`, `<lcSequenceOption2>`, `<lcSequence2 value>` | [23](/dita-tutorial/part-4-books/stage-23-learning) |\n| `dogsbay-xml validate` on a learning topic, with no catalog option | [23](/dita-tutorial/part-4-books/stage-23-learning) |\n\n## Part 5: Governance and the finish {#part-5-governance-and-the-finish}\n\n| Element or attribute | Stage |\n| --- | --- |\n| `@xml:lang` on every root and on a `<ph>`; `@dir=\"rtl\"` | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| `@translate=\"no\"` on a `<keyword>`, `<parml>`, `<msgblock>`, `<codeblock>`, `<screen>` | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| `<sort-as value>` in a `<glossterm>`; `<index-see>` for an abbreviation | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| `<draft-comment author time disposition>`, `<required-cleanup remap>`; DITA-OT `args.draft` | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| `@status` on a topic and on a `<row>`; `<revised modified>`; `<change-historylist>`, `<change-item>`, `<change-person>`, `<change-completed>`, `<change-summary>` | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| `project-health`'s *Authoring leftovers* warnings | [24](/dita-tutorial/part-5-governance/stage-24-drafts-and-localization) |\n| Schematron `house-style.sch`: `<schema>`, `<pattern>`, `<rule context>`, `<assert test>`, `<report test>` | [25](/dita-tutorial/part-5-governance/stage-25-house-rules) |\n| **Manage Projects**: **House Rules (Schematron)**; `project-health --include=schematron`; the house rules in **Check Project** | [25](/dita-tutorial/part-5-governance/stage-25-house-rules) |\n| Optional: `AGENTS.md`; a skill's `SKILL.md` with `name` and `description` front matter | [25](/dita-tutorial/part-5-governance/stage-25-house-rules) |\n| `<cite>` for the title of a work; `<simpletable>` in place of a `<required-cleanup remap=\"table\">` | [25](/dita-tutorial/part-5-governance/stage-25-house-rules) |\n| Nothing new: the eight deliverables, the final check, and the `tutorial/final` tag | [26](/dita-tutorial/part-5-governance/stage-26-final) |\n","mdUrl":"https://dogsbay.ai/dita-tutorial/reference/element-index.md"} ?? undefined;
 ---
 
 <DocsLayout
@@ -89,9 +89,9 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
   poweredBy={siteConfig.poweredBy !== false}
   multiSource={null ?? undefined}
   switcherMap={switcherMapData}
-  basePath={"/dogsbay-xml-dita-tutorial-docs"}
+  basePath={"/dita-tutorial"}
   navMode={"client"}
-  pagefindUrl={"/dogsbay-xml-dita-tutorial-docs/pagefind/"}
+  pagefindUrl={"/dita-tutorial/pagefind/"}
   pagefindBaseUrl={"/"}
   favicon={false}
   wideLayout={false}
@@ -113,147 +113,147 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <TableBody>
       <TableRow>
       <TableCell>DOCTYPE and the DITA-OT catalog</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup">00</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-00-setup">00</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>Project settings (project type, framework, format style), kept by the editor</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-00-setup">00</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-00-setup">00</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;concept&gt;</code>, <code>&lt;conbody&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@id</code> on a topic</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;title&gt;</code>, <code>&lt;shortdesc&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;li&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;section&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-01-concept">01</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-01-concept">01</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;task&gt;</code>, <code>&lt;taskbody&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;context&gt;</code>, <code>&lt;steps&gt;</code>, <code>&lt;step&gt;</code>, <code>&lt;cmd&gt;</code>, <code>&lt;info&gt;</code>, <code>&lt;result&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;reference&gt;</code>, <code>&lt;refbody&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;table&gt;</code>, <code>&lt;tgroup&gt;</code>, <code>&lt;colspec&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;row&gt;</code>, <code>&lt;entry&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-04-task-and-reference">04</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;uicontrol&gt;</code>, <code>&lt;menucascade&gt;</code>, <code>&lt;shortcut&gt;</code>, <code>&lt;wintitle&gt;</code>, <code>&lt;filepath&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;term&gt;</code>, <code>&lt;ph&gt;</code>, <code>&lt;cmdname&gt;</code>, <code>&lt;b&gt;</code>, <code>&lt;i&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;note&gt;</code> and <code>@type</code> (<code>tip</code>, <code>important</code>, <code>warning</code>, <code>caution</code>)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;dl&gt;</code>, <code>&lt;dlentry&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;dd&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;ol&gt;</code>, <code>&lt;sl&gt;</code>, <code>&lt;sli&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;lq&gt;</code>, <code>&lt;fn&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;simpletable&gt;</code>, <code>&lt;sthead&gt;</code>, <code>&lt;strow&gt;</code>, <code>&lt;stentry&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;codeblock&gt;</code>, <code>&lt;pre&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-05-inline-and-block">05</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;prereq&gt;</code>, <code>&lt;postreq&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;substeps&gt;</code>, <code>&lt;substep&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;choices&gt;</code>, <code>&lt;choice&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;choicetable&gt;</code>, <code>&lt;chhead&gt;</code>, <code>&lt;choptionhd&gt;</code>, <code>&lt;chdeschd&gt;</code>, <code>&lt;chrow&gt;</code>, <code>&lt;choption&gt;</code>, <code>&lt;chdesc&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;stepxmp&gt;</code>, <code>&lt;stepresult&gt;</code>, <code>&lt;steptroubleshooting&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;steps-unordered&gt;</code>, <code>&lt;tutorialinfo&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;example&gt;</code>, <code>&lt;tasktroubleshooting&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@importance="optional"</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;codeph&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-06-rich-tasks">06</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;xref&gt;</code> (local, <code>file#topic/element</code>, <code>@scope="external"</code>, <code>@format</code>)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links">07</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-07-links">07</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@id</code> on a <code>&lt;section&gt;</code> as a link target</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links">07</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-07-links">07</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;related-links&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;linktext&gt;</code>, <code>&lt;desc&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links">07</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-07-links">07</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;linklist&gt;</code>, <code>&lt;linkpool&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-07-links">07</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-07-links">07</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;fig&gt;</code>, <code>&lt;image&gt;</code> (<code>@href</code>, <code>@scale</code>, <code>@placement</code>), <code>&lt;alt&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures">08</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-08-figures">08</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;svg-container&gt;</code> and the <code>svg:</code> prefix</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures">08</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-08-figures">08</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;equation-block&gt;</code>, <code>&lt;equation-inline&gt;</code>, <code>&lt;mathml&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures">08</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-08-figures">08</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;imagemap&gt;</code>, <code>&lt;area&gt;</code>, <code>&lt;shape&gt;</code>, <code>&lt;coords&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-08-figures">08</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-08-figures">08</a></TableCell>
       </TableRow>
       </TableBody>
       </Table>
@@ -268,167 +268,167 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <TableBody>
       <TableRow>
       <TableCell><code>&lt;map&gt;</code> and its DOCTYPE, <code>&lt;title&gt;</code> of a map</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map">02</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-02-first-map">02</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;topicref&gt;</code> with <code>@href</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map">02</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-02-first-map">02</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;topichead&gt;</code> with <code>@navtitle</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;topicmeta&gt;</code> with <code>&lt;shortdesc&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Manage Deliverables</strong>: a deliverable, <strong>Transtype</strong> <code>html5</code>, <strong>Publication parameters</strong> (<code>nav-toc</code>)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build">03</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-03-first-build">03</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Manage Projects</strong>: <strong>Default Root Map</strong></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-02-first-map">02</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-02-first-map">02</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>The active deliverable (<strong>Set active</strong>, or the status bar)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-1-topics/stage-03-first-build">03</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-1-topics/stage-03-first-build">03</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>nested <code>&lt;topicref&gt;</code> (parent and child)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@collection-type</code> (<code>family</code>, <code>sequence</code>)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;topicgroup&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@linking="targetonly"</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@id</code> on a <code>&lt;topichead&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@locktitle="yes"</code> with <code>&lt;navtitle&gt;</code> in <code>&lt;topicmeta&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;reltable&gt;</code>, <code>&lt;relheader&gt;</code>, <code>&lt;relcolspec type&gt;</code>, <code>&lt;relrow&gt;</code>, <code>&lt;relcell&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-09-map-structure">09</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-09-map-structure">09</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;keydef&gt;</code> with <code>@keys</code>; <code>&lt;keywords&gt;</code>, <code>&lt;keyword&gt;</code> in <code>&lt;topicmeta&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;keydef href scope="external" format="html"&gt;</code> with <code>&lt;linktext&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;mapref&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@keys</code> on a <code>&lt;topicref&gt;</code>; <code>&lt;keydef keys href&gt;</code> for a topic</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;keyword keyref&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;xref keyref&gt;</code>, <code>&lt;link keyref&gt;</code>, <code>key/element-id</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml keys &lt;rootmap&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-10-keys">10</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-10-keys">10</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>shared topic topics: <code>&lt;topic&gt;</code>, <code>&lt;body&gt;</code>; <code>@id</code> on reusable elements</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@conref="file#topic/id"</code> on <code>&lt;step&gt;</code>, <code>&lt;note&gt;</code>, <code>&lt;li&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@conkeyref="key/id"</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@conrefend</code> (a conref range)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>conref push: <code>@conaction</code> (<code>pushbefore</code>, <code>mark</code>; also <code>pushafter</code>, <code>pushreplace</code>)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@processing-role="resource-only"</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>the <code>&lt;cmd/&gt;</code> placeholder in a conref'd <code>&lt;step&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-11-reuse">11</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-11-reuse">11</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;glossentry&gt;</code> and its DOCTYPE, <code>&lt;glossterm&gt;</code>, <code>&lt;glossdef&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;glossgroup&gt;</code> and its DOCTYPE</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;glossBody&gt;</code>, <code>&lt;glossSurfaceForm&gt;</code>, <code>&lt;glossAlt&gt;</code>, <code>&lt;glossAbbreviation&gt;</code>, <code>&lt;glossSynonym&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;keydef&gt;</code> to an element inside a group, <code>file#id</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;term keyref&gt;</code>, <code>&lt;abbreviated-form keyref&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-12-glossary">12</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-12-glossary">12</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;prolog&gt;</code> and the order of its children</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;author type&gt;</code>, <code>&lt;copyright&gt;</code>, <code>&lt;copyryear&gt;</code>, <code>&lt;copyrholder&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;critdates&gt;</code>, <code>&lt;created date&gt;</code>, <code>&lt;revised modified&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;metadata&gt;</code>, <code>&lt;audience type experiencelevel&gt;</code>, <code>&lt;category&gt;</code>, <code>&lt;keywords&gt;</code>, <code>&lt;keyword&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;indexterm&gt;</code> (nested), <code>&lt;index-see&gt;</code>, <code>&lt;index-see-also&gt;</code>, <code>&lt;index-sort-as&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;resourceid&gt;</code>, <code>&lt;data&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>map <code>&lt;topicmeta&gt;</code>: <code>&lt;author&gt;</code>, <code>&lt;publisher&gt;</code>, <code>&lt;copyright&gt;</code>, <code>&lt;critdates&gt;</code>, <code>&lt;audience&gt;</code>, <code>&lt;keywords&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Metadata</strong> &gt; <strong>Edit Policy</strong>: rules by topic type, field, presence, and pattern</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-2-maps/stage-13-metadata-and-index">13</a></TableCell>
       </TableRow>
       </TableBody>
       </Table>
@@ -443,103 +443,103 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <TableBody>
       <TableRow>
       <TableCell><code>@platform</code>, <code>@audience</code> on <code>&lt;p&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;note&gt;</code>, <code>&lt;chrow&gt;</code>, <code>&lt;ph&gt;</code>; multiple values; the other profiling attributes <code>@product</code>, <code>@otherprops</code>, <code>@props</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>two <code>&lt;ph platform&gt;</code> alternatives for text that differs</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@rev</code> on a <code>&lt;cmd&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@audience</code> on a <code>&lt;topichead&gt;</code> (filtering a map branch)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>DITAVAL: <code>&lt;val&gt;</code>, <code>&lt;prop att val action&gt;</code> (<code>include</code>, <code>exclude</code>, <code>flag</code>), <code>@backcolor</code>, <code>@color</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>DITAVAL: <code>&lt;revprop val action changebar&gt;</code>, <code>&lt;startflag&gt;</code>, <code>&lt;endflag&gt;</code>, <code>&lt;alt-text&gt;</code>, <code>&lt;style-conflict&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Manage Deliverables</strong>: the <strong>DITAVAL</strong> field, one deliverable per DITAVAL</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-14-conditional-text">14</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;subjectScheme&gt;</code> and its DOCTYPE; nested <code>&lt;subjectdef keys&gt;</code> with <code>&lt;navtitle&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;enumerationdef&gt;</code>, <code>&lt;attributedef name&gt;</code>, <code>&lt;subjectdef keyref&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;hasNarrower&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;mapref type="subjectScheme"&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml list-subjects</code>, <code>dogsbay-xml validate-conditions .</code>, <strong>Check Project</strong>; DITA-OT <code>DOTJ049W</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-15-subject-scheme">15</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;ditavalref href&gt;</code> under a <code>&lt;topicref&gt;</code> (one filters, several copy)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;ditavalmeta&gt;</code>, <code>&lt;dvrResourcePrefix&gt;</code>, <code>&lt;dvrResourceSuffix&gt;</code>, <code>&lt;dvrKeyscopePrefix&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml list-branches &lt;map&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-16-branch-filtering">16</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@keyscope</code> on a <code>&lt;mapref&gt;</code>; <code>scope.key</code> names; root-scope keys</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;mapref scope="peer" keyscope="…"&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml keys &lt;map&gt; --resolve &lt;key&gt; --scope &lt;scope&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-17-key-scopes">17</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@chunk="to-content"</code> on a parent <code>&lt;topicref&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>a <code>&lt;reference&gt;</code> nested in a <code>&lt;reference&gt;</code>; <code>@chunk="by-topic"</code>; <code>&lt;dita&gt;</code> (the composite root, and why not)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@copy-to</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@print="printonly"</code>, <code>@toc="no"</code>, <code>@search="no"</code>; a generic <code>&lt;topic&gt;</code> as front matter</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;topicset id navtitle&gt;</code>, <code>&lt;topicsetref href="map#id"&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@outputclass</code> on a <code>&lt;table&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml health</code> (unused keys on their own)</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-3-conditions/stage-18-chunking-and-output">18</a></TableCell>
       </TableRow>
       </TableBody>
       </Table>
@@ -554,91 +554,91 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <TableBody>
       <TableRow>
       <TableCell><code>&lt;bookmap&gt;</code> and its DOCTYPE; <code>&lt;booktitle&gt;</code>, <code>&lt;mainbooktitle&gt;</code>, <code>&lt;booktitlealt&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;bookmeta&gt;</code>: <code>&lt;publisherinformation&gt;</code>, <code>&lt;organization&gt;</code>, <code>&lt;bookid&gt;</code>, <code>&lt;bookpartno&gt;</code>, <code>&lt;edition&gt;</code>, <code>&lt;bookrights&gt;</code>, <code>&lt;copyrfirst&gt;</code>, <code>&lt;year&gt;</code>, <code>&lt;bookowner&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;frontmatter&gt;</code> (keydefs, maprefs and resource-only refs inside it), <code>&lt;booklists&gt;</code>, <code>&lt;toc&gt;</code>, <code>&lt;figurelist&gt;</code>, <code>&lt;tablelist&gt;</code>, <code>&lt;notices&gt;</code>, <code>&lt;preface&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;part&gt;</code>, <code>&lt;chapter&gt;</code>, <code>&lt;appendix&gt;</code>, <code>&lt;backmatter&gt;</code>, <code>&lt;glossarylist&gt;</code>, <code>&lt;indexlist&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Manage Deliverables</strong>: a deliverable with the <code>pdf</code> transtype</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap">19</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-19-bookmap">19</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;troubleshooting&gt;</code> and its DOCTYPE, <code>&lt;troublebody&gt;</code>, <code>&lt;condition&gt;</code>, <code>&lt;troubleSolution&gt;</code>, <code>&lt;cause&gt;</code>, <code>&lt;remedy&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting">20</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-20-troubleshooting">20</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;steps-informal&gt;</code>; a profiling attribute on a <code>&lt;troubleSolution&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting">20</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-20-troubleshooting">20</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;note type="trouble"&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-20-troubleshooting">20</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-20-troubleshooting">20</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;hazardstatement type&gt;</code>, <code>&lt;messagepanel&gt;</code>, <code>&lt;typeofhazard&gt;</code>, <code>&lt;consequence&gt;</code>, <code>&lt;howtoavoid&gt;</code>, <code>&lt;hazardsymbol&gt;</code> with <code>&lt;alt&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>the placeholder <code>&lt;messagepanel&gt;</code> in a conref'd <code>&lt;hazardstatement&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-21-hazards-and-safety">21</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;syntaxdiagram&gt;</code>, <code>&lt;groupseq&gt;</code>, <code>&lt;kwd&gt;</code>, <code>&lt;delim&gt;</code>, <code>&lt;var&gt;</code>, <code>&lt;repsep&gt;</code>, <code>&lt;synph&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;refsyn&gt;</code>; <code>&lt;parml&gt;</code>, <code>&lt;plentry&gt;</code>, <code>&lt;pt&gt;</code>, <code>&lt;pd&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;cmdname&gt;</code>, <code>&lt;parmname&gt;</code>, <code>&lt;varname&gt;</code>, <code>&lt;option&gt;</code>, <code>&lt;apiname&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;msgph&gt;</code>, <code>&lt;msgblock&gt;</code>, <code>&lt;msgnum&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;properties&gt;</code>, <code>&lt;prophead&gt;</code>, <code>&lt;proptypehd&gt;</code>, <code>&lt;propvaluehd&gt;</code>, <code>&lt;propdeschd&gt;</code>, <code>&lt;property&gt;</code>, <code>&lt;proptype&gt;</code>, <code>&lt;propvalue&gt;</code>, <code>&lt;propdesc&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;codeblock outputclass="language-…"&gt;</code> with <code>&lt;coderef href&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;screen&gt;</code>, <code>&lt;userinput&gt;</code>, <code>&lt;systemoutput&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-22-software-domains">22</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-22-software-domains">22</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;learningAssessment&gt;</code> and its DOCTYPE, <code>&lt;learningAssessmentbody&gt;</code>, <code>&lt;lcIntro&gt;</code>, <code>&lt;lcSummary&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;lcObjectives&gt;</code>, <code>&lt;lcObjectivesStem&gt;</code>, <code>&lt;lcObjectivesGroup&gt;</code>, <code>&lt;lcObjective&gt;</code>; <code>&lt;lcDuration&gt;</code>, <code>&lt;lcTime value&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;lcInteraction&gt;</code>; <code>&lt;lcTrueFalse2&gt;</code>, <code>&lt;lcSingleSelect2&gt;</code>, <code>&lt;lcMultipleSelect2&gt;</code>, <code>&lt;lcQuestion2&gt;</code>, <code>&lt;lcAnswerOptionGroup2&gt;</code>, <code>&lt;lcAnswerOption2&gt;</code>, <code>&lt;lcAnswerContent2&gt;</code>, <code>&lt;lcCorrectResponse2&gt;</code>, <code>&lt;lcFeedback2&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;lcSequencing2&gt;</code>, <code>&lt;lcSequenceOptionGroup2&gt;</code>, <code>&lt;lcSequenceOption2&gt;</code>, <code>&lt;lcSequence2 value&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>dogsbay-xml validate</code> on a learning topic, with no catalog option</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-23-learning">23</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-4-books/stage-23-learning">23</a></TableCell>
       </TableRow>
       </TableBody>
       </Table>
@@ -653,47 +653,47 @@ const llmActionsProps = {"enabled":true,"providers":["claude","chatgpt","perplex
       <TableBody>
       <TableRow>
       <TableCell><code>@xml:lang</code> on every root and on a <code>&lt;ph&gt;</code>; <code>@dir="rtl"</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@translate="no"</code> on a <code>&lt;keyword&gt;</code>, <code>&lt;parml&gt;</code>, <code>&lt;msgblock&gt;</code>, <code>&lt;codeblock&gt;</code>, <code>&lt;screen&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;sort-as value&gt;</code> in a <code>&lt;glossterm&gt;</code>; <code>&lt;index-see&gt;</code> for an abbreviation</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;draft-comment author time disposition&gt;</code>, <code>&lt;required-cleanup remap&gt;</code>; DITA-OT <code>args.draft</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>@status</code> on a topic and on a <code>&lt;row&gt;</code>; <code>&lt;revised modified&gt;</code>; <code>&lt;change-historylist&gt;</code>, <code>&lt;change-item&gt;</code>, <code>&lt;change-person&gt;</code>, <code>&lt;change-completed&gt;</code>, <code>&lt;change-summary&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>project-health</code>'s <em>Authoring leftovers</em> warnings</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-24-drafts-and-localization">24</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>Schematron <code>house-style.sch</code>: <code>&lt;schema&gt;</code>, <code>&lt;pattern&gt;</code>, <code>&lt;rule context&gt;</code>, <code>&lt;assert test&gt;</code>, <code>&lt;report test&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules">25</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-25-house-rules">25</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><strong>Manage Projects</strong>: <strong>House Rules (Schematron)</strong>; <code>project-health --include=schematron</code>; the house rules in <strong>Check Project</strong></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules">25</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-25-house-rules">25</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>Optional: <code>AGENTS.md</code>; a skill's <code>SKILL.md</code> with <code>name</code> and <code>description</code> front matter</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules">25</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-25-house-rules">25</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell><code>&lt;cite&gt;</code> for the title of a work; <code>&lt;simpletable&gt;</code> in place of a <code>&lt;required-cleanup remap="table"&gt;</code></TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-house-rules">25</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-25-house-rules">25</a></TableCell>
       </TableRow>
       <TableRow>
       <TableCell>Nothing new: the eight deliverables, the final check, and the <code>tutorial/final</code> tag</TableCell>
-      <TableCell><a href="/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-26-final">26</a></TableCell>
+      <TableCell><a href="/dita-tutorial/part-5-governance/stage-26-final">26</a></TableCell>
       </TableRow>
       </TableBody>
       </Table>

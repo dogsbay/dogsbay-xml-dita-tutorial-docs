@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "node ./dogsbay-mount.mjs clean && astro build && pagefind --site dist --output-path dist/dogsbay-xml-dita-tutorial-docs/pagefind && node ./dogsbay-mount.mjs finalize",
+    "build": "node ./dogsbay-mount.mjs clean && astro build && pagefind --site dist --output-path dist/dita-tutorial/pagefind && node ./dogsbay-mount.mjs finalize",
     "preview": "astro preview",
     "deploy": "pnpm build && wrangler deploy"
   },

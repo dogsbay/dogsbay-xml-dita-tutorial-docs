@@ -1,7 +1,0 @@
-# DogsBay DITA tutorial — Part 5: Governance and completion
-
-## Part 5: Governance and completion
-
-- [Stage 23: Drafts and localization](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-23-drafts-and-localization.md): Mark the guide for review and translation with a language on every root, translate flags, a right-to-left phrase, sort keys, review markup and a change history.
-- [Stage 24: House rules](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-24-house-rules.md): Write the house style as Schematron, name it in the project config so the gate enforces it, explain it to agents, and fix the ten violations it finds.
-- [Stage 25: Final](https://dogsbay.ai/dogsbay-xml-dita-tutorial-docs/part-5-governance/stage-25-final.md): Complete the guide, check all eight deliverables, inspect the published output, and tag your finished work.
