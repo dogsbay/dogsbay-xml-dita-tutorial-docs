@@ -132,10 +132,8 @@ this tutorial.
 
 ## Where it runs
 
-The gate is verified on every stage branch. On the tutorial repository's
-`main` branch, which is the deliberately broken demo project, it fails with
-two invalid files and the findings listed in that branch's `ISSUES.md`; that
-is the expected result there.
+The gate is verified on every stage branch, and on the tutorial
+repository's `main` branch, which holds the finished guide.
 
 The full ladder is checked with `scripts/check-all-stages.sh` on `main`,
 which checks out each `tutorial/*` branch into a temporary worktree and runs
