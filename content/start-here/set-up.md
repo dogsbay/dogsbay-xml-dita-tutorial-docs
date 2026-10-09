@@ -117,8 +117,8 @@ You do not need the sample project to follow the lessons. Use it to:
 - Start a later stage from its checkpoint when you skip a lesson. See
   [Choose a learning path](/start-here/learning-path).
 
-The editor's **File** > **Open Sample Project...** opens a different
-project, a bundled demo. It is not the stage-by-stage tutorial.
+The editor's **File** > **Open Sample Project...** opens the finished
+guide, the same files as `tutorial/26-final`, without the stage branches.
 
 ### Get the sample project
 
@@ -137,8 +137,8 @@ your work instead:
 git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
 ```
 
-The copy opens on `main`, which contains a separate repair exercise. The
-stages are on the `tutorial/NN-slug` branches.
+The copy opens on `main`, which is the finished guide. The stages are on
+the `tutorial/NN-slug` branches.
 
 ### Move between stages
 

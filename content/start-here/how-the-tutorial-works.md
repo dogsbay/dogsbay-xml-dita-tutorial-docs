@@ -79,12 +79,11 @@ still contain issues that those later checks detect.
 
 ## The orphan root
 
-`tutorial/00-setup` is an *orphan* branch: it shares no history with `main`.
-The `main` branch of the same repository is a finished, deliberately broken
-demo project used by the
-[DogsBay XML tutorial](https://dogsbay.ai/dogsbay-xml-docs/getting-started/tutorial-agentic),
-and the step-by-step tutorial has to start empty. So `git log tutorial/00-setup`
-shows one commit, and nothing on `main` is an ancestor of any stage branch.
+`tutorial/00-setup` is an *orphan* branch: it shares no history with `main`,
+because the step-by-step tutorial has to start empty. So
+`git log tutorial/00-setup` shows one commit, and nothing on `main` is an
+ancestor of any stage branch. `main` holds the finished guide, the same
+files as `tutorial/26-final`, plus the maintainers' scripts and notes.
 
 In a clone of the sample project, switching from `main` to
 `tutorial/00-setup` replaces the whole working tree. That is expected.

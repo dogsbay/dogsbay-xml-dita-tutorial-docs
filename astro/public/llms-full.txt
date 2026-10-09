@@ -262,7 +262,7 @@ Each completed stage passes the check. Error exercises show the diagnostics for 
 
 ## The orphan root {#the-orphan-root}
 
-`tutorial/00-setup` is an *orphan* branch: it shares no history with `main`. The `main` branch of the same repository is a finished, deliberately broken demo project used by the [DogsBay XML tutorial](https://dogsbay.ai/dogsbay-xml-docs/getting-started/tutorial-agentic), and the step-by-step tutorial has to start empty. So `git log tutorial/00-setup` shows one commit, and nothing on `main` is an ancestor of any stage branch.
+`tutorial/00-setup` is an *orphan* branch: it shares no history with `main`, because the step-by-step tutorial has to start empty. So `git log tutorial/00-setup` shows one commit, and nothing on `main` is an ancestor of any stage branch. `main` holds the finished guide, the same files as `tutorial/26-final`, plus the maintainers' scripts and notes.
 
 In a clone of the sample project, switching from `main` to `tutorial/00-setup` replaces the whole working tree. That is expected.
 
@@ -358,7 +358,7 @@ You do not need the sample project to follow the lessons. Use it to:
 - Copy files that you cannot type, such as the images in stage 08.
 - Start a later stage from its checkpoint when you skip a lesson. See [Choose a learning path](/dogsbay-xml-dita-tutorial-docs/start-here/learning-path).
 
-The editor's **File** > **Open Sample Project...** opens a different project, a bundled demo. It is not the stage-by-stage tutorial.
+The editor's **File** > **Open Sample Project...** opens the finished guide, the same files as `tutorial/26-final`, without the stage branches.
 
 ### Get the sample project {#get-the-sample-project}
 
@@ -374,7 +374,7 @@ From the command line, run this command from the folder where you keep your work
 git clone https://github.com/dogsbay/dogsbay-xml-dita-tutorial.git
 ```
 
-The copy opens on `main`, which contains a separate repair exercise. The stages are on the `tutorial/NN-slug` branches.
+The copy opens on `main`, which is the finished guide. The stages are on the `tutorial/NN-slug` branches.
 
 ### Move between stages {#move-between-stages}
 
@@ -9962,7 +9962,7 @@ The recorded runs used a libxml2 version that rejected the DITA 1.3 DTDs with "M
 
 ## Where it runs {#where-it-runs}
 
-The gate is verified on every stage branch. On the tutorial repository's `main` branch, which is the deliberately broken demo project, it fails with two invalid files and the findings listed in that branch's `ISSUES.md`; that is the expected result there.
+The gate is verified on every stage branch, and on the tutorial repository's `main` branch, which holds the finished guide.
 
 The full ladder is checked with `scripts/check-all-stages.sh` on `main`, which checks out each `tutorial/*` branch into a temporary worktree and runs the gate. On the full guide, validation takes about 2 seconds, health about 2.5 seconds and the build of four deliverables about 11 seconds; the PDF book from [stage 19](/dogsbay-xml-dita-tutorial-docs/part-4-books/stage-19-bookmap) adds about 26 seconds to the build.
 
