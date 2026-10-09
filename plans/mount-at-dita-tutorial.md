@@ -49,3 +49,13 @@ Four `astro/public/part-*/llms.txt` files were orphans. The generator no longer 
 `astro/public/llms.txt` should index the whole site. It contains only the "Optional modules" section, and is headed `DogsBay DITA tutorial — Optional modules`.
 
 A section whose pages all sit in one directory gets its `llms.txt` there (`part-1-topics/`, `practice/`, `reference/`). "Optional modules" draws its pages from five directories, so it has no single home and lands at the root, overwriting the site index. This is a `dogsbay-ssg` defect, it predates this change, and it affects `dogsbay-xml-docs` too wherever a section spans directories.
+
+## Found, not fixed: the 404 page's root-relative links
+
+On `404.html` alone, three links are written root-relative instead of under the mount: the `llms.txt` `alternate` and `describedby` link tags, and the "use the sitemap" link in the no-JS sidebar fallback. They resolve — to the apex site's `llms.txt` and sitemap, not the tutorial's.
+
+All 43 real pages are correct, and the HTTP `link:` header is correct even on the 404 page, so the page contradicts its own header. `dogsbay-xml-docs` emits exactly the same three, so this is a `dogsbay-ssg` defect that predates the move, not something the new mount introduced.
+
+## Deployed
+
+Workers Builds deployed `15f6a50` to `dogsbay.ai/dita-tutorial/`. Verified live: the bare path redirects to the trailing slash, pages and the Pagefind bundle answer 200, an unknown path gives a real 404, `_headers` applies at the assets root (the `describedby` header is present, which is the thing a missed `finalize` would drop), and Pagefind reports 43 pages. 95 of 97 internal links answer 200; the two that do not are this machine's own bundle hashes, and the hashes the server serves all answer 200. The deployed home page matches the local build apart from bundle hashes and generated grid ids.
