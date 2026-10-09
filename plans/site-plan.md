@@ -19,9 +19,11 @@ page, element index and branches reference link every stage. Remaining work
 is maintenance: when a stage branch is rewritten, refresh its page's blocks
 and re-run its gate output.
 
-Out: documenting the `main` branch's deliberately broken demo (that is the
-`dogsbay-xml-docs` tutorial), and anything about the DogsBay XML editor that
-is not needed to follow a stage.
+Out: the repair exercise and the faults it plants (that is the
+`dogsbay-xml-docs` tutorial, over a project of its own), and anything about
+the DogsBay XML editor that is not needed to follow a stage. `main` is the
+finished guide and is described in the branches reference, not treated as a
+separate demo.
 
 ## Readers
 
